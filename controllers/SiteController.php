@@ -131,6 +131,7 @@ class SiteController extends Controller {
         $acoes = Ativo::find()
                 ->where(['tipo_id' => 7])
                 ->andWhere(['>', 'quantidade', 0])
+                ->andWhere(['<>','valor_liquido',0])
                 ->all();
         $totalAcoes = Ativo::find()
                 ->where(['tipo_id' => 7])
