@@ -1,4 +1,0 @@
-#!/bin/bash
-
- ~/anaconda3/bin/python3.5 acao.py
-~/anaconda3/bin/python3.5 easy.py
