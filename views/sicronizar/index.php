@@ -1,0 +1,32 @@
+<?php
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use yii\bootstrap\Modal;
+
+$this->title = 'Sicroniza Dados';
+//\app\assets\AppAsset::register($this);
+?>
+<div class="box-body">
+    <div class="sinc-form">
+
+<?php $form = ActiveForm::begin(['action' => ['sicronizar/sicroniza']]); ?> 
+
+
+
+        <div class="form-group">
+            <?= Html::submitButton('Cotação Ação', ['class' => 'btn btn-success', 'name' => 'but', 'value' => 'cotacao_empresa']) ?>
+            <?= Html::submitButton('Cotação Titulo', ['class' => 'btn btn-success', 'name' => 'but', 'value' => 'titulo']) ?>
+            <?= Html::submitButton('Empresas da bolsa site Eduardo', ['id' => 'empresa_id', 'class' => 'btn btn-success', 'name' => 'but', 'value' => 'empresa']) ?>
+            <?= Html::submitButton('Dados da bolsa site Eduardo', ['id' => 'dados_empresa_id', 'class' => 'btn btn-success', 'name' => 'but', 'value' => 'dados_empresa']) ?>
+        </div>
+
+<?php ActiveForm::end(); ?> 
+    </div>
+</div>
+

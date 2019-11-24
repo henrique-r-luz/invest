@@ -1,0 +1,231 @@
+1562155913819	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.NppaUu63puw7"
+1562155914138	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1562155914139	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1562155914139	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+
+(firefox:5867): LIBDBUSMENU-GLIB-WARNING **: 12:11:55.001: Unable to get session bus: Error spawning command line “dbus-launch --autolaunch=f08b5916d7194388b5ba2117daf20b0c --binary-syntax --close-stderr”: Child process exited with code 1
+1562155915710	Marionette	INFO	Listening on port 41155
+1562155915765	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: http://%(server)s/dummy/blocklist//buckets/monitor/collections/changes/records?_expected=%221562112009804%22 is not a valid URL..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:203:13
+
+1562156820286	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.FksOuC7tujIs"
+1562156820609	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1562156820610	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1562156820610	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+
+(firefox:6246): LIBDBUSMENU-GLIB-WARNING **: 12:27:01.424: Unable to get session bus: Error spawning command line “dbus-launch --autolaunch=f08b5916d7194388b5ba2117daf20b0c --binary-syntax --close-stderr”: Child process exited with code 1
+1562156821962	Marionette	INFO	Listening on port 41157
+1562156822007	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: http://%(server)s/dummy/blocklist//buckets/monitor/collections/changes/records?_expected=%221562112009804%22 is not a valid URL..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:203:13
+
+1562424390507	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.xg6pzeMfJMbC"
+1562424390869	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1562424390869	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1562424390869	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+Unable to init server: Could not connect: Conexão recusada
+
+(/usr/lib/firefox/firefox:6194): Gtk-WARNING **: 14:46:31.458: cannot open display: :1001
+[Parent 6105, Gecko_IOThread] WARNING: pipe error (74): Conexão fechada pela outra ponta: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 357
+[Parent 6105, Gecko_IOThread] WARNING: pipe error (82): Conexão fechada pela outra ponta: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 357
+[Parent 6105, Gecko_IOThread] WARNING: pipe error (81): Conexão fechada pela outra ponta: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 357
+[Parent 6105, Gecko_IOThread] WARNING: pipe error (75): Conexão fechada pela outra ponta: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 357
+[Parent 6105, Gecko_IOThread] WARNING: pipe error (78): Conexão fechada pela outra ponta: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 357
+[Parent 6105, Gecko_IOThread] WARNING: pipe error (80): Conexão fechada pela outra ponta: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 357
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x1F0069,name=PBrowser::Msg_UpdateDimensions) Channel error: cannot send/recv
+
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x1F0069,name=PBrowser::Msg_UpdateDimensions) Channel error: cannot send/recv
+
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x1F0069,name=PBrowser::Msg_UpdateDimensions) Channel error: cannot send/recv
+
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x1F0069,name=PBrowser::Msg_UpdateDimensions) Channel error: cannot send/recv
+
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x36002D,name=PContent::Msg_UpdateSharedData) Channel error: cannot send/recv
+
+[Parent 6105, Main Thread] WARNING: FileDescriptorSet destroyed with unconsumed descriptors: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/file_descriptor_set_posix.cc, line 23
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x36005E,name=PContent::Msg_SetPluginList) Channel error: cannot send/recv
+
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x360053,name=PContent::Msg_GMPsChanged) Channel error: cannot send/recv
+
+Unable to init server: Could not connect: Conexão recusada
+
+(/usr/lib/firefox/firefox:6201): Gtk-WARNING **: 14:46:31.573: cannot open display: :1001
+[Parent 6105, Gecko_IOThread] WARNING: pipe error (77): Conexão fechada pela outra ponta: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 357
+[Parent 6105, Gecko_IOThread] WARNING: pipe error (82): Conexão fechada pela outra ponta: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 357
+[Parent 6105, Gecko_IOThread] WARNING: pipe error (80): Conexão fechada pela outra ponta: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 357
+[Parent 6105, Gecko_IOThread] WARNING: pipe error (81): Conexão fechada pela outra ponta: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 357
+[Parent 6105, Gecko_IOThread] WARNING: pipe error (83): Conexão fechada pela outra ponta: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 357
+[Parent 6105, Gecko_IOThread] WARNING: pipe error (78): Conexão fechada pela outra ponta: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 357
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x1F0069,name=PBrowser::Msg_UpdateDimensions) Channel error: cannot send/recv
+
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x1F0088,name=PBrowser::Msg_Destroy) Channel error: cannot send/recv
+
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x1F0088,name=PBrowser::Msg_Destroy) Channel error: cannot send/recv
+
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x1F0088,name=PBrowser::Msg_Destroy) Channel error: cannot send/recv
+
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x1F0088,name=PBrowser::Msg_Destroy) Channel error: cannot send/recv
+
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x1F0088,name=PBrowser::Msg_Destroy) Channel error: cannot send/recv
+
+
+(firefox:6105): LIBDBUSMENU-GLIB-WARNING **: 14:46:31.644: Unable to get session bus: Error spawning command line “dbus-launch --autolaunch=f08b5916d7194388b5ba2117daf20b0c --binary-syntax --close-stderr”: Child process exited with code 1
+1562424392201	Marionette	INFO	Listening on port 42155
+1562424392226	Marionette	WARN	TLS certificate errors will be ignored for this session
+Unable to init server: Could not connect: Conexão recusada
+
+(/usr/lib/firefox/firefox:6256): Gtk-WARNING **: 14:46:32.477: cannot open display: :1001
+[Parent 6105, Gecko_IOThread] WARNING: pipe error: Pipe quebrado: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 6105, Gecko_IOThread] WARNING: pipe error (107): Conexão fechada pela outra ponta: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 357
+[Parent 6105, Gecko_IOThread] WARNING: pipe error (115): Conexão fechada pela outra ponta: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 357
+[Parent 6105, Gecko_IOThread] WARNING: pipe error (110): Conexão fechada pela outra ponta: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 357
+[Parent 6105, Gecko_IOThread] WARNING: pipe error (112): Conexão fechada pela outra ponta: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 357
+[Parent 6105, Gecko_IOThread] WARNING: pipe error (116): Conexão fechada pela outra ponta: file /build/firefox-ubqoiK/firefox-67.0.4+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 357
+A content process crashed and MOZ_CRASHREPORTER_SHUTDOWN is set, shutting down
+JavaScript error: chrome://browser/content/browser.js, line 7281: TypeError: browser.messageManager is null
+WARNING: A blocker encountered an error while we were waiting.
+          Blocker:  SessionStore: flushing all windows
+          Phase: quit-application-granted
+          State: {"total":-1,"current":-1}
+WARNING: TypeError: mm is null
+WARNING: flush@resource:///modules/sessionstore/TabStateFlusher.jsm:85:5
+flushWindow@resource:///modules/sessionstore/TabStateFlusher.jsm:108:28
+flushWindow@resource:///modules/sessionstore/TabStateFlusher.jsm:31:36
+flushAllWindowsAsync@resource:///modules/sessionstore/SessionStore.jsm:1695:50
+ssi_onQuitApplicationGranted/<@resource:///modules/sessionstore/SessionStore.jsm:1626:32
+trigger@resource://gre/modules/AsyncShutdown.jsm:701:23
+_wait@resource://gre/modules/AsyncShutdown.jsm:847:15
+wait@resource://gre/modules/AsyncShutdown.jsm:832:33
+observe@resource://gre/modules/AsyncShutdown.jsm:515:31
+observe@resource:///modules/ContentCrashHandlers.jsm:153:28
+
+JavaScript error: resource:///modules/sessionstore/TabStateFlusher.jsm, line 85: TypeError: mm is null
+1562424392830	Marionette	INFO	Stopped listening on port 42155
+1562424631981	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.RiGEB7yJ4FIM"
+*** You are running in headless mode.
+1562424632312	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1562424632313	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1562424632313	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1562424633711	Marionette	INFO	Listening on port 41909
+1562424633800	Marionette	WARN	TLS certificate errors will be ignored for this session
+1562424642528	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+bail@chrome://marionette/content/sync.js:223:64
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: http://%(server)s/dummy/blocklist//buckets/monitor/collections/changes/records?_expected=%221562371206344%22 is not a valid URL..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:203:13
+
+JavaScript warning: https://api-identification.hotmart.com/id.min.js?account=ef4640f9-21f6-4e0e-88e6-576b1fbb8475, line 42: Error: WebGL warning: <SetDimensions>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://api-identification.hotmart.com/id.min.js?account=ef4640f9-21f6-4e0e-88e6-576b1fbb8475, line 42: Error: WebGL warning: <SetDimensions>: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://api-identification.hotmart.com/id.min.js?account=ef4640f9-21f6-4e0e-88e6-576b1fbb8475, line 42: Error: WebGL warning: <SetDimensions>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://api-identification.hotmart.com/id.min.js?account=ef4640f9-21f6-4e0e-88e6-576b1fbb8475, line 42: Error: WebGL warning: <SetDimensions>: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://api-identification.hotmart.com/id.min.js?account=ef4640f9-21f6-4e0e-88e6-576b1fbb8475, line 42: Error: WebGL warning: <SetDimensions>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://api-identification.hotmart.com/id.min.js?account=ef4640f9-21f6-4e0e-88e6-576b1fbb8475, line 42: Error: WebGL warning: <SetDimensions>: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://api-identification.hotmart.com/id.min.js?account=ef4640f9-21f6-4e0e-88e6-576b1fbb8475, line 42: Error: WebGL warning: <SetDimensions>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://api-identification.hotmart.com/id.min.js?account=ef4640f9-21f6-4e0e-88e6-576b1fbb8475, line 42: Error: WebGL warning: <SetDimensions>: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+1562424929126	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.A1iUhljCNY37"
+*** You are running in headless mode.
+1562424929465	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1562424929466	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1562424929466	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1562424930891	Marionette	INFO	Listening on port 34999
+1562424930939	Marionette	WARN	TLS certificate errors will be ignored for this session
+1562424938406	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+bail@chrome://marionette/content/sync.js:223:64
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: http://%(server)s/dummy/blocklist//buckets/monitor/collections/changes/records?_expected=%221562371206344%22 is not a valid URL..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:203:13
+
+JavaScript warning: https://api-identification.hotmart.com/id.min.js?account=ef4640f9-21f6-4e0e-88e6-576b1fbb8475, line 42: Error: WebGL warning: <SetDimensions>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://api-identification.hotmart.com/id.min.js?account=ef4640f9-21f6-4e0e-88e6-576b1fbb8475, line 42: Error: WebGL warning: <SetDimensions>: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://api-identification.hotmart.com/id.min.js?account=ef4640f9-21f6-4e0e-88e6-576b1fbb8475, line 42: Error: WebGL warning: <SetDimensions>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://api-identification.hotmart.com/id.min.js?account=ef4640f9-21f6-4e0e-88e6-576b1fbb8475, line 42: Error: WebGL warning: <SetDimensions>: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://api-identification.hotmart.com/id.min.js?account=ef4640f9-21f6-4e0e-88e6-576b1fbb8475, line 42: Error: WebGL warning: <SetDimensions>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://api-identification.hotmart.com/id.min.js?account=ef4640f9-21f6-4e0e-88e6-576b1fbb8475, line 42: Error: WebGL warning: <SetDimensions>: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://api-identification.hotmart.com/id.min.js?account=ef4640f9-21f6-4e0e-88e6-576b1fbb8475, line 42: Error: WebGL warning: <SetDimensions>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://api-identification.hotmart.com/id.min.js?account=ef4640f9-21f6-4e0e-88e6-576b1fbb8475, line 42: Error: WebGL warning: <SetDimensions>: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+1566152066271	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.iNhZfGQIOvnG"
+1566152070594	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1566152070594	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1566152070594	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1566152070594	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1566152075515	Marionette	INFO	Listening on port 44565
+1566152075612	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: http://%(server)s/dummy/blocklist//buckets/monitor/collections/changes/records?_expected=%221566000082377%22 is not a valid URL..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:201:13
+
+1566152246655	Marionette	INFO	Stopped listening on port 44565
+[Parent 6221, Gecko_IOThread] WARNING: pipe error (70): Conexão fechada pela outra ponta: file /build/firefox-qCOyDf/firefox-68.0.2+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 358
+1566152248001	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.bO9bxojGMdKr"
+1566152248562	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1566152248562	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1566152248563	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1566152248563	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1566152250688	Marionette	INFO	Listening on port 46147
+1566152250766	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+(firefox:6499): GLib-GObject-WARNING **: 15:17:34.609: ../../../../gobject/gsignal.c:3492: signal name 'selection_changed' is invalid for instance '0x7f013a18aab0' of type 'MaiAtkType139'
+
+(firefox:6499): GLib-GObject-WARNING **: 15:17:34.704: ../../../../gobject/gsignal.c:3492: signal name 'selection_changed' is invalid for instance '0x7f013a18aab0' of type 'MaiAtkType139'
+1566152258501	Marionette	INFO	Stopped listening on port 46147
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x53000D,name=PHttpChannel::Msg_RemoveCorsPreflightCacheEntry) Closed channel: cannot send/recv
+
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x53000D,name=PHttpChannel::Msg_RemoveCorsPreflightCacheEntry) Closed channel: cannot send/recv
+
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x53000D,name=PHttpChannel::Msg_RemoveCorsPreflightCacheEntry) Closed channel: cannot send/recv
+
