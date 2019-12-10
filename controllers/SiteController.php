@@ -62,12 +62,12 @@ class SiteController extends Controller {
      * @return string
      */
     public function actionIndex() {
-        
-        
-        list($resp,$msg) = $this->sicroniza();
-        if($resp==true){
-            Yii::$app->session->setFlash('success', $msg); 
-        }else{
+
+
+        list($resp, $msg) = $this->sicroniza();
+        if ($resp == true) {
+            Yii::$app->session->setFlash('success', $msg);
+        } else {
             Yii::$app->session->setFlash('danger', $msg);
         }
         $totalPatrimonio = Ativo::find()
@@ -131,7 +131,7 @@ class SiteController extends Controller {
         $acoes = Ativo::find()
                 ->where(['tipo_id' => 7])
                 ->andWhere(['>', 'quantidade', 0])
-                ->andWhere(['<>','valor_liquido',0])
+                ->andWhere(['<>', 'valor_liquido', 0])
                 ->all();
         $totalAcoes = Ativo::find()
                 ->where(['tipo_id' => 7])
@@ -164,19 +164,17 @@ class SiteController extends Controller {
         $msg = '';
         list($sincroniza) = Yii::$app->createController('sicronizar/index');
         list($resp, $msg) = $sincroniza->cotacaoAcao();
-        if ($resp == true) {
-            list($resp, $msg) = $sincroniza->easy();
-            if ($resp == true) {
-                $msg =  'O dados foram sincronizados com sucesso. ';
-                return [true,$msg];
-            } else {
-                $msg = 'O sistema não pode sincronizar os dados de renda fixa. ';
-                return [false,$msg];
-            }
-        } else {
-            $msg =  'O sistema não pode sincronizar os dados de ações. ';
-            return [false,$msg];
+        if ($resp == false) {
+            $msg = 'O sistema não pode sincronizar os dados de ações. ';
+            return [false, $msg];
         }
+        list($resp, $msg) = $sincroniza->easy();
+        if ($resp == false) {
+            $msg = 'O sistema não pode sincronizar os dados de renda fixa da easy. ';
+            return [false, $msg];
+        }
+        $msg = 'O dados foram sincronizados com sucesso. ';
+        return [true, $msg];
     }
 
 }
