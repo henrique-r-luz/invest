@@ -173,6 +173,12 @@ class SiteController extends Controller {
             $msg = 'O sistema não pode sincronizar os dados de renda fixa da easy. ';
             return [false, $msg];
         }
+         list($resp, $msg) =$sincroniza->clearAcoes();
+         if ($resp == false) {
+            #$msg = 'O sistema não pode sincronizar os dados de renda fixa da easy. ';
+            return [false, $msg];
+        }
+        
         $msg = 'O dados foram sincronizados com sucesso. ';
         return [true, $msg];
     }

@@ -49,7 +49,10 @@ class Operacao extends ActiveRecord {
             [['quantidade', 'ativo_id'], 'default', 'value' => null],
             [['ativo_id', 'tipo'], 'integer'],
             [['valor', 'quantidade'], 'number'],
-            [['data'], 'safe'],
+            [['data'], 'unique',
+                'targetAttribute' => ['ativo_id', 'data'],
+                'comboNotUnique'  => 'Já existe um registro de compra desse ativo nessa data e hora',
+            ],
             [['ativo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ativo::className(), 'targetAttribute' => ['ativo_id' => 'id']],
         ];
     }

@@ -16,7 +16,6 @@ class m190909_163226_balanco_empresa_bolsa extends Migration {
      * {@inheritdoc}
      */
     public function safeUp() {
-        
          $this->execute(
                 "CREATE TABLE balanco_empresa_bolsa (
                     id SERIAL PRIMARY KEY,

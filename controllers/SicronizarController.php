@@ -90,6 +90,9 @@ class SicronizarController extends Controller {
     public function cotacaoAcao() {
         $contErro = 0;
         $erros = '';
+          if (!file_exists('/vagrant/bot/preco_acao.csv')){
+            return [true, 'sucesso']; 
+        }
         $csv = array_map('str_getcsv', file('/vagrant/bot/preco_acao.csv'));
         $newkeys = array('id', 'valor');
         foreach ($csv as $id => $linha) {
@@ -121,6 +124,9 @@ class SicronizarController extends Controller {
 
     public function empresas() {
         $erros = '';
+          if (!file_exists('/vagrant/bot/empresa.csv')){
+            return [true, 'sucesso']; 
+        }
         $csv = array_map('str_getcsv', file('/vagrant/bot/empresas.csv'));
         $newkeys = array('cnpj', 'codigo', 'nome', 'setor');
         foreach ($csv as $id => $linha) {
@@ -153,6 +159,9 @@ class SicronizarController extends Controller {
 
     public function easy() {
         $erros = '';
+          if (!file_exists('/vagrant/bot/easy.csv')){
+            return [true, 'sucesso']; 
+        }
         $csv = array_map('str_getcsv', file('/vagrant/bot/easy.csv'));
         $newkeys = array('nome', 'valor_bruto', 'valor_liquido');
         foreach ($csv as $id => $linha) {
@@ -180,6 +189,60 @@ class SicronizarController extends Controller {
             return [true, 'sucesso'];
         } else {
             return [false, $erros];
+        }
+    }
+
+    public function clearAcoes() {
+        /*
+         * 1-> codigo ativo; 
+         * 8-> quantidade 
+         * 10-> preço médio unitario
+         * 11-> data da operação
+         * 15-> cancelado por
+         * tipo = 1 compra
+         */
+        $erros = 'Erro na criação das Operações: ';
+        if (!file_exists('/vagrant/bot/orders.csv')){
+            return [true, 'sucesso']; 
+        }
+        $csv = array_map('str_getcsv', file('/vagrant/bot/orders.csv'));
+        unset($csv[0]);
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            foreach ($csv as $id => $linha) {
+                $codigo = str_replace("F", "", $linha[1]);
+                //echo $codigo;
+                //exit();
+                $ativo = Ativo::find()
+                        ->where(['codigo' => $codigo])
+                        ->one();
+                if(Operacao::find()->where(['ativo_id'=>$ativo->id])->andWhere(['data'=>$linha[11]])->exists()){
+                    continue;
+                }
+               
+                if ($ativo != null && ($linha[15] == '' || $linha[15] == null)) {
+                    $operacao = new Operacao();
+                    $operacao->ativo_id = $ativo->id;
+                    $operacao->quantidade = $linha[8];
+                    $operacao->data = $linha[11];
+                    $operacao->valor = $linha[10] * $linha[8];
+                    $operacao->tipo = 1;
+                    if (!$operacao->salvaOperacao()) {
+                        $transaction->rollBack();
+                        $erros .= CajuiHelper::processaErros($operacao->getErrors()).'</br>';
+                        return [false, $erros];
+                    }
+                }else{
+                    $erros.='ativo não localizadao '.$erros.' ';
+                }
+               
+            }
+            $transaction->commit();
+            return [true, 'sucesso'];
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            return [false, $erros.$e];
+            throw $e;
         }
     }
 

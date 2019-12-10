@@ -92,7 +92,16 @@ $this->params['breadcrumbs'][] = $this->title;
             //'data',
             [
                 'attribute' => 'data',
-                'format' => 'date'
+                'format' => 'date',
+                'filterType' => GridView::FILTER_DATETIME,
+                'filterWidgetOptions' => [
+                    'pickerButton' => false,
+                    'pluginOptions' => [
+                        'format' => 'dd/mm/yyyy',
+                        'autoWidget' => true,
+                        'autoclose' => true,
+                    ],
+                ]
             ],
             //'ativo_id',
             ['class' => 'yii\grid\ActionColumn'],

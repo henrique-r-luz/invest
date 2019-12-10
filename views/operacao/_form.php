@@ -56,7 +56,7 @@ use kartik\number\NumberControl;
                                 'placeholder' => 'data operação'
                             ]
                         ],
-                        'type' => DateControl::FORMAT_DATE
+                        'type'=>DateControl::FORMAT_DATETIME
                     ])
                     ?>
                 </div>
