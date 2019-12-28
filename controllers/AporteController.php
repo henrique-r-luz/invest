@@ -56,7 +56,8 @@ class AporteController extends Controller {
                 //investir em ações
                 $dados = $this->defineAporteAcoes($valorAcoes, $model);
             } else {
-                $dados = ['Ativo' => 'Renda Fixa', 'Valor' => $model->valor];
+                
+                $dados = [['Ativo' => 'Renda Fixa', 'Valor' => $model->valor,'Quantidade'=>1]];
             }
         }
         $provider = new ArrayDataProvider([

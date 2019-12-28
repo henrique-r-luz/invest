@@ -108,7 +108,6 @@ class SiteController extends Controller {
             $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . $id . ']');
             $dadosAtivo[] = $fatia;
         }
-
         //gráfico por tipo
         $tipos = Tipo::find()->all();
         $dadosTipo = [];

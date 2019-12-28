@@ -29,7 +29,7 @@
                                 ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                             ],
                         ],
-                         [
+                        [
                             'label' => 'Finanças',
                             'icon' => 'dollar',
                             'url' => '#',
@@ -42,6 +42,14 @@
                                 ['label' => 'Sicronizar', 'icon' => 'rotate-left', 'url' => ['/sicronizar']],
                                 ['label' => 'Aporte', 'icon' => 'balance-scale', 'url' => ['/aporte']],
                                
+                            ],
+                        ],
+                        [
+                            'label' => 'Relatórios',
+                            'icon' => 'file',
+                            'url' => '#',
+                            'items' => [
+                                ['label' => 'Aportes por tempo', 'icon' => 'balance-scale', 'url' => ['/relatorio/relatorio-aporte']],
                             ],
                         ],
                     ],

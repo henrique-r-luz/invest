@@ -4,6 +4,7 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\data\ArrayDataProvider;
 use app\models\Operacao;
 
 /**
@@ -79,5 +80,27 @@ class OperacaoSearch extends Operacao
          $query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_codigo]);
 
         return $dataProvider;
+    }
+    
+    public function searchContAporte($model){
+       
+       $query = Operacao::find()
+                ->select(['ativo.codigo as codigo','ativo.nome as nome','sum(operacao.valor) as total','sum(operacao.quantidade) as quantidade'])
+                ->innerJoin('ativo','ativo.id = operacao.ativo_id')
+                ->where(['between', 'data',$model->dataInicio, $model->dataFim])
+               ->andWhere(['operacao.tipo'=>1])//operação de compra
+               ->andWhere(['ativo.tipo_id'=>7])
+               ->groupBy(['ativo.codigo','ativo.nome'])
+               ->orderBy(['sum(operacao.valor)'=>SORT_DESC])->asArray()->all();
+       
+       
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $query,
+             'pagination' => false,
+        ]);
+        return $dataProvider;
+        #echo $query->createCommand()->getSql();
+        #exit();
+               
     }
 }

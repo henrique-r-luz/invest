@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'ativo_codigo',
                 'value' => 'ativo.codigo',
                 'pageSummary' => 'EXTRATO FINANCEIRO',
-                'pageSummaryOptions' => ['colspan' => 3],
+                'pageSummaryOptions' => ['colspan' => 2],
             ],
             [
                 'filter' => Operacao::tipoOperacao(),
@@ -36,7 +36,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Operacao::getTipoOperacao($model->tipo);
                 },
             ],
-            'quantidade',
+            [
+                'attribute' => 'quantidade',
+                'pageSummary' => function ($summary, $data, $widget)use($dataProvider) {
+                    $quantidade = 0;
+                    $objetos = $dataProvider->models;
+                    foreach ($objetos as $operacao) {
+                        $quantidade += $operacao->quantidade;
+                    }
+                    return '<font color="blue">Quatidade: ' . $quantidade . '</font>';
+                }
+            ],
             [
                 'attribute' => 'valor',
                 'format' => 'currency',
@@ -46,46 +56,48 @@ $this->params['breadcrumbs'][] = $this->title;
                     $objetos = $dataProvider->models;
                     $total = 0;
                     foreach ($objetos as $operacao) {
-                         if($operacao->tipo==1){
-                             $total+=$operacao->valor;
-                         }else{
-                             $total-=$operacao->valor;
-                         }
-                    }
-                    if($total<0){
-                        $color = 'red';
-                    }else{
-                        $color = 'green';
-                    }
-                     return '<font color="' . $color . '">Valor Total: ' . Yii::$app->formatter->asCurrency($total) . '</font>';
-                        /*
-                        //renda fixa
-                        if ($ativo->categoria_id == 1) {
-                            $lucro = $lucro + ($ativo->valor_liquido - $ativo->valor_compra);
-                        }
-                        //ações
-                        if ($ativo->tipo_id == 7) {
-
-                            $valorLiquidoAcao = $valorLiquidoAcao + $ativo->valor_liquido;
-                            $valorCompraAcao = $valorCompraAcao + $ativo->valor_compra;
+                        if ($operacao->tipo == 0) {
+                            //dinheiro entrando no meu bolso
+                            $total += $operacao->valor;
+                        } else {
+                            //dinheiro saindo do meu bolso
+                            $total -= $operacao->valor;
                         }
                     }
-
-
-                    if (($valorLiquidoAcao - $valorCompraAcao) > 0) {
-                        $lucroAcao = (($valorLiquidoAcao - $valorCompraAcao) * 0.85);
-                    } else {
-                        $lucroAcao = ($valorLiquidoAcao - $valorCompraAcao);
-                    }
-                    $lucro = $lucro + $lucroAcao;
-                    if ($lucro > 0) {
-                        $color = 'green';
-                    } else {
+                    if ($total < 0) {
                         $color = 'red';
+                    } else {
+                        $color = 'green';
                     }
-                
-                         *     return '<font color="' . $color . '">Lucro/Prejuízo: ' . Yii::$app->formatter->asCurrency($lucro) . '</font>';
-                         */
+                    return '<font color="' . $color . '">Valor Total: ' . Yii::$app->formatter->asCurrency($total) . '</font>';
+                    /*
+                      //renda fixa
+                      if ($ativo->categoria_id == 1) {
+                      $lucro = $lucro + ($ativo->valor_liquido - $ativo->valor_compra);
+                      }
+                      //ações
+                      if ($ativo->tipo_id == 7) {
+
+                      $valorLiquidoAcao = $valorLiquidoAcao + $ativo->valor_liquido;
+                      $valorCompraAcao = $valorCompraAcao + $ativo->valor_compra;
+                      }
+                      }
+
+
+                      if (($valorLiquidoAcao - $valorCompraAcao) > 0) {
+                      $lucroAcao = (($valorLiquidoAcao - $valorCompraAcao) * 0.85);
+                      } else {
+                      $lucroAcao = ($valorLiquidoAcao - $valorCompraAcao);
+                      }
+                      $lucro = $lucro + $lucroAcao;
+                      if ($lucro > 0) {
+                      $color = 'green';
+                      } else {
+                      $color = 'red';
+                      }
+
+                     *     return '<font color="' . $color . '">Lucro/Prejuízo: ' . Yii::$app->formatter->asCurrency($lucro) . '</font>';
+                     */
                 },
                 'pageSummaryOptions' => ['colspan' => 2],
             ],
