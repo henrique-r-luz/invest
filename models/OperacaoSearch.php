@@ -6,33 +6,47 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use app\models\Operacao;
+use kartik\daterange\DateRangeBehavior;
 
 /**
  * OperacaoSearch represents the model behind the search form of `app\models\Operacao`.
  */
-class OperacaoSearch extends Operacao
-{
-    
+class OperacaoSearch extends Operacao {
+
     public $ativo_codigo;
+    public $createTimeRange;
+    public $createTimeStart;
+    public $createTimeEnd;
+
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id', 'ativo_id'], 'integer'],
-            [['tipo', 'data','ativo_codigo'], 'safe'],
-            [['valor','quantidade'], 'number'],
+            [['createTimeRange'], 'match', 'pattern' => '/^.+\s\-\s.+$/'],
+            [['tipo', 'data', 'ativo_codigo'], 'safe'],
+            [['valor', 'quantidade'], 'number'],
         ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
+    }
+
+    public function behaviors() {
+        return [
+            [
+                'class' => DateRangeBehavior::className(),
+                'attribute' => 'createTimeRange',
+                'dateStartAttribute' => 'createTimeStart',
+                'dateEndAttribute' => 'createTimeEnd',
+            ]
+        ];
     }
 
     /**
@@ -42,19 +56,18 @@ class OperacaoSearch extends Operacao
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Operacao::find()
-                ->innerJoin('ativo','ativo.id = operacao.ativo_id');
+                ->innerJoin('ativo', 'ativo.id = operacao.ativo_id');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-             'pagination' => [
+            'pagination' => [
                 'pageSize' => 10,
             ],
-             'sort'=> ['defaultOrder' => ['data'=>SORT_DESC]],
+            'sort' => ['defaultOrder' => ['data' => SORT_DESC]],
         ]);
 
         $this->load($params);
@@ -70,37 +83,43 @@ class OperacaoSearch extends Operacao
             'id' => $this->id,
             'operacao.quantidade' => $this->quantidade,
             'valor' => $this->valor,
-            'data' => $this->data,
-            'operacao.tipo'=>$this->tipo
-            //'ativo_id' => $this->ativo_id,
+            //'data' => $this->data,
+            'operacao.tipo' => $this->tipo
+                //'ativo_id' => $this->ativo_id,
         ]);
 
         //$query->andFilterWhere(['ilike', 'tipo', $this->tipo]);
-        
-         $query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_codigo]);
+        if ($this->createTimeRange != null && $this->createTimeRange != '') {
+            $query->andFilterWhere(['>=', 'data', date("Y-m-d H:i:s", $this->createTimeStart)])
+                    ->andFilterWhere(['<=', 'data', date("Y-m-d H:i:s", $this->createTimeEnd)]);
+        }
+
+
+        $query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_codigo]);
+      
 
         return $dataProvider;
     }
-    
-    public function searchContAporte($model){
-       
-       $query = Operacao::find()
-                ->select(['ativo.codigo as codigo','ativo.nome as nome','sum(operacao.valor) as total','sum(operacao.quantidade) as quantidade'])
-                ->innerJoin('ativo','ativo.id = operacao.ativo_id')
-                ->where(['between', 'data',$model->dataInicio, $model->dataFim])
-               ->andWhere(['operacao.tipo'=>1])//operação de compra
-               ->andWhere(['ativo.tipo_id'=>7])
-               ->groupBy(['ativo.codigo','ativo.nome'])
-               ->orderBy(['sum(operacao.valor)'=>SORT_DESC])->asArray()->all();
-       
-       
+
+    public function searchContAporte($model) {
+
+        $query = Operacao::find()
+                        ->select(['ativo.codigo as codigo', 'ativo.nome as nome', 'sum(operacao.valor) as total', 'sum(operacao.quantidade) as quantidade'])
+                        ->innerJoin('ativo', 'ativo.id = operacao.ativo_id')
+                        ->where(['between', 'data', $model->dataInicio, $model->dataFim])
+                        ->andWhere(['operacao.tipo' => 1])//operação de compra
+                        ->andWhere(['ativo.tipo_id' => 7])
+                        ->groupBy(['ativo.codigo', 'ativo.nome'])
+                        ->orderBy(['sum(operacao.valor)' => SORT_DESC])->asArray()->all();
+
+
         $dataProvider = new ArrayDataProvider([
             'allModels' => $query,
-             'pagination' => false,
+            'pagination' => false,
         ]);
         return $dataProvider;
         #echo $query->createCommand()->getSql();
         #exit();
-               
     }
+
 }

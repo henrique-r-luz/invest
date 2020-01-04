@@ -9,6 +9,7 @@ use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
+
 /**
  * This is the model class for table "public.operacao".
  *
@@ -23,6 +24,7 @@ class Operacao extends ActiveRecord {
 
     const VENDA = 'Venda';
     const COMPRA = 'Compra';
+   
 
     /**
      * {@inheritdoc}
@@ -39,7 +41,10 @@ class Operacao extends ActiveRecord {
             self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
     }
+    
+   
 
+    
     /**
      * {@inheritdoc}
      */

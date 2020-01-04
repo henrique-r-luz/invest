@@ -32,7 +32,7 @@
         "kartik-v/yii2-password": "*",
         "kartik-v/yii2-dynagrid": "*",
         "kartik-v/yii2-tabs-x": "*",
-        "kartik-v/yii2-date-range": "*",
+        "kartik-v/yii2-date-range": "dev-master",
         "kartik-v/yii2-widget-select2": "dev-master",
         "kartik-v/yii2-number": "@dev",
         "miloschuman/yii2-highcharts-widget": "^7.0"

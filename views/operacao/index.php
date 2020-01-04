@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use \kartik\grid\GridView;
 use \app\models\Operacao;
+use kartik\daterange\DateRangePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\OperacaoSearch */
@@ -10,10 +11,20 @@ use \app\models\Operacao;
 
 $this->title = 'Operacões';
 $this->params['breadcrumbs'][] = $this->title;
+$daterange = [
+    'model' => $searchModel,
+    'attribute' => 'createTimeRange',
+    'convertFormat' => true,
+    'pluginOptions' => [
+        'timePicker' => true,
+        'timePickerIncrement' => 30,
+        'locale' => ['format' => 'Y-m-d h:i']
+    ],
+];
 ?>
 <div class="operacao-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
 
     <?=
     GridView::widget([
@@ -104,17 +115,21 @@ $this->params['breadcrumbs'][] = $this->title;
             //'data',
             [
                 'attribute' => 'data',
-                'format' => 'date',
-                'filterType' => GridView::FILTER_DATETIME,
-                'filterWidgetOptions' => [
-                    'pickerButton' => false,
-                    'pluginOptions' => [
-                        'format' => 'dd/mm/yyyy',
-                        'autoWidget' => true,
-                        'autoclose' => true,
-                    ],
-                ]
+                'filter' => DateRangePicker::widget($daterange),
             ],
+            /* [
+              'attribute' => 'data',
+              'format' => 'date',
+              'filterType' => GridView::FILTER_DATETIME,
+              'filterWidgetOptions' => [
+              'pickerButton' => false,
+              'pluginOptions' => [
+              'format' => 'dd/mm/yyyy',
+              //'autoWidget' => true,
+              //'autoclose' => true,
+              ],
+              ]
+              ], */
             //'ativo_id',
             ['class' => 'yii\grid\ActionColumn'],
         ],
@@ -134,3 +149,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 </div>
+<?php
+$script = <<< JS
+teste = $("#reportdatetime").daterangepicker({
+    timePicker: true,
+    timePicker24Hour: true,
+    timePickerIncrement: 30,
+    locale: {
+        format: 'MM/DD/YYYY H:mm'
+    }
+}); 
+JS;
+$this->registerJs($script);    
+?>
