@@ -71,7 +71,7 @@ class SiteController extends Controller {
             Yii::$app->session->setFlash('danger', $msg);
         }
         $totalPatrimonio = Ativo::find()
-                ->sum('valor_liquido');
+                ->sum('valor_bruto');
 
         //gráfico por categorias
         $categorias = Categoria::find()->all();
@@ -79,7 +79,7 @@ class SiteController extends Controller {
         foreach ($categorias as $id => $categoria) {
             $fatia = [];
             $valorAtivoCategoria = Ativo::find()->where(['categoria_id' => $categoria->id])
-                    ->sum('valor_liquido');
+                    ->sum('valor_bruto');
             $fatia['name'] = $categoria->nome;
             if ($totalPatrimonio == 0) {
                 $totalPatrimonio = 1;
@@ -92,7 +92,7 @@ class SiteController extends Controller {
 
         //gráfico por ativos
         $ativos = Ativo::find()
-                ->orderBy(['valor_liquido' => SORT_DESC])
+                ->orderBy(['valor_bruto' => SORT_DESC])
                 ->andWhere(['>', 'quantidade', 0])
                 ->all();
         $dadosAtivo = [];
@@ -114,7 +114,7 @@ class SiteController extends Controller {
         foreach ($tipos as $id => $tipo) {
             $fatia = [];
             $valorAtivo = Ativo::find()->where(['tipo_id' => $tipo->id])
-                    ->sum('valor_liquido');
+                    ->sum('valor_bruto');
             $fatia['name'] = $tipo->nome;
             if ($totalPatrimonio == 0) {
                 $totalPatrimonio = 1;
@@ -130,11 +130,11 @@ class SiteController extends Controller {
         $acoes = Ativo::find()
                 ->where(['tipo_id' => 7])
                 ->andWhere(['>', 'quantidade', 0])
-                ->andWhere(['<>', 'valor_liquido', 0])
+                ->andWhere(['<>', 'valor_bruto', 0])
                 ->all();
         $totalAcoes = Ativo::find()
                 ->where(['tipo_id' => 7])
-                ->sum('valor_liquido');
+                ->sum('valor_bruto');
         foreach ($acoes as $id => $acao) {
             $fatia = [];
             $valorAtivo = $acao->valor_liquido;

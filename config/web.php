@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
@@ -33,6 +33,7 @@ $config = [
             'thousandSeparator' => '.',
             //'currencyCode' => ' ',
             'decimalSeparator' => ',',
+              'datetimeFormat' => 'php:d/m/Y H:i:s',
             'dateFormat' => 'dd/MM/yyyy',
         ],
         'request' => [

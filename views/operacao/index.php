@@ -15,6 +15,7 @@ $daterange = [
     'model' => $searchModel,
     'attribute' => 'createTimeRange',
     'convertFormat' => true,
+    
     'pluginOptions' => [
         'timePicker' => true,
         'timePickerIncrement' => 30,
@@ -49,6 +50,7 @@ $daterange = [
             ],
             [
                 'attribute' => 'quantidade',
+                'format' => 'decimal',
                 'pageSummary' => function ($summary, $data, $widget)use($dataProvider) {
                     $quantidade = 0;
                     $objetos = $dataProvider->models;
@@ -81,56 +83,19 @@ $daterange = [
                         $color = 'green';
                     }
                     return '<font color="' . $color . '">Valor Total: ' . Yii::$app->formatter->asCurrency($total) . '</font>';
-                    /*
-                      //renda fixa
-                      if ($ativo->categoria_id == 1) {
-                      $lucro = $lucro + ($ativo->valor_liquido - $ativo->valor_compra);
-                      }
-                      //ações
-                      if ($ativo->tipo_id == 7) {
-
-                      $valorLiquidoAcao = $valorLiquidoAcao + $ativo->valor_liquido;
-                      $valorCompraAcao = $valorCompraAcao + $ativo->valor_compra;
-                      }
-                      }
-
-
-                      if (($valorLiquidoAcao - $valorCompraAcao) > 0) {
-                      $lucroAcao = (($valorLiquidoAcao - $valorCompraAcao) * 0.85);
-                      } else {
-                      $lucroAcao = ($valorLiquidoAcao - $valorCompraAcao);
-                      }
-                      $lucro = $lucro + $lucroAcao;
-                      if ($lucro > 0) {
-                      $color = 'green';
-                      } else {
-                      $color = 'red';
-                      }
-
-                     *     return '<font color="' . $color . '">Lucro/Prejuízo: ' . Yii::$app->formatter->asCurrency($lucro) . '</font>';
-                     */
+                   
                 },
                 'pageSummaryOptions' => ['colspan' => 2],
             ],
             //'data',
             [
                 'attribute' => 'data',
+                 'format'              => 'datetime',
+                //'format'=>'dd/mm/yyyy HH:MM',
                 'filter' => DateRangePicker::widget($daterange),
+                 // 'format'     => 'dd/mm/yyyy',
             ],
-            /* [
-              'attribute' => 'data',
-              'format' => 'date',
-              'filterType' => GridView::FILTER_DATETIME,
-              'filterWidgetOptions' => [
-              'pickerButton' => false,
-              'pluginOptions' => [
-              'format' => 'dd/mm/yyyy',
-              //'autoWidget' => true,
-              //'autoclose' => true,
-              ],
-              ]
-              ], */
-            //'ativo_id',
+            
             ['class' => 'yii\grid\ActionColumn'],
         ],
         'panel' => [
@@ -138,9 +103,8 @@ $daterange = [
         //'heading' => true,
         ],
         'toolbar' => [
-            [
-                'content' => Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])
-            ],
+                'content' => Html::a('<i class="glyphicon glyphicon-plus"></i> ', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar']).
+                  Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], ['class' => 'btn btn-default', 'title' => 'Limpar Filtros']),
             '{toggleData}',
         ],
         'showPageSummary' => true,

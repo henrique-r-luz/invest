@@ -45,7 +45,13 @@ use kartik\number\NumberControl;
             </div>
             <div class="col-xs-12 col-lg-12 no-padding">
                 <div class="col-xs-4 col-sm-4 col-lg-4">
-                    <?= $form->field($model, 'quantidade')->textInput() ?>
+                    <?= 
+                        $form->field($model, 'quantidade')->widget(NumberControl::classname(), [
+                        'maskedInputOptions' => [
+                            'allowMinus' => false
+                        ],
+                    ])
+                            ?>
 
                 </div>
                 <div class="col-xs-4 col-sm-4 col-lg-4">
