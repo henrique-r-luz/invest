@@ -9,7 +9,6 @@ use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
-
 /**
  * This is the model class for table "public.operacao".
  *
@@ -24,7 +23,6 @@ class Operacao extends ActiveRecord {
 
     const VENDA = 'Venda';
     const COMPRA = 'Compra';
-   
 
     /**
      * {@inheritdoc}
@@ -41,10 +39,7 @@ class Operacao extends ActiveRecord {
             self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
     }
-    
-   
 
-    
     /**
      * {@inheritdoc}
      */
@@ -56,7 +51,7 @@ class Operacao extends ActiveRecord {
             [['valor', 'quantidade'], 'number'],
             [['data'], 'unique',
                 'targetAttribute' => ['ativo_id', 'data'],
-                'comboNotUnique'  => 'Já existe um registro de compra desse ativo nessa data e hora',
+                'comboNotUnique' => 'Já existe um registro de compra desse ativo nessa data e hora',
             ],
             [['ativo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ativo::className(), 'targetAttribute' => ['ativo_id' => 'id']],
         ];
@@ -106,34 +101,40 @@ class Operacao extends ActiveRecord {
     public function salvaOperacao() {
         $connection = \Yii::$app->db;
         $transaction = $connection->beginTransaction();
+        $ativo_id_antigo = null;
+        if ($this->getOldAttribute('ativo_id') != $this->ativo_id) {
+            $ativo_id_antigo = $this->getOldAttribute('ativo_id');
+        }
         try {
             if ($this->save()) {
-                if ($this->alteraAtivo()) {
-                    list($sincroniza) = Yii::$app->createController('sicronizar/index');
-                    list($resp, $msg) = $sincroniza->cotacaoAcao();
-                    if($resp==true){
-                        list($resp, $msg) = $sincroniza->easy();
-                        if($resp==true){
-                            $transaction->commit();
-                            return true;
-                        }else{
-                              $this->addError('ativo_id', 'O sistema não pode sincronizar os dados de renda fixa. ');
+                if ($this->alteraAtivo($this->ativo_id)) {
+                    if ($ativo_id_antigo != null) {
+                        if (!$this->alteraAtivo($ativo_id_antigo)) {
+                            $this->addError('ativo_id', 'O sistema não conseguiu atualizar o ativo:' . $ativo_id_antigo . '. ');
                             $transaction->rollBack();
                             return false;
                         }
-                    }else{
-                        $this->addError('ativo_id', 'O sistema não pode sincronizar os dados de ações. ');
-                        $transaction->rollBack();
-                        return false;
+                        list($sincroniza) = Yii::$app->createController('sicronizar/index');
+                        list($respEasy, $msgEasy) = $sincroniza->easy();
+                        list($respCotacao, $msgCotacao) = $sincroniza->cotacaoAcao();
+                        if ($respEasy && $respCotacao) {
+                            $transaction->commit();
+                            return true;
+                        } else {
+                            $this->addError('ativo_id', 'erro:</br>' . $msgEasy . '</br>' . $msgCotacao);
+                            $transaction->rollBack();
+                            return false;
+                        }
                     }
-                    
+                    //$transaction->commit();
                 } else {
+                    $this->addError('ativo_id', 'O sistema não pode sincronizar os dados de renda fixa. ');
                     $transaction->rollBack();
-                    $this->addError('ativo_id', 'O sistema não pode alterar o ativo:' . $this->ativo->codigo . '. ');
                     return false;
                 }
             } else {
                 $transaction->rollBack();
+                $this->addError('ativo_id', 'O sistema não pode alterar o ativo:' . $this->ativo->codigo . '. ');
                 return false;
             }
         } catch (Exception $e) {
@@ -155,25 +156,24 @@ class Operacao extends ActiveRecord {
         $transaction = $connection->beginTransaction();
         try {
             if ($this->delete()) {
-                if ($this->alteraAtivo()) {
+                if ($this->alteraAtivo($this->ativo_id)) {
                     list($sincroniza) = Yii::$app->createController('sicronizar/index');
                     list($resp, $msg) = $sincroniza->cotacaoAcao();
-                    if($resp==true){
+                    if ($resp == true) {
                         list($resp, $msg) = $sincroniza->easy();
-                        if($resp==true){
+                        if ($resp == true) {
                             $transaction->commit();
                             return true;
-                        }else{
-                              $this->addError('ativo_id', 'O sistema não pode sincronizar os dados de renda fixa. ');
+                        } else {
+                            $this->addError('ativo_id', 'O sistema não pode sincronizar os dados de renda fixa. ');
                             $transaction->rollBack();
                             return false;
                         }
-                    }else{
+                    } else {
                         $this->addError('ativo_id', 'O sistema não pode sincronizar os dados de ações. ');
                         $transaction->rollBack();
                         return false;
                     }
-                    
                 } else {
                     $transaction->rollBack();
                     $this->addError('ativo_id', 'O sistema não pode alterar o ativo:' . $this->ativo->codigo . '. ');
@@ -197,13 +197,13 @@ class Operacao extends ActiveRecord {
      * campos alterados quantidade e valor de compra
      * @return boolean
      */
-    public function alteraAtivo() {
-        $ativo = Ativo::findOne($this->ativo_id);
+    public function alteraAtivo($ativo_id) {
+        $ativo = Ativo::findOne($ativo_id);
 
-        $ativo->quantidade = self::find()->where(['ativo_id' => $this->ativo_id])
+        $ativo->quantidade = self::find()->where(['ativo_id' => $ativo_id])
                         ->andWhere(['tipo' => 1])//compra
                         ->sum('quantidade') -
-                        self::find()->where(['ativo_id' => $this->ativo_id])
+                        self::find()->where(['ativo_id' => $ativo_id])
                         ->andWhere(['tipo' => 0])//venda
                         ->sum('quantidade');
 
@@ -213,10 +213,10 @@ class Operacao extends ActiveRecord {
             $ativo->valor_liquido = 0;
         } else {
 
-            $ativo->valor_compra = self::find()->where(['ativo_id' => $this->ativo_id])
+            $ativo->valor_compra = self::find()->where(['ativo_id' => $ativo_id])
                             ->andWhere(['tipo' => 1])//compra
                             ->sum('valor') -
-                            self::find()->where(['ativo_id' => $this->ativo_id])
+                            self::find()->where(['ativo_id' => $ativo_id])
                             ->andWhere(['tipo' => 0])//venda
                             ->sum('valor');
         }
