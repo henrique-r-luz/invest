@@ -10,7 +10,7 @@ $this->title = 'Patrimônio';
 ?>
 
 <div class="row ">
-    <div class="col-lg-6">
+    <div class="col-lg-4">
         <div class="box box-info">
             <?=
             Highcharts::widget([
@@ -48,7 +48,7 @@ $this->title = 'Patrimônio';
             ?>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-5">
         <div class="box box-info">
             <?=
             Highcharts::widget([
@@ -86,7 +86,25 @@ $this->title = 'Patrimônio';
             ?>
         </div>
     </div>
+    <div class="col-lg-3">
+        <div class="info-box">
+            <!-- Apply any bg-* class to to the icon to color it -->
+            <span class="info-box-icon bg-green"><i class="fa fa-usd"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Valor Invest.</span>
+                <span class="info-box-number"> <?=$patrimonioBruto?></span>
+            </div><!-- /.info-box-content -->
+        </div><!-- /.info-box -->
 
+        <div class="info-box">
+            <!-- Apply any bg-* class to to the icon to color it -->
+            <span class="info-box-icon bg-blue"><i class="fa fa-line-chart"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Total Aportes</span>
+                <span class="info-box-number"><?=$valorCompra?></span>
+            </div><!-- /.info-box-content -->
+        </div><!-- /.info-box -->
+    </div>
 </div>
 <div class="row ">
     <div class="col-lg-12">
@@ -101,8 +119,8 @@ $this->title = 'Patrimônio';
                     'chart' => [
                         'type' => 'pie',
                     //'heigth' => 600
-                      //  'height'=>'100%',
-                      //  'width'=>'100%',
+                    //  'height'=>'100%',
+                    //  'width'=>'100%',
                     ],
                     'title' => [
                         'text' => 'Ativos',
@@ -129,7 +147,7 @@ $this->title = 'Patrimônio';
             ?>
         </div>
     </div>
-    
+
 </div>
 <div class="row ">
     <div class="col-lg-12">
@@ -144,8 +162,8 @@ $this->title = 'Patrimônio';
                     'chart' => [
                         'type' => 'pie',
                     //'heigth' => 600
-                      //  'height'=>'100%',
-                      //  'width'=>'100%',
+                    //  'height'=>'100%',
+                    //  'width'=>'100%',
                     ],
                     'title' => [
                         'text' => 'Açoes',
@@ -172,6 +190,6 @@ $this->title = 'Patrimônio';
             ?>
         </div>
     </div>
-    
+
 </div>
 

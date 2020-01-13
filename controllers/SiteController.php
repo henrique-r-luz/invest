@@ -13,6 +13,7 @@ use \app\models\Ativo;
 use \app\models\Categoria;
 use yii\web\JsExpression;
 use \app\models\Tipo;
+use yii\i18n\Formatter;
 
 class SiteController extends Controller {
 
@@ -147,12 +148,25 @@ class SiteController extends Controller {
             $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . $id . ']');
             $dadosAcaoes[] = $fatia;
         }
-
+        
+        
+        //patrimônio bruto total
+        $patrimonioBruto = Ativo::find()
+                        ->sum('valor_bruto');
+        $formatter = \Yii::$app->formatter;
+        $patrimonioBruto = $formatter->asCurrency($patrimonioBruto);
+        //valor de compra
+        $valorCompra = Ativo::find()
+                        ->sum('valor_compra');
+        $formatter = \Yii::$app->formatter;
+        $valorCompra = $formatter->asCurrency($valorCompra);
         return $this->render('index', [
                     'dadosCategoria' => $dadosCategoria,
                     'dadosAtivo' => $dadosAtivo,
                     'dadosTipo' => $dadosTipo,
                     'dadosAcoes' => $dadosAcaoes,
+                    'patrimonioBruto'=>$patrimonioBruto,
+                    'valorCompra'=>$valorCompra,
         ]);
     }
 
