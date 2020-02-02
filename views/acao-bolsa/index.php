@@ -10,6 +10,8 @@ use \kartik\grid\GridView;
 $this->title = 'Acao Bolsas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+
 <div class="acao-bolsa-index">
 
                     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -34,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'content' =>Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])
         ],
         '{toggleData}',
+        '{export}'
         ],
         ]); ?>
     
