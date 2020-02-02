@@ -8,35 +8,36 @@ use Yii;
  * This is the model class for table "balanco_empresa_bolsa".
  *
  * @property int $id
- * @property string $cnpj
- * @property int $tag_along_on
- * @property int $free_float_on
- * @property bool $governo
- * @property string $data
- * @property double $patrimonio_liquido
- * @property double $receita_liquida
- * @property double $ebitda
- * @property double $da
- * @property double $ebit
- * @property int $margem_ebit
- * @property double $resultado_financeiro
- * @property double $imposto
- * @property double $lucro_liquido
- * @property int $margem_liquida
- * @property int $roe
- * @property double $caixa
- * @property double $divida_bruta
- * @property double $divida_liquida
- * @property int $divida_bruta_patrimonio
- * @property double $divida_liquida_ebitda
- * @property double $fco
- * @property double $capex
- * @property double $fcf
- * @property double $fcl
- * @property int $capex_fco
- * @property double $proventos
- * @property int $payout
- * @property int $anual
+ * @property string|null $data
+ * @property float|null $patrimonio_liquido
+ * @property float|null $receita_liquida
+ * @property float|null $ebitda
+ * @property float|null $da
+ * @property float|null $ebit
+ * @property int|null $margem_ebit
+ * @property float|null $resultado_financeiro
+ * @property float|null $imposto
+ * @property float|null $lucro_liquido
+ * @property int|null $margem_liquida
+ * @property int|null $roe
+ * @property float|null $caixa
+ * @property float|null $divida_bruta
+ * @property float|null $divida_liquida
+ * @property int|null $divida_bruta_patrimonio
+ * @property float|null $divida_liquida_ebitda
+ * @property float|null $fco
+ * @property float|null $capex
+ * @property float|null $fcf
+ * @property float|null $fcl
+ * @property int|null $fcl_capex
+ * @property float|null $proventos
+ * @property int|null $payout
+ * @property float|null $pdd
+ * @property float|null $pdd_lucro_liquido
+ * @property float|null $indice_basileia
+ * @property string|null $codigo
+ *
+ * @property AcaoBolsa $codigo0
  */
 class BalancoEmpresaBolsa extends \yii\db\ActiveRecord
 {
@@ -54,13 +55,12 @@ class BalancoEmpresaBolsa extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cnpj'], 'required'],
-            [['cnpj', 'data'], 'string'],
-            [['tag_along_on', 'free_float_on', 'margem_ebit', 'margem_liquida', 'roe', 'divida_bruta_patrimonio', 'capex_fco', 'payout', 'anual'], 'default', 'value' => null],
-            [['tag_along_on', 'free_float_on', 'margem_ebit', 'margem_liquida', 'roe', 'divida_bruta_patrimonio', 'capex_fco', 'payout', 'anual'], 'integer'],
-            [['governo'], 'boolean'],
-            [['patrimonio_liquido', 'receita_liquida', 'ebitda', 'da', 'ebit', 'resultado_financeiro', 'imposto', 'lucro_liquido', 'caixa', 'divida_bruta', 'divida_liquida', 'divida_liquida_ebitda', 'fco', 'capex', 'fcf', 'fcl', 'proventos'], 'number'],
-            [['cnpj'], 'unique'],
+            [['data'], 'string'],
+            [['patrimonio_liquido', 'receita_liquida', 'ebitda', 'da', 'ebit', 'resultado_financeiro', 'imposto', 'lucro_liquido', 'caixa', 'divida_bruta', 'divida_liquida', 'divida_liquida_ebitda', 'fco', 'capex', 'fcf', 'fcl', 'proventos', 'pdd', 'pdd_lucro_liquido', 'indice_basileia'], 'number'],
+            [['margem_ebit', 'margem_liquida', 'roe', 'divida_bruta_patrimonio', 'fcl_capex', 'payout'], 'default', 'value' => null],
+            [['margem_ebit', 'margem_liquida', 'roe', 'divida_bruta_patrimonio', 'fcl_capex', 'payout'], 'integer'],
+            [['codigo'], 'string', 'max' => 4],
+            [['codigo'], 'exist', 'skipOnError' => true, 'targetClass' => AcaoBolsa::className(), 'targetAttribute' => ['codigo' => 'codigo']],
         ];
     }
 
@@ -71,10 +71,6 @@ class BalancoEmpresaBolsa extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'cnpj' => 'Cnpj',
-            'tag_along_on' => 'Tag Along On',
-            'free_float_on' => 'Free Float On',
-            'governo' => 'Governo',
             'data' => 'Data',
             'patrimonio_liquido' => 'Patrimonio Liquido',
             'receita_liquida' => 'Receita Liquida',
@@ -96,10 +92,21 @@ class BalancoEmpresaBolsa extends \yii\db\ActiveRecord
             'capex' => 'Capex',
             'fcf' => 'Fcf',
             'fcl' => 'Fcl',
-            'capex_fco' => 'Capex Fco',
+            'fcl_capex' => 'Fcl Capex',
             'proventos' => 'Proventos',
             'payout' => 'Payout',
-            'anual' => 'Anual',
+            'pdd' => 'Pdd',
+            'pdd_lucro_liquido' => 'Pdd Lucro Liquido',
+            'indice_basileia' => 'Indice Basileia',
+            'codigo' => 'Codigo',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCodigo0()
+    {
+        return $this->hasOne(AcaoBolsa::className(), ['codigo' => 'codigo']);
     }
 }
