@@ -208,14 +208,15 @@ class SicronizarController extends Controller {
         $csv = array_map('str_getcsv', file('/vagrant/bot/orders.csv'));
         unset($csv[0]);
         $transaction = Yii::$app->db->beginTransaction();
+        
         try {
             foreach ($csv as $id => $linha) {
                 $codigo = str_replace("F", "", $linha[1]);
-                //echo $codigo;
-                //exit();
+               
                 $ativo = Ativo::find()
                         ->where(['codigo' => $codigo])
                         ->one();
+                
                 if(Operacao::find()->where(['ativo_id'=>$ativo->id])->andWhere(['data'=>$linha[11]])->exists()){
                     continue;
                 }
@@ -227,10 +228,15 @@ class SicronizarController extends Controller {
                     $operacao->data = $linha[11];
                     $operacao->valor = $linha[10] * $linha[8];
                     $operacao->tipo = 1;
+                  
                     if (!$operacao->salvaOperacao()) {
+                       
                         $transaction->rollBack();
                         $erros .= CajuiHelper::processaErros($operacao->getErrors()).'</br>';
+                       
                         return [false, $erros];
+                    }else{
+                       
                     }
                 }else{
                     $erros.='ativo não localizadao '.$erros.' ';

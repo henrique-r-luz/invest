@@ -102,18 +102,24 @@ class Operacao extends ActiveRecord {
         $connection = \Yii::$app->db;
         $transaction = $connection->beginTransaction();
         $ativo_id_antigo = null;
+
         if ($this->getOldAttribute('ativo_id') != $this->ativo_id) {
             $ativo_id_antigo = $this->getOldAttribute('ativo_id');
         }
+
         try {
+
             if ($this->save()) {
+
                 if ($this->alteraAtivo($this->ativo_id)) {
                     if ($ativo_id_antigo != null) {
+
                         if (!$this->alteraAtivo($ativo_id_antigo)) {
                             $this->addError('ativo_id', 'O sistema não conseguiu atualizar o ativo:' . $ativo_id_antigo . '. ');
                             $transaction->rollBack();
                             return false;
                         }
+
                         list($sincroniza) = Yii::$app->createController('sicronizar/index');
                         list($respEasy, $msgEasy) = $sincroniza->easy();
                         list($respCotacao, $msgCotacao) = $sincroniza->cotacaoAcao();
@@ -125,24 +131,31 @@ class Operacao extends ActiveRecord {
                             $transaction->rollBack();
                             return false;
                         }
+                    } else {
+                        $transaction->commit();
+                        return true;
                     }
-                    //$transaction->commit();
                 } else {
                     $this->addError('ativo_id', 'O sistema não pode sincronizar os dados de renda fixa. ');
                     $transaction->rollBack();
                     return false;
                 }
             } else {
+
                 $transaction->rollBack();
                 $this->addError('ativo_id', 'O sistema não pode alterar o ativo:' . $this->ativo->codigo . '. ');
                 return false;
             }
         } catch (Exception $e) {
+            $this->addError('ativo_id', $e);
             $transaction->rollBack();
-            throw $e;
+            return false;
+            // throw $e;
         } catch (Throwable $e) {
+            $this->addError('ativo_id', $e);
             $transaction->rollBack();
-            throw $e;
+            return false;
+            //throw $e;
         }
     }
 
@@ -198,8 +211,8 @@ class Operacao extends ActiveRecord {
      * @return boolean
      */
     public function alteraAtivo($ativo_id) {
-        $ativo = Ativo::findOne($ativo_id);
 
+        $ativo = Ativo::findOne($ativo_id);
         $ativo->quantidade = self::find()->where(['ativo_id' => $ativo_id])
                         ->andWhere(['tipo' => 1])//compra
                         ->sum('quantidade') -
