@@ -27,17 +27,17 @@ class SicronizarController extends Controller {
 //put your code here
 //mapeamento id do ativo com índice do objeto easy 
     const discionario = [
-        0 => 1, //Tesouro Selic 2023
-        1 => 3, //Tesouro IPCA+ 2024
-        2 => 4, //Tesouro Selic 2025
-        3 => 5, //BANCO AGIBANK
-        4 => 6, //BANCO AGIBANK
-        5 => 2, //CMDT23 - CEMIG DISTRIBUICAO S.A
-        6 => 7, //MDT23 - CEMIG DISTRIBUICAO S.A
-        7 => 9, //BANCO MAXIMA
-        8 => 10, //BANCO MAXIMA
-        9 => 11, //BANCO MAXIMA
-        10 => 12, //DEVANT SOLIDUS CASH FIRF CP
+        10 => 1, //Tesouro Selic 2023
+        9 => 3, //Tesouro IPCA+ 2024
+        8 => 4, //Tesouro Selic 2025
+        2 => 5, //BANCO AGIBANK 20/04/2020
+        1 => 6, //BANCO AGIBANK 31/07/2020
+        3 => 2, //CMDT23 - CEMIG DISTRIBUICAO S.A 9.15
+        0 => 7, //MDT23 - CEMIG DISTRIBUICAO S.A 9.70
+        5 => 9, //BANCO MAXIMA 121
+        4 => 10, //BANCO MAXIMA 128 21/07/2023
+        6 => 11, //BANCO MAXIMA 128 cdi
+        7 => 12, //DEVANT SOLIDUS CASH FIRF CP
     ];
 
     public function actionIndex() {
@@ -90,8 +90,8 @@ class SicronizarController extends Controller {
     public function cotacaoAcao() {
         $contErro = 0;
         $erros = '';
-          if (!file_exists('/vagrant/bot/preco_acao.csv')){
-            return [true, 'sucesso']; 
+        if (!file_exists('/vagrant/bot/preco_acao.csv')) {
+            return [true, 'sucesso'];
         }
         $csv = array_map('str_getcsv', file('/vagrant/bot/preco_acao.csv'));
         $newkeys = array('id', 'valor');
@@ -124,8 +124,8 @@ class SicronizarController extends Controller {
 
     public function empresas() {
         $erros = '';
-          if (!file_exists('/vagrant/bot/empresa.csv')){
-            return [true, 'sucesso']; 
+        if (!file_exists('/vagrant/bot/empresa.csv')) {
+            return [true, 'sucesso'];
         }
         $csv = array_map('str_getcsv', file('/vagrant/bot/empresas.csv'));
         $newkeys = array('cnpj', 'codigo', 'nome', 'setor');
@@ -159,8 +159,42 @@ class SicronizarController extends Controller {
 
     public function easy() {
         $erros = '';
-          if (!file_exists('/vagrant/bot/easy.csv')){
-            return [true, 'sucesso']; 
+        if (!file_exists('/vagrant/bot/Exportar_custodia.csv')) {
+            return [true, 'sucesso'];
+        }
+        $csv = array_map(function($v) {
+            return str_getcsv($v, ";");
+        }, file('/vagrant/bot/Exportar_custodia.csv'));
+        unset($csv[0]);
+        unset($csv[1]);
+
+        $id = 0;
+        $contErro = 0;
+        foreach ($csv as $titulo) {
+          
+            $ativo = Ativo::findOne(self::discionario[$id]);
+            $ativo->valor_bruto = str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[6])));
+            $ativo->valor_liquido = str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[7])));
+            if ($ativo->valor_compra <= 0 && $ativo->quantidade > 0) {
+                $ativo->valor_compra = $ativo->valor_bruto;
+            }
+            if (!$ativo->save()) {
+                $contErro++;
+                $erros .= CajuiHelper::processaErros($ativo->getErrors()) . '</br>';
+            }
+            $id++;
+        }
+        if ($contErro == 0) {
+            return [true, 'sucesso'];
+        } else {
+            return [false, $erros];
+        }
+    }
+
+    public function easy2() {
+        $erros = '';
+        if (!file_exists('/vagrant/bot/easy.csv')) {
+            return [true, 'sucesso'];
         }
         $csv = array_map('str_getcsv', file('/vagrant/bot/easy.csv'));
         $newkeys = array('nome', 'valor_bruto', 'valor_liquido');
@@ -202,25 +236,25 @@ class SicronizarController extends Controller {
          * tipo = 1 compra
          */
         $erros = 'Erro na criação das Operações: ';
-        if (!file_exists('/vagrant/bot/orders.csv')){
-            return [true, 'sucesso']; 
+        if (!file_exists('/vagrant/bot/orders.csv')) {
+            return [true, 'sucesso'];
         }
         $csv = array_map('str_getcsv', file('/vagrant/bot/orders.csv'));
         unset($csv[0]);
         $transaction = Yii::$app->db->beginTransaction();
-        
+
         try {
             foreach ($csv as $id => $linha) {
                 $codigo = str_replace("F", "", $linha[1]);
-               
+
                 $ativo = Ativo::find()
                         ->where(['codigo' => $codigo])
                         ->one();
-                
-                if(Operacao::find()->where(['ativo_id'=>$ativo->id])->andWhere(['data'=>$linha[11]])->exists()){
+
+                if (Operacao::find()->where(['ativo_id' => $ativo->id])->andWhere(['data' => $linha[11]])->exists()) {
                     continue;
                 }
-               
+
                 if ($ativo != null && ($linha[15] == '' || $linha[15] == null)) {
                     $operacao = new Operacao();
                     $operacao->ativo_id = $ativo->id;
@@ -228,26 +262,25 @@ class SicronizarController extends Controller {
                     $operacao->data = $linha[11];
                     $operacao->valor = $linha[10] * $linha[8];
                     $operacao->tipo = 1;
-                  
+
                     if (!$operacao->salvaOperacao()) {
-                       
+
                         $transaction->rollBack();
-                        $erros .= CajuiHelper::processaErros($operacao->getErrors()).'</br>';
-                       
+                        $erros .= CajuiHelper::processaErros($operacao->getErrors()) . '</br>';
+
                         return [false, $erros];
-                    }else{
-                       
+                    } else {
+                        
                     }
-                }else{
-                    $erros.='ativo não localizadao '.$erros.' ';
+                } else {
+                    $erros .= 'ativo não localizadao ' . $erros . ' ';
                 }
-               
             }
             $transaction->commit();
             return [true, 'sucesso'];
         } catch (\Exception $e) {
             $transaction->rollBack();
-            return [false, $erros.$e];
+            return [false, $erros . $e];
             throw $e;
         }
     }
