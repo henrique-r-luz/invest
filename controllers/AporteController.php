@@ -18,9 +18,12 @@ use yii\data\ArrayDataProvider;
  */
 class AporteController extends Controller {
 
+    const tomadaDescisao = 35; // define a porcentagem de patrimônio investido em renda variável
+    
     /**
      * {@inheritdoc}
      */
+    
     public function behaviors() {
         return [
             'verbs' => [
@@ -52,7 +55,7 @@ class AporteController extends Controller {
                     ->sum('valor_bruto');
 
 
-            if ((($valorAcoes * 100) / $totalAtivo) <= 30 && $valorAcoes > 0) {
+            if ((($valorAcoes * 100) / $totalAtivo) <= $this->tomadaDescisao && $valorAcoes > 0) {
                 //investir em ações
                 $dados = $this->defineAporteAcoes($valorAcoes, $model);
             } else {
