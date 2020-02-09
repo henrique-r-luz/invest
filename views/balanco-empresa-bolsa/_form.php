@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
        <div class="balanco-empresa-bolsa-form">
             <?php $form = ActiveForm::begin(); ?>
 
-                <?= $form->field($model, 'data')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'data')->textInput() ?>
 
     <?= $form->field($model, 'patrimonio_liquido')->textInput() ?>
 

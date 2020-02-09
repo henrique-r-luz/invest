@@ -7,7 +7,7 @@ use yii\db\Migration;
 /**
  * Class m190609_143226_inicio
  */
-class m191210_173226_uniqui_data_ativo_compras_clear extends Migration {
+class m200208_173226_unique_data_empresa_balanco extends Migration {
 
     /**
      * {@inheritdoc}
@@ -15,16 +15,16 @@ class m191210_173226_uniqui_data_ativo_compras_clear extends Migration {
     public function safeUp() {
 
 
-
-         $this->execute("CREATE UNIQUE INDEX ativo_data_operacao ON  operacao (ativo_id,data);");
-       
+       $this->execute("CREATE UNIQUE INDEX balanco_data_empresa ON  balanco_empresa_bolsa(codigo,data);");
+        
     }
 
     /**
      * {@inheritdoc}
      */
     public function safeDown() {
-        $this->execute("DROP INDEX ativo_data_operacao;");
+
+        $this->execute("DROP INDEX balanco_data_empresa;");
         return true;
     }
 

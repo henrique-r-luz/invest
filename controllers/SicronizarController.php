@@ -14,6 +14,7 @@ use Yii;
 use \app\models\AcaoBolsa;
 use app\lib\CajuiHelper;
 use \app\models\Operacao;
+use \app\models\BalancoEmpresaBolsa;
 
 /**
  * Description of SicronizarController
@@ -171,7 +172,7 @@ class SicronizarController extends Controller {
         $id = 0;
         $contErro = 0;
         foreach ($csv as $titulo) {
-          
+
             $ativo = Ativo::findOne(self::discionario[$id]);
             $ativo->valor_bruto = str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[6])));
             $ativo->valor_liquido = str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[7])));
@@ -184,41 +185,6 @@ class SicronizarController extends Controller {
             }
             $id++;
         }
-        if ($contErro == 0) {
-            return [true, 'sucesso'];
-        } else {
-            return [false, $erros];
-        }
-    }
-
-    public function easy2() {
-        $erros = '';
-        if (!file_exists('/vagrant/bot/easy.csv')) {
-            return [true, 'sucesso'];
-        }
-        $csv = array_map('str_getcsv', file('/vagrant/bot/easy.csv'));
-        $newkeys = array('nome', 'valor_bruto', 'valor_liquido');
-        foreach ($csv as $id => $linha) {
-            $csv[$id] = array_combine($newkeys, $linha); //recursive_change_key($linha, array('0' => 'cnpj', '1' => 'codigo','2'=>'nome','3'=>'setor'));
-        }
-        unset($csv[0]);
-        $contErro = 0;
-        $id = 0;
-        foreach ($csv as $acoe) {
-
-            $ativo = Ativo::findOne(self::discionario[$id]);
-            $ativo->valor_bruto = str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $acoe['valor_bruto'])));
-            $ativo->valor_liquido = str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $acoe['valor_liquido'])));
-            if ($ativo->valor_compra <= 0 && $ativo->quantidade > 0) {
-                $ativo->valor_compra = $ativo->valor_bruto;
-            }
-            if (!$ativo->save()) {
-                $contErro++;
-                $erros .= CajuiHelper::processaErros($ativo->getErrors()) . '</br>';
-            }
-            $id++;
-        }
-
         if ($contErro == 0) {
             return [true, 'sucesso'];
         } else {
@@ -269,11 +235,94 @@ class SicronizarController extends Controller {
                         $erros .= CajuiHelper::processaErros($operacao->getErrors()) . '</br>';
 
                         return [false, $erros];
-                    } else {
-                        
                     }
-                } else {
-                    $erros .= 'ativo não localizadao ' . $erros . ' ';
+                }
+            }
+            $transaction->commit();
+            return [true, 'sucesso'];
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            return [false, $erros . $e];
+            throw $e;
+        }
+    }
+
+    public function fundamentos() {
+
+        $erros = 'Erro na criação dos balanços : ';
+        if (!file_exists('/vagrant/bot/fundamentos.csv')) {
+            return [true, 'sucesso'];
+        }
+        $csv = array_map('str_getcsv', file('/vagrant/bot/fundamentos.csv'));
+
+        foreach ($csv as $id => $linha) {
+            //ajusta dados
+            foreach ($linha as $k => $valor) {
+                if ($valor == 's/n') {
+                    $csv[$id][$k] = null;
+                }
+                if ($valor == 'P') {
+                    $csv[$id][$k] = null;
+                }
+                $csv[$id][$k] = $valor = str_replace('%', '', $csv[$id][$k]);
+                 $csv[$id][$k] = $valor = str_replace('.', '', $csv[$id][$k]);
+                $csv[$id][$k] = $valor = str_replace(',', '.', $csv[$id][$k]);
+            }
+        }
+
+        $newkeys = array('Ano', 'CAPEX', 'Caixa', 'D. L. / EBITDA', 'Dívida', 'EBITDA', 'FCF', 'FCL CAPEX', 'FCO', 'Lucro Líq.', 'Mrg. Líq.', 'PDD', 'PDD/Lucro Líquido', 'Pat. Líq.', 'Payout', 'Prov.', 'ROE', 'Receita Líq.', 'Res. Fin.', 'empresa', 'Índice de Basiléia');
+        foreach ($csv as $id => $linha) {
+            $csv[$id] = array_combine($newkeys, $linha); //recursive_change_key($linha, array('0' => 'cnpj', '1' => 'codigo','2'=>'nome','3'=>'setor'));
+        }
+
+        unset($csv[0]);
+
+        $transaction = Yii::$app->db->beginTransaction();
+
+        try {
+            foreach ($csv as $id => $linha) {
+
+                $ano =  str_replace(' ', '', $linha['Ano']);
+                $empresa = substr(trim($linha['empresa']), 0, 4);
+                if (BalancoEmpresaBolsa::find()->where(['codigo' => $empresa])
+                                ->andWhere(['data' => $ano])
+                                ->exists()) {
+                    continue;
+                }
+                $balanco = new BalancoEmpresaBolsa();
+                $balanco->data = str_replace(' ', '', $linha['Ano']);
+                $balanco->patrimonio_liquido = $linha['Pat. Líq.'] == 's/n' ? null : $linha['Pat. Líq.'];
+                $balanco->receita_liquida = $linha['Receita Líq.'] == 's/n' ? null : $linha['Receita Líq.'];
+                $balanco->ebitda = $linha['EBITDA'] == 's/n' ? null : $linha['EBITDA'];
+                $balanco->ebit = null;
+                $balanco->margem_ebit = null;
+                $balanco->resultado_financeiro = $linha['Res. Fin.'] == 's/n' ? null : $linha['Res. Fin.'];
+                $balanco->imposto = null;
+                $balanco->lucro_liquido = $linha['Lucro Líq.'] == 's/n' ? null : $linha['Lucro Líq.'];
+                $balanco->margem_liquida = $linha['Mrg. Líq.'] == 's/n' ? null : $linha['Mrg. Líq.'];
+                $balanco->roe = $linha['ROE'] == 's/n' ? null : $linha['ROE'];
+                $balanco->caixa = $linha['Caixa'] == 's/n' ? null : $linha['Caixa'];
+                $balanco->divida_bruta = $linha['Dívida'];
+                $balanco->divida_liquida = null;
+                $balanco->divida_bruta_patrimonio = null;
+                $balanco->divida_liquida_ebitda = $linha['D. L. / EBITDA'] == 's/n' ? null : $linha['D. L. / EBITDA'];
+                $balanco->fco = $linha['FCO'] == 's/n' ? null : $linha['FCO'];
+                $balanco->capex = $linha['CAPEX'] == 's/n' ? null : $linha['CAPEX'];
+                $balanco->fcf = $linha['FCF'] == 's/n' ? null : $linha['FCF'];
+                $balanco->fcl = '';
+                $balanco->fcl_capex = $linha['FCL CAPEX'] == 's/n' ? null : $linha['FCL CAPEX'];
+                $balanco->proventos = $linha['Prov.'] == 's/n' ? null : $linha['Prov.'];
+                $balanco->payout = $linha['Payout'] == 's/n' ? null : $linha['Payout'];
+                $balanco->pdd = $linha['PDD'] == 's/n' ? null : $linha['PDD'];
+               
+                $balanco->pdd_lucro_liquido = $linha['PDD/Lucro Líquido'] == 's/n' ? null : $linha['PDD/Lucro Líquido'];
+                $balanco->indice_basileia = $linha['Índice de Basiléia'] == 's/n' ? null : $linha['Índice de Basiléia'];
+                $balanco->codigo = substr(trim($linha['empresa']), 0, 4);
+                if (!$balanco->save()) {
+                    $transaction->rollBack();
+                    $erros .= CajuiHelper::processaErros($balanco->getErrors()) . '</br>';
+                   
+                    return [false, $erros];
                 }
             }
             $transaction->commit();
