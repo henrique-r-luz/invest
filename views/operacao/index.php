@@ -15,17 +15,19 @@ $daterange = [
     'model' => $searchModel,
     'attribute' => 'createTimeRange',
     'convertFormat' => true,
-    
     'pluginOptions' => [
         'timePicker' => true,
+        'timePicker24Hour'=> true,
         'timePickerIncrement' => 30,
-        'locale' => ['format' => 'Y-m-d h:i']
+        //'locale' => ['format' => 'Y-m-d H:i']
+        'locale' => ['format' => 'd/m/y H:i']
+        //'locale' => ['dd/MM/yyyy HH:mm']
     ],
 ];
 ?>
 <div class="operacao-index">
 
-<?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);   ?>
 
     <?=
     GridView::widget([
@@ -83,19 +85,17 @@ $daterange = [
                         $color = 'green';
                     }
                     return '<font color="' . $color . '">Valor Total: ' . Yii::$app->formatter->asCurrency($total) . '</font>';
-                   
                 },
                 'pageSummaryOptions' => ['colspan' => 2],
             ],
             //'data',
             [
                 'attribute' => 'data',
-                 'format'              => 'datetime',
+                'format' => 'datetime',
                 //'format'=>'dd/mm/yyyy HH:MM',
                 'filter' => DateRangePicker::widget($daterange),
-                 // 'format'     => 'dd/mm/yyyy',
+            // 'format'     => 'dd/mm/yyyy',
             ],
-            
             ['class' => 'yii\grid\ActionColumn'],
         ],
         'panel' => [
@@ -103,8 +103,8 @@ $daterange = [
         //'heading' => true,
         ],
         'toolbar' => [
-                'content' => Html::a('<i class="glyphicon glyphicon-plus"></i> ', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar']).
-                  Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], ['class' => 'btn btn-default', 'title' => 'Limpar Filtros']),
+            'content' => Html::a('<i class="glyphicon glyphicon-plus"></i> ', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar']) .
+            Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], ['class' => 'btn btn-default', 'title' => 'Limpar Filtros']),
             '{toggleData}',
         ],
         'showPageSummary' => true,
@@ -113,16 +113,3 @@ $daterange = [
 
 
 </div>
-<?php
-$script = <<< JS
-teste = $("#reportdatetime").daterangepicker({
-    timePicker: true,
-    timePicker24Hour: true,
-    timePickerIncrement: 30,
-    locale: {
-        format: 'MM/DD/YYYY H:mm'
-    }
-}); 
-JS;
-$this->registerJs($script);    
-?>

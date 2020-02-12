@@ -11,7 +11,8 @@ $config = [
     'name' => 'Investimento',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'timeZone' => 'America/Sao_Paulo',
+    'timeZone' => 'Europe/London',
+    //'timeZone'=>'America/Bahia',
     'language' => 'pt-BR',
     'sourceLanguage' => 'pt-BR',
     'aliases' => [
@@ -29,12 +30,13 @@ $config = [
             'showScriptName' => true,
         ],
         'formatter' => [
-            //'class' => 'yii\i18n\formatter',
+            'class' => 'yii\i18n\Formatter',
             'thousandSeparator' => '.',
             //'currencyCode' => ' ',
             'decimalSeparator' => ',',
-              'datetimeFormat' => 'php:d/m/Y H:i:s',
+              'datetimeFormat' => 'dd/MM/yyyy HH:mm:ss',
             'dateFormat' => 'dd/MM/yyyy',
+             'locale' => 'pt-BR', //your language locale
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

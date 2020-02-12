@@ -216,16 +216,19 @@ class SicronizarController extends Controller {
                 $ativo = Ativo::find()
                         ->where(['codigo' => $codigo])
                         ->one();
-
-                if (Operacao::find()->where(['ativo_id' => $ativo->id])->andWhere(['data' => $linha[11]])->exists()) {
+                 List($data,$hora) = explode(" ",$linha[11]);
+                    List($d,$m,$y) = explode('/', $data);
+                 $dataAcao = $y.'-'.$m.'-'.$d.' '.$hora;
+                if (Operacao::find()->where(['ativo_id' => $ativo->id])->andWhere(['data' => $dataAcao])->exists()) {
                     continue;
                 }
 
                 if ($ativo != null && ($linha[15] == '' || $linha[15] == null)) {
+                   
                     $operacao = new Operacao();
                     $operacao->ativo_id = $ativo->id;
                     $operacao->quantidade = $linha[8];
-                    $operacao->data = $linha[11];
+                    $operacao->data = $dataAcao;
                     $operacao->valor = $linha[10] * $linha[8];
                     $operacao->tipo = 1;
 

@@ -87,16 +87,18 @@ class OperacaoSearch extends Operacao {
             'operacao.tipo' => $this->tipo
                 //'ativo_id' => $this->ativo_id,
         ]);
-
+     
+        //echo 'data>>>' . date("Y-m-d H:i:s", $this->createTimeStart) . '--' . date("Y-m-d H:i:s", $this->createTimeEnd);
+        //exit();
         //$query->andFilterWhere(['ilike', 'tipo', $this->tipo]);
         if ($this->createTimeRange != null && $this->createTimeRange != '') {
-            $query->andFilterWhere(['>=', 'data', date("Y-m-d H:i:s", $this->createTimeStart)])
-                    ->andFilterWhere(['<=', 'data', date("Y-m-d H:i:s", $this->createTimeEnd)]);
+            $query->andFilterWhere(['>=', 'data', date("d/m/y H:i", $this->createTimeStart)])
+                    ->andFilterWhere(['<=', 'data', date("d/m/y H:i", $this->createTimeEnd)]);
         }
 
 
         $query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_codigo]);
-      
+
 
         return $dataProvider;
     }
