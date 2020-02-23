@@ -41,7 +41,7 @@ class OperacaoSearch extends Operacao {
     public function behaviors() {
         return [
             [
-                'class' => DateRangeBehavior::className(),
+                'class' => \app\lib\DateRangeBehaviorAlterado::className(),
                 'attribute' => 'createTimeRange',
                 'dateStartAttribute' => 'createTimeStart',
                 'dateEndAttribute' => 'createTimeEnd',
@@ -87,13 +87,18 @@ class OperacaoSearch extends Operacao {
             'operacao.tipo' => $this->tipo
                 //'ativo_id' => $this->ativo_id,
         ]);
-     
-        //echo 'data>>>' . date("Y-m-d H:i:s", $this->createTimeStart) . '--' . date("Y-m-d H:i:s", $this->createTimeEnd);
+      //echo  $this->createTimeRange;
+       // echo 'data>>>' .  strtotime($this->createTimeStart). '--' . date("d/m/y H:i", $this->createTimeEnd);
         //exit();
         //$query->andFilterWhere(['ilike', 'tipo', $this->tipo]);
+        //$dateInicio = date_create();
+        //$dateInicio =  date_format($date, 'U = Y-m-d H:i:s')
+        //$dateFim = date_create();
         if ($this->createTimeRange != null && $this->createTimeRange != '') {
-            $query->andFilterWhere(['>=', 'data', date("d/m/y H:i", $this->createTimeStart)])
-                    ->andFilterWhere(['<=', 'data', date("d/m/y H:i", $this->createTimeEnd)]);
+           // $query->andFilterWhere(['>=', 'data', date("d/m/y H:i", $this->createTimeStart)])
+           //         ->andFilterWhere(['<=', 'data', date("d/m/y H:i", $this->createTimeEnd)]);
+            $query->andFilterWhere(['>=', 'data', $this->createTimeStart])
+                    ->andFilterWhere(['<=', 'data', $this->createTimeEnd]);
         }
 
 

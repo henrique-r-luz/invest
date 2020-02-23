@@ -152,7 +152,7 @@ class Operacao extends ActiveRecord {
             return false;
             // throw $e;
         } catch (Throwable $e) {
-            $this->addError('ativo_id', $e);
+            $this->addError('ativo_id', $e);        
             $transaction->rollBack();
             return false;
             //throw $e;

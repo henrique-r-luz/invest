@@ -18,12 +18,13 @@ $daterange = [
     'pluginOptions' => [
         'timePicker' => true,
         'timePicker24Hour'=> true,
-        'timePickerIncrement' => 30,
+        'timePickerIncrement' => 10,
         //'locale' => ['format' => 'Y-m-d H:i']
-        'locale' => ['format' => 'd/m/y H:i']
-        //'locale' => ['dd/MM/yyyy HH:mm']
+        'locale' => ['format' => 'd/m/Y H:i:s']
+       //'locale' => ['dd/MM/yyyy HH:mm']
     ],
 ];
+
 ?>
 <div class="operacao-index">
 
