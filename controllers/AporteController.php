@@ -55,7 +55,7 @@ class AporteController extends Controller {
                     ->sum('valor_bruto');
 
 
-            if ((($valorAcoes * 100) / $totalAtivo) <= $this->tomadaDescisao && $valorAcoes > 0) {
+            if ((($valorAcoes * 100) / $totalAtivo) <= self::tomadaDescisao && $valorAcoes > 0) {
                 //investir em ações
                 $dados = $this->defineAporteAcoes($valorAcoes, $model);
             } else {
