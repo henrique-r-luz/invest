@@ -84,7 +84,7 @@ use kartik\number\NumberControl;
                 </div>
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <?=
-                    $form->field($model, 'categoria_id')->widget(Select2::classname(), [
+                    $form->field($model, 'categoria')->widget(Select2::classname(), [
                         'data' => ArrayHelper::map(Categoria::find()->asArray()->all(), 'id', 'nome'),
                         'options' => ['placeholder' => 'Selecione a Categoria'],
                         'pluginOptions' => [

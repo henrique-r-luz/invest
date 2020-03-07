@@ -75,22 +75,34 @@ class SiteController extends Controller {
                 ->sum('valor_bruto');
 
         //gráfico por categorias
-        $categorias = Categoria::find()->all();
+        //$categorias = Categoria::find()->all();
         $dadosCategoria = [];
-        foreach ($categorias as $id => $categoria) {
-            $fatia = [];
-            $valorAtivoCategoria = Ativo::find()->where(['categoria_id' => $categoria->id])
-                    ->sum('valor_bruto');
-            $fatia['name'] = $categoria->nome;
-            if ($totalPatrimonio == 0) {
-                $totalPatrimonio = 1;
-            } else {
-                $fatia['y'] = round((($valorAtivoCategoria / $totalPatrimonio) * 100));
-            }
-            $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . $id . ']');
-            $dadosCategoria[] = $fatia;
+        // foreach ($categorias as $id => $categoria) {
+        $fatia = [];
+        $valorAtivoCategoria = Ativo::find()->where(['categoria' => \app\lib\Categoria::RENDA_FIXA])
+                ->sum('valor_bruto');
+        $fatia['name'] = \app\lib\Categoria::RENDA_FIXA;
+        if ($totalPatrimonio == 0) {
+            $totalPatrimonio = 1;
+        } else {
+            $fatia['y'] = round((($valorAtivoCategoria / $totalPatrimonio) * 100));
         }
-
+        $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . 0 . ']');
+        $dadosCategoria[] = $fatia;
+        
+        $fatia = [];
+        $valorAtivoCategoria = Ativo::find()->where(['categoria' => \app\lib\Categoria::RENDA_VARIAVEL])
+                ->sum('valor_bruto');
+        $fatia['name'] = \app\lib\Categoria::RENDA_VARIAVEL;
+        if ($totalPatrimonio == 0) {
+            $totalPatrimonio = 1;
+        } else {
+            $fatia['y'] = round((($valorAtivoCategoria / $totalPatrimonio) * 100));
+        }
+        $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . 1 . ']');
+        $dadosCategoria[] = $fatia;
+        
+        //}
         //gráfico por ativos
         $ativos = Ativo::find()
                 ->orderBy(['valor_bruto' => SORT_DESC])
@@ -148,16 +160,16 @@ class SiteController extends Controller {
             $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . $id . ']');
             $dadosAcaoes[] = $fatia;
         }
-        
-        
+
+
         //patrimônio bruto total
         $patrimonioBruto = Ativo::find()
-                        ->sum('valor_bruto');
+                ->sum('valor_bruto');
         $formatter = \Yii::$app->formatter;
         $patrimonioBruto = $formatter->asCurrency($patrimonioBruto);
         //valor de compra
         $valorCompra = Ativo::find()
-                        ->sum('valor_compra');
+                ->sum('valor_compra');
         $formatter = \Yii::$app->formatter;
         $valorCompra = $formatter->asCurrency($valorCompra);
         return $this->render('index', [
@@ -165,8 +177,8 @@ class SiteController extends Controller {
                     'dadosAtivo' => $dadosAtivo,
                     'dadosTipo' => $dadosTipo,
                     'dadosAcoes' => $dadosAcaoes,
-                    'patrimonioBruto'=>$patrimonioBruto,
-                    'valorCompra'=>$valorCompra,
+                    'patrimonioBruto' => $patrimonioBruto,
+                    'valorCompra' => $valorCompra,
         ]);
     }
 
@@ -186,17 +198,17 @@ class SiteController extends Controller {
             $msg = 'O sistema não pode sincronizar os dados de renda fixa da easy. ';
             return [false, $msg];
         }
-         list($resp, $msg) =$sincroniza->clearAcoes();
-         if ($resp == false) {
+        list($resp, $msg) = $sincroniza->clearAcoes();
+        if ($resp == false) {
             #$msg = 'O sistema não pode sincronizar os dados de renda fixa da easy. ';
             return [false, $msg];
         }
-         list($resp, $msg) = $sincroniza->fundamentos();
-         if ($resp == false) {
+        list($resp, $msg) = $sincroniza->fundamentos();
+        if ($resp == false) {
             #$msg = 'O sistema não pode sincronizar os dados de renda fixa da easy. ';
             return [false, $msg];
         }
-        
+
         $msg = 'O dados foram sincronizados com sucesso. ';
         return [true, $msg];
     }

@@ -25,21 +25,6 @@ class SicronizarController extends Controller {
 
     public $processed = 0;
 
-//put your code here
-//mapeamento id do ativo com índice do objeto easy 
-    const discionario = [
-        10 => 1, //Tesouro Selic 2023
-        9 => 3, //Tesouro IPCA+ 2024
-        8 => 4, //Tesouro Selic 2025
-        2 => 5, //BANCO AGIBANK 20/04/2020
-        1 => 6, //BANCO AGIBANK 31/07/2020
-        3 => 2, //CMDT23 - CEMIG DISTRIBUICAO S.A 9.15
-        0 => 7, //MDT23 - CEMIG DISTRIBUICAO S.A 9.70
-        5 => 9, //BANCO MAXIMA 121
-        4 => 10, //BANCO MAXIMA 128 21/07/2023
-        6 => 11, //BANCO MAXIMA 128 cdi
-        7 => 12, //DEVANT SOLIDUS CASH FIRF CP
-    ];
 
     public function actionIndex() {
 
@@ -161,7 +146,7 @@ class SicronizarController extends Controller {
     public function easy() {
         $erros = '';
         if (!file_exists('/vagrant/bot/Exportar_custodia.csv')) {
-            return [true, 'sucesso'];
+            //return [true, 'sucesso'];
         }
         $csv = array_map(function($v) {
             return str_getcsv($v, ";");
@@ -172,8 +157,8 @@ class SicronizarController extends Controller {
         $id = 0;
         $contErro = 0;
         foreach ($csv as $titulo) {
-
-            $ativo = Ativo::findOne(self::discionario[$id]);
+           // echo $titulo[1].'-'.$titulo[3].'-'.$titulo[2].'</br>';
+            $ativo = Ativo::find()->where(['codigo'=>$titulo[1].'-'.$titulo[3].'-'.$titulo[2]])->one();
             $ativo->valor_bruto = str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[6])));
             $ativo->valor_liquido = str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[7])));
             if ($ativo->valor_compra <= 0 && $ativo->quantidade > 0) {
@@ -185,6 +170,7 @@ class SicronizarController extends Controller {
             }
             $id++;
         }
+        //exit();
         if ($contErro == 0) {
             return [true, 'sucesso'];
         } else {
@@ -205,10 +191,13 @@ class SicronizarController extends Controller {
         if (!file_exists('/vagrant/bot/orders.csv')) {
             return [true, 'sucesso'];
         }
-        $csv = array_map('str_getcsv', file('/vagrant/bot/orders.csv'));
+        //$csv = array_map('str_getcsv', file('/vagrant/bot/orders.csv'));
+         $csv = array_map(function($v) {
+            return str_getcsv($v, ";");
+        }, file('/vagrant/bot/orders.csv'));
         unset($csv[0]);
         $transaction = Yii::$app->db->beginTransaction();
-
+       
         try {
             foreach ($csv as $id => $linha) {
                 $codigo = str_replace("F", "", $linha[1]);

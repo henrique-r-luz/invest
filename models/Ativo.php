@@ -33,13 +33,14 @@ class Ativo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'codigo', 'tipo_id', 'categoria_id','ativo'], 'required'],
-            [['nome', 'codigo'], 'string'],
-            [['quantidade', 'tipo_id', 'categoria_id'], 'default', 'value' => null],
-            [['tipo_id', 'categoria_id','acao_bolsa_id'], 'integer'],
+            [['nome', 'codigo', 'tipo_id', 'categoria','ativo'], 'required'],
+            [['nome', 'codigo','categoria'], 'string'],
+            [['quantidade', 'tipo_id'], 'default', 'value' => null],
+            [['tipo_id','acao_bolsa_id'], 'integer'],
+            [['categoria'],'string'],
             [['ativo'],'boolean'],
             [['valor_compra', 'valor_bruto', 'valor_liquido','quantidade'], 'number'],
-            [['categoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['categoria_id' => 'id']],
+           // [['categoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['categoria_id' => 'id']],
             [['tipo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tipo::className(), 'targetAttribute' => ['tipo_id' => 'id']],
         ];
     }
@@ -58,7 +59,7 @@ class Ativo extends \yii\db\ActiveRecord
             'valor_bruto' => 'Valor Bruto',
             'valor_liquido' => 'Valor Liquido',
             'tipo_id' => 'Tipo',
-            'categoria_id' => 'Categoria',
+            'categoria' => 'Categoria',
             'ativo'=>'Ativo',
             'acao_bolsa_id'=>'Empresas'
         ];
@@ -81,12 +82,7 @@ class Ativo extends \yii\db\ActiveRecord
         return $this->hasOne(Tipo::class, ['id'=>'tipo_id']);
     }
     
-    /**
-     * @return ActiveQuery
-     */
-    public function getCategoria() {
-        return $this->hasOne(Categoria::class, ['id'=>'categoria_id']);
-    }
+
     
     /**
      * @return ActiveQuery

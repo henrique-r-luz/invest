@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     $lucroAcao = 0;
                     foreach ($objetos as $ativo){
                         //renda fixa
-                        if($ativo->categoria_id==1){
+                        if($ativo->categoria== app\lib\Categoria::RENDA_FIXA){
                             $lucro = $lucro+($ativo->valor_liquido-$ativo->valor_compra);
                         }
                         //ações
@@ -100,9 +100,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'pageSummaryOptions' => ['colspan' => 3],
             ],
             [
+                'filter'  => app\lib\Categoria::all(),
                 'attribute' => 'categoria',
                 'label' => 'Categoria',
-                'value' => 'categoria.nome',
+                'value' => 'categoria',
             ],
             ['class' => 'yii\grid\ActionColumn'],
         ],

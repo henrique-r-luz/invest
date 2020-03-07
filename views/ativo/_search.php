@@ -25,13 +25,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'valor_compra') ?>
 
-    <?php // echo $form->field($model, 'valor_bruto') ?>
-
-    <?php // echo $form->field($model, 'valor_liquido') ?>
-
-    <?php // echo $form->field($model, 'tipo_id') ?>
-
-    <?php // echo $form->field($model, 'categoria_id') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
