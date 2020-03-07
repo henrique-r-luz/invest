@@ -75,35 +75,10 @@ class SiteController extends Controller {
                 ->sum('valor_bruto');
 
         //gráfico por categorias
-        //$categorias = Categoria::find()->all();
         $dadosCategoria = [];
         // foreach ($categorias as $id => $categoria) {
-        $fatia = [];
-        $valorAtivoCategoria = Ativo::find()->where(['categoria' => \app\lib\Categoria::RENDA_FIXA])
-                ->sum('valor_bruto');
-        $fatia['name'] = \app\lib\Categoria::RENDA_FIXA;
-        if ($totalPatrimonio == 0) {
-            $totalPatrimonio = 1;
-        } else {
-            $fatia['y'] = round((($valorAtivoCategoria / $totalPatrimonio) * 100));
-        }
-        $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . 0 . ']');
-        $dadosCategoria[] = $fatia;
-        
-        $fatia = [];
-        $valorAtivoCategoria = Ativo::find()->where(['categoria' => \app\lib\Categoria::RENDA_VARIAVEL])
-                ->sum('valor_bruto');
-        $fatia['name'] = \app\lib\Categoria::RENDA_VARIAVEL;
-        if ($totalPatrimonio == 0) {
-            $totalPatrimonio = 1;
-        } else {
-            $fatia['y'] = round((($valorAtivoCategoria / $totalPatrimonio) * 100));
-        }
-        $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . 1 . ']');
-        $dadosCategoria[] = $fatia;
-        
-        //}
-        //gráfico por ativos
+        $this->montaGraficoCategoria(\app\lib\Categoria::RENDA_FIXA,$totalPatrimonio,0,$dadosCategoria);
+        $this->montaGraficoCategoria(\app\lib\Categoria::RENDA_VARIAVEL,$totalPatrimonio,1,$dadosCategoria);
         $ativos = Ativo::find()
                 ->orderBy(['valor_bruto' => SORT_DESC])
                 ->andWhere(['>', 'quantidade', 0])
@@ -211,6 +186,20 @@ class SiteController extends Controller {
 
         $msg = 'O dados foram sincronizados com sucesso. ';
         return [true, $msg];
+    }
+    
+    private function montaGraficoCategoria($categoria,$totalPatrimonio,$cor,&$dadosCategoria){
+        $fatia = [];
+        $valorAtivoCategoria = Ativo::find()->where(['categoria' => $categoria])
+                ->sum('valor_bruto');
+        $fatia['name'] = $categoria;
+        if ($totalPatrimonio == 0) {
+            $totalPatrimonio = 1;
+        } else {
+            $fatia['y'] = round((($valorAtivoCategoria / $totalPatrimonio) * 100));
+        }
+        $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . $cor . ']');
+        $dadosCategoria[] = $fatia;
     }
 
 }

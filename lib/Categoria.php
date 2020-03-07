@@ -1,28 +1,9 @@
 <?php
-/**
- * Este arquivo é parte do
- *    ___       _       _
- *   / __\__ _ (_)_   _(_)
- *  / /  / _` || | | | | |
- * / /__| (_| || | |_| | |
- * \____/\__,_|/ |\__,_|_|
- *           |__/
- *                 Um sistema integrado do IFNMG
- * PHP version 7
- *
- * @copyright Copyright (c) 2016, IFNMG
- * @license   http://cajui.ifnmg.edu.br/license/ MIT License
- * @link      http://cajui.ifnmg.edu.br/
- */
+
 
 namespace app\lib;
 
-/**
- * Description of Modalidade
- *
- * @author Nelson Cavalcante
- * @since     1.2.2
- */
+
 class Categoria {
     
     const RENDA_FIXA = 'Renda Fixa';

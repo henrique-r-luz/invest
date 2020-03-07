@@ -19,9 +19,6 @@ class m200307_173226_remove_table_categoria extends Migration {
         //remove categória
           $this->execute("DROP table categoria;");
 
-  
-       
-        
     }
 
     /**
