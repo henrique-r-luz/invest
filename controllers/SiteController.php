@@ -97,31 +97,23 @@ class SiteController extends Controller {
             $dadosAtivo[] = $fatia;
         }
         //gráfico por tipo
-        $tipos = Tipo::find()->all();
+       // $tipos = Tipo::find()->all();
         $dadosTipo = [];
-        foreach ($tipos as $id => $tipo) {
-            $fatia = [];
-            $valorAtivo = Ativo::find()->where(['tipo_id' => $tipo->id])
-                    ->sum('valor_bruto');
-            $fatia['name'] = $tipo->nome;
-            if ($totalPatrimonio == 0) {
-                $totalPatrimonio = 1;
-            } else {
-                $fatia['y'] = round((($valorAtivo / $totalPatrimonio) * 100));
-            }
-            $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . $id . ']');
-            $dadosTipo[] = $fatia;
-        }
-
+        $this->montaGraficoTipo(\app\lib\Tipo::ACOES,$totalPatrimonio,0,$dadosTipo);
+        $this->montaGraficoTipo(\app\lib\Tipo::CDB,$totalPatrimonio,1,$dadosTipo);
+        $this->montaGraficoTipo(\app\lib\Tipo::DEBENTURES,$totalPatrimonio,2,$dadosTipo);
+        $this->montaGraficoTipo(\app\lib\Tipo::FUNDOS_INVESTIMENTO,$totalPatrimonio,3,$dadosTipo);
+        $this->montaGraficoTipo(\app\lib\Tipo::TESOURO_DIRETO,$totalPatrimonio,4,$dadosTipo);
+       
         //gráfico de ações ações
         $dadosAcoes = [];
         $acoes = Ativo::find()
-                ->where(['tipo_id' => 7])
+                ->where(['tipo' => \app\lib\Tipo::ACOES])
                 ->andWhere(['>', 'quantidade', 0])
                 ->andWhere(['<>', 'valor_bruto', 0])
                 ->all();
         $totalAcoes = Ativo::find()
-                ->where(['tipo_id' => 7])
+                ->where(['tipo' => \app\lib\Tipo::ACOES])
                 ->sum('valor_bruto');
         foreach ($acoes as $id => $acao) {
             $fatia = [];
@@ -200,6 +192,21 @@ class SiteController extends Controller {
         }
         $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . $cor . ']');
         $dadosCategoria[] = $fatia;
+    }
+    
+    
+    private function montaGraficoTipo($tipo,$totalPatrimonio,$cor,&$dadosTipo){
+        $fatia = [];
+        $valorAtivoCategoria = Ativo::find()->where(['tipo' => $tipo])
+                ->sum('valor_bruto');
+        $fatia['name'] = $tipo;
+        if ($totalPatrimonio == 0) {
+            $totalPatrimonio = 1;
+        } else {
+            $fatia['y'] = round((($valorAtivoCategoria / $totalPatrimonio) * 100));
+        }
+        $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . $cor . ']');
+        $dadosTipo[] = $fatia;
     }
 
 }

@@ -52,13 +52,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'pageSummary' => true
             ],
             [
+                'filter'  => app\lib\Tipo::all(),
                 'attribute' => 'tipo',
                 'label' => 'Tipo',
                 'value' => function($model) {
                     if (isset($model->acaoBolsa->setor)) {
-                        return $model->tipo->nome . ' (' . $model->acaoBolsa->setor . ')';
+                        return $model->tipo . ' (' . $model->acaoBolsa->setor . ')';
                     }else{
-                        return $model->tipo->nome;
+                        return $model->tipo;
                     }
                 },
                 'pageSummary' => function ($summary, $data, $widget)use($dataProvider) {
@@ -75,7 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             $lucro = $lucro+($ativo->valor_liquido-$ativo->valor_compra);
                         }
                         //ações
-                        if($ativo->tipo_id==7){
+                        if($ativo->tipo== \app\lib\Tipo::ACOES){
                           
                             $valorLiquidoAcao = $valorLiquidoAcao+$ativo->valor_liquido;
                             $valorCompraAcao = $valorCompraAcao+$ativo->valor_compra;          

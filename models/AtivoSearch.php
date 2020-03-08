@@ -19,7 +19,7 @@ class AtivoSearch extends Ativo
     public function rules()
     {
         return [
-            [['id', 'quantidade', 'tipo_id'], 'integer'],
+            [['id', 'quantidade'], 'integer'],
             [['nome', 'codigo','tipo','categoria'], 'safe'],
             [['valor_compra', 'valor_bruto', 'valor_liquido'], 'number'],
         ];
@@ -44,7 +44,6 @@ class AtivoSearch extends Ativo
     public function search($params)
     {
         $query = Ativo::find()
-                 ->joinWith(['tipo'])
                  ->andWhere(['ativo'=>true]);
                  //->andWhere(['>','quantidade',0]);
 
@@ -72,13 +71,13 @@ class AtivoSearch extends Ativo
             'valor_compra' => $this->valor_compra,
             'valor_bruto' => $this->valor_bruto,
             'valor_liquido' => $this->valor_liquido,
-            //'tipo_id' => $this->tipo_id,
+            'tipo' => $this->tipo,
             'categoria' => $this->categoria,
         ]);
 
         $query->andFilterWhere(['ilike', 'nome', $this->nome])
-            ->andFilterWhere(['ilike', 'codigo', $this->codigo])
-            ->andFilterWhere(['ilike', 'tipo.nome', $this->tipo]);
+            ->andFilterWhere(['ilike', 'codigo', $this->codigo]);
+            //->andFilterWhere(['ilike', 'tipo.nome', $this->tipo]);
             //->andFilterWhere(['ilike', 'categoria', $this->categoria]);
 
         return $dataProvider;

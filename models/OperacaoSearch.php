@@ -115,7 +115,7 @@ class OperacaoSearch extends Operacao {
                         ->innerJoin('ativo', 'ativo.id = operacao.ativo_id')
                         ->where(['between', 'data', $model->dataInicio, $model->dataFim])
                         ->andWhere(['operacao.tipo' => 1])//operação de compra
-                        ->andWhere(['ativo.tipo_id' => 7])
+                        ->andWhere(['ativo.tipo' => \app\lib\Tipo::ACOES])
                         ->groupBy(['ativo.codigo', 'ativo.nome'])
                         ->orderBy(['sum(operacao.valor)' => SORT_DESC])->asArray()->all();
 

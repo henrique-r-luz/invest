@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'valor_compra',
             'valor_bruto',
             'valor_liquido',
-            'tipo_id',
+            'tipo',
             'categoria',
              'ativo'
             ],

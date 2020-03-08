@@ -37,7 +37,7 @@ use yii\helpers\ArrayHelper;
                     <div class="col-xs-6 col-sm-6 col-lg-6">
                         <?=
                         $form->field($model, 'ativo')->widget(Select2::classname(), [
-                            'data' => ArrayHelper::map(Ativo::find()->where(['tipo_id' => 7])->asArray()->all(), 'id', 'codigo'),
+                            'data' => ArrayHelper::map(Ativo::find()->where(['tipo' => \app\lib\Tipo::ACOES])->asArray()->all(), 'id', 'codigo'),
                             'options' => ['placeholder' => 'Selecione um Tipo'],
                             'pluginOptions' => [
                                 'allowClear' => true

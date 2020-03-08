@@ -48,7 +48,7 @@ class AporteController extends Controller {
             //$ativoDiscartado = Operacao::find();
 
             $valorAcoes = Ativo::find()
-                    ->where(['tipo_id' => 7])
+                    ->where(['tipo' => \app\lib\Tipo::ACOES])
                     ->sum('valor_bruto');
 
             $totalAtivo = Ativo::find()
@@ -85,7 +85,7 @@ class AporteController extends Controller {
             $vetAtivos = $model->ativo;
         }
         $totalAtivosAcoes = Ativo::find()
-                ->where(['tipo_id' => 7])
+                ->where(['tipo' => \app\lib\Tipo::ACOES])
                 ->andWhere(['ativo' => true])
                 //->andWhere($where)
                 ->orderBy(['valor_bruto' => SORT_ASC])

@@ -43,10 +43,5 @@ class Tipo extends \yii\db\ActiveRecord
     }
     
     
-    /**
-     * @return ActiveQuery
-     */
-    public function getAtivo() {
-        return $this->hasMany(Ativo::class, ['tipo_id'=>'id']);
-    }
+   
 }

@@ -73,8 +73,9 @@ use kartik\number\NumberControl;
                 </div>
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <?=
-                    $form->field($model, 'tipo_id')->widget(Select2::classname(), [
-                        'data' => ArrayHelper::map(Tipo::find()->asArray()->all(), 'id', 'nome'),
+                    $form->field($model, 'tipo')->widget(Select2::classname(), [
+                        //'data' => ArrayHelper::map(Tipo::find()->asArray()->all(), 'id', 'nome'),
+                        'data' => \app\lib\Tipo::all(),
                         'options' => ['placeholder' => 'Selecione um Tipo'],
                         'pluginOptions' => [
                             'allowClear' => true
@@ -85,7 +86,8 @@ use kartik\number\NumberControl;
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <?=
                     $form->field($model, 'categoria')->widget(Select2::classname(), [
-                        'data' => ArrayHelper::map(Categoria::find()->asArray()->all(), 'id', 'nome'),
+                        //'data' => ArrayHelper::map(Categoria::find()->asArray()->all(), 'id', 'nome'),
+                        'data' => app\lib\Categoria::all(),
                         'options' => ['placeholder' => 'Selecione a Categoria'],
                         'pluginOptions' => [
                             'allowClear' => true

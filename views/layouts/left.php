@@ -35,11 +35,10 @@
                             'url' => '#',
                             'items' => [
                                 ['label' => 'Tipo do ativo', 'icon' => 'list', 'url' => ['/tipo'],],
-                                ['label' => 'Categoria', 'icon' => 'indent', 'url' => ['/categoria']],
                                 ['label' => 'Ativo', 'icon' => 'diamond', 'url' => ['/ativo']],
                                 ['label' => 'Operação', 'icon' => 'paper-plane', 'url' => ['/operacao']],
                                 ['label' => 'Empresas Bolsa', 'icon' => 'building', 'url' => ['/acao-bolsa']],
-                                 ['label' => 'Balanço', 'icon' => 'clipboard', 'url' => ['/balanco-empresa-bolsa']],
+                                ['label' => 'Balanço', 'icon' => 'clipboard', 'url' => ['/balanco-empresa-bolsa']],
                                 ['label' => 'Sincronizar', 'icon' => 'rotate-left', 'url' => ['/sicronizar']],
                                 ['label' => 'Aporte', 'icon' => 'balance-scale', 'url' => ['/aporte']],
                                

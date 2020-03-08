@@ -21,7 +21,7 @@ namespace app\lib;
 class Tipo {
 
     const TESOURO_DIRETO = 'Tesouro Direto';
-    const FUNDOS_INVESTIMENTO = 'Fundos de Ivestimentos';
+    const FUNDOS_INVESTIMENTO = 'Fundos de Investimentos';
     const CDB = 'CDB';
     const DEBENTURES = 'Debêntures';
     const ACOES = 'Ações';
@@ -33,7 +33,7 @@ class Tipo {
     public static function all() {
         return [
             self::TESOURO_DIRETO => 'Tesouro Direto',
-            self::FUNDOS_INVESTIMENTO => 'Fundos de Ivestimentos',
+            self::FUNDOS_INVESTIMENTO => 'Fundos de Investimentos',
             self::CDB => 'CDB',
             self::DEBENTURES => 'Debêntures',
             self::ACOES => 'Ações',
