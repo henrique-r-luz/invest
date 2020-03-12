@@ -59,7 +59,7 @@ class BalancoEmpresaBolsa extends \yii\db\ActiveRecord
             [['roe', 'divida_bruta_patrimonio', 'fcl_capex', 'payout','margem_ebit', 'margem_liquida','patrimonio_liquido', 'receita_liquida', 'ebitda', 'da', 'ebit', 'resultado_financeiro', 'imposto', 'lucro_liquido', 'caixa', 'divida_bruta', 'divida_liquida', 'divida_liquida_ebitda', 'fco', 'capex', 'fcf', 'fcl', 'proventos', 'pdd', 'pdd_lucro_liquido', 'indice_basileia'], 'number'],
             [['margem_ebit', 'margem_liquida', 'roe', 'divida_bruta_patrimonio', 'fcl_capex', 'payout'], 'default', 'value' => null],
             [['codigo'], 'string', 'max' => 4],
-            [['codigo'], 'exist', 'skipOnError' => true, 'targetClass' => AcaoBolsa::className(), 'targetAttribute' => ['codigo' => 'codigo']],
+           // [['codigo'], 'exist', 'skipOnError' => true, 'targetClass' => AcaoBolsa::className(), 'targetAttribute' => ['codigo' => 'codigo']],
         ];
     }
 
