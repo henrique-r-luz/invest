@@ -33,7 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'toolbar' => [
         [
-        'content' =>Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])
+        'content' => Html::a('<i class="fa fa-sort-amount-desc" ></i> Rank', ['update-rank'], ['class' => 'btn btn-info', 'title' => 'Rank'])
+        ],
+         [
+        'content' => Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])
         ],
         '{toggleData}',
         '{export}'

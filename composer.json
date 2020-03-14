@@ -35,7 +35,9 @@
         "kartik-v/yii2-date-range": "dev-master",
         "kartik-v/yii2-widget-select2": "dev-master",
         "kartik-v/yii2-number": "@dev",
-        "miloschuman/yii2-highcharts-widget": "^7.0"
+        "miloschuman/yii2-highcharts-widget": "^7.0",
+        "php-ai/php-ml": "*"
+        
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
