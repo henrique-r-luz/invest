@@ -30,7 +30,9 @@ class AcaoBolsa extends \yii\db\ActiveRecord
         return [
             [['nome', 'codigo', 'setor','cnpj'], 'required'],
             [['nome', 'setor','cnpj'], 'string'],
+            [['rank_ano','rank_trimestre'],'number'],
             [['codigo'], 'unique'],
+            [['habilita_rank'],'boolean']
         ];
     }
 
@@ -45,6 +47,8 @@ class AcaoBolsa extends \yii\db\ActiveRecord
             'nome' => 'Nome',
             'codigo' => 'Código',
             'setor' => 'Setor',
+            'rank_ano' => 'Rank Ano',
+            'rank_trimestre'=>'Rank trimestre'
         ];
     }
 }

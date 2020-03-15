@@ -104,7 +104,7 @@ class BalancoEmpresaBolsa extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCodigo0()
+    public function getCodigo()
     {
         return $this->hasOne(AcaoBolsa::className(), ['codigo' => 'codigo']);
     }

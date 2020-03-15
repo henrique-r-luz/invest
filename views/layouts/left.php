@@ -34,7 +34,6 @@
                             'icon' => 'dollar',
                             'url' => '#',
                             'items' => [
-                                ['label' => 'Tipo do ativo', 'icon' => 'list', 'url' => ['/tipo'],],
                                 ['label' => 'Ativo', 'icon' => 'diamond', 'url' => ['/ativo']],
                                 ['label' => 'Operação', 'icon' => 'paper-plane', 'url' => ['/operacao']],
                                 ['label' => 'Empresas Bolsa', 'icon' => 'building', 'url' => ['/acao-bolsa']],

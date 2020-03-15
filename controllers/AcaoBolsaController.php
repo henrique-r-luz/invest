@@ -2,23 +2,23 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\models\AcaoBolsa;
 use app\models\AcaoBolsaSearch;
+use Phpml\Regression\LeastSquares;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * AcaoBolsaController implements the CRUD actions for AcaoBolsa model.
  */
-class AcaoBolsaController extends Controller
-{
+class AcaoBolsaController extends Controller {
+
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -33,14 +33,13 @@ class AcaoBolsaController extends Controller
      * Lists all AcaoBolsa models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new AcaoBolsaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -50,10 +49,9 @@ class AcaoBolsaController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+                    'model' => $this->findModel($id),
         ]);
     }
 
@@ -62,8 +60,7 @@ class AcaoBolsaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new AcaoBolsa();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -71,7 +68,7 @@ class AcaoBolsaController extends Controller
         }
 
         return $this->render('create', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
 
@@ -82,8 +79,7 @@ class AcaoBolsaController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -91,8 +87,25 @@ class AcaoBolsaController extends Controller
         }
 
         return $this->render('update', [
-            'model' => $model,
+                    'model' => $model,
         ]);
+    }
+    
+    /**
+     * define um rank para cada ação cadastrada
+     */
+    public function actionRank() {
+        /**
+         * função mínimos quadrados
+         */
+        $samples = [[60], [61], [62], [63], [65]];
+        $targets = [10, 9, 9.5, 7.3, 5.5];
+
+        $regression = new LeastSquares();
+        $regression->train($samples, $targets);
+        print_r ($regression->getCoefficients());
+        echo ' = '. $regression->predict([30]);
+        exit();
     }
 
     /**
@@ -102,8 +115,7 @@ class AcaoBolsaController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -116,12 +128,12 @@ class AcaoBolsaController extends Controller
      * @return AcaoBolsa the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = AcaoBolsa::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }
