@@ -32,8 +32,7 @@ class NotificacaoWidget extends Widget {
            ['lido'=>FALSE]
        ];
        $dataProvider = $notificacaoSearch->search($params);
-       //echo 'ola: '.$dataProvider->getCount();
-       //exit();
+     ;
         return $this->render('notificacao/notificacao-widget',['dataProvider'=>$dataProvider]);
     }
     

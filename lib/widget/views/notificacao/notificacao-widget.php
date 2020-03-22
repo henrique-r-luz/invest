@@ -20,7 +20,8 @@ foreach ($dataProvider->getModels() as $notificacao){
 $html .= Html::endTag('ul');
 $html .= Html::endTag('li');
 $html .= Html::beginTag('li',['class'=>'footer meu-footers']);
-$html .= Html::tag('a','Ver Todos',['href' => 'index.php/notificacao']);
+
+$html.= Html::a('Ver Todos', ['/notificacao']);
 $html .= Html::endTag('li');
 $html .= Html::endTag('ul');
 $html .= Html::endTag('li');

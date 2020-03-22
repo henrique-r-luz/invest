@@ -91,7 +91,7 @@ class AcaoBolsaController extends Controller {
                     'model' => $model,
         ]);
     }
-    
+
     /**
      * define um rank para cada ação cadastrada
      */
@@ -99,16 +99,17 @@ class AcaoBolsaController extends Controller {
         /**
          * função mínimos quadrados
          */
-       /* $samples = [[60], [61], [62], [63], [65]];
-        $targets = [10, 9, 9.5, 7.3, 5.5];
+        /* $samples = [[60], [61], [62], [63], [65]];
+          $targets = [10, 9, 9.5, 7.3, 5.5];
 
-        $regression = new LeastSquares();
-        $regression->train($samples, $targets);
-        print_r ($regression->getCoefficients());
-        echo ' = '. $regression->predict([30]);
-        exit();*/
-        FabricaNotificacao::create('rank',['ok'=>true,'titulo'=>'Rank Atualizado!','mensagem'=>'Teste mensagem !!!'])->envia();
-        return  $this->redirect(['index']);
+          $regression = new LeastSquares();
+          $regression->train($samples, $targets);
+          print_r ($regression->getCoefficients());
+          echo ' = '. $regression->predict([30]);
+          exit(); */
+      
+        FabricaNotificacao::create('rank', ['ok' => true, 'titulo' => 'Rank Atualizado!', 'mensagem' => 'Teste mensagem !!!', 'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
+        return $this->redirect(['index']);
     }
 
     /**

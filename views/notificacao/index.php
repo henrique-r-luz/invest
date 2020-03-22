@@ -20,8 +20,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             'id',
-            'user_id',
-           // 'dados',
+            [
+            'attribute'=>'user_id',
+             'value'=>function($model){
+                if($model->user_id==1){
+                    return 'Sistema';
+                }
+             }   
+            ],
+           [
+               'attribute'=>'dados',
+               'format' => 'html',
+               'value'=>function($model){
+                return implode(",<br/>", $model->dados);
+               } 
+               ],
             'lido:boolean',
             'created_at',
             //'updated_at',
