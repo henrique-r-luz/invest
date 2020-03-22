@@ -36,7 +36,9 @@
         "kartik-v/yii2-widget-select2": "dev-master",
         "kartik-v/yii2-number": "@dev",
         "miloschuman/yii2-highcharts-widget": "^7.0",
-        "php-ai/php-ml": "*"
+        "php-ai/php-ml": "*",
+        "webzop/yii2-notifications": "*",
+        "yiisoft/yii2-queue" : "*"
         
     },
     "require-dev": {

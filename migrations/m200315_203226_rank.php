@@ -23,9 +23,6 @@ class m200315_203226_rank extends Migration {
                         ADD COLUMN data_atualizacao_rank timestamp,
                         ADD COLUMN habilita_rank boolean DEFAULT TRUE;
                         ");
-        // 
-      
-        
 
     }
 

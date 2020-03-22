@@ -81,6 +81,22 @@ $config = [
      */
     ],
     'modules' => [
+        
+        'notifications' => [
+            'class' => 'webzop\notifications\Module',
+            'channels' => [
+                'screen' => [
+                    'class' => 'webzop\notifications\channels\ScreenChannel',
+                ],
+                'email' => [
+                    'class' => 'webzop\notifications\channels\EmailChannel',
+                    'message' => [
+                        'from' => 'example@email.com'
+                    ],
+                ],
+            ],
+        ],
+        
         'gridview' => ['class' => '\kartik\grid\Module'],
         'datecontrol' => [
             'class' => 'kartik\datecontrol\Module',

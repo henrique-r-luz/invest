@@ -23,7 +23,6 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
-         "js/remotoEasy.js",
          "js/sicronizar.js"
     ];
     public $depends = [

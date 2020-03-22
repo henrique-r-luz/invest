@@ -22,6 +22,11 @@ body {
     padding-top: 20px;
 }
 
+.meu-footers {
+  padding-top: 0px;
+  height: 30px;
+}
+
 .jumbotron {
     text-align: center;
     background-color: transparent;
@@ -168,4 +173,14 @@ body {
 .select2-container--krajee .select2-selection--single {
     
     padding: 10px 24px 6px 12px;
+}
+
+.footers {
+    background-color: #ffffff;
+    white-space: nowrap;
+    border-top: 1px solid #e5e5e5;
+    font-size: 14px;
+    text-align: center;
+    font-color: #000000;
+    
 }

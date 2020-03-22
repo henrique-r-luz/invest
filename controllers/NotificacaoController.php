@@ -2,24 +2,23 @@
 
 namespace app\controllers;
 
-use app\lib\componentes\AccountNotification;
-use app\models\AcaoBolsa;
-use app\models\AcaoBolsaSearch;
 use Yii;
-use yii\filters\VerbFilter;
+use app\models\Notificacao;
+use app\models\NotificacaoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use app\lib\componentes\FabricaNotificacao;
+use yii\filters\VerbFilter;
 
 /**
- * AcaoBolsaController implements the CRUD actions for AcaoBolsa model.
+ * NotificacaoController implements the CRUD actions for Notificacao model.
  */
-class AcaoBolsaController extends Controller {
-
+class NotificacaoController extends Controller
+{
     /**
      * {@inheritdoc}
      */
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -31,56 +30,60 @@ class AcaoBolsaController extends Controller {
     }
 
     /**
-     * Lists all AcaoBolsa models.
+     * Lists all Notificacao models.
      * @return mixed
      */
-    public function actionIndex() {
-        $searchModel = new AcaoBolsaSearch();
+    public function actionIndex()
+    {
+        $searchModel = new NotificacaoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single AcaoBolsa model.
+     * Displays a single Notificacao model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id) {
+    public function actionView($id)
+    {
         return $this->render('view', [
-                    'model' => $this->findModel($id),
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new AcaoBolsa model.
+     * Creates a new Notificacao model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate() {
-        $model = new AcaoBolsa();
+    public function actionCreate()
+    {
+        $model = new Notificacao();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
-                    'model' => $model,
+            'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing AcaoBolsa model.
+     * Updates an existing Notificacao model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id) {
+    public function actionUpdate($id)
+    {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -88,55 +91,37 @@ class AcaoBolsaController extends Controller {
         }
 
         return $this->render('update', [
-                    'model' => $model,
+            'model' => $model,
         ]);
     }
-    
-    /**
-     * define um rank para cada ação cadastrada
-     */
-    public function actionRank() {
-        /**
-         * função mínimos quadrados
-         */
-       /* $samples = [[60], [61], [62], [63], [65]];
-        $targets = [10, 9, 9.5, 7.3, 5.5];
-
-        $regression = new LeastSquares();
-        $regression->train($samples, $targets);
-        print_r ($regression->getCoefficients());
-        echo ' = '. $regression->predict([30]);
-        exit();*/
-        FabricaNotificacao::create('rank',['ok'=>true,'titulo'=>'Rank Atualizado!','mensagem'=>'Teste mensagem !!!'])->envia();
-        return  $this->redirect(['index']);
-    }
 
     /**
-     * Deletes an existing AcaoBolsa model.
+     * Deletes an existing Notificacao model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id) {
+    public function actionDelete($id)
+    {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the AcaoBolsa model based on its primary key value.
+     * Finds the Notificacao model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return AcaoBolsa the loaded model
+     * @return Notificacao the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id) {
-        if (($model = AcaoBolsa::findOne($id)) !== null) {
+    protected function findModel($id)
+    {
+        if (($model = Notificacao::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
 }
