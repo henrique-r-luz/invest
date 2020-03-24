@@ -14,6 +14,7 @@ use \app\models\Categoria;
 use yii\web\JsExpression;
 use \app\models\Tipo;
 use yii\i18n\Formatter;
+use app\lib\componentes\FabricaNotificacao;
 
 class SiteController extends Controller {
 
@@ -64,13 +65,14 @@ class SiteController extends Controller {
      */
     public function actionIndex() {
 
-
-        list($resp, $msg) = $this->sicroniza();
+         
+          $this->sicroniza();
+        /*list($resp, $msg) = $this->sicroniza();
         if ($resp == true) {
             Yii::$app->session->setFlash('success', $msg);
         } else {
             Yii::$app->session->setFlash('danger', $msg);
-        }
+        }*/
         $totalPatrimonio = Ativo::find()
                 ->sum('valor_bruto');
 
@@ -156,28 +158,64 @@ class SiteController extends Controller {
         $msg = '';
         list($sincroniza) = Yii::$app->createController('sicronizar/index');
         list($resp, $msg) = $sincroniza->cotacaoAcao();
-        if ($resp == false) {
-            $msg = 'O sistema não pode sincronizar os dados de ações. ';
-            return [false, $msg];
+        if ($resp == true) {
+            FabricaNotificacao::create('rank', 
+                  ['ok' => $resp, 
+                   'titulo' => 'Cotação açoes Atualizado!', 
+                    'mensagem' => 'A Cotação açoes foram atualizados !', 
+                    'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
+        }else{
+            FabricaNotificacao::create('rank', 
+                  ['ok' => $resp, 
+                   'titulo' => 'Cotação açoes falhou!', 
+                    'mensagem' => 'A Cotação açoes foram atualizados !', 
+                    'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia(); 
         }
         list($resp, $msg) = $sincroniza->easy();
-        if ($resp == false) {
-            $msg = 'O sistema não pode sincronizar os dados de renda fixa da easy. ';
-            return [false, $msg];
+        if ($resp == true) {
+            FabricaNotificacao::create('rank', 
+                  ['ok' => $resp, 
+                   'titulo' => 'Renda fixa Easynveste atualizada!', 
+                    'mensagem' => 'Os dados do site fundamentos não foram atualizados !', 
+                    'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
+        }else{
+            FabricaNotificacao::create('rank', 
+                  ['ok' => $resp, 
+                   'titulo' => 'Renda fixa Easynveste falhou!', 
+                    'mensagem' => 'Renda fixa Easynveste não foi atualizados !', 
+                    'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
         }
         list($resp, $msg) = $sincroniza->clearAcoes();
-        if ($resp == false) {
-            #$msg = 'O sistema não pode sincronizar os dados de renda fixa da easy. ';
-            return [false, $msg];
+        if ($resp == true) {
+             FabricaNotificacao::create('rank', 
+                  ['ok' => $resp, 
+                   'titulo' => 'Operações ações Atualizado!', 
+                    'mensagem' => 'As operações de ações foram atualizadas !', 
+                    'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
+        }else{
+            FabricaNotificacao::create('rank', 
+                  ['ok' => $resp, 
+                   'titulo' => 'Operações ações Falhou!', 
+                    'mensagem' => 'As operações de ações Falharam !', 
+                    'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia(); 
         }
         list($resp, $msg) = $sincroniza->fundamentos();
         if ($resp == false) {
-            #$msg = 'O sistema não pode sincronizar os dados de renda fixa da easy. ';
-            return [false, $msg];
+             FabricaNotificacao::create('rank', 
+                  ['ok' => $resp, 
+                   'titulo' => 'Fundamentos ações falhou!', 
+                    'mensagem' => 'Os dados do site fundamentos não foram atualizados !', 
+                    'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
+        }else{
+             FabricaNotificacao::create('rank', 
+                  ['ok' => $resp, 
+                   'titulo' => 'Fundamentos Atualizado!', 
+                    'mensagem' => 'Os dados do site fundamentos foram atualizados !', 
+                    'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
         }
-
-        $msg = 'O dados foram sincronizados com sucesso. ';
-        return [true, $msg];
+         
+        //$msg = 'O dados foram sincronizados com sucesso. ';
+       
     }
     
     private function montaGraficoCategoria($categoria,$totalPatrimonio,$cor,&$dadosCategoria){

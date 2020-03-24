@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            //'cnpj',
+            'cnpj',
             'codigo',
             'nome:ntext',
             'setor:ntext',
