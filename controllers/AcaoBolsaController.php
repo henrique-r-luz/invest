@@ -107,9 +107,16 @@ class AcaoBolsaController extends Controller {
           print_r ($regression->getCoefficients());
           echo ' = '. $regression->predict([30]);
           exit(); */
-      
-        FabricaNotificacao::create('rank', ['ok' => true, 'titulo' => 'Rank Atualizado!', 'mensagem' => 'Teste mensagem !!!', 'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
-        return $this->redirect(['index']);
+
+        //FabricaNotificacao::create('rank', ['ok' => true, 'titulo' => 'Rank Atualizado!', 'mensagem' => 'Teste mensagem !!!', 'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
+        if(Yii::$app->queue->push(new \app\lib\backgroud\Teste())){
+            echo 'ok';
+            exit();
+        }else{
+            echo 'não ok';
+            exit();
+        }
+        //return $this->redirect(['index']);
     }
 
     /**

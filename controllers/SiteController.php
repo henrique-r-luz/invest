@@ -158,61 +158,37 @@ class SiteController extends Controller {
         $msg = '';
         list($sincroniza) = Yii::$app->createController('sicronizar/index');
         list($resp, $msg) = $sincroniza->cotacaoAcao();
-        if ($resp == true) {
-            FabricaNotificacao::create('rank', 
-                  ['ok' => $resp, 
-                   'titulo' => 'Cotação açoes Atualizado!', 
-                    'mensagem' => 'A Cotação açoes foram atualizados !', 
-                    'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
-        }else{
-            FabricaNotificacao::create('rank', 
+        if ($resp == false ) {
+             FabricaNotificacao::create('rank', 
                   ['ok' => $resp, 
                    'titulo' => 'Cotação açoes falhou!', 
-                    'mensagem' => 'A Cotação açoes foram atualizados !', 
+                    'mensagem' => 'A Cotação açoes foram atualizados !</br>'.$msg, 
                     'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia(); 
         }
         list($resp, $msg) = $sincroniza->easy();
-        if ($resp == true) {
-            FabricaNotificacao::create('rank', 
-                  ['ok' => $resp, 
-                   'titulo' => 'Renda fixa Easynveste atualizada!', 
-                    'mensagem' => 'Os dados do site fundamentos não foram atualizados !', 
-                    'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
-        }else{
+        if ($resp == false) {
             FabricaNotificacao::create('rank', 
                   ['ok' => $resp, 
                    'titulo' => 'Renda fixa Easynveste falhou!', 
-                    'mensagem' => 'Renda fixa Easynveste não foi atualizados !', 
+                    'mensagem' => 'Renda fixa Easynveste não foi atualizados !</br>'.$msg, 
                     'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
         }
         list($resp, $msg) = $sincroniza->clearAcoes();
-        if ($resp == true) {
-             FabricaNotificacao::create('rank', 
+        if ($resp == false) {
+              FabricaNotificacao::create('rank', 
                   ['ok' => $resp, 
-                   'titulo' => 'Operações ações Atualizado!', 
-                    'mensagem' => 'As operações de ações foram atualizadas !', 
-                    'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
-        }else{
-            FabricaNotificacao::create('rank', 
-                  ['ok' => $resp, 
-                   'titulo' => 'Operações ações Falhou!', 
-                    'mensagem' => 'As operações de ações Falharam !', 
+                   'titulo' => 'Operações ações Falhou!</br>'.$msg, 
+                    'mensagem' => 'As operações de ações Falharam !.<br>'.$msg, 
                     'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia(); 
         }
-        list($resp, $msg) = $sincroniza->fundamentos();
+        /*list($resp, $msg) = $sincroniza->fundamentos();
         if ($resp == false) {
              FabricaNotificacao::create('rank', 
                   ['ok' => $resp, 
                    'titulo' => 'Fundamentos ações falhou!', 
-                    'mensagem' => 'Os dados do site fundamentos não foram atualizados !', 
+                    'mensagem' => 'Os dados do site fundamentos não foram atualizados !</br>'.$msg, 
                     'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
-        }else{
-             FabricaNotificacao::create('rank', 
-                  ['ok' => $resp, 
-                   'titulo' => 'Fundamentos Atualizado!', 
-                    'mensagem' => 'Os dados do site fundamentos foram atualizados !', 
-                    'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
-        }
+        }*/
          
         //$msg = 'O dados foram sincronizados com sucesso. ';
        

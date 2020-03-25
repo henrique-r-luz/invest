@@ -1,4 +1,4 @@
- <?php
+<?php
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
@@ -26,7 +26,7 @@ $config = [
           ],
           ], */
         'urlManager' => [
-             'enablePrettyUrl' => true,
+            'enablePrettyUrl' => true,
             'showScriptName' => true,
         ],
         'formatter' => [
@@ -34,9 +34,9 @@ $config = [
             'thousandSeparator' => '.',
             //'currencyCode' => ' ',
             'decimalSeparator' => ',',
-              'datetimeFormat' => 'dd/MM/yyyy HH:mm:ss',
+            'datetimeFormat' => 'dd/MM/yyyy HH:mm:ss',
             'dateFormat' => 'dd/MM/yyyy',
-             'locale' => 'pt-BR', //your language locale
+            'locale' => 'pt-BR', //your language locale
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -71,6 +71,17 @@ $config = [
             ],
         ],
         'db' => $db,
+        'queue' => [
+            'class' => \yii\queue\db\Queue::class,
+            'db' => $db, // DB connection component or its config 
+            'tableName' => '{{%queue}}', // Table name
+            'channel' => 'default', // Queue channel key
+            //'mutex' => \yii\mutex\MysqlMutex::class, // Mutex used to sync queries
+            'mutex' => [
+                'class' => \yii\mutex\PgsqlMutex::class,
+                'db' => $db,
+            ],
+        ],
     /*
       'urlManager' => [
       'enablePrettyUrl' => true,
@@ -81,22 +92,6 @@ $config = [
      */
     ],
     'modules' => [
-        
-        'notifications' => [
-            'class' => 'webzop\notifications\Module',
-            'channels' => [
-                'screen' => [
-                    'class' => 'webzop\notifications\channels\ScreenChannel',
-                ],
-                'email' => [
-                    'class' => 'webzop\notifications\channels\EmailChannel',
-                    'message' => [
-                        'from' => 'example@email.com'
-                    ],
-                ],
-            ],
-        ],
-        
         'gridview' => ['class' => '\kartik\grid\Module'],
         'datecontrol' => [
             'class' => 'kartik\datecontrol\Module',

@@ -242,7 +242,7 @@ class SicronizarController extends Controller {
         
         $erros = 'Erro na criação dos balanços : ';
         if (!file_exists('/vagrant/bot/fundamentos.csv')) {
-            return [false, 'sucesso'];
+            return [true, 'sucesso'];
         }
         $old = ini_set('memory_limit', '8192M');
         $csv = array_map('str_getcsv', file('/vagrant/bot/fundamentos.csv'));
