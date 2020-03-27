@@ -120,7 +120,7 @@ class Operacao extends ActiveRecord {
                             return false;
                         }
 
-                        list($sincroniza) = Yii::$app->createController('sicronizar/index');
+                        list($sincroniza) = Yii::$app->createController('sincronizar/index');
                         list($respEasy, $msgEasy) = $sincroniza->easy();
                         list($respCotacao, $msgCotacao) = $sincroniza->cotacaoAcao();
                         if ($respEasy && $respCotacao) {
@@ -170,7 +170,7 @@ class Operacao extends ActiveRecord {
         try {
             if ($this->delete()) {
                 if ($this->alteraAtivo($this->ativo_id)) {
-                    list($sincroniza) = Yii::$app->createController('sicronizar/index');
+                    list($sincroniza) = Yii::$app->createController('sincronizar/index');
                     list($resp, $msg) = $sincroniza->cotacaoAcao();
                     if ($resp == true) {
                         list($resp, $msg) = $sincroniza->easy();

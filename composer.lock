@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc4dd731f6cba4b2cdac9d91a42e4912",
+    "content-hash": "e9e80df2614df47a8ef423f442a2a8a3",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -93,7 +93,7 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "https://github.com/RobinHerbots/Inputmask.git",
+                "url": "git@github.com:RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -3544,6 +3544,50 @@
             "time": "2020-02-07T20:06:44+00:00"
         },
         {
+            "name": "toriphes/yii2-console-runner",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/toriphes/yii2-console-runner.git",
+                "reference": "153e1f6b6d817000e4a528f8d861492ac465bedc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/toriphes/yii2-console-runner/zipball/153e1f6b6d817000e4a528f8d861492ac465bedc",
+                "reference": "153e1f6b6d817000e4a528f8d861492ac465bedc",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": ">=2.0.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "toriphes\\console\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Giulio Ganci",
+                    "email": "giulioganci@gmail.com"
+                }
+            ],
+            "description": "Runs console command in yii web application",
+            "keywords": [
+                "application",
+                "console",
+                "extension",
+                "runner",
+                "web",
+                "yii2"
+            ],
+            "time": "2018-08-27T13:06:30+00:00"
+        },
+        {
             "name": "webzop/yii2-notifications",
             "version": "0.2",
             "source": {
@@ -3587,6 +3631,72 @@
                 "yii2-notifications-module"
             ],
             "time": "2018-02-04T09:23:12+00:00"
+        },
+        {
+            "name": "wisembly/elephant.io",
+            "version": "v3.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Wisembly/elephant.io.git",
+                "reference": "9d56f409fe231a906af87005f83a135565632d3f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Wisembly/elephant.io/zipball/9d56f409fe231a906af87005f83a135565632d3f",
+                "reference": "9d56f409fe231a906af87005f83a135565632d3f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "psr/log": "~1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ElephantIO\\": [
+                        "src/",
+                        "test/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Baptiste Clavié",
+                    "email": "baptiste@wisembly.com",
+                    "homepage": "http://baptiste.xn--clavi-fsa.net/",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Guillaume Potier",
+                    "email": "guillaume@wisembly.com",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Ludovic Barreca",
+                    "email": "ludogp2@gmail.com",
+                    "role": "Project Founder"
+                },
+                {
+                    "name": "Elephant.IO Community",
+                    "role": "Contributors :)"
+                }
+            ],
+            "description": "Send events to a websocket real time engine though PHP",
+            "homepage": "http://elephant.io",
+            "keywords": [
+                "dialog",
+                "nodejs",
+                "real time",
+                "websocket"
+            ],
+            "time": "2017-09-10T20:38:38+00:00"
         },
         {
             "name": "yiisoft/yii2",

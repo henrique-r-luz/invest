@@ -38,7 +38,9 @@
         "miloschuman/yii2-highcharts-widget": "^7.0",
         "php-ai/php-ml": "*",
         "webzop/yii2-notifications": "*",
-        "yiisoft/yii2-queue" : "*"
+        "yiisoft/yii2-queue" : "*",
+        "toriphes/yii2-console-runner": "1.2.1",
+        "wisembly/elephant.io": "^3.3"
         
     },
     "require-dev": {

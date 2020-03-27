@@ -1,0 +1,28 @@
+{
+  "name": "php-sicket",
+  "version": "1.0.0",
+  "description": "socket para gerenciar sistema de notificação",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://henrique_r_luz@yahoo.com.br@github.com/henrique-r-luz/investimento.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/henrique-r-luz/investimento/issues"
+  },
+  "homepage": "https://github.com/henrique-r-luz/investimento#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0",
+    "winston": "^3.2.1"
+  }
+}

@@ -45,7 +45,9 @@ $this->params['breadcrumbs'][] = $this->title;
         //'heading' => true,
         ],
         'toolbar' => [
-            '{toggleData}',
+            [
+            'content'=>Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], ['class' => 'btn btn-default', 'title' => 'Limpar Filtros'])
+            ],
         ],
     ]);
     ?>

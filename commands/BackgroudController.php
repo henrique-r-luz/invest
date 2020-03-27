@@ -27,7 +27,7 @@ class BackgroudController extends Controller {
   
 
     /**
-     * Atualiza os fundamentos das empresas
+     * Atualiza os fundamentos das empresas de acordo  com o site fundamente
      * @return void
      */
     public function actionAtualizaFundamento() {

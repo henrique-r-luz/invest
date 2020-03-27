@@ -7,7 +7,7 @@ use \kartik\datecontrol\Module;
 use yii\i18n\Formatter;
 
 $config = [
-    'id' => 'basic',
+    'id' => 'Investimento',
     'name' => 'Investimento',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
@@ -71,17 +71,7 @@ $config = [
             ],
         ],
         'db' => $db,
-        'queue' => [
-            'class' => \yii\queue\db\Queue::class,
-            'db' => $db, // DB connection component or its config 
-            'tableName' => '{{%queue}}', // Table name
-            'channel' => 'default', // Queue channel key
-            //'mutex' => \yii\mutex\MysqlMutex::class, // Mutex used to sync queries
-            'mutex' => [
-                'class' => \yii\mutex\PgsqlMutex::class,
-                'db' => $db,
-            ],
-        ],
+      
     /*
       'urlManager' => [
       'enablePrettyUrl' => true,

@@ -66,8 +66,8 @@ class SiteController extends Controller {
     public function actionIndex() {
 
          
-          $this->sicroniza();
-        /*list($resp, $msg) = $this->sicroniza();
+          $this->sincroniza();
+        /*list($resp, $msg) = $this->sincroniza();
         if ($resp == true) {
             Yii::$app->session->setFlash('success', $msg);
         } else {
@@ -154,9 +154,9 @@ class SiteController extends Controller {
     /**
      * sincroniza valores mobiliários 
      */
-    public function sicroniza() {
+    public function sincroniza() {
         $msg = '';
-        list($sincroniza) = Yii::$app->createController('sicronizar/index');
+        list($sincroniza) = Yii::$app->createController('sincronizar/index');
         list($resp, $msg) = $sincroniza->cotacaoAcao();
         if ($resp == false ) {
              FabricaNotificacao::create('rank', 
