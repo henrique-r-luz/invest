@@ -15,12 +15,16 @@ use yii\web\JsExpression;
 use \app\models\Tipo;
 use yii\i18n\Formatter;
 use app\lib\componentes\FabricaNotificacao;
+use ElephantIO\Client;
+use ElephantIO\Engine\SocketIO\Version2X;
 
 class SiteController extends Controller {
 
     /**
      * {@inheritdoc}
      */
+    
+
     public function behaviors() {
         return [
             'access' => [
@@ -65,22 +69,22 @@ class SiteController extends Controller {
      */
     public function actionIndex() {
 
-         
-          $this->sincroniza();
-        /*list($resp, $msg) = $this->sincroniza();
-        if ($resp == true) {
-            Yii::$app->session->setFlash('success', $msg);
-        } else {
-            Yii::$app->session->setFlash('danger', $msg);
-        }*/
+        
+        $this->sincroniza();
+        /* list($resp, $msg) = $this->sincroniza();
+          if ($resp == true) {
+          Yii::$app->session->setFlash('success', $msg);
+          } else {
+          Yii::$app->session->setFlash('danger', $msg);
+          } */
         $totalPatrimonio = Ativo::find()
                 ->sum('valor_bruto');
 
         //gráfico por categorias
         $dadosCategoria = [];
         // foreach ($categorias as $id => $categoria) {
-        $this->montaGraficoCategoria(\app\lib\Categoria::RENDA_FIXA,$totalPatrimonio,0,$dadosCategoria);
-        $this->montaGraficoCategoria(\app\lib\Categoria::RENDA_VARIAVEL,$totalPatrimonio,1,$dadosCategoria);
+        $this->montaGraficoCategoria(\app\lib\Categoria::RENDA_FIXA, $totalPatrimonio, 0, $dadosCategoria);
+        $this->montaGraficoCategoria(\app\lib\Categoria::RENDA_VARIAVEL, $totalPatrimonio, 1, $dadosCategoria);
         $ativos = Ativo::find()
                 ->orderBy(['valor_bruto' => SORT_DESC])
                 ->andWhere(['>', 'quantidade', 0])
@@ -99,14 +103,14 @@ class SiteController extends Controller {
             $dadosAtivo[] = $fatia;
         }
         //gráfico por tipo
-       // $tipos = Tipo::find()->all();
+        // $tipos = Tipo::find()->all();
         $dadosTipo = [];
-        $this->montaGraficoTipo(\app\lib\Tipo::ACOES,$totalPatrimonio,0,$dadosTipo);
-        $this->montaGraficoTipo(\app\lib\Tipo::CDB,$totalPatrimonio,1,$dadosTipo);
-        $this->montaGraficoTipo(\app\lib\Tipo::DEBENTURES,$totalPatrimonio,2,$dadosTipo);
-        $this->montaGraficoTipo(\app\lib\Tipo::FUNDOS_INVESTIMENTO,$totalPatrimonio,3,$dadosTipo);
-        $this->montaGraficoTipo(\app\lib\Tipo::TESOURO_DIRETO,$totalPatrimonio,4,$dadosTipo);
-       
+        $this->montaGraficoTipo(\app\lib\Tipo::ACOES, $totalPatrimonio, 0, $dadosTipo);
+        $this->montaGraficoTipo(\app\lib\Tipo::CDB, $totalPatrimonio, 1, $dadosTipo);
+        $this->montaGraficoTipo(\app\lib\Tipo::DEBENTURES, $totalPatrimonio, 2, $dadosTipo);
+        $this->montaGraficoTipo(\app\lib\Tipo::FUNDOS_INVESTIMENTO, $totalPatrimonio, 3, $dadosTipo);
+        $this->montaGraficoTipo(\app\lib\Tipo::TESOURO_DIRETO, $totalPatrimonio, 4, $dadosTipo);
+
         //gráfico de ações ações
         $dadosAcoes = [];
         $acoes = Ativo::find()
@@ -151,6 +155,20 @@ class SiteController extends Controller {
         ]);
     }
 
+    public function actionEmite() {
+        $version = new Version2X("http://192.168.200.10:3001");
+        $client = new Client($version);
+        $client->initialize();
+      
+        $client->emit("new_order", ['id' => time()]);
+        $client->close();
+        return $this->render('emite', []);
+    }
+
+    public function actionRecebe() {
+         return $this->render('recebe', ['now'=> time()]);
+    }
+
     /**
      * sincroniza valores mobiliários 
      */
@@ -158,43 +176,39 @@ class SiteController extends Controller {
         $msg = '';
         list($sincroniza) = Yii::$app->createController('sincronizar/index');
         list($resp, $msg) = $sincroniza->cotacaoAcao();
-        if ($resp == false ) {
-             FabricaNotificacao::create('rank', 
-                  ['ok' => $resp, 
-                   'titulo' => 'Cotação açoes falhou!', 
-                    'mensagem' => 'A Cotação açoes foram atualizados !</br>'.$msg, 
-                    'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia(); 
+        if ($resp == false) {
+            FabricaNotificacao::create('rank', ['ok' => $resp,
+                'titulo' => 'Cotação açoes falhou!',
+                'mensagem' => 'A Cotação açoes foram atualizados !</br>' . $msg,
+                'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
         }
         list($resp, $msg) = $sincroniza->easy();
         if ($resp == false) {
-            FabricaNotificacao::create('rank', 
-                  ['ok' => $resp, 
-                   'titulo' => 'Renda fixa Easynveste falhou!', 
-                    'mensagem' => 'Renda fixa Easynveste não foi atualizados !</br>'.$msg, 
-                    'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
+            FabricaNotificacao::create('rank', ['ok' => $resp,
+                'titulo' => 'Renda fixa Easynveste falhou!',
+                'mensagem' => 'Renda fixa Easynveste não foi atualizados !</br>' . $msg,
+                'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
         }
         list($resp, $msg) = $sincroniza->clearAcoes();
         if ($resp == false) {
-              FabricaNotificacao::create('rank', 
-                  ['ok' => $resp, 
-                   'titulo' => 'Operações ações Falhou!</br>'.$msg, 
-                    'mensagem' => 'As operações de ações Falharam !.<br>'.$msg, 
-                    'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia(); 
+            FabricaNotificacao::create('rank', ['ok' => $resp,
+                'titulo' => 'Operações ações Falhou!</br>' . $msg,
+                'mensagem' => 'As operações de ações Falharam !.<br>' . $msg,
+                'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
         }
-        /*list($resp, $msg) = $sincroniza->fundamentos();
-        if ($resp == false) {
-             FabricaNotificacao::create('rank', 
-                  ['ok' => $resp, 
-                   'titulo' => 'Fundamentos ações falhou!', 
-                    'mensagem' => 'Os dados do site fundamentos não foram atualizados !</br>'.$msg, 
-                    'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
-        }*/
-         
+        /* list($resp, $msg) = $sincroniza->fundamentos();
+          if ($resp == false) {
+          FabricaNotificacao::create('rank',
+          ['ok' => $resp,
+          'titulo' => 'Fundamentos ações falhou!',
+          'mensagem' => 'Os dados do site fundamentos não foram atualizados !</br>'.$msg,
+          'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
+          } */
+
         //$msg = 'O dados foram sincronizados com sucesso. ';
-       
     }
-    
-    private function montaGraficoCategoria($categoria,$totalPatrimonio,$cor,&$dadosCategoria){
+
+    private function montaGraficoCategoria($categoria, $totalPatrimonio, $cor, &$dadosCategoria) {
         $fatia = [];
         $valorAtivoCategoria = Ativo::find()->where(['categoria' => $categoria])
                 ->sum('valor_bruto');
@@ -207,9 +221,8 @@ class SiteController extends Controller {
         $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . $cor . ']');
         $dadosCategoria[] = $fatia;
     }
-    
-    
-    private function montaGraficoTipo($tipo,$totalPatrimonio,$cor,&$dadosTipo){
+
+    private function montaGraficoTipo($tipo, $totalPatrimonio, $cor, &$dadosTipo) {
         $fatia = [];
         $valorAtivoCategoria = Ativo::find()->where(['tipo' => $tipo])
                 ->sum('valor_bruto');

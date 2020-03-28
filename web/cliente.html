@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="node_modules/socket.io-client/dist/socket.io.js"></script>
+    </head>
+    <body>
+        <div>TODO write content</div>
+
+        
+        <script>
+            var socket = io('http://192.168.200.10:3001');
+            socket.on('new_order', function (data) {
+                console.log(data);
+                //socket.emit('my other event', {my: 'data'});
+            });
+        </script>
+    </body>
+</html>
