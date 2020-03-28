@@ -21,9 +21,14 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        "js/grow-js/jquery.growl.css"
     ];
     public $js = [
-         "js/node_modules/socket.io-client/dist/socket.io.js"
+        "js/node_modules/socket.io-client/dist/socket.io.js",
+         //"js/msg.js",
+        "js/notificacao.js",
+        "js/grow-js/jquery.growl.js"
+       
     ];
     public $depends = [
         'yii\web\YiiAsset',

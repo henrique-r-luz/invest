@@ -5,18 +5,15 @@ namespace app\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
+
 use \app\models\Ativo;
-use \app\models\Categoria;
+
 use yii\web\JsExpression;
-use \app\models\Tipo;
-use yii\i18n\Formatter;
+
 use app\lib\componentes\FabricaNotificacao;
-use ElephantIO\Client;
-use ElephantIO\Engine\SocketIO\Version2X;
+use yii\helpers\Url;
+
 
 class SiteController extends Controller {
 
@@ -69,14 +66,9 @@ class SiteController extends Controller {
      */
     public function actionIndex() {
 
-        
+       
         $this->sincroniza();
-        /* list($resp, $msg) = $this->sincroniza();
-          if ($resp == true) {
-          Yii::$app->session->setFlash('success', $msg);
-          } else {
-          Yii::$app->session->setFlash('danger', $msg);
-          } */
+      
         $totalPatrimonio = Ativo::find()
                 ->sum('valor_bruto');
 
@@ -155,19 +147,8 @@ class SiteController extends Controller {
         ]);
     }
 
-    public function actionEmite() {
-        $version = new Version2X("http://192.168.200.10:3001");
-        $client = new Client($version);
-        $client->initialize();
-      
-        $client->emit("new_order", ['id' => time()]);
-        $client->close();
-        return $this->render('emite', []);
-    }
 
-    public function actionRecebe() {
-         return $this->render('recebe', ['now'=> time()]);
-    }
+   
 
     /**
      * sincroniza valores mobiliários 

@@ -5,6 +5,8 @@ namespace app\models;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
+use ElephantIO\Client;
+use ElephantIO\Engine\SocketIO\Version2X;
 
 /**
  * This is the model class for table "notificacao".
@@ -61,6 +63,20 @@ class Notificacao extends ActiveRecord {
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+    
+   
+    
+    public function afterSave($insert, $changedAttributes) {
+       
+        if($insert == true){
+            $version = new Version2X(\Yii::$app->params['serverNode']);
+            $client = new Client($version);
+            $client->initialize();
+            $client->emit("new_order", ['info' => 'atualiza Notificação']);
+            $client->close();
+        }
+        parent::afterSave($insert, $changedAttributes);
     }
 
 }

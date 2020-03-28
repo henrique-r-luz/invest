@@ -33,7 +33,7 @@ class SincronizarController extends Controller {
     }
 
     public function actionSincroniza() {
-        set_time_limit(3600);
+
         $erro = '';
         if (Yii::$app->request->post('but') == 'cotacao_empresa') {
             list($resp, $msg) = $this->cotacaoAcao();

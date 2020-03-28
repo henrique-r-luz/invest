@@ -14,7 +14,7 @@ $this->title = 'Sincroniza Dados';
 ?>
 <div class="box-body">
     <div class="sinc-form">
-
+ 
 <?php $form = ActiveForm::begin(['action' => ['sincronizar/sincroniza']]); ?> 
 
 
