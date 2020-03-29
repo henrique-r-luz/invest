@@ -63,12 +63,6 @@ class SincronizarController extends Controller {
             $return = $runner->run('backgroud/atualiza-fundamento');
             Yii::$app->session->setFlash('success', 'Uma notificação será enviada quando o processo for finalizado!');
             return $this->redirect('index');
-            /* if (ERunActions::runBackground()) {
-              $runner = new Runner();
-              $return = $runner->run('backgroud/atualiza-fundamento');
-              } else {
-
-              } */
         }
 
         if (Yii::$app->request->post('but') == 'empresa') {
