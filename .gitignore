@@ -13,3 +13,5 @@
 /node_modules/
 /web/js/node_modules/
 /doc/videos/
+/investimento-2020-03-31.sql
+*.sql*
