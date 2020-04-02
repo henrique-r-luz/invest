@@ -205,14 +205,14 @@ class SincronizarController extends Controller {
 
         try {
             foreach ($csv as $id => $linha) {
-                $codigo = str_replace("F", "", $linha[1]);
-
+                $codigo = substr($linha[1],0,5);//str_replace("F", "", $linha[1]);
                 $ativo = Ativo::find()
                         ->where(['codigo' => $codigo])
                         ->one();
                 List($data, $hora) = explode(" ", $linha[11]);
                 List($d, $m, $y) = explode('/', $data);
                 $dataAcao = $y . '-' . $m . '-' . $d . ' ' . $hora;
+             
                 if (Operacao::find()->where(['ativo_id' => $ativo->id])->andWhere(['data' => $dataAcao])->exists()) {
                     continue;
                 }
