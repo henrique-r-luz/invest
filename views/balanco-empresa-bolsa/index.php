@@ -7,7 +7,7 @@ use \kartik\grid\GridView;
 /* @var $searchModel app\models\BalancoEmpresaBolsaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Balanco Empresa Bolsas';
+$this->title = 'Balancos das Empresas da Bolsa';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="balanco-empresa-bolsa-index">

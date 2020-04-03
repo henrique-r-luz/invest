@@ -60,6 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'pdd_lucro_liquido',
             'indice_basileia',
             'codigo',
+            'trimestre',    
             ],
             ]) ?>
 

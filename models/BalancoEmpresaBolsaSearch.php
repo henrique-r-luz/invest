@@ -9,13 +9,12 @@ use app\models\BalancoEmpresaBolsa;
 /**
  * BalancoEmpresaBolsaSearch represents the model behind the search form of `app\models\BalancoEmpresaBolsa`.
  */
-class BalancoEmpresaBolsaSearch extends BalancoEmpresaBolsa
-{
+class BalancoEmpresaBolsaSearch extends BalancoEmpresaBolsa {
+
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id', 'margem_ebit', 'margem_liquida', 'roe', 'divida_bruta_patrimonio', 'fcl_capex', 'payout'], 'integer'],
             [['data', 'codigo'], 'safe'],
@@ -26,8 +25,7 @@ class BalancoEmpresaBolsaSearch extends BalancoEmpresaBolsa
     /**
      * {@inheritdoc}
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -39,15 +37,14 @@ class BalancoEmpresaBolsaSearch extends BalancoEmpresaBolsa
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = BalancoEmpresaBolsa::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-             'pagination' => [
+            'pagination' => [
                 'pageSize' => 10,
             ],
         ]);
@@ -92,8 +89,40 @@ class BalancoEmpresaBolsaSearch extends BalancoEmpresaBolsa
         ]);
 
         $query->andFilterWhere(['ilike', 'data', $this->data])
-            ->andFilterWhere(['ilike', 'codigo', $this->codigo]);
+                ->andFilterWhere(['ilike', 'codigo', $this->codigo]);
 
         return $dataProvider;
     }
+
+    /**
+     * @param boolean trimestre
+     * retorna os dados do balanco em uma linha .
+     * empresa=>nome da empresa
+     * atributos_de balanço=>[valo1,valor2,valor3,...]
+     */
+    public static function dadosBalanco($trimestre) {
+       /* $balancoSubQuery = BalancoEmpresaBolsa::find()
+                ->andWhere(['trimestre' => $trimestre])
+                ->orderBy(['codigo'=>SORT_ASC,'data' => SORT_ASC]);
+        $balancos = (new \yii\db\Query())
+                ->from(['balanco' => $balancoSubQuery])
+                ->select(['codigo', 'array_agg(patrimonio_liquido orde) as patrimonio_liquido', 'array_agg(receita_liquida) as receita_liquida'])
+                ->groupBy(['codigo'])
+                //->asArray()
+                ->all();*/
+        $balancos = BalancoEmpresaBolsa::find()
+         // ->select(['codigo', 'array_agg(patrimonio_liquido order by data asc) as patrimonio_liquido', 'array_agg(receita_liquida) as receita_liquida'])
+           ->select(['codigo', 'patrimonio_liquido','data'])      
+          ->andWhere(['trimestre' => $trimestre])
+          ->orderBy(['codigo'=>SORT_ASC,'data'=>SORT_ASC]);
+          //->groupBy(['codigo'])
+          //->asArray()
+          //->all(); 
+        
+        echo $balancos->createCommand()->getRawSql();
+        exit();
+        
+        return $balancos;
+    }
+
 }

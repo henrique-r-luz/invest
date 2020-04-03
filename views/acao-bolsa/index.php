@@ -7,7 +7,7 @@ use \kartik\grid\GridView;
 /* @var $searchModel app\models\AcaoBolsaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Acao Bolsas';
+$this->title = 'Acões da Bolsa';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

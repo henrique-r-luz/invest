@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use app\lib\componentes\AccountNotification;
 use app\models\AcaoBolsa;
 use app\models\AcaoBolsaSearch;
 use Yii;
@@ -10,6 +9,9 @@ use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use app\lib\componentes\FabricaNotificacao;
+use \app\models\BalancoEmpresaBolsaSearch;
+use app\lib\componentes\Util;
+use Phpml\Regression\LeastSquares;
 
 /**
  * AcaoBolsaController implements the CRUD actions for AcaoBolsa model.
@@ -96,26 +98,42 @@ class AcaoBolsaController extends Controller {
      * define um rank para cada ação cadastrada
      */
     public function actionRank() {
-        /**
-         * função mínimos quadrados
-         */
-        /* $samples = [[60], [61], [62], [63], [65]];
-          $targets = [10, 9, 9.5, 7.3, 5.5];
+        //false=> monta apenas anos
+        //true=> monta apenas trimestres
+        $dadosAnuais = BalancoEmpresaBolsaSearch::dadosBalanco(false);
+       
+        $dados = [];
+        foreach ($dadosAnuais as $ano) {
+            $atributos = array_keys($ano);
+            for ($i = 2; $i < sizeof($atributos); $i++) {
+                $samples = [];
+                $targets = Util::convertArrayAgregInVetor($ano[$atributos[$i]]);
+                print_r($targets);
+                $j = 1;
+                foreach ($targets as $item) {
+                    $samples[] = [$j];
+                    $j++;
+                }
+                $regression = new LeastSquares();
+                $regression->train($samples, $targets);
+                $dados[$ano[$atributos[0]]][$atributos[$i]] = $regression->getCoefficients()[0];
+            }
+            print_r($dados);
+            exit();
+        }
 
-          $regression = new LeastSquares();
+        /* função mínimos quadrados */
+
+        //$samples = [[60], [61], [62], [63], [65]];
+        // $targets = [10, 9, 9.5, 7.3, 5.5];
+
+        /*  $regression = new LeastSquares();
           $regression->train($samples, $targets);
-          print_r ($regression->getCoefficients());
-          echo ' = '. $regression->predict([30]);
+          print_r($regression->getCoefficients());
+          echo ' = ' . $regression->predict([30]);
           exit(); */
 
         //FabricaNotificacao::create('rank', ['ok' => true, 'titulo' => 'Rank Atualizado!', 'mensagem' => 'Teste mensagem !!!', 'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
-        if(Yii::$app->queue->push(new \app\lib\backgroud\Teste())){
-            echo 'ok';
-            exit();
-        }else{
-            echo 'não ok';
-            exit();
-        }
         //return $this->redirect(['index']);
     }
 
