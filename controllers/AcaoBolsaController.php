@@ -105,10 +105,9 @@ class AcaoBolsaController extends Controller {
         $dados = [];
         foreach ($dadosAnuais as $ano) {
             $atributos = array_keys($ano);
-            for ($i = 2; $i < sizeof($atributos); $i++) {
+            for ($i = 1; $i < sizeof($atributos); $i++) {
                 $samples = [];
                 $targets = Util::convertArrayAgregInVetor($ano[$atributos[$i]]);
-                print_r($targets);
                 $j = 1;
                 foreach ($targets as $item) {
                     $samples[] = [$j];
@@ -118,23 +117,8 @@ class AcaoBolsaController extends Controller {
                 $regression->train($samples, $targets);
                 $dados[$ano[$atributos[0]]][$atributos[$i]] = $regression->getCoefficients()[0];
             }
-            print_r($dados);
-            exit();
         }
-
-        /* função mínimos quadrados */
-
-        //$samples = [[60], [61], [62], [63], [65]];
-        // $targets = [10, 9, 9.5, 7.3, 5.5];
-
-        /*  $regression = new LeastSquares();
-          $regression->train($samples, $targets);
-          print_r($regression->getCoefficients());
-          echo ' = ' . $regression->predict([30]);
-          exit(); */
-
-        //FabricaNotificacao::create('rank', ['ok' => true, 'titulo' => 'Rank Atualizado!', 'mensagem' => 'Teste mensagem !!!', 'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
-        //return $this->redirect(['index']);
+       
     }
 
     /**

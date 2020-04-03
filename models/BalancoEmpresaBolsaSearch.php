@@ -101,26 +101,17 @@ class BalancoEmpresaBolsaSearch extends BalancoEmpresaBolsa {
      * atributos_de balanço=>[valo1,valor2,valor3,...]
      */
     public static function dadosBalanco($trimestre) {
-       /* $balancoSubQuery = BalancoEmpresaBolsa::find()
-                ->andWhere(['trimestre' => $trimestre])
-                ->orderBy(['codigo'=>SORT_ASC,'data' => SORT_ASC]);
-        $balancos = (new \yii\db\Query())
-                ->from(['balanco' => $balancoSubQuery])
-                ->select(['codigo', 'array_agg(patrimonio_liquido orde) as patrimonio_liquido', 'array_agg(receita_liquida) as receita_liquida'])
-                ->groupBy(['codigo'])
-                //->asArray()
-                ->all();*/
+   
         $balancos = BalancoEmpresaBolsa::find()
-         // ->select(['codigo', 'array_agg(patrimonio_liquido order by data asc) as patrimonio_liquido', 'array_agg(receita_liquida) as receita_liquida'])
-           ->select(['codigo', 'patrimonio_liquido','data'])      
+          ->select(['codigo', 'array_agg(patrimonio_liquido order by data asc) as patrimonio_liquido',
+                             'array_agg(receita_liquida order by data asc) as receita_liquida',
+                            'array_agg(receita_liquida order by data asc) as receita_liquida'])
           ->andWhere(['trimestre' => $trimestre])
-          ->orderBy(['codigo'=>SORT_ASC,'data'=>SORT_ASC]);
-          //->groupBy(['codigo'])
-          //->asArray()
-          //->all(); 
+          ->groupBy(['codigo'])
+          ->asArray()
+          ->all(); 
         
-        echo $balancos->createCommand()->getRawSql();
-        exit();
+      
         
         return $balancos;
     }

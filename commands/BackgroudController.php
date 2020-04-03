@@ -24,19 +24,18 @@ use yii\db\Exception as Exception2;
  */
 class BackgroudController extends Controller {
 
-  
-
     /**
      * Atualiza os fundamentos das empresas de acordo  com o site fundamente
      * @return void
      */
     public function actionAtualizaFundamento() {
         try {
+            //BalancoEmpresaBolsa::deleteAll(['ilike','data','%TTM%']);
+           
             $erros = 'Erro na criação dos balanços : ';
             if (!file_exists('/vagrant/bot/fundamentos.csv')) {
                 $this->criaMessagen([true, 'sucesso']);
                 return;
-                
             }
             // $old = ini_set('memory_limit', '8192M');
             $csv = array_map('str_getcsv', file('/vagrant/bot/fundamentos.csv'));
@@ -78,6 +77,7 @@ class BackgroudController extends Controller {
                     $linha['empresa'] = substr(trim($linha['empresa']), 0, 4);
                     $balanco = BalancoEmpresaBolsa::find()->where(['codigo' => $linha['empresa']])
                                     ->andWhere(['data' => $linha['Ano'], 'trimestre' => $linha['trimestre']])->one();
+
                     if ($balanco != null) {
                         $balanco = $this->constroiData($balanco, $linha);
                         //continue;
@@ -85,6 +85,7 @@ class BackgroudController extends Controller {
                         $balanco = new BalancoEmpresaBolsa();
                         $balanco = $this->constroiData($balanco, $linha);
                     }
+
                     if (!$balanco->save()) {
                         $transaction->rollBack();
                         $erros .= CajuiHelper::processaErros($balanco->getErrors()) . '</br>';
@@ -96,37 +97,36 @@ class BackgroudController extends Controller {
                 } catch (Exception $e) {
                     $transaction->rollBack();
                     $this->criaMessagen([false, $erros . $e]);
-                    
                     throw $e;
                 }
             }
+            
             $this->criaMessagen([true, 'sucesso']);
             return;
         } catch (Exception2 $e) {
-            $this->criaMessagen([false, 'Exceção capturada: '. $e->getMessage()]);
+            $this->criaMessagen([false, 'Exceção capturada: ' . $e->getMessage()]);
             return;
             //return [false, 'Exceção capturada: '. $e->getMessage()];
         }
     }
-    
-    private function  criaMessagen($resp){
-        List($tipo,$msg) = $resp;
-        if($tipo==true){
+
+    private function criaMessagen($resp) {
+         Yii::$app->db->createCommand("delete from balanco_empresa_bolsa  where data ilike '%TTM%'")->execute();
+        List($tipo, $msg) = $resp;
+        if ($tipo == true) {
             $titulo = 'Fundamentos Atualizado!';
             $mensagem = 'Fundamentos Atualizado!';
-        }else{
+        } else {
             $titulo = 'Fundamentos falhou!';
             $mensagem = $msg;
         }
-         FabricaNotificacao::create('rank', ['ok' => $tipo,
-                'titulo' =>$titulo,
-                'mensagem' => $mensagem,
-                'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
-       
+        FabricaNotificacao::create('rank', ['ok' => $tipo,
+            'titulo' => $titulo,
+            'mensagem' => $mensagem,
+            'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
     }
-    
-    
-      public function constroiData($balanco, $linha) {
+
+    public function constroiData($balanco, $linha) {
 
         $balanco->data = $linha['Ano'];
         $balanco->patrimonio_liquido = $linha['Pat. Líq.'] == 's/n' ? null : $linha['Pat. Líq.'];
