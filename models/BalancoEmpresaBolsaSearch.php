@@ -105,7 +105,33 @@ class BalancoEmpresaBolsaSearch extends BalancoEmpresaBolsa {
         $balancos = BalancoEmpresaBolsa::find()
           ->select(['codigo', 'array_agg(patrimonio_liquido order by data asc) as patrimonio_liquido',
                              'array_agg(receita_liquida order by data asc) as receita_liquida',
-                            'array_agg(receita_liquida order by data asc) as receita_liquida'])
+                            'array_agg(ebitda order by data asc) as ebitda',
+                            'array_agg(da order by data asc) as da',
+                            'array_agg(ebit order by data asc) as ebit',
+                            'array_agg(margem_ebit order by data asc) as margem_ebit',
+                            'array_agg(resultado_financeiro order by data asc) as resultado_financeiro',
+                            'array_agg(imposto order by data asc) as imposto',
+                             'array_agg(lucro_liquido order by data asc) as lucro_liquido',
+                            'array_agg(margem_liquida order by data asc) as margem_liquida',
+                            'array_agg(roe order by data asc) as roe',
+                            'array_agg(caixa order by data asc) as caixa',
+                            'array_agg(divida_bruta order by data asc) as divida_bruta',
+                            'array_agg(divida_liquida order by data asc) as divida_liquida',
+                            'array_agg(divida_bruta_patrimonio order by data asc) as divida_bruta_patrimonio',
+                            'array_agg(divida_liquida_ebitda order by data asc) as divida_liquida_ebitda',
+                            'array_agg(fco order by data asc) as fco',
+                            'array_agg(capex order by data asc) as capex',
+                            'array_agg(fcf order by data asc) as fcf',
+                            'array_agg(fcl order by data asc) as fcl',  
+                            'array_agg(fcl_capex order by data asc) as fcl_capex',
+                            'array_agg(proventos order by data asc) as proventos',
+                            'array_agg(payout order by data asc) as payout',
+                            'array_agg(pdd order by data asc) as pdd',
+                            'array_agg(pdd_lucro_liquido order by data asc) as pdd_lucro_liquido',
+                            'array_agg(indice_basileia order by data asc) as indice_basileia',
+                            
+                             
+              ])
           ->andWhere(['trimestre' => $trimestre])
           ->groupBy(['codigo'])
           ->asArray()
