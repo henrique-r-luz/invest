@@ -21,7 +21,12 @@ use Yii;
 class AcaoBolsaOperacao {
 
     //put your code here
-
+    /**
+     * gera um rank utilizado o cálculo de mínimos quadardos 
+     * @param type $dadosEmpresas
+     * @param type $atribute
+     * @return type
+     */
     public static function geraRankMinQuad($dadosEmpresas,$atribute) {
         $resp = [];
         $dados = [];
