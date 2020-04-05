@@ -3,15 +3,13 @@
 namespace app\controllers;
 
 use app\models\AcaoBolsa;
+use app\models\AcaoBolsaOperacao;
 use app\models\AcaoBolsaSearch;
+use app\models\BalancoEmpresaBolsaSearch;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use app\lib\componentes\FabricaNotificacao;
-use \app\models\BalancoEmpresaBolsaSearch;
-use app\lib\componentes\Util;
-use Phpml\Regression\LeastSquares;
 
 /**
  * AcaoBolsaController implements the CRUD actions for AcaoBolsa model.
@@ -100,35 +98,31 @@ class AcaoBolsaController extends Controller {
     public function actionRank() {
         //false=> monta apenas anos
         //true=> monta apenas trimestres
-        $dadosAnuais = BalancoEmpresaBolsaSearch::dadosBalanco(false);
-        $rankAno = [];
-        $dados = [];
-        foreach ($dadosAnuais as $ano) {
-            $atributos = array_keys($ano);
-            $numerador = 0;
-            $denominador = 1;
-            for ($i = 1; $i < sizeof($atributos); $i++) {
-                $samples = [];
-                $targets = Util::convertArrayAgregInVetor($ano[$atributos[$i]]);
-                $j = 1;
-                foreach ($targets as $item) {
-                    $samples[] = [$j];
-                    $j++;
-                }
-                $regression = new LeastSquares();
-                $regression->train($samples, $targets);
-                $dados[$ano[$atributos[0]]][$atributos[$i]] = $regression->getCoefficients()[0];
-                $numerador += $regression->getCoefficients()[0]* (isset(Util::NUMERADOR[$atributos[$i]])?Util::NUMERADOR[$atributos[$i]]:0);
-                $denominador+= $regression->getCoefficients()[0]* (isset(Util::DENOMINADOR[$i])?Util::DENOMINADOR[$atributos[$i]]:0);
-             }
-             $rankAno[$ano[$atributos[0]]] = round($numerador/$denominador)/1000;
+        try {
+            $transaction = Yii::$app->db->beginTransaction();
+            $dadosAnuais = BalancoEmpresaBolsaSearch::dadosBalanco(false);
+            $dadosTrimestre = BalancoEmpresaBolsaSearch::dadosBalanco(true);
+            List($resp, $msg) = AcaoBolsaOperacao::geraRankMinQuad($dadosAnuais,'rank_ano');
+            List($resp, $msg) = AcaoBolsaOperacao::geraRankMinQuad($dadosTrimestre,'rank_trimestre');
+            // $rankAno = [];
+            if ($resp == true) {
+                $transaction->commit();
+                Yii::$app->session->setFlash('success', $msg);
+                return $this->redirect(['index']);
+            } else {
+                $transaction->rollBack();
+                Yii::$app->session->setFlash('danger', $msg);
+                return $this->redirect(['index']);
+            }
+        } catch (Exception $e) {
+            $transaction->rollBack();
+            Yii::$app->session->setFlash('danger', 'Exceção capturada: ', $e->getMessage(), "\n");
+            return $this->redirect(['index']);
         }
-        
+
         //foreach ($dados as $dados)
-            
-        print_r($rankAno);
-        exit();
-       
+        //print_r($rankAno);
+        //exit();
     }
 
     /**

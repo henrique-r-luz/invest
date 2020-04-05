@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'setor:ntext',
             'rank_ano',
             'rank_trimestre',
-            'data_atualizacao_rank',
+           // 'data_atualizacao_rank',
             [
                 'attribute' => 'habilita_rank',
                 'value' => function($model) {
