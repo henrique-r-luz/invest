@@ -6,22 +6,16 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-
 use \app\models\Ativo;
-
 use yii\web\JsExpression;
-
 use app\lib\componentes\FabricaNotificacao;
 use yii\helpers\Url;
-
 
 class SiteController extends Controller {
 
     /**
      * {@inheritdoc}
      */
-    
-
     public function behaviors() {
         return [
             'access' => [
@@ -66,9 +60,9 @@ class SiteController extends Controller {
      */
     public function actionIndex() {
 
-       
+
         $this->sincroniza();
-      
+
         $totalPatrimonio = Ativo::find()
                 ->sum('valor_bruto');
 
@@ -147,22 +141,13 @@ class SiteController extends Controller {
         ]);
     }
 
-
-   
-
     /**
      * sincroniza valores mobiliários 
      */
     public function sincroniza() {
         $msg = '';
         list($sincroniza) = Yii::$app->createController('sincronizar/index');
-        list($resp, $msg) = $sincroniza->cotacaoAcao();
-        if ($resp == false) {
-            FabricaNotificacao::create('rank', ['ok' => $resp,
-                'titulo' => 'Cotação açoes falhou!',
-                'mensagem' => 'A Cotação açoes foram atualizados !</br>' . $msg,
-                'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
-        }
+
         list($resp, $msg) = $sincroniza->easy();
         if ($resp == false) {
             FabricaNotificacao::create('rank', ['ok' => $resp,
@@ -175,6 +160,14 @@ class SiteController extends Controller {
             FabricaNotificacao::create('rank', ['ok' => $resp,
                 'titulo' => 'Operações ações Falhou!</br>' . $msg,
                 'mensagem' => 'As operações de ações Falharam !.<br>' . $msg,
+                'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
+        }
+
+        list($resp, $msg) = $sincroniza->cotacaoAcao();
+        if ($resp == false) {
+            FabricaNotificacao::create('rank', ['ok' => $resp,
+                'titulo' => 'Cotação açoes falhou!',
+                'mensagem' => 'A Cotação açoes foram atualizados !</br>' . $msg,
                 'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
         }
         /* list($resp, $msg) = $sincroniza->fundamentos();

@@ -8,15 +8,15 @@
 
 namespace app\controllers;
 
-use yii\web\Controller;
-use \app\models\Ativo;
-use Yii;
-use \app\models\AcaoBolsa;
 use app\lib\CajuiHelper;
-use \app\models\Operacao;
-use \app\models\BalancoEmpresaBolsa;
-use toriphes\console\Runner;
 use app\lib\componentes\ExecutaBack;
+use app\models\AcaoBolsa;
+use app\models\Ativo;
+use app\models\Operacao;
+use Exception;
+use SplFileObject;
+use Yii;
+use yii\web\Controller;
 
 /**
  * Description of SincronizarController
@@ -58,7 +58,7 @@ class SincronizarController extends Controller {
             }
         }
         if (Yii::$app->request->post('but') == 'dados_empresa') {
-           
+
             //a classe Runner deve ser extendida
             $runner = new ExecutaBack();
             $return = $runner->run('backgroud/atualiza-fundamento');
@@ -193,27 +193,29 @@ class SincronizarController extends Controller {
          * 15-> cancelado por
          * tipo = 1 compra
          */
+        $arquivo = '/vagrant/bot/orders.csv';
         $erros = 'Erro na criação das Operações: ';
-        if (!file_exists('/vagrant/bot/orders.csv')) {
+        if (!file_exists($arquivo)) {
             return [true, 'sucesso'];
         }
         //$csv = array_map('str_getcsv', file('/vagrant/bot/orders.csv'));
-        $csv = array_map(function($v) {
-            return str_getcsv($v, ";");
-        }, file('/vagrant/bot/orders.csv'));
+        $csv = array_map(function($v)use($arquivo) {
+            return str_getcsv($v, $this->getFileDelimiter($arquivo));
+        }, file($arquivo));
         unset($csv[0]);
         $transaction = Yii::$app->db->beginTransaction();
 
         try {
             foreach ($csv as $id => $linha) {
-                $codigo = substr($linha[1],0,5);//str_replace("F", "", $linha[1]);
+              
+                $codigo = substr($linha[1], 0, 5); //str_replace("F", "", $linha[1]);
                 $ativo = Ativo::find()
                         ->where(['codigo' => $codigo])
                         ->one();
                 List($data, $hora) = explode(" ", $linha[11]);
                 List($d, $m, $y) = explode('/', $data);
                 $dataAcao = $y . '-' . $m . '-' . $d . ' ' . $hora;
-             
+
                 if (Operacao::find()->where(['ativo_id' => $ativo->id])->andWhere(['data' => $dataAcao])->exists()) {
                     continue;
                 }
@@ -238,11 +240,33 @@ class SincronizarController extends Controller {
             }
             $transaction->commit();
             return [true, 'sucesso'];
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $transaction->rollBack();
             return [false, $erros . $e];
             throw $e;
         }
+    }
+
+    private function getFileDelimiter($file, $checkLines = 2) {
+        $file = new SplFileObject($file);
+        $delimiters = array(',', '\t', ';', '|', ':');
+        $results = array();
+        $i = 0;
+        while ($file->valid() && $i <= $checkLines) {
+            $line = $file->fgets();
+            foreach ($delimiters as $delimiter) {
+                $regExp = '/[' . $delimiter . ']/';
+                $fields = preg_split($regExp, $line);
+                if (count($fields) > 1) {
+                    if (!empty($results[$delimiter])) {
+                        $results[$delimiter]++;
+                    } else {
+                        $results[$delimiter] = 1;
+                    }
+                }
+            } $i++;
+        } $results = array_keys($results, max($results));
+        return $results[0];
     }
 
 }

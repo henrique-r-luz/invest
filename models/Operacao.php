@@ -119,21 +119,17 @@ class Operacao extends ActiveRecord {
                             $transaction->rollBack();
                             return false;
                         }
-
-                        list($sincroniza) = Yii::$app->createController('sincronizar/index');
-                        list($respEasy, $msgEasy) = $sincroniza->easy();
-                        list($respCotacao, $msgCotacao) = $sincroniza->cotacaoAcao();
-                        if ($respEasy && $respCotacao) {
-                            $transaction->commit();
-                            return true;
-                        } else {
-                            $this->addError('ativo_id', 'erro:</br>' . $msgEasy . '</br>' . $msgCotacao);
-                            $transaction->rollBack();
-                            return false;
-                        }
-                    } else {
+                    } 
+                    list($sincroniza) = Yii::$app->createController('sincronizar/index');
+                    list($respEasy, $msgEasy) = $sincroniza->easy();
+                    list($respCotacao, $msgCotacao) = $sincroniza->cotacaoAcao();
+                    if ($respEasy && $respCotacao) {
                         $transaction->commit();
                         return true;
+                    } else {
+                        $this->addError('ativo_id', 'erro:</br>' . $msgEasy . '</br>' . $msgCotacao);
+                        $transaction->rollBack();
+                        return false;
                     }
                 } else {
                     $this->addError('ativo_id', 'O sistema não pode sincronizar os dados de renda fixa. ');
@@ -152,7 +148,7 @@ class Operacao extends ActiveRecord {
             return false;
             // throw $e;
         } catch (Throwable $e) {
-            $this->addError('ativo_id', $e);        
+            $this->addError('ativo_id', $e);
             $transaction->rollBack();
             return false;
             //throw $e;

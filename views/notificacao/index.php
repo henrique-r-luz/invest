@@ -21,24 +21,30 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             'id',
             [
-            'attribute'=>'user_id',
-             'value'=>function($model){
-                if($model->user_id==1){
-                    return 'Sistema';
+                'attribute' => 'user_id',
+                'value' => function($model) {
+                    if ($model->user_id == 1) {
+                        return 'Sistema';
+                    }
                 }
-             }   
             ],
-           [
-               'attribute'=>'dados',
-               'format' => 'html',
-               'value'=>function($model){
-                return implode(",<br/>", $model->dados);
-               } 
-               ],
+            [
+                'attribute' => 'dados',
+                'format' => 'html',
+                'value' => function($model) {
+                    return implode(",<br/>", $model->dados);
+                }
+            ],
             'lido:boolean',
-            'created_at',
-            //'updated_at',
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'attribute' => 'created_at',
+                'label'=>'Criado em',
+                'value' => function($model) {
+                    return date('d/m/y H:i:s', $model->created_at);
+                },
+            ],
+        //'updated_at',
+        //['class' => 'yii\grid\ActionColumn'],
         ],
         'panel' => [
             'type' => GridView::TYPE_DEFAULT,
@@ -46,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'toolbar' => [
             [
-            'content'=>Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], ['class' => 'btn btn-default', 'title' => 'Limpar Filtros'])
+                'content' => Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], ['class' => 'btn btn-default', 'title' => 'Limpar Filtros'])
             ],
         ],
     ]);

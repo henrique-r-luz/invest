@@ -26,6 +26,15 @@ class Ativo extends \yii\db\ActiveRecord
     {
         return 'public.ativo';
     }
+    
+      /**
+     * {@inheritdoc}
+     */
+    public function transactions() {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_ALL,
+        ];
+    }
 
     /**
      * {@inheritdoc}
@@ -93,5 +102,11 @@ class Ativo extends \yii\db\ActiveRecord
     
      public function getAcaoBolsa() {
         return $this->hasOne(AcaoBolsa::class, ['id'=>'acao_bolsa_id']);
+    }
+    
+    
+    public function afterSave($insert, $changedAttributes) {
+        //atualiza preço
+        parent::afterSave($insert, $changedAttributes);
     }
 }
