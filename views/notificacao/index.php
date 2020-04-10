@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             'id',
             [
+                 'options'   => ['style' => 'width:12%;'],
                 'attribute' => 'user_id',
                 'value' => function($model) {
                     if ($model->user_id == 1) {
@@ -32,11 +33,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'dados',
                 'format' => 'html',
                 'value' => function($model) {
-                    return implode(",<br/>", $model->dados);
+                   if($model->dados['ok']==true){
+                       $estilo ='btn-success';
+                   }else{
+                       $estilo ='btn-danger';
+                   }
+                    return '<a class="btn '.$estilo.'" style="margin-bottom:4px;white-space: normal;">'.$model->dados['titulo'].'</span>';
                 }
             ],
             'lido:boolean',
             [
+                 'options'   => ['style' => 'width:10%;'],
                 'attribute' => 'created_at',
                 'label'=>'Criado em',
                 'value' => function($model) {

@@ -89,19 +89,27 @@ $this->title = 'Patrimônio';
     <div class="col-lg-3">
         <div class="info-box">
             <!-- Apply any bg-* class to to the icon to color it -->
-            <span class="info-box-icon bg-green"><i class="fa fa-usd"></i></span>
+            <span class="info-box-icon bg-green"><i class="fa  fa-usd "></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Valor Invest.</span>
-                <span class="info-box-number"> <?=$patrimonioBruto?></span>
+                <span class="info-box-number"> <?= $patrimonioBruto ?></span>
             </div><!-- /.info-box-content -->
         </div><!-- /.info-box -->
 
         <div class="info-box">
             <!-- Apply any bg-* class to to the icon to color it -->
-            <span class="info-box-icon bg-blue"><i class="fa fa-line-chart"></i></span>
+            <span class="info-box-icon bg-blue"><i class="fa fa-briefcase "></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Total Aportes</span>
-                <span class="info-box-number"><?=$valorCompra?></span>
+                <span class="info-box-number"><?= $valorCompra ?></span>
+            </div><!-- /.info-box-content -->
+        </div><!-- /.info-box -->
+        <div class="info-box">
+            <!-- Apply any bg-* class to to the icon to color it -->
+            <span class="info-box-icon bg-yellow"><i class="fa fa-line-chart"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Lucro</span>
+                <span class="info-box-number"><?= $valorCompra ?></span>
             </div><!-- /.info-box-content -->
         </div><!-- /.info-box -->
     </div>

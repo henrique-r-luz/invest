@@ -82,10 +82,11 @@ class SincronizarController extends Controller {
     public function cotacaoAcao() {
         $contErro = 0;
         $erros = '';
-        if (!file_exists('/vagrant/bot/preco_acao.csv')) {
+        $file = '/vagrant/bot/preco_acao.csv';
+        if (!file_exists($file)) {
             return [true, 'sucesso'];
         }
-        $csv = array_map('str_getcsv', file('/vagrant/bot/preco_acao.csv'));
+        $csv = array_map('str_getcsv', file($file));
         $newkeys = array('id', 'valor');
         foreach ($csv as $id => $linha) {
             $csv[$id] = array_combine($newkeys, $linha); //recursive_change_key($linha, array('0' => 'cnpj', '1' => 'codigo','2'=>'nome','3'=>'setor'));
@@ -116,10 +117,11 @@ class SincronizarController extends Controller {
 
     public function empresas() {
         $erros = '';
-        if (!file_exists('/vagrant/bot/empresa.csv')) {
+        $file = '/vagrant/bot/empresa.csv';
+        if (!file_exists($file)) {
             return [true, 'sucesso'];
         }
-        $csv = array_map('str_getcsv', file('/vagrant/bot/empresas.csv'));
+        $csv = array_map('str_getcsv', file($file));
         $newkeys = array('cnpj', 'codigo', 'nome', 'setor');
         foreach ($csv as $id => $linha) {
             $csv[$id] = array_combine($newkeys, $linha); //recursive_change_key($linha, array('0' => 'cnpj', '1' => 'codigo','2'=>'nome','3'=>'setor'));
@@ -151,12 +153,13 @@ class SincronizarController extends Controller {
 
     public function easy() {
         $erros = '';
-        if (!file_exists('/vagrant/bot/Exportar_custodia.csv')) {
+        $file = '/vagrant/bot/Exportar_custodia.csv';
+        if (!file_exists($file)) {
             //return [true, 'sucesso'];
         }
-        $csv = array_map(function($v) {
-            return str_getcsv($v, ";");
-        }, file('/vagrant/bot/Exportar_custodia.csv'));
+        $csv = array_map(function($v)use($file) {
+            return str_getcsv($v,  $this->getFileDelimiter($file));
+        }, file($file));
         unset($csv[0]);
         unset($csv[1]);
 

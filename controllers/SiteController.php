@@ -158,7 +158,7 @@ class SiteController extends Controller {
         list($resp, $msg) = $sincroniza->clearAcoes();
         if ($resp == false) {
             FabricaNotificacao::create('rank', ['ok' => $resp,
-                'titulo' => 'Operações ações Falhou!</br>' . $msg,
+                'titulo' => 'Operações ações Falhou!',
                 'mensagem' => 'As operações de ações Falharam !.<br>' . $msg,
                 'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
         }

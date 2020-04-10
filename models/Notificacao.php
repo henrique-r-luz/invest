@@ -17,6 +17,11 @@ use ElephantIO\Engine\SocketIO\Version2X;
  * @property bool $lido
  * @property int $created_at
  * @property int $updated_at
+ * 
+ * {"ok": true,
+ *  "action": "backgroud/atualiza-fundamento",
+ *  "titulo": "Fundamentos Atualizado!",
+ *  "mensagem": "Fundamentos Atualizado!"}
  */
 class Notificacao extends ActiveRecord {
 
