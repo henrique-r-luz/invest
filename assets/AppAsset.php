@@ -28,7 +28,8 @@ class AppAsset extends AssetBundle
        "js/node_modules/socket.io-client/dist/socket.io.js",
          //"js/msg.js",
         "js/notificacao.js",
-        "js/grow-js/jquery.growl.js"
+        "js/grow-js/jquery.growl.js",
+        "js/investimento.js",
        
     ];
     public $depends = [
