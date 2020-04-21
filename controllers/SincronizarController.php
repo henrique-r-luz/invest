@@ -82,7 +82,7 @@ class SincronizarController extends Controller {
     public function cotacaoAcao() {
         $contErro = 0;
         $erros = '';
-        $file = '/vagrant/bot/preco_acao.csv';
+        $file = Yii::$app->params['bot'].'/preco_acao.csv';
         if (!file_exists($file)) {
             return [true, 'sucesso'];
         }
@@ -117,7 +117,7 @@ class SincronizarController extends Controller {
 
     public function empresas() {
         $erros = '';
-        $file = '/vagrant/bot/empresa.csv';
+        $file = Yii::$app->params['bot'].'/empresa.csv';
         if (!file_exists($file)) {
             return [true, 'sucesso'];
         }
@@ -153,7 +153,7 @@ class SincronizarController extends Controller {
 
     public function easy() {
         $erros = '';
-        $file = '/vagrant/bot/Exportar_custodia.csv';
+        $file = Yii::$app->params['bot'].'/Exportar_custodia.csv';
         if (!file_exists($file)) {
             //return [true, 'sucesso'];
         }
@@ -196,7 +196,7 @@ class SincronizarController extends Controller {
          * 15-> cancelado por
          * tipo = 1 compra
          */
-        $arquivo = '/vagrant/bot/orders.csv';
+        $arquivo = Yii::$app->params['bot'].'/orders.csv';
         $erros = 'Erro na criação das Operações: ';
         if (!file_exists($arquivo)) {
             return [true, 'sucesso'];
