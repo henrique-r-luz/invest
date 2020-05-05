@@ -168,7 +168,7 @@ class SiteController extends Controller {
         if ($resp == false) {
             FabricaNotificacao::create('rank', ['ok' => $resp,
                 'titulo' => 'Cotação açoes falhou!',
-                'mensagem' => 'A Cotação açoes foram atualizados !</br>' . $msg,
+                'mensagem' => 'A Cotação açoes não foram atualizados !</br>' . $msg,
                 'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
         }
      
