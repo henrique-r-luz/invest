@@ -123,6 +123,7 @@ class SiteController extends Controller {
 
         //patrimônio bruto total
         $patrimonioBruto = Ativo::find()
+                ->andWhere(['ativo'=>true])
                 ->sum('valor_bruto');
         $formatter = \Yii::$app->formatter;
         $patrimonioBruto = $formatter->asCurrency($patrimonioBruto);
