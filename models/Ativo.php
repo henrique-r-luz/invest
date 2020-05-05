@@ -104,6 +104,14 @@ class Ativo extends \yii\db\ActiveRecord
         return $this->hasOne(AcaoBolsa::class, ['id'=>'acao_bolsa_id']);
     }
     
+    public function beforeSave($insert) {
+        if($this->quantidade<=0){
+            $this->valor_compra = 0;
+            $this->valor_bruto=0;
+            $this->valor_liquido = 0;
+        }
+       return  parent::beforeSave($insert);
+    }
     
     public function afterSave($insert, $changedAttributes) {
         //atualiza preço
