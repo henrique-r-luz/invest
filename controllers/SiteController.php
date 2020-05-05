@@ -171,16 +171,7 @@ class SiteController extends Controller {
                 'mensagem' => 'A Cotação açoes foram atualizados !</br>' . $msg,
                 'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
         }
-        /* list($resp, $msg) = $sincroniza->fundamentos();
-          if ($resp == false) {
-          FabricaNotificacao::create('rank',
-          ['ok' => $resp,
-          'titulo' => 'Fundamentos ações falhou!',
-          'mensagem' => 'Os dados do site fundamentos não foram atualizados !</br>'.$msg,
-          'action' =>Yii::$app->controller->id.'/'.Yii::$app->controller->action->id])->envia();
-          } */
-
-        //$msg = 'O dados foram sincronizados com sucesso. ';
+     
     }
 
     private function montaGraficoCategoria($categoria, $totalPatrimonio, $cor, &$dadosCategoria) {

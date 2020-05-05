@@ -163,7 +163,7 @@ class SincronizarController extends Controller {
         unset($csv[0]);
         unset($csv[1]);
 
-        $id = 0;
+       
         $contErro = 0;
         foreach ($csv as $titulo) {
             // echo $titulo[1].'-'.$titulo[3].'-'.$titulo[2].'</br>';
@@ -177,7 +177,6 @@ class SincronizarController extends Controller {
                 $contErro++;
                 $erros .= CajuiHelper::processaErros($ativo->getErrors()) . '</br>';
             }
-            $id++;
         }
         //exit();
         if ($contErro == 0) {
