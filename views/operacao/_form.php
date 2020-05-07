@@ -48,7 +48,8 @@ use kartik\number\NumberControl;
                     <?= 
                         $form->field($model, 'quantidade')->widget(NumberControl::classname(), [
                         'maskedInputOptions' => [
-                            'allowMinus' => false
+                            'allowMinus' => false,
+                            'digits' => 15,
                         ],
                     ])
                             ?>

@@ -95,7 +95,9 @@ class SincronizarController extends Controller {
         foreach ($csv as $acoe) {
             $ativo = Ativo::findOne($acoe['id']);
 //$output = shell_exec("/home/vagrant/anaconda3/bin/python3.6 /vagrant/bot/acao.py " . $acoe . " 2>&1");
-            $valor = str_replace(',', '.', $acoe['valor']);
+            $valor = str_replace('.', '', $acoe['valor']);
+            $valor = str_replace(',', '.', $valor);
+           
             $lucro = ($valor * $ativo->quantidade);
             $ativo->valor_bruto = $lucro;
             $ativo->valor_liquido = $lucro;

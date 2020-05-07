@@ -3,8 +3,7 @@
 namespace app\migrations;
 
 use yii\db\Migration;
-use app\models\Ativo;
-use app\lib\Categoria;
+
 
 /**
  * Class m190609_143226_inicio

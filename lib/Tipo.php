@@ -25,6 +25,7 @@ class Tipo {
     const CDB = 'CDB';
     const DEBENTURES = 'Debêntures';
     const ACOES = 'Ações';
+    const Criptomoeda = 'Criptomoeda';
 
     /**
      * Retorna todos os enuns em um array
@@ -37,6 +38,7 @@ class Tipo {
             self::CDB => 'CDB',
             self::DEBENTURES => 'Debêntures',
             self::ACOES => 'Ações',
+            self::Criptomoeda => 'Criptomoeda',
         ];
     }
 

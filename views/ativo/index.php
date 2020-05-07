@@ -76,14 +76,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             $lucro = $lucro+($ativo->valor_liquido-$ativo->valor_compra);
                         }
                         //ações
-                        if($ativo->tipo== \app\lib\Tipo::ACOES){
+                        if($ativo->tipo== \app\lib\Tipo::ACOES || $ativo->tipo== \app\lib\Tipo::Criptomoeda ){
                           
                             $valorLiquidoAcao = $valorLiquidoAcao+$ativo->valor_liquido;
                             $valorCompraAcao = $valorCompraAcao+$ativo->valor_compra;          
                         }
                     }
 
-                   
+                   //remove 15 % do lucro
                     if(($valorLiquidoAcao-$valorCompraAcao)>0){
                         $lucroAcao =(($valorLiquidoAcao-$valorCompraAcao)*0.85);
                         
