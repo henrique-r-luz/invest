@@ -9,6 +9,7 @@ use yii\filters\VerbFilter;
 use \app\models\Ativo;
 use yii\web\JsExpression;
 use app\lib\componentes\FabricaNotificacao;
+use \app\models\Sincroniza;
 use yii\helpers\Url;
 
 class SiteController extends Controller {
@@ -96,6 +97,7 @@ class SiteController extends Controller {
         $this->montaGraficoTipo(\app\lib\Tipo::DEBENTURES, $totalPatrimonio, 2, $dadosTipo);
         $this->montaGraficoTipo(\app\lib\Tipo::FUNDOS_INVESTIMENTO, $totalPatrimonio, 3, $dadosTipo);
         $this->montaGraficoTipo(\app\lib\Tipo::TESOURO_DIRETO, $totalPatrimonio, 4, $dadosTipo);
+        $this->montaGraficoTipo(\app\lib\Tipo::Criptomoeda, $totalPatrimonio, 5, $dadosTipo);
 
         //gráfico de ações ações
         $dadosAcoes = [];
@@ -125,13 +127,16 @@ class SiteController extends Controller {
         $patrimonioBruto = Ativo::find()
                 ->andWhere(['ativo'=>true])
                 ->sum('valor_bruto');
-        $formatter = \Yii::$app->formatter;
-        $patrimonioBruto = $formatter->asCurrency($patrimonioBruto);
         //valor de compra
         $valorCompra = Ativo::find()
                 ->sum('valor_compra');
+        $lucro = $patrimonioBruto-$valorCompra;
+        $formatter = \Yii::$app->formatter;
+        $lucro = $formatter->asCurrency($lucro);
         $formatter = \Yii::$app->formatter;
         $valorCompra = $formatter->asCurrency($valorCompra);
+        $formatter = \Yii::$app->formatter;
+        $patrimonioBruto = $formatter->asCurrency($patrimonioBruto);
         return $this->render('index', [
                     'dadosCategoria' => $dadosCategoria,
                     'dadosAtivo' => $dadosAtivo,
@@ -139,6 +144,7 @@ class SiteController extends Controller {
                     'dadosAcoes' => $dadosAcaoes,
                     'patrimonioBruto' => $patrimonioBruto,
                     'valorCompra' => $valorCompra,
+                    'lucro_bruto'=> $lucro,
         ]);
     }
 
@@ -147,7 +153,7 @@ class SiteController extends Controller {
      */
     public function sincroniza() {
         $msg = '';
-        list($sincroniza) = Yii::$app->createController('sincronizar/index');
+        $sincroniza = new Sincroniza();
 
         list($resp, $msg) = $sincroniza->easy();
         if ($resp == false) {

@@ -108,8 +108,8 @@ $this->title = 'Patrimônio';
             <!-- Apply any bg-* class to to the icon to color it -->
             <span class="info-box-icon bg-yellow"><i class="fa fa-line-chart"></i></span>
             <div class="info-box-content">
-                <span class="info-box-text">Lucro</span>
-                <span class="info-box-number"><?= $valorCompra ?></span>
+                <span class="info-box-text">Lucro Bruto</span>
+                <span class="info-box-number"><?= $lucro_bruto ?></span>
             </div><!-- /.info-box-content -->
         </div><!-- /.info-box -->
     </div>
