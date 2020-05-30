@@ -4,13 +4,10 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Ativo;
-use app\models\AtivoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \app\models\Aporte;
-use app\lib\CajuiHelper;
-use \app\models\Operacao;
 use yii\data\ArrayDataProvider;
 
 /**
@@ -19,11 +16,10 @@ use yii\data\ArrayDataProvider;
 class AporteController extends Controller {
 
     const tomadaDescisao = 35; // define a porcentagem de patrimônio investido em renda variável
-    
+
     /**
      * {@inheritdoc}
      */
-    
     public function behaviors() {
         return [
             'verbs' => [
@@ -59,8 +55,8 @@ class AporteController extends Controller {
                 //investir em ações
                 $dados = $this->defineAporteAcoes($valorAcoes, $model);
             } else {
-                
-                $dados = [['Ativo' => 'Renda Fixa', 'Valor' => $model->valor,'Quantidade'=>1]];
+
+                $dados = [['Ativo' => 'Renda Fixa', 'Valor' => $model->valor, 'Quantidade' => 1]];
             }
         }
         $provider = new ArrayDataProvider([
@@ -70,7 +66,6 @@ class AporteController extends Controller {
                   'attributes' => ['id', 'name'],
                   ], */
         ]);
-        //$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
                     'model' => $model,
@@ -96,19 +91,12 @@ class AporteController extends Controller {
         $dados = [];
         $contTotal = 0;
         foreach ($totalAtivosAcoes as $ativo) {
-            if(in_array($ativo->id, $vetAtivos)){
+            if (in_array($ativo->id, $vetAtivos)) {
                 continue;
             }
-            if($valorIndividual<=$ativo->valor_bruto){
+            if ($valorIndividual <= $ativo->valor_bruto) {
                 continue;
             }
-            /*if (!empty($model->ativo)) {
-                foreach ($model->ativo as $ativo_id) {
-                    if ($ativo_id == $ativo->id) {
-                        continue 2;
-                    }
-                }
-            }*/
             $valorUnitario = $ativo->valor_bruto / $ativo->quantidade;
             $valorInserir = $valorIndividual - $ativo->valor_bruto;
             $valorRestante = ($model->valor - $contTotal);
@@ -126,11 +114,12 @@ class AporteController extends Controller {
             //exit();
             $sobra = ($model->valor - $contTotal);
             $valorUnitario = $totalAtivosAcoes[0]->valor_bruto / $totalAtivosAcoes[0]->quantidade;
-            $dados[0]['Quantidade']+= intval($sobra / $valorUnitario);
-            $dados[0]['Valor']+= $sobra ;
+            $dados[0]['Quantidade'] += intval($sobra / $valorUnitario);
+            $dados[0]['Valor'] += $sobra;
             // $dados[] = ['Ativo' => $totalAtivosAcoes[0]->codigo, 'Quantidade' => intval($sobra / $valorUnitario)];
         }
         return $dados;
+       
     }
 
     /**

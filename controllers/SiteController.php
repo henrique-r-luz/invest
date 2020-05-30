@@ -65,18 +65,23 @@ class SiteController extends Controller {
         $this->sincroniza();
 
         $totalPatrimonio = Ativo::find()
+                ->andWhere(['>', 'quantidade', 0])
                 ->sum('valor_bruto');
 
-        //gráfico por categorias
-        $dadosCategoria = [];
-        // foreach ($categorias as $id => $categoria) {
-        $this->montaGraficoCategoria(\app\lib\Categoria::RENDA_FIXA, $totalPatrimonio, 0, $dadosCategoria);
-        $this->montaGraficoCategoria(\app\lib\Categoria::RENDA_VARIAVEL, $totalPatrimonio, 1, $dadosCategoria);
         $ativos = Ativo::find()
                 ->orderBy(['valor_bruto' => SORT_DESC])
                 ->andWhere(['>', 'quantidade', 0])
                 ->all();
+
+        //gráfico por categorias
+        $dadosCategoria = [];
+        $this->graficoCategoria($totalPatrimonio, $dadosCategoria);
+
+        //gráfico por tipo
         $dadosAtivo = [];
+        $this->graficoTipo($ativos, $totalPatrimonio, $dadosTipo);
+
+        //grafico por ativo
         foreach ($ativos as $id => $ativo) {
             $fatia = [];
             $valorAtivo = $ativo->valor_liquido;
@@ -89,16 +94,6 @@ class SiteController extends Controller {
             $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . $id . ']');
             $dadosAtivo[] = $fatia;
         }
-        //gráfico por tipo
-        // $tipos = Tipo::find()->all();
-        $dadosTipo = [];
-        $this->montaGraficoTipo(\app\lib\Tipo::ACOES, $totalPatrimonio, 0, $dadosTipo);
-        $this->montaGraficoTipo(\app\lib\Tipo::CDB, $totalPatrimonio, 1, $dadosTipo);
-        $this->montaGraficoTipo(\app\lib\Tipo::DEBENTURES, $totalPatrimonio, 2, $dadosTipo);
-        $this->montaGraficoTipo(\app\lib\Tipo::FUNDOS_INVESTIMENTO, $totalPatrimonio, 3, $dadosTipo);
-        $this->montaGraficoTipo(\app\lib\Tipo::TESOURO_DIRETO, $totalPatrimonio, 4, $dadosTipo);
-        $this->montaGraficoTipo(\app\lib\Tipo::Criptomoeda, $totalPatrimonio, 5, $dadosTipo);
-
         //gráfico de ações ações
         $dadosAcoes = [];
         $acoes = Ativo::find()
@@ -125,12 +120,12 @@ class SiteController extends Controller {
 
         //patrimônio bruto total
         $patrimonioBruto = Ativo::find()
-                ->andWhere(['ativo'=>true])
+                ->andWhere(['ativo' => true])
                 ->sum('valor_bruto');
         //valor de compra
         $valorCompra = Ativo::find()
                 ->sum('valor_compra');
-        $lucro = $patrimonioBruto-$valorCompra;
+        $lucro = $patrimonioBruto - $valorCompra;
         $formatter = \Yii::$app->formatter;
         $lucro = $formatter->asCurrency($lucro);
         $formatter = \Yii::$app->formatter;
@@ -144,8 +139,26 @@ class SiteController extends Controller {
                     'dadosAcoes' => $dadosAcaoes,
                     'patrimonioBruto' => $patrimonioBruto,
                     'valorCompra' => $valorCompra,
-                    'lucro_bruto'=> $lucro,
+                    'lucro_bruto' => $lucro,
         ]);
+    }
+
+    private function graficoCategoria($totalPatrimonio, &$dadosCategoria) {
+        $this->montaGraficoCategoria(\app\lib\Categoria::RENDA_FIXA, $totalPatrimonio, 0, $dadosCategoria);
+        $this->montaGraficoCategoria(\app\lib\Categoria::RENDA_VARIAVEL, $totalPatrimonio, 1, $dadosCategoria);
+    }
+
+    private function graficoTipo($ativos, $totalPatrimonio, &$dadosTipo) {
+
+
+        // $tipos = Tipo::find()->all();
+        $dadosTipo = [];
+        $this->montaGraficoTipo(\app\lib\Tipo::ACOES, $totalPatrimonio, 0, $dadosTipo);
+        $this->montaGraficoTipo(\app\lib\Tipo::CDB, $totalPatrimonio, 1, $dadosTipo);
+        $this->montaGraficoTipo(\app\lib\Tipo::DEBENTURES, $totalPatrimonio, 2, $dadosTipo);
+        $this->montaGraficoTipo(\app\lib\Tipo::FUNDOS_INVESTIMENTO, $totalPatrimonio, 3, $dadosTipo);
+        $this->montaGraficoTipo(\app\lib\Tipo::TESOURO_DIRETO, $totalPatrimonio, 4, $dadosTipo);
+        $this->montaGraficoTipo(\app\lib\Tipo::Criptomoeda, $totalPatrimonio, 5, $dadosTipo);
     }
 
     /**
@@ -177,7 +190,6 @@ class SiteController extends Controller {
                 'mensagem' => 'A Cotação açoes não foram atualizados !</br>' . $msg,
                 'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
         }
-     
     }
 
     private function montaGraficoCategoria($categoria, $totalPatrimonio, $cor, &$dadosCategoria) {

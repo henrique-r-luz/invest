@@ -62,7 +62,7 @@ $this->title = 'Patrimônio';
                     //'width' => 300
                     ],
                     'title' => [
-                        'text' => 'Patrimônio po Tipo',
+                        'text' => 'Patrimônio por Tipo',
                     ],
                     'series' => [
                         [
