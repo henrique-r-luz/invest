@@ -53,7 +53,7 @@ $daterange = [
             ],
             [
                 'attribute' => 'quantidade',
-                'format' => 'decimal',
+                //'format' => 'number',
                 'pageSummary' => function ($summary, $data, $widget)use($dataProvider) {
                     $quantidade = 0;
                     $objetos = $dataProvider->models;
