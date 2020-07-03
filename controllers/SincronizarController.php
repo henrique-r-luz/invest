@@ -31,6 +31,10 @@ class SincronizarController extends Controller {
     public function actionSincroniza() {
         $sicroniza = new Sincroniza();
         $erro = '';
+        
+         if (Yii::$app->request->post('but') == 'backup') {
+             $this->executaBackup();
+         }
         if (Yii::$app->request->post('but') == 'cotacao_empresa') {
             list($resp, $msg) = $sicroniza->cotacaoAcao();
             $erro .= $msg;
@@ -73,6 +77,14 @@ class SincronizarController extends Controller {
                 return $this->render('index');
             }
         }
+    }
+    
+    /**
+     * Faz backup do banco de dados do sistema
+     */
+    private function executaBackup(){
+       $cmd =  'sudo -u postgres pg_dump investimento  > /vagrant/invest/back/investimento_'.date("YmdHis").'.sql';
+      // echo $cmd;
     }
 
     
