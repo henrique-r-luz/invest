@@ -20,7 +20,7 @@ $this->title = 'Sincroniza Dados';
 
 
         <div class="form-group">
-            <?= Html::submitButton('Cotação Ação', ['class' => 'btn btn-success', 'name' => 'but', 'value' => 'cotacao_empresa']) ?>
+            <?= Html::submitButton('Backup Dados', ['class' => 'btn btn-warning', 'name' => 'but', 'value' => 'backup']) ?>
             <?= Html::submitButton('Cotação Titulo', ['class' => 'btn btn-success', 'name' => 'but', 'value' => 'titulo']) ?>
             <?= Html::submitButton('Empresas da bolsa site Eduardo', ['id' => 'empresa_id', 'class' => 'btn btn-success', 'name' => 'but', 'value' => 'empresa']) ?>
             <?= Html::submitButton('Dados da bolsa site Eduardo', ['id' => 'dados_empresa_id', 'class' => 'btn btn-success', 'name' => 'but', 'value' => 'dados_empresa']) ?>
