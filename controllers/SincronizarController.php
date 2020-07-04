@@ -8,7 +8,6 @@
 
 namespace app\controllers;
 
-
 use app\lib\componentes\ExecutaBack;
 use \app\models\Sincroniza;
 use Yii;
@@ -31,10 +30,10 @@ class SincronizarController extends Controller {
     public function actionSincroniza() {
         $sicroniza = new Sincroniza();
         $erro = '';
-        
-         if (Yii::$app->request->post('but') == 'backup') {
-             $this->executaBackup();
-         }
+
+        if (Yii::$app->request->post('but') == 'backup') {
+            return $this->executaBackup();
+        }
         if (Yii::$app->request->post('but') == 'cotacao_empresa') {
             list($resp, $msg) = $sicroniza->cotacaoAcao();
             $erro .= $msg;
@@ -78,15 +77,26 @@ class SincronizarController extends Controller {
             }
         }
     }
-    
+
     /**
      * Faz backup do banco de dados do sistema
      */
-    private function executaBackup(){
-       $cmd =  'sudo -u postgres pg_dump investimento  > /vagrant/invest/back/investimento_'.date("YmdHis").'.sql';
-      // echo $cmd;
+    private function executaBackup() {
+        $dump = '/vagrant/invest/back/investimento_' . date("YmdHis") . '.sql';
+        $cmd = 'sudo -u postgres pg_dump investimento  > ' . $dump;
+        $resp = shell_exec($cmd);
+        if ($resp == null) {
+            if (file_exists($dump)) {
+                Yii::$app->session->setFlash('success', 'O Backup realizado com sucesso!');
+                return $this->render('index');
+            } else {
+                Yii::$app->session->setFlash('danger', 'O arquivo não foi criado.');
+                return $this->render('index'); 
+            }
+        } else {
+            Yii::$app->session->setFlash('danger', 'Erro ao realizar backup.');
+            return $this->render('index');
+        }
     }
-
-    
 
 }
