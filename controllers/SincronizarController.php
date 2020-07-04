@@ -85,7 +85,7 @@ class SincronizarController extends Controller {
         $dump = '/vagrant/invest/back/investimento_' . date("YmdHis") . '.sql';
         $cmd = 'sudo -u postgres pg_dump investimento  > ' . $dump;
         $resp = shell_exec($cmd);
-        if ($resp == null) {
+        if (empty($resp)) {
             if (file_exists($dump)) {
                 Yii::$app->session->setFlash('success', 'O Backup realizado com sucesso!');
                 return $this->render('index');
