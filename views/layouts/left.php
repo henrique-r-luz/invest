@@ -39,7 +39,7 @@
                                 ['label' => 'Empresas Bolsa', 'icon' => 'building', 'url' => ['/acao-bolsa']],
                                 ['label' => 'Balanço', 'icon' => 'clipboard', 'url' => ['/balanco-empresa-bolsa']],
                                 ['label' => 'Sincronizar', 'icon' => 'rotate-left', 'url' => ['/sincronizar']],
-                                ['label' => 'Aporte', 'icon' => 'balance-scale', 'url' => ['/aporte']],
+                                
                                
                             ],
                         ],
@@ -48,7 +48,8 @@
                             'icon' => 'file',
                             'url' => '#',
                             'items' => [
-                                ['label' => 'Aportes por tempo', 'icon' => 'balance-scale', 'url' => ['/relatorio/relatorio-aporte']],
+                                ['label' => 'Filtro Empresas', 'icon' => 'filter', 'url' => ['/analise-empresa']],
+                                ['label' => 'Aporte', 'icon' => 'balance-scale', 'url' => ['/aporte']],
                             ],
                         ],
                     ],
