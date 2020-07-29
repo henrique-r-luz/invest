@@ -20,7 +20,7 @@ use yii\helpers\ArrayHelper;
                 <?php
                 $form = ActiveForm::begin([
                             'action' => ['index'],
-                            'method' => 'post',
+                            'method' => 'get',
                 ]);
                 ?>
                 <div class="col-xs-12 col-lg-12 no-padding">

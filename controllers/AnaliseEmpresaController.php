@@ -39,22 +39,16 @@ class AnaliseEmpresaController extends Controller {
      */
     public function actionIndex() {
         $filtroServico = new FiltroEmpresaService();
-        
-         $provider = new ArrayDataProvider([
-          // 'allModels' => $dados,
-          'pagination' => false
-          ]); 
-
-        if ($filtroServico->load(Yii::$app->request->post())) {
-
-            $provider = new ArrayDataProvider([
-                'allModels' => $filtroServico->filtraAguiaConservador(),
-                'pagination' => false
-            ]);
-        }
-
+        $filtroServico->load(Yii::$app->request->get());
+        $provider = new ArrayDataProvider([
+            'allModels' => $filtroServico->fabricaFiltro(Yii::$app->request->queryParams),
+            'pagination' => [
+                'pageSize' => 30,
+            ],
+        ]);
         return $this->render('index', [
                     'model' => $filtroServico->getFiltroEmpresa(),
+                    'searchModel' => $filtroServico->getFiltroEmpresaDados(),
                     'provaider' => $provider,
         ]);
     }

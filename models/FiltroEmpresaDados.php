@@ -13,18 +13,20 @@ namespace app\models;
  *
  * @author henrique
  */
-class FiltroEmpresa extends \yii\base\Model {
+class FiltroEmpresaDados extends \yii\base\Model {
     //put your code here
     //id do filtro 
-    public $id;
     
-  
+    public $cnpj;
+    public $codigo;
+    public $nome;
+    public $setor;
     
      public function rules()
     {
         return [
-            [['id'], 'required'],
-           
+            [['cnpj','nome','setor','codigo'], 'safe'],
+            [['id','cnpj','codigo','nome','setor'], 'string'],
             
         ];
     }
@@ -32,16 +34,23 @@ class FiltroEmpresa extends \yii\base\Model {
     public function attributeLabels()
     {
         return [
-            'id'    => 'Filtra Empresas',
            
+            'codigo'=>'Código',
+            'cnpj'=>'CNPJ',
+            'nome'=>'Nome',
+            'setor'=>'Setor'
             ];
     }
 
     public function attributeComments()
     {
         return [
-              'id'    => 'Filtro',
-                
+           
+              'codigo'=>'Código',
+              'cnpj'=>'CNPJ',
+              'nome'=>'Nome',
+              'setor'=>'Setor'
+             
         ];
     }
 }

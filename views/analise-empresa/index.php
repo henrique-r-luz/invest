@@ -1,29 +1,34 @@
 <?php
 
+use app\models\TipoSearch;
+use kartik\grid\GridView;
+use yii\data\ActiveDataProvider;
+use yii\web\View;
+use yii\widgets\Pjax;
 use yii\helpers\Html;
-use \kartik\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\TipoSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $this View */
+/* @var $searchModel TipoSearch */
+/* @var $dataProvider ActiveDataProvider */
 
 $this->title = 'Filtro Empresas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tipo-index">
     <?= $this->render('_search', ['model' => $model]) ?> 
-
-    <?php if (isset($model->id)): ?>
+  
+        <?php Pjax::begin() ?>
+        
         <?=
         GridView::widget([
             'dataProvider' => $provaider,
-            //'filterModel' => $searchModel,
+            'filterModel' => $searchModel,
+          //  'pjax'=>true,
             'columns' => [
-               'cnpj',
-               'codigo',
-               'nome',
-               'setor',
-               
+                'cnpj',
+                'codigo',
+                'nome',
+                'setor',
             ],
             'panel' => [
                 'type' => GridView::TYPE_DEFAULT,
@@ -34,5 +39,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]);
         ?>
-    <?php endif; ?>
+        <?php Pjax::end() ?>
+   
 </div>
