@@ -41,7 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'valor_liquido',
             'tipo',
             'categoria',
-             'ativo'
+             'ativo',
+             'pais'   
             ],
             ]) ?>
 

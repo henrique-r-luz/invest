@@ -23,9 +23,6 @@ use Yii;
 class FiltroEmpresaService {
 
     //put your code here
-
-    private $empresasBolsa;
-    private $empresas;
     private $filtroEmpresa;
     private $filtroEmpresaDados;
 

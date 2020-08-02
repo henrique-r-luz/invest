@@ -42,7 +42,7 @@ class AcaoBolsa extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'cnpj'=>'Cnpj',
+            'cnpj'=>'Registro Empresa (CPNJ,IRS)',
             'id' => 'ID',
             'nome' => 'Nome',
             'codigo' => 'Código',

@@ -42,7 +42,7 @@ class Ativo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'codigo', 'tipo', 'categoria','ativo'], 'required'],
+            [['nome', 'codigo', 'tipo', 'categoria','ativo','pais'], 'required'],
             [['nome', 'codigo','categoria','tipo'], 'string'],
             [['quantidade'], 'default', 'value' => null],
             [['acao_bolsa_id'], 'integer'],
@@ -70,7 +70,8 @@ class Ativo extends \yii\db\ActiveRecord
             'tipo' => 'Tipo',
             'categoria' => 'Categoria',
             'ativo'=>'Ativo',
-            'acao_bolsa_id'=>'Empresas'
+            'acao_bolsa_id'=>'Empresas',
+            'pais'=>'País'
         ];
     }
     

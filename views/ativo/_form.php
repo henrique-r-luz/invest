@@ -7,6 +7,7 @@ use kartik\widgets\Select2;
 use app\models\Categoria;
 use yii\helpers\ArrayHelper;
 use app\models\Tipo;
+use app\lib\Pais;
 use kartik\number\NumberControl;
 
 /* @var $this yii\web\View */
@@ -19,10 +20,12 @@ use kartik\number\NumberControl;
         <div class="ativo-form">
             <?php $form = ActiveForm::begin(); ?>
             <div class="col-xs-12 col-lg-12 no-padding">
-                <div class="col-xs-4 col-sm-4 col-lg-4">
+                <div class="col-xs-12 col-sm-12 col-lg-12">
                     <?= $form->field($model, 'nome')->textInput() ?>
-                </div>
-                <div class="col-xs-2 col-sm-2 col-lg-2">
+                </div> 
+            </div>
+            <div class="col-xs-12 col-lg-12 no-padding">
+                <div class="col-xs-4 col-sm-4 col-lg-4">
                     <?= $form->field($model, 'codigo')->textInput() ?>
                 </div>
                  <div class="col-xs-4 col-sm-4 col-lg-4">
@@ -35,6 +38,16 @@ use kartik\number\NumberControl;
                         ],
                     ]);
                     ?>
+                </div>
+                 <div class="col-xs-2 col-sm-2 col-lg-2">
+                    <?=  $form->field($model, 'pais')->widget(Select2::classname(), [
+                        //'data' => ArrayHelper::map(Tipo::find()->asArray()->all(), 'id', 'nome'),
+                        'data' => \app\lib\Pais::all(),
+                        'options' => ['placeholder' => 'País'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]); ?>
                 </div>
                   <div class="col-xs-2 col-sm-2 col-lg-2">
                     <?=

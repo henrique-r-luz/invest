@@ -25,19 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'codigo',
             'nome:ntext',
             'setor:ntext',
-            'rank_ano',
-            'rank_trimestre',
-           // 'data_atualizacao_rank',
-            [
-                'attribute' => 'habilita_rank',
-                'value' => function($model) {
-                    if ($model->habilita_rank == true) {
-                        return 'Sim';
-                    } else {
-                        return 'Não';
-                    }
-                },
-            ],
 
         ['class' => 'yii\grid\ActionColumn'],
         ],
@@ -46,9 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
         //'heading' => true,
         ],
         'toolbar' => [
-            [
-                'content' => Html::a('<i class="fa fa-sort-amount-desc" ></i> Rank', ['rank'], ['class' => 'btn btn-info', 'title' => 'Rank'])
-            ],
             [
                 'content' => Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])
             ],
