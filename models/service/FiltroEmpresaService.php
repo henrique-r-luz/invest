@@ -48,7 +48,7 @@ class FiltroEmpresaService {
         if (!empty($this->filtroEmpresa)) {
             switch ($this->filtroEmpresa->id) {
                 case TipoFiltro::AGUIA_CONSERVADOR:
-                   return $this->filtraAguiaConservador($params);
+                    return $this->filtraAguiaConservador($params);
                 case 1:
                     echo "i equals 1";
                     break;
@@ -63,30 +63,68 @@ class FiltroEmpresaService {
     /**
      * Filtra empresas com a técnica do investidor Aguia.
      * de forma conservadora.  
-     * 
      * Deve retornar um array()
      */
     public function filtraAguiaConservador($params) {
-        $anoInicial = '2008';
+      
+        $dataNow = date('Y');
+        $anoInicial = $dataNow-11;
         $contAnosBolsa = 10;
+        $magenLiquidaMinima = 10;
+        $dividaPorEdita = 3;
+        $maximoCaixaNegativo = 2;
         $carregaGrid = $this->loadDadosGrid($params);
+        
+        
+        //Filtro patrimonais
+        $tempoBolsa = BalancoEmpresaBolsa::find()
+                ->select(['codigo', 'count(codigo)'])
+                ->andWhere(['trimestre' => false])
+                ->andWhere([">=", "split_part(data, '-', 1)", $anoInicial])
+                ->groupBy(['codigo'])
+                ->having(['<', 'count(codigo)', $contAnosBolsa]);
 
+        $tempoBolsaCodigo = (new \yii\db\Query())
+                ->select(['codigo'])
+                ->from(['tempoBolsa'=>$tempoBolsa]);
+        
+        $contaFclCapexNegativo = BalancoEmpresaBolsa::find()
+                ->select(['codigo'])
+                ->where(['<', 'fcl_capex', 0])
+                ->andWhere(['trimestre' => false])
+                ->andWhere([">=", "split_part(data, '-', 1)", $anoInicial])
+                ->groupBy(['codigo'])
+                ->having(['<=', 'count(codigo)', $maximoCaixaNegativo]);
+        
+         $FclCapexNegativo = BalancoEmpresaBolsa::find()
+                ->select(['codigo'])
+                ->where(['<', 'fcl_capex', 0])
+                ->andWhere(['trimestre' => false])
+                ->andWhere([">=", "split_part(data, '-', 1)", $anoInicial])
+                ->andWhere(['not in', 'acao_bolsa.codigo',  $contaFclCapexNegativo]);
 
         $lucroNegativo = BalancoEmpresaBolsa::find()
                 ->select(['codigo'])
                 ->where(['<=', 'lucro_liquido', 0])
                 ->andWhere(['trimestre' => false])
                 ->andWhere([">=", "split_part(data, '-', 1)", $anoInicial]);
+        
+         $ebitidaNegativo = BalancoEmpresaBolsa::find()
+                ->select(['codigo'])
+                ->where(['<=', 'ebitda', 0])
+                ->andWhere(['trimestre' => false])
+                ->andWhere([">=", "split_part(data, '-', 1)", $anoInicial]);
 
         $removeEmpresasComDivida = BalancoEmpresaBolsa::find()
                 ->select(['codigo'])
-                ->where(['>', 'divida_liquida_ebitda', 3])
+                ->where(['>=', 'divida_liquida_ebitda', $dividaPorEdita])
                 ->andWhere([">=", "split_part(data, '-', 1)", $anoInicial])
                 ->andWhere(['trimestre' => false]);
 
-        $removeBasileiaRuim = BalancoEmpresaBolsa::find()
+        
+        $removeMargemLiquidaPequena = BalancoEmpresaBolsa::find()
                 ->select(['codigo'])
-                ->where(['<', 'indice_basileia', 11])
+                ->where(['<', 'margem_liquida', $magenLiquidaMinima])
                 ->andWhere([">=", "split_part(data, '-', 1)", $anoInicial])
                 ->andWhere(['trimestre' => false]);
 
@@ -94,27 +132,34 @@ class FiltroEmpresaService {
                 ->select(['acao_bolsa.codigo', 'acao_bolsa.nome', 'cnpj', 'setor'])
                 ->distinct()
                 ->innerJoin('acao_bolsa', 'acao_bolsa.codigo = balanco_empresa_bolsa.codigo');
+        
+        
+       
 
         if (!empty($this->filtroEmpresa->id)) {
             $filtro->where(['not in', 'acao_bolsa.codigo', $lucroNegativo])
                     ->andWhere(['not in', 'acao_bolsa.codigo', $removeEmpresasComDivida])
-                    ->andWhere(['not in', 'acao_bolsa.codigo', $removeBasileiaRuim]);
+                    ->andWhere(['not in', 'acao_bolsa.codigo', $ebitidaNegativo])
+                    ->andWhere(['not in', 'acao_bolsa.codigo',  $tempoBolsaCodigo])
+                    ->andWhere(['not in','acao_bolsa.codigo',$removeMargemLiquidaPequena])
+                    ->andWhere(['not in', 'acao_bolsa.codigo', $FclCapexNegativo])
+                    ->andWhere(['not ilike', 'acao_bolsa.setor', new \yii\db\Expression("'%banco%'")]);// remove bancos
+                    
         }
-                
-        
-        if($carregaGrid){
-           $filtro->andFilterWhere(['ilike', 'acao_bolsa.cnpj', $this->filtroEmpresaDados->cnpj]);
-           $filtro->andFilterWhere(['ilike', 'acao_bolsa.codigo', $this->filtroEmpresaDados->codigo]);
-           $filtro->andFilterWhere(['ilike', 'acao_bolsa.nome', $this->filtroEmpresaDados->nome]);
-           $filtro->andFilterWhere(['ilike', 'acao_bolsa.setor', $this->filtroEmpresaDados->setor]);
+
+
+        if ($carregaGrid) {
+            $filtro->andFilterWhere(['ilike', 'acao_bolsa.cnpj', $this->filtroEmpresaDados->cnpj]);
+            $filtro->andFilterWhere(['ilike', 'acao_bolsa.codigo', $this->filtroEmpresaDados->codigo]);
+            $filtro->andFilterWhere(['ilike', 'acao_bolsa.nome', $this->filtroEmpresaDados->nome]);
+            $filtro->andFilterWhere(['ilike', 'acao_bolsa.setor', $this->filtroEmpresaDados->setor]);
         }
-                
+
         return $filtro->asArray()->all();
 
-       
 
-        // echo $filtro->createCommand()->getRawSql();
-        //  exit();
+
+     
     }
 
     function getFiltroEmpresa() {
