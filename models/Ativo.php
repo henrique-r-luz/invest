@@ -17,17 +17,16 @@ use Yii;
  * @property int $tipo_id
  * @property int $categoria_id
  */
-class Ativo extends \yii\db\ActiveRecord
-{
+class Ativo extends \yii\db\ActiveRecord {
+
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'public.ativo';
     }
-    
-      /**
+
+    /**
      * {@inheritdoc}
      */
     public function transactions() {
@@ -39,26 +38,24 @@ class Ativo extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['nome', 'codigo', 'tipo', 'categoria','ativo','pais'], 'required'],
-            [['nome', 'codigo','categoria','tipo'], 'string'],
+            [['nome', 'codigo', 'tipo', 'categoria', 'ativo', 'pais'], 'required'],
+            [['nome', 'codigo', 'categoria', 'tipo'], 'string'],
             [['quantidade'], 'default', 'value' => null],
             [['acao_bolsa_id'], 'integer'],
-            [['categoria'],'string'],
-            [['ativo'],'boolean'],
-            [['valor_compra', 'valor_bruto', 'valor_liquido','quantidade'], 'number'],
-           // [['categoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['categoria_id' => 'id']],
-            //[['tipo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tipo::className(), 'targetAttribute' => ['tipo_id' => 'id']],
+            [['categoria'], 'string'],
+            [['ativo'], 'boolean'],
+            [['valor_compra', 'valor_bruto', 'valor_liquido', 'quantidade'], 'number'],
+                // [['categoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['categoria_id' => 'id']],
+                //[['tipo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tipo::className(), 'targetAttribute' => ['tipo_id' => 'id']],
         ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'nome' => 'Nome',
@@ -69,53 +66,62 @@ class Ativo extends \yii\db\ActiveRecord
             'valor_liquido' => 'Valor Liquido',
             'tipo' => 'Tipo',
             'categoria' => 'Categoria',
-            'ativo'=>'Ativo',
-            'acao_bolsa_id'=>'Empresas',
-            'pais'=>'País'
+            'ativo' => 'Ativo',
+            'acao_bolsa_id' => 'Empresas',
+            'pais' => 'País'
         ];
     }
-    
-    public static function lucroPrejuizo(){
-      $valorCompra = Ativo::find()
-                     ->sum(['valor_compra']);
-      $valorLiquido = Ativo::find()
-                     ->sum(['valor_liquido']);
-      return $valorLiquido - $valorCompra;
-                       
-                              
+
+    public static function lucroPrejuizo() {
+        $valorCompra = Ativo::find()
+                ->sum(['valor_compra']);
+        $valorLiquido = Ativo::find()
+                ->sum(['valor_liquido']);
+        return $valorLiquido - $valorCompra;
     }
-    
-       /**
+
+    /**
      * @return ActiveQuery
      */
     public function getTipo() {
-        return $this->hasOne(Tipo::class, ['id'=>'tipo_id']);
+        return $this->hasOne(Tipo::class, ['id' => 'tipo_id']);
     }
-    
 
-    
     /**
      * @return ActiveQuery
      */
     public function getOperacao() {
-        return $this->hasMany(Operacao::class, ['ativo_id'=>'id']);
+        return $this->hasMany(Operacao::class, ['ativo_id' => 'id']);
     }
-    
-     public function getAcaoBolsa() {
-        return $this->hasOne(AcaoBolsa::class, ['id'=>'acao_bolsa_id']);
+
+    public function getAcaoBolsa() {
+        return $this->hasOne(AcaoBolsa::class, ['id' => 'acao_bolsa_id']);
     }
-    
+
     public function beforeSave($insert) {
-        if($this->quantidade<=0){
+        
+        if ($this->quantidade <= 0) {
             $this->valor_compra = 0;
-            $this->valor_bruto=0;
+            $this->valor_bruto = 0;
             $this->valor_liquido = 0;
         }
-       return  parent::beforeSave($insert);
+        return parent::beforeSave($insert);
     }
-    
+
     public function afterSave($insert, $changedAttributes) {
         //atualiza preço
         parent::afterSave($insert, $changedAttributes);
     }
+
+    public static function valorCambio($ativo,$valor) {
+        $sicroniza = new Sincroniza();
+        $cambio = $sicroniza->cotacaoCambio();
+        if ($ativo->pais == \app\lib\Pais::US) {
+           return $valor* floatval($cambio['dollar']);
+            //exit();
+            return    $valor* floatval($cambio['dollar']);
+        }
+        return $valor;
+    }
+
 }

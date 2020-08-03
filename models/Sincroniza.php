@@ -18,6 +18,8 @@ class Sincroniza extends \yii\base\Model
 {
     
     public function cotacaoAcao() {
+        $cambio = $this->cotacaoCambio();
+      
         $contErro = 0;
         $erros = '';
         $file = Yii::$app->params['bot'].'/preco_acao.csv';
@@ -32,17 +34,15 @@ class Sincroniza extends \yii\base\Model
         unset($csv[0]);
         foreach ($csv as $acoe) {
             $ativo = Ativo::findOne($acoe['id']);
-//$output = shell_exec("/home/vagrant/anaconda3/bin/python3.6 /vagrant/bot/acao.py " . $acoe . " 2>&1");
             $valor = str_replace('.', '', $acoe['valor']);
             $valor = str_replace(',', '.', $valor);
+            $valor = Ativo::valorCambio($ativo, $valor);
            
             $lucro = ($valor * $ativo->quantidade);
             $ativo->valor_bruto = $lucro;
             $ativo->valor_liquido = $lucro;
-            if ($ativo->valor_compra <= 0 && $ativo->quantidade > 0) {
-                $ativo->valor_compra = $ativo->valor_bruto;
-            }
-
+          
+            
             if (!$ativo->save()) {
                 $erros .= CajuiHelper::processaErros($ativo->getErrors()) . '</br>';
                 $contErro++;
@@ -53,6 +53,25 @@ class Sincroniza extends \yii\base\Model
         } else {
             return [false, 'erro:</br>' . $erros];
         }
+    }
+    
+    
+    public function cotacaoCambio(){
+        
+       
+        $file = Yii::$app->params['bot'].'/cambio.csv';
+        if (!file_exists($file)) {
+            throw new Exception("Não foi possível encontrar o arquivo de câmbio");
+        }
+        $csv = array_map('str_getcsv', file($file));
+        unset($csv[0]);
+       
+        $cambio = [];
+        foreach ($csv as $moeda) {
+           $cambio[$moeda[0]]=$moeda[1];
+        }
+        return $cambio;
+      
     }
 
     public function empresas() {

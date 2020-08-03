@@ -206,7 +206,7 @@ class Operacao extends ActiveRecord {
      * campos alterados quantidade e valor de compra
      * @return boolean
      */
-    public function alteraAtivo($ativo_id) {
+    private function alteraAtivo($ativo_id) {
 
         $ativo = Ativo::findOne($ativo_id);
         $ativo->quantidade = self::find()->where(['ativo_id' => $ativo_id])
@@ -221,16 +221,15 @@ class Operacao extends ActiveRecord {
             $ativo->valor_bruto = 0;
             $ativo->valor_liquido = 0;
         } else {
-
-            $ativo->valor_compra = self::find()->where(['ativo_id' => $ativo_id])
+            
+            $ativo->valor_compra = (self::find()->where(['ativo_id' => $ativo_id])
                             ->andWhere(['tipo' => 1])//compra
                             ->sum('valor') -
                             self::find()->where(['ativo_id' => $ativo_id])
                             ->andWhere(['tipo' => 0])//venda
-                            ->sum('valor');
+                            ->sum('valor'));
         }
-
-
+      
         if ($ativo->save()) {
             return true;
         } else {
@@ -238,6 +237,13 @@ class Operacao extends ActiveRecord {
             Yii::$app->session->setFlash('danger', 'Erro ao salvar ativo!</br>' . $erro);
             return false;
         }
+    }
+    
+    
+    public function getValorCambio(){
+       
+        return Ativo::valorCambio($this->ativo, $this->valor);
+       
     }
 
 }

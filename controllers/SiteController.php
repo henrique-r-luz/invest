@@ -123,13 +123,18 @@ class SiteController extends Controller {
                 ->andWhere(['ativo' => true])
                 ->sum('valor_bruto');
         //valor de compra
-        $valorCompra = Ativo::find()
-                ->sum('valor_compra');
-        $lucro = $patrimonioBruto - $valorCompra;
+        $valorCompras = Ativo::find()->all();
+        $somaCompra = 0;
+        foreach($valorCompras as $compra){
+           $somaCompra+= Ativo::valorCambio($compra,$compra->valor_compra);
+        }
+              
+      
+        $lucro = $patrimonioBruto - $somaCompra;
         $formatter = \Yii::$app->formatter;
         $lucro = $formatter->asCurrency($lucro);
         $formatter = \Yii::$app->formatter;
-        $valorCompra = $formatter->asCurrency($valorCompra);
+        $valorCompra = $formatter->asCurrency($somaCompra);
         $formatter = \Yii::$app->formatter;
         $patrimonioBruto = $formatter->asCurrency($patrimonioBruto);
         return $this->render('index', [

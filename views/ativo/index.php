@@ -36,6 +36,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'quantidade',
             [
                 'attribute' => 'valor_compra',
+                'value' => function($model){
+                    return app\models\Ativo::valorCambio($model, $model->valor_compra);
+                },
                 'format' => 'currency',
                 'pageSummary' => true,
             ],

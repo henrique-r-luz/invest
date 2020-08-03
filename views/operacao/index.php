@@ -66,6 +66,9 @@ $daterange = [
             [
                 'attribute' => 'valor',
                 'format' => 'currency',
+                'value'=> function($model) {
+                    return $model->getValorCambio();
+                },
                 'pageSummary' => function ($summary, $data, $widget)use($dataProvider) {
                     //var_dump($dataProvider);
                     // print_r($dataProvider->models);
@@ -74,10 +77,10 @@ $daterange = [
                     foreach ($objetos as $operacao) {
                         if ($operacao->tipo == 0) {
                             //dinheiro entrando no meu bolso
-                            $total += $operacao->valor;
+                            $total += $operacao->getValorCambio();
                         } else {
                             //dinheiro saindo do meu bolso
-                            $total -= $operacao->valor;
+                            $total -= $operacao->getValorCambio();
                         }
                     }
                     if ($total < 0) {
