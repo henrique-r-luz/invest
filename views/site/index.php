@@ -48,7 +48,7 @@ $this->title = 'Patrimônio';
             ?>
         </div>
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-4">
         <div class="box box-info">
             <?=
             Highcharts::widget([
@@ -86,7 +86,47 @@ $this->title = 'Patrimônio';
             ?>
         </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-4">
+         <div class="box box-info">
+        <?=
+            Highcharts::widget([
+                'id' => 'grafico-pizza-pais',
+                'scripts' => [
+                    'modules/exporting',
+                ],
+                'options' => [
+                    'chart' => [
+                        'type' => 'pie',
+                    //'width' => 300
+                    ],
+                    'title' => [
+                        'text' => 'Patrimônio por país',
+                    ],
+                    'series' => [
+                        [
+                            'name' => 'Tipo',
+                            'data' => $dadosPais,
+                            //'size' => 300,
+                            'showInLegend' => true,
+                            'dataLabels' => [
+                                'enabled' => false,
+                                'format' => '<span style="font-size:13px">{point.name}: {point.y:f} %'
+                            ],
+                            'depth' => 100,
+                            'tooltip' => [
+                                'headerFormat' => '',
+                                'pointFormat' => '<span >{point.name}</span>: <b>{point.y:f} %</b> do Patrimônio<br/>'
+                            ],
+                        ],
+                    ],
+                ]
+            ])
+            ?>
+         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="info-box">
             <!-- Apply any bg-* class to to the icon to color it -->
             <span class="info-box-icon bg-green"><i class="fa  fa-usd "></i></span>
@@ -95,7 +135,8 @@ $this->title = 'Patrimônio';
                 <span class="info-box-number"> <?= $patrimonioBruto ?></span>
             </div><!-- /.info-box-content -->
         </div><!-- /.info-box -->
-
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="info-box">
             <!-- Apply any bg-* class to to the icon to color it -->
             <span class="info-box-icon bg-blue"><i class="fa fa-briefcase "></i></span>
@@ -104,6 +145,8 @@ $this->title = 'Patrimônio';
                 <span class="info-box-number"><?= $valorCompra ?></span>
             </div><!-- /.info-box-content -->
         </div><!-- /.info-box -->
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="info-box">
             <!-- Apply any bg-* class to to the icon to color it -->
             <span class="info-box-icon bg-yellow"><i class="fa fa-line-chart"></i></span>

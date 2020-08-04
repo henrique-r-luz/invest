@@ -80,7 +80,11 @@ class SiteController extends Controller {
         //gráfico por tipo
         $dadosAtivo = [];
         $this->graficoTipo($ativos, $totalPatrimonio, $dadosTipo);
-
+        
+        //grafico por País
+        $dadosPais = [];
+        $this->graficoPais($totalPatrimonio, $dadosPais);
+        
         //grafico por ativo
         foreach ($ativos as $id => $ativo) {
             $fatia = [];
@@ -122,13 +126,11 @@ class SiteController extends Controller {
         $patrimonioBruto = Ativo::find()
                 ->andWhere(['ativo' => true])
                 ->sum('valor_bruto');
+        
+         $somaCompra = Ativo::find()
+                ->andWhere(['ativo' => true])
+                ->sum('valor_compra');
         //valor de compra
-        $valorCompras = Ativo::find()->all();
-        $somaCompra = 0;
-        foreach($valorCompras as $compra){
-           $somaCompra+= Ativo::valorCambio($compra,$compra->valor_compra);
-        }
-              
       
         $lucro = $patrimonioBruto - $somaCompra;
         $formatter = \Yii::$app->formatter;
@@ -139,6 +141,7 @@ class SiteController extends Controller {
         $patrimonioBruto = $formatter->asCurrency($patrimonioBruto);
         return $this->render('index', [
                     'dadosCategoria' => $dadosCategoria,
+                    'dadosPais'=>$dadosPais,
                     'dadosAtivo' => $dadosAtivo,
                     'dadosTipo' => $dadosTipo,
                     'dadosAcoes' => $dadosAcaoes,
@@ -164,6 +167,11 @@ class SiteController extends Controller {
         $this->montaGraficoTipo(\app\lib\Tipo::FUNDOS_INVESTIMENTO, $totalPatrimonio, 3, $dadosTipo);
         $this->montaGraficoTipo(\app\lib\Tipo::TESOURO_DIRETO, $totalPatrimonio, 4, $dadosTipo);
         $this->montaGraficoTipo(\app\lib\Tipo::Criptomoeda, $totalPatrimonio, 5, $dadosTipo);
+    }
+    
+     private function graficoPais($totalPatrimonio, &$dadosPais) {
+        $this->montaGraficoPais(\app\lib\Pais::BR, $totalPatrimonio, 0, $dadosPais);
+        $this->montaGraficoPais(\app\lib\Pais::US, $totalPatrimonio, 1, $dadosPais);
     }
 
     /**
@@ -209,6 +217,21 @@ class SiteController extends Controller {
         }
         $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . $cor . ']');
         $dadosCategoria[] = $fatia;
+    }
+    
+    
+     private function montaGraficoPais($pais, $totalPatrimonio, $cor, &$dadosPais) {
+        $fatia = [];
+        $valorAtivoPais = Ativo::find()->where(['pais' => $pais])
+                ->sum('valor_bruto');
+        $fatia['name'] = $pais;
+        if ($totalPatrimonio == 0) {
+            $totalPatrimonio = 1;
+        } else {
+            $fatia['y'] = round((($valorAtivoPais / $totalPatrimonio) * 100));
+        }
+        $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . $cor . ']');
+        $dadosPais[] = $fatia;
     }
 
     private function montaGraficoTipo($tipo, $totalPatrimonio, $cor, &$dadosTipo) {

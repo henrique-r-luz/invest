@@ -20,7 +20,7 @@ class AtivoSearch extends Ativo
     {
         return [
             [['id', 'quantidade'], 'integer'],
-            [['nome', 'codigo','tipo','categoria'], 'safe'],
+            [['nome', 'codigo','tipo','categoria','pais'], 'safe'],
             [['valor_compra', 'valor_bruto', 'valor_liquido'], 'number'],
         ];
     }
@@ -73,6 +73,7 @@ class AtivoSearch extends Ativo
             'valor_liquido' => $this->valor_liquido,
             'tipo' => $this->tipo,
             'categoria' => $this->categoria,
+            'pais'=>$this->pais,
         ]);
 
         $query->andFilterWhere(['ilike', 'nome', $this->nome])

@@ -22,92 +22,88 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             [
-                'attribute' =>'id',
-                 'pageSummary' => 'EXTRATO FINANCEIRO',
+                'attribute' => 'id',
+                'pageSummary' => 'EXTRATO FINANCEIRO',
                 'pageSummaryOptions' => ['colspan' => 3],
                 'options' => ['style' => 'width:5%;'],
             ],
-
             [
                 'attribute' => 'codigo',
                 'value' => 'codigo',
-               
             ],
             'quantidade',
             [
                 'attribute' => 'valor_compra',
-                'value' => function($model){
-                    return app\models\Ativo::valorCambio($model, $model->valor_compra);
+                'value' => function($model) {
+                    return $model->valor_compra;//app\models\Ativo::valorCambio($model, $model->valor_compra);
                 },
                 'format' => 'currency',
                 'pageSummary' => true,
             ],
-
             [
                 'attribute' => 'valor_bruto',
                 'format' => 'currency',
                 'pageSummary' => true,
             ],
-
             [
-                'attribute' => 'valor_liquido',
-                'format' => 'currency',
-                'pageSummary' => true
-            ],
-            [
-                'filter'  => app\lib\Tipo::all(),
+                'filter' => app\lib\Tipo::all(),
                 'attribute' => 'tipo',
                 'label' => 'Tipo',
                 'value' => function($model) {
                     if (isset($model->acaoBolsa->setor)) {
                         return $model->tipo . ' (' . $model->acaoBolsa->setor . ')';
-                    }else{
+                    } else {
                         return $model->tipo;
                     }
                 },
                 'pageSummary' => function ($summary, $data, $widget)use($dataProvider) {
                     //var_dump($dataProvider);
-                   // print_r($dataProvider->models);
+                    // print_r($dataProvider->models);
                     $objetos = $dataProvider->models;
                     $lucro = 0;
                     $valorLiquidoAcao = 0;
                     $valorCompraAcao = 0;
                     $lucroAcao = 0;
-                    foreach ($objetos as $ativo){
+                    foreach ($objetos as $ativo) {
                         //renda fixa
-                        if($ativo->categoria== app\lib\Categoria::RENDA_FIXA){
-                            $lucro = $lucro+($ativo->valor_liquido-$ativo->valor_compra);
+                        if ($ativo->categoria == app\lib\Categoria::RENDA_FIXA) {
+                            $lucro = $lucro + ($ativo->valor_liquido - $ativo->valor_compra);
                         }
                         //ações
-                        if($ativo->tipo== \app\lib\Tipo::ACOES || $ativo->tipo== \app\lib\Tipo::Criptomoeda ){
-                          
-                            $valorLiquidoAcao = $valorLiquidoAcao+$ativo->valor_liquido;
-                            $valorCompraAcao = $valorCompraAcao+$ativo->valor_compra;          
+                        if ($ativo->tipo == \app\lib\Tipo::ACOES || $ativo->tipo == \app\lib\Tipo::Criptomoeda) {
+
+                            $valorLiquidoAcao = $valorLiquidoAcao + $ativo->valor_liquido;
+                            $valorCompraAcao = $valorCompraAcao + $ativo->valor_compra;
                         }
                     }
 
-                   //remove 15 % do lucro
-                    if(($valorLiquidoAcao-$valorCompraAcao)>0){
-                        $lucroAcao =(($valorLiquidoAcao-$valorCompraAcao)*0.85);
-                        
-                    }else{
-                        $lucroAcao = ($valorLiquidoAcao-$valorCompraAcao);
+                    //remove 15 % do lucro
+                    if (($valorLiquidoAcao - $valorCompraAcao) > 0) {
+                        $lucroAcao = (($valorLiquidoAcao - $valorCompraAcao) * 0.85);
+                    } else {
+                        $lucroAcao = ($valorLiquidoAcao - $valorCompraAcao);
                     }
-                    $lucro = $lucro+$lucroAcao;
-                    if($lucro>0){
+                    $lucro = $lucro + $lucroAcao;
+                    if ($lucro > 0) {
                         $color = 'green';
-                    }else{
-                         $color = 'red';
+                    } else {
+                        $color = 'red';
                     }
-                    return '<font color="'.$color.'">Lucro/Prejuízo: '.Yii::$app->formatter->asCurrency($lucro).'</font>';
+                    return '<font color="' . $color . '">Lucro/Prejuízo: ' . Yii::$app->formatter->asCurrency($lucro) . '</font>';
                 },
                 'pageSummaryOptions' => ['colspan' => 3],
             ],
             [
-                'filter'  => app\lib\Categoria::all(),
+                'filter' => app\lib\Categoria::all(),
                 'attribute' => 'categoria',
                 'label' => 'Categoria',
                 'value' => 'categoria',
+            ],
+            [
+                'filter' => \app\lib\Pais::all(),
+                'attribute' => 'pais',
+                'label' => 'País',
+                'value' => 'pais',
             ],
             ['class' => 'yii\grid\ActionColumn'],
         ],

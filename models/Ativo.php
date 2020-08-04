@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property string $nome
  * @property string $codigo
+ * @property string $pais
  * @property int $quantidade
  * @property double $valor_compra
  * @property double $valor_bruto

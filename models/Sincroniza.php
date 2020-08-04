@@ -41,7 +41,8 @@ class Sincroniza extends \yii\base\Model
             $lucro = ($valor * $ativo->quantidade);
             $ativo->valor_bruto = $lucro;
             $ativo->valor_liquido = $lucro;
-          
+            $valorCompra = Ativo::valorCambio($ativo,Operacao::find()->where(['ativo_id'=>$acoe['id']])->sum('valor'));
+            $ativo->valor_compra =$valorCompra; 
             
             if (!$ativo->save()) {
                 $erros .= CajuiHelper::processaErros($ativo->getErrors()) . '</br>';
