@@ -17,7 +17,7 @@ class BalancoEmpresaBolsaSearch extends BalancoEmpresaBolsa {
     public function rules() {
         return [
             [['id', 'margem_ebit', 'margem_liquida', 'roe', 'divida_bruta_patrimonio', 'fcl_capex', 'payout'], 'integer'],
-            [['data', 'codigo'], 'safe'],
+            [['data', 'codigo','trimestre'], 'safe'],
             [['patrimonio_liquido', 'receita_liquida', 'ebitda', 'da', 'ebit', 'resultado_financeiro', 'imposto', 'lucro_liquido', 'caixa', 'divida_bruta', 'divida_liquida', 'divida_liquida_ebitda', 'fco', 'capex', 'fcf', 'fcl', 'proventos', 'pdd', 'pdd_lucro_liquido', 'indice_basileia'], 'number'],
         ];
     }
@@ -44,9 +44,7 @@ class BalancoEmpresaBolsaSearch extends BalancoEmpresaBolsa {
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => [
-                'pageSize' => 10,
-            ],
+            'pagination' => false,
         ]);
 
         $this->load($params);
@@ -86,10 +84,14 @@ class BalancoEmpresaBolsaSearch extends BalancoEmpresaBolsa {
             'pdd' => $this->pdd,
             'pdd_lucro_liquido' => $this->pdd_lucro_liquido,
             'indice_basileia' => $this->indice_basileia,
+            'trimestre'=>$this->trimestre,
         ]);
 
         $query->andFilterWhere(['ilike', 'data', $this->data])
-                ->andFilterWhere(['ilike', 'codigo', $this->codigo]);
+               ->andFilterWhere(['ilike', 'codigo', $this->codigo])
+                ->orderBy(['data'=>SORT_ASC]);
+        
+       
 
         return $dataProvider;
     }

@@ -1,6 +1,9 @@
 <?php
 use yii\helpers\Html;
 
+//Icon::map($this);
+ // Maps the Elusive icon font framework
+
 /* @var $this \yii\web\View */
 /* @var $content string */
 

@@ -129,7 +129,7 @@ $this->title = 'Patrimônio';
     <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="info-box">
             <!-- Apply any bg-* class to to the icon to color it -->
-            <span class="info-box-icon bg-green"><i class="fa  fa-usd "></i></span>
+            <span class="info-box-icon bg-green"><i class="fa fa-usd "></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Valor Invest.</span>
                 <span class="info-box-number"> <?= $patrimonioBruto ?></span>

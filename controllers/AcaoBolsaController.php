@@ -6,6 +6,7 @@ use app\models\AcaoBolsa;
 use app\models\AcaoBolsaOperacao;
 use app\models\AcaoBolsaSearch;
 use app\models\BalancoEmpresaBolsaSearch;
+use \app\models\BalancoEmpresaBolsa;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -91,40 +92,21 @@ class AcaoBolsaController extends Controller {
                     'model' => $model,
         ]);
     }
-
-    /**
-     * define um rank para cada ação cadastrada
-     */
-    public function actionRank() {
-        //false=> monta apenas anos
-        //true=> monta apenas trimestres
-        try {
-            $transaction = Yii::$app->db->beginTransaction();
-            $dadosAnuais = BalancoEmpresaBolsaSearch::dadosBalanco(false);
-            $dadosTrimestre = BalancoEmpresaBolsaSearch::dadosBalanco(true);
-            List($resp, $msg) = AcaoBolsaOperacao::geraRankMinQuad($dadosAnuais,'rank_ano');
-            List($resp, $msg) = AcaoBolsaOperacao::geraRankMinQuad($dadosTrimestre,'rank_trimestre');
-            // $rankAno = [];
-            if ($resp == true) {
-                $transaction->commit();
-                Yii::$app->session->setFlash('success', $msg);
-                return $this->redirect(['index']);
-            } else {
-                $transaction->rollBack();
-                Yii::$app->session->setFlash('danger', $msg);
-                return $this->redirect(['index']);
-            }
-        } catch (Exception $e) {
-            $transaction->rollBack();
-            Yii::$app->session->setFlash('danger', 'Exceção capturada: ', $e->getMessage(), "\n");
-            return $this->redirect(['index']);
-        }
-
-        //foreach ($dados as $dados)
-        //print_r($rankAno);
-        //exit();
+    
+    
+    public function actionBalanco($codigo_empresa){
+        
+        $empresa = AcaoBolsa::find()->where(['codigo'=>$codigo_empresa])->one();
+        $balancoDadosAnos = new BalancoEmpresaBolsaSearch();
+         $provider =$balancoDadosAnos->search(['BalancoEmpresaBolsaSearch'=>['codigo'=>$codigo_empresa,'trimestre'=>false]]);
+         return $this->render('balanco', [
+                    'empresa'=>$empresa,
+                    'providerBalancoDadosAnos' => $provider,
+                   
+        ]);
     }
 
+    
     /**
      * Deletes an existing AcaoBolsa model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

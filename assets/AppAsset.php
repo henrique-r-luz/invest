@@ -21,7 +21,11 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
-        "js/grow-js/jquery.growl.css"
+        // 'css/all.css',
+        "js/grow-js/jquery.growl.css",
+        //'dist/css/adminlte.min.css',
+        //'plugins/fontawesome-free/css/all.min.css',
+        //'plugins/icheck-bootstrap/icheck-bootstrap.min.css',
     ];
     public $js = [
         //"/usr/local/bin/node-server/node_modules/socket.io-client/dist/socket.io.js",
@@ -30,10 +34,16 @@ class AppAsset extends AssetBundle
         "js/notificacao.js",
         "js/grow-js/jquery.growl.js",
         "js/investimento.js",
+       // 'js/all.js',
        
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+        //'rmrevin\yii\fontawesome\cdn'
+       // '@vendro\rmrevin\yii\fontawesome\AssetBundle',
+        //'yii\fontawesome\CdnProAssetBundle',
     ];
+    
+  
 }
