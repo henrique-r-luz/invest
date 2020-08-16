@@ -88,6 +88,7 @@ class FiltroEmpresaService {
                 ->select(['codigo'])
                 ->from(['tempoBolsa'=>$tempoBolsa]);
         
+        //permite 3 fcl_capex negativos nos último 10 anos
         $contaFclCapexNegativo = BalancoEmpresaBolsa::find()
                 ->select(['codigo'])
                 ->where(['<', 'fcl_capex', 0])

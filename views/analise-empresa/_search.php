@@ -15,35 +15,41 @@ use yii\helpers\ArrayHelper;
 <div class="tipo-search">
     <div class="box-success box">
         <div class="box-body">
-            <div class="ativo-form">
+          
+                <div class="ativo-form">
 
-                <?php
-                $form = ActiveForm::begin([
-                            'action' => ['index'],
-                            'method' => 'get',
-                ]);
-                ?>
-                <div class="col-xs-12 col-lg-12 no-padding">
-                    <div class="col-xs-12 col-sm-12 col-lg-12">
-                         <?=
-                    $form->field($model, 'id')->widget(Select2::classname(), [
-                        //'data' => ArrayHelper::map(Categoria::find()->asArray()->all(), 'id', 'nome'),
-                        'data' => app\lib\TipoFiltro::all(),
-                        'options' => ['placeholder' => 'Selecione o Filtro'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
+                    <?php
+                    $form = ActiveForm::begin([
+                                'action' => ['index'],
+                                'method' => 'get',
                     ]);
                     ?>
-                    </div>   
-                    <div class="col-xs-12 col-sm-12 col-lg-12">
-                        <?= Html::submitButton('Pesquisar', ['class' => 'btn btn-primary']) ?>
-                         <?= Html::a('<i class="glyphicon glyphicon-erase"></i> Reset', ['index'], ['class' => 'btn btn-default']) ?>    
+                    <div class="col-xs-12 col-lg-12 no-padding">
+                        <div class="col-xs-12 col-sm-12 col-lg-12">
+                            <?=
+                            $form->field($model, 'id')->widget(Select2::classname(), [
+                                //'data' => ArrayHelper::map(Categoria::find()->asArray()->all(), 'id', 'nome'),
+                                'data' => app\lib\TipoFiltro::all(),
+                                'options' => ['placeholder' => 'Selecione o Filtro'],
+                                'pluginOptions' => [
+                                    'allowClear' => true
+                                ],
+                            ]);
+                            ?>
+                        </div>   
+                        <div class="col-xs-12 col-sm-12 col-lg-12">
+                            <?= Html::submitButton('Pesquisar', ['class' => 'btn btn-primary']) ?>
+                            <?= Html::a('<i class="glyphicon glyphicon-erase"></i> Reset', ['index'], ['class' => 'btn btn-default']) ?>    
+                        </div>
                     </div>
-                </div>
 
-                <?php ActiveForm::end(); ?>
-            </div>
+                    <?php ActiveForm::end(); ?>
+                </div>
+            
         </div>
+        <?php if (!empty($model->id)): ?>
+         <div class="callout callout-info">
+                        <p> <?= app\lib\TipoFiltro::getDescricaoFiltro($model->id) ?></p>
+                    </div>
+        <?php endif; ?>
     </div>
-</div>

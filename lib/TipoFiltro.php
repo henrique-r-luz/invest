@@ -43,4 +43,27 @@ class TipoFiltro {
         return 'Não existe';
     }
     
+    
+    public static function getDescricaoFiltro($tipoFiltro){
+         switch ($tipoFiltro) {
+             case  self::AGUIA_CONSERVADOR:
+                 return self::getAguiaConservador();
+         }
+    } 
+    
+    
+    private function getAguiaConservador(){
+        $text = "<b> Definições do filtros:</b></br>";
+        $text .="<ul>";
+        $text .="<li>A empresa deve ter no mínimo 10 anos de bolsa.</li>";
+        $text .="<li>O fcl_capex deve ser maior que 0.</li>";
+        $text .="<li>Permite 3 fcl_capex negativos nos último 10 anos.</li>";
+        $text .="<li>O lucro deve ser maior que 0.</li>";
+        $text .="<li>O EBITA deve ser maior que 0.</li>";
+        $text .="<li>A divida liquida por EBITA deve ser menor que 3.</li>";
+        $text .="<li>A margem liquida deve ser maior que 10%.</li>";
+        $text .="</ul>";
+        return $text;
+    }
+    
 }
