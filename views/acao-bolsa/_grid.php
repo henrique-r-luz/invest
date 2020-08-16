@@ -22,13 +22,34 @@ use yii\web\View;
     <?=
     GridView::widget([
         'dataProvider' => $dataProvider,
-
         'columns' => [
            'data',
             'patrimonio_liquido',
             'receita_liquida',
             'ebitda',
-           
+            'da',
+            'ebit',
+            'margem_ebit',
+            'resultado_financeiro',
+            'imposto',
+            'lucro_liquido',
+            'margem_liquida',
+            'roe',
+            'caixa',
+            'divida_bruta',
+            'divida_liquida',
+            'divida_bruta_patrimonio',
+            'divida_liquida_ebitda',
+            'fco',
+            'capex',
+            'fcf',
+            'fcl',
+            'fcl_capex',
+            'proventos',
+            'payout',
+            'pdd',
+            'pdd_lucro_liquido',
+            'indice_basileia',
         ],
         
          'toolbar'=>null,
