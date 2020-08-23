@@ -87,7 +87,7 @@ class BalancoEmpresaBolsa extends \yii\db\ActiveRecord
             'divida_bruta' => 'D. Bruta',
             'divida_liquida' => 'D. Líq.',
             'divida_bruta_patrimonio' => 'D/ Pat.',
-            'divida_liquida_ebitda' => 'D/ Ebitda',
+            'divida_liquida_ebitda' => 'D.L./ Ebitda',
             'fco' => 'Fco',
             'capex' => 'Capex',
             'fcf' => 'Fcf',
@@ -96,7 +96,7 @@ class BalancoEmpresaBolsa extends \yii\db\ActiveRecord
             'proventos' => 'Prov.',
             'payout' => 'Payout',
             'pdd' => 'Pdd',
-            'pdd_lucro_liquido' => 'Pdd Lucro Líquido',
+            'pdd_lucro_liquido' => 'PDD/L. Líquido',
             'indice_basileia' => 'Basiléia',
             'codigo' => 'Codigo',
         ];
@@ -105,8 +105,10 @@ class BalancoEmpresaBolsa extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCodigo()
+    public function getAcaoBolsa()
     {
         return $this->hasOne(AcaoBolsa::className(), ['codigo' => 'codigo']);
     }
+    
+    
 }

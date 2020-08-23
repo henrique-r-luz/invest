@@ -33,7 +33,7 @@ $this->registerJs(
 
     <nav class="navbar navbar-static-top" role="navigation">
 
-        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <a href="#" id="esconde_menu" class="sidebar-toggle" data-toggle="push-menu" role="button">
             <span class="sr-only">Toggle navigation</span>
         </a>
 <?php Pjax::begin(['id' => 'containerPusherNodejs', 'enablePushState' => false]); ?>

@@ -31,6 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'label' => 'Dados Anuais',
                         'content' => $this->render('_grid', [
                             'dataProvider' => $providerBalancoDadosAnos,
+                            'empresa'=>$empresa,
+                            'trimestre'=>false,
                         ]),
                         'active' => true,
                         'encode' => false,
@@ -38,7 +40,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'label' => 'Dados Trimestrais',
                         'content' => $this->render('_grid', [
-                            'dataProvider' => $providerBalancoDadosAnos,
+                            'dataProvider' => $providerBalancoDadosTrimestre,
+                            'empresa'=>$empresa,
+                            'trimestre'=>true,
                         ]),
                         'active' => false,
                         'encode' => false,

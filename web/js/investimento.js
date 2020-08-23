@@ -5,7 +5,7 @@
  */
 var invest = {
     load: function(objJon){
-        alert('teste');
+       
     }
 }
 

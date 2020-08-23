@@ -37,7 +37,7 @@
                                 ['label' => 'Ativo', 'icon' => 'diamond', 'url' => ['/ativo']],
                                 ['label' => 'Operação', 'icon' => 'paper-plane', 'url' => ['/operacao']],
                                 ['label' => 'Empresas Bolsa', 'icon' => 'building', 'url' => ['/acao-bolsa']],
-                                ['label' => 'Balanço', 'icon' => 'clipboard', 'url' => ['/balanco-empresa-bolsa']],
+                               // ['label' => 'Balanço', 'icon' => 'clipboard', 'url' => ['/balanco-empresa-bolsa']],
                                 ['label' => 'Sincronizar', 'icon' => 'rotate-left', 'url' => ['/sincronizar']],
                                 
                                

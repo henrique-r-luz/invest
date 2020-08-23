@@ -15,7 +15,7 @@ use yii\data\ArrayDataProvider;
  */
 class AporteController extends Controller {
 
-    const tomadaDescisao = 40; // define a porcentagem de patrimônio investido em renda variável
+    const tomadaDescisao = 100; // define a porcentagem de patrimônio investido em renda variável
 
     /**
      * {@inheritdoc}

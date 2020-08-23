@@ -168,7 +168,7 @@
             "version": "v2.2.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:js-cookie/js-cookie.git",
+                "url": "https://github.com/js-cookie/js-cookie.git",
                 "reference": "54962f884e9ae33f93e13ac903ffaf1d5a523598"
             },
             "dist": {

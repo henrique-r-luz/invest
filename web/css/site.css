@@ -23,8 +23,8 @@ body {
 }
 
 .meu-footers {
-  padding-top: 0px;
-  height: 30px;
+    padding-top: 0px;
+    height: 30px;
 }
 
 .jumbotron {
@@ -140,7 +140,7 @@ a.desc:after {
 }
 
 .control-label{
-     font-size: 12px;
+    font-size: 12px;
 }
 
 .form-control{
@@ -148,7 +148,7 @@ a.desc:after {
 }
 
 .detail-view{
-   font-size: 12px; 
+    font-size: 12px; 
 }
 
 .sidebar-menu{
@@ -165,13 +165,13 @@ a.desc:after {
 }
 
 body {
-   
+
     font-size: 12px;
-    
+
 }
 
 .select2-container--krajee .select2-selection--single {
-    
+
     padding: 10px 24px 6px 12px;
 }
 
@@ -182,5 +182,10 @@ body {
     font-size: 14px;
     text-align: center;
     font-color: #000000;
-    
+
 }
+
+.table-hover tbody tr:hover{
+    background-color: #ffe4e1;
+}
+
