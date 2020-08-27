@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "93b3e9eb3f9d8a25532f1c47d0820715",
+    "content-hash": "45e2b50263cc2817ba58c5b8c3d2cc12",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -75,7 +75,7 @@
             "version": "v7.2.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:highcharts/highcharts-dist.git",
+                "url": "https://github.com/highcharts/highcharts-dist.git",
                 "reference": "6b1a03af7f26ce8ed9b62bab6a041a7f477b3f7c"
             },
             "dist": {
@@ -3443,6 +3443,51 @@
                 "pdf"
             ],
             "time": "2020-04-28T12:40:35+00:00"
+        },
+        {
+            "name": "sjaakp/yii2-collapse",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sjaakp/yii2-collapse.git",
+                "reference": "17499af97de08f1109afda9e721327183ef9cf9f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sjaakp/yii2-collapse/zipball/17499af97de08f1109afda9e721327183ef9cf9f",
+                "reference": "17499af97de08f1109afda9e721327183ef9cf9f",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "sjaakp\\collapse\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sjaak Priester",
+                    "email": "sjaak@sjaakpriester.nl",
+                    "homepage": "http://sjaakpriester.nl"
+                }
+            ],
+            "description": "Collapse and Accordion widgets for the Yii 2.0 framework",
+            "keywords": [
+                "accordion",
+                "collapse",
+                "extension",
+                "widget",
+                "yii",
+                "yii2"
+            ],
+            "time": "2019-04-25T12:33:55+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

@@ -98,12 +98,15 @@ class AcaoBolsaController extends Controller {
         
         $empresa = AcaoBolsa::find()->where(['codigo'=>$codigo_empresa])->one();
         $balancoDadosAnos = new BalancoEmpresaBolsaSearch();
+         $balancoDadosTrimestre = new BalancoEmpresaBolsaSearch();
         $provider =$balancoDadosAnos->search(['BalancoEmpresaBolsaSearch'=>['codigo'=>$codigo_empresa,'trimestre'=>false]]);
-        $providerTrimestre =$balancoDadosAnos->search(['BalancoEmpresaBolsaSearch'=>['codigo'=>$codigo_empresa,'trimestre'=>true]]);
+        $providerTrimestre =$balancoDadosTrimestre->search(['BalancoEmpresaBolsaSearch'=>['codigo'=>$codigo_empresa,'trimestre'=>true]]);
+      
         return $this->render('balanco', [
                     'empresa'=>$empresa,
                     'providerBalancoDadosAnos' => $provider,
                     'providerBalancoDadosTrimestre' => $providerTrimestre,
+                    'graficoAno'=>$balancoDadosAnos->criaDadosGrafico(),
                    
         ]);
     }

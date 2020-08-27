@@ -11,13 +11,15 @@ use app\models\BalancoEmpresaBolsa;
  */
 class BalancoEmpresaBolsaSearch extends BalancoEmpresaBolsa {
 
+    private $query;
+
     /**
      * {@inheritdoc}
      */
     public function rules() {
         return [
             [['id', 'margem_ebit', 'margem_liquida', 'roe', 'divida_bruta_patrimonio', 'fcl_capex', 'payout'], 'integer'],
-            [['data', 'codigo','trimestre'], 'safe'],
+            [['data', 'codigo', 'trimestre'], 'safe'],
             [['patrimonio_liquido', 'receita_liquida', 'ebitda', 'da', 'ebit', 'resultado_financeiro', 'imposto', 'lucro_liquido', 'caixa', 'divida_bruta', 'divida_liquida', 'divida_liquida_ebitda', 'fco', 'capex', 'fcf', 'fcl', 'proventos', 'pdd', 'pdd_lucro_liquido', 'indice_basileia'], 'number'],
         ];
     }
@@ -38,12 +40,12 @@ class BalancoEmpresaBolsaSearch extends BalancoEmpresaBolsa {
      * @return ActiveDataProvider
      */
     public function search($params) {
-        $query = BalancoEmpresaBolsa::find();
+        $this->query = BalancoEmpresaBolsa::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query' => $this->query,
             'pagination' => false,
         ]);
 
@@ -56,7 +58,7 @@ class BalancoEmpresaBolsaSearch extends BalancoEmpresaBolsa {
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
+        $this->query->andFilterWhere([
             'id' => $this->id,
             'patrimonio_liquido' => $this->patrimonio_liquido,
             'receita_liquida' => $this->receita_liquida,
@@ -84,64 +86,35 @@ class BalancoEmpresaBolsaSearch extends BalancoEmpresaBolsa {
             'pdd' => $this->pdd,
             'pdd_lucro_liquido' => $this->pdd_lucro_liquido,
             'indice_basileia' => $this->indice_basileia,
-            'trimestre'=>$this->trimestre,
+            'trimestre' => $this->trimestre,
         ]);
 
-        $query->andFilterWhere(['ilike', 'data', $this->data])
-               ->andFilterWhere(['ilike', 'codigo', $this->codigo])
-                ->orderBy(['data'=>SORT_ASC]);
-        
-       
+        $this->query->andFilterWhere(['ilike', 'data', $this->data])
+                ->andFilterWhere(['ilike', 'codigo', $this->codigo])
+                ->orderBy(['data' => SORT_ASC]);
+
+
 
         return $dataProvider;
     }
 
-    /**
-     * @param boolean trimestre
-     * retorna os dados do balanco em uma linha .
-     * empresa=>nome da empresa
-     * atributos_de balanço=>[valo1,valor2,valor3,...]
-     */
-    public static function dadosBalanco($trimestre) {
-   
-        $balancos = BalancoEmpresaBolsa::find()
-          ->select(['codigo', 'array_agg(abs(patrimonio_liquido) order by data asc) as patrimonio_liquido',
-                             'array_agg(abs(receita_liquida) order by data asc) as receita_liquida',
-                            'array_agg(abs(ebitda) order by data asc) as ebitda',
-                           // 'array_agg(abs(da) order by data asc) as da',
-                           // 'array_agg(ebit order by data asc) as ebit',
-                           // 'array_agg(margem_ebit order by data asc) as margem_ebit',
-                            'array_agg(abs(resultado_financeiro) order by data asc) as resultado_financeiro',
-                            'array_agg(abs(imposto) order by data asc) as imposto',
-                             'array_agg(abs(lucro_liquido) order by data asc) as lucro_liquido',
-                            'array_agg(abs(margem_liquida) order by data asc) as margem_liquida',
-                            'array_agg(abs(roe) order by data asc) as roe',
-                            'array_agg(abs(caixa) order by data asc) as caixa',
-                            'array_agg(abs(divida_bruta) order by data asc) as divida_bruta',
-                            //'array_agg(divida_liquida order by data asc) as divida_liquida',
-                           // 'array_agg(divida_bruta_patrimonio order by data asc) as divida_bruta_patrimonio',
-                           // 'array_agg(divida_liquida_ebitda order by data asc) as divida_liquida_ebitda',
-                            'array_agg(abs(fco) order by data asc) as fco',
-                            'array_agg(abs(capex) order by data asc) as capex',
-                            'array_agg(abs(fcf) order by data asc) as fcf',
-                            'array_agg(abs(fcl) order by data asc) as fcl',  
-                            'array_agg(abs(fcl_capex) order by data asc) as fcl_capex',
-                            'array_agg(abs(proventos) order by data asc) as proventos',
-                            'array_agg(abs(payout) order by data asc) as payout',
-                            'array_agg(abs(pdd) order by data asc) as pdd',
-                            'array_agg(abs(pdd_lucro_liquido) order by data asc) as pdd_lucro_liquido',
-                            'array_agg(abs(indice_basileia) order by data asc) as indice_basileia',
-                            
-                             
-              ])
-          ->andWhere(['trimestre' => $trimestre])
-          ->groupBy(['codigo'])
-          ->asArray()
-          ->all(); 
-        
-      
-        
-        return $balancos;
+    public function criaDadosGrafico() {
+        $queryGrafico = clone $this->query;
+        $dados = $queryGrafico->asArray()->all();
+        //print_r($dados);
+        $dadosGrafico = [];
+        //  $first_names = array_column($records, 'first_name');
+        foreach ($dados[0] as $key => $atributo) {
+            if ($key == 'id' || $key == 'trimestre' || $key == 'da' || $key == 'imposto' || $key == 'codigo') {
+                continue;
+            }
+            //if ($key == 'patrimonio_liquido' || $key=='data') {
+                $valores = array_map('floatval', array_column($dados, $key));
+                array_push($dadosGrafico, ['name' => $key, 'data' =>$valores]);
+            //}
+            //array_push($dadosGrafico,['name'=>$key,'data'=>[1,2,3,4,5,6]]);
+        }
+        return $dadosGrafico;
     }
 
 }
