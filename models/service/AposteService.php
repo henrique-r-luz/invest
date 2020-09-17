@@ -46,7 +46,7 @@ class AposteService {
         foreach ($ativos as $ativo) {
             $valorTotal = $ativo['soma_valor_bruto'] + $this->aporte->valor;
             $parcela = $valorTotal / $ativo['total_acao'];
-            $model[] = ['Ativo' => $ativo['codigo'], 'Quantidade' => 0, 'Valor' =>round(($parcela - $ativo['valor_bruto']),2)];
+            $model[] = ['Ativo' => $ativo['codigo'], 'Quantidade' => round((($parcela - $ativo['valor_bruto'])/$ativo['preco'])), 'Valor' =>round(($parcela - $ativo['valor_bruto']),2)];
         }
         $this->model = $model;
         $this->provider = new ArrayDataProvider([
@@ -78,7 +78,8 @@ class AposteService {
                     'quantidade',
                     'valor_bruto',
                     'soma_valor_bruto',
-                    'total_acao'
+                    'total_acao',
+                    '(valor_bruto/quantidade) as preco'
                 ])
                 ->from(['somas' => $somas, 'ativo'])
                 ->where(['tipo' => Tipo::ACOES])

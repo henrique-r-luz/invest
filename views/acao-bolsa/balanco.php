@@ -80,14 +80,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         'active' => true,
                         'encode' => true,
                     ],
-                    [
+                   /* [
                         'label' => 'Dados Trimestrais',
                         'content' => $this->render('_grafico', [
                             'graficoAno'=>$graficoAno,
                         ]),
                         'active' => false,
                         'encode' => true,
-                    ],
+                    ],*/
                 ],
                 'position' => TabsX::POS_ABOVE,
                 'bordered' => true,

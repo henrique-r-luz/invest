@@ -1,6 +1,7 @@
 <?php
 
 use miloschuman\highcharts\Highcharts;
+use yii\web\View;
 //print_r($graficoAno[0]);
 //exit();
 /*
@@ -19,7 +20,7 @@ $graficoAno = array_values($graficoAno);
 <?=
 
 Highcharts::widget([
-   // 'id' => 'grafico-pizza-categoria',
+    'id' => 'nome',
     'scripts' => [
         'modules/exporting',
     ],
@@ -42,8 +43,31 @@ Highcharts::widget([
         'yAxis' => [
             'title' => ['text' => 'Valores']
         ],
+        'plotOptions'=>[
+           'series'=>[
+               'events'=>[
+                   'legendItemClick'=>"function(){alert('ola')}"
+               ]
+           ] 
+        ],
         'series' => $graficoAno,
     ]
 ])
 ?>
 
+<?php $this->registerJs(
+        
+        "var teste = $('.highcharts-legend-item')[0];"
+        . "teste.onclick = function(){alert('ola');};"
+        //. "var legendas = chart.series;"
+       // . "console.log(chart.event);"
+        //. "console.log(legendas);"
+        /*. "for (legenda in legendas) {
+            chart.series[legenda].onclick = function(){alert('olaaa')};
+            console.log(chart.series[legenda].eventOptions.legendItemClick);
+          }"*/
+        ,
+        View::POS_READY
+        
+);
+?>
