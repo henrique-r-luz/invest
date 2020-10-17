@@ -110,6 +110,7 @@ class IndexService {
                 ->where(['tipo' => Tipo::ACOES])
                 ->andWhere(['>', 'quantidade', 0])
                 ->andWhere(['<>', 'valor_bruto', 0])
+                ->orderBy(['valor_bruto'=>SORT_DESC])
                 ->all();
         $totalAcoes = Ativo::find()
                 ->where(['tipo' => Tipo::ACOES])
