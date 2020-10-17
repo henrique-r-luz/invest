@@ -1,6 +1,7 @@
 <?php
 
 use miloschuman\highcharts\Highcharts;
+use yii\helpers\Html;
 use yii\web\View;
 //print_r($graficoAno[0]);
 //exit();
@@ -16,7 +17,8 @@ $graficoAno = array_values($graficoAno);
 //exit();
 ?>
 
-
+ <?= Html::button('<i class="fa fa-eye-slash"></i> Ocutar Todos', ['class' => 'btn btn-success', 'id'=>'ocultar']) ?>
+   <?= Html::button(' <i class="fa fa-eye"></i> Mostra Todos', ['class' => 'btn btn-info','id'=>'mostrar']) ?>
 <?=
 
 Highcharts::widget([
@@ -57,15 +59,21 @@ Highcharts::widget([
 
 <?php $this->registerJs(
         
-        "var teste = $('.highcharts-legend-item')[0];"
-        . "teste.onclick = function(){alert('ola');};"
-        //. "var legendas = chart.series;"
-       // . "console.log(chart.event);"
-        //. "console.log(legendas);"
-        /*. "for (legenda in legendas) {
-            chart.series[legenda].onclick = function(){alert('olaaa')};
-            console.log(chart.series[legenda].eventOptions.legendItemClick);
-          }"*/
+          "var mostraTudo = document.getElementById('mostrar');"
+        . "var ocultaTudo = document.getElementById('ocultar');"
+        . " var chart = $('#nome').highcharts();"
+        . "var series = chart.series;"
+        . "mostraTudo.onclick = function() {"
+          . "     series.forEach(function(item,index){"
+        . "        item.setVisible(true,false);"
+        . "     });"
+        . "};"
+        . "ocultaTudo.onclick = function() {"
+        . "     series.forEach(function(item,index){"
+        . "        item.setVisible(false,false);"
+        . "     });"
+        . "};"
+      
         ,
         View::POS_READY
         

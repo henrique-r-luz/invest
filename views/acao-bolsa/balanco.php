@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php
     BoxCollapse::begin([
         'type' => BoxCollapse::TYPE_PRIMARY,
-        'title' => 'Graficos de Indicadores',
+        'title' => 'Gráficos de Indicadores',
             //'collapseRemember' => false
     ])
     ?>
