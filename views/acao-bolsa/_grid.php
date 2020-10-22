@@ -460,6 +460,8 @@ $this->registerJs(
            
                if(mudou!=document.getElementsByClassName('sidebar-collapse').length){
                         table.floatThead('reflow');
+                        var chart = $('#nome').highcharts();
+                        chart.reflow();
                         mudou =   document.getElementsByClassName('sidebar-collapse').length;
                }
         }",

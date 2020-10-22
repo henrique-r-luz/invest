@@ -38,10 +38,8 @@
                                 ['label' => 'Cotacão', 'icon' => 'paper-plane', 'url' => ['/cotacao-ativo']],
                                 ['label' => 'Operação', 'icon' => 'money', 'url' => ['/operacao']],
                                 ['label' => 'Empresas Bolsa', 'icon' => 'building', 'url' => ['/acao-bolsa']],
-                               // ['label' => 'Balanço', 'icon' => 'clipboard', 'url' => ['/balanco-empresa-bolsa']],
+                                // ['label' => 'Balanço', 'icon' => 'clipboard', 'url' => ['/balanco-empresa-bolsa']],
                                 ['label' => 'Sincronizar', 'icon' => 'rotate-left', 'url' => ['/sincronizar']],
-                                
-                               
                             ],
                         ],
                         [
@@ -53,6 +51,15 @@
                                 ['label' => 'Aporte', 'icon' => 'balance-scale', 'url' => ['/aporte']],
                             ],
                         ],
+                        [
+                            'label' => 'Análise Gráfica',
+                            'icon' => 'file',
+                            'url' => '#',
+                            'items' => [
+                                ['label' => 'Histograma', 'icon' => 'filter', 'url' => ['/histograma']],
+                                ['label' => 'Correlação', 'icon' => 'filter', 'url' => ['/']],
+                            ],
+                        ]
                     ],
                 ]
         )
