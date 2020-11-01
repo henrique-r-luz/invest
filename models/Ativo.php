@@ -100,7 +100,7 @@ class Ativo extends \yii\db\ActiveRecord {
     }
 
     public function beforeSave($insert) {
-        
+
         if ($this->quantidade <= 0) {
             $this->valor_compra = 0;
             $this->valor_bruto = 0;
@@ -114,13 +114,13 @@ class Ativo extends \yii\db\ActiveRecord {
         parent::afterSave($insert, $changedAttributes);
     }
 
-    public static function valorCambio($ativo,$valor) {
+    public static function valorCambio($ativo, $valor) {
         $sicroniza = new Sincroniza();
         $cambio = $sicroniza->cotacaoCambio();
+
         if ($ativo->pais == \app\lib\Pais::US) {
-           return $valor* floatval($cambio['dollar']);
-            //exit();
-            return    $valor* floatval($cambio['dollar']);
+            $moeda = str_replace(',', '.', $cambio['dollar']);
+            return floatval($valor) * floatval($moeda);
         }
         return $valor;
     }

@@ -2,8 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
-
+use \app\models\AcaoBolsa;
+use kartik\widgets\Select2;
+use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\OperacaoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -25,38 +26,63 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="box-success box">
             <div class="box-body">
                 <div class="col-xs-12 col-lg-12 no-padding">
-                    <div class="col-xs-6 col-sm-6 col-lg-6">
+                    <div class="col-xs-12 col-sm-12 col-lg-12">
+                       <?=
+                        $form->field($model, 'empresas')->widget(Select2::classname(), [
+                            'data' => ArrayHelper::map(AcaoBolsa::find()
+                                                        ->innerJoin('balanco_empresa_bolsa','balanco_empresa_bolsa.codigo=acao_bolsa.codigo')
+                                                        ->asArray()->all(), 'id', 'codigo'),
+                            'options' => ['placeholder' => 'Selecione as empresas'],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                            'options' => [
+                                'multiple' => true,
+                            ],
+                        ]);
+                        ?>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-lg-12 no-padding">
+                    <div class="col-xs-4 col-sm-4 col-lg-4">
+                        <?=  $form->field($model, 'atributo')->widget(Select2::classname(), [
+                        //'data' => ArrayHelper::map(Tipo::find()->asArray()->all(), 'id', 'nome'),
+                        'data' => \app\lib\Atributos::all(),
+                        'options' => ['placeholder' => 'escolha um atributo'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]); ?>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-lg-4">
                         <?=
-                         $form->field($model, 'atributo')->textInput() 
+                        $form->field($model, 'numeroClasse')->textInput()
                         ?>
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-lg-6">
-                         <?=
-                         $form->field($model, 'numeroClasse')->textInput() 
-                        ?>
+
+                    <div class="col-xs-4 col-sm-4 col-lg-4">
+                         <?=  $form->field($model, 'tempo')->widget(Select2::classname(), [
+                        //'data' => ArrayHelper::map(Tipo::find()->asArray()->all(), 'id', 'nome'),
+                        'data' => \app\lib\Tempo::all(),
+                        'options' => ['placeholder' => 'Tempo'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]); ?>
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-lg-6">
-                         <?=
-                         $form->field($model, 'empresas')->textInput() 
-                        ?>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-lg-6">
-                         <?=
-                         $form->field($model, 'tempo')->textInput() 
-                        ?>
-                    </div>
-                    <div class="col-xs-12 col-lg-12 ">
-                        <div class="form-group">
-                            <?= Html::submitButton('Gráfico', ['class' => 'btn btn-primary']) ?>
-                             <?= Html::a('Limpar', ['/relatorio/relatorio-aporte'], ['class' => 'btn btn-default']) ?>
-                        </div>
+                </div>
+                <div class="col-xs-12 col-lg-12 ">
+                    <div class="form-group">
+                        <?= Html::submitButton('Gráfico', ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a('Limpar', ['/relatorio/relatorio-aporte'], ['class' => 'btn btn-default']) ?>
                     </div>
                 </div>
             </div>
-        </div>    
-        <?php ActiveForm::end(); ?>
+        </div>
+    </div>    
+    <?php ActiveForm::end(); ?>
 
-    </div>
+</div>
 </div>    
 
 

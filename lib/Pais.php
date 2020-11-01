@@ -16,8 +16,8 @@ class Pais {
     public static function all()
     {
         return [
-            self::BR => 'BR',
-            self::US => 'US',
+            self::BR => Pais::BR,
+            self::US => Pais::US,
         ];
     }
     

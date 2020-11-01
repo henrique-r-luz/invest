@@ -23,7 +23,8 @@ class Histograma extends \yii\base\Model {
        public function rules()
     {
         return [
-            [['atributo','numeroClasse','empresas','tempo'], 'required'],
+            [['numeroClasse','atributo','tempo'], 'required'],
+            [['empresas'],'safe'],
             [['numeroClasse'],'integer'],
            
             
@@ -33,7 +34,7 @@ class Histograma extends \yii\base\Model {
     public function attributeLabels()
     {
         return [
-            'atributo'    => 'Filtra Empresas',
+            'atributo'    => 'Atributo',
             'numeroClasse' => 'Classes',
             'empresas'=>'Empresas',
             'tempo'=>'Tempo'
@@ -43,7 +44,7 @@ class Histograma extends \yii\base\Model {
     public function attributeComments()
     {
          return [
-            'atributo'    => 'Filtra Empresas',
+            'atributo'    => 'Atributo',
             'numeroClasse' => 'Classes',
             'empresas'=>'Empresas',
             'tempo'=>'Tempo'
