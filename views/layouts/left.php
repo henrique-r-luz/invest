@@ -53,11 +53,11 @@
                         ],
                         [
                             'label' => 'Análise Gráfica',
-                            'icon' => 'file',
+                            'icon' => 'bar-chart',
                             'url' => '#',
                             'items' => [
-                                ['label' => 'Histograma', 'icon' => 'filter', 'url' => ['/histograma']],
-                                ['label' => 'Correlação', 'icon' => 'filter', 'url' => ['/']],
+                                ['label' => 'Histograma', 'icon' => 'signal', 'url' => ['/histograma']],
+                                ['label' => 'Correlação', 'icon' => 'exchange', 'url' => ['/']],
                             ],
                         ]
                     ],

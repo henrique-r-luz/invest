@@ -11,6 +11,8 @@ namespace app\controllers;
 use app\models\Histograma;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
+use \app\models\service\HistogramaService;
+use Yii;
 
 /**
  * Description of Histograma
@@ -36,11 +38,15 @@ class HistogramaController extends Controller {
     
     
      public function actionIndex() {
-        $model = new Histograma();
-
+        $modelService = new HistogramaService();
+        if($modelService->load(Yii::$app->request->post())){
+            $modelService->geraDados();
+        }
         return $this->render('index', [
+                    'model' => $modelService->getHistograma(),
+                    'labelClasse'=>$modelService->getLabelClasse(),
+                    'histogramaClasse'=>$modelService->getClasseHistograma(),
                    
-                    'model' => $model,
         ]);
     }
 
