@@ -113,7 +113,7 @@ class Operacao extends ActiveRecord {
 
                 if ($this->alteraAtivo($this->ativo_id)) {
                     if ($ativo_id_antigo != null) {
-
+                        
                         if (!$this->alteraAtivo($ativo_id_antigo)) {
                             $this->addError('ativo_id', 'O sistema não conseguiu atualizar o ativo:' . $ativo_id_antigo . '. ');
                             $transaction->rollBack();
@@ -124,6 +124,8 @@ class Operacao extends ActiveRecord {
                     list($respEasy, $msgEasy) = $sincroniza->easy();
                     list($respCotacao, $msgCotacao) = $sincroniza->cotacaoAcao();
                     if ($respEasy && $respCotacao) {
+                         $ativo = Ativo::findOne($this->ativo_id);
+                         
                         $transaction->commit();
                         return true;
                     } else {
@@ -222,21 +224,28 @@ class Operacao extends ActiveRecord {
             $ativo->valor_liquido = 0;
         } else {
             
-            $ativo->valor_compra = (self::find()->where(['ativo_id' => $ativo_id])
-                            ->andWhere(['tipo' => 1])//compra
-                            ->sum('valor') -
-                            self::find()->where(['ativo_id' => $ativo_id])
-                            ->andWhere(['tipo' => 0])//venda
-                            ->sum('valor'));
+            $ativo->valor_compra = self::valorDeCompra($ativo_id);
+           
         }
       
         if ($ativo->save()) {
+           
             return true;
         } else {
             $erro = CajuiHelper::processaErros($ativo->getErrors());
             Yii::$app->session->setFlash('danger', 'Erro ao salvar ativo!</br>' . $erro);
             return false;
         }
+    }
+    
+    
+    public static function valorDeCompra($ativo_id){
+         return  max(0,(self::find()->where(['ativo_id' => $ativo_id])
+                            ->andWhere(['tipo' => 1])//compra
+                            ->sum('valor') -
+                            self::find()->where(['ativo_id' => $ativo_id])
+                            ->andWhere(['tipo' => 0])//venda
+                            ->sum('valor')));
     }
     
     

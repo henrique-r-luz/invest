@@ -44,7 +44,7 @@ class Sincroniza extends \yii\base\Model
             $lucro = ($valor * $ativo->quantidade);
             $ativo->valor_bruto = $lucro;
             $ativo->valor_liquido = $lucro;
-            $valorCompra = Ativo::valorCambio($ativo,Operacao::find()->where(['ativo_id'=>$acoe['id']])->sum('valor'));
+            $valorCompra = Ativo::valorCambio($ativo,Operacao::valorDeCompra($acoe['id']));
             $ativo->valor_compra =$valorCompra; 
             
             if (!$ativo->save()) {

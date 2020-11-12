@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         $form->field($model, 'empresas')->widget(Select2::classname(), [
                             'data' => ArrayHelper::map(AcaoBolsa::find()
                                             ->innerJoin('balanco_empresa_bolsa', 'balanco_empresa_bolsa.codigo=acao_bolsa.codigo')
-                                            ->asArray()->all(), 'id', 'codigo'),
+                                            ->asArray()->all(), 'codigo', 'codigo'),
                             'options' => ['placeholder' => 'Selecione as empresas'],
                             'pluginOptions' => [
                                 'allowClear' => true
@@ -86,7 +86,8 @@ $form->field($model, 'numeroClasse')->textInput()
         </div>
         <?php if (!empty($histogramaClasse)): ?>
             <?= $this->render('_grafico',['labelClasse'=>$labelClasse,
-                    'histogramaClasse'=>$histogramaClasse]); ?>
+                    'histogramaClasse'=>$histogramaClasse,
+                'model'=>$model]); ?>
         <?php endif; ?>
 
     </div>    

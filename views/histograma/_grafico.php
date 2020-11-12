@@ -32,7 +32,7 @@ Highcharts::widget([
             'categories' => $labelClasse
         ],
         'yAxis' => [
-            'title' => ['text' => 'Valores']
+            'title' => ['text' => 'Frequência']
         ],
         'plotOptions' => [
             'column' => [
@@ -44,7 +44,7 @@ Highcharts::widget([
         ],
         'series' => [
            // 'type'=>'column',
-            ['name' => 'data',
+            ['name' => $model->atributo,
                 'data' => $histogramaClasse
                // 'data'=>[1 , 2 , 1,  1,  4,  11,  14000,  795,90, 20,23,25,111,1516,15,  66,  14,  15,  6,  3 ]
             ]

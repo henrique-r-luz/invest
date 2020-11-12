@@ -10,6 +10,7 @@ namespace app\models\service;
 
 use app\models\Histograma;
 use \app\models\BalancoEmpresaBolsa;
+use \app\lib\Tempo;
 
 /**
  * Description of HistogramaService
@@ -23,6 +24,7 @@ class HistogramaService {
     private $histograma;
     private $labelClasse;
     private $classesHistograma;
+    private $balancos;
 
     function __construct() {
         $this->histograma = new Histograma();
@@ -33,26 +35,21 @@ class HistogramaService {
     }
 
     public function geraDados() {
-        if($this->histograma->tempo==\app\lib\Tempo::ANO){
-            $tempo = false;
-        }else{
-            $tempo = true;
-        }
-        $balancos = BalancoEmpresaBolsa::find()
-                ->select([$this->histograma->atributo])
-                //->where($model->empresas)
-                ->orderBy([$this->histograma->atributo => SORT_ASC])
-                ->andWhere(['is not', $this->histograma->atributo, null])
-                ->andWhere(['trimestre'=>$tempo])
-                ->asArray()
-                ->all();
-       
-        if (empty($balancos)) {
-           
+
+
+        $this->balancos = $this->getDadosBd();
+        if (empty($this->balancos)) {
             return;
         }
-        $min = $balancos[0][$this->histograma->atributo];
-        $max = $balancos[count($balancos) - 1][$this->histograma->atributo];
+        //intevalo de classes do histograma e frequências
+        $classes = $this->geraLabelClasse();
+        $this->geraClassesHistograma($classes);
+        
+    }
+    
+    private function geraLabelClasse(){
+        $min = $this->balancos[0][$this->histograma->atributo];
+        $max = $this->balancos[count($this->balancos) - 1][$this->histograma->atributo];
         $intergalo = $max - $min;
         $denominador = ($this->histograma->numeroClasse == 0) ? 1 : $this->histograma->numeroClasse;
         $tamanhoIntervalos = $intergalo / $denominador;
@@ -62,16 +59,19 @@ class HistogramaService {
         $this->labelClasse = [];
         for ($i = 0; $i < $denominador; $i++) {
             $classes[$i] = [$limiteInferiror, $limiteSuperiror];
-            $this->labelClasse[$i] = round(($limiteInferiror)/1000, 2).'__'.round($limiteSuperiror/1000, 2);
+            $this->labelClasse[$i] = '(' . round(($limiteInferiror), 2) . ', ' . round($limiteSuperiror, 2) . ')';
             $limiteInferiror = $limiteSuperiror;
             $limiteSuperiror += $tamanhoIntervalos;
         }
-        //$classes[count($classes) - 1][1]++;
+        return $classes;
+    }
+    
+    private function geraClassesHistograma($classes){
         $this->classesHistograma = [];
         foreach ($classes as $id => $classe) {
             $this->classesHistograma[$id] = 0;
         }
-        foreach ($balancos as $balanco) {
+        foreach ($this->balancos as $balanco) {
             foreach ($classes as $id => $classe) {
                 if ($balanco[$this->histograma->atributo] >= $classe[0] && $balanco[$this->histograma->atributo] < $classe[1]) {
 
@@ -79,7 +79,27 @@ class HistogramaService {
                 }
             }
         }
-       
+    }
+
+    private function getDadosBd() {
+        $balancos = BalancoEmpresaBolsa::find()
+                ->select([$this->histograma->atributo])
+                ->orderBy([$this->histograma->atributo => SORT_ASC])
+                ->andWhere(['is not', $this->histograma->atributo, null])
+                ->andWhere(['trimestre' => $this->getTempo()])
+                ->andWhere(['codigo' => $this->histograma->empresas])
+                ->asArray()
+                ->all();
+        return $balancos;
+    }
+
+    private function getTempo() {
+        if ($this->histograma->tempo == Tempo::ANO) {
+            $tempo = false;
+        } else {
+            $tempo = true;
+        }
+        return $tempo;
     }
 
     public function getHistograma() {
