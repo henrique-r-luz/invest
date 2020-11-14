@@ -8,8 +8,8 @@
 
 namespace app\models\service;
 
-use app\models\Histograma;
-use \app\models\BalancoEmpresaBolsa;
+use app\models\financas\Histograma;
+use app\models\financas\BalancoEmpresaBolsa;
 use \app\lib\Tempo;
 
 /**
@@ -44,10 +44,9 @@ class HistogramaService {
         //intevalo de classes do histograma e frequências
         $classes = $this->geraLabelClasse();
         $this->geraClassesHistograma($classes);
-        
     }
-    
-    private function geraLabelClasse(){
+
+    private function geraLabelClasse() {
         $min = $this->balancos[0][$this->histograma->atributo];
         $max = $this->balancos[count($this->balancos) - 1][$this->histograma->atributo];
         $intergalo = $max - $min;
@@ -65,8 +64,8 @@ class HistogramaService {
         }
         return $classes;
     }
-    
-    private function geraClassesHistograma($classes){
+
+    private function geraClassesHistograma($classes) {
         $this->classesHistograma = [];
         foreach ($classes as $id => $classe) {
             $this->classesHistograma[$id] = 0;
@@ -82,14 +81,24 @@ class HistogramaService {
     }
 
     private function getDadosBd() {
-        $balancos = BalancoEmpresaBolsa::find()
-                ->select([$this->histograma->atributo])
-                ->orderBy([$this->histograma->atributo => SORT_ASC])
-                ->andWhere(['is not', $this->histograma->atributo, null])
-                ->andWhere(['trimestre' => $this->getTempo()])
-                ->andWhere(['codigo' => $this->histograma->empresas])
-                ->asArray()
-                ->all();
+        if (!empty($this->histograma->empresas)) {
+            $balancos = BalancoEmpresaBolsa::find()
+                    ->select([$this->histograma->atributo])
+                    ->orderBy([$this->histograma->atributo => SORT_ASC])
+                    ->andWhere(['is not', $this->histograma->atributo, null])
+                    ->andWhere(['trimestre' => $this->getTempo()])
+                    ->andWhere(['codigo' => $this->histograma->empresas])
+                    ->asArray()
+                    ->all();
+        }else{
+              $balancos = BalancoEmpresaBolsa::find()
+                    ->select([$this->histograma->atributo])
+                    ->orderBy([$this->histograma->atributo => SORT_ASC])
+                    ->andWhere(['is not', $this->histograma->atributo, null])
+                    ->andWhere(['trimestre' => $this->getTempo()])
+                    ->asArray()
+                    ->all();
+        }
         return $balancos;
     }
 

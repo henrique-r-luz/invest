@@ -34,12 +34,11 @@
                             'icon' => 'dollar',
                             'url' => '#',
                             'items' => [
-                                ['label' => 'Ativo', 'icon' => 'diamond', 'url' => ['/ativo']],
-                                ['label' => 'Cotacão', 'icon' => 'paper-plane', 'url' => ['/cotacao-ativo']],
-                                ['label' => 'Operação', 'icon' => 'money', 'url' => ['/operacao']],
-                                ['label' => 'Empresas Bolsa', 'icon' => 'building', 'url' => ['/acao-bolsa']],
+                                ['label' => 'Ativo', 'icon' => 'diamond', 'url' => ['/financas/ativo']],
+                                ['label' => 'Operação', 'icon' => 'money', 'url' => ['/financas/operacao']],
+                                ['label' => 'Empresas Bolsa', 'icon' => 'building', 'url' => ['/financas/acao-bolsa']],
                                 // ['label' => 'Balanço', 'icon' => 'clipboard', 'url' => ['/balanco-empresa-bolsa']],
-                                ['label' => 'Sincronizar', 'icon' => 'rotate-left', 'url' => ['/sincronizar']],
+                                ['label' => 'Sincronizar', 'icon' => 'rotate-left', 'url' => ['/financas/sincronizar']],
                             ],
                         ],
                         [
@@ -47,8 +46,8 @@
                             'icon' => 'file',
                             'url' => '#',
                             'items' => [
-                                ['label' => 'Filtro Empresas', 'icon' => 'filter', 'url' => ['/analise-empresa']],
-                                ['label' => 'Aporte', 'icon' => 'balance-scale', 'url' => ['/aporte']],
+                                ['label' => 'Filtro Empresas', 'icon' => 'filter', 'url' => ['/relatorios/analise-empresa']],
+                                ['label' => 'Aporte', 'icon' => 'balance-scale', 'url' => ['/relatorios/aporte']],
                             ],
                         ],
                         [

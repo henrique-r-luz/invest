@@ -12,8 +12,8 @@ use app\lib\Categoria;
 use app\lib\componentes\FabricaNotificacao;
 use app\lib\Pais;
 use app\lib\Tipo;
-use app\models\Ativo;
-use app\models\Sincroniza;
+use app\models\financas\Ativo;
+use app\models\financas\Sincroniza;
 use Yii;
 use yii\web\JsExpression;
 

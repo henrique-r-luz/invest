@@ -3,7 +3,7 @@
 namespace app\migrations;
 
 use yii\db\Migration;
-use app\models\Ativo;
+use app\models\financas\Ativo;
 use app\lib\Categoria;
 
 /**

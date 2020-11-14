@@ -8,10 +8,10 @@
 
 namespace app\models\service;
 
-use \app\models\BalancoEmpresaBolsa;
-use \app\models\AcaoBols;
-use app\models\FiltroEmpresa;
-use \app\models\FiltroEmpresaDados;
+use app\models\financas\BalancoEmpresaBolsa;
+use app\models\financas\AcaoBols;
+use app\models\relatorios\FiltroEmpresa;
+use app\models\relatorios\FiltroEmpresaDados;
 use \app\lib\TipoFiltro;
 use Yii;
 

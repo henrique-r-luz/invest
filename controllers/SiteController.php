@@ -6,7 +6,7 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use \app\models\Ativo;
+use \app\models\financas\Ativo;
 use yii\web\JsExpression;
 use app\lib\componentes\FabricaNotificacao;
 use \app\models\Sincroniza;

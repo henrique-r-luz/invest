@@ -10,8 +10,8 @@ namespace app\models\service;
 
 use app\lib\Pais;
 use app\lib\Tipo;
-use app\models\Aporte;
-use app\models\Ativo;
+use app\models\relatorios\Aporte;
+use app\models\financas\Ativo;
 use Yii;
 use yii\data\ArrayDataProvider;
 use yii\db\Query;
