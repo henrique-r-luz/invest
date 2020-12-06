@@ -7,8 +7,8 @@ use \kartik\datecontrol\Module;
 use yii\i18n\Formatter;
 
 $config = [
-    'id' => 'Investimento',
-    'name' => 'Investimento',
+    'id' => 'Invest.',
+    'name' => 'INVEST.',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     //'timeZone' => 'Europe/London',
