@@ -6,8 +6,8 @@
  */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
-use yii\bootstrap\Modal;
 
 $this->title = 'Sincroniza Dados';
 //\app\assets\AppAsset::register($this);
@@ -15,7 +15,7 @@ $this->title = 'Sincroniza Dados';
 <div class="box-body">
     <div class="sinc-form">
  
-<?php $form = ActiveForm::begin(['action' => ['sincronizar/sincroniza']]); ?> 
+<?php $form = ActiveForm::begin(['action' => [Url::to('sincroniza')]]); ?> 
 
 
 

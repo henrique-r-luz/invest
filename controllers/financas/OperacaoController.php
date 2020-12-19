@@ -11,6 +11,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\db\Transaction;
 use yii\db\Query;
+use \app\models\financas\service\OperacaoService;
 
 /**
  * OperacaoController implements the CRUD actions for Operacao model.
@@ -64,13 +65,14 @@ class OperacaoController extends Controller {
      */
     public function actionCreate() {
         $model = new Operacao();
+        $operacaoService = new OperacaoService($model);
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->salvaOperacao()) {
+        if ($operacaoService->load(Yii::$app->request->post())) {
+            if ($operacaoService->acaoSalvaOperacao()) {
                 Yii::$app->session->setFlash('success', 'Dados salvos com sucesso!');
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'id' => $operacaoService->getOpereacao()->id]);
             } else {
-                $erro = CajuiHelper::processaErros($model->getErrors());
+                $erro = CajuiHelper::processaErros($operacaoService->getOpereacao()->getErrors());
                 Yii::$app->session->setFlash('danger', 'Erro ao salvar Operação!</br>' . $erro);
             }
         }
@@ -89,9 +91,9 @@ class OperacaoController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->salvaOperacao()) {
+        $operacaoService = new OperacaoService($model);
+        if ($operacaoService->load(Yii::$app->request->post())) {
+            if ($operacaoService->acaoSalvaOperacao()) {
                 Yii::$app->session->setFlash('success', 'Dados salvos com sucesso!');
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
@@ -114,7 +116,8 @@ class OperacaoController extends Controller {
      */
     public function actionDelete($id) {
         $model = $this->findModel($id);
-        if ($model->deletaOperacao()) {
+         $operacaoService = new OperacaoService($model);
+        if ($operacaoService->acaoDeletaOperacao()) {
              Yii::$app->session->setFlash('success', 'Dados excluídos com sucesso!');
         }else{
              $erro = CajuiHelper::processaErros($model->getErrors());

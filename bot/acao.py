@@ -31,6 +31,7 @@ discionarioAcoes = [
     [29,"https://br.investing.com/equities/amazon-com-inc"], #amazon
     [30,"https://br.investing.com/equities/google-inc"], # google
     [32,"https://br.investing.com/equities/microsoft-corp"],#macosoft
+    ['dollar','https://br.investing.com/currencies/usd-brl'],
 ];
 
 
@@ -41,14 +42,23 @@ discionarioAcoes = [
 
 browser = webdriver.Firefox();
 listaPreco = [];
+moeda = [];
 for row in discionarioAcoes:
-    browser.get(row[1]);
-    preco = browser.find_element_by_id("last_last");
-    listaPreco.append([row[0],preco.text])
+    
+    if row[0]=='dollar':
+        browser.get(row[1]);
+        preco = browser.find_element_by_id("last_last");
+        moeda.append([row[0],preco.text])
+    else:
+        browser.get(row[1]);
+        preco = browser.find_element_by_id("last_last");
+        listaPreco.append([row[0],preco.text])
 
 #print(listaPreco);
 df = pd.DataFrame(listaPreco, columns =['id', 'valor'])
+dfDollar = pd.DataFrame(moeda, columns =['moeda', 'valor'])
 df.to_csv(filePath+'preco_acao.csv',index=False)
+dfDollar.to_csv(filePath+'cambio.csv',index=False)
 browser.quit()
 print(df);
 
