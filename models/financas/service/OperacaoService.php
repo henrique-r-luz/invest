@@ -14,13 +14,10 @@
 
 namespace app\models\financas\service;
 
+use app\lib\CajuiHelper;
 use app\models\financas\Sincroniza;
 use Yii;
 use yii\db\Exception;
-use app\lib\CajuiHelper;
-use \app\lib\Categoria;
-use \app\models\financas\Ativo;
-use \app\models\financas\Operacao;
 
 //use app\models\financas\Operacao;
 

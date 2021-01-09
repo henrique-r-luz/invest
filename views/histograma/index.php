@@ -1,14 +1,18 @@
 <?php
 
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use \app\models\AcaoBolsa;
+use app\lib\Atributos;
+use app\lib\Tempo;
+use app\models\financas\AcaoBolsa;
 use kartik\widgets\Select2;
+use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\web\View;
+use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
+/* @var $this View */
 /* @var $searchModel app\models\OperacaoSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $dataProvider ActiveDataProvider */
 
 $this->title = 'Histograma';
 $this->params['breadcrumbs'][] = $this->title;
@@ -49,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?=
                         $form->field($model, 'atributo')->widget(Select2::classname(), [
                             //'data' => ArrayHelper::map(Tipo::find()->asArray()->all(), 'id', 'nome'),
-                            'data' => \app\lib\Atributos::all(),
+                            'data' => Atributos::all(),
                             'options' => ['placeholder' => 'escolha um atributo'],
                             'pluginOptions' => [
                                 'allowClear' => true
@@ -67,7 +71,7 @@ $form->field($model, 'numeroClasse')->textInput()
                         <?=
                         $form->field($model, 'tempo')->widget(Select2::classname(), [
                             //'data' => ArrayHelper::map(Tipo::find()->asArray()->all(), 'id', 'nome'),
-                            'data' => \app\lib\Tempo::all(),
+                            'data' => Tempo::all(),
                             'options' => ['placeholder' => 'Tempo'],
                             'pluginOptions' => [
                                 'allowClear' => true

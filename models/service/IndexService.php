@@ -46,6 +46,7 @@ class IndexService {
 
         list($resp, $msg) = $sincroniza->easy();
         if ($resp == false) {
+             
             FabricaNotificacao::create('rank', ['ok' => $resp,
                 'titulo' => 'Renda fixa Easynveste falhou!',
                 'mensagem' => 'Renda fixa Easynveste não foi atualizados !</br>' . $msg,

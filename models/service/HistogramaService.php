@@ -8,7 +8,7 @@
 
 namespace app\models\service;
 
-use app\models\financas\Histograma;
+use app\models\Histograma;
 use app\models\financas\BalancoEmpresaBolsa;
 use \app\lib\Tempo;
 

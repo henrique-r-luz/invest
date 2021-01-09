@@ -1,0 +1,5 @@
+sudo apt install nodejs
+
+sudo apt install npm
+
+npm install (dentro da pasta js do porjeto)
