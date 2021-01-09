@@ -82,11 +82,27 @@ class Operacao extends ActiveRecord {
             1 => self::COMPRA,
         ];
     }
+    
+       public static function tipoOperacaoId() {
+        return [
+            self::VENDA =>0,
+            self::COMPRA=>1,
+        ];
+    }
+
 
     public static function getTipoOperacao($id) {
         return self::tipoOperacao()[$id];
     }
-
+    
+    
+     public static function getTipoOperacaoId($id) {
+        return self::tipoOperacaoId()[$id];
+    }
+    
+    
+    
+  
     /**
      * @return ActiveQuery
      */

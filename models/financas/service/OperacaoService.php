@@ -18,6 +18,9 @@ use app\models\financas\Sincroniza;
 use Yii;
 use yii\db\Exception;
 use app\lib\CajuiHelper;
+use \app\lib\Categoria;
+use \app\models\financas\Ativo;
+use \app\models\financas\Operacao;
 
 //use app\models\financas\Operacao;
 
@@ -58,10 +61,9 @@ class OperacaoService {
             return false;
         }
     }
-    
-    
-    public function acaoDeletaOperacao(){
-         $connection = Yii::$app->db;
+
+    public function acaoDeletaOperacao() {
+        $connection = Yii::$app->db;
         $this->transaction = $connection->beginTransaction();
         $this->alteraAtivo = new AlteraAtivoOperacao();
         try {
@@ -75,9 +77,8 @@ class OperacaoService {
             return false;
         }
     }
-    
-    
-    private function deleteOperacao(){
+
+    private function deleteOperacao() {
         if (!$this->operacao->delete()) {
             $erro = CajuiHelper::processaErros($this->operacao->getErrors());
             $this->operacao->addError('ativo_id', 'O sistema não pode remover a operação:' . $erro . '. ');
@@ -108,7 +109,7 @@ class OperacaoService {
         if ($ativo_id_antigo == null) {
             return true;
         }
-        
+
         //essa ação acontece se ocorrer uma alteração do tipo de ativo
         if (!$this->alteraAtivo->updateAtivo($ativo_id_antigo)) {
             $this->operacao->addError('ativo_id', 'O sistema não conseguiu atualizar o ativo:' . $ativo_id_antigo . '. ');
@@ -116,6 +117,7 @@ class OperacaoService {
             // throw new Exception('O sistema não pode alterar o ativo:' . $this->ativo->codigo . '. ');
         }
     }
+
 
     private function sicronizaDadosAtivo() {
         $sincroniza = new Sincroniza();

@@ -2,13 +2,15 @@
 
 namespace app\models\financas;
 
+use app\lib\CajuiHelper;
 use app\models\financas\AcaoBolsa;
 use app\models\financas\Ativo;
 use app\models\financas\Operacao;
+use app\models\financas\service\OperacaoService;
 use Exception;
 use SplFileObject;
-use app\lib\CajuiHelper;
 use Yii;
+use yii\base\Model;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,7 +18,7 @@ use Yii;
  * and open the template in the editor.
  */
 
-class Sincroniza extends \yii\base\Model {
+class Sincroniza extends Model {
 
     public function cotacaoAcao() {
         //$json = file_get_contents('url_here');
@@ -148,6 +150,11 @@ class Sincroniza extends \yii\base\Model {
         }
     }
 
+    /**
+     * Importa as operação para do site clear
+     * @return type
+     * @throws Exception
+     */
     public function clearAcoes() {
         /*
          * 1-> codigo ativo; 
@@ -158,6 +165,7 @@ class Sincroniza extends \yii\base\Model {
          * tipo = 1 compra
          */
         $arquivo = Yii::$app->params['bot'] . '/orders.csv';
+
         $erros = 'Erro na criação das Operações: ';
         if (!file_exists($arquivo)) {
             return [true, 'sucesso'];
@@ -167,6 +175,7 @@ class Sincroniza extends \yii\base\Model {
             return str_getcsv($v, $this->getFileDelimiter($arquivo));
         }, file($arquivo));
         unset($csv[0]);
+
         $transaction = Yii::$app->db->beginTransaction();
 
         try {
@@ -196,11 +205,11 @@ class Sincroniza extends \yii\base\Model {
                     } else {
                         $operacao->tipo = 1;
                     }
-
-                    if (!$operacao->salvaOperacao()) {
+                    $operacaoService = new OperacaoService($operacao);
+                    if (!$operacaoService->acaoSalvaOperacao()) {
 
                         $transaction->rollBack();
-                        $erros .= CajuiHelper::processaErros($operacao->getErrors()) . '</br>';
+                        $erros .= CajuiHelper::processaErros($operacaoService->getOpereacao()->getErrors()) . '</br>';
 
                         return [false, $erros];
                     }
@@ -209,6 +218,7 @@ class Sincroniza extends \yii\base\Model {
             $transaction->commit();
             return [true, 'sucesso'];
         } catch (Exception $e) {
+           
             $transaction->rollBack();
             return [false, $erros . $e];
             throw $e;
