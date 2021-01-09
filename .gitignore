@@ -16,3 +16,4 @@
 *.sql*
 /vendor/
 /back/
+/bot/dados/
