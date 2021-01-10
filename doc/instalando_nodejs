@@ -3,3 +3,32 @@ sudo apt install nodejs
 sudo apt install npm
 
 npm install (dentro da pasta js do porjeto)
+
+script que inicializa o server de notificação node.js
+
+
+#!/bin/bash
+#//etc/init.d/server_notificacao
+
+sleep 30
+case "$1" in
+        start)
+        echo "start"
+        echo "start notificação $(date '+%Y-%m-%d %H:%M:%S')  " >> "/var/log/notificacao"
+        /usr/bin/node  /vagrant/invest/web/js/server.js &
+        ;;
+
+        stop)
+        echo "stop"
+        pkill node
+        ;;
+
+        *)
+        echo "operação inválida"
+        ;;
+        esac
+
+
+
+
+instalar o programa sysv-rc-conf
