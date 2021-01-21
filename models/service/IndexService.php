@@ -16,6 +16,7 @@ use app\models\financas\Ativo;
 use app\models\financas\Sincroniza;
 use Yii;
 use yii\web\JsExpression;
+use app\models\financas\service\sincroniza\SincronizaFactory;
 
 /**
  * Description of IndexService
@@ -42,9 +43,7 @@ class IndexService {
 
     public function sincroniza() {
         $msg = '';
-        $sincroniza = new Sincroniza();
-
-        list($resp, $msg) = $sincroniza->easy();
+        list($resp, $msg) = SincronizaFactory::sincroniza('easy')->atualiza();
         if ($resp == false) {
              
             FabricaNotificacao::create('rank', ['ok' => $resp,
@@ -52,7 +51,7 @@ class IndexService {
                 'mensagem' => 'Renda fixa Easynveste não foi atualizados !</br>' . $msg,
                 'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
         }
-        list($resp, $msg) = $sincroniza->clearAcoes();
+        list($resp, $msg) =  SincronizaFactory::sincroniza('operacaoClear')->atualiza();
         if ($resp == false) {
             FabricaNotificacao::create('rank', ['ok' => $resp,
                 'titulo' => 'Operações ações Falhou!',
@@ -60,7 +59,7 @@ class IndexService {
                 'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
         }
 
-        list($resp, $msg) = $sincroniza->cotacaoAcao();
+        list($resp, $msg) = SincronizaFactory::sincroniza('acao')->atualiza();
         if ($resp == false) {
             FabricaNotificacao::create('rank', ['ok' => $resp,
                 'titulo' => 'Cotação açoes falhou!',

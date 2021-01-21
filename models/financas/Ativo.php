@@ -2,8 +2,11 @@
 
 namespace app\models\financas;
 
-use Yii;
-
+use app\lib\Pais;
+use app\models\financas\service\sincroniza\CotacaoCambio;
+use app\models\Tipo;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 /**
  * This is the model class for table "public.ativo".
  *
@@ -18,7 +21,7 @@ use Yii;
  * @property int $tipo_id
  * @property int $categoria_id
  */
-class Ativo extends \yii\db\ActiveRecord {
+class Ativo extends ActiveRecord {
 
     /**
      * {@inheritdoc}
@@ -115,10 +118,10 @@ class Ativo extends \yii\db\ActiveRecord {
     }
 
     public static function valorCambio($ativo, $valor) {
-        $sicroniza = new Sincroniza();
-        $cambio = $sicroniza->cotacaoCambio();
+        $cotacao = new CotacaoCambio();
+        $cambio = $cotacao->atualiza();
 
-        if ($ativo->pais == \app\lib\Pais::US) {
+        if ($ativo->pais == Pais::US) {
             $moeda = str_replace(',', '.', $cambio['dollar']);
             return floatval($valor) * floatval($moeda);
         }

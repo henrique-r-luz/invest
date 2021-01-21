@@ -12,6 +12,7 @@ use app\lib\componentes\ExecutaBack;
 use app\models\financas\Sincroniza;
 use Yii;
 use yii\web\Controller;
+use \app\models\financas\service\sincroniza\SincronizaFactory;
 
 /**
  * Description of SincronizarController
@@ -35,7 +36,8 @@ class SincronizarController extends Controller {
             return $this->executaBackup();
         }
         if (Yii::$app->request->post('but') == 'cotacao_empresa') {
-            list($resp, $msg) = $sicroniza->cotacaoAcao();
+            
+            list($resp, $msg) = SincronizaFactory::sincroniza('acao')->atualiza();
             $erro .= $msg;
             if ($resp) {
                 Yii::$app->session->setFlash('success', 'A cotação das ações foram atualizadas!');
@@ -46,7 +48,7 @@ class SincronizarController extends Controller {
             }
         }
         if (Yii::$app->request->post('but') == 'titulo') {
-            list($resp, $msg) = $sicroniza->easy();
+            list($resp, $msg) = SicronizaFactory::sicroniza('easy')->atualiza();
             $erro .= $msg;
             if ($resp) {
                 Yii::$app->session->setFlash('success', 'Os dados da Easynvest foram atualizados !');

@@ -18,6 +18,7 @@ use app\lib\CajuiHelper;
 use app\models\financas\Sincroniza;
 use Yii;
 use yii\db\Exception;
+use app\models\financas\service\sincroniza\SincronizaFactory;
 
 //use app\models\financas\Operacao;
 
@@ -120,8 +121,8 @@ class OperacaoService {
         $sincroniza = new Sincroniza();
         $msgEasy = '';
         $msgCotacao = '';
-        list($respEasy, $msgEasy) = $sincroniza->easy();
-        list($respCotacao, $msgCotacao) = $sincroniza->cotacaoAcao();
+        list($respEasy, $msgEasy) = SincronizaFactory::sincroniza('easy')->atualiza();
+        list($respCotacao, $msgCotacao) = SincronizaFactory::sincroniza('acao')->atualiza();
         if (!($respEasy && $respCotacao)) {
             $this->operacao->addError('ativo_id', 'erro:</br>' . $msgEasy . '</br>' . $msgCotacao);
             throw new Exception('');
