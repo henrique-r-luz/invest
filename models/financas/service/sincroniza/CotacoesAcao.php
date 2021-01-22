@@ -9,25 +9,26 @@
 namespace app\models\financas\service\sincroniza;
 
 use app\lib\CajuiHelper;
+use app\lib\componentes\FabricaNotificacao;
 use app\models\financas\Ativo;
 use app\models\financas\Operacao;
 use Yii;
+use yii\db\Exception;
+use yii\base\UserException;
 
 /**
  * Description of CotacoesAcao
  *
  * @author henrique
  */
-class CotacoesAcao extends OperacoesAbstract{
-    
-    
+class CotacoesAcao extends OperacoesAbstract {
+
     private $csv;
     private $erros;
-    
-    
+
     //put your code here
     public function atualiza() {
-        
+
         foreach ($this->csv as $acoes) {
             $contErro = 0;
             $ativo = Ativo::findOne($acoes['id']);
@@ -46,12 +47,15 @@ class CotacoesAcao extends OperacoesAbstract{
                 $contErro++;
             }
         }
-        if ($contErro == 0) {
-            return [true, 'sucesso'];
-        } else {
-            return [false, 'erro:</br>' . $this->erros];
+        if ($contErro != 0) {         
+                $msg = 'A Cotação açoes não foram atualizados !</br>' . $this->erros;
+                FabricaNotificacao::create('rank', ['ok' => false,
+                    'titulo' => 'Cotação ação falhou!',
+                    'mensagem' => $msg,
+                    'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
+                     throw new UserException($msg);
+            
         }
-        
     }
 
     public function getDados() {

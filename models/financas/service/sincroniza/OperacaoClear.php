@@ -9,10 +9,12 @@
 namespace app\models\financas\service\sincroniza;
 
 use app\lib\CajuiHelper;
+use app\lib\componentes\FabricaNotificacao;
 use app\models\financas\Ativo;
 use app\models\financas\Operacao;
 use app\models\financas\service\OperacaoService;
 use Yii;
+use yii\base\UserException;
 use yii\db\Exception;
 
 /**
@@ -21,12 +23,13 @@ use yii\db\Exception;
  * @author henrique
  */
 class OperacaoClear extends OperacoesAbstract {
+
     //put your code here
-    
+
     private $csv;
-    
+
     protected function getDados() {
-         $arquivo = Yii::$app->params['bot'] . '/orders.csv';
+        $arquivo = Yii::$app->params['bot'] . '/orders.csv';
 
         $erros = 'Erro na criação das Operações: ';
         if (!file_exists($arquivo)) {
@@ -74,18 +77,21 @@ class OperacaoClear extends OperacoesAbstract {
 
                         $transaction->rollBack();
                         $erros .= CajuiHelper::processaErros($operacaoService->getOpereacao()->getErrors()) . '</br>';
-
-                        return [false, $erros];
+                        throw new UserException($erros);
                     }
                 }
             }
             $transaction->commit();
-            return [true, 'sucesso'];
         } catch (Exception $e) {
-           
+            if ($resp == false) {
+                FabricaNotificacao::create('rank', ['ok' => false,
+                    'titulo' => 'Operações ações Falhou!',
+                    'mensagem' => 'As operações de ações Falharam !.<br>' . $erros,
+                    'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
+            }
+
             $transaction->rollBack();
-            return [false, $erros . $e];
-            throw $e;
+          
         }
     }
 

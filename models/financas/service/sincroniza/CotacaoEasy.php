@@ -51,10 +51,12 @@ class CotacaoEasy extends OperacoesAbstract {
             }
         }
         //exit();
-        if ($contErro == 0) {
-            return [true, 'sucesso'];
-        } else {
-            return [false, $erros];
+        if ($contErro != 0) {
+                FabricaNotificacao::create('rank', ['ok' => false,
+                'titulo' => 'Renda fixa Easynveste falhou!',
+                'mensagem' => 'Renda fixa Easynveste não foi atualizados !</br>' . $erros,
+                'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
+                 throw new UserException($erros);
         }
     }
 

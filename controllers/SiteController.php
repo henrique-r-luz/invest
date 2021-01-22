@@ -2,16 +2,12 @@
 
 namespace app\controllers;
 
-use Yii;
-use yii\filters\AccessControl;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
-use \app\models\financas\Ativo;
-use yii\web\JsExpression;
-use app\lib\componentes\FabricaNotificacao;
-use \app\models\Sincroniza;
+use app\lib\actions\ActionException;
 use app\models\service\IndexService;
-use yii\helpers\Url;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\web\Controller;
+use const YII_ENV_TEST;
 
 class SiteController extends Controller {
 
@@ -45,9 +41,10 @@ class SiteController extends Controller {
      */
     public function actions() {
         return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
+             'error' => [
+                // 'class' => ActionException::class,
+              'class' => 'yii\web\ErrorAction',
+              ], 
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
@@ -64,15 +61,16 @@ class SiteController extends Controller {
         $indexService = new IndexService();
         $indexService->createGraficos();
         return $this->render('index', [
-                    'dadosCategoria' =>$indexService->getDadosCategoria(), 
-                    'dadosPais'=>$indexService->getDadosPais(),
+                    'dadosCategoria' => $indexService->getDadosCategoria(),
+                    'dadosPais' => $indexService->getDadosPais(),
                     'dadosAtivo' => $indexService->getDadosAtivo(),
                     'dadosTipo' => $indexService->getDadosTipo(),
                     'dadosAcoes' => $indexService->getDadosAcaoes(),
-                    'patrimonioBruto' =>$indexService->getPatrimonioBruto(),
-                    'valorCompra' =>$indexService->getValorCompra(),
-                    'lucro_bruto' =>$indexService->getLucro() ,
+                    'patrimonioBruto' => $indexService->getPatrimonioBruto(),
+                    'valorCompra' => $indexService->getValorCompra(),
+                    'lucro_bruto' => $indexService->getLucro(),
         ]);
     }
 
+   
 }

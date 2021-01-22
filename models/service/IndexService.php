@@ -13,7 +13,6 @@ use app\lib\componentes\FabricaNotificacao;
 use app\lib\Pais;
 use app\lib\Tipo;
 use app\models\financas\Ativo;
-use app\models\financas\Sincroniza;
 use Yii;
 use yii\web\JsExpression;
 use app\models\financas\service\sincroniza\SincronizaFactory;
@@ -42,30 +41,9 @@ class IndexService {
     }
 
     public function sincroniza() {
-        $msg = '';
-        list($resp, $msg) = SincronizaFactory::sincroniza('easy')->atualiza();
-        if ($resp == false) {
-             
-            FabricaNotificacao::create('rank', ['ok' => $resp,
-                'titulo' => 'Renda fixa Easynveste falhou!',
-                'mensagem' => 'Renda fixa Easynveste não foi atualizados !</br>' . $msg,
-                'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
-        }
-        list($resp, $msg) =  SincronizaFactory::sincroniza('operacaoClear')->atualiza();
-        if ($resp == false) {
-            FabricaNotificacao::create('rank', ['ok' => $resp,
-                'titulo' => 'Operações ações Falhou!',
-                'mensagem' => 'As operações de ações Falharam !.<br>' . $msg,
-                'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
-        }
-
-        list($resp, $msg) = SincronizaFactory::sincroniza('acao')->atualiza();
-        if ($resp == false) {
-            FabricaNotificacao::create('rank', ['ok' => $resp,
-                'titulo' => 'Cotação açoes falhou!',
-                'mensagem' => 'A Cotação açoes não foram atualizados !</br>' . $msg,
-                'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
-        }
+        SincronizaFactory::sincroniza('easy')->atualiza();
+        SincronizaFactory::sincroniza('operacaoClear')->atualiza();
+        SincronizaFactory::sincroniza('acao')->atualiza();
     }
 
     public function createGraficos() {
@@ -110,7 +88,7 @@ class IndexService {
                 ->where(['tipo' => Tipo::ACOES])
                 ->andWhere(['>', 'quantidade', 0])
                 ->andWhere(['<>', 'valor_bruto', 0])
-                ->orderBy(['valor_bruto'=>SORT_DESC])
+                ->orderBy(['valor_bruto' => SORT_DESC])
                 ->all();
         $totalAcoes = Ativo::find()
                 ->where(['tipo' => Tipo::ACOES])
@@ -165,7 +143,8 @@ class IndexService {
         $this->montaGraficoTipo(Tipo::TESOURO_DIRETO, $totalPatrimonio, 4, $dadosTipo);
         $this->montaGraficoTipo(Tipo::Criptomoeda, $totalPatrimonio, 5, $dadosTipo);
     }
-     private function montaGraficoCategoria($categoria, $totalPatrimonio, $cor, &$dadosCategoria) {
+
+    private function montaGraficoCategoria($categoria, $totalPatrimonio, $cor, &$dadosCategoria) {
         $fatia = [];
         $valorAtivoCategoria = Ativo::find()->where(['categoria' => $categoria])
                 ->sum('valor_bruto');
@@ -178,9 +157,8 @@ class IndexService {
         $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . $cor . ']');
         $dadosCategoria[] = $fatia;
     }
-    
-    
-     private function montaGraficoPais($pais, $totalPatrimonio, $cor, &$dadosPais) {
+
+    private function montaGraficoPais($pais, $totalPatrimonio, $cor, &$dadosPais) {
         $fatia = [];
         $valorAtivoPais = Ativo::find()->where(['pais' => $pais])
                 ->sum('valor_bruto');
@@ -212,7 +190,7 @@ class IndexService {
         $this->montaGraficoPais(Pais::BR, $totalPatrimonio, 0, $dadosPais);
         $this->montaGraficoPais(Pais::US, $totalPatrimonio, 1, $dadosPais);
     }
-    
+
     function getDadosCategoria() {
         return $this->dadosCategoria;
     }
@@ -244,7 +222,5 @@ class IndexService {
     function getLucro() {
         return $this->lucro;
     }
-
-
 
 }

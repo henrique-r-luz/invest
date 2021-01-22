@@ -15,7 +15,6 @@
 namespace app\models\financas\service;
 
 use app\lib\CajuiHelper;
-use app\models\financas\Sincroniza;
 use Yii;
 use yii\db\Exception;
 use app\models\financas\service\sincroniza\SincronizaFactory;
@@ -118,15 +117,10 @@ class OperacaoService {
 
 
     private function sicronizaDadosAtivo() {
-        $sincroniza = new Sincroniza();
-        $msgEasy = '';
-        $msgCotacao = '';
-        list($respEasy, $msgEasy) = SincronizaFactory::sincroniza('easy')->atualiza();
-        list($respCotacao, $msgCotacao) = SincronizaFactory::sincroniza('acao')->atualiza();
-        if (!($respEasy && $respCotacao)) {
-            $this->operacao->addError('ativo_id', 'erro:</br>' . $msgEasy . '</br>' . $msgCotacao);
-            throw new Exception('');
-        }
+       
+        SincronizaFactory::sincroniza('easy')->atualiza();
+        SincronizaFactory::sincroniza('acao')->atualiza();
+       
     }
 
     public function getOpereacao() {

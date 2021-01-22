@@ -25,6 +25,7 @@ $config = [
           'class' => '\kartik\grid\Module',
           ],
           ], */
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => true,
