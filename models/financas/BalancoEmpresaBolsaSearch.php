@@ -114,6 +114,7 @@ class BalancoEmpresaBolsaSearch extends BalancoEmpresaBolsa {
             //}
             //array_push($dadosGrafico,['name'=>$key,'data'=>[1,2,3,4,5,6]]);
         }
+       
         return $dadosGrafico;
     }
 

@@ -57,6 +57,7 @@
                             'items' => [
                                 ['label' => 'Histograma', 'icon' => 'signal', 'url' => ['/histograma']],
                                 ['label' => 'Correlação', 'icon' => 'exchange', 'url' => ['/']],
+                                ['label' => 'Evol. Patrimônio', 'icon' => 'signal', 'url' => ['/evolucao-patrimonio']],
                             ],
                         ]
                     ],
