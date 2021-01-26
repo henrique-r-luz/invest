@@ -51,6 +51,7 @@ class EvolucaoPatrimonio extends Model {
                 ->innerJoin('ativo', 'ativo.id = operacao.ativo_id')
                 ->where(['operacao.tipo' => Operacao::getTipoOperacaoId(Operacao::COMPRA)])
                 ->andWhere(['ativo.pais' => $pais])
+                ->andWhere(['ativo'=>true])
                 ->groupBy(["to_char(data, 'YYYY-MM'),ativo.pais"]);
 
         $vendaMes = Operacao::find()
@@ -58,19 +59,25 @@ class EvolucaoPatrimonio extends Model {
                 ->innerJoin('ativo', 'ativo.id = operacao.ativo_id')
                 ->where(['operacao.tipo' => Operacao::getTipoOperacaoId(Operacao::VENDA)])
                 ->andWhere(['ativo.pais' => $pais])
+                ->andWhere(['ativo'=>true])
                 ->groupBy(["to_char(data, 'YYYY-MM'),ativo.pais"]);
 
         $datasOperacao = Operacao::find()
                 ->select(["to_char(data, 'YYYY-MM') as data_id", 'ativo.pais'])
                 ->innerJoin('ativo', 'ativo.id = operacao.ativo_id')
+               //  ->andWhere(['ativo.pais' => $pais])
+                ->andWhere(['ativo'=>true])
                 ->distinct();
 
         return (new Query())
                 ->from(['datasOperacao' => $datasOperacao])
                 ->select(['datasOperacao.data_id', '(coalesce(valor_compra, 0)  - coalesce(valor_venda, 0)) as valor'])
                 ->leftJoin(['comprasMes' => $comprasMes], '"comprasMes"."data_id" = "datasOperacao"."data_id" and "datasOperacao".pais = "comprasMes"."pais"')
-                ->leftJoin(['vendaMes' => $vendaMes], '"vendaMes"."data_id" = "datasOperacao"."data_id" and "datasOperacao".pais = "vendaMes"."pais"')
+                ->leftJoin(['vendaMes' => $vendaMes], '"vendaMes"."data_id" = "datasOperacao"."data_id" and "datasOperacao".pais = "vendaMes"."pais"') 
                 ->orderBy(['datasOperacao.data_id' => SORT_ASC])
+               // ->createCommand()
+              //  ->getRawSql();
+        
                 ->all();
     }
     

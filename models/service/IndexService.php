@@ -114,6 +114,7 @@ class IndexService {
 
         $somaCompra = Ativo::find()
                 ->andWhere(['ativo' => true])
+                ->andWhere(['pais'=>Pais::BR])
                 ->sum('valor_compra');
         //valor de compra
 
