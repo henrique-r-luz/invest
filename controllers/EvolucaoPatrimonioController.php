@@ -8,26 +8,27 @@
 
 namespace app\controllers;
 
-
-
 use \app\models\graficos\EvolucaoPatrimonio;
 use \yii\base\Controller;
+
 /**
  * Description of EvolucaoPatrimonioController
  *
  * @author henrique
  */
 class EvolucaoPatrimonioController extends Controller {
+
     //put your code here
-    
-    
-    public function actionIndex(){
-        $dadosGraficoPratrimonio = new  EvolucaoPatrimonio();
+
+
+    public function actionIndex() {
+        $dadosGraficoPratrimonio = new EvolucaoPatrimonio();
+        $dadosGraficoPratrimonio->getDados();
         return $this->render('index',
-                [
-                    'dados'=>$dadosGraficoPratrimonio->getDados(),
-                ]
-                );
-                
+                        [
+                            'dados' => $dadosGraficoPratrimonio,
+                        ]
+        );
     }
+
 }

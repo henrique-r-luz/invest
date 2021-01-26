@@ -21,26 +21,30 @@ use \app\lib\Pais;
  */
 class EvolucaoPatrimonio extends Model {
 
-   
-     public function getDados() { 
-        
-       return [$this->getPatrimonioValorMoeda(Pais::BR,'Real'),
-           $this->getPatrimonioValorMoeda(Pais::US,'Dolar')];
+    private $dadosGrafico;
+    private $dataTime;
+
+    public function getDados() {
+
+        $this->dadosGrafico = [$this->getPatrimonioValorMoeda(Pais::BR, 'Real'),
+            $this->getPatrimonioValorMoeda(Pais::US, 'Dolar')];
     }
-    
-    public function getPatrimonioValorMoeda($pais,$moeda){
+
+    public function getPatrimonioValorMoeda($pais, $moeda) {
         $dados = $this->evolucaoPratrimonio($pais);
-        $patromonio= ['name' => $moeda, 'data' => []];
+
+        $patromonio = ['name' => $moeda, 'data' => []];
         $valores = [];
-        $datas = array_column($dados,'data_id');
+        $datas = array_column($dados, 'data_id');
+        $this->dataTime = $datas;
         $valorPatrimonio = array_column($dados, 'valor');
-       
+
         foreach ($valorPatrimonio as $id => $valorMes) {
-            $sub = array_slice($valorPatrimonio, 0, ($id+1));
-          
-            $valores[] = floatval(round(array_sum($sub),2));
+            $sub = array_slice($valorPatrimonio, 0, ($id + 1));
+
+            $valores[] = floatval(round(array_sum($sub), 2));
         }
-        $patromonio['data'] =$valores;
+        $patromonio['data'] = $valores;
         return $patromonio;
     }
 
@@ -51,7 +55,7 @@ class EvolucaoPatrimonio extends Model {
                 ->innerJoin('ativo', 'ativo.id = operacao.ativo_id')
                 ->where(['operacao.tipo' => Operacao::getTipoOperacaoId(Operacao::COMPRA)])
                 ->andWhere(['ativo.pais' => $pais])
-                ->andWhere(['ativo'=>true])
+                ->andWhere(['ativo' => true])
                 ->groupBy(["to_char(data, 'YYYY-MM'),ativo.pais"]);
 
         $vendaMes = Operacao::find()
@@ -59,31 +63,31 @@ class EvolucaoPatrimonio extends Model {
                 ->innerJoin('ativo', 'ativo.id = operacao.ativo_id')
                 ->where(['operacao.tipo' => Operacao::getTipoOperacaoId(Operacao::VENDA)])
                 ->andWhere(['ativo.pais' => $pais])
-                ->andWhere(['ativo'=>true])
+                ->andWhere(['ativo' => true])
                 ->groupBy(["to_char(data, 'YYYY-MM'),ativo.pais"]);
 
         $datasOperacao = Operacao::find()
-                ->select(["to_char(data, 'YYYY-MM') as data_id", 'ativo.pais'])
+                ->select(["to_char(data, 'YYYY-MM') as data_id"])
                 ->innerJoin('ativo', 'ativo.id = operacao.ativo_id')
-               //  ->andWhere(['ativo.pais' => $pais])
-                ->andWhere(['ativo'=>true])
+                ->andWhere(['ativo' => true])
                 ->distinct();
 
         return (new Query())
-                ->from(['datasOperacao' => $datasOperacao])
-                ->select(['datasOperacao.data_id', '(coalesce(valor_compra, 0)  - coalesce(valor_venda, 0)) as valor'])
-                ->leftJoin(['comprasMes' => $comprasMes], '"comprasMes"."data_id" = "datasOperacao"."data_id" and "datasOperacao".pais = "comprasMes"."pais"')
-                ->leftJoin(['vendaMes' => $vendaMes], '"vendaMes"."data_id" = "datasOperacao"."data_id" and "datasOperacao".pais = "vendaMes"."pais"') 
-                ->orderBy(['datasOperacao.data_id' => SORT_ASC])
-               // ->createCommand()
-              //  ->getRawSql();
-        
-                ->all();
+                        ->from(['datasOperacao' => $datasOperacao])
+                        ->select(['datasOperacao.data_id', '(coalesce(valor_compra, 0)  - coalesce(valor_venda, 0)) as valor'])
+                        ->leftJoin(['comprasMes' => $comprasMes], '"comprasMes"."data_id" = "datasOperacao"."data_id"')
+                        ->leftJoin(['vendaMes' => $vendaMes], '"vendaMes"."data_id" = "datasOperacao"."data_id"')
+                        ->orderBy(['datasOperacao.data_id' => SORT_ASC])
+                        ->all();
     }
-    
-    
-   
+    function getDadosGrafico() {
+        return $this->dadosGrafico;
+    }
 
-   
+    function getDataTime() {
+        return $this->dataTime;
+    }
+
+
 
 }

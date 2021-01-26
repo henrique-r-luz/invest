@@ -29,9 +29,9 @@ Highcharts::widget([
             'align' => 'right',
             'verticalAlign' => 'middle'
         ],
-       /* 'xAxis' => [
-            'categories' => ['2000','2001','2002','2003','2004','2005','2006']
-        ],*/
+        'xAxis' => [
+            'categories' => $dados->getDataTime()
+        ],
         'yAxis' => [
             'title' => ['text' => 'Valores']
         ],
@@ -43,7 +43,7 @@ Highcharts::widget([
            ] 
         ],
        // 'series' => [['name' => 'graf', 'data' =>[11217.93,1198.93,3604.3599,-1055.34 ]]],
-        'series' => $dados,
+        'series' => $dados->getDadosGrafico(),
     ]
 ])
 ?>
