@@ -44,7 +44,7 @@ class IndexService {
         SincronizaFactory::sincroniza('easy')->atualiza();
         SincronizaFactory::sincroniza('operacaoClear')->atualiza();
         SincronizaFactory::sincroniza('acao')->atualiza();
-        SincronizaFactory::sincroniza('banco_inter')->atualiza();
+        //SincronizaFactory::sincroniza('banco_inter')->atualiza();
     }
 
     public function createGraficos() {
@@ -115,7 +115,6 @@ class IndexService {
 
         $somaCompra = Ativo::find()
                 ->andWhere(['ativo' => true])
-                ->andWhere(['pais'=>Pais::BR])
                 ->sum('valor_compra');
         //valor de compra
 
