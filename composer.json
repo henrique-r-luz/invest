@@ -47,7 +47,9 @@
         "bower-asset/js-cookie": "*",
         "bower-asset/vis": "*",
         "kartik-v/yii2-icons": "@dev",
-        "sjaakp/yii2-collapse": "^1.1"
+        "sjaakp/yii2-collapse": "^1.1",
+         "smalot/pdfparser": "*"
+       
      
     },
     "require-dev": {
