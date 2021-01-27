@@ -28,6 +28,9 @@ class SincronizaFactory {
                 return self::getEmpresa();    
             case 'operacaoClear':
                 return self::getOperacaoClear();
+            case 'banco_inter':
+                return self::getBancoInter();
+                
         }
     }
     
@@ -50,5 +53,9 @@ class SincronizaFactory {
     
     private function getOperacaoClear(){
         return new OperacaoClear();
+    }
+    
+    private function getBancoInter(){
+        return new BancoInter();
     }
 }

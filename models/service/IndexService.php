@@ -44,6 +44,7 @@ class IndexService {
         SincronizaFactory::sincroniza('easy')->atualiza();
         SincronizaFactory::sincroniza('operacaoClear')->atualiza();
         SincronizaFactory::sincroniza('acao')->atualiza();
+        SincronizaFactory::sincroniza('banco_inter')->atualiza();
     }
 
     public function createGraficos() {
