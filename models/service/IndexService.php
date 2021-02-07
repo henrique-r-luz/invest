@@ -52,10 +52,12 @@ class IndexService {
         $this->sincroniza();
         $totalPatrimonio = Ativo::find()
                 ->andWhere(['>', 'quantidade', 0])
+                 ->andWhere(['ativo' => true])
                 ->sum('valor_bruto');
 
         $ativos = Ativo::find()
                 ->orderBy(['valor_bruto' => SORT_DESC])
+                 ->andWhere(['ativo' => true])
                 ->andWhere(['>', 'quantidade', 0])
                 ->all();
         
@@ -64,12 +66,14 @@ class IndexService {
                 ->where(['tipo' => Tipo::ACOES])
                 ->andWhere(['>', 'quantidade', 0])
                 ->andWhere(['<>', 'valor_bruto', 0])
+                   ->andWhere(['ativo' => true])
                 ->orderBy(['valor_bruto' => SORT_DESC])
                 ->all();
           
           
         $totalAcoes = Ativo::find()
                 ->where(['tipo' => Tipo::ACOES])
+                 ->andWhere(['ativo' => true])
                 ->sum('valor_bruto');
 
         //gráfico por categorias
@@ -139,6 +143,7 @@ class IndexService {
     private function montaGraficoCategoria($categoria, $totalPatrimonio, $cor, &$dadosCategoria) {
         $fatia = [];
         $valorAtivoCategoria = Ativo::find()->where(['categoria' => $categoria])
+                 ->andWhere(['ativo' => true])
                 ->sum('valor_bruto');
         $fatia['name'] = $categoria;
         if ($totalPatrimonio == 0) {
@@ -153,6 +158,7 @@ class IndexService {
     private function montaGraficoPais($pais, $totalPatrimonio, $cor, &$dadosPais) {
         $fatia = [];
         $valorAtivoPais = Ativo::find()->where(['pais' => $pais])
+                 ->andWhere(['ativo' => true])
                 ->sum('valor_bruto');
         $fatia['name'] = $pais;
         if ($totalPatrimonio == 0) {
@@ -169,6 +175,7 @@ class IndexService {
     private function montaGraficoTipo($tipo, $totalPatrimonio, $cor, &$dadosTipo) {
         $fatia = [];
         $valorAtivoCategoria = Ativo::find()->where(['tipo' => $tipo])
+                 ->andWhere(['ativo' => true])
                 ->sum('valor_bruto');
         $fatia['name'] = $tipo;
         if ($totalPatrimonio == 0) {
@@ -185,6 +192,7 @@ class IndexService {
         
         $valorAtivoPais = Ativo::find()->where(['pais' => $pais])
                  ->andWhere(['tipo' => Tipo::ACOES])
+                 ->andWhere(['ativo' => true])
                 ->sum('valor_bruto');
         $fatia['name'] = $pais;
         if ($totalPatrimonio == 0) {
@@ -210,7 +218,6 @@ class IndexService {
     private function graficoTipo($ativos, $totalPatrimonio, &$dadosTipo) {
 
 
-        // $tipos = Tipo::find()->all();
         $dadosTipo = [];
         $this->montaGraficoTipo(Tipo::ACOES, $totalPatrimonio, 0, $dadosTipo);
         $this->montaGraficoTipo(Tipo::CDB, $totalPatrimonio, 1, $dadosTipo);
