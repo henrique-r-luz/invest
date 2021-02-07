@@ -69,7 +69,7 @@ use kartik\number\NumberControl;
                         'maskedInputOptions' => [
                             'allowMinus' => false
                         ],
-                        'readonly' => ($model->isNewRecord) ? true : false,
+                        'readonly' => true,//($model->isNewRecord) ? true : false,
                     ])
                     ?>
                 </div>
@@ -79,7 +79,7 @@ use kartik\number\NumberControl;
                         'maskedInputOptions' => [
                             'allowMinus' => false
                         ],
-                        'readonly' => ($model->isNewRecord) ? true : false,
+                        'readonly' => true,//($model->isNewRecord) ? true : false,
                     ])
                     ?>
 
