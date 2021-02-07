@@ -14,7 +14,7 @@ Highcharts::widget([
     'options' => [
         'chart' => [
             'type' => 'pie',
-        //'width' => 250
+         'height' => 350,
         ],
         'title' => [
             'text' => 'Tipo',

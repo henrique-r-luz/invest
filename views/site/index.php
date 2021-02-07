@@ -9,9 +9,9 @@ $this->title = 'Patrimônio';
 //exit();
 ?>
 
-<div class="row ">
-    <div class="col-lg-3" >
-        <div class="box box-info" height="50%">
+<div class="row">
+    <div class="col-lg-3">
+        <div class="box box-info" >
             <?= $this->render('@app/views/site/graficos/patrimonio_categoria', ['dadosCategoria' => $dadosCategoria]) ?>
         </div>
     </div>
@@ -27,7 +27,7 @@ $this->title = 'Patrimônio';
     </div>
     <div class="col-lg-3">
         <div class="box box-info">
-            <?= $this->render('@app/views/site/graficos/acoes_pais', ['dadosPais' => $dadosPais]) ?>
+            <?= $this->render('@app/views/site/graficos/acoes_pais', ['dadosAcoesPais' => $dadosAcoesPais]) ?>
         </div>
     </div>
 </div>

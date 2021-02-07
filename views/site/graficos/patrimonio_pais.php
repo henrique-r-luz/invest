@@ -13,7 +13,7 @@ use yii\web\JsExpression;
                 'options' => [
                     'chart' => [
                         'type' => 'pie',
-                    //'width' => 300
+                     'height' => 350,
                     ],
                     'title' => [
                         'text' => 'País',

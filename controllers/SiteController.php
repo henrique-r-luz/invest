@@ -60,8 +60,7 @@ class SiteController extends Controller {
     public function actionIndex() {
         $indexService = new IndexService();
         $indexService->createGraficos();
-       // print_r($indexService->getDadosCategoria());
-      //  exit();
+       
         return $this->render('index', [
                     'dadosCategoria' => $indexService->getDadosCategoria(),
                     'dadosPais' => $indexService->getDadosPais(),
@@ -71,6 +70,7 @@ class SiteController extends Controller {
                     'patrimonioBruto' => $indexService->getPatrimonioBruto(),
                     'valorCompra' => $indexService->getValorCompra(),
                     'lucro_bruto' => $indexService->getLucro(),
+                    'dadosAcoesPais'=>$indexService->getDadosAcaoPais(),
         ]);
     }
 

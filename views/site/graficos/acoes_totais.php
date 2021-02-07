@@ -12,9 +12,7 @@ use yii\web\JsExpression;
                 'options' => [
                     'chart' => [
                         'type' => 'pie',
-                    //'heigth' => 600
-                    //  'height'=>'100%',
-                    //  'width'=>'100%',
+                       // 'height' => 350,
                     ],
                     'title' => [
                         'text' => 'Açoes',

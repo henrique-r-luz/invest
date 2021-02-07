@@ -12,7 +12,7 @@ use yii\web\JsExpression;
                 'options' => [
                     'chart' => [
                         'type' => 'pie',
-                       // 'width' => 250
+                        'height' => 350,
                     ],
                     'title' => [
                         'text' => 'Ações Por País',
@@ -20,7 +20,7 @@ use yii\web\JsExpression;
                     'series' => [
                         [
                             'name' => 'Tipo',
-                            'data' => $dadosPais,
+                            'data' => $dadosAcoesPais,
                             //'size' => 300,
                             'showInLegend' => false,
                             'dataLabels' => [

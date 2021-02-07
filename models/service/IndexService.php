@@ -35,6 +35,7 @@ class IndexService {
     private $patrimonioBruto;
     private $valorCompra;
     private $lucro;
+    private $dadosAcaoPais;
 
     function __construct() {
         
@@ -57,6 +58,19 @@ class IndexService {
                 ->orderBy(['valor_bruto' => SORT_DESC])
                 ->andWhere(['>', 'quantidade', 0])
                 ->all();
+        
+        
+          $acoes = Ativo::find()
+                ->where(['tipo' => Tipo::ACOES])
+                ->andWhere(['>', 'quantidade', 0])
+                ->andWhere(['<>', 'valor_bruto', 0])
+                ->orderBy(['valor_bruto' => SORT_DESC])
+                ->all();
+          
+          
+        $totalAcoes = Ativo::find()
+                ->where(['tipo' => Tipo::ACOES])
+                ->sum('valor_bruto');
 
         //gráfico por categorias
         $this->dadosCategoria = [];
@@ -69,6 +83,8 @@ class IndexService {
         //grafico por País
         $this->dadosPais = [];
         $this->graficoPais($totalPatrimonio, $this->dadosPais);
+        
+        $this->graficoAcaoPais($totalAcoes, $this->dadosAcaoPais);
 
         //grafico por ativo
         foreach ($ativos as $id => $ativo) {
@@ -85,15 +101,7 @@ class IndexService {
         }
         //gráfico de ações ações
         $this->dadosAcoes = [];
-        $acoes = Ativo::find()
-                ->where(['tipo' => Tipo::ACOES])
-                ->andWhere(['>', 'quantidade', 0])
-                ->andWhere(['<>', 'valor_bruto', 0])
-                ->orderBy(['valor_bruto' => SORT_DESC])
-                ->all();
-        $totalAcoes = Ativo::find()
-                ->where(['tipo' => Tipo::ACOES])
-                ->sum('valor_bruto');
+      
         foreach ($acoes as $id => $acao) {
             $fatia = [];
             $valorAtivo = $acao->valor_liquido;
@@ -127,23 +135,6 @@ class IndexService {
         $this->patrimonioBruto = $formatter->asCurrency($this->patrimonioBruto);
     }
 
-    private function graficoCategoria($totalPatrimonio, &$dadosCategoria) {
-        $this->montaGraficoCategoria(Categoria::RENDA_FIXA, $totalPatrimonio, 0, $dadosCategoria);
-        $this->montaGraficoCategoria(Categoria::RENDA_VARIAVEL, $totalPatrimonio, 1, $dadosCategoria);
-    }
-
-    private function graficoTipo($ativos, $totalPatrimonio, &$dadosTipo) {
-
-
-        // $tipos = Tipo::find()->all();
-        $dadosTipo = [];
-        $this->montaGraficoTipo(Tipo::ACOES, $totalPatrimonio, 0, $dadosTipo);
-        $this->montaGraficoTipo(Tipo::CDB, $totalPatrimonio, 1, $dadosTipo);
-        $this->montaGraficoTipo(Tipo::DEBENTURES, $totalPatrimonio, 2, $dadosTipo);
-        $this->montaGraficoTipo(Tipo::FUNDOS_INVESTIMENTO, $totalPatrimonio, 3, $dadosTipo);
-        $this->montaGraficoTipo(Tipo::TESOURO_DIRETO, $totalPatrimonio, 4, $dadosTipo);
-        $this->montaGraficoTipo(Tipo::Criptomoeda, $totalPatrimonio, 5, $dadosTipo);
-    }
 
     private function montaGraficoCategoria($categoria, $totalPatrimonio, $cor, &$dadosCategoria) {
         $fatia = [];
@@ -172,6 +163,8 @@ class IndexService {
         $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . $cor . ']');
         $dadosPais[] = $fatia;
     }
+    
+    
 
     private function montaGraficoTipo($tipo, $totalPatrimonio, $cor, &$dadosTipo) {
         $fatia = [];
@@ -186,14 +179,50 @@ class IndexService {
         $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . $cor . ']');
         $dadosTipo[] = $fatia;
     }
+    
+     private function montaGraficoAcaoPais($pais, $totalPatrimonio, $cor, &$dadosAcaoPais) {
+        $fatia = [];
+        
+        $valorAtivoPais = Ativo::find()->where(['pais' => $pais])
+                 ->andWhere(['tipo' => Tipo::ACOES])
+                ->sum('valor_bruto');
+        $fatia['name'] = $pais;
+        if ($totalPatrimonio == 0) {
+            $totalPatrimonio = 1;
+        } else {
+            $fatia['y'] = round((($valorAtivoPais / $totalPatrimonio) * 100));
+        }
+        $fatia['color'] = new JsExpression('Highcharts.getOptions().colors[' . $cor . ']');
+        $dadosAcaoPais[] = $fatia;
+    }
 
     private function graficoPais($totalPatrimonio, &$dadosPais) {
         $this->montaGraficoPais(Pais::BR, $totalPatrimonio, 0, $dadosPais);
         $this->montaGraficoPais(Pais::US, $totalPatrimonio, 1, $dadosPais);
     }
     
-    private function graficoAcaoPais($totalPatrimonio, &$dadosPais){
-        
+    
+    private function graficoCategoria($totalPatrimonio, &$dadosCategoria) {
+        $this->montaGraficoCategoria(Categoria::RENDA_FIXA, $totalPatrimonio, 0, $dadosCategoria);
+        $this->montaGraficoCategoria(Categoria::RENDA_VARIAVEL, $totalPatrimonio, 1, $dadosCategoria);
+    }
+
+    private function graficoTipo($ativos, $totalPatrimonio, &$dadosTipo) {
+
+
+        // $tipos = Tipo::find()->all();
+        $dadosTipo = [];
+        $this->montaGraficoTipo(Tipo::ACOES, $totalPatrimonio, 0, $dadosTipo);
+        $this->montaGraficoTipo(Tipo::CDB, $totalPatrimonio, 1, $dadosTipo);
+        $this->montaGraficoTipo(Tipo::DEBENTURES, $totalPatrimonio, 2, $dadosTipo);
+        $this->montaGraficoTipo(Tipo::FUNDOS_INVESTIMENTO, $totalPatrimonio, 3, $dadosTipo);
+        $this->montaGraficoTipo(Tipo::TESOURO_DIRETO, $totalPatrimonio, 4, $dadosTipo);
+        $this->montaGraficoTipo(Tipo::Criptomoeda, $totalPatrimonio, 5, $dadosTipo);
+    }
+    
+    private function graficoAcaoPais($totalPatrimonio, &$dadosAcaoPais){
+        $this->montaGraficoAcaoPais(Pais::BR, $totalPatrimonio, 0, $dadosAcaoPais);
+        $this->montaGraficoAcaoPais(Pais::US, $totalPatrimonio, 1, $dadosAcaoPais);
     }
 
     function getDadosCategoria() {
@@ -227,5 +256,11 @@ class IndexService {
     function getLucro() {
         return $this->lucro;
     }
+    
+    function getDadosAcaoPais() {
+        return $this->dadosAcaoPais;
+    }
+
+
 
 }
