@@ -28,7 +28,7 @@ use Yii;
  */
 class CajuiHelper
 {
-
+    
     /**
      * Trasforma a string proveniente de um campo array do postgres em um array do php
      * {data,data} to [data, data]
