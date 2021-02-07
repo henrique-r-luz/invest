@@ -10,119 +10,25 @@ $this->title = 'Patrimônio';
 ?>
 
 <div class="row ">
-    <div class="col-lg-3">
-        <div class="box box-info">
-            <?=
-            Highcharts::widget([
-                'id' => 'grafico-pizza-categoria',
-                'scripts' => [
-                    'modules/exporting',
-                ],
-                'options' => [
-                    'chart' => [
-                        'type' => 'pie',
-                    //'width' => 300
-                    ],
-                    'title' => [
-                        'text' => 'Patrimônio por Categoria',
-                    ],
-                    'series' => [
-                        [
-                            'name' => 'Categorias',
-                            'data' => $dadosCategoria,
-                            //'size' => 200,
-                            'showInLegend' => true,
-                            'dataLabels' => [
-                                'enabled' => false,
-                                'format' => '<span style="font-size:13px">{point.name}: {point.y:f} %'
-                            ],
-                            'depth' => 100,
-                            'tooltip' => [
-                                'headerFormat' => '',
-                                'pointFormat' => '<span >{point.name}</span>: <b>{point.y:f} %</b> do Patrimônio<br/>'
-                            ],
-                        ],
-                    ],
-                ]
-            ])
-            ?>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="box box-info">
-            <?=
-            Highcharts::widget([
-                'id' => 'grafico-pizza-tipo',
-                'scripts' => [
-                    'modules/exporting',
-                ],
-                'options' => [
-                    'chart' => [
-                        'type' => 'pie',
-                    //'width' => 300
-                    ],
-                    'title' => [
-                        'text' => 'Patrimônio por Tipo',
-                    ],
-                    'series' => [
-                        [
-                            'name' => 'Tipo',
-                            'data' => $dadosTipo,
-                            //'size' => 300,
-                            'showInLegend' => true,
-                            'dataLabels' => [
-                                'enabled' => false,
-                                'format' => '<span style="font-size:13px">{point.name}: {point.y:f} %'
-                            ],
-                            'depth' => 100,
-                            'tooltip' => [
-                                'headerFormat' => '',
-                                'pointFormat' => '<span >{point.name}</span>: <b>{point.y:f} %</b> do Patrimônio<br/>'
-                            ],
-                        ],
-                    ],
-                ]
-            ])
-            ?>
+    <div class="col-lg-3" >
+        <div class="box box-info" height="50%">
+            <?= $this->render('@app/views/site/graficos/patrimonio_categoria', ['dadosCategoria' => $dadosCategoria]) ?>
         </div>
     </div>
     <div class="col-lg-3">
-         <div class="box box-info">
-        <?=
-            Highcharts::widget([
-                'id' => 'grafico-pizza-pais',
-                'scripts' => [
-                    'modules/exporting',
-                ],
-                'options' => [
-                    'chart' => [
-                        'type' => 'pie',
-                    //'width' => 300
-                    ],
-                    'title' => [
-                        'text' => 'Patrimônio por país',
-                    ],
-                    'series' => [
-                        [
-                            'name' => 'Tipo',
-                            'data' => $dadosPais,
-                            //'size' => 300,
-                            'showInLegend' => true,
-                            'dataLabels' => [
-                                'enabled' => false,
-                                'format' => '<span style="font-size:13px">{point.name}: {point.y:f} %'
-                            ],
-                            'depth' => 100,
-                            'tooltip' => [
-                                'headerFormat' => '',
-                                'pointFormat' => '<span >{point.name}</span>: <b>{point.y:f} %</b> do Patrimônio<br/>'
-                            ],
-                        ],
-                    ],
-                ]
-            ])
-            ?>
-         </div>
+        <div class="box box-info">
+            <?= $this->render('@app/views/site/graficos/patrimonio_tipo', ['dadosTipo' => $dadosTipo]) ?>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="box box-info">
+            <?= $this->render('@app/views/site/graficos/patrimonio_pais', ['dadosPais' => $dadosPais]) ?>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="box box-info">
+            <?= $this->render('@app/views/site/graficos/acoes_pais', ['dadosPais' => $dadosPais]) ?>
+        </div>
     </div>
 </div>
 <div class="row">
@@ -160,42 +66,7 @@ $this->title = 'Patrimônio';
 <div class="row ">
     <div class="col-lg-12">
         <div class="box box-info">
-            <?=
-            Highcharts::widget([
-                'id' => 'grafico-pizza-ativos2',
-                'scripts' => [
-                    'modules/exporting',
-                ],
-                'options' => [
-                    'chart' => [
-                        'type' => 'pie',
-                    //'heigth' => 600
-                    //  'height'=>'100%',
-                    //  'width'=>'100%',
-                    ],
-                    'title' => [
-                        'text' => 'Ativos',
-                    ],
-                    'series' => [
-                        [
-                            'name' => 'Ativos',
-                            'data' => $dadosAtivo,
-                            //'size' => 200,
-                            'showInLegend' => false,
-                            'dataLabels' => [
-                                'enabled' => true,
-                                'format' => '<span style="font-size:13px">{point.name}: {point.y:f} %'
-                            ],
-                            'depth' => 100,
-                            'tooltip' => [
-                                'headerFormat' => '',
-                                'pointFormat' => '<span >{point.name}</span>: <b>{point.y:f} %</b> do Patrimônio<br/>'
-                            ],
-                        ],
-                    ],
-                ]
-            ])
-            ?>
+            <?= $this->render('@app/views/site/graficos/ativos_detalhados', ['dadosAtivo' => $dadosAtivo]) ?>
         </div>
     </div>
 
@@ -203,42 +74,7 @@ $this->title = 'Patrimônio';
 <div class="row ">
     <div class="col-lg-12">
         <div class="box box-info">
-            <?=
-            Highcharts::widget([
-                'id' => 'grafico-pizza-acoes',
-                'scripts' => [
-                    'modules/exporting',
-                ],
-                'options' => [
-                    'chart' => [
-                        'type' => 'pie',
-                    //'heigth' => 600
-                    //  'height'=>'100%',
-                    //  'width'=>'100%',
-                    ],
-                    'title' => [
-                        'text' => 'Açoes',
-                    ],
-                    'series' => [
-                        [
-                            'name' => 'Ações',
-                            'data' => $dadosAcoes,
-                            //'size' => 200,
-                            'showInLegend' => false,
-                            'dataLabels' => [
-                                'enabled' => true,
-                                'format' => '<span style="font-size:13px">{point.name}: {point.y:f} %'
-                            ],
-                            'depth' => 100,
-                            'tooltip' => [
-                                'headerFormat' => '',
-                                'pointFormat' => '<span >{point.name}</span>: <b>{point.y:f} %</b> do Patrimônio<br/>'
-                            ],
-                        ],
-                    ],
-                ]
-            ])
-            ?>
+            <?= $this->render('@app/views/site/graficos/acoes_totais', ['dadosAcoes' => $dadosAcoes]) ?>
         </div>
     </div>
 

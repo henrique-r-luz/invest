@@ -26,6 +26,10 @@ class Tipo {
     const DEBENTURES = 'Debêntures';
     const ACOES = 'Ações';
     const Criptomoeda = 'Criptomoeda';
+    const OURO = 'Ouro';
+    const PRATA = 'Prata';
+    const ETFS = 'ETFs';
+    
 
     /**
      * Retorna todos os enuns em um array
@@ -39,6 +43,9 @@ class Tipo {
             self::DEBENTURES => 'Debêntures',
             self::ACOES => 'Ações',
             self::Criptomoeda => 'Criptomoeda',
+            self::OURO => 'Ouro',
+            self::PRATA => 'Prata',
+            self::ETFS => 'ETFs',
         ];
     }
 

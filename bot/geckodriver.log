@@ -13051,3 +13051,1200 @@ IPDL protocol error: Handler returned error code!
 ###!!! [Child][MessageChannel] Error: (msgtype=0xB60006,name=PWebSocket::Msg_DeleteSelf) Channel closing: too late to send/recv, messages will be lost
 
 JavaScript error: , line 0: uncaught exception: undefined
+1611778270015	geckodriver	INFO	Listening on 127.0.0.1:37901
+1611778270956	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileJ91wRi"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1611778279367	Marionette	INFO	Listening on port 44015
+1611778279588	Marionette	WARN	TLS certificate errors will be ignored for this session
+1611778285758	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+1611778287770	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+
+(firefox:91335): GLib-GObject-WARNING **: 17:11:29.215: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fe2477d6b90' of type 'MaiAtkType139'
+1611778313415	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+JavaScript error: https://accounts.google.com/o/oauth2/iframe#origin=https%3A%2F%2Fbr.investing.com&rpcToken=1407362539.161917&clearCache=1, line 1: ReferenceError: lso is not defined
+1611778313523	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1611778316777	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:91335): GLib-GObject-WARNING **: 17:11:57.375: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fe245c40770' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1611778321528	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:91335): GLib-GObject-WARNING **: 17:12:02.335: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fe2596acbf0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611778324395	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:91335): GLib-GObject-WARNING **: 17:12:05.105: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fe244cebcb0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611778327543	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:91335): GLib-GObject-WARNING **: 17:12:08.167: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fe2448eb170' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1611778336345	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:91335): GLib-GObject-WARNING **: 17:12:16.972: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fe244ee59b0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611778339376	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:91335): GLib-GObject-WARNING **: 17:12:19.995: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fe2441d9830' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611778342604	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:91335): GLib-GObject-WARNING **: 17:12:23.202: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fe243ca5e30' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611778345696	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:91335): GLib-GObject-WARNING **: 17:12:26.282: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fe243939050' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611778349395	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:91335): GLib-GObject-WARNING **: 17:12:29.935: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fe26a7126b0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611778353537	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:91335): GLib-GObject-WARNING **: 17:12:34.234: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fe259653170' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611778357432	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:91335): GLib-GObject-WARNING **: 17:12:38.134: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fe26c47e4d0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611778361520	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:91335): GLib-GObject-WARNING **: 17:12:42.318: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fe26bcaf350' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611778365147	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:91335): GLib-GObject-WARNING **: 17:12:45.958: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fe26c4496b0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611778368806	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:91335): GLib-GObject-WARNING **: 17:12:49.545: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fe244d449b0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611778372107	Marionette	INFO	Stopped listening on port 44015
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://activity-stream/lib/ASRouter.jsm, line 987: NS_ERROR_ILLEGAL_VALUE: Component returned failure code: 0x80070057 (NS_ERROR_ILLEGAL_VALUE) [nsIObserverService.removeObserver]
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x3A0144,name=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+1611855309629	geckodriver	INFO	Listening on 127.0.0.1:36333
+1611855310482	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileywOzRm"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1611855318792	Marionette	INFO	Listening on port 44347
+1611855319026	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+(firefox:66358): GLib-GObject-WARNING **: 14:35:25.939: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fd3288480b0' of type 'MaiAtkType139'
+1611855326007	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+1611855327407	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1611855341923	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+JavaScript error: resource://pdf.js/PdfStreamConverter.jsm, line 1089: NS_ERROR_FAILURE: Ignore PDF.js for this download.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1611855364582	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=568955e6-32a1-41f2-9a05-c43b94dbd7d4, line 29: SecurityError: The operation is insecure.
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1611855376110	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=568955e6-32a1-41f2-9a05-c43b94dbd7d4, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1611855385935	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=568955e6-32a1-41f2-9a05-c43b94dbd7d4, line 29: SecurityError: The operation is insecure.
+1611855390661	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1611855393400	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=568955e6-32a1-41f2-9a05-c43b94dbd7d4, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1611855398799	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=568955e6-32a1-41f2-9a05-c43b94dbd7d4, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1611855404104	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=568955e6-32a1-41f2-9a05-c43b94dbd7d4, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1611855409861	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=568955e6-32a1-41f2-9a05-c43b94dbd7d4, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1611855415099	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=568955e6-32a1-41f2-9a05-c43b94dbd7d4, line 29: SecurityError: The operation is insecure.
+1611855418773	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=568955e6-32a1-41f2-9a05-c43b94dbd7d4, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1611855423478	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=568955e6-32a1-41f2-9a05-c43b94dbd7d4, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1611855427490	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=568955e6-32a1-41f2-9a05-c43b94dbd7d4, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1611855437637	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=568955e6-32a1-41f2-9a05-c43b94dbd7d4, line 29: SecurityError: The operation is insecure.
+JavaScript error: https://s0.2mdn.net/sadbundle/11555686585659771760/index.html, line 151: TypeError: a.a is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1611855442060	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=568955e6-32a1-41f2-9a05-c43b94dbd7d4, line 29: SecurityError: The operation is insecure.
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1611855446822	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=568955e6-32a1-41f2-9a05-c43b94dbd7d4, line 29: SecurityError: The operation is insecure.
+1611855450567	Marionette	INFO	Stopped listening on port 44347
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://activity-stream/lib/ASRouter.jsm, line 987: NS_ERROR_ILLEGAL_VALUE: Component returned failure code: 0x80070057 (NS_ERROR_ILLEGAL_VALUE) [nsIObserverService.removeObserver]
+JavaScript error: , line 0: uncaught exception: undefined
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1611938863518	geckodriver	INFO	Listening on 127.0.0.1:38759
+1611938864474	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileWoFAKV"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1611938871549	Marionette	INFO	Listening on port 35101
+1611938871792	Marionette	WARN	TLS certificate errors will be ignored for this session
+1611938876044	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:88788): GLib-GObject-WARNING **: 13:47:56.739: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fea73b1b710' of type 'MaiAtkType139'
+1611938877115	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1611938890976	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:88788): GLib-GObject-WARNING **: 13:48:11.576: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fea73b9c2f0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611938893916	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:88788): GLib-GObject-WARNING **: 13:48:14.617: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fea892f78f0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611938896684	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:88788): GLib-GObject-WARNING **: 13:48:17.349: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fea721a2fb0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611938899227	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:88788): GLib-GObject-WARNING **: 13:48:19.856: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fea72d93710' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611938902135	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:88788): GLib-GObject-WARNING **: 13:48:22.884: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fea72bdc3b0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611938904657	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:88788): GLib-GObject-WARNING **: 13:48:25.330: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fea71868f50' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611938907067	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:88788): GLib-GObject-WARNING **: 13:48:27.700: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fea7176ba70' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611938909708	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:88788): GLib-GObject-WARNING **: 13:48:30.356: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fea714e4d10' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1611938917956	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:88788): GLib-GObject-WARNING **: 13:48:38.582: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fea71396350' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611938920935	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:88788): GLib-GObject-WARNING **: 13:48:41.625: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fea70ed6290' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611938924500	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:88788): GLib-GObject-WARNING **: 13:48:45.173: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fea70a1edd0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611938927917	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:88788): GLib-GObject-WARNING **: 13:48:48.480: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fea71c38a10' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611938930779	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:88788): GLib-GObject-WARNING **: 13:48:51.407: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fea70992050' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611938933928	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:88788): GLib-GObject-WARNING **: 13:48:54.627: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fea7092d410' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611938936581	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:88788): GLib-GObject-WARNING **: 13:48:57.143: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fea7002e0b0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1611938940557	Marionette	INFO	Stopped listening on port 35101
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://activity-stream/lib/ASRouter.jsm, line 987: NS_ERROR_ILLEGAL_VALUE: Component returned failure code: 0x80070057 (NS_ERROR_ILLEGAL_VALUE) [nsIObserverService.removeObserver]
+1612206098311	geckodriver	INFO	Listening on 127.0.0.1:49135
+1612206099266	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileD3yw17"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612206105569	Marionette	INFO	Listening on port 41761
+1612206105712	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+(firefox:76734): GLib-GObject-WARNING **: 16:01:59.882: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f0aec42cc50' of type 'MaiAtkType139'
+1612206119937	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+1612206146616	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=21e4da12-5977-4d5d-8440-5bbb46e2ace8, line 29: SecurityError: The operation is insecure.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=W4_58SQnX6Q_t-41snzE5AayicCKsZimadzQP0Sji9XNoL6-mXZJNTjcw_7A6K1i&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1612206158794	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=21e4da12-5977-4d5d-8440-5bbb46e2ace8, line 29: SecurityError: The operation is insecure.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=W4_58SQnX6Q_t-41snzE5AayicCKsZimadzQP0Sji9XNoL6-mXZJNTjcw_7A6K1i&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1612206162268	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=21e4da12-5977-4d5d-8440-5bbb46e2ace8, line 29: SecurityError: The operation is insecure.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=W4_58SQnX6Q_t-41snzE5AayicCKsZimadzQP0Sji9XNoL6-mXZJNTjcw_7A6K1i&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1612206167041	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=21e4da12-5977-4d5d-8440-5bbb46e2ace8, line 29: SecurityError: The operation is insecure.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=W4_58SQnX6Q_t-41snzE5AayicCKsZimadzQP0Sji9XNoL6-mXZJNTjcw_7A6K1i&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1612206171590	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=21e4da12-5977-4d5d-8440-5bbb46e2ace8, line 29: SecurityError: The operation is insecure.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=W4_58SQnX6Q_t-41snzE5AayicCKsZimadzQP0Sji9XNoL6-mXZJNTjcw_7A6K1i&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1612206175371	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=21e4da12-5977-4d5d-8440-5bbb46e2ace8, line 29: SecurityError: The operation is insecure.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=W4_58SQnX6Q_t-41snzE5AayicCKsZimadzQP0Sji9XNoL6-mXZJNTjcw_7A6K1i&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1612206179907	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=21e4da12-5977-4d5d-8440-5bbb46e2ace8, line 29: SecurityError: The operation is insecure.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=W4_58SQnX6Q_t-41snzE5AayicCKsZimadzQP0Sji9XNoL6-mXZJNTjcw_7A6K1i&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1612206183831	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=21e4da12-5977-4d5d-8440-5bbb46e2ace8, line 29: SecurityError: The operation is insecure.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=W4_58SQnX6Q_t-41snzE5AayicCKsZimadzQP0Sji9XNoL6-mXZJNTjcw_7A6K1i&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1612206187448	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=21e4da12-5977-4d5d-8440-5bbb46e2ace8, line 29: SecurityError: The operation is insecure.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=W4_58SQnX6Q_t-41snzE5AayicCKsZimadzQP0Sji9XNoL6-mXZJNTjcw_7A6K1i&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1612206191396	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=21e4da12-5977-4d5d-8440-5bbb46e2ace8, line 29: SecurityError: The operation is insecure.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=W4_58SQnX6Q_t-41snzE5AayicCKsZimadzQP0Sji9XNoL6-mXZJNTjcw_7A6K1i&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1612206196223	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=21e4da12-5977-4d5d-8440-5bbb46e2ace8, line 29: SecurityError: The operation is insecure.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=W4_58SQnX6Q_t-41snzE5AayicCKsZimadzQP0Sji9XNoL6-mXZJNTjcw_7A6K1i&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1612206200240	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=21e4da12-5977-4d5d-8440-5bbb46e2ace8, line 29: SecurityError: The operation is insecure.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=W4_58SQnX6Q_t-41snzE5AayicCKsZimadzQP0Sji9XNoL6-mXZJNTjcw_7A6K1i&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1612206204764	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=21e4da12-5977-4d5d-8440-5bbb46e2ace8, line 29: SecurityError: The operation is insecure.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=W4_58SQnX6Q_t-41snzE5AayicCKsZimadzQP0Sji9XNoL6-mXZJNTjcw_7A6K1i&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1612206209405	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=21e4da12-5977-4d5d-8440-5bbb46e2ace8, line 29: SecurityError: The operation is insecure.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=W4_58SQnX6Q_t-41snzE5AayicCKsZimadzQP0Sji9XNoL6-mXZJNTjcw_7A6K1i&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1612206218864	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=21e4da12-5977-4d5d-8440-5bbb46e2ace8, line 29: SecurityError: The operation is insecure.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=W4_58SQnX6Q_t-41snzE5AayicCKsZimadzQP0Sji9XNoL6-mXZJNTjcw_7A6K1i&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1612206222671	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=21e4da12-5977-4d5d-8440-5bbb46e2ace8, line 29: SecurityError: The operation is insecure.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=W4_58SQnX6Q_t-41snzE5AayicCKsZimadzQP0Sji9XNoL6-mXZJNTjcw_7A6K1i&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1612206226262	Marionette	INFO	Stopped listening on port 41761
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://activity-stream/lib/ASRouter.jsm, line 987: NS_ERROR_ILLEGAL_VALUE: Component returned failure code: 0x80070057 (NS_ERROR_ILLEGAL_VALUE) [nsIObserverService.removeObserver]
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x3A0144,name=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x3A0144,name=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: , line 0: uncaught exception: undefined
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x3A0144,name=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel] Error: (msgtype=0xB60006,name=PWebSocket::Msg_DeleteSelf) Channel closing: too late to send/recv, messages will be lost
+
+1612282928424	geckodriver	INFO	Listening on 127.0.0.1:50899
+1612282928428	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileqjLlhl"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612282934122	Marionette	INFO	Listening on port 42837
+1612282934157	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612282934170	Marionette	ERROR	[15] No reply from Marionette:Register
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612282943568	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+1612282944681	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+
+(firefox:84626): GLib-GObject-WARNING **: 13:22:38.542: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f6717a4c470' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612282966915	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:84626): GLib-GObject-WARNING **: 13:22:48.217: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f671764aa10' of type 'MaiAtkType139'
+1612282974430	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:84626): GLib-GObject-WARNING **: 13:22:55.052: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f671767df50' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612282982561	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:84626): GLib-GObject-WARNING **: 13:23:04.342: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f67158a1710' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612282989765	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:84626): GLib-GObject-WARNING **: 13:23:11.865: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f6715bf4890' of type 'MaiAtkType139'
+1612282996212	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:84626): GLib-GObject-WARNING **: 13:23:18.012: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f67154c3170' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612283004565	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:84626): GLib-GObject-WARNING **: 13:23:26.602: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f673a4fe7d0' of type 'MaiAtkType139'
+1612283020581	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:84626): GLib-GObject-WARNING **: 13:23:42.386: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f67179a6ef0' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612283028622	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:84626): GLib-GObject-WARNING **: 13:23:50.647: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f672b9fbe90' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612283036873	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:84626): GLib-GObject-WARNING **: 13:23:58.792: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f672c38d590' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612283047751	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:84626): GLib-GObject-WARNING **: 13:24:08.130: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f67360f2170' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612283057118	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:84626): GLib-GObject-WARNING **: 13:24:18.539: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f6715550a10' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612283066135	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:84626): GLib-GObject-WARNING **: 13:24:28.241: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f6716091a10' of type 'MaiAtkType139'
+1612283076286	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:84626): GLib-GObject-WARNING **: 13:24:37.803: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f673a141f50' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612283087375	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:84626): GLib-GObject-WARNING **: 13:24:48.862: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f6717470e90' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612283096488	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:84626): GLib-GObject-WARNING **: 13:24:58.018: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f6717764bf0' of type 'MaiAtkType139'
+1612283103881	Marionette	INFO	Stopped listening on port 42837
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://activity-stream/lib/ASRouter.jsm, line 987: NS_ERROR_ILLEGAL_VALUE: Component returned failure code: 0x80070057 (NS_ERROR_ILLEGAL_VALUE) [nsIObserverService.removeObserver]
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1612376518304	geckodriver	INFO	Listening on 127.0.0.1:57371
+1612376519342	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilejcwLVJ"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612376527017	Marionette	INFO	Listening on port 45461
+1612376527322	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612376527337	Marionette	ERROR	[15] No reply from Marionette:Register
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+
+(firefox:123346): GLib-GObject-WARNING **: 15:22:21.535: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fa6c3e9bdd0' of type 'MaiAtkType139'
+1612376541588	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+1612376542104	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 453: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612376577172	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 453: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612376582777	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=f64be49b-6d3b-4d5c-a119-249429e8712a, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 453: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612376598577	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=f64be49b-6d3b-4d5c-a119-249429e8712a, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 225: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'PictureInPictureToggle' has been destroyed
+1612376605390	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=f64be49b-6d3b-4d5c-a119-249429e8712a, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 453: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612376610505	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=f64be49b-6d3b-4d5c-a119-249429e8712a, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 225: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'PictureInPictureToggle' has been destroyed
+1612376615477	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=f64be49b-6d3b-4d5c-a119-249429e8712a, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 453: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612376622670	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=f64be49b-6d3b-4d5c-a119-249429e8712a, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 453: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612376627532	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=f64be49b-6d3b-4d5c-a119-249429e8712a, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 225: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'PictureInPictureToggle' has been destroyed
+1612376631731	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=f64be49b-6d3b-4d5c-a119-249429e8712a, line 29: SecurityError: The operation is insecure.
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 453: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612376636271	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=f64be49b-6d3b-4d5c-a119-249429e8712a, line 29: SecurityError: The operation is insecure.
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 225: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'PictureInPictureToggle' has been destroyed
+1612376641108	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=f64be49b-6d3b-4d5c-a119-249429e8712a, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 453: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612376649602	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=f64be49b-6d3b-4d5c-a119-249429e8712a, line 29: SecurityError: The operation is insecure.
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 453: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612376653895	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=f64be49b-6d3b-4d5c-a119-249429e8712a, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 453: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612376657908	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=f64be49b-6d3b-4d5c-a119-249429e8712a, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 225: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'PictureInPictureToggle' has been destroyed
+1612376661884	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=f64be49b-6d3b-4d5c-a119-249429e8712a, line 29: SecurityError: The operation is insecure.
+1612376664880	Marionette	INFO	Stopped listening on port 45461
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://activity-stream/lib/ASRouter.jsm, line 987: NS_ERROR_ILLEGAL_VALUE: Component returned failure code: 0x80070057 (NS_ERROR_ILLEGAL_VALUE) [nsIObserverService.removeObserver]
+1612546499449	geckodriver	INFO	Listening on 127.0.0.1:42503
+1612546500451	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileUDcWld"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612546507061	Marionette	INFO	Listening on port 34481
+1612546507371	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612546507388	Marionette	ERROR	[15] No reply from Marionette:Register
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612546514662	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+1612546514837	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+
+(firefox:89068): GLib-GObject-WARNING **: 14:35:41.355: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f8ceec8f110' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/nanoWidget/externals/obUserFrame/test.html?lsd=b6821e18-f13e-44b8-a4d0-f91d95214087, line 29: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612546550424	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:89068): GLib-GObject-WARNING **: 14:35:51.024: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f8cedfc1bf0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612546555587	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:89068): GLib-GObject-WARNING **: 14:35:56.202: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f8cee360f50' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612546561130	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:89068): GLib-GObject-WARNING **: 14:36:01.764: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f8cedb23530' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1612546565012	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:89068): GLib-GObject-WARNING **: 14:36:05.691: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f8cee993170' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612546570353	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:89068): GLib-GObject-WARNING **: 14:36:10.841: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f8cecf9f0b0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612546577124	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:89068): GLib-GObject-WARNING **: 14:36:18.656: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f8cee6520b0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612546584669	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+
+(firefox:89068): GLib-GObject-WARNING **: 14:36:26.759: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f8d0de33830' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612546588396	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:89068): GLib-GObject-WARNING **: 14:36:29.028: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f8d11999cb0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612546592588	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:89068): GLib-GObject-WARNING **: 14:36:33.147: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f8d02e8a530' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612546596735	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:89068): GLib-GObject-WARNING **: 14:36:37.470: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f8d119992f0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612546601011	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:89068): GLib-GObject-WARNING **: 14:36:41.696: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f8cef547950' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1612546604699	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:89068): GLib-GObject-WARNING **: 14:36:45.376: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f8cec728770' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1612546608233	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+
+(firefox:89068): GLib-GObject-WARNING **: 14:36:50.991: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f8cecce3590' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612546612121	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:89068): GLib-GObject-WARNING **: 14:36:52.713: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f8cecdb8110' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1612546616032	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:89068): GLib-GObject-WARNING **: 14:36:56.627: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f8ced67cc50' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1612546619294	Marionette	INFO	Stopped listening on port 34481
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://activity-stream/lib/ASRouter.jsm, line 987: NS_ERROR_ILLEGAL_VALUE: Component returned failure code: 0x80070057 (NS_ERROR_ILLEGAL_VALUE) [nsIObserverService.removeObserver]
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+1612629047657	geckodriver	INFO	Listening on 127.0.0.1:44495
+1612629048568	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilenEGoUL"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612629055808	Marionette	INFO	Listening on port 36641
+1612629056089	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612629056098	Marionette	ERROR	[15] No reply from Marionette:Register
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612629073550	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+1612629073660	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+
+(firefox:40342): GLib-GObject-WARNING **: 13:31:29.569: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdb1a7704d0' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612629094612	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40342): GLib-GObject-WARNING **: 13:31:35.644: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdaf7a8def0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1612629100173	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40342): GLib-GObject-WARNING **: 13:31:40.799: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdaf7a20bf0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612629104160	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40342): GLib-GObject-WARNING **: 13:31:44.885: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdb19228650' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612629108897	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40342): GLib-GObject-WARNING **: 13:31:49.314: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdaf80f4bf0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1612629112264	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40342): GLib-GObject-WARNING **: 13:31:52.939: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdaf5827b90' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612629116991	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40342): GLib-GObject-WARNING **: 13:31:57.576: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdaf4eacbf0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1612629120085	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40342): GLib-GObject-WARNING **: 13:32:00.712: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdaf4ac6410' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612629124084	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40342): GLib-GObject-WARNING **: 13:32:04.722: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdb192288f0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612629128151	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40342): GLib-GObject-WARNING **: 13:32:08.740: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdb16433530' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612629133731	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40342): GLib-GObject-WARNING **: 13:32:14.378: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdb0b312650' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1612629141288	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40342): GLib-GObject-WARNING **: 13:32:21.913: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdb1b192b90' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612629145154	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40342): GLib-GObject-WARNING **: 13:32:25.835: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdaf6ed15f0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612629149759	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40342): GLib-GObject-WARNING **: 13:32:30.400: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdb0d572290' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1612629154759	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40342): GLib-GObject-WARNING **: 13:32:35.329: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdb193c4fb0' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1612629158290	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40342): GLib-GObject-WARNING **: 13:32:38.904: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdaf587c230' of type 'MaiAtkType139'
+JavaScript error: https://widgets.outbrain.com/widgetOBUserSync/obUserSync.html#pid=6406&dmpenabled=false&filterDMP=&csenabled=true&d=&gdpr=0&cmpNeeded=false&gdprVer=2&ccpa=1---&country=BR, line 3: SecurityError: The operation is insecure.
+1612629161896	Marionette	INFO	Stopped listening on port 36641
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://activity-stream/lib/ASRouter.jsm, line 987: NS_ERROR_ILLEGAL_VALUE: Component returned failure code: 0x80070057 (NS_ERROR_ILLEGAL_VALUE) [nsIObserverService.removeObserver]
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+

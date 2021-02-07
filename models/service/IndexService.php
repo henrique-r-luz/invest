@@ -191,6 +191,10 @@ class IndexService {
         $this->montaGraficoPais(Pais::BR, $totalPatrimonio, 0, $dadosPais);
         $this->montaGraficoPais(Pais::US, $totalPatrimonio, 1, $dadosPais);
     }
+    
+    private function graficoAcaoPais($totalPatrimonio, &$dadosPais){
+        
+    }
 
     function getDadosCategoria() {
         return $this->dadosCategoria;
