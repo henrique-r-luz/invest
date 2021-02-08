@@ -32,6 +32,7 @@ discionarioAcoes = [
     [30,"https://br.investing.com/equities/google-inc"], # google
     [32,"https://br.investing.com/equities/microsoft-corp"],#macosoft
     [34,"https://br.investing.com/equities/accenture-ltd"],#accenture
+    [35,"https://br.investing.com/equities/novo-nordis"],#novo nordisk
     ['dollar','https://br.investing.com/currencies/usd-brl'],
 ];
 
