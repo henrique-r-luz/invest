@@ -1,10 +1,5 @@
-from selenium import webdriver #esse comando importa a biblioteca
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 import pandas as pd
-import json
-import sys
+from selenium import webdriver
 
 #código para o servidor, deve ser comentado pra teste local
 '''from pyvirtualdisplay import Display
