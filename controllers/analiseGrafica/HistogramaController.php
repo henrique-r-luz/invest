@@ -6,9 +6,9 @@
  * and open the template in the editor.
  */
 
-namespace app\controllers;
+namespace app\controllers\analiseGrafica;
 
-use app\models\Histograma;
+use app\models\analiseGrafica\Histograma;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use \app\models\service\HistogramaService;

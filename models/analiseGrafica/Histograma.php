@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace app\models;
+namespace app\models\analiseGrafica;
 
 /**
  * Description of Histograma

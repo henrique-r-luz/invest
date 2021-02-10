@@ -55,9 +55,10 @@
                             'icon' => 'bar-chart',
                             'url' => '#',
                             'items' => [
-                                ['label' => 'Histograma', 'icon' => 'signal', 'url' => ['/histograma']],
+                                ['label' => 'Histograma', 'icon' => 'signal', 'url' => ['/analiseGrafica/histograma']],
                                 ['label' => 'Correlação', 'icon' => 'exchange', 'url' => ['/']],
-                                ['label' => 'Evol. Patrimônio', 'icon' => 'signal', 'url' => ['/evolucao-patrimonio']],
+                                ['label' => 'Evol. Patrimônio', 'icon' => 'signal', 'url' => ['/analiseGrafica/evolucao-patrimonio']],
+                                ['label' => 'Lucro/Prejuízo', 'icon' => 'signal', 'url' => ['/analiseGrafica/lucro-prejuizo']],
                             ],
                         ]
                     ],

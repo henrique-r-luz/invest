@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace app\models\graficos;
+namespace app\models\analiseGrafica;
 
 use \yii\base\Model;
 use \app\models\financas\Operacao;

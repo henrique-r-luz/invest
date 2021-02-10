@@ -6,9 +6,9 @@
  * and open the template in the editor.
  */
 
-namespace app\controllers;
+namespace app\controllers\analiseGrafica;
 
-use \app\models\graficos\EvolucaoPatrimonio;
+use \app\models\analiseGrafica\EvolucaoPatrimonio;
 use \yii\base\Controller;
 
 /**
