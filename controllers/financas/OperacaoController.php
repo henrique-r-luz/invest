@@ -9,8 +9,7 @@ use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\db\Transaction;
-use yii\db\Query;
+
 use \app\models\financas\service\OperacaoService;
 
 /**

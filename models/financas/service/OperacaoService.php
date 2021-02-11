@@ -120,6 +120,7 @@ class OperacaoService {
        
         SincronizaFactory::sincroniza('easy')->atualiza();
         SincronizaFactory::sincroniza('acao')->atualiza();
+        SincronizaFactory::sincroniza('banco_inter')->atualiza();
        
     }
 

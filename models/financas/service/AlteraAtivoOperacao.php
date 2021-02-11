@@ -33,16 +33,17 @@ class AlteraAtivoOperacao {
         $this->ativo_id = $ativo_id;
         $ativo = Ativo::findOne($ativo_id);
         
-        $valoresAtivo = $this->valorDeCompraEquantidade();
+        $valoresAtivo = Operacao::queryDadosAtivos($ativo_id);
+      
         
-        $ativo->quantidade = max(0,$valoresAtivo[0]['quantidade']);
+        $ativo->quantidade = max(0, $valoresAtivo[0]['quantidade']);
         
         if ($ativo->quantidade <= 0) {
             $ativo->valor_compra = 0;
             $ativo->valor_bruto = 0;
             $ativo->valor_liquido = 0;
         } else {
-            $ativo->valor_compra = max(0,$valoresAtivo[0]['valor_compra']);  
+            $ativo->valor_compra = round(max(0,$valoresAtivo[0]['valor_compra']),2);  
         }
         if ($ativo->save()) {
             return true;
@@ -50,49 +51,6 @@ class AlteraAtivoOperacao {
             $this->erro = CajuiHelper::processaErros($ativo->getErrors());
             return false;
         }
-    }
-    
-    
-    public  function valorDeCompraEquantidade(){
-                $venda = 0;
-                $compra = 1;
-        
-                $quantidade_venda = Operacao::find()
-                              ->select('sum(quantidade) as quantidade_venda')
-                              ->andWhere(['ativo_id'=>$this->ativo_id])
-                               ->andWhere(['tipo' => $venda]);
-                
-                $quantidade_compra = Operacao::find()
-                              ->select('sum(quantidade) as quantidade_compra')
-                              ->andWhere(['ativo_id'=>$this->ativo_id])
-                               ->andWhere(['tipo' => $compra]);
-                
-                $valor_compra = Operacao::find()
-                              ->select('sum(valor) as valor_compra')
-                              ->andWhere(['ativo_id'=>$this->ativo_id])
-                               ->andWhere(['tipo' => $compra]);
-                
-                $valor_venda = Operacao::find()
-                              ->select('sum(valor) as  valor_venda')
-                              ->andWhere(['ativo_id'=>$this->ativo_id])
-                               ->andWhere(['tipo' => $venda]);
-                
-                $query =  (new Query())
-                        ->select(['(coalesce(quantidade_compra,0)  - coalesce(quantidade_venda,0)) as quantidade',
-                                  '(coalesce(valor_compra,0) - coalesce(valor_venda,0)) as valor_compra'])
-                        ->from(['quantidade_venda'=>$quantidade_venda,
-                                'quantidade_compra'=>$quantidade_compra,
-                                'valor_venda'=>$valor_venda,
-                                'valor_compra'=>$valor_compra]);
-                        
-                //echo $query->createCommand()->getRawSql();
-                //exit();
-                
-               return $query->all();
-                
-                
-        
-       
     }
     
     

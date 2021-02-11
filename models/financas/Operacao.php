@@ -2,13 +2,10 @@
 
 namespace app\models\financas;
 
-use app\lib\CajuiHelper;
-use Exception;
-use Throwable;
-use Yii;
+use app\models\financas\Ativo;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-use app\models\financas\Ativo;
+use yii\db\Query;
 
 /**
  * This is the model class for table "public.operacao".
@@ -82,27 +79,22 @@ class Operacao extends ActiveRecord {
             1 => self::COMPRA,
         ];
     }
-    
-       public static function tipoOperacaoId() {
+
+    public static function tipoOperacaoId() {
         return [
-            self::VENDA =>0,
-            self::COMPRA=>1,
+            self::VENDA => 0,
+            self::COMPRA => 1,
         ];
     }
-
 
     public static function getTipoOperacao($id) {
         return self::tipoOperacao()[$id];
     }
-    
-    
-     public static function getTipoOperacaoId($id) {
+
+    public static function getTipoOperacaoId($id) {
         return self::tipoOperacaoId()[$id];
     }
-    
-    
-    
-  
+
     /**
      * @return ActiveQuery
      */
@@ -110,25 +102,44 @@ class Operacao extends ActiveRecord {
         return $this->hasOne(Ativo::class, ['id' => 'ativo_id']);
     }
 
-    
-  
-    
-    
-    
-    public static function valorDeCompra($ativo_id){
-         return  max(0,(self::find()->where(['ativo_id' => $ativo_id])
-                            ->andWhere(['tipo' => 1])//compra
-                            ->sum('valor') -
-                            self::find()->where(['ativo_id' => $ativo_id])
-                            ->andWhere(['tipo' => 0])//venda
-                            ->sum('valor')));
+    public static function valorDeCompra($ativo_id) {
+
+        return max(0, round(self::queryDadosAtivos($ativo_id)[0]['valor_compra'], 2));
     }
-    
-    
-    public function getValorCambio(){
-       
+
+    public static function  queryDadosAtivos($ativo_id) {
+        $venda = 0;
+        $compra = 1;
+
+        $quantidade_venda = Operacao::find()
+                ->select('sum(quantidade) as quantidade_venda')
+                ->andWhere(['ativo_id' => $ativo_id])
+                ->andWhere(['tipo' => $venda]);
+
+        $quantidade_compra = Operacao::find()
+                ->select('sum(quantidade) as quantidade_compra')
+                ->andWhere(['ativo_id' => $ativo_id])
+                ->andWhere(['tipo' => $compra]);
+
+
+        $precoMedio = Operacao::find()
+                ->select('(sum(valor)/sum(quantidade)) as  preco_medio')
+                ->andWhere(['ativo_id' => $ativo_id])
+                ->andWhere(['tipo' => $compra]);
+
+        $query = (new Query())
+                        ->select(['(coalesce(quantidade_compra,0)  - coalesce(quantidade_venda,0)) as quantidade',
+                            '(coalesce(preco_medio,0)*(coalesce(quantidade_compra,0)  - coalesce(quantidade_venda,0))) as valor_compra'])
+                        ->from(['quantidade_venda' => $quantidade_venda,
+                            'quantidade_compra' => $quantidade_compra,
+                            'preco_medio' => $precoMedio])->all();
+        
+        return $query;
+    }
+
+    public function getValorCambio() {
+
         return Ativo::valorCambio($this->ativo, $this->valor);
-       
     }
 
 }
