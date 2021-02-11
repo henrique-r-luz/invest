@@ -35,6 +35,7 @@
                             'url' => '#',
                             'items' => [
                                 ['label' => 'Ativo', 'icon' => 'diamond', 'url' => ['/financas/ativo']],
+                                ['label' => 'Atualiza Ação', 'icon' => 'undo', 'url' => ['/financas/atualiza-acao']],
                                 ['label' => 'Operação', 'icon' => 'money', 'url' => ['/financas/operacao']],
                                 ['label' => 'Empresas Bolsa', 'icon' => 'building', 'url' => ['/financas/acao-bolsa']],
                                 // ['label' => 'Balanço', 'icon' => 'clipboard', 'url' => ['/balanco-empresa-bolsa']],

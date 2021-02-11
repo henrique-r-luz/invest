@@ -12,7 +12,7 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     //'timeZone' => 'Europe/London',
-    'timeZone'=>'America/Bahia',
+    'timeZone' => 'America/Bahia',
     'language' => 'pt-BR',
     'sourceLanguage' => 'pt-BR',
     'aliases' => [
@@ -25,10 +25,11 @@ $config = [
           'class' => '\kartik\grid\Module',
           ],
           ], */
-        
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => true,
+          
         ],
         'formatter' => [
             'class' => 'yii\i18n\Formatter',
@@ -44,6 +45,9 @@ $config = [
             'enableCookieValidation' => true,
             'enableCsrfValidation' => true,
             'cookieValidationKey' => 'xxxxxxx',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -72,7 +76,6 @@ $config = [
             ],
         ],
         'db' => $db,
-      
     /*
       'urlManager' => [
       'enablePrettyUrl' => true,
