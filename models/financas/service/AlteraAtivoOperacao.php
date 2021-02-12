@@ -34,17 +34,7 @@ class AlteraAtivoOperacao {
         $ativo = Ativo::findOne($ativo_id);
         
         $valoresAtivo = Operacao::queryDadosAtivos($ativo_id);
-      
-        
         $ativo->quantidade = max(0, $valoresAtivo[0]['quantidade']);
-        
-        if ($ativo->quantidade <= 0) {
-            $ativo->valor_compra = 0;
-            $ativo->valor_bruto = 0;
-            $ativo->valor_liquido = 0;
-        } else {
-            $ativo->valor_compra = round(max(0,$valoresAtivo[0]['valor_compra']),2);  
-        }
         if ($ativo->save()) {
             return true;
         } else {
