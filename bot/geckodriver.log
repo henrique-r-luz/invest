@@ -15254,3 +15254,374 @@ JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: Inv
 JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
 JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
 JavaScript error: resource://activity-stream/lib/ASRouter.jsm, line 987: NS_ERROR_ILLEGAL_VALUE: Component returned failure code: 0x80070057 (NS_ERROR_ILLEGAL_VALUE) [nsIObserverService.removeObserver]
+1613642944597	geckodriver	INFO	Listening on 127.0.0.1:55631
+1613642945524	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile4gNr64"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1613642952435	Marionette	INFO	Listening on port 40335
+1613642952742	Marionette	WARN	TLS certificate errors will be ignored for this session
+1613642952756	Marionette	ERROR	[15] No reply from Marionette:Register
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1613642956338	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+1613642956344	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+
+(firefox:29777): GLib-GObject-WARNING **: 07:09:32.312: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdc7d3b7fb0' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1613642996623	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:29777): GLib-GObject-WARNING **: 07:09:57.223: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdc946827d0' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1613643000216	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:29777): GLib-GObject-WARNING **: 07:10:00.930: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdca20b4110' of type 'MaiAtkType139'
+1613643002639	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+1613643005251	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:29777): GLib-GObject-WARNING **: 07:10:05.879: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdc7ddbc7d0' of type 'MaiAtkType139'
+1613643007562	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:29777): GLib-GObject-WARNING **: 07:10:08.173: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdc7dc7ae90' of type 'MaiAtkType139'
+1613643010097	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:29777): GLib-GObject-WARNING **: 07:10:10.735: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdc7b696770' of type 'MaiAtkType139'
+1613643012846	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:29777): GLib-GObject-WARNING **: 07:10:13.483: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdc7b4dcd10' of type 'MaiAtkType139'
+1613643015959	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:29777): GLib-GObject-WARNING **: 07:10:16.587: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdca016f050' of type 'MaiAtkType139'
+1613643018725	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:29777): GLib-GObject-WARNING **: 07:10:19.370: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdc7ad45a10' of type 'MaiAtkType139'
+1613643021270	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:29777): GLib-GObject-WARNING **: 07:10:21.905: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdc93d3ea10' of type 'MaiAtkType139'
+1613643023703	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:29777): GLib-GObject-WARNING **: 07:10:24.434: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdc7c688710' of type 'MaiAtkType139'
+1613643026244	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:29777): GLib-GObject-WARNING **: 07:10:26.861: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdca16af290' of type 'MaiAtkType139'
+1613643028886	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:29777): GLib-GObject-WARNING **: 07:10:29.632: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdca1658710' of type 'MaiAtkType139'
+1613643031622	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:29777): GLib-GObject-WARNING **: 07:10:32.256: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdc7e3b5290' of type 'MaiAtkType139'
+1613643034366	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:29777): GLib-GObject-WARNING **: 07:10:35.096: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdc7df04b90' of type 'MaiAtkType139'
+1613643036781	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:29777): GLib-GObject-WARNING **: 07:10:37.492: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7fdc7b06fa70' of type 'MaiAtkType139'
+1613643038396	Marionette	INFO	Stopped listening on port 40335
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://activity-stream/lib/ASRouter.jsm, line 987: NS_ERROR_ILLEGAL_VALUE: Component returned failure code: 0x80070057 (NS_ERROR_ILLEGAL_VALUE) [nsIObserverService.removeObserver]
+1613660968912	geckodriver	INFO	Listening on 127.0.0.1:48801
+1613660969920	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilenu8W7k"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1613660975835	Marionette	INFO	Listening on port 43985
+1613660975950	Marionette	WARN	TLS certificate errors will be ignored for this session
+1613660975968	Marionette	ERROR	[18] No reply from Marionette:Register
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1613660999308	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+1613660999497	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+
+(firefox:48347): GLib-GObject-WARNING **: 12:09:59.969: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2448daa950' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 225: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'PictureInPictureToggle' has been destroyed
+1613661010651	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:48347): GLib-GObject-WARNING **: 12:10:11.521: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f24391941d0' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 453: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1613661015434	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:48347): GLib-GObject-WARNING **: 12:10:16.261: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2425f97e90' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 453: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1613661021918	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:48347): GLib-GObject-WARNING **: 12:10:22.949: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2422d71230' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 225: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'PictureInPictureToggle' has been destroyed
+1613661026095	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:48347): GLib-GObject-WARNING **: 12:10:27.951: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2425197ef0' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 225: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'PictureInPictureToggle' has been destroyed
+1613661031023	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:48347): GLib-GObject-WARNING **: 12:10:32.679: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2425351410' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 225: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'PictureInPictureToggle' has been destroyed
+1613661041318	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:48347): GLib-GObject-WARNING **: 12:10:41.603: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2424c34350' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 453: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1613661046598	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:48347): GLib-GObject-WARNING **: 12:10:47.599: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2425702f50' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 225: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'PictureInPictureToggle' has been destroyed
+1613661050732	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:48347): GLib-GObject-WARNING **: 12:10:52.508: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2422d028f0' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 225: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'PictureInPictureToggle' has been destroyed
+1613661056310	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:48347): GLib-GObject-WARNING **: 12:10:58.854: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2422c48d70' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 453: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1613661064718	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:48347): GLib-GObject-WARNING **: 12:11:06.462: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f24251ef290' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 453: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1613661070159	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:48347): GLib-GObject-WARNING **: 12:11:11.157: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f243a95f470' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 225: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'PictureInPictureToggle' has been destroyed
+1613661075412	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:48347): GLib-GObject-WARNING **: 12:11:16.386: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f24257fedd0' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 225: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'PictureInPictureToggle' has been destroyed
+1613661080327	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:48347): GLib-GObject-WARNING **: 12:11:21.364: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2426703410' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 453: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1613661084819	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:48347): GLib-GObject-WARNING **: 12:11:25.730: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f24275e67d0' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 225: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'PictureInPictureToggle' has been destroyed
+1613661089620	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:48347): GLib-GObject-WARNING **: 12:11:30.571: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2424a4bd70' of type 'MaiAtkType139'
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 453: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1613661094069	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:48347): GLib-GObject-WARNING **: 12:11:34.564: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2422c51470' of type 'MaiAtkType139'
+1613661097037	Marionette	INFO	Stopped listening on port 43985
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://activity-stream/lib/ASRouter.jsm, line 987: NS_ERROR_ILLEGAL_VALUE: Component returned failure code: 0x80070057 (NS_ERROR_ILLEGAL_VALUE) [nsIObserverService.removeObserver]
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x6C0027,name=PNecko::Msg_RemoveRequestContext) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x3A0144,name=PContent::Msg_ScriptError) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel] Error: (msgtype=0xB60006,name=PWebSocket::Msg_DeleteSelf) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1613760248149	geckodriver	INFO	Listening on 127.0.0.1:37363
+1613760249066	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofiley4zoS1"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1613760256084	Marionette	INFO	Listening on port 37965
+1613760256465	Marionette	WARN	TLS certificate errors will be ignored for this session
+1613760256479	Marionette	ERROR	[15] No reply from Marionette:Register
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1613760263689	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+1613760264794	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+
+(firefox:40508): GLib-GObject-WARNING **: 15:44:26.655: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2d34e99b30' of type 'MaiAtkType139'
+JavaScript error: resource://pdf.js/PdfStreamConverter.jsm, line 1089: NS_ERROR_FAILURE: Ignore PDF.js for this download.
+1613760307677	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 569: TypeError: this.contentWindow is null
+1613760321157	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+1613760323486	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40508): GLib-GObject-WARNING **: 15:45:24.259: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2d323f16b0' of type 'MaiAtkType139'
+1613760326421	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40508): GLib-GObject-WARNING **: 15:45:29.015: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2d32590e30' of type 'MaiAtkType139'
+1613760329776	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40508): GLib-GObject-WARNING **: 15:45:30.359: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2d582c5a10' of type 'MaiAtkType139'
+1613760332690	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40508): GLib-GObject-WARNING **: 15:45:33.500: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2d325ba4d0' of type 'MaiAtkType139'
+1613760335148	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+1613760337748	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40508): GLib-GObject-WARNING **: 15:45:38.521: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2d57bfb110' of type 'MaiAtkType139'
+1613760340113	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40508): GLib-GObject-WARNING **: 15:45:40.806: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2d4a446830' of type 'MaiAtkType139'
+1613760342927	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40508): GLib-GObject-WARNING **: 15:45:43.488: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2d57bdf110' of type 'MaiAtkType139'
+1613760345606	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40508): GLib-GObject-WARNING **: 15:45:46.223: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2d52f0fdd0' of type 'MaiAtkType139'
+1613760347951	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+1613760350644	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40508): GLib-GObject-WARNING **: 15:45:51.354: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2d344e0fb0' of type 'MaiAtkType139'
+1613760353119	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40508): GLib-GObject-WARNING **: 15:45:55.746: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2d32b3e5f0' of type 'MaiAtkType139'
+1613760356236	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40508): GLib-GObject-WARNING **: 15:45:56.863: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2d49edebf0' of type 'MaiAtkType139'
+1613760358872	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40508): GLib-GObject-WARNING **: 15:45:59.616: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2d46ffe530' of type 'MaiAtkType139'
+1613760361104	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40508): GLib-GObject-WARNING **: 15:46:01.723: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2d35535f50' of type 'MaiAtkType139'
+1613760363758	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'loading'.
+
+(firefox:40508): GLib-GObject-WARNING **: 15:46:04.454: ../../../gobject/gsignal.c:3599: signal name 'load_complete' is invalid for instance '0x7f2d480f1770' of type 'MaiAtkType139'
+1613760365100	Marionette	INFO	Stopped listening on port 37965
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 299: InvalidStateError: JSWindowActorChild.contentWindow getter: Cannot access property 'contentWindow' after actor 'PictureInPictureToggle' has been destroyed
+JavaScript error: resource://activity-stream/lib/ASRouter.jsm, line 987: NS_ERROR_ILLEGAL_VALUE: Component returned failure code: 0x80070057 (NS_ERROR_ILLEGAL_VALUE) [nsIObserverService.removeObserver]
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
