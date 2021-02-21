@@ -43,7 +43,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     $objetos = $dataProvider->models;
                     $total = 0;
                     foreach ($objetos as $provento) {
-                        $total += $provento->valor;
+                        $valorCambio = Ativo::valorCambio($provento->ativo, $provento->valor);
+                        $total += $valorCambio;
                     }
                     if ($total < 0) {
                         $color = 'red';

@@ -19,6 +19,8 @@ use \app\lib\Categoria;
 class EvolucaoProventos {
 
     //put your code here
+    
+    
 
     private $dadosGrafico;
     private $dataTime;
@@ -29,15 +31,17 @@ class EvolucaoProventos {
 
     public function evolucaoProventos() {
         $query= Proventos::find()
+                ->innerJoin('ativo','ativo.id = proventos.ativo_id')
                 ->select(["to_char(data, 'YYYY-MM') as data", 'ROUND(sum(valor)::numeric,2) as valores'])
+                ->where(['ativo.pais'=> \app\lib\Pais::BR])
                 ->groupBy(["to_char(data, 'YYYY-MM')"])
                 ->orderBy(["to_char(data, 'YYYY-MM')"=>SORT_ASC])
                 ->asArray()
                 ->all();
         $valores = array_column($query, 'valores');
-       
+        // tem que adicionar o valor em dollar
         $valores = array_map('floatval', $valores);
-        $this->dadosGrafico = ['name'=>'Proventos','data'=>$valores];
+        $this->dadosGrafico = ['name'=>'Reais','data'=>$valores];
         $tempo = array_column($query, 'data');
         $this->dataTime = $tempo;
     }

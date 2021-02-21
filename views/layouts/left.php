@@ -62,7 +62,7 @@
                                 ['label' => 'Evol. Patrimônio', 'icon' => 'signal', 'url' => ['/analiseGrafica/evolucao-patrimonio']],
                                 ['label' => 'Lucro/Prejuízo', 'icon' => 'signal', 'url' => ['/analiseGrafica/lucro-prejuizo']],
                                 ['label' => 'Proventos/mês', 'icon' => 'signal', 'url' => ['/analiseGrafica/evolucao-proventos']],
-                                 ['label' => 'Proventos/Atipo', 'icon' => 'signal', 'url' => ['/analiseGrafica/proventos-por-ativo']],
+                                 ['label' => 'Proventos/Ativo', 'icon' => 'signal', 'url' => ['/analiseGrafica/proventos-por-ativo']],
                             ],
                         ]
                     ],

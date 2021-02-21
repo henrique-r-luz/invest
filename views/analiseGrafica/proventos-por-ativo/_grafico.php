@@ -34,7 +34,7 @@ Highcharts::widget([
             'type' => 'category'
         ],
         'yAxis' => [
-            'title' => ['text' => 'Reais']
+            'title' => ['text' => 'Valores']
         ],
         'legend' => [
             'enabled' => false

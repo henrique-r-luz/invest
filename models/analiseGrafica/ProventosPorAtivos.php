@@ -9,6 +9,7 @@
 namespace app\models\analiseGrafica;
 
 use app\lib\Categoria;
+use app\models\financas\Ativo;
 use app\models\financas\Proventos;
 use yii\base\Model;
 
@@ -26,7 +27,7 @@ class ProventosPorAtivos extends Model{
     public function getDadosProventos(){
         $ativos = Proventos::find()
                   ->innerjoin('ativo','ativo.id = proventos.ativo_id')
-                  ->select(['ativo.codigo','sum(valor) as valor'])
+                  ->select(['ativo.codigo','round(sum(valor)::numeric,2) as valor'])
                   ->where(['ativo'=>true])
                   ->andWhere(['categoria'=> Categoria::RENDA_VARIAVEL])
                   ->groupBy(['ativo.codigo'])
@@ -40,7 +41,8 @@ class ProventosPorAtivos extends Model{
     public function criaDadosGrafico($ativos){
         $dados = ['name'=>'Ativos','data'=>[]];
         foreach($ativos as $ativo){
-            $lucro = round($ativo['valor']);
+            $ativoModel = Ativo::find()->andWhere(['codigo'=>$ativo['codigo']])->one();
+            $lucro =  round(Ativo::valorCambio($ativoModel, floatval($ativo['valor'])),2);
             $cor = self::verde;
             $dados['data'][] = ['name'=>$ativo['codigo'],'y'=>$lucro,'color'=>$cor];
         }
