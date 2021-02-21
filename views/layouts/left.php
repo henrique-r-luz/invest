@@ -37,6 +37,7 @@
                                 ['label' => 'Ativo', 'icon' => 'diamond', 'url' => ['/financas/ativo']],
                                 ['label' => 'Atualiza Ação', 'icon' => 'undo', 'url' => ['/financas/atualiza-acao']],
                                 ['label' => 'Operação', 'icon' => 'money', 'url' => ['/financas/operacao']],
+                                ['label' => 'Proventos', 'icon' => 'arrow-down', 'url' => ['/financas/proventos']],
                                 ['label' => 'Empresas Bolsa', 'icon' => 'building', 'url' => ['/financas/acao-bolsa']],
                                 // ['label' => 'Balanço', 'icon' => 'clipboard', 'url' => ['/balanco-empresa-bolsa']],
                                 ['label' => 'Sincronizar', 'icon' => 'rotate-left', 'url' => ['/financas/sincronizar']],
@@ -60,6 +61,8 @@
                                 ['label' => 'Correlação', 'icon' => 'exchange', 'url' => ['/']],
                                 ['label' => 'Evol. Patrimônio', 'icon' => 'signal', 'url' => ['/analiseGrafica/evolucao-patrimonio']],
                                 ['label' => 'Lucro/Prejuízo', 'icon' => 'signal', 'url' => ['/analiseGrafica/lucro-prejuizo']],
+                                ['label' => 'Proventos/mês', 'icon' => 'signal', 'url' => ['/analiseGrafica/evolucao-proventos']],
+                                 ['label' => 'Proventos/Atipo', 'icon' => 'signal', 'url' => ['/analiseGrafica/proventos-por-ativo']],
                             ],
                         ]
                     ],

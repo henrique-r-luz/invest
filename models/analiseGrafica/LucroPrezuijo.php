@@ -10,6 +10,7 @@ namespace app\models\analiseGrafica;
 use yii\base\Model;
 use \app\models\financas\Ativo;
 use \app\lib\Tipo;
+use \app\lib\Categoria;
 
 /**
  * Description of LucroPrezuijo
@@ -25,7 +26,7 @@ class LucroPrezuijo extends Model{
     public function getDadosLucroPrejuizo(){
         $ativos = Ativo::find()
                   ->where(['ativo'=>true])
-                  ->andWhere(['tipo'=> Tipo::ACOES])
+                  ->andWhere(['categoria'=> Categoria::RENDA_VARIAVEL])
                   ->orderBy(['(valor_bruto-valor_compra)'=>SORT_DESC])
                   ->all();
         return $this->criaDadosGrafico($ativos);

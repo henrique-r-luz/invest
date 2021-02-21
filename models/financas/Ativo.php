@@ -97,10 +97,17 @@ class Ativo extends ActiveRecord {
     public function getOperacao() {
         return $this->hasMany(Operacao::class, ['ativo_id' => 'id']);
     }
+    
+    public function getProvento() {
+        return $this->hasMany(Proventos::class, ['ativo_id' => 'id']);
+    }
 
     public function getAcaoBolsa() {
         return $this->hasOne(AcaoBolsa::class, ['id' => 'acao_bolsa_id']);
     }
+    
+   
+
 
     public function beforeSave($insert) {
 

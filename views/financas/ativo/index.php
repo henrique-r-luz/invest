@@ -11,7 +11,7 @@ use \kartik\grid\GridView;
 
 $this->title = 'Ativos';
 $this->params['breadcrumbs'][] = $this->title;
-$impostoRenda = 0.85;
+$impostoRenda = 1;
 ?>
 <div class="ativo-index">
 
@@ -36,7 +36,7 @@ $impostoRenda = 0.85;
             [
                 'attribute' => 'valor_compra',
                 'value' => function($model) {
-                    return $model->valor_compra;//app\models\financas\Ativo::valorCambio($model, $model->valor_compra);
+                    return $model->valor_compra; //app\models\financas\Ativo::valorCambio($model, $model->valor_compra);
                 },
                 'format' => 'currency',
                 'pageSummary' => true,
@@ -57,7 +57,7 @@ $impostoRenda = 0.85;
                         return $model->tipo;
                     }
                 },
-                'pageSummary' => function ($summary, $data, $widget)use($dataProvider,$impostoRenda) {
+                'pageSummary' => function ($summary, $data, $widget)use($dataProvider, $impostoRenda) {
                     //var_dump($dataProvider);
                     // print_r($dataProvider->models);
                     $objetos = $dataProvider->models;
@@ -68,22 +68,16 @@ $impostoRenda = 0.85;
                     foreach ($objetos as $ativo) {
                         //renda fixa
                         if ($ativo->categoria == app\lib\Categoria::RENDA_FIXA) {
-                            $lucro = $lucro + ($ativo->valor_liquido - $ativo->valor_compra);
-                        }
-                        //ações
-                        if ($ativo->tipo == \app\lib\Tipo::ACOES || $ativo->tipo == \app\lib\Tipo::Criptomoeda) {
-
-                            $valorLiquidoAcao = $valorLiquidoAcao + $ativo->valor_liquido;
-                            $valorCompraAcao = $valorCompraAcao + $ativo->valor_compra;
+                            $lucro = $lucro + ($ativo->valor_bruto - $ativo->valor_compra);
+                        } else {
+                            $lucroAcao = $lucroAcao+ ($ativo->valor_bruto - $ativo->valor_compra);
                         }
                     }
 
                     //remove 15 % do lucro
-                    if (($valorLiquidoAcao - $valorCompraAcao) > 0) {
-                        $lucroAcao = (($valorLiquidoAcao - $valorCompraAcao) * $impostoRenda);
-                    } else {
-                        $lucroAcao = ($valorLiquidoAcao - $valorCompraAcao);
-                    }
+
+
+
                     $lucro = $lucro + $lucroAcao;
                     if ($lucro > 0) {
                         $color = 'green';

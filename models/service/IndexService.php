@@ -228,6 +228,7 @@ class IndexService {
         $this->montaGraficoTipo(Tipo::OURO, $totalPatrimonio, 6, $dadosTipo);
         $this->montaGraficoTipo(Tipo::PRATA, $totalPatrimonio, 7, $dadosTipo);
         $this->montaGraficoTipo(Tipo::ETFS, $totalPatrimonio, 8, $dadosTipo);
+        $this->montaGraficoTipo(Tipo::FIIS, $totalPatrimonio, 8, $dadosTipo);
     }
     
     private function graficoAcaoPais($totalPatrimonio, &$dadosAcaoPais){

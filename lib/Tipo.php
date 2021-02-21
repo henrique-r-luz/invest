@@ -29,6 +29,7 @@ class Tipo {
     const OURO = 'Ouro';
     const PRATA = 'Prata';
     const ETFS = 'ETFs';
+    const FIIS = 'FIIs';
     
 
     /**
@@ -46,6 +47,7 @@ class Tipo {
             self::OURO => 'Ouro',
             self::PRATA => 'Prata',
             self::ETFS => 'ETFs',
+            self::FIIS => 'FIIs',
         ];
     }
 
