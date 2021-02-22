@@ -52,6 +52,15 @@ class OperacaoClear extends OperacoesAbstract {
                 $ativo = Ativo::find()
                         ->where(['codigo' => $codigo])
                         ->one();
+                if (empty($ativo)) {
+                    $codigo = $linha[1]; //str_replace("F", "", $linha[1]);
+                    $ativo = Ativo::find()
+                            ->where(['codigo' => $codigo])
+                            ->one();
+                    if (empty($ativo)) {
+                        continue;
+                    }
+                }
                 List($data, $hora) = explode(" ", $linha[11]);
                 List($d, $m, $y) = explode('/', $data);
                 $dataAcao = $y . '-' . $m . '-' . $d . ' ' . $hora;
@@ -91,7 +100,6 @@ class OperacaoClear extends OperacoesAbstract {
             }
 
             $transaction->rollBack();
-          
         }
     }
 
