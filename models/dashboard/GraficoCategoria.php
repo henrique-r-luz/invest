@@ -16,21 +16,19 @@ use yii\web\JsExpression;
  *
  * @author henrique
  */
-class GraficoCategoria {
+class GraficoCategoria extends GraficoAbstract {
 
     //put your code here
-
-    private $dados;
     private $rendaFixa;
     private $rendaVariavel;
     private $valorTotalPatrimonio;
 
-    function __construct($dados) {
-        $this->dados = $dados;
-        $this->configuraDados();
-    }
+    /* function __construct($dados) {
+      $this->dados = $dados;
+      $this->configuraDados();
+      } */
 
-    private function configuraDados() {
+    protected function configuraDados() {
         $rendaFixa = 0;
         $valorTotalPatrimonio = 0;
         $rendaVariavel = 0;
@@ -58,7 +56,6 @@ class GraficoCategoria {
         $this->rendaFixa = round(($rendaFixa / $valorTotalPatrimonio) * 100);
         $this->rendaVariavel = round(($rendaVariavel / $valorTotalPatrimonio) * 100);
         $this->valorTotalPatrimonio = $valorTotalPatrimonio;
-
     }
 
     public function montaGrafico() {
@@ -74,7 +71,6 @@ class GraficoCategoria {
                 'color' => new JsExpression('Highcharts.getOptions().colors[1]'),
             ],
         ];
-       
     }
 
 }

@@ -4,10 +4,13 @@ namespace app\controllers;
 
 use app\models\dashboard\DashBoardSearch;
 use app\models\dashboard\GraficoCategoria;
+use app\models\dashboard\GraficoTipo;
 use app\models\service\IndexService;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
+use \app\models\dashboard\GraficoPais;
+use  \app\models\dashboard\GraficoAtivo;
 use const YII_ENV_TEST;
 
 class SiteController extends Controller {
@@ -62,17 +65,18 @@ class SiteController extends Controller {
         $dashBoardSearch = new DashBoardSearch();
         $dados = $dashBoardSearch->search();
         $graficoCategoria = new GraficoCategoria($dados);
-        //print_r($graficoCategoria->montaGrafico());
-        //exit();
+        $graficoTipo = new GraficoTipo($dados);
+        $graficoPais = new GraficoPais($dados);
+        $graficoAtivo = new GraficoAtivo($dados);
+        
         $indexService = new IndexService();
         $indexService->createGraficos();
-       //  print_r($indexService->getDadosCategoria());
-       // exit();
+   
         return $this->render('index', [
                     'dadosCategoria' => $graficoCategoria->montaGrafico(),//$indexService->getDadosCategoria(),
-                    'dadosPais' => $indexService->getDadosPais(),
-                    'dadosAtivo' => $indexService->getDadosAtivo(),
-                    'dadosTipo' => $indexService->getDadosTipo(),
+                    'dadosPais' => $graficoPais->montaGrafico(),
+                    'dadosAtivo' => $graficoAtivo->montaGrafico(),
+                    'dadosTipo' => $graficoTipo->montaGrafico(),
                     'dadosAcoes' => $indexService->getDadosAcaoes(),
                     'patrimonioBruto' => $indexService->getPatrimonioBruto(),
                     'valorCompra' => $indexService->getValorCompra(),
