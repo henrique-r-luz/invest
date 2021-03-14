@@ -2,7 +2,8 @@
 
 namespace app\controllers;
 
-use app\lib\actions\ActionException;
+use app\models\dashboard\DashBoardSearch;
+use app\models\dashboard\GraficoCategoria;
 use app\models\service\IndexService;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -58,11 +59,17 @@ class SiteController extends Controller {
      * @return string
      */
     public function actionIndex() {
+        $dashBoardSearch = new DashBoardSearch();
+        $dados = $dashBoardSearch->search();
+        $graficoCategoria = new GraficoCategoria($dados);
+        //print_r($graficoCategoria->montaGrafico());
+        //exit();
         $indexService = new IndexService();
         $indexService->createGraficos();
-       
+       //  print_r($indexService->getDadosCategoria());
+       // exit();
         return $this->render('index', [
-                    'dadosCategoria' => $indexService->getDadosCategoria(),
+                    'dadosCategoria' => $graficoCategoria->montaGrafico(),//$indexService->getDadosCategoria(),
                     'dadosPais' => $indexService->getDadosPais(),
                     'dadosAtivo' => $indexService->getDadosAtivo(),
                     'dadosTipo' => $indexService->getDadosTipo(),

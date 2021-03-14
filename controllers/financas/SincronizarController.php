@@ -9,9 +9,9 @@
 namespace app\controllers\financas;
 
 use app\lib\componentes\ExecutaBack;
+use app\models\financas\service\sincroniza\SincronizaFactory;
 use Yii;
 use yii\web\Controller;
-use \app\models\financas\service\sincroniza\SincronizaFactory;
 
 /**
  * Description of SincronizarController
@@ -34,22 +34,11 @@ class SincronizarController extends Controller {
             return $this->executaBackup();
         }
         if (Yii::$app->request->post('but') == 'cotacao_empresa') {
-            
+
             SincronizaFactory::sincroniza('acao')->atualiza();
             $erro .= $msg;
             if ($resp) {
                 Yii::$app->session->setFlash('success', 'A cotação das ações foram atualizadas!');
-                return $this->render('index');
-            } else {
-                Yii::$app->session->setFlash('danger', $erro);
-                return $this->render('index');
-            }
-        }
-        if (Yii::$app->request->post('but') == 'titulo') {
-            SicronizaFactory::sicroniza('easy')->atualiza();
-            $erro .= $msg;
-            if ($resp) {
-                Yii::$app->session->setFlash('success', 'Os dados da Easynvest foram atualizados !');
                 return $this->render('index');
             } else {
                 Yii::$app->session->setFlash('danger', $erro);
@@ -65,16 +54,12 @@ class SincronizarController extends Controller {
             return $this->redirect('index');
         }
 
-        if (Yii::$app->request->post('but') == 'empresa') {
-            /*list($resp, $msg) = $sicroniza->empresas();
-            $erro .= $msg;
-            if ($resp) {
-                Yii::$app->session->setFlash('success', 'Os dados das empresas do site do Eduardo foram atualizadas!');
-                return $this->render('index');
-            } else {
-                Yii::$app->session->setFlash('danger', $erro);
-                return $this->render('index');
-            }*/
+        if (Yii::$app->request->post('but') == 'atualiza_dados') {
+            SincronizaFactory::sincroniza('easy')->atualiza();
+            SincronizaFactory::sincroniza('operacaoClear')->atualiza();
+            SincronizaFactory::sincroniza('acao')->atualiza();
+            SincronizaFactory::sincroniza('banco_inter')->atualiza();
+            return $this->redirect('/index.php');
         }
     }
 
@@ -91,7 +76,7 @@ class SincronizarController extends Controller {
                 return $this->render('index');
             } else {
                 Yii::$app->session->setFlash('danger', 'O arquivo não foi criado.');
-                return $this->render('index'); 
+                return $this->render('index');
             }
         } else {
             Yii::$app->session->setFlash('danger', 'Erro ao realizar backup.');

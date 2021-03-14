@@ -41,15 +41,9 @@ class IndexService {
         
     }
 
-    public function sincroniza() {
-        SincronizaFactory::sincroniza('easy')->atualiza();
-        SincronizaFactory::sincroniza('operacaoClear')->atualiza();
-        SincronizaFactory::sincroniza('acao')->atualiza();
-        SincronizaFactory::sincroniza('banco_inter')->atualiza();
-    }
+   
 
     public function createGraficos() {
-        $this->sincroniza();
         $totalPatrimonio = Ativo::find()
                 ->andWhere(['>', 'quantidade', 0])
                  ->andWhere(['ativo' => true])
