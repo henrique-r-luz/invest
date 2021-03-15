@@ -9,36 +9,36 @@
 namespace app\models\dashboard;
 
 /**
- * Description of GraficoAcaoPais
+ * Description of GraficoAcoes
  *
  * @author henrique
  */
-class GraficoAcaoPais extends GraficoAbstract {
-
-    private $acaoPais = [];
-
+class GraficoAcoes extends GraficoAbstract {
+    
+    private $acoes;
+    
     //put your code here
     protected function configuraDados() {
         $valorTotalAcoes = 0;
         foreach ($this->dados as $item) {
-            $this->acaoPais[$item['pais']] = $item['valor_acao_pais'];
+            if($item['tipo']==\app\lib\Tipo::ACOES){
+                $this->acoes[$item['codigo']] = $item['valor_bruto'];
+            }
         }
-
-        $valorTotalAcoes = array_sum($this->acaoPais);
-
+        $valorTotalAcoes = array_sum($this->acoes);
         if ($valorTotalAcoes != 0) {
             $aux = [];
-            foreach ($this->acaoPais as $nome => $item) {
+            foreach ($this->acoes as $nome => $item) {
                 $aux[$nome] = round(($item / $valorTotalAcoes) * 100);
             }
-            $this->acaoPais = $aux;
-            arsort($this->acaoPais);
+            $this->acoes = $aux;
+            arsort($this->acoes);
         }
         
     }
 
     public function montaGrafico() {
-        return GraficoUtil::graficoPizza($this->acaoPais);
+        return GraficoUtil::graficoPizza($this->acoes);
     }
 
 }

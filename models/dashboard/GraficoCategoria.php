@@ -18,59 +18,20 @@ use yii\web\JsExpression;
  */
 class GraficoCategoria extends GraficoAbstract {
 
-    //put your code here
-    private $rendaFixa;
-    private $rendaVariavel;
-    private $valorTotalPatrimonio;
+  
+    private $renda;
 
-    /* function __construct($dados) {
-      $this->dados = $dados;
-      $this->configuraDados();
-      } */
 
     protected function configuraDados() {
-        $rendaFixa = 0;
-        $valorTotalPatrimonio = 0;
-        $rendaVariavel = 0;
-        foreach ($this->dados as $item) {
-            if ($item['categoria'] == Categoria::RENDA_FIXA) {
-                $rendaFixa = $item['valor_categoria'];
-                $valorTotalPatrimonio = $item['valor_total'];
-                break;
-            }
-        }
-
-        foreach ($this->dados as $item) {
-            if ($item['categoria'] == Categoria::RENDA_VARIAVEL) {
-                $rendaVariavel = $item['valor_categoria'];
-                break;
-            }
-        }
-        if ($valorTotalPatrimonio == 0) {
-
-            $this->rendaFixa = 0;
-            $this->rendaVariavel = 0;
-            $this->valorTotalPatrimonio = 0;
-            return;
-        }
-        $this->rendaFixa = round(($rendaFixa / $valorTotalPatrimonio) * 100);
-        $this->rendaVariavel = round(($rendaVariavel / $valorTotalPatrimonio) * 100);
-        $this->valorTotalPatrimonio = $valorTotalPatrimonio;
+       
+        $this->renda = GraficoUtil::dadosPizza(['dados' => $this->dados,
+                    'item' => 'categoria',
+                    'valor_item' => 'valor_categoria',
+                    'valor_total' => 'valor_total']);
     }
 
     public function montaGrafico() {
-        return [
-            [
-                'name' => 'Renda Fixa',
-                'y' => $this->rendaFixa,
-                'color' => new JsExpression('Highcharts.getOptions().colors[0]'),
-            ],
-            [
-                'name' => 'Renda Variável',
-                'y' => $this->rendaVariavel,
-                'color' => new JsExpression('Highcharts.getOptions().colors[1]'),
-            ],
-        ];
+         return GraficoUtil::graficoPizza($this->renda);
     }
 
 }

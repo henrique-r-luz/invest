@@ -10,7 +10,10 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use \app\models\dashboard\GraficoPais;
-use  \app\models\dashboard\GraficoAtivo;
+use \app\models\dashboard\GraficoAtivo;
+use \app\models\dashboard\GraficoAcaoPais;
+use \app\models\dashboard\GraficoAcoes;
+use \app\models\dashboard\GraficoFiis;
 use const YII_ENV_TEST;
 
 class SiteController extends Controller {
@@ -45,10 +48,10 @@ class SiteController extends Controller {
      */
     public function actions() {
         return [
-             'error' => [
+            'error' => [
                 // 'class' => ActionException::class,
-              'class' => 'yii\web\ErrorAction',
-              ], 
+                'class' => 'yii\web\ErrorAction',
+            ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
@@ -68,22 +71,30 @@ class SiteController extends Controller {
         $graficoTipo = new GraficoTipo($dados);
         $graficoPais = new GraficoPais($dados);
         $graficoAtivo = new GraficoAtivo($dados);
-        
-        $indexService = new IndexService();
-        $indexService->createGraficos();
-   
+        $graficoAcaoPais = new GraficoAcaoPais($dados);
+        $graficoAcoes = new GraficoAcoes($dados);
+        $graficoFii = new GraficoFiis($dados);
+        $formatter = \Yii::$app->formatter;
+        $patrimonioBruto = 0;
+        $valorCompra = 0;
+        if (!empty($dados)) {
+            $patrimonioBruto = $formatter->asCurrency($dados[0]['valor_total']);
+            $valorCompra = $formatter->asCurrency($dados[0]['valor_compra']);
+            $lucro = $formatter->asCurrency($dados[0]['valor_total'] - $dados[0]['valor_compra']);
+        }
+
         return $this->render('index', [
-                    'dadosCategoria' => $graficoCategoria->montaGrafico(),//$indexService->getDadosCategoria(),
+                    'dadosCategoria' => $graficoCategoria->montaGrafico(), //$indexService->getDadosCategoria(),
                     'dadosPais' => $graficoPais->montaGrafico(),
                     'dadosAtivo' => $graficoAtivo->montaGrafico(),
                     'dadosTipo' => $graficoTipo->montaGrafico(),
-                    'dadosAcoes' => $indexService->getDadosAcaoes(),
-                    'patrimonioBruto' => $indexService->getPatrimonioBruto(),
-                    'valorCompra' => $indexService->getValorCompra(),
-                    'lucro_bruto' => $indexService->getLucro(),
-                    'dadosAcoesPais'=>$indexService->getDadosAcaoPais(),
+                    'dadosAcoes' => $graficoAcoes->montaGrafico(),
+                    'patrimonioBruto' => $patrimonioBruto,
+                    'valorCompra' => $valorCompra,
+                    'lucro_bruto' => $lucro,
+                    'dadosAcoesPais' => $graficoAcaoPais->montaGrafico(),
+                    'dadosFiis'=>$graficoFii->montaGrafico(),
         ]);
     }
 
-   
 }

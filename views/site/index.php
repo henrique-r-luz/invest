@@ -72,9 +72,14 @@ $this->title = 'Patrimônio';
 
 </div>
 <div class="row ">
-    <div class="col-lg-12">
+    <div class="col-lg-6">
         <div class="box box-info">
             <?= $this->render('@app/views/site/graficos/acoes_totais', ['dadosAcoes' => $dadosAcoes]) ?>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="box box-info">
+            <?= $this->render('@app/views/site/graficos/fiis_totais', ['dadosFiis' => $dadosFiis]) ?>
         </div>
     </div>
 

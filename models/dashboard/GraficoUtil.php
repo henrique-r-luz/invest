@@ -37,7 +37,7 @@ class GraficoUtil {
             }
         }
         arsort($vetDados);
-        return $vetDados;//asort($vetDados)
+        return $vetDados;
     }
     
     /**
