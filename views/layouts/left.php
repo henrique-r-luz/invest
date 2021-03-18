@@ -2,17 +2,6 @@
 
     <section class="sidebar">
 
-        <!-- search form 
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search..."/>
-              <span class="input-group-btn">
-                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
-        </form>
-       /.search form -->
 
         <?=
         dmstr\widgets\Menu::widget(
@@ -39,7 +28,6 @@
                                 ['label' => 'Operação', 'icon' => 'money', 'url' => ['/financas/operacao']],
                                 ['label' => 'Proventos', 'icon' => 'arrow-down', 'url' => ['/financas/proventos']],
                                 ['label' => 'Empresas Bolsa', 'icon' => 'building', 'url' => ['/financas/acao-bolsa']],
-                                // ['label' => 'Balanço', 'icon' => 'clipboard', 'url' => ['/balanco-empresa-bolsa']],
                                 ['label' => 'Sincronizar', 'icon' => 'rotate-left', 'url' => ['/financas/sincronizar']],
                             ],
                         ],
@@ -59,10 +47,10 @@
                             'items' => [
                                 ['label' => 'Histograma', 'icon' => 'signal', 'url' => ['/analiseGrafica/histograma']],
                                 ['label' => 'Correlação', 'icon' => 'exchange', 'url' => ['/']],
-                                ['label' => 'Evol. Patrimônio', 'icon' => 'signal', 'url' => ['/analiseGrafica/evolucao-patrimonio']],
-                                ['label' => 'Lucro/Prejuízo', 'icon' => 'signal', 'url' => ['/analiseGrafica/lucro-prejuizo']],
-                                ['label' => 'Proventos/mês', 'icon' => 'signal', 'url' => ['/analiseGrafica/evolucao-proventos']],
-                                 ['label' => 'Proventos/Ativo', 'icon' => 'signal', 'url' => ['/analiseGrafica/proventos-por-ativo']],
+                                ['label' => 'Evol. Patrimônio', 'icon' => 'line-chart', 'url' => ['/analiseGrafica/evolucao-patrimonio']],
+                                ['label' => 'Lucro/Prejuízo', 'icon' => 'plus', 'url' => ['/analiseGrafica/lucro-prejuizo']],
+                                ['label' => 'Proventos/mês', 'icon' => 'level-down', 'url' => ['/analiseGrafica/evolucao-proventos']],
+                                ['label' => 'Proventos/Ativo', 'icon' => 'rocket', 'url' => ['/analiseGrafica/proventos-por-ativo']],
                             ],
                         ]
                     ],
