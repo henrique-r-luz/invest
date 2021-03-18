@@ -51,8 +51,7 @@ class DashBoardSearch {
                 ->leftJoin(['ativo_acao_pais' => $acaoPais], 'ativo_acao_pais.pais = ativo.pais')
                 ->where(['ativo' => true]);
                 
-      //  echo $ativos->createCommand()->getRawSql();
-      //  exit();
+     
                 $dados = (new \yii\db\Query())
                 ->from(['ativo' => $ativos, 'valorTotal' => $valorTotal])
                 ->all();
