@@ -42,7 +42,8 @@ class ProventosSearch extends Proventos
     public function search($params)
     {
         $query = Proventos::find()
-                ->joinWith(['ativo']);
+                ->joinWith(['ativo'])
+                ->orderBy(['data'=>SORT_DESC]);
 
         // add conditions that should always apply here
 
