@@ -22,7 +22,7 @@ use kartik\number\NumberControl;
                 <div class="col-xs-8 col-sm-8 col-lg-8">
                     <?=
                     $form->field($model, 'ativo_id')->widget(Select2::classname(), [
-                        'data' => ArrayHelper::map(Ativo::find()->asArray()->all(), 'id', 'codigo'),
+                        'data' => ArrayHelper::map(Ativo::find()->where(['ativo'=>true])->asArray()->all(), 'id', 'codigo'),
                         'options' => ['placeholder' => 'Selecione um Tipo'],
                         'pluginOptions' => [
                             'allowClear' => true
