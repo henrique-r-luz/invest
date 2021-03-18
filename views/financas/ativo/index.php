@@ -25,14 +25,17 @@ $impostoRenda = 1;
             [
                 'attribute' => 'id',
                 'pageSummary' => 'EXTRATO FINANCEIRO',
-                'pageSummaryOptions' => ['colspan' => 3],
+                'pageSummaryOptions' => ['colspan' => 2],
                 'options' => ['style' => 'width:5%;'],
             ],
             [
                 'attribute' => 'codigo',
                 'value' => 'codigo',
             ],
-            'quantidade',
+            [
+                'attribute' => 'quantidade',
+                'pageSummary' => true,
+            ],
             [
                 'attribute' => 'valor_compra',
                 'value' => function($model) {
@@ -70,7 +73,7 @@ $impostoRenda = 1;
                         if ($ativo->categoria == app\lib\Categoria::RENDA_FIXA) {
                             $lucro = $lucro + ($ativo->valor_bruto - $ativo->valor_compra);
                         } else {
-                            $lucroAcao = $lucroAcao+ ($ativo->valor_bruto - $ativo->valor_compra);
+                            $lucroAcao = $lucroAcao + ($ativo->valor_bruto - $ativo->valor_compra);
                         }
                     }
 
