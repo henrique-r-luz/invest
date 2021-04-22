@@ -11,6 +11,7 @@ namespace app\models\financas\service\sincroniza;
 use app\lib\CajuiHelper;
 use app\lib\componentes\FabricaNotificacao;
 use app\models\financas\Ativo;
+use app\models\financas\Operacao;
 use Smalot\PdfParser\Parser;
 use Yii;
 use yii\base\UserException;
@@ -45,6 +46,8 @@ class BancoInter extends OperacoesAbstract {
         $cdbBancoInter = Ativo::findOne($this->cdbBancoInterId);
         $cdbBancoInter->valor_bruto = $this->valorCdbBruto;
          $cdbBancoInter->valor_liquido = $this->valorCdbLiquido;
+          $valorCompra = Ativo::valorCambio($cdbBancoInter, Operacao::valorDeCompraBancoInter($cdbBancoInter->id));
+          $cdbBancoInter->valor_compra = $valorCompra;
         if (!$cdbBancoInter->save()) {
             $this->erros .= CajuiHelper::processaErros($cdbBancoInter->getErrors()) . '</br>';
             $msg = 'A sicronização CDB banco Inter falhou!</br>' . $this->erros;

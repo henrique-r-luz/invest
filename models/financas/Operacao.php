@@ -106,6 +106,11 @@ class Operacao extends ActiveRecord {
 
         return max(0, round(self::queryDadosAtivos($ativo_id)[0]['valor_compra'], 2));
     }
+    
+    public static function valorDeCompraBancoInter($ativo_id) {
+
+        return max(0, round(self::queryDadosAtivosBancoInter($ativo_id)[0]['valor_compra'], 2));
+    }
 
     public static function  queryDadosAtivos($ativo_id) {
         $venda = 0;
@@ -129,13 +134,39 @@ class Operacao extends ActiveRecord {
 
         $query = (new Query())
                         ->select(['(coalesce(quantidade_compra,0)  - coalesce(quantidade_venda,0)) as quantidade',
-                            '(coalesce(preco_medio,0)*(coalesce(quantidade_compra,0)  - coalesce(quantidade_venda,0))) as valor_compra'])
+                            '(coalesce(preco_medio,0)*  '
+                           .'(coalesce(quantidade_compra,0)  - coalesce(quantidade_venda,0))) as valor_compra'])
                         ->from(['quantidade_venda' => $quantidade_venda,
                             'quantidade_compra' => $quantidade_compra,
                             'preco_medio' => $precoMedio])->all();
         
         return $query;
     }
+    
+    
+     public static function  queryDadosAtivosBancoInter($ativo_id) {
+        $venda = 0;
+        $compra = 1;
+
+        $valor_venda = Operacao::find()
+                ->select('sum(valor) as valor_venda')
+                ->andWhere(['ativo_id' => $ativo_id])
+                ->andWhere(['tipo' => $venda]);
+
+        $valor_compra = Operacao::find()
+                ->select('sum(valor) as valor_compra')
+                ->andWhere(['ativo_id' => $ativo_id])
+                ->andWhere(['tipo' => $compra]);
+
+
+        $query = (new Query())
+                        ->select(['(coalesce(valor_compra,0)  - coalesce(valor_venda,0)) as valor_compra'])
+                        ->from(['quantidade_venda' => $valor_venda,
+                            'quantidade_compra' => $valor_compra])->all();
+        
+        return $query;
+    }
+    
 
     public function getValorCambio() {
 
