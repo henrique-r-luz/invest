@@ -9,16 +9,20 @@ use app\models\financas\Proventos;
 /**
  * ProventosSearch represents the model behind the search form of `app\models\financas\Proventos`.
  */
-class ProventosSearch extends Proventos
-{
+class ProventosSearch extends Proventos {
+
+    public $createTimeRange;
+    public $createTimeStart;
+    public $createTimeEnd;
+
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id'], 'integer'],
-            [['data','ativo_id'], 'safe'],
+            [['data', 'ativo_id'], 'safe'],
+            [['createTimeRange'], 'match', 'pattern' => '/^.+\s\-\s.+$/'],
             [['valor'], 'number'],
         ];
     }
@@ -26,8 +30,7 @@ class ProventosSearch extends Proventos
     /**
      * {@inheritdoc}
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -39,17 +42,16 @@ class ProventosSearch extends Proventos
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Proventos::find()
                 ->joinWith(['ativo'])
-                ->orderBy(['data'=>SORT_DESC]);
+                ->orderBy(['data' => SORT_DESC]);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-             'pagination' => [
+            'pagination' => [
                 'pageSize' => 10,
             ],
         ]);
@@ -65,12 +67,19 @@ class ProventosSearch extends Proventos
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'data' => $this->data,
             'valor' => $this->valor,
         ]);
         
-         $query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_id]);
+        if ($this->createTimeRange != null && $this->createTimeRange != '') {
+           // $query->andFilterWhere(['>=', 'data', date("d/m/y H:i", $this->createTimeStart)])
+           //         ->andFilterWhere(['<=', 'data', date("d/m/y H:i", $this->createTimeEnd)]);
+            $query->andFilterWhere(['>=', 'data', $this->createTimeStart])
+                    ->andFilterWhere(['<=', 'data', $this->createTimeEnd]);
+        }
+
+        $query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_id]);
 
         return $dataProvider;
     }
+
 }
