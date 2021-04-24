@@ -34,6 +34,17 @@ class ProventosSearch extends Proventos {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
+    
+     public function behaviors() {
+        return [
+            [
+                'class' => \app\lib\DateRangeBehaviorAlterado::className(),
+                'attribute' => 'createTimeRange',
+                'dateStartAttribute' => 'createTimeStart',
+                'dateEndAttribute' => 'createTimeEnd',
+            ]
+        ];
+    }
 
     /**
      * Creates data provider instance with search query applied
@@ -69,7 +80,7 @@ class ProventosSearch extends Proventos {
             'id' => $this->id,
             'valor' => $this->valor,
         ]);
-        
+     
         if ($this->createTimeRange != null && $this->createTimeRange != '') {
            // $query->andFilterWhere(['>=', 'data', date("d/m/y H:i", $this->createTimeStart)])
            //         ->andFilterWhere(['<=', 'data', date("d/m/y H:i", $this->createTimeEnd)]);

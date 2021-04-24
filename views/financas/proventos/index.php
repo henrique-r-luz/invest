@@ -2,6 +2,7 @@
 
 use app\models\financas\Ativo;
 use app\models\financas\ProventosSearch;
+use kartik\daterange\DateRangePicker;
 use kartik\grid\GridView;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
@@ -13,6 +14,20 @@ use yii\web\View;
 
 $this->title = 'Proventos';
 $this->params['breadcrumbs'][] = $this->title;
+
+$daterange = [
+    'model' => $searchModel,
+    'attribute' => 'createTimeRange',
+    'convertFormat' => true,
+    'pluginOptions' => [
+        'timePicker' => true,
+        'timePicker24Hour'=> true,
+        'timePickerIncrement' => 10,
+        //'locale' => ['format' => 'Y-m-d H:i']
+        'locale' => ['format' => 'd/m/Y H:i:s']
+       //'locale' => ['dd/MM/yyyy HH:mm']
+    ],
+];
 ?>
 <div class="proventos-index">
 
@@ -30,7 +45,6 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'pageSummary' => 'EXTRATO FINANCEIRO',
             // 'pageSummaryOptions' => ['colspan' => 2],
             ],
-            'data',
             [
                 'attribute' => 'valor',
                 'format' => 'currency',
@@ -54,6 +68,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     return '<font color="' . $color . '">Valor Total: ' . Yii::$app->formatter->asCurrency($total) . '</font>';
                 },
             ],
+            [
+                'attribute' => 'data',
+                'format' => 'datetime',
+                //'format'=>'dd/mm/yyyy HH:MM',
+                'filter' => DateRangePicker::widget($daterange),
+            // 'format'     => 'dd/mm/yyyy',
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
         'panel' => [
@@ -66,7 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             '{toggleData}',
         ],
-         'showPageSummary' => true,
+        'showPageSummary' => true,
     ]);
     ?>
 
