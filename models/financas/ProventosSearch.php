@@ -10,7 +10,8 @@ use app\models\financas\Proventos;
  * ProventosSearch represents the model behind the search form of `app\models\financas\Proventos`.
  */
 class ProventosSearch extends Proventos {
-
+    
+    public $ativo_codigo;
     public $createTimeRange;
     public $createTimeStart;
     public $createTimeEnd;
@@ -21,7 +22,7 @@ class ProventosSearch extends Proventos {
     public function rules() {
         return [
             [['id'], 'integer'],
-            [['data', 'ativo_id'], 'safe'],
+            [['data', 'ativo_id','ativo_codigo'], 'safe'],
             [['createTimeRange'], 'match', 'pattern' => '/^.+\s\-\s.+$/'],
             [['valor'], 'number'],
         ];
@@ -66,6 +67,11 @@ class ProventosSearch extends Proventos {
                 'pageSize' => 10,
             ],
         ]);
+        
+           $dataProvider->sort->attributes['ativo_codigo'] = [
+            'asc'  => ['ativo.codigo' => SORT_ASC],
+            'desc' => ['ativo.codigo' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -79,6 +85,7 @@ class ProventosSearch extends Proventos {
         $query->andFilterWhere([
             'id' => $this->id,
             'valor' => $this->valor,
+            'ativo_id'=>$this->ativo_id,
         ]);
      
         if ($this->createTimeRange != null && $this->createTimeRange != '') {
@@ -88,7 +95,7 @@ class ProventosSearch extends Proventos {
                     ->andFilterWhere(['<=', 'data', $this->createTimeEnd]);
         }
 
-        $query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_id]);
+        $query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_codigo]);
 
         return $dataProvider;
     }

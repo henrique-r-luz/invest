@@ -25,7 +25,7 @@ class OperacaoSearch extends Operacao {
         return [
             [['id', 'ativo_id'], 'integer'],
             [['createTimeRange'], 'match', 'pattern' => '/^.+\s\-\s.+$/'],
-            [['tipo', 'data', 'ativo_codigo'], 'safe'],
+            [['tipo', 'data', 'ativo_codigo','ativo_id'], 'safe'],
             [['valor', 'quantidade'], 'number'],
         ];
     }
@@ -69,6 +69,11 @@ class OperacaoSearch extends Operacao {
             ],
             'sort' => ['defaultOrder' => ['data' => SORT_DESC]],
         ]);
+        
+          $dataProvider->sort->attributes['ativo_codigo'] = [
+            'asc'  => ['ativo.codigo' => SORT_ASC],
+            'desc' => ['ativo.codigo' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -84,7 +89,8 @@ class OperacaoSearch extends Operacao {
             'operacao.quantidade' => $this->quantidade,
             'valor' => $this->valor,
             //'data' => $this->data,
-            'operacao.tipo' => $this->tipo
+            'operacao.tipo' => $this->tipo,
+            'ativo.id'=>$this->ativo_id    
                 //'ativo_id' => $this->ativo_id,
         ]);
       

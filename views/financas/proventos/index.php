@@ -38,12 +38,16 @@ $daterange = [
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
+             [
+              'label' => 'Id Ativo',
+               'attribute' => 'ativo_id',
+               'value' => 'ativo.id', 
+                'options' => ['style' => 'width:10%;']
+            ],
             [
-                'label' => 'Ativo Código',
-                'attribute' => 'ativo_id',
+                'label' => 'Ativo',
+                'attribute' => 'ativo_codigo',
                 'value' => 'ativo.codigo',
-            // 'pageSummary' => 'EXTRATO FINANCEIRO',
-            // 'pageSummaryOptions' => ['colspan' => 2],
             ],
             [
                 'attribute' => 'valor',

@@ -38,7 +38,13 @@ $daterange = [
             //      'id',
             //'tipo:ntext',
             [
-                'label' => 'Ativo Código',
+              'label' => 'Id Ativo',
+               'attribute' => 'ativo_id',
+               'value' => 'ativo.id', 
+                'options' => ['style' => 'width:10%;']
+            ],
+            [
+                'label' => 'Ativo',
                 'attribute' => 'ativo_codigo',
                 'value' => 'ativo.codigo',
                 'pageSummary' => 'EXTRATO FINANCEIRO',
