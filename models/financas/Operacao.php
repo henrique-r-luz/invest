@@ -117,28 +117,24 @@ class Operacao extends ActiveRecord {
         $compra = 1;
 
         $quantidade_venda = Operacao::find()
-                ->select('sum(quantidade) as quantidade_venda')
+                ->select(['sum(quantidade) as quantidade_venda','sum(valor) as valor_venda'])
                 ->andWhere(['ativo_id' => $ativo_id])
                 ->andWhere(['tipo' => $venda]);
 
         $quantidade_compra = Operacao::find()
-                ->select('sum(quantidade) as quantidade_compra')
+                ->select(['sum(quantidade) as quantidade_compra','sum(valor) as valor_compra'])
                 ->andWhere(['ativo_id' => $ativo_id])
                 ->andWhere(['tipo' => $compra]);
 
 
-        $precoMedio = Operacao::find()
-                ->select('(sum(valor)/sum(quantidade)) as  preco_medio')
-                ->andWhere(['ativo_id' => $ativo_id])
-                ->andWhere(['tipo' => $compra]);
 
         $query = (new Query())
                         ->select(['(coalesce(quantidade_compra,0)  - coalesce(quantidade_venda,0)) as quantidade',
-                            '(coalesce(preco_medio,0)*  '
+                            '(coalesce((valor_compra/quantidade_compra),0) *  '
                            .'(coalesce(quantidade_compra,0)  - coalesce(quantidade_venda,0))) as valor_compra'])
                         ->from(['quantidade_venda' => $quantidade_venda,
                             'quantidade_compra' => $quantidade_compra,
-                            'preco_medio' => $precoMedio])->all();
+                           ])->all();
         
         return $query;
     }

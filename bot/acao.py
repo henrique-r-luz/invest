@@ -32,6 +32,7 @@ def executa(discionarioAcoes):
         
         browser.get(row['url']);
         preco = getPreco(browser);
+        print(str(row['ativo_id'])+' - '+str(preco.text));
         listaPreco.append([row['ativo_id'], preco.text])
        
     browser.get('https://br.investing.com/currencies/usd-brl');
