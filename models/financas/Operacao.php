@@ -21,6 +21,8 @@ class Operacao extends ActiveRecord {
 
     const VENDA = 'Venda';
     const COMPRA = 'Compra';
+    const DESDOBRAMENTO_MAIS = 'DESDOBRAMENTO_MAIS'; //aumenta a quantidade de ativos
+    const DESDOBRAMENTO_MENOS = 'DESDOBRAMENTO_MENOS'; //diminui a quantidade de ativos
 
     /**
      * {@inheritdoc}
@@ -68,6 +70,14 @@ class Operacao extends ActiveRecord {
             'ativo_id' => 'Ativo ID',
         ];
     }
+    
+    
+    public function beforeSave($insert) {
+        if($this->tipo==2 || $this->tipo==3){
+            $this->valor = 0;
+        }
+       return  parent::beforeSave($insert);
+    }
 
     /**
      * retorna o tipo de operação
@@ -77,6 +87,8 @@ class Operacao extends ActiveRecord {
         return [
             0 => self::VENDA,
             1 => self::COMPRA,
+            2 => self::DESDOBRAMENTO_MAIS,
+            3 => self::DESDOBRAMENTO_MENOS
         ];
     }
 
@@ -84,6 +96,8 @@ class Operacao extends ActiveRecord {
         return [
             self::VENDA => 0,
             self::COMPRA => 1,
+            self::DESDOBRAMENTO_MAIS => 2,
+            self::DESDOBRAMENTO_MENOS => 3
         ];
     }
 
@@ -115,6 +129,8 @@ class Operacao extends ActiveRecord {
     public static function  queryDadosAtivos($ativo_id) {
         $venda = 0;
         $compra = 1;
+        $desdobramentoMais = 2;
+        $desdobramentoMenos = 3;
 
         $quantidade_venda = Operacao::find()
                 ->select(['sum(quantidade) as quantidade_venda','sum(valor) as valor_venda'])
@@ -125,15 +141,39 @@ class Operacao extends ActiveRecord {
                 ->select(['sum(quantidade) as quantidade_compra','sum(valor) as valor_compra'])
                 ->andWhere(['ativo_id' => $ativo_id])
                 ->andWhere(['tipo' => $compra]);
+        
+        $quantidade_desdobramento_menos = Operacao::find()
+                ->select(['sum(quantidade) as quantidade_desdobramento_menos'])
+                ->andWhere(['ativo_id' => $ativo_id])
+                ->andWhere(['tipo' => $desdobramentoMenos]);
+        
+         $quantidade_desdobramento_mais = Operacao::find()
+                ->select(['sum(quantidade) as quantidade_desdobramento_mais'])
+                ->andWhere(['ativo_id' => $ativo_id])
+                ->andWhere(['tipo' => $desdobramentoMais]);
 
 
 
         $query = (new Query())
-                        ->select(['(coalesce(quantidade_compra,0)  - coalesce(quantidade_venda,0)) as quantidade',
-                            '(coalesce((valor_compra/quantidade_compra),0) *  '
-                           .'(coalesce(quantidade_compra,0)  - coalesce(quantidade_venda,0))) as valor_compra'])
+                        ->select(['(coalesce(quantidade_compra,0)  '
+                                . '- coalesce(quantidade_venda,0) '
+                                . '- coalesce(quantidade_desdobramento_menos,0)'
+                                . '+ coalesce(quantidade_desdobramento_mais,0)'
+                                . ') as quantidade',
+                            '(coalesce((valor_compra/(quantidade_compra '
+                            . '- coalesce(quantidade_desdobramento_menos,0)'
+                            . '+ coalesce(quantidade_desdobramento_mais,0)'
+                            . ')),0) *  '
+                           .'(coalesce(quantidade_compra,0)  '
+                          . '- coalesce(quantidade_venda,0)  '
+                          . '- coalesce(quantidade_desdobramento_menos,0)'
+                          . '+ coalesce(quantidade_desdobramento_mais,0)'
+                          . ')) as valor_compra'])
+                
                         ->from(['quantidade_venda' => $quantidade_venda,
                             'quantidade_compra' => $quantidade_compra,
+                            'desdobramento_menos'=>$quantidade_desdobramento_menos,
+                            'desdobramento_mais'=>$quantidade_desdobramento_mais,
                            ])->all();
         
         return $query;
