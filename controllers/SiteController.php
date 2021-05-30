@@ -3,17 +3,18 @@
 namespace app\controllers;
 
 use app\models\dashboard\DashBoardSearch;
+use app\models\dashboard\GraficoAcaoPais;
+use app\models\dashboard\GraficoAcoes;
+use app\models\dashboard\GraficoAtivo;
 use app\models\dashboard\GraficoCategoria;
+use app\models\dashboard\GraficoFiis;
+use app\models\dashboard\GraficoPais;
 use app\models\dashboard\GraficoTipo;
-use app\models\service\IndexService;
+use app\models\financas\Proventos;
+use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
-use \app\models\dashboard\GraficoPais;
-use \app\models\dashboard\GraficoAtivo;
-use \app\models\dashboard\GraficoAcaoPais;
-use \app\models\dashboard\GraficoAcoes;
-use \app\models\dashboard\GraficoFiis;
 use const YII_ENV_TEST;
 
 class SiteController extends Controller {
@@ -74,9 +75,10 @@ class SiteController extends Controller {
         $graficoAcaoPais = new GraficoAcaoPais($dados);
         $graficoAcoes = new GraficoAcoes($dados);
         $graficoFii = new GraficoFiis($dados);
-        $formatter = \Yii::$app->formatter;
+        $formatter = Yii::$app->formatter;
         $patrimonioBruto = 0;
         $valorCompra = 0;
+        $proventos = $formatter->asCurrency(Proventos::find()->sum('valor'));
         if (!empty($dados)) {
             $patrimonioBruto = $formatter->asCurrency($dados[0]['valor_total']);
             $valorCompra = $formatter->asCurrency($dados[0]['valor_compra']);
@@ -92,6 +94,7 @@ class SiteController extends Controller {
                     'patrimonioBruto' => $patrimonioBruto,
                     'valorCompra' => $valorCompra,
                     'lucro_bruto' => $lucro,
+                    'proventos'=>$proventos,
                     'dadosAcoesPais' => $graficoAcaoPais->montaGrafico(),
                     'dadosFiis'=>$graficoFii->montaGrafico(),
         ]);

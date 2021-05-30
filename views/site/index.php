@@ -32,7 +32,7 @@ $this->title = 'Patrimônio';
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4 col-sm-4 col-xs-12">
+    <div class="col-md-3 col-sm-3 col-xs-12">
         <div class="info-box">
             <!-- Apply any bg-* class to to the icon to color it -->
             <span class="info-box-icon bg-green"><i class="fa fa-usd "></i></span>
@@ -42,7 +42,7 @@ $this->title = 'Patrimônio';
             </div><!-- /.info-box-content -->
         </div><!-- /.info-box -->
     </div>
-    <div class="col-md-4 col-sm-4 col-xs-12">
+    <div class="col-md-3 col-sm-3 col-xs-12">
         <div class="info-box">
             <!-- Apply any bg-* class to to the icon to color it -->
             <span class="info-box-icon bg-blue"><i class="fa fa-briefcase "></i></span>
@@ -52,13 +52,23 @@ $this->title = 'Patrimônio';
             </div><!-- /.info-box-content -->
         </div><!-- /.info-box -->
     </div>
-    <div class="col-md-4 col-sm-4 col-xs-12">
+    <div class="col-md-3 col-sm-3 col-xs-12">
         <div class="info-box">
             <!-- Apply any bg-* class to to the icon to color it -->
             <span class="info-box-icon bg-yellow"><i class="fa fa-line-chart"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Lucro Bruto</span>
                 <span class="info-box-number"><?= $lucro_bruto ?></span>
+            </div><!-- /.info-box-content -->
+        </div><!-- /.info-box -->
+    </div>
+     <div class="col-md-3 col-sm-3 col-xs-12">
+        <div class="info-box">
+            <!-- Apply any bg-* class to to the icon to color it -->
+            <span class="info-box-icon bg-aqua"><i class="fa fa-arrow-down"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Proventos</span>
+                <span class="info-box-number"><?= $proventos ?></span>
             </div><!-- /.info-box-content -->
         </div><!-- /.info-box -->
     </div>

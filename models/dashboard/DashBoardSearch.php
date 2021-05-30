@@ -10,13 +10,14 @@ namespace app\models\dashboard;
 
 use \app\models\financas\Ativo;
 use app\lib\Tipo;
+use \app\models\financas\Proventos;
+
 /**
  * Description of DashBoardSearch
  *
  * @author henrique
  */
 class DashBoardSearch {
-    
 
     public function search() {
         $categorio = Ativo::find()
@@ -33,31 +34,32 @@ class DashBoardSearch {
                 ->select(['pais', 'sum(valor_bruto) as valor_pais'])
                 ->where(['ativo' => true])
                 ->groupBy(['pais']);
-        
+
         $acaoPais = Ativo::find()
                 ->select(['tipo,pais,sum(valor_bruto) as valor_acao_pais'])
-                ->where(['tipo'=>Tipo::ACOES])
+                ->where(['tipo' => Tipo::ACOES])
                 ->andWhere(['ativo' => true])
-                ->groupBy(['tipo','pais']);
-               
+                ->groupBy(['tipo', 'pais']);
 
-        $valorTotal = Ativo::find()->select(['sum(valor_bruto) as valor_total','sum(valor_compra) as valor_compra']);
+       
+
+
+        $valorTotal = Ativo::find()->select(['sum(valor_bruto) as valor_total', 'sum(valor_compra) as valor_compra']);
 
         $ativos = Ativo::find()
-                ->select(['ativo.codigo', 'valor_bruto', 'ativo.categoria', 'valor_categoria', 'ativo.pais', 'valor_pais', 'ativo.tipo', 'valor_tipo','valor_acao_pais'])
+                ->select(['ativo.codigo', 'valor_bruto', 'ativo.categoria', 'valor_categoria', 'ativo.pais', 'valor_pais', 'ativo.tipo', 'valor_tipo', 'valor_acao_pais'])
                 ->leftJoin(['ativo_categoria' => $categorio], 'ativo.categoria = ativo_categoria.categoria')
                 ->leftJoin(['ativo_tipo' => $tipo], 'ativo.tipo = ativo_tipo.tipo')
                 ->leftJoin(['ativo_pais' => $pais], 'ativo.pais = ativo_pais.pais')
                 ->leftJoin(['ativo_acao_pais' => $acaoPais], 'ativo_acao_pais.pais = ativo.pais')
                 ->where(['ativo' => true]);
-                
-     
-                $dados = (new \yii\db\Query())
+
+
+        $dados = (new \yii\db\Query())
                 ->from(['ativo' => $ativos, 'valorTotal' => $valorTotal])
                 ->all();
 
         return $dados;
-        
     }
 
 }
