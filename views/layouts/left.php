@@ -25,6 +25,7 @@
                             'items' => [
                                 ['label' => 'Ativo', 'icon' => 'diamond', 'url' => ['/financas/ativo']],
                                 ['label' => 'Atualiza Ação', 'icon' => 'undo', 'url' => ['/financas/atualiza-acao']],
+                                ['label' => 'Investidor', 'icon' => 'user', 'url' => ['/financas/investidor']],
                                 ['label' => 'Operação', 'icon' => 'money', 'url' => ['/financas/operacao']],
                                 ['label' => 'Proventos', 'icon' => 'arrow-down', 'url' => ['/financas/proventos']],
                                 ['label' => 'Empresas Bolsa', 'icon' => 'building', 'url' => ['/financas/acao-bolsa']],

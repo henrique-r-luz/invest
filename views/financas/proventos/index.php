@@ -21,11 +21,11 @@ $daterange = [
     'convertFormat' => true,
     'pluginOptions' => [
         'timePicker' => true,
-        'timePicker24Hour'=> true,
+        'timePicker24Hour' => true,
         'timePickerIncrement' => 10,
         //'locale' => ['format' => 'Y-m-d H:i']
         'locale' => ['format' => 'd/m/Y H:i:s']
-       //'locale' => ['dd/MM/yyyy HH:mm']
+    //'locale' => ['dd/MM/yyyy HH:mm']
     ],
 ];
 ?>
@@ -38,10 +38,10 @@ $daterange = [
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-             [
-              'label' => 'Id Ativo',
-               'attribute' => 'ativo_id',
-               'value' => 'ativo.id', 
+            [
+                'label' => 'Id Ativo',
+                'attribute' => 'ativo_id',
+                'value' => 'ativo.id',
                 'options' => ['style' => 'width:10%;']
             ],
             [
@@ -72,6 +72,7 @@ $daterange = [
                     return '<font color="' . $color . '">Valor Total: ' . Yii::$app->formatter->asCurrency($total) . '</font>';
                 },
             ],
+            
             [
                 'attribute' => 'data',
                 'format' => 'datetime',
@@ -79,6 +80,14 @@ $daterange = [
                 'filter' => DateRangePicker::widget($daterange),
             // 'format'     => 'dd/mm/yyyy',
             ],
+            [
+                'filter' => \app\lib\Pais::all(),
+                'attribute' => 'pais',
+                'label' => 'País',
+                'value' => function($model) {
+                    return $model->ativo->pais;
+                }
+            ],            
             ['class' => 'yii\grid\ActionColumn'],
         ],
         'panel' => [

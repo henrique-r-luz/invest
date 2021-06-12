@@ -10,8 +10,9 @@ use app\models\financas\Proventos;
  * ProventosSearch represents the model behind the search form of `app\models\financas\Proventos`.
  */
 class ProventosSearch extends Proventos {
-    
+
     public $ativo_codigo;
+    public $pais;
     public $createTimeRange;
     public $createTimeStart;
     public $createTimeEnd;
@@ -22,7 +23,7 @@ class ProventosSearch extends Proventos {
     public function rules() {
         return [
             [['id'], 'integer'],
-            [['data', 'ativo_id','ativo_codigo'], 'safe'],
+            [['data', 'ativo_id', 'ativo_codigo', 'pais'], 'safe'],
             [['createTimeRange'], 'match', 'pattern' => '/^.+\s\-\s.+$/'],
             [['valor'], 'number'],
         ];
@@ -35,8 +36,8 @@ class ProventosSearch extends Proventos {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
-    
-     public function behaviors() {
+
+    public function behaviors() {
         return [
             [
                 'class' => \app\lib\DateRangeBehaviorAlterado::className(),
@@ -67,10 +68,15 @@ class ProventosSearch extends Proventos {
                 'pageSize' => 10,
             ],
         ]);
-        
-           $dataProvider->sort->attributes['ativo_codigo'] = [
-            'asc'  => ['ativo.codigo' => SORT_ASC],
+
+        $dataProvider->sort->attributes['ativo_codigo'] = [
+            'asc' => ['ativo.codigo' => SORT_ASC],
             'desc' => ['ativo.codigo' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['pais'] = [
+            'asc' => ['ativo.pais' => SORT_ASC],
+            'desc' => ['ativo.pais' => SORT_DESC],
         ];
 
         $this->load($params);
@@ -85,12 +91,13 @@ class ProventosSearch extends Proventos {
         $query->andFilterWhere([
             'id' => $this->id,
             'valor' => $this->valor,
-            'ativo_id'=>$this->ativo_id,
+            'ativo_id' => $this->ativo_id,
+            'pais' => $this->pais,
         ]);
-     
+
         if ($this->createTimeRange != null && $this->createTimeRange != '') {
-           // $query->andFilterWhere(['>=', 'data', date("d/m/y H:i", $this->createTimeStart)])
-           //         ->andFilterWhere(['<=', 'data', date("d/m/y H:i", $this->createTimeEnd)]);
+            // $query->andFilterWhere(['>=', 'data', date("d/m/y H:i", $this->createTimeStart)])
+            //         ->andFilterWhere(['<=', 'data', date("d/m/y H:i", $this->createTimeEnd)]);
             $query->andFilterWhere(['>=', 'data', $this->createTimeStart])
                     ->andFilterWhere(['<=', 'data', $this->createTimeEnd]);
         }
