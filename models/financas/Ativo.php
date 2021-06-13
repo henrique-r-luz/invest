@@ -63,8 +63,8 @@ class Ativo extends ActiveRecord {
         return [
             'id' => 'ID',
             'nome' => 'Nome',
-            'codigo' => 'Codigo',
-            'quantidade' => 'Quantidade',
+            'codigo' => 'Código',
+            'quantidade' => 'Quant.',
             'valor_compra' => 'Valor Compra',
             'valor_bruto' => 'Valor Bruto',
             'valor_liquido' => 'Valor Liquido',
@@ -105,6 +105,10 @@ class Ativo extends ActiveRecord {
 
     public function getAcaoBolsa() {
         return $this->hasOne(AcaoBolsa::class, ['id' => 'acao_bolsa_id']);
+    }
+    
+     public function getInvestidor() {
+        return $this->hasOne(Investidor::class, ['id' => 'investidor_id']);
     }
     
    

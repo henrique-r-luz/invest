@@ -20,7 +20,7 @@ class AtivoSearch extends Ativo
     {
         return [
             [['id', 'quantidade'], 'integer'],
-            [['nome', 'codigo','tipo','categoria','pais'], 'safe'],
+            [['nome', 'codigo','tipo','categoria','pais','investidor_id'], 'safe'],
             [['valor_compra', 'valor_bruto', 'valor_liquido'], 'number'],
         ];
     }
@@ -44,6 +44,7 @@ class AtivoSearch extends Ativo
     public function search($params)
     {
         $query = Ativo::find()
+                 ->innerJoin('investidor','investidor.id = ativo.investidor_id')
                  ->andWhere(['ativo'=>true]);
                  //->andWhere(['>','quantidade',0]);
 
@@ -77,8 +78,8 @@ class AtivoSearch extends Ativo
         ]);
 
         $query->andFilterWhere(['ilike', 'nome', $this->nome])
-            ->andFilterWhere(['ilike', 'codigo', $this->codigo]);
-            //->andFilterWhere(['ilike', 'tipo.nome', $this->tipo]);
+            ->andFilterWhere(['ilike', 'codigo', $this->codigo])
+            ->andFilterWhere(['ilike', 'investidor.nome', $this->investidor_id]);
             //->andFilterWhere(['ilike', 'categoria', $this->categoria]);
 
         return $dataProvider;

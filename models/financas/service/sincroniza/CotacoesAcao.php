@@ -61,7 +61,7 @@ class CotacoesAcao extends OperacoesAbstract {
     public function getDados() {
 
         //$cotacaoCambio = new CotacaoCambio();
-        $cambio = SincronizaFactory::sincroniza('cambio')->atualiza();
+        $cambio = SincronizaFactory::sincroniza('cambioApi')->atualiza();
 
         $file = Yii::$app->params['bot'] . '/preco_acao.csv';
         if (!file_exists($file)) {

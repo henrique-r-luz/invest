@@ -14,48 +14,61 @@ namespace app\models\financas\service\sincroniza;
  * @author henrique
  */
 class SincronizaFactory {
+
     //put your code here
-    public static function sincroniza($tipo){
-        
-        switch ($tipo){
+    public static function sincroniza($tipo) {
+
+        switch ($tipo) {
             case 'cambio':
                 return self::getCambio();
+            case 'cambioApi':
+                return self::getCambioApi();
             case 'acao':
-               return self::getAcao();
+                return self::getAcao();
+             case 'acaoApi':
+                return self::getAcaoApi();
             case 'easy':
                 return self::getEasy();
             case 'empresa':
-                return self::getEmpresa();    
+                return self::getEmpresa();
             case 'operacaoClear':
                 return self::getOperacaoClear();
             case 'banco_inter':
                 return self::getBancoInter();
-                
         }
     }
-    
-    private function getAcao(){
+
+    private function getAcao() {
         return new CotacoesAcao();
     }
     
-    
-    private function getCambio(){
-         return new CotacaoCambio();
+    private function getAcaoApi() {
+        return new CotacoesAcaoApi();
+    }
+
+    private function getCambio() {
+        return new CotacaoCambio();
     }
     
-    private function getEasy(){
+    private function getCambioApi() {
+        return new CotacaoCambioApi();
+    }
+
+
+    private function getEasy() {
         return new CotacaoEasy();
     }
-    
-    private function getEmpresa(){
+
+    private function getEmpresa() {
         return new InseriEmpresasBolsa();
     }
-    
-    private function getOperacaoClear(){
+
+    private function getOperacaoClear() {
         return new OperacaoClear();
     }
-    
-    private function getBancoInter(){
+
+    private function getBancoInter() {
         return new BancoInter();
     }
+
 }

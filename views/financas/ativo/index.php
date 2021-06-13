@@ -31,6 +31,7 @@ $impostoRenda = 1;
             [
                 'attribute' => 'codigo',
                 'value' => 'codigo',
+                'options' => ['style' => 'width:5%;'],
             ],
             [
                 'attribute' => 'quantidade',
@@ -96,6 +97,12 @@ $impostoRenda = 1;
                 'attribute' => 'categoria',
                 'label' => 'Categoria',
                 'value' => 'categoria',
+            ],
+            [
+               // 'filter' => app\lib\Categoria::all(),
+                'attribute' => 'investidor_id',
+                'label' => 'Investidor',
+                'value' => 'investidor.nome',
             ],
             [
                 'filter' => \app\lib\Pais::all(),

@@ -20,9 +20,20 @@ use kartik\number\NumberControl;
         <div class="ativo-form">
             <?php $form = ActiveForm::begin(); ?>
             <div class="col-xs-12 col-lg-12 no-padding">
-                <div class="col-xs-12 col-sm-12 col-lg-12">
+                <div class="col-xs-12 col-sm-8 col-lg-8">
                     <?= $form->field($model, 'nome')->textInput() ?>
                 </div> 
+                <div class="col-xs-12 col-sm-4 col-lg-4">
+                    <?=
+                    $form->field($model, 'investidor_id')->widget(Select2::classname(), [
+                        'data' => ArrayHelper::map(app\models\financas\Investidor::find()->asArray()->all(), 'id', 'nome'),
+                        'options' => ['placeholder' => 'Selecione um Investidor'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]);
+                    ?> 
+                </div>
             </div>
             <div class="col-xs-12 col-lg-12 no-padding">
                 <div class="col-xs-4 col-sm-4 col-lg-4">
