@@ -30,8 +30,10 @@ class CotacoesAcaoApi extends OperacoesAbstract {
 
     //put your code here
     public function atualiza() {
+        set_time_limit(6000);
         $this->contacaoAcoesBrasil();
         $this->cotacaoAtivosUsa();
+        $this->atualizaFiis();
     }
 
     private function contacaoAcoesBrasil() {
@@ -42,8 +44,7 @@ class CotacoesAcaoApi extends OperacoesAbstract {
                 ->all();
         foreach ($ativos as $acoes) {
             try {
-                //$url = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' . $acoes->codigo . $pais . '&apikey=' . $this->key;
-                $url = 'https://api.hgbrasil.com/finance/stock_price?key=e94e8fa6&symbol=' . $acoes->codigo;
+                $url = "https://api.hgbrasil.com/finance/stock_price?key=e94e8fa6&symbol=" . $acoes->codigo;
                 $json = file_get_contents($url);
                 $dados = json_decode($json, true);
                 $preco = 0;
@@ -69,10 +70,15 @@ class CotacoesAcaoApi extends OperacoesAbstract {
             $empresas[] = $acoes->codigo;
         }
         try {
-            $url = 'https://mboum.com/api/v1/qu/quote/?symbol=' . implode(',', $empresas) . '&apikey=Niy1I9fd7L8GmG3v8Eot3CHYC1o7mxINKbN90IPvdmCuHqB8kKiVJsByOCeX';
-            $json = file_get_contents($url);
+            $context = stream_context_create(array(
+                'http' => array('ignore_errors' => true),
+            ));
+            $url = "https://mboum.com/api/v1/qu/quote/?symbol=" . implode(',', $empresas) . "&apikey=Niy1I9fd7L8GmG3v8Eot3CHYC1o7mxINKbN90IPvdmCuHqB8kKiVJsByOCeX";
+            $json = file_get_contents($url, false, $context);
             $dados = json_decode($json, true);
             $index = 0;
+            //print_r($dados);
+            //exit();
             foreach ($dados as $acoes) {
 
 
@@ -86,6 +92,32 @@ class CotacoesAcaoApi extends OperacoesAbstract {
             }
         } catch (Exception $ex) {
             $this->erro('<b> Ação ' . $acoes['symbol'] . ' <b>: ' . $ex);
+        }
+    }
+
+    private function atualizaFiis() {
+        $ativos = Ativo::find()->where(['ativo' => true])
+                ->andWhere(['categoria' => Categoria::RENDA_VARIAVEL])
+                ->andWhere(['pais' => Pais::BR])
+                ->andWhere(['tipo' => Tipo::FIIS])
+                ->all();
+        foreach ($ativos as $acoes) {
+            try {
+                $url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" . $acoes->codigo . ".SAO" . "&apikey=" . $this->key;
+                $json = file_get_contents($url);
+                $dados = json_decode($json, true);
+                $preco = 0;
+                if (isset($dados['Global Quote']['05. price'])) {
+                    $preco = $dados['Global Quote']['05. price'];
+                } else {
+                    print_r($dados);
+                    exit();
+                    $this->erro('Os dados não puderam ser lidos! ' . $acoes->codigo . ' ' . $url);
+                }
+            } catch (Exception $ex) {
+                $this->erro('<b> Ação ' . $acao->codigo . ' <b>: ' . $ex);
+            }
+            $this->salvaValorCompraAtivo($acoes, $preco);
         }
     }
 
