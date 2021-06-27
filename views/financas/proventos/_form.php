@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <?=
                     $form->field($model, 'ativo_id')->widget(Select2::classname(), [
-                        'data' => ArrayHelper::map(Ativo::find()->andWhere(['categoria'=> app\lib\Categoria::RENDA_VARIAVEL])->asArray()->all(), 'id', 'codigo'),
+                        'data' => Ativo::lista(),//ArrayHelper::map(Ativo::find()->andWhere(['categoria'=> app\lib\Categoria::RENDA_VARIAVEL])->asArray()->all(), 'id', 'codigo'),
                         'options' => ['placeholder' => 'Selecione um Tipo'],
                         'pluginOptions' => [
                             'allowClear' => true

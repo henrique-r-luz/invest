@@ -7,6 +7,8 @@ use app\models\financas\service\sincroniza\CotacaoCambio;
 use app\models\Tipo;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
+
 /**
  * This is the model class for table "public.ativo".
  *
@@ -44,7 +46,7 @@ class Ativo extends ActiveRecord {
      */
     public function rules() {
         return [
-            [['nome', 'codigo', 'tipo', 'categoria', 'ativo', 'pais','investidor_id'], 'required'],
+            [['nome', 'codigo', 'tipo', 'categoria', 'ativo', 'pais', 'investidor_id'], 'required'],
             [['nome', 'codigo', 'categoria', 'tipo'], 'string'],
             [['quantidade'], 'default', 'value' => null],
             [['acao_bolsa_id'], 'integer'],
@@ -73,7 +75,7 @@ class Ativo extends ActiveRecord {
             'ativo' => 'Ativo',
             'acao_bolsa_id' => 'Empresas',
             'pais' => 'País',
-            'investidor_id'=> 'Investidor' 
+            'investidor_id' => 'Investidor'
         ];
     }
 
@@ -98,7 +100,7 @@ class Ativo extends ActiveRecord {
     public function getOperacao() {
         return $this->hasMany(Operacao::class, ['ativo_id' => 'id']);
     }
-    
+
     public function getProvento() {
         return $this->hasMany(Proventos::class, ['ativo_id' => 'id']);
     }
@@ -106,13 +108,10 @@ class Ativo extends ActiveRecord {
     public function getAcaoBolsa() {
         return $this->hasOne(AcaoBolsa::class, ['id' => 'acao_bolsa_id']);
     }
-    
-     public function getInvestidor() {
+
+    public function getInvestidor() {
         return $this->hasOne(Investidor::class, ['id' => 'investidor_id']);
     }
-    
-   
-
 
     public function beforeSave($insert) {
 
@@ -138,6 +137,14 @@ class Ativo extends ActiveRecord {
             return floatval($valor) * floatval($moeda);
         }
         return $valor;
+    }
+
+    public static function lista() {
+        return ArrayHelper::map(Ativo::find()->where(['ativo' => true])->all(), 'id', 
+                function($model){
+                    return $model->codigo.' | '.$model->investidor->nome;
+                });
+        
     }
 
 }

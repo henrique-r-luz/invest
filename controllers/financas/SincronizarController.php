@@ -55,10 +55,10 @@ class SincronizarController extends Controller {
         }
 
         if (Yii::$app->request->post('but') == 'atualiza_dados') {
-            //SincronizaFactory::sincroniza('acao')->atualiza();
+            SincronizaFactory::sincroniza('acao')->atualiza();
             SincronizaFactory::sincroniza('easy')->atualiza();
             SincronizaFactory::sincroniza('operacaoClear')->atualiza();
-            SincronizaFactory::sincroniza('acaoApi')->atualiza();
+           // SincronizaFactory::sincroniza('acaoApi')->atualiza();
             SincronizaFactory::sincroniza('banco_inter')->atualiza();
             return $this->redirect('/index.php');
         }

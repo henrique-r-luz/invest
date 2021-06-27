@@ -1,17 +1,18 @@
 <?php
 
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use \app\models\financas\Ativo;
+use app\models\financas\Ativo;
 use app\models\financas\Operacao;
-use kartik\widgets\Select2;
-use yii\helpers\ArrayHelper;
 use kartik\datecontrol\DateControl;
 use kartik\number\NumberControl;
+use kartik\widgets\Select2;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\web\View;
+use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
+/* @var $this View */
 /* @var $model app\models\Operacao */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form ActiveForm */
 ?>
 
 <div class="box-success box">
@@ -22,7 +23,7 @@ use kartik\number\NumberControl;
                 <div class="col-xs-8 col-sm-8 col-lg-8">
                     <?=
                     $form->field($model, 'ativo_id')->widget(Select2::classname(), [
-                        'data' => ArrayHelper::map(Ativo::find()->where(['ativo'=>true])->asArray()->all(), 'id', 'codigo'),
+                        'data' => Ativo::lista(),//ArrayHelper::map(Ativo::find()->where(['ativo'=>true])->asArray()->all(), 'id', 'codigo'),
                         'options' => ['placeholder' => 'Selecione um Tipo'],
                         'pluginOptions' => [
                             'allowClear' => true
