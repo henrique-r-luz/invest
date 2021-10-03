@@ -9,6 +9,7 @@
 namespace app\models\financas\service\sincroniza;
 
 use Yii;
+use yii\db\Exception;
 
 /**
  * Description of CotacaoCambio

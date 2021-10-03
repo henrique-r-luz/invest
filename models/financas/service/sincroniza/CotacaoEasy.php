@@ -9,8 +9,12 @@
 namespace app\models\financas\service\sincroniza;
 
 use app\lib\CajuiHelper;
+use app\lib\Categoria;
+use app\lib\componentes\FabricaNotificacao;
 use app\models\financas\Ativo;
+use app\models\financas\Operacao;
 use Yii;
+use yii\base\UserException;
 
 /**
  * Description of CotacaoEasy
@@ -50,7 +54,9 @@ class CotacaoEasy extends OperacoesAbstract {
                 $erros .= CajuiHelper::processaErros($ativo->getErrors()) . '</br>';
             }
         }
-        //exit();
+        List($cont,$msg) =  $this->atualizaBaby();
+        $contErro += $cont;
+        $erros .= $msg;
         if ($contErro != 0) {
                 FabricaNotificacao::create('rank', ['ok' => false,
                 'titulo' => 'Renda fixa Easynveste falhou!',
@@ -58,6 +64,28 @@ class CotacaoEasy extends OperacoesAbstract {
                 'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
                  throw new UserException($erros);
         }
+       
+    }
+    
+    
+    public function atualizaBaby(){
+        $ativos = Ativo::find()
+                ->andWhere(['investidor_id'=>2])
+                ->andWhere(['categoria'=>Categoria::RENDA_FIXA])->all();
+        $erros = '';
+        foreach($ativos as $ativo){
+            $compra = Operacao::find()
+                    ->where(['ativo_id'=>$ativo->id])->sum('valor');
+            
+            $ativo->valor_compra = $compra;
+            $ativo->valor_bruto = $compra;
+            $ativo->valor_liquido = $compra;
+            if(!$ativo->save()){
+                 $erros .= CajuiHelper::processaErros($ativo->getErrors()) . '</br>';
+               return [1,$erros]; 
+            }
+        }
+        return [0,$erros];
     }
 
 }

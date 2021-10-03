@@ -19,7 +19,7 @@ filePath = '~/NetBeansProjects/investimento/invest/bot/dados/';
 #browser = webdriver.Firefox(executable_path="/home/vagrant/anaconda3/bin/geckodriver",log_path="/tmp/geckodriver.log")
 
 def getDados():
-    url = "http://192.168.200.10/index.php/financas/atualiza-acao/url";
+    url = "http://localhost/index.php/financas/atualiza-acao/url";
     response = json.loads(requests.get(url).text);
     executa(response);
 

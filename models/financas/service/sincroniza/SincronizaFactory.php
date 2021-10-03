@@ -38,36 +38,36 @@ class SincronizaFactory {
         }
     }
 
-    private function getAcao() {
+    private static function getAcao() {
         return new CotacoesAcao();
     }
     
-    private function getAcaoApi() {
+    private static function getAcaoApi() {
         return new CotacoesAcaoApi();
     }
 
-    private function getCambio() {
+    private static function getCambio() {
         return new CotacaoCambio();
     }
     
-    private function getCambioApi() {
+    private static function getCambioApi() {
         return new CotacaoCambioApi();
     }
 
 
-    private function getEasy() {
+    private static function getEasy() {
         return new CotacaoEasy();
     }
 
-    private function getEmpresa() {
+    private static function getEmpresa() {
         return new InseriEmpresasBolsa();
     }
 
-    private function getOperacaoClear() {
+    private static function getOperacaoClear() {
         return new OperacaoClear();
     }
 
-    private function getBancoInter() {
+    private static function getBancoInter() {
         return new BancoInter();
     }
 
