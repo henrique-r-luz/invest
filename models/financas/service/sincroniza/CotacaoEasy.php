@@ -42,50 +42,52 @@ class CotacaoEasy extends OperacoesAbstract {
         $contErro = 0;
         $erros = '';
         foreach ($this->csv as $titulo) {
-            // echo $titulo[1].'-'.$titulo[3].'-'.$titulo[2].'</br>';
-            $ativo = Ativo::find()->where(['codigo' => $titulo[1] . '-' . $titulo[3] . '-' . $titulo[2]])->one();
-            $ativo->valor_bruto = str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[6])));
-            $ativo->valor_liquido = str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[7])));
-            if ($ativo->valor_compra <= 0 && $ativo->quantidade > 0) {
-                $ativo->valor_compra = $ativo->valor_bruto;
-            }
-            if (!$ativo->save()) {
-                $contErro++;
-                $erros .= CajuiHelper::processaErros($ativo->getErrors()) . '</br>';
+            $codigo = $titulo[1] . '-' . $titulo[3] . '-' . $titulo[2];
+            $ativo = Ativo::find()->where(['codigo' => $codigo])->one();
+            if ($ativo == null) {
+                $erros .= ' o codigo do ativo:' . $codigo . ' não existe</br>';
+            } else {
+                $ativo->valor_bruto = str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[6])));
+                $ativo->valor_liquido = str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[7])));
+                if ($ativo->valor_compra <= 0 && $ativo->quantidade > 0) {
+                    $ativo->valor_compra = $ativo->valor_bruto;
+                }
+                if (!$ativo->save()) {
+                    $contErro++;
+                    $erros .= CajuiHelper::processaErros($ativo->getErrors()) . '</br>';
+                }
             }
         }
-        List($cont,$msg) =  $this->atualizaBaby();
+        List($cont, $msg) = $this->atualizaBaby();
         $contErro += $cont;
         $erros .= $msg;
         if ($contErro != 0) {
-                FabricaNotificacao::create('rank', ['ok' => false,
+            FabricaNotificacao::create('rank', ['ok' => false,
                 'titulo' => 'Renda fixa Easynveste falhou!',
                 'mensagem' => 'Renda fixa Easynveste não foi atualizados !</br>' . $erros,
                 'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
-                 throw new UserException($erros);
+            throw new UserException($erros);
         }
-       
     }
-    
-    
-    public function atualizaBaby(){
+
+    public function atualizaBaby() {
         $ativos = Ativo::find()
-                ->andWhere(['investidor_id'=>2])
-                ->andWhere(['categoria'=>Categoria::RENDA_FIXA])->all();
+                        ->andWhere(['investidor_id' => 2])
+                        ->andWhere(['categoria' => Categoria::RENDA_FIXA])->all();
         $erros = '';
-        foreach($ativos as $ativo){
+        foreach ($ativos as $ativo) {
             $compra = Operacao::find()
-                    ->where(['ativo_id'=>$ativo->id])->sum('valor');
-            
+                            ->where(['ativo_id' => $ativo->id])->sum('valor');
+
             $ativo->valor_compra = $compra;
             $ativo->valor_bruto = $compra;
             $ativo->valor_liquido = $compra;
-            if(!$ativo->save()){
-                 $erros .= CajuiHelper::processaErros($ativo->getErrors()) . '</br>';
-               return [1,$erros]; 
+            if (!$ativo->save()) {
+                $erros .= CajuiHelper::processaErros($ativo->getErrors()) . '</br>';
+                return [1, $erros];
             }
         }
-        return [0,$erros];
+        return [0, $erros];
     }
 
 }
