@@ -51,10 +51,10 @@ class BancoInter extends OperacoesAbstract {
         if (!$cdbBancoInter->save()) {
             $this->erros .= CajuiHelper::processaErros($cdbBancoInter->getErrors()) . '</br>';
             $msg = 'A sicronização CDB banco Inter falhou!</br>' . $this->erros;
-            FabricaNotificacao::create('rank', ['ok' => false,
+           /* FabricaNotificacao::create('rank', ['ok' => false,
                 'titulo' => 'A sicronização CDB banco Inter falhou!',
                 'mensagem' => $msg,
-                'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
+                'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();*/
             throw new UserException($msg);
         }
     }

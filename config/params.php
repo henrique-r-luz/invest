@@ -6,6 +6,7 @@ return [
     'senderName' => 'Example.com mailer',
     'serverNode'=>'http://192.168.200.10:3001',
     'bot'=>'/var/www/dados',
+    'back_up'=>'/var/www/back',
     'icon-framework' => \kartik\icons\Icon::FAS,  // Font Awesome Icon framework
      
 ];

@@ -18,7 +18,7 @@ $this->title = $name;
             <h3><?= $name ?></h3>
 
             <p>
-                <?= nl2br(Html::encode($message)) ?>
+                <?= $message ?>
             </p>
 
             <p>

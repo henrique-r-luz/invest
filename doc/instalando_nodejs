@@ -2,7 +2,7 @@ sudo apt install nodejs
 
 sudo apt install npm
 
-npm install (dentro da pasta js do porjeto)
+npm install (dentro da pasta js do projeto)
 
 script que inicializa o server de notificação node.js
 

@@ -139,10 +139,10 @@ class CotacoesAcaoApi extends OperacoesAbstract {
 
     private function erro($erro) {
         $msg = 'Cotações das ações não foram atualizadas !</br>' . $erro;
-        FabricaNotificacao::create('rank', ['ok' => false,
+       /* FabricaNotificacao::create('rank', ['ok' => false,
             'titulo' => 'Cotações das ações falharam!',
             'mensagem' => $msg,
-            'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
+            'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();*/
         throw new UserException($msg);
     }
 

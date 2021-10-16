@@ -67,7 +67,7 @@ class SincronizarController extends Controller {
      * Faz backup do banco de dados do sistema
      */
     private function executaBackup() {
-        $dump = '/vagrant/invest/back/investimento_' . date("YmdHis") . '.sql';
+        $dump = Yii::$app->params['back_up'].'/'. date("YmdHis") . '.sql';
         $cmd = 'sudo -u postgres pg_dump investimento  > ' . $dump;
         $resp = shell_exec($cmd);
         if (empty($resp)) {

@@ -41,10 +41,9 @@ class CotacaoCambioApi extends OperacoesAbstract {
 
     private function erro($erro) {
         $msg = 'A cotação do dolar não foi atualizada !</br>' . $erro;
-        FabricaNotificacao::create('rank', ['ok' => false,
-            'titulo' => 'Cotação do dolar falhou!',
+        /*     'titulo' => 'Cotação do dolar falhou!',
             'mensagem' => $msg,
-            'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
+            'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();*/
         throw new UserException($msg);
     }
 

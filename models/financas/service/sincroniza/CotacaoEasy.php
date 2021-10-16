@@ -45,6 +45,7 @@ class CotacaoEasy extends OperacoesAbstract {
             $codigo = $titulo[1] . '-' . $titulo[3] . '-' . $titulo[2];
             $ativo = Ativo::find()->where(['codigo' => $codigo])->one();
             if ($ativo == null) {
+                $contErro++;
                 $erros .= ' o codigo do ativo:' . $codigo . ' não existe</br>';
             } else {
                 $ativo->valor_bruto = str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[6])));
@@ -62,11 +63,12 @@ class CotacaoEasy extends OperacoesAbstract {
         $contErro += $cont;
         $erros .= $msg;
         if ($contErro != 0) {
-            FabricaNotificacao::create('rank', ['ok' => false,
+           /* FabricaNotificacao::create('rank', ['ok' => false,
                 'titulo' => 'Renda fixa Easynveste falhou!',
                 'mensagem' => 'Renda fixa Easynveste não foi atualizados !</br>' . $erros,
-                'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
+                'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();*/
             throw new UserException($erros);
+           
         }
     }
 

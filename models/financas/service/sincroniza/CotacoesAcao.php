@@ -49,10 +49,10 @@ class CotacoesAcao extends OperacoesAbstract {
         }
         if ($contErro != 0) {  
                 $msg = 'A Cotação açoes não foram atualizados !</br>' . $this->erros;
-                FabricaNotificacao::create('rank', ['ok' => false,
+                /*FabricaNotificacao::create('rank', ['ok' => false,
                     'titulo' => 'Cotação ação falhou!',
                     'mensagem' => $msg,
-                    'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
+                    'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();*/
                     throw new UserException($msg);
             
         }

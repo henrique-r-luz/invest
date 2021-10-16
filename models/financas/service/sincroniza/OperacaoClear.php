@@ -93,10 +93,11 @@ class OperacaoClear extends OperacoesAbstract {
             $transaction->commit();
         } catch (Exception $e) {
             if ($resp == false) {
-                FabricaNotificacao::create('rank', ['ok' => false,
+              /*  FabricaNotificacao::create('rank', ['ok' => false,
                     'titulo' => 'Operações ações Falhou!',
                     'mensagem' => 'As operações de ações Falharam !.<br>' . $erros,
-                    'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
+                    'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();*/
+                throw new UserException($erros);
             }
 
             $transaction->rollBack();
