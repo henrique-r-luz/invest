@@ -3,36 +3,34 @@ from selenium import webdriver
 import json
 import requests
 import json
-from selenium.common.exceptions import NoSuchElementException   
-#import urllib.request, json 
-
-#código para o servidor, deve ser comentado pra teste local
-'''from pyvirtualdisplay import Display
+from selenium.common.exceptions import NoSuchElementException
 import sys
-display = Display(visible=0, size=(1366, 768))
-display.start()'''
-
-filePath = '~/NetBeansProjects/investimento/invest/bot/dados/';
+import os
 
 
-#url = sys.argv[1];
-#browser = webdriver.Firefox(executable_path="/home/vagrant/anaconda3/bin/geckodriver",log_path="/tmp/geckodriver.log")
+filePath = '~/NetBeansProjects/investimento/dados/';
+
 
 def getDados():
-    url = "http://localhost/index.php/financas/atualiza-acao/url";
-    response = json.loads(requests.get(url).text);
-    executa(response);
+    try:
+        os.remove("/tmp/atualiza_acao.log");
+        url = "http://localhost/index.php/financas/atualiza-acao/url";
+        response = json.loads(requests.get(url).text);
+        executa(response);
+    except BaseException as err:
+        print('Erro', format(err));
+        browser.quit();
 
 
-def executa(discionarioAcoes):  
-    browser = webdriver.Firefox();
+def executa(discionarioAcoes):
     listaPreco = [];
     moeda = [];
     for row in discionarioAcoes:
-        
         browser.get(row['url']);
         preco = getPreco(browser);
-        print(str(row['ativo_id'])+' - '+str(preco.text));
+        print(str(row['ativo_id']) + ' - ' + str(preco.text));
+        with open('/tmp/atualiza_acao.log', 'a') as log:
+            log.write(str(row['ativo_id'])+' - '+str(preco.text)+';');
         listaPreco.append([row['ativo_id'], preco.text])
        
     browser.get('https://br.investing.com/currencies/usd-brl');
@@ -72,9 +70,8 @@ def getPrecoClass(browser):
         return browser.find_element_by_class_name('instrument-price_last__KQzyA')
     except NoSuchElementException:
         return False;
-         
 
-
-    
+#browser = webdriver.Firefox();
+browser = webdriver.Remote();
 getDados();
 
