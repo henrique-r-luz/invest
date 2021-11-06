@@ -6,32 +6,35 @@ import json
 from selenium.common.exceptions import NoSuchElementException
 import sys
 import os
+import os.path
 
 
-filePath = '~/NetBeansProjects/investimento/dados/';
+filePath = '~/NetBeansProjects/dados/';
 
 
 def getDados():
-    try:
-        os.remove("/tmp/atualiza_acao.log");
+        if (os.path.exists("/tmp/atualiza_acao.log")):
+            os.remove("/tmp/atualiza_acao.log");
         url = "http://localhost/index.php/financas/atualiza-acao/url";
         response = json.loads(requests.get(url).text);
         executa(response);
-    except BaseException as err:
-        print('Erro', format(err));
-        browser.quit();
-
+        print('true');
+        return 'true';
 
 def executa(discionarioAcoes):
     listaPreco = [];
     moeda = [];
+    id = 0;
     for row in discionarioAcoes:
+        #if(id==2):
+            #break;
         browser.get(row['url']);
         preco = getPreco(browser);
-        print(str(row['ativo_id']) + ' - ' + str(preco.text));
+        #print(str(row['ativo_id']) + ' - ' + str(preco.text));
         with open('/tmp/atualiza_acao.log', 'a') as log:
             log.write(str(row['ativo_id'])+' - '+str(preco.text)+';');
         listaPreco.append([row['ativo_id'], preco.text])
+        id+=1
        
     browser.get('https://br.investing.com/currencies/usd-brl');
     preco = getPreco(browser);
@@ -41,10 +44,10 @@ def executa(discionarioAcoes):
   
     df = pd.DataFrame(listaPreco, columns=['id', 'valor'])
     dfDollar = pd.DataFrame(moeda, columns=['moeda', 'valor'])
-    df.to_csv(filePath + 'preco_acao.csv', index=False)
-    dfDollar.to_csv(filePath + 'cambio.csv', index=False)
+    #df.to_csv(filePath + 'preco_acao.csv', index=False)
+    #dfDollar.to_csv(filePath + 'cambio.csv', index=False)
     browser.quit()
-    print(df);
+    #print(df);
     
  
 def getPreco(browser):
@@ -71,7 +74,10 @@ def getPrecoClass(browser):
     except NoSuchElementException:
         return False;
 
-#browser = webdriver.Firefox();
-browser = webdriver.Remote();
-getDados();
+try:
+    browser = webdriver.Remote(command_executor='invest_bot:4444');
+    getDados();
+except BaseException as err:
+    print('Erro', format(err));
+    browser.quit();
 
