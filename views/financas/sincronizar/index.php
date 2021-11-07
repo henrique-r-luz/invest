@@ -22,8 +22,7 @@ $this->title = 'Sincroniza Dados';
         <div class="form-group">
             <?= Html::submitButton('Backup Dados', ['class' => 'btn btn-warning', 'name' => 'but', 'value' => 'backup']) ?>
             <?= Html::submitButton('Atualiza Dados', ['class' => 'btn btn-info', 'name' => 'but', 'value' => 'atualiza_dados']) ?>
-            <?= Html::submitButton('Empresas da bolsa site Eduardo', ['id' => 'empresa_id', 'class' => 'btn btn-success', 'name' => 'but', 'value' => 'empresa']) ?>
-            <?= Html::submitButton('Dados da bolsa site Eduardo', ['id' => 'dados_empresa_id', 'class' => 'btn btn-success', 'name' => 'but', 'value' => 'dados_empresa']) ?>
+            <?= Html::submitButton('Atualiza ações', ['id' => 'acoes_id', 'class' => 'btn btn-success', 'name' => 'but', 'value' => 'acoes']) ?>
         </div>
 
 <?php ActiveForm::end(); ?> 
