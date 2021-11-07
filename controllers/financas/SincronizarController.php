@@ -33,6 +33,9 @@ class SincronizarController extends Controller {
         if (Yii::$app->request->post('but') == 'backup') {
             return $this->executaBackup();
         }
+        if (Yii::$app->request->post('but') == 'acoes') {
+            return $this->atualizaAcoes();
+        }
         if (Yii::$app->request->post('but') == 'cotacao_empresa') {
 
             SincronizaFactory::sincroniza('acao')->atualiza();
@@ -55,20 +58,27 @@ class SincronizarController extends Controller {
         }
 
         if (Yii::$app->request->post('but') == 'atualiza_dados') {
-            SincronizaFactory::sincroniza('acao')->atualiza();
-            SincronizaFactory::sincroniza('easy')->atualiza();
-            SincronizaFactory::sincroniza('operacaoClear')->atualiza();
-            SincronizaFactory::sincroniza('banco_inter')->atualiza();
+            $this->atualiza();
             return $this->redirect('/index.php');
         }
+    }
+
+    private function atualiza() {
+        SincronizaFactory::sincroniza('acao')->atualiza();
+        SincronizaFactory::sincroniza('easy')->atualiza();
+        SincronizaFactory::sincroniza('operacaoClear')->atualiza();
+        SincronizaFactory::sincroniza('banco_inter')->atualiza();
+        //return $this->redirect('/index.php');
     }
 
     /**
      * Faz backup do banco de dados do sistema
      */
     private function executaBackup() {
-        $dump = Yii::$app->params['back_up'].'/'. date("YmdHis") . '.sql';
-        $cmd = 'sudo -u postgres pg_dump investimento  > ' . $dump;
+        $dump = Yii::$app->params['back_up'] . '/' . date("YmdHis") . '.sql';
+        $cmd = 'sudo sshpass -p dandelo  ssh  henrique@' . Yii::$app->params['ip_docker'] . ' "docker exec ' . Yii::$app->params['container_web'] . ' pg_dump -U postgres  investimento" > ' . $dump;
+        //echo $cmd;
+        //exit();
         $resp = shell_exec($cmd);
         if (empty($resp)) {
             if (file_exists($dump)) {
@@ -82,6 +92,20 @@ class SincronizarController extends Controller {
             Yii::$app->session->setFlash('danger', 'Erro ao realizar backup.');
             return $this->render('index');
         }
+    }
+
+    private function atualizaAcoes() {
+        //$cmd  = "python3.8 /var/www/invest/bot/acao.py";
+        $cmd = escapeshellcmd('python3.8 /var/www/invest/bot/acao.py');
+        $resp = shell_exec($cmd);
+        if ($resp == true) {
+            Yii::$app->session->setFlash('success', 'Atualizaoes acoes ocorreu com sucesso!');
+            $this->atualiza();
+            return $this->redirect('/index.php');
+        } else {
+            Yii::$app->session->setFlash('danger', 'Erro na atualizações da ações');
+        }
+        return $this->render('index');
     }
 
 }
