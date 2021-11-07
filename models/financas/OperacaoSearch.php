@@ -17,6 +17,7 @@ class OperacaoSearch extends Operacao {
     public $createTimeRange;
     public $createTimeStart;
     public $createTimeEnd;
+    public $investidor;
 
     /**
      * {@inheritdoc}
@@ -25,7 +26,7 @@ class OperacaoSearch extends Operacao {
         return [
             [['id', 'ativo_id'], 'integer'],
             [['createTimeRange'], 'match', 'pattern' => '/^.+\s\-\s.+$/'],
-            [['tipo', 'data', 'ativo_codigo','ativo_id'], 'safe'],
+            [['tipo', 'data', 'ativo_codigo', 'ativo_id', 'investidor'], 'safe'],
             [['valor', 'quantidade'], 'number'],
         ];
     }
@@ -58,7 +59,8 @@ class OperacaoSearch extends Operacao {
      */
     public function search($params) {
         $query = Operacao::find()
-                ->innerJoin('ativo', 'ativo.id = operacao.ativo_id');
+                ->innerJoin('ativo', 'ativo.id = operacao.ativo_id')
+                ->innerjoin('investidor', 'investidor.id = ativo.investidor_id');
 
         // add conditions that should always apply here
 
@@ -69,11 +71,17 @@ class OperacaoSearch extends Operacao {
             ],
             'sort' => ['defaultOrder' => ['data' => SORT_DESC]],
         ]);
-        
-          $dataProvider->sort->attributes['ativo_codigo'] = [
-            'asc'  => ['ativo.codigo' => SORT_ASC],
+
+        $dataProvider->sort->attributes['ativo_codigo'] = [
+            'asc' => ['ativo.codigo' => SORT_ASC],
             'desc' => ['ativo.codigo' => SORT_DESC],
         ];
+
+        $dataProvider->sort->attributes['investidor'] = [
+            'asc' => ['investidor.nome' => SORT_ASC],
+            'desc' => ['investidor.nome' => SORT_DESC],
+        ];
+
 
         $this->load($params);
 
@@ -90,18 +98,19 @@ class OperacaoSearch extends Operacao {
             'valor' => $this->valor,
             //'data' => $this->data,
             'operacao.tipo' => $this->tipo,
-            'ativo.id'=>$this->ativo_id    
+            'ativo.id' => $this->ativo_id
                 //'ativo_id' => $this->ativo_id,
         ]);
-      
+
         if ($this->createTimeRange != null && $this->createTimeRange != '') {
-           // $query->andFilterWhere(['>=', 'data', date("d/m/y H:i", $this->createTimeStart)])
-           //         ->andFilterWhere(['<=', 'data', date("d/m/y H:i", $this->createTimeEnd)]);
+            // $query->andFilterWhere(['>=', 'data', date("d/m/y H:i", $this->createTimeStart)])
+            //         ->andFilterWhere(['<=', 'data', date("d/m/y H:i", $this->createTimeEnd)]);
             $query->andFilterWhere(['>=', 'data', $this->createTimeStart])
                     ->andFilterWhere(['<=', 'data', $this->createTimeEnd]);
         }
 
 
+        $query->andFilterWhere(['ilike', 'investidor.nome', $this->investidor]);
         $query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_codigo]);
 
 

@@ -72,7 +72,6 @@ $daterange = [
                     return '<font color="' . $color . '">Valor Total: ' . Yii::$app->formatter->asCurrency($total) . '</font>';
                 },
             ],
-            
             [
                 'attribute' => 'data',
                 'format' => 'datetime',
@@ -87,7 +86,12 @@ $daterange = [
                 'value' => function($model) {
                     return $model->ativo->pais;
                 }
-            ],            
+            ],
+            [
+                'attribute' => 'investidor',
+                'label' => 'Investidor',
+                'value' => 'ativo.investidor.nome',
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
         'panel' => [

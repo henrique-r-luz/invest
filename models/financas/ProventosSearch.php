@@ -16,6 +16,7 @@ class ProventosSearch extends Proventos {
     public $createTimeRange;
     public $createTimeStart;
     public $createTimeEnd;
+    public $investidor;
 
     /**
      * {@inheritdoc}
@@ -23,7 +24,7 @@ class ProventosSearch extends Proventos {
     public function rules() {
         return [
             [['id'], 'integer'],
-            [['data', 'ativo_id', 'ativo_codigo', 'pais'], 'safe'],
+            [['data', 'ativo_id', 'ativo_codigo', 'pais','investidor'], 'safe'],
             [['createTimeRange'], 'match', 'pattern' => '/^.+\s\-\s.+$/'],
             [['valor'], 'number'],
         ];
@@ -57,7 +58,7 @@ class ProventosSearch extends Proventos {
      */
     public function search($params) {
         $query = Proventos::find()
-                ->joinWith(['ativo'])
+                ->joinWith(['ativo.investidor'])
                 ->orderBy(['data' => SORT_DESC]);
 
         // add conditions that should always apply here
@@ -77,6 +78,11 @@ class ProventosSearch extends Proventos {
         $dataProvider->sort->attributes['pais'] = [
             'asc' => ['ativo.pais' => SORT_ASC],
             'desc' => ['ativo.pais' => SORT_DESC],
+        ];
+        
+        $dataProvider->sort->attributes['investidor'] = [
+            'asc' => ['investidor.nome' => SORT_ASC],
+            'desc' => ['investidor.nome' => SORT_DESC],
         ];
 
         $this->load($params);
@@ -103,6 +109,7 @@ class ProventosSearch extends Proventos {
         }
 
         $query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_codigo]);
+        $query->andFilterWhere(['ilike', 'investidor.nome', $this->investidor]);
 
         return $dataProvider;
     }

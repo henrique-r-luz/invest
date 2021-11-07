@@ -12,30 +12,30 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="investidor-index">
 
-                    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    
-            <?= GridView::widget([
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-
-                    'id',
+            'id',
             'cpf',
             'nome:ntext',
-
-        ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn'],
         ],
         'panel' => [
-        'type' => GridView::TYPE_DEFAULT,
+            'type' => GridView::TYPE_DEFAULT,
         //'heading' => true,
         ],
         'toolbar' => [
-        [
-        'content' =>Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])
+            [
+                'content' => Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])
+            ],
+            '{toggleData}',
         ],
-        '{toggleData}',
-        ],
-        ]); ?>
-    
-    
+    ]);
+    ?>
+
+
 </div>

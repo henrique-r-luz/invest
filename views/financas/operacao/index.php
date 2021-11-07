@@ -17,18 +17,17 @@ $daterange = [
     'convertFormat' => true,
     'pluginOptions' => [
         'timePicker' => true,
-        'timePicker24Hour'=> true,
+        'timePicker24Hour' => true,
         'timePickerIncrement' => 10,
         //'locale' => ['format' => 'Y-m-d H:i']
         'locale' => ['format' => 'd/m/Y H:i:s']
-       //'locale' => ['dd/MM/yyyy HH:mm']
+    //'locale' => ['dd/MM/yyyy HH:mm']
     ],
 ];
-
 ?>
 <div class="operacao-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]);   ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);    ?>
 
     <?=
     GridView::widget([
@@ -38,9 +37,9 @@ $daterange = [
             //      'id',
             //'tipo:ntext',
             [
-              'label' => 'Id Ativo',
-               'attribute' => 'ativo_id',
-               'value' => 'ativo.id', 
+                'label' => 'Id Ativo',
+                'attribute' => 'ativo_id',
+                'value' => 'ativo.id',
                 'options' => ['style' => 'width:10%;']
             ],
             [
@@ -72,7 +71,7 @@ $daterange = [
             [
                 'attribute' => 'valor',
                 'format' => 'currency',
-                'value'=> function($model) {
+                'value' => function($model) {
                     return $model->getValorCambio();
                 },
                 'pageSummary' => function ($summary, $data, $widget)use($dataProvider) {
@@ -105,6 +104,11 @@ $daterange = [
                 //'format'=>'dd/mm/yyyy HH:MM',
                 'filter' => DateRangePicker::widget($daterange),
             // 'format'     => 'dd/mm/yyyy',
+            ],
+            [
+                'attribute' => 'investidor',
+                'label' => 'Investidor',
+                'value' => 'ativo.investidor.nome',
             ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
