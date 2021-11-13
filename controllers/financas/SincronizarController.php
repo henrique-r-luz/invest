@@ -36,20 +36,7 @@ class SincronizarController extends Controller {
         if (Yii::$app->request->post('but') == 'acoes') {
             return $this->atualizaAcoes();
         }
-        if (Yii::$app->request->post('but') == 'cotacao_empresa') {
-
-            SincronizaFactory::sincroniza('acao')->atualiza();
-            $erro .= $msg;
-            if ($resp) {
-                Yii::$app->session->setFlash('success', 'A cotação das ações foram atualizadas!');
-                return $this->render('index');
-            } else {
-                Yii::$app->session->setFlash('danger', $erro);
-                return $this->render('index');
-            }
-        }
         if (Yii::$app->request->post('but') == 'dados_empresa') {
-
             //a classe Runner deve ser extendida
             $runner = new ExecutaBack();
             $return = $runner->run('backgroud/atualiza-fundamento');
@@ -99,7 +86,7 @@ class SincronizarController extends Controller {
         $cmd = escapeshellcmd('python3.8 /var/www/invest/bot/acao.py');
         $resp = shell_exec($cmd);
         if ($resp == true) {
-            Yii::$app->session->setFlash('success', 'Atualizaoes acoes ocorreu com sucesso!');
+            Yii::$app->session->setFlash('success', 'Atualizações das ações ocorreram com sucesso!');
             $this->atualiza();
             return $this->redirect('/index.php');
         } else {

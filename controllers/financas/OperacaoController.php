@@ -11,16 +11,19 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 use \app\models\financas\service\OperacaoService;
+use Exception;
 
 /**
  * OperacaoController implements the CRUD actions for Operacao model.
  */
-class OperacaoController extends Controller {
+class OperacaoController extends Controller
+{
 
     /**
      * {@inheritdoc}
      */
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -35,13 +38,14 @@ class OperacaoController extends Controller {
      * Lists all Operacao models.
      * @return mixed
      */
-    public function actionIndex() {
+    public function actionIndex()
+    {
         $searchModel = new OperacaoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -51,9 +55,10 @@ class OperacaoController extends Controller {
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id) {
+    public function actionView($id)
+    {
         return $this->render('view', [
-                    'model' => $this->findModel($id),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -62,23 +67,24 @@ class OperacaoController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate() {
+    public function actionCreate()
+    {
         $model = new Operacao();
         $operacaoService = new OperacaoService($model);
-
-        if ($operacaoService->load(Yii::$app->request->post())) {
-            if ($operacaoService->acaoSalvaOperacao()) {
-                Yii::$app->session->setFlash('success', 'Dados salvos com sucesso!');
-                return $this->redirect(['view', 'id' => $operacaoService->getOpereacao()->id]);
-            } else {
-                $erro = CajuiHelper::processaErros($operacaoService->getOpereacao()->getErrors());
-                Yii::$app->session->setFlash('danger', 'Erro ao salvar Operação!</br>' . $erro);
+        try {
+            if ($operacaoService->load(Yii::$app->request->post())) {
+                if ($operacaoService->acaoSalvaOperacao()) {
+                    Yii::$app->session->setFlash('success', 'Dados salvos com sucesso!');
+                    return $this->redirect(['view', 'id' => $operacaoService->getOpereacao()->id]);
+                }
             }
+        } catch (Exception $ex) {
+            Yii::$app->session->setFlash('danger', 'Erro ao salvar Operação!</br>' . $ex->getMessage());
+        } finally {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('create', [
-                    'model' => $model,
-        ]);
     }
 
     /**
@@ -88,22 +94,24 @@ class OperacaoController extends Controller {
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id) {
+    public function actionUpdate($id)
+    {
         $model = $this->findModel($id);
         $operacaoService = new OperacaoService($model);
-        if ($operacaoService->load(Yii::$app->request->post())) {
-            if ($operacaoService->acaoSalvaOperacao()) {
-                Yii::$app->session->setFlash('success', 'Dados salvos com sucesso!');
-                return $this->redirect(['view', 'id' => $model->id]);
-            } else {
-                $erro = CajuiHelper::processaErros($model->getErrors());
-                Yii::$app->session->setFlash('danger', 'Erro ao salvar Operação!</br>' . $erro);
+        try {
+            if ($operacaoService->load(Yii::$app->request->post())) {
+                if ($operacaoService->acaoSalvaOperacao()) {
+                    Yii::$app->session->setFlash('success', 'Dados salvos com sucesso!');
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }
+        } catch (Exception $ex) {
+            Yii::$app->session->setFlash('danger', 'Erro ao salvar Operação!</br>' . $ex->getMessage());
+        } finally {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('update', [
-                    'model' => $model,
-        ]);
     }
 
     /**
@@ -113,17 +121,19 @@ class OperacaoController extends Controller {
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id) {
+    public function actionDelete($id)
+    {
         $model = $this->findModel($id);
-         $operacaoService = new OperacaoService($model);
-        if ($operacaoService->acaoDeletaOperacao()) {
-             Yii::$app->session->setFlash('success', 'Dados excluídos com sucesso!');
-        }else{
-             $erro = CajuiHelper::processaErros($model->getErrors());
-             Yii::$app->session->setFlash('danger', 'Erro ao deletar Operação!</br>' . $erro);
+        $operacaoService = new OperacaoService($model);
+        try {
+            if ($operacaoService->acaoDeletaOperacao()) {
+                Yii::$app->session->setFlash('success', 'Dados excluídos com sucesso!');
+            }
+        } catch (Exception $ex) {
+            Yii::$app->session->setFlash('danger', 'Erro ao delete Operação!</br>' . $ex->getMessage());
+        } finally {
+            return $this->redirect(['index']);
         }
-
-        return $this->redirect(['index']);
     }
 
     /**
@@ -133,12 +143,12 @@ class OperacaoController extends Controller {
      * @return Operacao the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id) {
+    protected function findModel($id)
+    {
         if (($model = Operacao::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
 }
