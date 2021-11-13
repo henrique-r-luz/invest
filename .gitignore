@@ -19,3 +19,14 @@
 /bot/dados/
 /web/js/package-lock.json
 /bot/back/
+nbproject/project.properties
+bot/geckodriver.log
+nbproject/project.properties
+nbproject/project.xml
+vendor/kartik-v/yii2-date-range
+vendor/kartik-v/yii2-grid
+vendor/kartik-v/yii2-number
+vendor/kartik-v/yii2-widget-affix
+vendor/kartik-v/yii2-widget-select2
+vendor/yiisoft/yii2
+web/atualiza_acao.log
