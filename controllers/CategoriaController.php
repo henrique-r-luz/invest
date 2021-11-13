@@ -18,6 +18,7 @@ class CategoriaController extends Controller
      * {@inheritdoc}
      */
     public function behaviors()
+
     {
         return [
             'verbs' => [
