@@ -20,8 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="index">
 
-<?= $this->render('_grafico',['dados'=>$dados]); ?>
-    
-</div>    
+    <?= $this->render('_grafico', ['dados' => $dados]); ?>
 
-
+</div>

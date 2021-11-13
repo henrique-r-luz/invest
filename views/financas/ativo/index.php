@@ -15,7 +15,8 @@ $impostoRenda = 1;
 ?>
 <div class="ativo-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);  
+    ?>
 
     <?=
     GridView::widget([
@@ -39,7 +40,7 @@ $impostoRenda = 1;
             ],
             [
                 'attribute' => 'valor_compra',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return $model->valor_compra; //app\models\financas\Ativo::valorCambio($model, $model->valor_compra);
                 },
                 'format' => 'currency',
@@ -54,14 +55,14 @@ $impostoRenda = 1;
                 'filter' => app\lib\Tipo::all(),
                 'attribute' => 'tipo',
                 'label' => 'Tipo',
-                'value' => function($model) {
+                'value' => function ($model) {
                     if (isset($model->acaoBolsa->setor)) {
                         return $model->tipo . ' (' . $model->acaoBolsa->setor . ')';
                     } else {
                         return $model->tipo;
                     }
                 },
-                'pageSummary' => function ($summary, $data, $widget)use($dataProvider, $impostoRenda) {
+                'pageSummary' => function ($summary, $data, $widget) use ($dataProvider, $impostoRenda) {
                     //var_dump($dataProvider);
                     // print_r($dataProvider->models);
                     $objetos = $dataProvider->models;
@@ -99,7 +100,7 @@ $impostoRenda = 1;
                 'value' => 'categoria',
             ],
             [
-               // 'filter' => app\lib\Categoria::all(),
+                // 'filter' => app\lib\Categoria::all(),
                 'attribute' => 'investidor_id',
                 'label' => 'Investidor',
                 'value' => 'investidor.nome',
@@ -114,7 +115,7 @@ $impostoRenda = 1;
         ],
         'panel' => [
             'type' => GridView::TYPE_DEFAULT,
-        //'heading' => true,
+            //'heading' => true,
         ],
         'toolbar' => [
             [
