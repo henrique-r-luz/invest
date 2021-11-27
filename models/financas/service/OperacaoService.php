@@ -50,7 +50,7 @@ class OperacaoService {
             $this->salvaOperacao();
             $this->salvaAtivo();
             $this->corrigeAlteracaoAtivo();
-            $this->sicronizaDadosAtivo();
+            //$this->sicronizaDadosAtivo();
             $this->transaction->commit();
             return true;
         } catch (Exception $ex) {
@@ -87,19 +87,19 @@ class OperacaoService {
     private function salvaOperacao() {
         if (!$this->operacao->save()) {
             $erro = CajuiHelper::processaErros($this->operacao->getErrors());
-            $this->operacao->addError('ativo_id', 'O sistema não pode alterar a operação:' . $erro . '. ');
+            $this->operacao->addError('itens_ativos_id', 'O sistema não pode alterar a operação:' . $erro . '. ');
             throw new Exception( 'O sistema não pode alterar a operação:' . $erro . '. ');
         }
     }
 
     private function salvaAtivo() {
-        if (!$this->alteraAtivo->updateAtivo($this->operacao->ativo_id)) {
+        if (!$this->alteraAtivo->updateAtivo($this->operacao->itens_ativos_id)) {
             throw new Exception('O sistema não pode atualizar o ativo. ');
         }
     }
 
     private function corrigeAlteracaoAtivo() {
-        $ativo_id_antigo = $this->operacao->getOldAttribute('ativo_id');
+        $ativo_id_antigo = $this->operacao->getOldAttribute('itens_ativos_id');
         if ($ativo_id_antigo == null) {
             return true;
         }

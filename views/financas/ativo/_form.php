@@ -20,26 +20,25 @@ use kartik\number\NumberControl;
         <div class="ativo-form">
             <?php $form = ActiveForm::begin(); ?>
             <div class="col-xs-12 col-lg-12 no-padding">
-                <div class="col-xs-12 col-sm-8 col-lg-8">
+                <div class="col-xs-6 col-sm-6 col-lg-6">
                     <?= $form->field($model, 'nome')->textInput() ?>
-                </div> 
-                <div class="col-xs-12 col-sm-4 col-lg-4">
-                    <?=
-                    $form->field($model, 'investidor_id')->widget(Select2::classname(), [
-                        'data' => ArrayHelper::map(app\models\financas\Investidor::find()->asArray()->all(), 'id', 'nome'),
-                        'options' => ['placeholder' => 'Selecione um Investidor'],
+                </div>
+                <div class="col-xs-4 col-sm-4 col-lg-4">
+                    <?= $form->field($model, 'codigo')->textInput() ?>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-lg-2">
+                    <?= $form->field($model, 'pais')->widget(Select2::classname(), [
+                        //'data' => ArrayHelper::map(Tipo::find()->asArray()->all(), 'id', 'nome'),
+                        'data' => \app\lib\Pais::all(),
+                        'options' => ['placeholder' => 'País'],
                         'pluginOptions' => [
                             'allowClear' => true
                         ],
-                    ]);
-                    ?> 
+                    ]); ?>
                 </div>
             </div>
             <div class="col-xs-12 col-lg-12 no-padding">
                 <div class="col-xs-4 col-sm-4 col-lg-4">
-                    <?= $form->field($model, 'codigo')->textInput() ?>
-                </div>
-                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <?=
                     $form->field($model, 'acao_bolsa_id')->widget(Select2::classname(), [
                         'data' => ArrayHelper::map(app\models\financas\AcaoBolsa::find()->asArray()->all(), 'id', 'codigo'),
@@ -49,51 +48,6 @@ use kartik\number\NumberControl;
                         ],
                     ]);
                     ?>
-                </div>
-                 <div class="col-xs-2 col-sm-2 col-lg-2">
-                    <?=  $form->field($model, 'pais')->widget(Select2::classname(), [
-                        //'data' => ArrayHelper::map(Tipo::find()->asArray()->all(), 'id', 'nome'),
-                        'data' => \app\lib\Pais::all(),
-                        'options' => ['placeholder' => 'País'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ]); ?>
-                </div>
-                  <div class="col-xs-2 col-sm-2 col-lg-2">
-                    <?=
-                    $form->field($model, 'ativo')->widget(SwitchInput::class, [
-                        'pluginOptions' => [
-                            'onText' => 'Sim',
-                            'offText' => 'Não',
-                            'onColor' => 'success',
-                            'offColor' => 'danger',
-                        ]
-                    ])
-                    ?>
-                </div>
-            </div>
-            <div class="col-xs-12 col-lg-12 no-padding">
-                <div class="col-xs-2 col-sm-2 col-lg-2">
-                    <?=
-                    $form->field($model, 'valor_liquido')->widget(NumberControl::classname(), [
-                        'maskedInputOptions' => [
-                            'allowMinus' => false
-                        ],
-                        'readonly' => true,//($model->isNewRecord) ? true : false,
-                    ])
-                    ?>
-                </div>
-                <div class="col-xs-2 col-sm-2 col-lg-2">
-                    <?=
-                    $form->field($model, 'valor_bruto')->widget(NumberControl::classname(), [
-                        'maskedInputOptions' => [
-                            'allowMinus' => false
-                        ],
-                        'readonly' => true,//($model->isNewRecord) ? true : false,
-                    ])
-                    ?>
-
                 </div>
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <?=
@@ -119,16 +73,17 @@ use kartik\number\NumberControl;
                     ]);
                     ?>
                 </div>
-                
+            </div>
+            <div class="col-xs-12 col-lg-12 no-padding">
             </div>
             <div class="form-group col-xs-12 col-lg-12">
 
-            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-            <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+                <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
 
             </div>
 
-<?php ActiveForm::end(); ?>
+            <?php ActiveForm::end(); ?>
         </div>
     </div>
 </div>

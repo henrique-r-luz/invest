@@ -24,7 +24,7 @@ class ProventosSearch extends Proventos {
     public function rules() {
         return [
             [['id'], 'integer'],
-            [['data', 'ativo_id', 'ativo_codigo', 'pais','investidor'], 'safe'],
+            [['data', 'itens_ativos_id', 'ativo_codigo', 'pais','investidor'], 'safe'],
             [['createTimeRange'], 'match', 'pattern' => '/^.+\s\-\s.+$/'],
             [['valor'], 'number'],
         ];
@@ -58,7 +58,7 @@ class ProventosSearch extends Proventos {
      */
     public function search($params) {
         $query = Proventos::find()
-                ->joinWith(['ativo.investidor'])
+                ->joinWith(['itensAtivo.investidor','itensAtivo.ativos'])
                 ->orderBy(['data' => SORT_DESC]);
 
         // add conditions that should always apply here
@@ -97,7 +97,7 @@ class ProventosSearch extends Proventos {
         $query->andFilterWhere([
             'id' => $this->id,
             'valor' => $this->valor,
-            'ativo_id' => $this->ativo_id,
+            'itens_ativos_id' => $this->itens_ativos_id,
             'pais' => $this->pais,
         ]);
 

@@ -9,9 +9,11 @@
 namespace app\models\financas\service;
 
 
+use yii\db\Query;
+use app\lib\CajuiHelper;
 use \app\models\financas\Ativo;
 use \app\models\financas\Operacao;
-use yii\db\Query;
+use app\models\financas\ItensAtivo;
 
 /**
  * Aletara os ativo através do CRUD de operação
@@ -20,7 +22,7 @@ use yii\db\Query;
  */
 class AlteraAtivoOperacao {
     
-    private $ativo_id;
+    private $itens_ativos_id;
     private $erro;
     
      /**
@@ -29,23 +31,23 @@ class AlteraAtivoOperacao {
      * @return boolean
      */
     
-    public function updateAtivo($ativo_id) {
-        $this->ativo_id = $ativo_id;
-        $ativo = Ativo::findOne($ativo_id);
+    public function updateAtivo($itens_ativos_id) {
+        $this->itens_ativos_id = $itens_ativos_id;
+        $itensAtivo = ItensAtivo::findOne($itens_ativos_id);
         
-        $valoresAtivo = Operacao::queryDadosAtivos($ativo_id);
-        $ativo->quantidade = max(0, $valoresAtivo[0]['quantidade']);
-        if ($ativo->save()) {
+        $valoresAtivo = Operacao::queryDadosAtivos($itens_ativos_id);
+        $itensAtivo->quantidade = max(0, $valoresAtivo[0]['quantidade']);
+        if ($itensAtivo->save()) {
             return true;
         } else {
-            $this->erro = CajuiHelper::processaErros($ativo->getErrors());
+            $this->erro = CajuiHelper::processaErros($itensAtivo->getErrors());
             return false;
         }
     }
     
     
     public function getErro(){
-        return $erro;
+        return $this->erro;
     }
     
     

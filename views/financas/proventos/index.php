@@ -40,20 +40,20 @@ $daterange = [
         'columns' => [
             [
                 'label' => 'Id Ativo',
-                'attribute' => 'ativo_id',
-                'value' => 'ativo.id',
+                'attribute' => 'itens_ativos_id',
+                'value' => 'itensAtivo.id',
                 'options' => ['style' => 'width:10%;']
             ],
             [
                 'label' => 'Ativo',
                 'attribute' => 'ativo_codigo',
-                'value' => 'ativo.codigo',
+                'value' => 'itensAtivo.ativos.codigo',
             ],
             [
                 'attribute' => 'valor',
                 'format' => 'currency',
                 'value' => function($model) {
-                    return Ativo::valorCambio($model->ativo, $model->valor);
+                    return Ativo::valorCambio($model->itensAtivo->ativos, $model->valor);
                 },
                 'pageSummary' => function ($summary, $data, $widget)use($dataProvider) {
                     //var_dump($dataProvider);
@@ -61,7 +61,7 @@ $daterange = [
                     $objetos = $dataProvider->models;
                     $total = 0;
                     foreach ($objetos as $provento) {
-                        $valorCambio = Ativo::valorCambio($provento->ativo, $provento->valor);
+                        $valorCambio = Ativo::valorCambio($provento->itensAtivo->ativos, $provento->valor);
                         $total += $valorCambio;
                     }
                     if ($total < 0) {
@@ -84,13 +84,13 @@ $daterange = [
                 'attribute' => 'pais',
                 'label' => 'País',
                 'value' => function($model) {
-                    return $model->ativo->pais;
+                    return $model->itensAtivo->ativos->pais;
                 }
             ],
             [
                 'attribute' => 'investidor',
                 'label' => 'Investidor',
-                'value' => 'ativo.investidor.nome',
+                'value' => 'itensAtivo.investidor.nome',
             ],
             ['class' => 'yii\grid\ActionColumn'],
         ],

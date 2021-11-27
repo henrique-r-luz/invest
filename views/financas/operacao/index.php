@@ -38,14 +38,14 @@ $daterange = [
             //'tipo:ntext',
             [
                 'label' => 'Id Ativo',
-                'attribute' => 'ativo_id',
-                'value' => 'ativo.id',
+                'attribute' => 'itens_ativos_id',
+                'value' => 'itens_ativos_id',
                 'options' => ['style' => 'width:10%;']
             ],
             [
                 'label' => 'Ativo',
                 'attribute' => 'ativo_codigo',
-                'value' => 'ativo.codigo',
+                'value' => 'itensAtivo.ativos.codigo',
                 'pageSummary' => 'EXTRATO FINANCEIRO',
                 'pageSummaryOptions' => ['colspan' => 2],
             ],
@@ -108,7 +108,7 @@ $daterange = [
             [
                 'attribute' => 'investidor',
                 'label' => 'Investidor',
-                'value' => 'ativo.investidor.nome',
+                'value' => 'itensAtivo.investidor.nome',
             ],
             ['class' => 'yii\grid\ActionColumn'],
         ],

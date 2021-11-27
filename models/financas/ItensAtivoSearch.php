@@ -9,18 +9,22 @@ use app\models\financas\Ativo;
 /**
  * AtivoSearch represents the model behind the search form of `app\models\financas\Ativo`.
  */
-class AtivoSearch extends Ativo
+class ItensAtivoSearch extends ItensAtivo
 {
     public $tipo;
     public $categoria;
+    public $nome;
+    public $codigo;
+    public $pais;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['nome', 'codigo','tipo','categoria','pais'], 'safe'],
+            [['id', 'quantidade'], 'integer'],
+            [['nome', 'codigo','tipo','categoria','pais','investidor_id'], 'safe'],
+            [['valor_compra', 'valor_bruto', 'valor_liquido'], 'number'],
         ];
     }
 
@@ -42,10 +46,12 @@ class AtivoSearch extends Ativo
      */
     public function search($params)
     {
-        $query = Ativo::find()
-                ->joinWith(['itensAtivo.investidor'])
-                 ->orderBy(['codigo'=>SORT_ASC]);
-               
+        $query = ItensAtivo::find()
+                 ->joinWith(['ativos','investidor'])
+                 ->andWhere(['ativo'=>true]);
+                 //->andWhere(['>','quantidade',0]);
+
+        // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -64,14 +70,20 @@ class AtivoSearch extends Ativo
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'ativo.id' => $this->id,
-            'tipo' => $this->tipo,
-            'categoria' => $this->categoria,
-            'pais'=>$this->pais,
+            'itens_ativo.id' => $this->id,
+            'quantidade' => $this->quantidade,
+            'valor_compra' => $this->valor_compra,
+            'valor_bruto' => $this->valor_bruto,
+            'valor_liquido' => $this->valor_liquido,
+            'ativo.tipo' => $this->tipo,
+            'ativo.categoria' => $this->categoria,
+            'ativo.pais'=>$this->pais,
         ]);
 
-        $query->andFilterWhere(['ilike', 'nome', $this->nome])
-            ->andFilterWhere(['ilike', 'codigo', $this->codigo]);
+        $query->andFilterWhere(['ilike', 'ativo.nome', $this->nome])
+            ->andFilterWhere(['ilike', 'ativo.codigo', $this->codigo])
+            ->andFilterWhere(['ilike', 'investidor.nome', $this->investidor_id]);
+            //->andFilterWhere(['ilike', 'categoria', $this->categoria]);
 
         return $dataProvider;
     }

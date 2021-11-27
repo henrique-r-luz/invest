@@ -9,6 +9,8 @@
 namespace app\models\financas\service\sincroniza;
 
 use Yii;
+use yii\base\UserException;
+use app\models\financas\service\sincroniza\OperacoesAbstract;
 
 /**
  * Description of CotacaoCambio
@@ -30,7 +32,7 @@ class CotacaoCambioApi extends OperacoesAbstract {
             } else {
                 $this->erro('Os dados não puderam ser lidos! ');
             }
-        } catch (Exception $ex) {
+        } catch (\Exception $ex) {
             $this->erro($ex);
         }
     }

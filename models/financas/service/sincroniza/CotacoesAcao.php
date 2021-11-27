@@ -8,13 +8,15 @@
 
 namespace app\models\financas\service\sincroniza;
 
-use app\lib\CajuiHelper;
-use app\lib\componentes\FabricaNotificacao;
-use app\models\financas\Ativo;
-use app\models\financas\Operacao;
 use Yii;
 use yii\db\Exception;
+use app\lib\CajuiHelper;
 use yii\base\UserException;
+use app\models\financas\Ativo;
+use app\models\financas\Operacao;
+use app\models\financas\ItensAtivo;
+use app\models\financas\service\sincroniza\OperacoesAbstract;
+use app\models\financas\service\sincroniza\SincronizaFactory;
 
 /**
  * Description of CotacoesAcao
@@ -31,19 +33,19 @@ class CotacoesAcao extends OperacoesAbstract {
 
         foreach ($this->csv as $acoes) {
             $contErro = 0;
-            $ativo = Ativo::findOne($acoes['id']);
+            $itensAtivo = ItensAtivo::findOne($acoes['id']);
             $valor = str_replace('.', '', $acoes['valor']);
             $valor = str_replace(',', '.', $valor);
-            $valor = Ativo::valorCambio($ativo, $valor);
+            $valor = Ativo::valorCambio($itensAtivo->ativos, $valor);
 
-            $lucro = ($valor * $ativo->quantidade);
-            $ativo->valor_bruto = $lucro;
-            $ativo->valor_liquido = $lucro;
-            $valorCompra = Ativo::valorCambio($ativo, Operacao::valorDeCompra($acoes['id']));
-            $ativo->valor_compra = $valorCompra;
+            $lucro = ($valor * $itensAtivo->quantidade);
+            $itensAtivo->valor_bruto = $lucro;
+            $itensAtivo->valor_liquido = $lucro;
+            $valorCompra = Ativo::valorCambio($itensAtivo->ativos, Operacao::valorDeCompra($acoes['id']));
+            $itensAtivo->valor_compra = $valorCompra;
 
-            if (!$ativo->save()) {
-                $this->erros .= CajuiHelper::processaErros($ativo->getErrors()) . '</br>';
+            if (!$itensAtivo->save()) {
+                $this->erros .= CajuiHelper::processaErros($itensAtivo->getErrors()) . '</br>';
                 $contErro++;
             }
         }

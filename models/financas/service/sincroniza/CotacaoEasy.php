@@ -8,13 +8,16 @@
 
 namespace app\models\financas\service\sincroniza;
 
-use app\lib\CajuiHelper;
-use app\lib\Categoria;
-use app\lib\componentes\FabricaNotificacao;
-use app\models\financas\Ativo;
-use app\models\financas\Operacao;
 use Yii;
+use app\lib\Categoria;
+use app\lib\CajuiHelper;
 use yii\base\UserException;
+use app\models\financas\itensAtivo;
+use app\models\financas\Operacao;
+use app\models\financas\ItensitensAtivo;
+use app\lib\componentes\FabricaNotificacao;
+use app\models\financas\service\sincroniza\OperacoesAbstract;
+use app\models\financas\service\sincroniza\ComponenteOperacoes;
 
 /**
  * Description of CotacaoEasy
@@ -43,19 +46,19 @@ class CotacaoEasy extends OperacoesAbstract {
         $erros = '';
         foreach ($this->csv as $titulo) {
             $codigo = $titulo[1] . '-' . $titulo[3] . '-' . $titulo[2];
-            $ativo = Ativo::find()->where(['codigo' => $codigo])->one();
-            if ($ativo == null) {
+            $itensAtivo = ItensAtivo::find()->where(['codigo' => $codigo])->one();
+            if ($itensAtivo == null) {
                 $contErro++;
-                $erros .= ' o codigo do ativo:' . $codigo . ' não existe</br>';
+                $erros .= ' o codigo do itensAtivo:' . $codigo . ' não existe</br>';
             } else {
-                $ativo->valor_bruto = str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[6])));
-                $ativo->valor_liquido = str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[7])));
-                if ($ativo->valor_compra <= 0 && $ativo->quantidade > 0) {
-                    $ativo->valor_compra = $ativo->valor_bruto;
+                $itensAtivo->valor_bruto = str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[6])));
+                $itensAtivo->valor_liquido = str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[7])));
+                if ($itensAtivo->valor_compra <= 0 && $itensAtivo->quantidade > 0) {
+                    $itensAtivo->valor_compra = $itensAtivo->valor_bruto;
                 }
-                if (!$ativo->save()) {
+                if (!$itensAtivo->save()) {
                     $contErro++;
-                    $erros .= CajuiHelper::processaErros($ativo->getErrors()) . '</br>';
+                    $erros .= CajuiHelper::processaErros($itensAtivo->getErrors()) . '</br>';
                 }
             }
         }
@@ -73,19 +76,19 @@ class CotacaoEasy extends OperacoesAbstract {
     }
 
     public function atualizaBaby() {
-        $ativos = Ativo::find()
+        $itensAtivos = ItensAtivo::find()
                         ->andWhere(['investidor_id' => 2])
                         ->andWhere(['categoria' => Categoria::RENDA_FIXA])->all();
         $erros = '';
-        foreach ($ativos as $ativo) {
+        foreach ($itensAtivos as $itensAtivo) {
             $compra = Operacao::find()
-                            ->where(['ativo_id' => $ativo->id])->sum('valor');
+                            ->where(['itens_itensAtivos_id' => $itensAtivo->id])->sum('valor');
 
-            $ativo->valor_compra = $compra;
-            $ativo->valor_bruto = $compra;
-            $ativo->valor_liquido = $compra;
-            if (!$ativo->save()) {
-                $erros .= CajuiHelper::processaErros($ativo->getErrors()) . '</br>';
+            $itensAtivo->valor_compra = $compra;
+            $itensAtivo->valor_bruto = $compra;
+            $itensAtivo->valor_liquido = $compra;
+            if (!$itensAtivo->save()) {
+                $erros .= CajuiHelper::processaErros($itensAtivo->getErrors()) . '</br>';
                 return [1, $erros];
             }
         }

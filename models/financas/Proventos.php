@@ -31,13 +31,13 @@ class Proventos extends ActiveRecord
     public function rules()
     {
         return [
-            [['ativo_id', 'data', 'valor'], 'required'],
-            [['ativo_id'], 'default', 'value' => null],
-            [['ativo_id'], 'integer'],
+            [['itens_ativos_id', 'data', 'valor'], 'required'],
+            [['itens_ativos_id'], 'default', 'value' => null],
+            [['itens_ativos_id'], 'integer'],
             [['data'], 'safe'],
             [['valor'], 'number'],
-            [['ativo_id', 'data'], 'unique', 'targetAttribute' => ['ativo_id', 'data']],
-            [['ativo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ativo::className(), 'targetAttribute' => ['ativo_id' => 'id']],
+            [['itens_ativos_id', 'data'], 'unique', 'targetAttribute' => ['ativo_id', 'data']],
+            [['itens_ativos_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ativo::className(), 'targetAttribute' => ['ativo_id' => 'id']],
         ];
     }
 
@@ -48,7 +48,7 @@ class Proventos extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'ativo_id' => 'Ativos',
+            'itens_ativos_id' => 'Ativos',
             'data' => 'Data',
             'valor' => 'Valor',
         ];
@@ -59,8 +59,8 @@ class Proventos extends ActiveRecord
      *
      * @return ActiveQuery
      */
-    public function getAtivo()
+    public function getItensAtivo()
     {
-        return $this->hasOne(Ativo::className(), ['id' => 'ativo_id']);
+        return $this->hasOne(ItensAtivo::className(), ['id' => 'itens_ativos_id']);
     }
 }

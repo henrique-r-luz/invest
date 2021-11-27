@@ -15,7 +15,7 @@ use yii\db\Query;
  * @property int $quantidade
  * @property double $valor
  * @property string $data
- * @property int $ativo_id
+ * @property int $itens_ativos_id
  */
 class Operacao extends ActiveRecord {
 
@@ -45,15 +45,15 @@ class Operacao extends ActiveRecord {
      */
     public function rules() {
         return [
-            [['tipo', 'quantidade', 'valor', 'data', 'ativo_id'], 'required'],
-            [['quantidade', 'ativo_id'], 'default', 'value' => null],
-            [['ativo_id', 'tipo'], 'integer'],
+            [['tipo', 'quantidade', 'valor', 'data', 'itens_ativos_id'], 'required'],
+            [['quantidade', 'itens_ativos_id'], 'default', 'value' => null],
+            [['itens_ativos_id', 'tipo'], 'integer'],
             [['valor', 'quantidade'], 'number'],
             [['data'], 'unique',
-                'targetAttribute' => ['ativo_id', 'data'],
+                'targetAttribute' => ['itens_ativos_id', 'data'],
                 'comboNotUnique' => 'Já existe um registro de operação desse ativo nessa data e hora',
             ],
-            [['ativo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ativo::className(), 'targetAttribute' => ['ativo_id' => 'id']],
+            [['itens_ativos_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ativo::className(), 'targetAttribute' => ['itens_ativos_id' => 'id']],
         ];
     }
 
@@ -67,7 +67,7 @@ class Operacao extends ActiveRecord {
             'quantidade' => 'Quantidade',
             'valor' => 'Valor',
             'data' => 'Data',
-            'ativo_id' => 'Ativo ID',
+            'itens_ativos_id' => 'Ativo ID',
         ];
     }
     
@@ -112,21 +112,21 @@ class Operacao extends ActiveRecord {
     /**
      * @return ActiveQuery
      */
-    public function getAtivo() {
-        return $this->hasOne(Ativo::class, ['id' => 'ativo_id']);
+    public function getItensAtivo() {
+        return $this->hasOne(ItensAtivo::class, ['id' => 'itens_ativos_id']);
     }
 
-    public static function valorDeCompra($ativo_id) {
+    public static function valorDeCompra($itens_ativos_id) {
 
-        return max(0, round(self::queryDadosAtivos($ativo_id)[0]['valor_compra'], 2));
+        return max(0, round(self::queryDadosAtivos($itens_ativos_id)[0]['valor_compra'], 2));
     }
     
-    public static function valorDeCompraBancoInter($ativo_id) {
+    public static function valorDeCompraBancoInter($itens_ativos_id) {
 
-        return max(0, round(self::queryDadosAtivosBancoInter($ativo_id)[0]['valor_compra'], 2));
+        return max(0, round(self::queryDadosAtivosBancoInter($itens_ativos_id)[0]['valor_compra'], 2));
     }
 
-    public static function  queryDadosAtivos($ativo_id) {
+    public static function  queryDadosAtivos($itens_ativos_id) {
         $venda = 0;
         $compra = 1;
         $desdobramentoMais = 2;
@@ -134,22 +134,22 @@ class Operacao extends ActiveRecord {
 
         $quantidade_venda = Operacao::find()
                 ->select(['sum(quantidade) as quantidade_venda','sum(valor) as valor_venda'])
-                ->andWhere(['ativo_id' => $ativo_id])
+                ->andWhere(['itens_ativos_id' => $itens_ativos_id])
                 ->andWhere(['tipo' => $venda]);
 
         $quantidade_compra = Operacao::find()
                 ->select(['sum(quantidade) as quantidade_compra','sum(valor) as valor_compra'])
-                ->andWhere(['ativo_id' => $ativo_id])
+                ->andWhere(['itens_ativos_id' => $itens_ativos_id])
                 ->andWhere(['tipo' => $compra]);
         
         $quantidade_desdobramento_menos = Operacao::find()
                 ->select(['sum(quantidade) as quantidade_desdobramento_menos'])
-                ->andWhere(['ativo_id' => $ativo_id])
+                ->andWhere(['itens_ativos_id' => $itens_ativos_id])
                 ->andWhere(['tipo' => $desdobramentoMenos]);
         
          $quantidade_desdobramento_mais = Operacao::find()
                 ->select(['sum(quantidade) as quantidade_desdobramento_mais'])
-                ->andWhere(['ativo_id' => $ativo_id])
+                ->andWhere(['itens_ativos_id' => $itens_ativos_id])
                 ->andWhere(['tipo' => $desdobramentoMais]);
 
 
@@ -180,18 +180,18 @@ class Operacao extends ActiveRecord {
     }
     
     
-     public static function  queryDadosAtivosBancoInter($ativo_id) {
+     public static function  queryDadosAtivosBancoInter($itens_ativos_id) {
         $venda = 0;
         $compra = 1;
 
         $valor_venda = Operacao::find()
                 ->select('sum(valor) as valor_venda')
-                ->andWhere(['ativo_id' => $ativo_id])
+                ->andWhere(['itens_ativos_id' => $itens_ativos_id])
                 ->andWhere(['tipo' => $venda]);
 
         $valor_compra = Operacao::find()
                 ->select('sum(valor) as valor_compra')
-                ->andWhere(['ativo_id' => $ativo_id])
+                ->andWhere(['itens_ativos_id' => $itens_ativos_id])
                 ->andWhere(['tipo' => $compra]);
 
 
@@ -206,7 +206,7 @@ class Operacao extends ActiveRecord {
 
     public function getValorCambio() {
 
-        return Ativo::valorCambio($this->ativo, $this->valor);
+        return Ativo::valorCambio($this->itensAtivo->ativos, $this->valor);
     }
 
 }

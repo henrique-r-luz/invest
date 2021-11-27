@@ -24,9 +24,9 @@ class OperacaoSearch extends Operacao {
      */
     public function rules() {
         return [
-            [['id', 'ativo_id'], 'integer'],
+            [['id', 'itens_ativos_id'], 'integer'],
             [['createTimeRange'], 'match', 'pattern' => '/^.+\s\-\s.+$/'],
-            [['tipo', 'data', 'ativo_codigo', 'ativo_id', 'investidor'], 'safe'],
+            [['tipo', 'data', 'ativo_codigo', 'itens_ativos_id', 'investidor'], 'safe'],
             [['valor', 'quantidade'], 'number'],
         ];
     }
@@ -59,8 +59,7 @@ class OperacaoSearch extends Operacao {
      */
     public function search($params) {
         $query = Operacao::find()
-                ->innerJoin('ativo', 'ativo.id = operacao.ativo_id')
-                ->innerjoin('investidor', 'investidor.id = ativo.investidor_id');
+                ->joinWith(['itensAtivo.investidor','itensAtivo.ativos']);
 
         // add conditions that should always apply here
 
@@ -98,8 +97,7 @@ class OperacaoSearch extends Operacao {
             'valor' => $this->valor,
             //'data' => $this->data,
             'operacao.tipo' => $this->tipo,
-            'ativo.id' => $this->ativo_id
-                //'ativo_id' => $this->ativo_id,
+            'itens_ativo.id' => $this->itens_ativos_id
         ]);
 
         if ($this->createTimeRange != null && $this->createTimeRange != '') {
@@ -121,7 +119,8 @@ class OperacaoSearch extends Operacao {
 
         $query = Operacao::find()
                         ->select(['ativo.codigo as codigo', 'ativo.nome as nome', 'sum(operacao.valor) as total', 'sum(operacao.quantidade) as quantidade'])
-                        ->innerJoin('ativo', 'ativo.id = operacao.ativo_id')
+                        ->innerjoin('itens_ativo','itens_ativo.id = operacao.itens_ativo')
+                        ->innerJoin('ativo', 'ativo.id = itens_ativo.ativo_id')
                         ->where(['between', 'data', $model->dataInicio, $model->dataFim])
                         ->andWhere(['operacao.tipo' => 1])//operação de compra
                         ->andWhere(['ativo.tipo' => \app\lib\Tipo::ACOES])

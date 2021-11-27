@@ -23,7 +23,7 @@
                             'icon' => 'dollar',
                             'url' => '#',
                             'items' => [
-                                ['label' => 'Ativo', 'icon' => 'diamond', 'url' => ['/financas/ativo']],
+                                ['label' => 'Ativo Investidos', 'icon' => 'diamond', 'url' => ['/financas/itens-ativo']],
                                 ['label' => 'Atualiza Ação', 'icon' => 'undo', 'url' => ['/financas/atualiza-acao']],
                                 ['label' => 'Investidor', 'icon' => 'user', 'url' => ['/financas/investidor']],
                                 ['label' => 'Operação', 'icon' => 'money', 'url' => ['/financas/operacao']],

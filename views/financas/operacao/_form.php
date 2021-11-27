@@ -1,14 +1,15 @@
 <?php
 
-use app\models\financas\Ativo;
-use app\models\financas\Operacao;
-use kartik\datecontrol\DateControl;
-use kartik\number\NumberControl;
-use kartik\widgets\Select2;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
 use yii\web\View;
+use yii\helpers\Html;
+use kartik\widgets\Select2;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\models\financas\Ativo;
+use kartik\number\NumberControl;
+use app\models\financas\Operacao;
+use app\models\financas\ItensAtivo;
+use kartik\datecontrol\DateControl;
 
 /* @var $this View */
 /* @var $model app\models\Operacao */
@@ -22,8 +23,8 @@ use yii\widgets\ActiveForm;
             <div class="col-xs-12 col-lg-12 no-padding">
                 <div class="col-xs-8 col-sm-8 col-lg-8">
                     <?=
-                    $form->field($model, 'ativo_id')->widget(Select2::classname(), [
-                        'data' => Ativo::lista(),//ArrayHelper::map(Ativo::find()->where(['ativo'=>true])->asArray()->all(), 'id', 'codigo'),
+                    $form->field($model, 'itens_ativos_id')->widget(Select2::classname(), [
+                        'data' => ItensAtivo::lista(),//ArrayHelper::map(Ativo::find()->where(['ativo'=>true])->asArray()->all(), 'id', 'codigo'),
                         'options' => ['placeholder' => 'Selecione um Tipo'],
                         'pluginOptions' => [
                             'allowClear' => true

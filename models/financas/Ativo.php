@@ -46,15 +46,10 @@ class Ativo extends ActiveRecord {
      */
     public function rules() {
         return [
-            [['nome', 'codigo', 'tipo', 'categoria', 'ativo', 'pais', 'investidor_id'], 'required'],
+            [['nome', 'codigo', 'tipo', 'categoria', 'pais'], 'required'],
             [['nome', 'codigo', 'categoria', 'tipo'], 'string'],
-            [['quantidade'], 'default', 'value' => null],
             [['acao_bolsa_id'], 'integer'],
             [['categoria'], 'string'],
-            [['ativo'], 'boolean'],
-            [['valor_compra', 'valor_bruto', 'valor_liquido', 'quantidade'], 'number'],
-                // [['categoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['categoria_id' => 'id']],
-                //[['tipo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tipo::className(), 'targetAttribute' => ['tipo_id' => 'id']],
         ];
     }
 
@@ -66,16 +61,10 @@ class Ativo extends ActiveRecord {
             'id' => 'ID',
             'nome' => 'Nome',
             'codigo' => 'Código',
-            'quantidade' => 'Quant.',
-            'valor_compra' => 'Valor Compra',
-            'valor_bruto' => 'Valor Bruto',
-            'valor_liquido' => 'Valor Liquido',
             'tipo' => 'Tipo',
             'categoria' => 'Categoria',
-            'ativo' => 'Ativo',
             'acao_bolsa_id' => 'Empresas',
             'pais' => 'País',
-            'investidor_id' => 'Investidor'
         ];
     }
 
@@ -101,6 +90,10 @@ class Ativo extends ActiveRecord {
         return $this->hasMany(Operacao::class, ['ativo_id' => 'id']);
     }
 
+    public function getItensAtivo() {
+        return $this->hasMany(ItensAtivo::class, ['ativo_id' => 'id']);
+    }
+
     public function getProvento() {
         return $this->hasMany(Proventos::class, ['ativo_id' => 'id']);
     }
@@ -111,21 +104,6 @@ class Ativo extends ActiveRecord {
 
     public function getInvestidor() {
         return $this->hasOne(Investidor::class, ['id' => 'investidor_id']);
-    }
-
-    public function beforeSave($insert) {
-
-        if ($this->quantidade <= 0) {
-            $this->valor_compra = 0;
-            $this->valor_bruto = 0;
-            $this->valor_liquido = 0;
-        }
-        return parent::beforeSave($insert);
-    }
-
-    public function afterSave($insert, $changedAttributes) {
-        //atualiza preço
-        parent::afterSave($insert, $changedAttributes);
     }
 
     public static function valorCambio($ativo, $valor) {

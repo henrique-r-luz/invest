@@ -9,11 +9,13 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\lib\CajuiHelper;
+use app\models\financas\ItensAtivo;
+use app\models\financas\ItensAtivoSearch;
 
 /**
  * AtivoController implements the CRUD actions for Ativo model.
  */
-class AtivoController extends Controller {
+class ItensAtivoController extends Controller {
 
     /**
      * {@inheritdoc}
@@ -34,7 +36,7 @@ class AtivoController extends Controller {
      * @return mixed
      */
     public function actionIndex() {
-        $searchModel = new AtivoSearch();
+        $searchModel = new ItensAtivoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -61,7 +63,8 @@ class AtivoController extends Controller {
      * @return mixed
      */
     public function actionCreate() {
-        $model = new Ativo();
+        $model = new ItensAtivo();
+        $model->ativo = true;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -116,7 +119,7 @@ class AtivoController extends Controller {
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id) {
-        if (($model = Ativo::findOne($id)) !== null) {
+        if (($model = ItensAtivo::findOne($id)) !== null) {
             return $model;
         }
 

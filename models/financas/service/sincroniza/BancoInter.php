@@ -8,13 +8,15 @@
 
 namespace app\models\financas\service\sincroniza;
 
+use Yii;
 use app\lib\CajuiHelper;
-use app\lib\componentes\FabricaNotificacao;
+use yii\base\UserException;
+use Smalot\PdfParser\Parser;
 use app\models\financas\Ativo;
 use app\models\financas\Operacao;
-use Smalot\PdfParser\Parser;
-use Yii;
-use yii\base\UserException;
+use app\models\financas\ItensAtivo;
+use app\lib\componentes\FabricaNotificacao;
+use app\models\financas\service\sincroniza\OperacoesAbstract;
 
 /**
  * Description of BancoInter
@@ -43,7 +45,7 @@ class BancoInter extends OperacoesAbstract {
     }
 
     public function atualiza() {
-        $cdbBancoInter = Ativo::findOne($this->cdbBancoInterId);
+        $cdbBancoInter = ItensAtivo::findOne($this->cdbBancoInterId);
         $cdbBancoInter->valor_bruto = $this->valorCdbBruto;
          $cdbBancoInter->valor_liquido = $this->valorCdbLiquido;
           $valorCompra = Ativo::valorCambio($cdbBancoInter, Operacao::valorDeCompraBancoInter($cdbBancoInter->id));
