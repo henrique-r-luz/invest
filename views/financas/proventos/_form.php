@@ -1,6 +1,7 @@
 <?php
 
 use app\models\financas\Ativo;
+use app\models\financas\ItensAtivo;
 use app\models\financas\Proventos;
 use kartik\datecontrol\DateControl;
 use kartik\number\NumberControl;
@@ -14,7 +15,6 @@ use yii\widgets\ActiveForm;
 /* @var $model Proventos */
 /* @var $form ActiveForm */
 ?>
-
 <div class="box-success box">
     <div class="box-body">
         <div class="proventos-form">
@@ -22,8 +22,8 @@ use yii\widgets\ActiveForm;
             <div class="col-xs-12 col-lg-12 no-padding">
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <?=
-                    $form->field($model, 'ativo_id')->widget(Select2::classname(), [
-                        'data' => Ativo::lista(),//ArrayHelper::map(Ativo::find()->andWhere(['categoria'=> app\lib\Categoria::RENDA_VARIAVEL])->asArray()->all(), 'id', 'codigo'),
+                    $form->field($model, 'itens_ativos_id')->widget(Select2::classname(), [
+                        'data' => ItensAtivo::lista(),//ArrayHelper::map(Ativo::find()->andWhere(['categoria'=> app\lib\Categoria::RENDA_VARIAVEL])->asArray()->all(), 'id', 'codigo'),
                         'options' => ['placeholder' => 'Selecione um Tipo'],
                         'pluginOptions' => [
                             'allowClear' => true

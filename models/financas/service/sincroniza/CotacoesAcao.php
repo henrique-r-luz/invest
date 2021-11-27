@@ -23,48 +23,52 @@ use app\models\financas\service\sincroniza\SincronizaFactory;
  *
  * @author henrique
  */
-class CotacoesAcao extends OperacoesAbstract {
+class CotacoesAcao extends OperacoesAbstract
+{
 
     private $csv;
     private $erros;
 
     //put your code here
-    public function atualiza() {
+    public function atualiza()
+    {
 
         foreach ($this->csv as $acoes) {
             $contErro = 0;
-            $itensAtivo = ItensAtivo::findOne($acoes['id']);
-            $valor = str_replace('.', '', $acoes['valor']);
-            $valor = str_replace(',', '.', $valor);
-            $valor = Ativo::valorCambio($itensAtivo->ativos, $valor);
+            $itensAtivos = ItensAtivo::find()->where(['ativo_id' => $acoes['id']])->all();
+            foreach ($itensAtivos as $itensAtivo) {
+               
+                $valor = str_replace('.', '', $acoes['valor']);
+                $valor = str_replace(',', '.', $valor);
+                $valor = Ativo::valorCambio($itensAtivo->ativos, $valor);
 
-            $lucro = ($valor * $itensAtivo->quantidade);
-            $itensAtivo->valor_bruto = $lucro;
-            $itensAtivo->valor_liquido = $lucro;
-            $valorCompra = Ativo::valorCambio($itensAtivo->ativos, Operacao::valorDeCompra($acoes['id']));
-            $itensAtivo->valor_compra = $valorCompra;
+                $lucro = ($valor * $itensAtivo->quantidade);
+                $itensAtivo->valor_bruto = $lucro;
+                $itensAtivo->valor_liquido = $lucro;
+                $valorCompra = Ativo::valorCambio($itensAtivo->ativos, Operacao::valorDeCompra($itensAtivo->id));
+                $itensAtivo->valor_compra = $valorCompra;
+                /*if($acoes['id']==29){
+                    echo $acoes['valor'].' '.$valor.' '.$lucro.' '.$itensAtivo->quantidade; 
+                }*/
 
-            if (!$itensAtivo->save()) {
-                $this->erros .= CajuiHelper::processaErros($itensAtivo->getErrors()) . '</br>';
-                $contErro++;
+                if (!$itensAtivo->save()) {
+                    $this->erros .= CajuiHelper::processaErros($itensAtivo->getErrors()) . '</br>';
+                    $contErro++;
+                }
             }
         }
-        if ($contErro != 0) {  
-                $msg = 'A Cotação açoes não foram atualizados !</br>' . $this->erros;
-                /*FabricaNotificacao::create('rank', ['ok' => false,
+        if ($contErro != 0) {
+            $msg = 'A Cotação açoes não foram atualizados !</br>' . $this->erros;
+            /*FabricaNotificacao::create('rank', ['ok' => false,
                     'titulo' => 'Cotação ação falhou!',
                     'mensagem' => $msg,
                     'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();*/
-                    throw new UserException($msg);
-            
+            throw new UserException($msg);
         }
     }
 
-    public function getDados() {
-
-        //$cotacaoCambio = new CotacaoCambio();
-        $cambio = SincronizaFactory::sincroniza('cambioApi')->atualiza();
-
+    public function getDados()
+    {
         $file = Yii::$app->params['bot'] . '/preco_acao.csv';
         if (!file_exists($file)) {
             return [true, 'sucesso'];
@@ -76,5 +80,4 @@ class CotacoesAcao extends OperacoesAbstract {
         }
         unset($this->csv[0]);
     }
-
 }

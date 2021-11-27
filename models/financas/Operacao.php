@@ -53,7 +53,7 @@ class Operacao extends ActiveRecord {
                 'targetAttribute' => ['itens_ativos_id', 'data'],
                 'comboNotUnique' => 'Já existe um registro de operação desse ativo nessa data e hora',
             ],
-            [['itens_ativos_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ativo::className(), 'targetAttribute' => ['itens_ativos_id' => 'id']],
+            //[['itens_ativos_id'], 'exist', 'skipOnError' => true, 'targetClass' => ItensAtivo::className(), 'targetAttribute' => ['itens_ativos_id' => 'id']],
         ];
     }
 
@@ -205,7 +205,6 @@ class Operacao extends ActiveRecord {
     
 
     public function getValorCambio() {
-
         return Ativo::valorCambio($this->itensAtivo->ativos, $this->valor);
     }
 

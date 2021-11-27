@@ -109,7 +109,6 @@ class Ativo extends ActiveRecord {
     public static function valorCambio($ativo, $valor) {
         $cotacao = new CotacaoCambio();
         $cambio = $cotacao->atualiza();
-
         if ($ativo->pais == Pais::US) {
             $moeda = str_replace(',', '.', $cambio['dollar']);
             return floatval($valor) * floatval($moeda);

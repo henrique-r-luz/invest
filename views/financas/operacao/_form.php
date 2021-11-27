@@ -24,7 +24,7 @@ use kartik\datecontrol\DateControl;
                 <div class="col-xs-8 col-sm-8 col-lg-8">
                     <?=
                     $form->field($model, 'itens_ativos_id')->widget(Select2::classname(), [
-                        'data' => ItensAtivo::lista(),//ArrayHelper::map(Ativo::find()->where(['ativo'=>true])->asArray()->all(), 'id', 'codigo'),
+                        'data' => ItensAtivo::lista(),
                         'options' => ['placeholder' => 'Selecione um Tipo'],
                         'pluginOptions' => [
                             'allowClear' => true

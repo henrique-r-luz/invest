@@ -53,7 +53,7 @@ class SincronizarController extends Controller {
     private function atualiza() {
         SincronizaFactory::sincroniza('acao')->atualiza();
         SincronizaFactory::sincroniza('easy')->atualiza();
-        SincronizaFactory::sincroniza('operacaoClear')->atualiza();
+        //SincronizaFactory::sincroniza('operacaoClear')->atualiza();
         SincronizaFactory::sincroniza('banco_inter')->atualiza();
         //return $this->redirect('/index.php');
     }

@@ -33,13 +33,13 @@ class m211115_114530_reestrutura_banco extends Migration
         $this->addColumn('operacao','itens_ativos_id','integer');
         foreach (Operacao::find()->each(10) as $operacao) {
             $operacao->itens_ativos_id = ItensAtivo::find()->where(['ativo_id'=>$operacao->ativo_id])->one()->id;
-            $operacao->save();
+            $operacao->save(false);
         }
         //insere Proventos
         $this->addColumn('proventos','itens_ativos_id','integer');
         foreach (Proventos::find()->each(10) as $proventos) {
             $proventos->itens_ativos_id = ItensAtivo::find()->where(['ativo_id'=>$proventos->ativo_id])->one()->id;
-            $proventos->save();
+            $proventos->save(false);
         }
 
         //remove colunas intes_ativos

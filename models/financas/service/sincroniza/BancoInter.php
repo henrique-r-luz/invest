@@ -27,7 +27,7 @@ class BancoInter extends OperacoesAbstract {
 
     private $valorCdbBruto;
     private $valorCdbLiquido;
-    private $cdbBancoInterId = 33;
+    private $cdbBancoInterId = 32;
     private $erros;
 
     //put your code here
@@ -48,7 +48,7 @@ class BancoInter extends OperacoesAbstract {
         $cdbBancoInter = ItensAtivo::findOne($this->cdbBancoInterId);
         $cdbBancoInter->valor_bruto = $this->valorCdbBruto;
          $cdbBancoInter->valor_liquido = $this->valorCdbLiquido;
-          $valorCompra = Ativo::valorCambio($cdbBancoInter, Operacao::valorDeCompraBancoInter($cdbBancoInter->id));
+          $valorCompra = Ativo::valorCambio($cdbBancoInter->ativos, Operacao::valorDeCompraBancoInter($cdbBancoInter->id));
           $cdbBancoInter->valor_compra = $valorCompra;
         if (!$cdbBancoInter->save()) {
             $this->erros .= CajuiHelper::processaErros($cdbBancoInter->getErrors()) . '</br>';
