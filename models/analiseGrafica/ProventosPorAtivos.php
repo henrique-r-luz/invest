@@ -23,14 +23,15 @@ class ProventosPorAtivos extends Model{
     const vermelho = '#d70026';
     
     
-    
     public function getDadosProventos(){
         $ativos = Proventos::find()
-                  ->innerjoin('ativo','ativo.id = proventos.ativo_id')
-                  ->select(['ativo.codigo','round(sum(valor)::numeric,2) as valor'])
+                  ->select(['itens_ativos_id','ativo.codigo','investidor.nome','round(sum(valor)::numeric,2) as valor'])
+                  ->innerjoin('itens_ativo','itens_ativo.id = proventos.itens_ativos_id')
+                  ->innerjoin('ativo','ativo.id = itens_ativo.ativo_id')
+                  ->innerjoin('investidor','investidor.id = itens_ativo.investidor_id')
                   ->where(['ativo'=>true])
                   ->andWhere(['categoria'=> Categoria::RENDA_VARIAVEL])
-                  ->groupBy(['ativo.codigo'])
+                  ->groupBy(['itens_ativos_id','ativo.codigo','investidor.nome'])
                   ->orderBy(['sum(valor)'=>SORT_DESC])
                   ->asArray()
                   ->all();
@@ -44,7 +45,7 @@ class ProventosPorAtivos extends Model{
             $ativoModel = Ativo::find()->andWhere(['codigo'=>$ativo['codigo']])->one();
             $lucro =  round(Ativo::valorCambio($ativoModel, floatval($ativo['valor'])),2);
             $cor = self::verde;
-            $dados['data'][] = ['name'=>$ativo['codigo'],'y'=>$lucro,'color'=>$cor];
+            $dados['data'][] = ['name'=>$ativo['codigo'].' | '.$ativo['nome'],'y'=>$lucro,'color'=>$cor];
         }
         
        return $dados;

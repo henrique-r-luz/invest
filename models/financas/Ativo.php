@@ -124,4 +124,12 @@ class Ativo extends ActiveRecord {
         
     }
 
+    public static function listaAtivo() {
+        return ArrayHelper::map(Ativo::find()->all(), 'id', 
+                function($model){
+                    return $model->id.' | '.$model->codigo;
+                });
+        
+    }
+
 }

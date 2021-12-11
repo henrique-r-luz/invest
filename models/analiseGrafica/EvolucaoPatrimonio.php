@@ -52,7 +52,8 @@ class EvolucaoPatrimonio extends Model {
 
         $comprasMes = Operacao::find()
                 ->select(["to_char(data, 'YYYY-MM') as data_id", 'sum(valor) as valor_compra', 'ativo.pais'])
-                ->innerJoin('ativo', 'ativo.id = operacao.ativo_id')
+                ->innerJoin('itens_ativo', 'itens_ativo.id = operacao.itens_ativos_id')
+                ->innerJoin('ativo', 'itens_ativo.ativo_id = ativo.id')
                 ->where(['operacao.tipo' => Operacao::getTipoOperacaoId(Operacao::COMPRA)])
                 ->andWhere(['ativo.pais' => $pais])
                 ->andWhere(['ativo' => true])
@@ -60,7 +61,8 @@ class EvolucaoPatrimonio extends Model {
 
         $vendaMes = Operacao::find()
                 ->select(["to_char(data, 'YYYY-MM') as data_id", 'sum(valor) as valor_venda', 'ativo.pais'])
-                ->innerJoin('ativo', 'ativo.id = operacao.ativo_id')
+                ->innerJoin('itens_ativo', 'itens_ativo.id = operacao.itens_ativos_id')
+                ->innerJoin('ativo', 'itens_ativo.ativo_id = ativo.id')
                 ->where(['operacao.tipo' => Operacao::getTipoOperacaoId(Operacao::VENDA)])
                 ->andWhere(['ativo.pais' => $pais])
                 ->andWhere(['ativo' => true])
@@ -68,7 +70,8 @@ class EvolucaoPatrimonio extends Model {
 
         $datasOperacao = Operacao::find()
                 ->select(["to_char(data, 'YYYY-MM') as data_id"])
-                ->innerJoin('ativo', 'ativo.id = operacao.ativo_id')
+                ->innerJoin('itens_ativo', 'itens_ativo.id = operacao.itens_ativos_id')
+                ->innerJoin('ativo', 'itens_ativo.ativo_id = ativo.id')
                 ->andWhere(['ativo' => true])
                 ->distinct();
 

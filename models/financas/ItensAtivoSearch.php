@@ -49,6 +49,7 @@ class ItensAtivoSearch extends ItensAtivo
         $query = ItensAtivo::find()
                  ->joinWith(['ativos','investidor'])
                  ->andWhere(['ativo'=>true]);
+                 
                  //->andWhere(['>','quantidade',0]);
 
         // add conditions that should always apply here

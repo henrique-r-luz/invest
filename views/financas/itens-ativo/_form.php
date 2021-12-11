@@ -1,14 +1,16 @@
 <?php
 
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use kartik\widgets\SwitchInput;
-use kartik\widgets\Select2;
-use app\models\Categoria;
-use yii\helpers\ArrayHelper;
-use app\models\Tipo;
 use app\lib\Pais;
+use app\models\Tipo;
+use yii\helpers\Html;
+use app\models\Categoria;
+use kartik\widgets\Select2;
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\models\financas\Ativo;
+use kartik\widgets\SwitchInput;
 use kartik\number\NumberControl;
+use app\models\financas\Investidor;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\financas\Ativo */
@@ -35,7 +37,7 @@ use kartik\number\NumberControl;
                 <div class="col-xs-12 col-sm-5 col-lg-5">
                     <?=
                     $form->field($model, 'ativo_id')->widget(Select2::classname(), [
-                        'data' => ArrayHelper::map(app\models\financas\Ativo::find()->asArray()->all(), 'id', 'codigo'),
+                        'data' => Ativo::listaAtivo(),
                         'options' => ['placeholder' => 'Selecione um Investidor'],
                         'pluginOptions' => [
                             'allowClear' => true

@@ -31,8 +31,9 @@ class EvolucaoProventos {
 
     public function evolucaoProventos() {
         $query= Proventos::find()
-                ->innerJoin('ativo','ativo.id = proventos.ativo_id')
                 ->select(["to_char(data, 'YYYY-MM') as data", 'ROUND(sum(valor)::numeric,2) as valores'])
+                ->innerJoin('itens_ativo','itens_ativo.id = proventos.itens_ativos_id')
+                ->innerjoin('ativo','ativo.id = itens_ativo.ativo_id')
                 ->where(['ativo.pais'=> \app\lib\Pais::BR])
                 ->groupBy(["to_char(data, 'YYYY-MM')"])
                 ->orderBy(["to_char(data, 'YYYY-MM')"=>SORT_ASC])
