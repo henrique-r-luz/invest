@@ -29,7 +29,7 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => true,
-          
+
         ],
         'formatter' => [
             'class' => 'yii\i18n\Formatter',
@@ -76,7 +76,7 @@ $config = [
             ],
         ],
         'db' => $db,
-    /*
+        /*
       'urlManager' => [
       'enablePrettyUrl' => true,
       'showScriptName' => false,
@@ -119,18 +119,18 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        'allowedIPs' => ['127.0.0.1', '192.168.*.*'],
+        'allowedIPs' => ['127.0.0.1', '192.168.*.*', '172.19.0.*'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        'allowedIPs' => ['127.0.0.1', '192.168.*.*'],
-        'generators' => [//here
-            'crud' => [// generator name
+        'allowedIPs' => ['127.0.0.1', '192.168.*.*', '172.19.0.*'],
+        'generators' => [ //here
+            'crud' => [ // generator name
                 'class' => 'yii\gii\generators\crud\Generator', // generator class
-                'templates' => [//setting for out templates
+                'templates' => [ //setting for out templates
                     'myCrud' => '@app/templates/default', // template name => path to template
                 ]
             ]

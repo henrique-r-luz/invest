@@ -23,7 +23,7 @@ class AppAsset extends AssetBundle
         'css/site.css',
         // 'css/all.css',
         "js/grow-js/jquery.growl.css",
-        //'dist/css/adminlte.min.css',
+        'dist/css/adminlte.min.css',
         //'plugins/fontawesome-free/css/all.min.css',
         //'plugins/icheck-bootstrap/icheck-bootstrap.min.css',
     ];
@@ -34,6 +34,7 @@ class AppAsset extends AssetBundle
         "js/notificacao.js",
         "js/grow-js/jquery.growl.js",
         "js/investimento.js",
+       // "js/demo.js"
        // 'js/all.js',
        
     ];

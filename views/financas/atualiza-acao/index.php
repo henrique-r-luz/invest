@@ -20,17 +20,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             [
-               'label'=>'Ativo',
-                'attribute'=>'ativo_id',
-                'value'=>'ativo.codigo'
-            ]
-,
+                'attribute' => 'id',
+                'value' => function ($model) {
+                    return $model->ativo_id;
+                }
+            ],
+            [
+                'label' => 'Ativo',
+                'attribute' => 'ativo_id',
+                'value' => 'ativo.codigo'
+            ],
             'url:ntext',
             ['class' => 'yii\grid\ActionColumn'],
         ],
         'panel' => [
             'type' => GridView::TYPE_DEFAULT,
-        //'heading' => true,
+            //'heading' => true,
         ],
         'toolbar' => [
             [

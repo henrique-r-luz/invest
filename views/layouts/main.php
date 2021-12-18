@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\web\View;
 
 //Icon::map($this);
  // Maps the Elusive icon font framework
@@ -39,7 +40,7 @@ if (Yii::$app->controller->action->id === 'login') {
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
     </head>
-    <body class="hold-transition skin-blue sidebar-mini">
+    <body class="hold-transition <?=(YII_ENV_DEV)?'skin-green' : 'skin-blue'?> sidebar-mini">
     <?php $this->beginBody() ?>
     <div class="wrapper">
 

@@ -85,11 +85,12 @@ class SincronizarController extends Controller {
         //$cmd  = "python3.8 /var/www/invest/bot/acao.py";
         $cmd = escapeshellcmd('python3.8 /var/www/invest/bot/acao.py');
         $resp = shell_exec($cmd);
-        if ($resp == true) {
+        if (intval($resp) == intval(1)) {
             Yii::$app->session->setFlash('success', 'Atualizações das ações ocorreram com sucesso!');
             $this->atualiza();
             return $this->redirect('/index.php');
         } else {
+           
             Yii::$app->session->setFlash('danger', 'Erro na atualizações da ações');
         }
         return $this->render('index');

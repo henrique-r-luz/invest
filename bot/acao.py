@@ -8,6 +8,7 @@ import sys
 import os
 import os.path
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
 
 
 #filePath = '~/NetBeansProjects/dados/';
@@ -15,13 +16,14 @@ logPath = "/var/www/dados"
 
 
 def getDados():
+	
         if (os.path.exists(logPath+'/atualiza_acao.log')):
             os.remove(logPath+'/atualiza_acao.log');
         url = "http://localhost/index.php/financas/atualiza-acao/url";
         response = json.loads(requests.get(url).text);
         executa(response);
-        print('true');
-        return 'true';
+        print(1);
+        #return 'Deu certo';
 
 def executa(discionarioAcoes):
     listaPreco = [];
@@ -30,9 +32,12 @@ def executa(discionarioAcoes):
     for row in discionarioAcoes:
         #if(id==2):
             #break;
+        #print(row['url']);
+        
         browser.get(row['url']);
         preco = getPreco(browser);
-        #print(str(row['ativo_id']) + ' - ' + str(preco.text));
+        #print(preco);
+        #print(str(row['ativo_id']));
         with open(logPath+'/atualiza_acao.log', 'a') as log:
             log.write(str(row['ativo_id'])+' - '+str(preco.text)+';');
         listaPreco.append([row['ativo_id'], preco.text])
@@ -62,6 +67,9 @@ def getPreco(browser):
     preco = getPrecoClass(browser);
     if(preco!=False):
         return preco;
+    preco = getPrecoAttribute(browser);
+    if(preco!=False):
+        return preco;
     
     
     
@@ -76,6 +84,14 @@ def getPrecoId(browser):
 def getPrecoClass(browser):
     try:
         return browser.find_element_by_class_name('instrument-price_last__KQzyA')
+    except NoSuchElementException:
+        return False;
+        
+
+def getPrecoAttribute(browser):
+
+    try:
+        return browser.find_element(By.CSS_SELECTOR,'[data-test=instrument-price-last]')
     except NoSuchElementException:
         return False;
 
