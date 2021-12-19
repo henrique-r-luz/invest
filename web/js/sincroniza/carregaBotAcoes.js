@@ -8,10 +8,11 @@ $("document").ready(function () {
 });
 
 function progressoProcesso() {
+    showProgressBar();
     execBot();
     loadDados(5);
     //loadDados();
-    showProgressBar();
+
 
     //disposeProgressBar();
 }
@@ -36,13 +37,13 @@ function loadDados(porcentagem) {
         type: 'get',
         success: function (data) {
             console.log(data)
-            if(data['total'] =='erro'){
-                $.growl.error({ message:"Erro ao atualizar ativos"});
+            if (data['total'] == 'erro') {
+                $.growl.error({ message: "Erro ao atualizar ativos" });
                 disposeProgressBar();
 
             }
             taxa = data['ativosAtualizados'] / data['total'] * 100
-            if (data['total'] == 0 ) {
+            if (data['total'] == 0) {
                 setTimeout(function () {
                     porcentagem = taxa;
                     atualizaTaxa(porcentagem);
@@ -76,11 +77,10 @@ function atualizaTaxa(porcentagem) {
 
 //atualiza o porgressBar
 function updateProgressBar(percentage) {
-    var perc_string = percentage + '%  dos registros analisados';
-    $('.progress-bar').attr('aria-valuenow', percentage);
-    $('.progress-bar').css('width', percentage + '%');
-    $('#pb-small').text(perc_string);
-    $('#progress').text(perc_string);
+    if (percentage == 0) {
+        percentage = 1
+    }
+    atualizaBarra(percentage);
 }
 //desabilita o porgressBras
 function disposeProgressBar() {
@@ -89,11 +89,21 @@ function disposeProgressBar() {
 }
 //mostra o porgressBar
 function showProgressBar() {
-    var perc = 0;
-    var perc_string = perc + '% dos registros analisados';
-    $('.progress-bar').attr('aria-valuenow', perc);
-    $('.progress-bar').css('width', perc + '%');
+    var percentage = 0;
+    if (percentage == 0) {
+        percentage = 1
+    }
+    atualizaBarra(percentage);
+    $('#progress-modal').modal('show');
+}
+
+function atualizaBarra(percentage) {
+    if (isNaN(percentage)) {
+        percentage = 1
+    }
+    var perc_string = 'Total de Ativos Atualizados: ' + Math.round(percentage) + '%';
+    $('.progress-bar').attr('aria-valuenow', percentage);
+    $('.progress-bar').css('width', percentage + '%');
     $('#pb-small').text(perc_string);
     $('#progress').text(perc_string);
-    $('#progress-modal').modal('show');
 }

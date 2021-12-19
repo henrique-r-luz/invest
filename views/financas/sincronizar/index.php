@@ -41,7 +41,7 @@ $this->registerJsFile(
 
 <?php
     Modal::begin([
-        //'title'        => '<h5 class = "card-title" id="progress">0% Complete</h5>',
+        'header'        => '<h5 class = "card-title" id="progress"></h5>',
         'id'            => 'progress-modal',
         'closeButton'   => false,
         'clientOptions' => ['backdrop' => 'static', 'keyboard' => false]]);

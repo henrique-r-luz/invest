@@ -94,7 +94,7 @@ class SincronizarController extends Controller
     public function actionAtualizaAcoes()
     {
         unlink($this->local_file);
-        $cmd = exec('python3.8 /var/www/invest/bot/acao.py > /dev/null 2>&1 &');
+        $cmd = exec('python3.8 /var/www/invest/bot/acao.py > /dev/null 2>&1');
         echo true;
     }
 
