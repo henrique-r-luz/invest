@@ -71,7 +71,7 @@ class SincronizarController extends Controller
     private function executaBackup()
     {
         $dump = Yii::$app->params['back_up'] . '/' . date("YmdHis") . '.sql';
-        $cmd = 'sudo sshpass -p dandelo  ssh  henrique@' . Yii::$app->params['ip_docker'] . ' "docker exec ' . Yii::$app->params['container_web'] . ' pg_dump -U postgres  investimento" > ' . $dump;
+        $cmd = 'sudo sshpass -p '.Yii::$app->params['acesso'].'  ssh  henrique@' . Yii::$app->params['ip_docker'] . ' "docker exec ' . Yii::$app->params['container_web'] . ' pg_dump -U postgres  investimento" > ' . $dump;
         $resp = shell_exec($cmd);
         if (empty($resp)) {
             if (file_exists($dump)) {
