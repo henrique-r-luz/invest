@@ -11,53 +11,53 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
 
-#filePath = '~/NetBeansProjects/dados/';
-logPath = "/var/www/dados"
+# filePath = '~/NetBeansProjects/dados/';
+logPath = "/var/www/dados/atualiza_acao.txt"
+dir = "/var/www/dados"
 
 
 def getDados():
-	
-        if (os.path.exists(logPath+'/atualiza_acao.log')):
-            os.remove(logPath+'/atualiza_acao.log');
+
+        if (os.path.exists(logPath)):
+            os.remove(logPath);
         url = "http://localhost/index.php/financas/atualiza-acao/url";
         response = json.loads(requests.get(url).text);
         executa(response);
         print(1);
-        #return 'Deu certo';
+        # return 'Deu certo';
 
 def executa(discionarioAcoes):
     listaPreco = [];
     moeda = [];
     id = 0;
     for row in discionarioAcoes:
-        #if(id==2):
-            #break;
-        #print(row['url']);
+        # if(id==2):
+            # break;
+        # print(row['url']);
         
         browser.get(row['url']);
         preco = getPreco(browser);
-        #print(preco);
-        #print(str(row['ativo_id']));
-        with open(logPath+'/atualiza_acao.log', 'a') as log:
-            log.write(str(row['ativo_id'])+' - '+str(preco.text)+';');
+        # print(preco);
+        # print(str(row['ativo_id']));
+        with open(logPath, 'a') as log:
+             log.write('ativo@#:'+str(preco.text)+';');
         listaPreco.append([row['ativo_id'], preco.text])
         id+=1
        
     browser.get('https://br.investing.com/currencies/usd-brl');
     preco = getPreco(browser);
-    #preco = "5.5";
-    with open(logPath+'/atualiza_acao.log', 'a') as log:
-            log.write('dollar - '+str(preco.text));
+    # preco = "5.5";
+    with open(logPath, 'a') as log:
+            log.write('ativo@#:'+str(preco.text)+';')
    
-        
     moeda.append(['dollar', preco.text]);
   
     df = pd.DataFrame(listaPreco, columns=['id', 'valor'])
     dfDollar = pd.DataFrame(moeda, columns=['moeda', 'valor'])
-    df.to_csv(logPath + '/preco_acao.csv', index=False)
-    dfDollar.to_csv(logPath + '/cambio.csv', index=False)
+    df.to_csv(dir + '/preco_acao.csv', index=False)
+    dfDollar.to_csv(dir + '/cambio.csv', index=False)
     browser.quit()
-    #print(df);
+    # print(df);
     
  
 def getPreco(browser):
@@ -101,6 +101,8 @@ try:
     browser = webdriver.Remote(command_executor='invest_bot:4444',options=options);
     getDados();
 except BaseException as err:
+    with open(logPath, 'a') as log:
+            log.write('erro@#:'+str(format(err))+';')
     print('Erro', format(err));
     browser.quit();
 

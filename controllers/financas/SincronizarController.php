@@ -8,33 +8,36 @@
 
 namespace app\controllers\financas;
 
-use app\lib\componentes\ExecutaBack;
-use app\models\financas\service\sincroniza\SincronizaFactory;
 use Yii;
 use yii\web\Controller;
+use app\lib\componentes\ExecutaBack;
+use app\models\financas\AtualizaAcao;
+use app\models\financas\service\sincroniza\CallScriptAcoes;
+use app\models\financas\service\sincroniza\SincronizaFactory;
 
 /**
  * Description of SincronizarController
  *
  * @author henrique
  */
-class SincronizarController extends Controller {
+class SincronizarController extends Controller
+{
 
     public $processed = 0;
+    private $local_file = '/var/www/dados/atualiza_acao.txt';
 
-    public function actionIndex() {
+    public function actionIndex()
+    {
 
         return $this->render('index');
     }
 
-    public function actionSincroniza() {
+    public function actionSincroniza()
+    {
         $erro = '';
 
         if (Yii::$app->request->post('but') == 'backup') {
             return $this->executaBackup();
-        }
-        if (Yii::$app->request->post('but') == 'acoes') {
-            return $this->atualizaAcoes();
         }
         if (Yii::$app->request->post('but') == 'dados_empresa') {
             //a classe Runner deve ser extendida
@@ -46,26 +49,29 @@ class SincronizarController extends Controller {
 
         if (Yii::$app->request->post('but') == 'atualiza_dados') {
             $this->atualiza();
-            return $this->redirect('/index.php');
+            
         }
     }
+    
 
-    private function atualiza() {
+    private function atualiza()
+    {
         SincronizaFactory::sincroniza('acao')->atualiza();
         SincronizaFactory::sincroniza('easy')->atualiza();
         //SincronizaFactory::sincroniza('operacaoClear')->atualiza();
         SincronizaFactory::sincroniza('banco_inter')->atualiza();
+        Yii::$app->session->setFlash('success', 'Dados atualizados com sucesso!');
+        return $this->redirect('/index.php');
         //return $this->redirect('/index.php');
     }
 
     /**
      * Faz backup do banco de dados do sistema
      */
-    private function executaBackup() {
+    private function executaBackup()
+    {
         $dump = Yii::$app->params['back_up'] . '/' . date("YmdHis") . '.sql';
         $cmd = 'sudo sshpass -p dandelo  ssh  henrique@' . Yii::$app->params['ip_docker'] . ' "docker exec ' . Yii::$app->params['container_web'] . ' pg_dump -U postgres  investimento" > ' . $dump;
-        //echo $cmd;
-        //exit();
         $resp = shell_exec($cmd);
         if (empty($resp)) {
             if (file_exists($dump)) {
@@ -81,19 +87,32 @@ class SincronizarController extends Controller {
         }
     }
 
-    private function atualizaAcoes() {
-        //$cmd  = "python3.8 /var/www/invest/bot/acao.py";
-        $cmd = escapeshellcmd('python3.8 /var/www/invest/bot/acao.py');
-        $resp = shell_exec($cmd);
-        if (intval($resp) == intval(1)) {
-            Yii::$app->session->setFlash('success', 'Atualizações das ações ocorreram com sucesso!');
-            $this->atualiza();
-            return $this->redirect('/index.php');
-        } else {
-           
-            Yii::$app->session->setFlash('danger', 'Erro na atualizações da ações');
-        }
-        return $this->render('index');
+    public function actionAtualizaDados(){
+        $this->atualiza();
     }
 
+    public function actionAtualizaAcoes()
+    {
+        unlink($this->local_file);
+        $cmd = exec('python3.8 /var/www/invest/bot/acao.py > /dev/null 2>&1 &');
+        echo true;
+    }
+
+    public function actionGetStatusAcoes()
+    {
+        try {
+            $total = AtualizaAcao::find()->count();
+            $arquivo =  file_get_contents($this->local_file);
+            $ativoAtualizados = explode(';',$arquivo);
+            foreach($ativoAtualizados as $item){
+                $tipo  = explode('@#:',$item);
+                if(isset($tipo[0]) && $tipo[0]=='erro'){
+                    return $this->asJson(['ativosAtualizados'=>'erro','total'=>'erro']);
+                }
+            }
+            return $this->asJson(['ativosAtualizados'=>(count($ativoAtualizados)-1),'total'=>($total+1)]);
+        } catch (\Exception $e) {
+            return $this->asJson(['ativosAtualizados'=>0,'total'=>0]);
+        }
+    }
 }
