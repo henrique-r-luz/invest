@@ -27,7 +27,7 @@ class BancoInter extends OperacoesAbstract {
 
     private $valorCdbBruto;
     private $valorCdbLiquido;
-    private $cdbBancoInterId =(YII_ENV_DEV)?32:40;
+    private $cdbBancoInterId =40;
     private $erros;
 
     //put your code here

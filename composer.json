@@ -16,7 +16,7 @@
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "dev-master",
-         "npm-asset/font-awesome" : "~5.1",
+        "npm-asset/font-awesome" : "~5.1",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "dmstr/yii2-adminlte-asset": "~2.5",
