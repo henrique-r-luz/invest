@@ -25,6 +25,7 @@
                             'items' => [
                                 ['label' => 'Ativo', 'icon' => 'diamond', 'url' => ['/financas/ativo']],
                                 ['label' => 'Ativo Investidos', 'icon' => 'diamond', 'url' => ['/financas/itens-ativo']],
+                                ['label' => 'Operações Import', 'icon' => 'refresh', 'url' => ['/financas/operacoes-import']],
                                 ['label' => 'Atualiza Ação', 'icon' => 'undo', 'url' => ['/financas/atualiza-acao']],
                                 ['label' => 'Investidor', 'icon' => 'user', 'url' => ['/financas/investidor']],
                                 ['label' => 'Operação', 'icon' => 'money', 'url' => ['/financas/operacao']],

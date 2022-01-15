@@ -20,20 +20,19 @@ namespace app\lib;
 
 class TipoArquivoUpload {
 
-    const CLEAR_R_V = 'Tesouro Direto';
-    const AVENUE_R_V = 'Fundos de Investimentos';
+    const CLEAR = 'Operações Clear';
+    const AVENUE = 'Operações Avenue';
+    const INTER = 'Operações Inter';
     
-    
-
     /**
      * Retorna todos os enuns em um array
      * @return array 
      */
     public static function all() {
         return [
-            self::CLEAR_R_V => self::CLEAR_R_V,
-            self::AVENUE_R_V => self::AVENUE_R_V,
-           
+            self::CLEAR => self::CLEAR,
+            self::AVENUE => self::AVENUE,
+            self::INTER => self::INTER,
         ];
     }
 

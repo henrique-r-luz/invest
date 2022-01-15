@@ -21,11 +21,6 @@ $config = [
         '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
-        /* 'modules' => [
-          'gridview' => [
-          'class' => '\kartik\grid\Module',
-          ],
-          ], */
 
         'urlManager' => [
             'enablePrettyUrl' => true,

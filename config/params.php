@@ -11,6 +11,7 @@ return [
     'container_web'=>'invest_dev_invest_db_prod_1',
     'codigo_cdb_inter'=>32,
     'acesso'=>'corco',
+    'bsVersion' => '3.x',
     'icon-framework' => \kartik\icons\Icon::FAS,  // Font Awesome Icon framework
      
 ];

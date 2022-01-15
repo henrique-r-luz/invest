@@ -22,10 +22,14 @@ class m211229_141830_upload_operacao extends Migration
         $this->execute("CREATE table operacoes_import(
             id SERIAL PRIMARY KEY,
             investidor_id INTEGER REFERENCES investidor(id) NOT NULL,
-            arquivo text,
-            tipo_arquivo text,
-            lista_operacoes_criadas_json text
+            arquivo text not null,
+            extensao text not null,
+            tipo_arquivo text not null,
+            hash_nome text not null,
+            lista_operacoes_criadas_json text -- operações que serão criadas pelo arquivo
         );");
+
+        $this->execute("CREATE UNIQUE INDEX unique_hash_investido ON operacoes_import (investidor_id,hash_nome);");
     }
 
     /**
