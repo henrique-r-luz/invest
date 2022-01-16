@@ -120,7 +120,7 @@ $impostoRenda = 1;
         ],
         'toolbar' => [
             [
-                'content' => Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])
+                'content' => Html::a('<i class="fa fa-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])
             ],
             '{toggleData}',
         ],

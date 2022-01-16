@@ -24,13 +24,9 @@ class AppAsset extends AssetBundle
         'css/site.css',
         // 'css/all.css',
         "js/grow-js/jquery.growl.css",
-        "dist/css/adminlte.min.css",
-        //'plugins/fontawesome-free/css/all.min.css',
-        //'plugins/icheck-bootstrap/icheck-bootstrap.min.css',
     ];
     public $js = [
         //"/usr/local/bin/node-server/node_modules/socket.io-client/dist/socket.io.js",
-        "js/node_modules/socket.io-client/dist/socket.io.js",
         "js/notificacao.js",
         "js/grow-js/jquery.growl.js",
         "js/investimento.js",

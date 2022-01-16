@@ -1,69 +1,61 @@
 <?php
-use yii\helpers\Html;
-
-
-//Icon::map($this);
- // Maps the Elusive icon font framework
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use yii\helpers\Html;
 
-if (Yii::$app->controller->action->id === 'login') { 
-/**
- * Do not use this code in your template. Remove it. 
- * Instead, use the code  $this->layout = '//main-login'; in your controller.
- */
-    echo $this->render(
-        'main-login',
-        ['content' => $content]
-    );
-} else {
-     dmstr\web\AdminLteAsset::register($this);
-    if (class_exists('backend\assets\AppAsset')) {
-        backend\assets\AppAsset::register($this);
-    } else {
-        app\assets\AppAsset::register($this);
-    }
+\hail812\adminlte3\assets\FontAwesomeAsset::register($this);
+\hail812\adminlte3\assets\AdminLteAsset::register($this);
+$this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
 
-   
+use kartik\icons\FontAwesomeAsset;
+FontAwesomeAsset::register($this);
+$assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
+?>
 
-    $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
-    ?>
-    <?php $this->beginPage() ?>
-    <!DOCTYPE html>
-    <html lang="<?= Yii::$app->language ?>">
-    <head>
-        <meta charset="<?= Yii::$app->charset ?>"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <?= Html::csrfMetaTags() ?>
-        <title><?= Html::encode($this->title) ?></title>
-        <?php $this->head() ?>
-    </head>
-    <body class="hold-transition <?=(YII_ENV_DEV)?'skin-green' : 'skin-blue'?> sidebar-mini">
+<?php $this->beginPage() ?>
+<!DOCTYPE html>
+<html lang="<?= Yii::$app->language ?>">
+
+<head>
+    <meta charset="<?= Yii::$app->charset ?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php $this->registerCsrfMetaTags() ?>
+    <title><?= Html::encode($this->title) ?></title>
+    <?php $this->head() ?>
+    <!-- on your view layout file HEAD section -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+<!-- on your view layout file HEAD section -->
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="hold-transition sidebar-mini">
     <?php $this->beginBody() ?>
+
     <div class="wrapper">
+        <!-- Navbar -->
+        <?= $this->render('navbar', ['assetDir' => $assetDir]) ?>
+        <!-- /.navbar -->
 
-        <?= $this->render(
-            'header.php',
-            ['directoryAsset' => $directoryAsset]
-        ) ?>
+        <!-- Main Sidebar Container -->
+        <?= $this->render('sidebar', ['assetDir' => $assetDir]) ?>
 
-        <?= $this->render(
-            'left.php',
-            ['directoryAsset' => $directoryAsset]
-        )
-        ?>
+        <!-- Content Wrapper. Contains page content -->
+        <?= $this->render('content', ['content' => $content, 'assetDir' => $assetDir]) ?>
+        <!-- /.content-wrapper -->
 
-        <?= $this->render(
-            'content.php',
-            ['content' => $content, 'directoryAsset' => $directoryAsset]
-        ) ?>
+        <!-- Control Sidebar -->
+        <?= $this->render('control-sidebar') ?>
+        <!-- /.control-sidebar -->
 
+        <!-- Main Footer -->
+        <?= $this->render('footer') ?>
     </div>
 
     <?php $this->endBody() ?>
-    </body>
-    </html>
-    <?php $this->endPage() ?>
-<?php } ?>
+</body>
+
+</html>
+<?php $this->endPage() ?>
