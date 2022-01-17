@@ -32,32 +32,32 @@ use kartik\helpers\Html;
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <?php
-            echo \hail812\adminlte\widgets\Menu::widget([
+            echo \app\lib\Menu::widget([
                 'items' => [
                     //['label' => 'Menu', 'options' => ['class' => 'header']],
-                    [
+                  /*  [
                         'label' => 'Tools',
                         'icon' => 'share',
-                        'url' => '#',
+                        //'url' => '#',
                         'items' => [
                             ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii'],],
                             ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                         ],
-                    ],
+                    ],*/
                     [
                         'label' => 'Finanças',
                         'icon' => 'dollar-sign',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Ativo', 'icon' => 'gem', 'url' => ['/financas/ativo']],
-                            ['label' => 'Ativo Investidos', 'icon' => 'glass-cheers', 'url' => ['/financas/itens-ativo']],
-                            ['label' => 'Operações Import', 'icon' => 'file-import', 'url' => ['/financas/operacoes-import']],
-                            ['label' => 'Atualiza Ação', 'icon' => 'undo', 'url' => ['/financas/atualiza-acao']],
-                            ['label' => 'Investidor', 'icon' => 'user', 'url' => ['/financas/investidor']],
-                            ['label' => 'Operação', 'icon' => 'cash-register', 'url' => ['/financas/operacao']],
-                            ['label' => 'Proventos', 'icon' => 'arrow-down', 'url' => ['/financas/proventos']],
-                            ['label' => 'Empresas Bolsa', 'icon' => 'building', 'url' => ['/financas/acao-bolsa']],
-                            ['label' => 'Sincronizar', 'icon' => 'sync-alt', 'url' => ['/financas/sincronizar']],
+                            ['label' => 'Ativo', 'icon' => 'gem', 'url' => ['financas/ativo']],
+                            ['label' => 'Ativo Investidos', 'icon' => 'glass-cheers', 'url' => ['financas/itens-ativo']],
+                            ['label' => 'Operações Import', 'icon' => 'file-import', 'url' => ['financas/operacoes-import']],
+                            ['label' => 'Atualiza Ação', 'icon' => 'undo', 'url' => ['financas/atualiza-acao']],
+                            ['label' => 'Investidor', 'icon' => 'user', 'url' => ['financas/investidor']],
+                            ['label' => 'Operação', 'icon' => 'cash-register', 'url' => ['financas/operacao']],
+                            ['label' => 'Proventos', 'icon' => 'arrow-down', 'url' => ['financas/proventos']],
+                            ['label' => 'Empresas Bolsa', 'icon' => 'building', 'url' => ['financas/acao-bolsa']],
+                            ['label' => 'Sincronizar', 'icon' => 'sync-alt', 'url' => ['financas/sincronizar']],
                         ],
                     ],
                     [
@@ -65,8 +65,8 @@ use kartik\helpers\Html;
                         'icon' => 'file',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Filtro Empresas', 'icon' => 'filter', 'url' => ['/relatorios/analise-empresa']],
-                            ['label' => 'Aporte', 'icon' => 'balance-scale', 'url' => ['/relatorios/aporte']],
+                            ['label' => 'Filtro Empresas', 'icon' => 'filter', 'url' => ['relatorios/analise-empresa']],
+                            ['label' => 'Aporte', 'icon' => 'balance-scale', 'url' => ['relatorios/aporte']],
                         ],
                     ],
                     [
@@ -74,12 +74,12 @@ use kartik\helpers\Html;
                         'icon' => 'chart-line',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Histograma', 'icon' => 'chart-bar', 'url' => ['/analiseGrafica/histograma']],
+                            ['label' => 'Histograma', 'icon' => 'chart-bar', 'url' => ['analiseGrafica/histograma']],
                             ['label' => 'Correlação', 'icon' => 'project-diagram', 'url' => ['/']],
-                            ['label' => 'Evol. Patrimônio', 'icon' => 'level-up-alt', 'url' => ['/analiseGrafica/evolucao-patrimonio']],
-                            ['label' => 'Lucro/Prejuízo', 'icon' => 'plus-circle', 'url' => ['/analiseGrafica/lucro-prejuizo']],
-                            ['label' => 'Proventos/mês', 'icon' => 'file-invoice-dollar', 'url' => ['/analiseGrafica/evolucao-proventos']],
-                            ['label' => 'Proventos/Ativo', 'icon' => 'rocket', 'url' => ['/analiseGrafica/proventos-por-ativo']],
+                            ['label' => 'Evol. Patrimônio', 'icon' => 'level-up-alt', 'url' => ['analiseGrafica/evolucao-patrimonio']],
+                            ['label' => 'Lucro/Prejuízo', 'icon' => 'plus-circle', 'url' => ['analiseGrafica/lucro-prejuizo']],
+                            ['label' => 'Proventos/mês', 'icon' => 'file-invoice-dollar', 'url' => ['analiseGrafica/evolucao-proventos']],
+                            ['label' => 'Proventos/Ativo', 'icon' => 'rocket', 'url' => ['analiseGrafica/proventos-por-ativo']],
                         ],
                     ]
                 ],

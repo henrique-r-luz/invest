@@ -8,16 +8,15 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use app\assets\AppAsset;
-use yii\bootstrap\Modal;
+use yii\bootstrap4\Modal;
 use yii\widgets\ActiveForm;
-use yii\bootstrap\Progress;
+use yii\bootstrap4\Progress;
 
 
 $this->title = 'Sincroniza Dados';
 $this->registerJsFile(
     '@web/js/sincroniza/carregaBotAcoes.js',
-    ['depends' => [yii\web\YiiAsset::class,
-                  yii\bootstrap\BootstrapAsset::class]
+    ['depends' => [yii\web\YiiAsset::class]
     ]);
 
 ?>
@@ -41,7 +40,7 @@ $this->registerJsFile(
 
 <?php
     Modal::begin([
-        'header'        => '<h5 class = "card-title" id="progress"></h5>',
+        'title'        => '<h5 class = "card-title" id="progress"></h5>',
         'id'            => 'progress-modal',
         'closeButton'   => false,
         'clientOptions' => ['backdrop' => 'static', 'keyboard' => false]]);
