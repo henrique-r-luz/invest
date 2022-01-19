@@ -21,7 +21,13 @@ $config = [
         '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
-
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                   '@app/views' => '@app/views/hail812/yii2-adminlte3/src/views'
+                ],
+            ],
+       ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => true,
