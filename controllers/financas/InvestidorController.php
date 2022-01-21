@@ -3,11 +3,12 @@
 namespace app\controllers\financas;
 
 use Yii;
+use yii\web\Controller;
+use app\lib\CajuiHelper;
+use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 use app\models\financas\Investidor;
 use app\models\financas\InvestidorSearch;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * InvestidorController implements the CRUD actions for Investidor model.
@@ -66,8 +67,17 @@ class InvestidorController extends Controller
     {
         $model = new Investidor();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+           
+            if (!$model->save()) {
+
+                $erro = CajuiHelper::processaErros($model->getErrors());
+                Yii::$app->session->setFlash('danger', 'Erro ao salvar Ativo!</br>' . $erro);
+               // exit();
+            }else{
+                Yii::$app->session->setFlash('success', 'Dados cadastrados com sucesso! ');
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create', [

@@ -33,7 +33,13 @@ class Investidor extends \yii\db\ActiveRecord
             [['nome'], 'string'],
             [['cpf'], 'string'],
             [['cpf'], 'unique'],
+           // [['cpf'],'teste']
         ];
+    }
+
+
+    public function teste(){
+        $this->addError('cpf','olaaaaa');
     }
 
     /**

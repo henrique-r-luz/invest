@@ -3,7 +3,7 @@
 use app\models\financas\Ativo;
 use app\models\financas\ProventosSearch;
 use kartik\daterange\DateRangePicker;
-use kartik\grid\GridView;
+use app\lib\grid\GridView;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\web\View;
@@ -37,6 +37,8 @@ $daterange = [
     GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'toolbar'=>'padraoCajui',
+        'boxTitle' => $this->title,
         'columns' => [
             [
                 'label' => 'Id Ativo',
@@ -92,18 +94,9 @@ $daterange = [
                 'label' => 'Investidor',
                 'value' => 'itensAtivo.investidor.nome',
             ],
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'app\lib\grid\ActionColumn'],
         ],
-        'panel' => [
-            'type' => GridView::TYPE_DEFAULT,
-        //'heading' => true,
-        ],
-        'toolbar' => [
-            [
-                'content' => Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])
-            ],
-            '{toggleData}',
-        ],
+       
         'showPageSummary' => true,
     ]);
     ?>

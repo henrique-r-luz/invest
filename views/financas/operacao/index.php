@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use \kartik\grid\GridView;
+use app\lib\grid\GridView;
 use app\models\financas\Operacao;
 use kartik\daterange\DateRangePicker;
 
@@ -33,6 +33,8 @@ $daterange = [
     GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'toolbar'=>'padraoCajui',
+        'boxTitle' => $this->title,
         'columns' => [
             //      'id',
             //'tipo:ntext',
@@ -110,16 +112,7 @@ $daterange = [
                 'label' => 'Investidor',
                 'value' => 'itensAtivo.investidor.nome',
             ],
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-        'panel' => [
-            'type' => GridView::TYPE_DEFAULT,
-        //'heading' => true,
-        ],
-        'toolbar' => [
-            'content' => Html::a('<i class="glyphicon glyphicon-plus"></i> ', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar']) .
-            Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], ['class' => 'btn btn-default', 'title' => 'Limpar Filtros']),
-            '{toggleData}',
+            ['class' => 'app\lib\grid\ActionColumn'],
         ],
         'showPageSummary' => true,
     ]);
