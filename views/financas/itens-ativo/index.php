@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use \kartik\grid\GridView;
+use app\lib\grid\GridView;
 
 //use Yii;
 
@@ -14,14 +14,12 @@ $this->params['breadcrumbs'][] = $this->title;
 $impostoRenda = 1;
 ?>
 <div class="ativo-index">
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]);  
-    ?>
-
     <?=
     GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'toolbar'=>'padraoCajui',
+        'boxTitle' => $this->title,
         'columns' => [
             [
                 'attribute' => 'id',
@@ -112,17 +110,7 @@ $impostoRenda = 1;
                 'label' => 'País',
                 'value' => 'ativos.pais',
             ],
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-        'panel' => [
-            'type' => GridView::TYPE_DEFAULT,
-            //'heading' => true,
-        ],
-        'toolbar' => [
-            [
-                'content' => Html::a('<i class="fa fa-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])
-            ],
-            '{toggleData}',
+            ['class' => 'app\lib\grid\ActionColumn'],
         ],
         'showPageSummary' => true,
     ]);

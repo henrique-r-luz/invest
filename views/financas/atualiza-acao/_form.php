@@ -14,15 +14,15 @@ use app\lib\Tipo;
 /* @var $form ActiveForm */
 ?>
 
-<div class="box-success box">
-    <div class="box-body">
+<div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">
+    <div class="card-body">
         <div class="atualiza-acao-form">
             <?php $form = ActiveForm::begin(); ?>
-            <div class="col-xs-12 col-lg-12 no-padding">
+            <div class="row">
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <?=
                     $form->field($model, 'ativo_id')->widget(Select2::classname(), [
-                        'data' => Ativo::lista(),//ArrayHelper::map(Ativo::find()->where(['categoria'=> app\lib\Categoria::RENDA_VARIAVEL])->asArray()->all(), 'id', 'codigo'),
+                        'data' =>  Ativo::listaAtivo(), //ArrayHelper::map(Ativo::find()->where(['categoria'=> app\lib\Categoria::RENDA_VARIAVEL])->asArray()->all(), 'id', 'codigo'),
                         'options' => ['placeholder' => 'Selecione um Tipo'],
                         'pluginOptions' => [
                             'allowClear' => true
@@ -34,12 +34,12 @@ use app\lib\Tipo;
                     <?= $form->field($model, 'url')->textInput() ?>
                 </div>
             </div>
-            <div class="form-group col-xs-12 col-lg-12">
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-                <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
-            </div>
-
-            <?php ActiveForm::end(); ?>
         </div>
     </div>
+    <div class="card-footer">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
 </div>

@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use \kartik\grid\GridView;
+use app\lib\grid\GridView;
 use Mpdf\Tag\Summary;
 
 //use Yii;
@@ -13,23 +13,15 @@ use Mpdf\Tag\Summary;
 $this->title = 'Ativos';
 $this->params['breadcrumbs'][] = $this->title;
 $impostoRenda = 1;
-$layout = <<< HTML
-<div class="float-right">
-    {summary}
-</div>
-{custom}
-<div class="clearfix"></div>
-{items}
-{pager}
-HTML;
 ?>
 <div class="ativo-index">
 
     <?php // echo $this->render('_search', ['model' => $searchModel]);  
     ?>
-    <div class="card card-success card-outline">
+    
             <?=
             GridView::widget([
+                'toolbar'=>'padraoCajui',
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
                 'columns' => [
@@ -71,21 +63,9 @@ HTML;
                         'label' => 'País',
                         'value' => 'pais',
                     ],
-                    ['class' => 'yii\grid\ActionColumn'],
+                    ['class' => 'app\lib\grid\ActionColumn'],
                 ],
-                'summary'=>false,
-                /* 'panel' => [
-            'type' => GridView::TYPE_INFO,
-            //'heading' => true,
-        ],
-        'toolbar' => [
-            [
-                'content' => Html::a('<i class="fa fa-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar']),
-               
-            ],
-            '{toggleData}',
-        ],*/
+                'boxTitle' => $this->title,
             ]);
             ?>
-    </div>
 </div>

@@ -12,8 +12,8 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 
-<div class="box box-default">
-        <div class="box-header with-border">
+<div class="card-info card card-outline">
+        <div class="card-body">
 <div class="ativo-view">
     
             <p>
@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 ]) ?>
                 <?= Html::a('Voltar',['index'], ['class' => 'btn btn-default']) ?>
-                <?= Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])?>
+                <?= Html::a('<i class="fa fa-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])?>
             </p>
 
             <?= DetailView::widget([

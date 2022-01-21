@@ -15,11 +15,11 @@ use kartik\number\NumberControl;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="box-success box">
-    <div class="box-body">
-        <div class="ativo-form">
+<div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">
+    <div class="ativo-form">
+        <div class="card-body">
             <?php $form = ActiveForm::begin(); ?>
-            <div class="col-xs-12 col-lg-12 no-padding">
+            <div class="row">
                 <div class="col-xs-6 col-sm-6 col-lg-6">
                     <?= $form->field($model, 'nome')->textInput() ?>
                 </div>
@@ -37,7 +37,7 @@ use kartik\number\NumberControl;
                     ]); ?>
                 </div>
             </div>
-            <div class="col-xs-12 col-lg-12 no-padding">
+            <div class="row">
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <?=
                     $form->field($model, 'acao_bolsa_id')->widget(Select2::classname(), [
@@ -74,16 +74,13 @@ use kartik\number\NumberControl;
                     ?>
                 </div>
             </div>
-            <div class="col-xs-12 col-lg-12 no-padding">
-            </div>
-            <div class="form-group col-xs-12 col-lg-12">
+        </div>
+        <div class="card-footer">
 
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-                <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
-
-            </div>
-
+            <?= Html::submitButton('Salvar', ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
             <?php ActiveForm::end(); ?>
         </div>
+
     </div>
 </div>

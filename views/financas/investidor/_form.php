@@ -8,11 +8,11 @@ use yii\widgets\MaskedInput;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="box-success box">
-    <div class="box-body">
+<div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">
+    <div class="card-body">
         <div class="investidor-form">
             <?php $form = ActiveForm::begin(); ?>
-            <div class="col-xs-12 col-lg-12 no-padding">
+            <div class="row">
                 <div class="col-xs-12 col-sm-6 col-lg-6">
                     <?=
                     $form->field($model, 'cpf')->widget(MaskedInput::class, [
@@ -22,15 +22,17 @@ use yii\widgets\MaskedInput;
                     ?>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-lg-6">
-<?= $form->field($model, 'nome')->textInput() ?>
-                </div>
-            </div>   
-            <div class="form-group col-xs-12 col-lg-12">
-<?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-            <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
-            </div>
+                    <?= $form->field($model, 'nome')->textInput() ?>
 
-<?php ActiveForm::end(); ?>
+
+                    <?php ActiveForm::end(); ?>
+                </div>
+
+            </div>
         </div>
+    </div>
+    <div class="card-footer">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
     </div>
 </div>

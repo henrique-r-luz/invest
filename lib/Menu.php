@@ -99,8 +99,6 @@ class Menu extends \yii\widgets\Menu
     public function run()
     {
         $this->items = $this->defineActiveItens($this->items);
-        //print_r($this->items);
-        //exit();
         parent::run();
     }
 
@@ -186,9 +184,6 @@ class Menu extends \yii\widgets\Menu
         $treeFlag = '';
         if (isset($item['items'])) {
             $treeFlag = '<i class="right fas fa-angle-left"></i>';
-            if ($item['active']) {
-                $treeFlag = '<i class="right fas fa-angle-down"></i>';
-            }
         }
 
         $template = ArrayHelper::getValue($item, 'template', $this->linkTemplate);

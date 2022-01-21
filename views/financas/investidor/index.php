@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use \kartik\grid\GridView;
+use app\lib\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\financas\InvestidorSearch */
@@ -18,21 +18,13 @@ $this->params['breadcrumbs'][] = $this->title;
     GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'toolbar'=>'padraoCajui',
+        'boxTitle' => $this->title,
         'columns' => [
             'id',
             'cpf',
             'nome:ntext',
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-        'panel' => [
-            'type' => GridView::TYPE_DEFAULT,
-        //'heading' => true,
-        ],
-        'toolbar' => [
-            [
-                'content' => Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])
-            ],
-            '{toggleData}',
+            ['class' => 'app\lib\grid\ActionColumn'],
         ],
     ]);
     ?>

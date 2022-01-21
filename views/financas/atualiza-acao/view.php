@@ -11,9 +11,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Atualiza Acaos', 'url' => ['index'
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-
-<div class="box box-default">
-        <div class="box-header with-border">
+<div class="card-info card card-outline">
+        <div class="card-body">
 <div class="atualiza-acao-view">
     
             <p>
@@ -25,8 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
                 ],
                 ]) ?>
-                <?= Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])?>
                 <?= Html::a('Voltar',['index'], ['class' => 'btn btn-default']) ?>
+                <?= Html::a('<i class="fa fa-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])?>
             </p>
 
             <?= DetailView::widget([

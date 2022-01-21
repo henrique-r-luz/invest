@@ -1,6 +1,8 @@
+<?php use yii\helpers\Html; ?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    
+    <a href="<?php echo  \Yii::$app->homeUrl?>" class="brand-link">
         <img src="/img/logo2.png" alt="Invest Logo" class="brand-image" >
         <span class="brand-text font-weight-light">INVEST</span>
     </a>

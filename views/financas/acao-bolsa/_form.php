@@ -9,14 +9,16 @@ use kartik\widgets\SwitchInput;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="box-success box">
-    <div class="box-body">
+<div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">
+    <div class="card-body">
         <div class="acao-bolsa-form">
             <?php $form = ActiveForm::begin(); ?>
-            <div class="col-xs-12 col-lg-12 col-lg-12">
-                <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-12">
+                    <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
+                </div>
             </div>
-            <div class="col-xs-12 col-lg-12 no-padding">
+            <div class="row">
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <?= $form->field($model, 'codigo')->textInput() ?>
                 </div>
@@ -28,14 +30,13 @@ use kartik\widgets\SwitchInput;
                 </div>
             </div>
         </div>
-
-        <div class="col-xs-12 col-lg-12 col-lg-12">
-            <div class="form-group">
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-                <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
-            </div>
-        </div>
-        <?php ActiveForm::end(); ?>
     </div>
+    <div class="card-footer">
+        <div class="form-group">
+            <?= Html::submitButton('Salvar', ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
+        </div>
+    </div>
+    <?php ActiveForm::end(); ?>
 </div>
 </div>

@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use \kartik\grid\GridView;
+use app\lib\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\financas\AtualizaAcaoSearch */
@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'toolbar'=>'padraoCajui',
         'columns' => [
             [
                 'attribute' => 'id',
@@ -31,18 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'ativo.codigo'
             ],
             'url:ntext',
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'app\lib\grid\ActionColumn'],
         ],
-        'panel' => [
-            'type' => GridView::TYPE_DEFAULT,
-            //'heading' => true,
-        ],
-        'toolbar' => [
-            [
-                'content' => Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])
-            ],
-            '{toggleData}',
-        ],
+        
     ]);
     ?>
 

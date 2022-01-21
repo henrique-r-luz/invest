@@ -17,11 +17,11 @@ use app\models\financas\Investidor;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="box-success box">
-    <div class="box-body">
+<div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">
+    <div class="card-body">
         <div class="ativo-form">
             <?php $form = ActiveForm::begin(); ?>
-            <div class="col-xs-12 col-lg-12 no-padding">
+            <div class="row">
 
                 <div class="col-xs-12 col-sm-5 col-lg-5">
                     <?=
@@ -58,11 +58,8 @@ use app\models\financas\Investidor;
                     ?>
                 </div>
             </div>
-            <div class="col-xs-12 col-lg-12 no-padding">
-
-            </div>
-            <div class="col-xs-12 col-lg-12 no-padding">
-            <div class="col-xs-3 col-sm-3 col-lg-3">
+            <div class="row">
+                <div class="col-xs-3 col-sm-3 col-lg-3">
                     <?=
                     $form->field($model, 'quantidade')->widget(NumberControl::classname(), [
                         'maskedInputOptions' => [
@@ -106,14 +103,14 @@ use app\models\financas\Investidor;
                 </div>
 
             </div>
-            <div class="form-group col-xs-12 col-lg-12">
-
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-                <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
-
-            </div>
-
-            <?php ActiveForm::end(); ?>
         </div>
-    </div>
+        </div>
+        <div class="card-footer">
+
+            <?= Html::submitButton('Salvar', ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
+
+        </div>
+
+        <?php ActiveForm::end(); ?>
 </div>

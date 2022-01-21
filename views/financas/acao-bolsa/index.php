@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use \kartik\grid\GridView;
+use app\lib\grid\GridView;
 use yii\helpers\Url;
 //use kartik\icons\Icon;
 
@@ -31,29 +31,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'nome:ntext',
             'setor:ntext',
             [
-                'class' => 'yii\grid\ActionColumn',
+                'class' => 'app\lib\grid\ActionColumn',
                 'template' => '{view} {update} {delete} {balanco}',
                 'buttons' => [
                     'balanco'=>function ($url, $model){
                          $title   = 'balanços';
-                            $label   = '<i class="fa fa-balance-scale"></i>';
+                            $label   = '<button type="button" class="btn btn-warning btn-xs"><i class="fa fa-balance-scale"></i></button>';
                             $options = ['title' => $title, 'data-pjax' => '0'];
                             return Html::a($label, Url::toRoute(['balanco', 'codigo_empresa' => $model->codigo]), $options);
                     }, 
                 ],
             ],
         ],
-        'panel' => [
-            'type' => GridView::TYPE_DEFAULT,
-        //'heading' => true,
-        ],
-        'toolbar' => [
-            [
-                'content' => Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])
-            ],
-            '{toggleData}',
-            '{export}'
-        ],
+        'toolbar'=>'padraoCajui',
+        'boxTitle' => $this->title,
     ]);
     ?>
 
