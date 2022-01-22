@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
 use kartik\widgets\SwitchInput;
 use kartik\widgets\Select2;
 use app\models\Categoria;
@@ -16,9 +16,10 @@ use kartik\number\NumberControl;
 ?>
 
 <div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">
+<?php $form = ActiveForm::begin(); ?>
     <div class="ativo-form">
         <div class="card-body">
-            <?php $form = ActiveForm::begin(); ?>
+           
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-lg-6">
                     <?= $form->field($model, 'nome')->textInput() ?>
@@ -79,8 +80,9 @@ use kartik\number\NumberControl;
 
             <?= Html::submitButton('Salvar', ['class' => 'btn btn-success']) ?>
             <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
-            <?php ActiveForm::end(); ?>
+            
         </div>
 
     </div>
+    <?php ActiveForm::end(); ?>
 </div>

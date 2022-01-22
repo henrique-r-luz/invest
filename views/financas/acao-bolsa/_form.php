@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
 use kartik\widgets\SwitchInput;
 
 /* @var $this yii\web\View */
@@ -10,9 +10,10 @@ use kartik\widgets\SwitchInput;
 ?>
 
 <div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">
+    <?php $form = ActiveForm::begin(); ?>
     <div class="card-body">
         <div class="acao-bolsa-form">
-            <?php $form = ActiveForm::begin(); ?>
+
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-lg-12">
                     <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
@@ -37,6 +38,7 @@ use kartik\widgets\SwitchInput;
             <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
         </div>
     </div>
-    <?php ActiveForm::end(); ?>
+
 </div>
+<?php ActiveForm::end(); ?>
 </div>

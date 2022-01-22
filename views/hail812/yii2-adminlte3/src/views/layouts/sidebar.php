@@ -53,7 +53,7 @@
                             ['label' => 'Sincronizar', 'icon' => 'sync-alt', 'url' => ['financas/sincronizar']],
                         ],
                     ],
-                    [
+                   /* [
                         'label' => 'Relatórios',
                         'icon' => 'file',
                         'url' => '#',
@@ -61,7 +61,7 @@
                             ['label' => 'Filtro Empresas', 'icon' => 'filter', 'url' => ['relatorios/analise-empresa']],
                             ['label' => 'Aporte', 'icon' => 'balance-scale', 'url' => ['relatorios/aporte']],
                         ],
-                    ],
+                    ],*/
                     [
                         'label' => 'Análise Gráfica',
                         'icon' => 'chart-line',

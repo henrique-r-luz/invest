@@ -6,7 +6,7 @@ use kartik\widgets\Select2;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\View;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
 use app\lib\Tipo;
 
 /* @var $this View */
@@ -15,9 +15,10 @@ use app\lib\Tipo;
 ?>
 
 <div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">
+<?php $form = ActiveForm::begin(); ?>
     <div class="card-body">
         <div class="atualiza-acao-form">
-            <?php $form = ActiveForm::begin(); ?>
+           
             <div class="row">
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <?=

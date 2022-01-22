@@ -5,7 +5,7 @@ use app\models\Tipo;
 use yii\helpers\Html;
 use app\models\Categoria;
 use kartik\widgets\Select2;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\financas\Ativo;
 use kartik\widgets\SwitchInput;
@@ -18,9 +18,9 @@ use app\models\financas\Investidor;
 ?>
 
 <div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">
+<?php $form = ActiveForm::begin(); ?>
     <div class="card-body">
         <div class="ativo-form">
-            <?php $form = ActiveForm::begin(); ?>
             <div class="row">
 
                 <div class="col-xs-12 col-sm-5 col-lg-5">
