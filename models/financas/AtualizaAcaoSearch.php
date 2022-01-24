@@ -18,7 +18,7 @@ class AtualizaAcaoSearch extends AtualizaAcao
     {
         return [
             [['ativo_id'], 'safe'],
-            [['url'], 'safe'],
+            [['url'], 'string'],
         ];
     }
 
@@ -61,9 +61,6 @@ class AtualizaAcaoSearch extends AtualizaAcao
         }
 
         // grid filtering conditions
-       /* $query->andFilterWhere([
-            'ativo_id' => $this->ativo_id,
-        ]);*/
 
         $query->andFilterWhere(['ilike', 'url', $this->url]);
         $query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_id]);

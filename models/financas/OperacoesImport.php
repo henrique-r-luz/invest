@@ -21,7 +21,14 @@ use Exception;
 class OperacoesImport extends \yii\db\ActiveRecord
 {
 
-    private $diretorio = 'arquivos';
+    public $diretorio = 'arquivos';
+    const type_pdf = 'application/pdf';
+    const type_csv = 'text/plain';
+    const type_uplod_file = ['csv'=>'text',
+                             'pdf'=>'pdf',
+                            'png'=>'image',
+                            'jpg'=>'image',
+                            'jpeg'=>'image'];
     /**
      * {@inheritdoc}
      */
@@ -42,7 +49,7 @@ class OperacoesImport extends \yii\db\ActiveRecord
             [['arquivo'], 'file', 'skipOnEmpty' => false],
             [['tipo_arquivo', 'lista_operacoes_criadas_json', 'hash_nome', 'extensao'], 'string'],
             [['investidor_id'], 'exist', 'skipOnError' => true, 'targetClass' => Investidor::className(), 'targetAttribute' => ['investidor_id' => 'id']],
-            [['arquivo'], 'validaTypeUpload'],
+            //[['arquivo'], 'validaTypeUpload'],
         ];
     }
 
@@ -59,6 +66,26 @@ class OperacoesImport extends \yii\db\ActiveRecord
             'lista_operacoes_criadas_json' => 'Lista Operacoes Criadas Json',
         ];
     }
+
+
+    public static function all() {
+        return [
+            'pdf' => self::type_pdf,
+            'csv' =>  self::type_csv
+        ];
+    }
+
+
+    public static function get($tipo) {
+        $all = self::all();
+
+        if (isset($all[$tipo])) {
+            return $all[$tipo];
+        }
+
+        return 'Não existe';
+    }
+
 
     /**
      * Gets query for [[Investidor]].
@@ -79,7 +106,7 @@ class OperacoesImport extends \yii\db\ActiveRecord
     public function validaTypeUpload()
     {
         if ($this->arquivo->type != 'text/csv') {
-            $this->addError('arquivo', 'Tipo Errado');
+            $this->addError('arquivo', 'Tipo de arquivo errado');
         }
     }
 
@@ -141,4 +168,7 @@ class OperacoesImport extends \yii\db\ActiveRecord
             $this->addError('arquivo', 'Erro ao remover registro. ');
         }
     }
+
+
+   
 }

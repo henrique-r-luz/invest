@@ -1,12 +1,14 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
-use kartik\select2\Select2;
-use kartik\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
 use kartik\file\FileInput;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
 use app\lib\TipoArquivoUpload;
+use kartik\widgets\ActiveForm;
 use app\models\financas\Investidor;
+use app\models\financas\OperacoesImport;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\OperacoesImport */
@@ -43,7 +45,25 @@ use app\models\financas\Investidor;
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-lg-12">
-                    <?= $form->field($model, 'arquivo')->widget(FileInput::classname(), []);
+                    <?= $form->field($model, 'arquivo')->widget(FileInput::classname(), [
+                        'options' => [
+                            'multiple' => false,
+                        ],
+                        'pluginOptions' => isset($model->arquivo) ? [
+                            'initialPreview' => [
+                                Url::to(['get-arquivo','id'=>$model->id]),
+                            ],
+                            'initialPreviewAsData' => true,
+                            //'initialPreviewFileType'=> 'image',
+                            'initialCaption' => $model->arquivo,
+                            'initialPreviewConfig' => [
+                                 ['type'=>OperacoesImport::type_uplod_file[$model->extensao],'caption' =>$model->arquivo,'downloadUrl'=> false],
+                            ],
+                             'overwriteInitial' => false,
+                            // 'maxFileSize' => 2800
+                        ]
+                            : [],
+                    ]);
                     ?>
                 </div>
             </div>

@@ -21,12 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'toolbar'=>'padraoCajui',
         'columns' => [
             [
-                'attribute' => 'id',
-                'value' => function ($model) {
-                    return $model->ativo_id;
-                }
-            ],
-            [
                 'label' => 'Ativo',
                 'attribute' => 'ativo_id',
                 'value' => 'ativo.codigo'

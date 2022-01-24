@@ -12,8 +12,8 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 
-<div class="box box-default">
-        <div class="box-header with-border">
+<div class="card-info card card-outline">
+        <div class="card-body">
 <div class="proventos-view">
     
             <p>

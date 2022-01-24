@@ -3,13 +3,14 @@
 namespace app\controllers\financas;
 
 use Yii;
+use yii\base\Response;
 use yii\web\Controller;
 use app\lib\CajuiHelper;
 use yii\web\UploadedFile;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
-use app\models\financas\OperacoesImportSearch;
 use app\models\financas\OperacoesImport;
+use app\models\financas\OperacoesImportSearch;
 
 
 /**
@@ -68,7 +69,7 @@ class OperacoesImportController extends Controller
     public function actionCreate()
     {
         $model = new OperacoesImport();
-      
+
         if ($model->load(Yii::$app->request->post())) {
             $model->arquivo = UploadedFile::getInstance($model, 'arquivo');
             if (!$model->saveUpload()) {
@@ -104,6 +105,18 @@ class OperacoesImportController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+
+    public function actionGetArquivo($id)
+    {
+        $model = $this->findModel($id);
+        \Yii::$app->response->format = yii\web\Response::FORMAT_RAW;
+        \Yii::$app->response->headers->add('content-type',OperacoesImport::get($model->extensao));
+        \Yii::$app->response->data = file_get_contents(Yii::getAlias('@' . $model->diretorio) . '/' . $model->hash_nome . '.' . $model->extensao);
+        return \Yii::$app->response;
+        // return Yii::$app->response->sendFile(Yii::getAlias('@' . $model->diretorio) . '/' . $model->hash_nome . '.' . $model->extensao)->send();
+        //return 
     }
 
     /**
