@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use app\models\financas\OperacoesImport;
 use app\models\financas\OperacoesImportSearch;
-
+use app\models\financas\service\operacoesImport\OperacoesImportService;
 
 /**
  * OperacoesImportController implements the CRUD actions for OperacoesImport model.
@@ -68,22 +68,22 @@ class OperacoesImportController extends Controller
      */
     public function actionCreate()
     {
-        $model = new OperacoesImport();
+        //$model = new OperacoesImport();
+        $operacoesImportService = new OperacoesImportService();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->arquivo = UploadedFile::getInstance($model, 'arquivo');
-            if (!$model->saveUpload()) {
-                $erro = CajuiHelper::processaErros($model->getErrors());
+        if ($operacoesImportService->load(Yii::$app->request->post())) {
+            if ($operacoesImportService->save()) {
+                $erro = CajuiHelper::processaErros($operacoesImportService->getErrors());
                 Yii::$app->session->setFlash('danger', 'Erro ao salvar Ativo!</br>' . $erro);
                 return $this->render('create', [
-                    'model' => $model,
+                    'model' => $operacoesImportService->getModel(),
                 ]);
             }
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $operacoesImportService->getModel()->id]);
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $operacoesImportService->getModel(),
         ]);
     }
 
@@ -113,7 +113,7 @@ class OperacoesImportController extends Controller
         $model = $this->findModel($id);
         \Yii::$app->response->format = yii\web\Response::FORMAT_RAW;
         \Yii::$app->response->headers->add('content-type',OperacoesImport::get($model->extensao));
-        \Yii::$app->response->data = file_get_contents(Yii::getAlias('@' . $model->diretorio) . '/' . $model->hash_nome . '.' . $model->extensao);
+        \Yii::$app->response->data = file_get_contents(Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $model->hash_nome . '.' . $model->extensao);
         return \Yii::$app->response;
         // return Yii::$app->response->sendFile(Yii::getAlias('@' . $model->diretorio) . '/' . $model->hash_nome . '.' . $model->extensao)->send();
         //return 

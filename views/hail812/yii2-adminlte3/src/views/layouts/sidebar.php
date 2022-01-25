@@ -44,10 +44,10 @@
                         'items' => [
                             ['label' => 'Ativo', 'icon' => 'gem', 'url' => ['financas/ativo']],
                             ['label' => 'Ativo Investidos', 'icon' => 'glass-cheers', 'url' => ['financas/itens-ativo']],
-                            ['label' => 'Operações Import', 'icon' => 'file-import', 'url' => ['financas/operacoes-import']],
                             ['label' => 'Atualiza Ação', 'icon' => 'undo', 'url' => ['financas/atualiza-acao']],
                             ['label' => 'Investidor', 'icon' => 'user', 'url' => ['financas/investidor']],
                             ['label' => 'Operação', 'icon' => 'cash-register', 'url' => ['financas/operacao']],
+                            ['label' => 'Operações Import', 'icon' => 'file-import', 'url' => ['financas/operacoes-import']],
                             ['label' => 'Proventos', 'icon' => 'arrow-down', 'url' => ['financas/proventos']],
                             ['label' => 'Empresas Bolsa', 'icon' => 'building', 'url' => ['financas/acao-bolsa']],
                             ['label' => 'Sincronizar', 'icon' => 'sync-alt', 'url' => ['financas/sincronizar']],

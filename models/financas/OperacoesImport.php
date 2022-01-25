@@ -21,14 +21,16 @@ use Exception;
 class OperacoesImport extends \yii\db\ActiveRecord
 {
 
-    public $diretorio = 'arquivos';
+    const DIR = 'arquivos';
     const type_pdf = 'application/pdf';
     const type_csv = 'text/plain';
-    const type_uplod_file = ['csv'=>'text',
-                             'pdf'=>'pdf',
-                            'png'=>'image',
-                            'jpg'=>'image',
-                            'jpeg'=>'image'];
+    const type_uplod_file = [
+        'csv' => 'text',
+        'pdf' => 'pdf',
+        'png' => 'image',
+        'jpg' => 'image',
+        'jpeg' => 'image'
+    ];
     /**
      * {@inheritdoc}
      */
@@ -68,7 +70,8 @@ class OperacoesImport extends \yii\db\ActiveRecord
     }
 
 
-    public static function all() {
+    public static function all()
+    {
         return [
             'pdf' => self::type_pdf,
             'csv' =>  self::type_csv
@@ -76,7 +79,8 @@ class OperacoesImport extends \yii\db\ActiveRecord
     }
 
 
-    public static function get($tipo) {
+    public static function get($tipo)
+    {
         $all = self::all();
 
         if (isset($all[$tipo])) {
@@ -122,7 +126,7 @@ class OperacoesImport extends \yii\db\ActiveRecord
                 return false;
             }
             $this->extensao = $this->arquivo->extension;
-            if (!$this->arquivo->saveAs(Yii::getAlias('@' . $this->diretorio) . '/' . $this->hash_nome . '.' . $this->arquivo->extension)) {
+            if (!$this->arquivo->saveAs(Yii::getAlias('@' . self::DIR) . '/' . $this->hash_nome . '.' . $this->arquivo->extension)) {
                 $this->addError('arquivo', 'Arquivo de upload não foi gerado. ');
                 return false;
             }
@@ -159,9 +163,7 @@ class OperacoesImport extends \yii\db\ActiveRecord
     public function deleteUpload()
     {
         try {
-            $arquivo = Yii::getAlias('@' . $this->diretorio) . '/' . $this->hash_nome . '.' . $this->extensao;
-            unlink($arquivo);
-            if (!file_exists($arquivo)) {
+            if ($this->removeArquivo()) {
                 $this->delete();
             }
         } catch (Exception $e) {
@@ -169,6 +171,10 @@ class OperacoesImport extends \yii\db\ActiveRecord
         }
     }
 
-
-   
+    public function removeArquivo()
+    {
+        $arquivo = Yii::getAlias('@' . self::DIR) . '/' . $this->hash_nome . '.' . $this->extensao;
+        unlink($arquivo);
+        return (!file_exists($arquivo));
+    }
 }
