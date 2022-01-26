@@ -69,22 +69,31 @@ class OperacoesImportController extends Controller
     public function actionCreate()
     {
         //$model = new OperacoesImport();
-        $operacoesImportService = new OperacoesImportService();
+        try {
+            $operacoesImportService = new OperacoesImportService();
 
-        if ($operacoesImportService->load(Yii::$app->request->post())) {
-            if ($operacoesImportService->save()) {
-                $erro = CajuiHelper::processaErros($operacoesImportService->getErrors());
-                Yii::$app->session->setFlash('danger', 'Erro ao salvar Ativo!</br>' . $erro);
-                return $this->render('create', [
-                    'model' => $operacoesImportService->getModel(),
-                ]);
+            if ($operacoesImportService->load(Yii::$app->request->post())) {
+                if (!$operacoesImportService->save()) {
+                    $erro = CajuiHelper::processaErros($operacoesImportService->getErrors());
+                    Yii::$app->session->setFlash('danger', 'Erro ao salvar Ativo!</br>' . $erro);
+                    return $this->render('create', [
+                        'model' => $operacoesImportService->getModel(),
+                    ]);
+                }
+                return $this->redirect(['view', 'id' => $operacoesImportService->getModel()->id]);
             }
-            return $this->redirect(['view', 'id' => $operacoesImportService->getModel()->id]);
+            $operacoesImportService->getModel()->arquivo = null;
+            return $this->render('create', [
+                'model' => $operacoesImportService->getModel(),
+            ]);
+        } catch (\Exception $e) {
+           
+            Yii::$app->session->setFlash('danger', 'Erro ao salvar operação import! ');
+            $operacoesImportService->getModel()->arquivo = null;
+            return $this->render('create', [
+                'model' => $operacoesImportService->getModel(),
+            ]);
         }
-
-        return $this->render('create', [
-            'model' => $operacoesImportService->getModel(),
-        ]);
     }
 
     /**
@@ -97,7 +106,6 @@ class OperacoesImportController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -112,7 +120,7 @@ class OperacoesImportController extends Controller
     {
         $model = $this->findModel($id);
         \Yii::$app->response->format = yii\web\Response::FORMAT_RAW;
-        \Yii::$app->response->headers->add('content-type',OperacoesImport::get($model->extensao));
+        \Yii::$app->response->headers->add('content-type', OperacoesImport::get($model->extensao));
         \Yii::$app->response->data = file_get_contents(Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $model->hash_nome . '.' . $model->extensao);
         return \Yii::$app->response;
         // return Yii::$app->response->sendFile(Yii::getAlias('@' . $model->diretorio) . '/' . $model->hash_nome . '.' . $model->extensao)->send();
@@ -128,9 +136,16 @@ class OperacoesImportController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->deleteUpload();
-
-        return $this->redirect(['index']);
+        try {
+            $model = $this->findModel($id);
+            $operacoesImportService = new OperacoesImportService($model);
+            $operacoesImportService->delete();
+            Yii::$app->session->setFlash('success', 'Registro deletado com sucesso! ');
+        } catch (\Exception $e) {
+            Yii::$app->session->setFlash('danger', 'Erro ao deletera registro.');
+        } finally {
+            return $this->redirect(['index']);
+        }
     }
 
     /**

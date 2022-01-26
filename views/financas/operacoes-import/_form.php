@@ -45,7 +45,7 @@ use app\models\financas\OperacoesImport;
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-lg-12">
-                    <?= $form->field($model, 'arquivo')->widget(FileInput::classname(), [
+                    <?=  $form->field($model, 'arquivo')->widget(FileInput::classname(), [
                         'options' => [
                             'multiple' => false,
                         ],
@@ -57,7 +57,8 @@ use app\models\financas\OperacoesImport;
                             //'initialPreviewFileType'=> 'image',
                             'initialCaption' => $model->arquivo,
                             'initialPreviewConfig' => [
-                                 ['type'=>OperacoesImport::type_uplod_file[$model->extensao],'caption' =>$model->arquivo,'downloadUrl'=> false],
+                                 ['type'=>isset(OperacoesImport::type_uplod_file[$model->extensao])?OperacoesImport::type_uplod_file[$model->extensao]:'text',
+                                 'downloadUrl'=> false],
                             ],
                              'overwriteInitial' => false,
                             // 'maxFileSize' => 2800

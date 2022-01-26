@@ -21,22 +21,24 @@ $daterange = [
         'timePickerIncrement' => 10,
         //'locale' => ['format' => 'Y-m-d H:i']
         'locale' => ['format' => 'd/m/Y H:i:s']
-    //'locale' => ['dd/MM/yyyy HH:mm']
+        //'locale' => ['dd/MM/yyyy HH:mm']
     ],
 ];
 ?>
 <div class="operacao-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]);    ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);    
+    ?>
 
     <?=
     GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'toolbar'=>'padraoCajui',
+        'toolbar' => 'padraoCajui',
         'boxTitle' => $this->title,
+        
         'columns' => [
-            //      'id',
+                  'id',
             //'tipo:ntext',
             [
                 'label' => 'Id Ativo',
@@ -54,14 +56,14 @@ $daterange = [
             [
                 'filter' => Operacao::tipoOperacao(),
                 'attribute' => 'tipo',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return Operacao::getTipoOperacao($model->tipo);
                 },
             ],
             [
                 'attribute' => 'quantidade',
                 //'format' => 'number',
-                'pageSummary' => function ($summary, $data, $widget)use($dataProvider) {
+                'pageSummary' => function ($summary, $data, $widget) use ($dataProvider) {
                     $quantidade = 0;
                     $objetos = $dataProvider->models;
                     foreach ($objetos as $operacao) {
@@ -73,10 +75,10 @@ $daterange = [
             [
                 'attribute' => 'valor',
                 'format' => 'currency',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return $model->getValorCambio();
                 },
-                'pageSummary' => function ($summary, $data, $widget)use($dataProvider) {
+                'pageSummary' => function ($summary, $data, $widget) use ($dataProvider) {
                     //var_dump($dataProvider);
                     // print_r($dataProvider->models);
                     $objetos = $dataProvider->models;
@@ -102,10 +104,14 @@ $daterange = [
             //'data',
             [
                 'attribute' => 'data',
-                'format' => 'datetime',
+                'value'=>function($model){
+                    $date = date_create($model->data);
+                    return date_format($date, 'd/m/Y H:i:s');
+                },
+                //'format' => 'datetime',
                 //'format'=>'dd/mm/yyyy HH:MM',
                 'filter' => DateRangePicker::widget($daterange),
-            // 'format'     => 'dd/mm/yyyy',
+                // 'format'     => 'dd/mm/yyyy',
             ],
             [
                 'attribute' => 'investidor',

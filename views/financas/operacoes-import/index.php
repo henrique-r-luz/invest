@@ -35,6 +35,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'attribute' => 'arquivo'
                         ],
                         'tipo_arquivo:ntext',
+                        [
+                                'label'=>'Operações criadas',
+                                'attribute'=>'lista_operacoes_criadas_json',
+                        ],
 
                         ['class' => 'app\lib\grid\ActionColumn'],
                 ],

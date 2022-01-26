@@ -29,7 +29,8 @@ class OperacoesImport extends \yii\db\ActiveRecord
         'pdf' => 'pdf',
         'png' => 'image',
         'jpg' => 'image',
-        'jpeg' => 'image'
+        'jpeg' => 'image',
+         ''=>'text'
     ];
     /**
      * {@inheritdoc}
@@ -48,6 +49,7 @@ class OperacoesImport extends \yii\db\ActiveRecord
             [['investidor_id', 'tipo_arquivo', 'arquivo'], 'required'],
             [['investidor_id'], 'default', 'value' => null],
             [['investidor_id'], 'integer'],
+            [['hash_nome', 'investidor_id'], 'unique', 'targetAttribute' => ['investidor_id','hash_nome'],'message'=>'O arquivo já existe na base de dados. '],
             [['arquivo'], 'file', 'skipOnEmpty' => false],
             [['tipo_arquivo', 'lista_operacoes_criadas_json', 'hash_nome', 'extensao'], 'string'],
             [['investidor_id'], 'exist', 'skipOnError' => true, 'targetClass' => Investidor::className(), 'targetAttribute' => ['investidor_id' => 'id']],
@@ -146,6 +148,7 @@ class OperacoesImport extends \yii\db\ActiveRecord
      */
     private function geraHashUpload()
     {
+        
         if (file_exists($this->arquivo->tempName)) {
             $this->hash_nome =  hash_file('sha3-512', $this->arquivo->tempName);
             return true;

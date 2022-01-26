@@ -11,11 +11,12 @@ namespace app\models\financas\service\operacoesImport;
  *
  * @author henrique
  */
-abstract class OperacoesAbstract {
+abstract class OperacoesImportAbstract {
     
     //arquivo recebido no CRUD, que pode ser cvs , pdf e etc
     protected $arquivo;
     protected $operacoesImport;
+    protected $dadosJson;
 
     function __construct($operacoesImport) {
        $this->operacoesImport =  $operacoesImport;
@@ -25,6 +26,13 @@ abstract class OperacoesAbstract {
     //get os dados externos
     abstract protected function getDados();
     
-    //Atuliza a base de dados com as informações obtidas de fora
+    //Atuliza a base de dados com as informações obtidas do upload
     abstract public  function atualiza();
+
+    // deleta operações vinculadas
+    abstract public  function delete();
+
+    public function getJson(){
+       return json_encode($this->dadosJson);
+    }
 }

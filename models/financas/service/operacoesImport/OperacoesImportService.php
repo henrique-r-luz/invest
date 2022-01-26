@@ -14,6 +14,7 @@ class OperacoesImportService
 {
 
     private  $operacoesImport;
+    private $post;
 
     function __construct($operacoesImport = null)
     {
@@ -32,6 +33,7 @@ class OperacoesImportService
      */
     public function load($post)
     {
+        $this->post = $post;
         return  $this->operacoesImport->load($post);
     }
 
@@ -40,38 +42,55 @@ class OperacoesImportService
     {
         try {
             $transaction = Yii::$app->db->beginTransaction();
+            
             $this->operacoesImport->arquivo = UploadedFile::getInstance($this->operacoesImport, 'arquivo');
+            
             if (!$this->operacoesImport->saveUpload()) {
-                $erro = CajuiHelper::processaErros($this->operacoesImport->getErrors());
-                $this->operacoesImport->addError('arquivo', CajuiHelper::processaErros($this->operacoesImport->getErrors()));
+                $transaction->rollBack();
                 return false;
             }
-            OperacoesImportFactory::getObjeto($this->operacoesImport);
+            $acaoImport = OperacoesImportFactory::getObjeto($this->operacoesImport);
+            $acaoImport->atualiza();
+            $acaoImport->getJson();
+            $this->operacoesImport->refresh();
+            $this->operacoesImport->lista_operacoes_criadas_json = $acaoImport->getJson();
+            if (!$this->operacoesImport->save(false)) {
+                $transaction->rollBack();
+                return false;
+            }
             $transaction->commit();
+            return true;
         } catch (\Exception $e) {
             $transaction->rollBack();
-            throw new \Exception("Erro ao salvar operações Import ");
-            
+            if (!OperacoesImport::find()->where(['hash_nome' => $this->operacoesImport->hash_nome])->exists()) {
+                $this->operacoesImport->removeArquivo();
+            }
+            throw new \Exception($e->getMessage());
         }
     }
 
 
-    public function update()
+    public function reload()
     {
+        return  $this->operacoesImport->load($this->post);
     }
 
 
-    public function delte()
+    public function delete()
     {
+        $acaoImport = OperacoesImportFactory::getObjeto($this->operacoesImport);
+        $acaoImport->delete();
     }
 
 
-    public function getErrors(){
+    public function getErrors()
+    {
         return $this->operacoesImport->getErrors();
     }
 
 
-    public function getModel(){
+    public function getModel()
+    {
         return $this->operacoesImport;
     }
 }

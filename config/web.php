@@ -24,10 +24,10 @@ $config = [
         'view' => [
             'theme' => [
                 'pathMap' => [
-                   '@app/views' => '@app/views/hail812/yii2-adminlte3/src/views'
+                    '@app/views' => '@app/views/hail812/yii2-adminlte3/src/views'
                 ],
             ],
-       ],
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => true,
@@ -35,6 +35,7 @@ $config = [
         ],
         'formatter' => [
             'class' => 'yii\i18n\Formatter',
+            // 'timeZone' => 'Europe/London',
             'thousandSeparator' => '.',
             //'currencyCode' => ' ',
             'decimalSeparator' => ',',
@@ -90,17 +91,23 @@ $config = [
     'modules' => [
         'gridview' => ['class' => '\kartik\grid\Module'],
         'datecontrol' => [
+            
             'class' => 'kartik\datecontrol\Module',
             'displaySettings' => [
                 Module::FORMAT_DATE => 'dd/MM/yyyy',
                 Module::FORMAT_TIME => 'HH:mm',
-                Module::FORMAT_DATETIME => 'dd/MM/yyyy HH:mm',
+                Module::FORMAT_DATETIME => 'php:Y-m-d H:i:s',
             ],
             'saveSettings' => [
                 Module::FORMAT_DATE => 'php:Y-m-d',
                 Module::FORMAT_TIME => 'php:H:i:s',
                 Module::FORMAT_DATETIME => 'php:Y-m-d H:i:s',
             ],
+            // set your display timezone
+
+
+            // set your timezone for date saved to db
+
             // automatically use kartik\widgets for each of the above formats
             'autoWidget' => true,
             // converte data entre formatos de displaySettings e saveSettings via chamada ajax.
