@@ -1,9 +1,72 @@
-version: '2'
+version: "3.7"
 services:
-  php:
-    image: yiisoftware/yii2-php:7.1-apache
+  app:
+    build:
+      args:
+        user: invest
+        uid: 1000
+      context: ./docker-compose/php
+      dockerfile: Dockerfile
+    image: invest_app
+    working_dir: /var/www/
     volumes:
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      - ./:/app:delegated
+      - ./:/var/www
+    networks:
+      - invest-network
+    depends_on:
+      - "db_invest"
+
+  db_invest:
+    build:
+      context: ./docker-compose/postgres
+      dockerfile: Dockerfile
+    image: invest_postgres
+    ports: 
+        - "5432:5432"
+    environment:
+      POSTGRES_DB: invest
+      POSTGRES_PASSWORD: invest
+      POSTGRES_USER: postgres
+    volumes:
+      - ./docker-compose/postgres:/docker-entrypoint-initdb.d
+      - ./docker-compose/postgres/db-data:/var/lib/postgresql/data
+    networks:
+      - invest-network
+    
+  nginx:
+    image: nginx:alpine
     ports:
-      - '8000:80'
+      - "80:80"
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d
+    networks:
+      - invest-network
+    depends_on:
+      - "app"
+    
+  #apache:
+  #  build:
+  #     context: ./docker-compose/apache
+  #     dockerfile: Dockerfile
+  #  depends_on:
+  #    - app
+  #  networks:
+  #    - invest-network
+  #  ports:
+  #    - "800:80"
+  #  volumes:
+  #    - ./:/var/www
+  
+  invest_bot:
+    image: selenium/standalone-chrome:95.0
+    ports:
+      - "4444:4444"
+    shm_size: 2gb
+    networks:
+      - invest-network
+
+networks:
+  invest-network:
+    driver: bridge
+

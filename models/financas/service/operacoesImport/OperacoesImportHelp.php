@@ -7,6 +7,7 @@ use app\models\financas\Operacao;
 use app\models\financas\service\OperacaoService;
 
 class OperacoesImportHelp{
+    
     public static function delete($operacoesImport){
         try {
             $transaction = Yii::$app->db->beginTransaction();

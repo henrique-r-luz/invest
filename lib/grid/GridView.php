@@ -103,7 +103,7 @@ class GridView extends \kartik\grid\GridView
     {
         $this->layout = '
             <div class="card ' . $this->cardStyle . '">
-              <div class="card-header">
+              <div class="card-header" style="padding-left: 10px;">
                   <h3 class="card-title">
                       <i class="fas fa-search"></i>
                       Lista de ' . $this->boxTitle . '
