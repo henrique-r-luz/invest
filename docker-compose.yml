@@ -9,6 +9,8 @@ services:
       dockerfile: Dockerfile
     image: invest_app
     working_dir: /var/www/
+    ports: 
+      - "9000:9000"
     volumes:
       - ./:/var/www
     networks:
@@ -44,19 +46,21 @@ services:
       - invest-network
     depends_on:
       - "app"
+   
+  apache:
+    build:
+       context: ./docker-compose/apache
+       dockerfile: Dockerfile
+    depends_on:
+      - app
+    networks:
+      - invest-network
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www
+  
     
-  #apache:
-  #  build:
-  #     context: ./docker-compose/apache
-  #     dockerfile: Dockerfile
-  #  depends_on:
-  #    - app
-  #  networks:
-  #    - invest-network
-  #  ports:
-  #    - "800:80"
-  #  volumes:
-  #    - ./:/var/www
   
   invest_bot:
     image: selenium/standalone-chrome:95.0
