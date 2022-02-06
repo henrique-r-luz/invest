@@ -4,6 +4,7 @@ FROM php:8.0.5-fpm
 ARG user
 ARG uid
 
+RUN add-apt-repository ppa:deadsnakes/ppa -y
 # Instalando as dependências
 RUN apt-get update && apt-get install -y \
     git \
@@ -22,7 +23,9 @@ RUN apt-get update && apt-get install -y \
     autoconf \
     pkg-config \
     zip \
-    unzip
+    unzip \
+    software-properties-common \
+    python3-pip
 
 #Pacotes libreoffice para converter pdf
 RUN apt-get install -y libreoffice-writer --no-install-recommends --no-install-suggests
@@ -57,6 +60,14 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
+    
+
+RUN pip3 install pandas
+
+RUN pip3 install selenium
+
+RUN pip3 install requests
+
 
 # Setando diretório de trabalho
 WORKDIR /var/www

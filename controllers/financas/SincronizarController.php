@@ -12,7 +12,6 @@ use Yii;
 use yii\web\Controller;
 use app\lib\componentes\ExecutaBack;
 use app\models\financas\AtualizaAcao;
-use app\models\financas\service\sincroniza\CallScriptAcoes;
 use app\models\financas\service\sincroniza\SincronizaFactory;
 
 /**
@@ -49,10 +48,9 @@ class SincronizarController extends Controller
 
         if (Yii::$app->request->post('but') == 'atualiza_dados') {
             $this->atualiza();
-            
         }
     }
-    
+
 
     private function atualiza()
     {
@@ -71,7 +69,7 @@ class SincronizarController extends Controller
     private function executaBackup()
     {
         $dump = Yii::$app->params['back_up'] . '/' . date("YmdHis") . '.sql';
-        $cmd = 'sudo sshpass -p '.Yii::$app->params['acesso'].'  ssh  henrique@' . Yii::$app->params['ip_docker'] . ' "docker exec ' . Yii::$app->params['container_web'] . ' pg_dump -U postgres  investimento" > ' . $dump;
+        $cmd = 'sudo sshpass -p ' . Yii::$app->params['acesso'] . '  ssh  henrique@' . Yii::$app->params['ip_docker'] . ' "docker exec ' . Yii::$app->params['container_web'] . ' pg_dump -U postgres  investimento" > ' . $dump;
         $resp = shell_exec($cmd);
         if (empty($resp)) {
             if (file_exists($dump)) {
@@ -87,14 +85,17 @@ class SincronizarController extends Controller
         }
     }
 
-    public function actionAtualizaDados(){
+    public function actionAtualizaDados()
+    {
         $this->atualiza();
     }
 
     public function actionAtualizaAcoes()
     {
-        unlink($this->local_file);
-        $cmd = exec('python3.8 /var/www/invest/bot/acao.py > /dev/null 2>&1 &');
+        if (file_exists($this->local_file)) {
+            unlink($this->local_file);
+        }
+        $cmd = exec('python3 /var/www/bot/acao.py > /dev/null 2>&1 &');
         echo true;
     }
 
@@ -103,17 +104,16 @@ class SincronizarController extends Controller
         try {
             $total = AtualizaAcao::find()->count();
             $arquivo =  file_get_contents($this->local_file);
-            $ativoAtualizados = explode(';',$arquivo);
-            foreach($ativoAtualizados as $item){
-                $tipo  = explode('@#:',$item);
-                if(isset($tipo[0]) && $tipo[0]=='erro'){
-                    return $this->asJson(['ativosAtualizados'=>'erro','total'=>'erro']);
+            $ativoAtualizados = explode(';', $arquivo);
+            foreach ($ativoAtualizados as $item) {
+                $tipo  = explode('@#:', $item);
+                if (isset($tipo[0]) && $tipo[0] == 'erro') {
+                    return $this->asJson(['ativosAtualizados' => 'erro', 'total' => 'erro']);
                 }
             }
-            return $this->asJson(['ativosAtualizados'=>(count($ativoAtualizados)-1),'total'=>($total+1)]);
+            return $this->asJson(['ativosAtualizados' => (count($ativoAtualizados) - 1), 'total' => ($total + 1)]);
         } catch (\Exception $e) {
-            return $this->asJson(['ativosAtualizados'=>0,'total'=>0]);
+            return $this->asJson(['ativosAtualizados' => 0, 'total' => 0]);
         }
-        
     }
 }

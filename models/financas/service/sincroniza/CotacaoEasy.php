@@ -14,8 +14,6 @@ use app\lib\CajuiHelper;
 use yii\base\UserException;
 use app\models\financas\itensAtivo;
 use app\models\financas\Operacao;
-use app\models\financas\ItensitensAtivo;
-use app\lib\componentes\FabricaNotificacao;
 use app\models\financas\service\sincroniza\OperacoesAbstract;
 use app\models\financas\service\sincroniza\ComponenteOperacoes;
 

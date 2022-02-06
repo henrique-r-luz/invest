@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
-                'toolbar'=>'padraoCajui',
+                'toolbar' => 'padraoCajui',
                 'boxTitle' => $this->title,
                 'columns' => [
 
@@ -36,10 +36,16 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         'tipo_arquivo:ntext',
                         [
-                                'label'=>'Operações criadas',
-                                'attribute'=>'lista_operacoes_criadas_json',
+                                'label' => 'Operações criadas',
+                                'attribute' => 'lista_operacoes_criadas_json',
                         ],
-
+                        [
+                                'attribute' => 'data',
+                                'value' => function ($model) {
+                                        $date = date_create($model->data);
+                                        return date_format($date, 'd/m/Y H:i:s');
+                                },
+                        ],
                         ['class' => 'app\lib\grid\ActionColumn'],
                 ],
         ]); ?>

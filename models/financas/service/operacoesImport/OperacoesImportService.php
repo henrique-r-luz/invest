@@ -6,6 +6,7 @@ use Yii;
 use app\lib\CajuiHelper;
 use yii\web\UploadedFile;
 use app\models\financas\OperacoesImport;
+use Throwable;
 
 /**
  * Define o serviço para os trabalhos de operações de importação de dados 
@@ -44,14 +45,13 @@ class OperacoesImportService
             $transaction = Yii::$app->db->beginTransaction();
             
             $this->operacoesImport->arquivo = UploadedFile::getInstance($this->operacoesImport, 'arquivo');
-            
+            $this->operacoesImport->data = date("Y-m-d H:i:s");
             if (!$this->operacoesImport->saveUpload()) {
                 $transaction->rollBack();
                 return false;
             }
             $acaoImport = OperacoesImportFactory::getObjeto($this->operacoesImport);
             $acaoImport->atualiza();
-            $acaoImport->getJson();
             $this->operacoesImport->refresh();
             $this->operacoesImport->lista_operacoes_criadas_json = $acaoImport->getJson();
             if (!$this->operacoesImport->save(false)) {
@@ -60,7 +60,7 @@ class OperacoesImportService
             }
             $transaction->commit();
             return true;
-        } catch (\Exception $e) {
+        } catch (Throwable $e) {
             $transaction->rollBack();
             if (!OperacoesImport::find()->where(['hash_nome' => $this->operacoesImport->hash_nome])->exists()) {
                 $this->operacoesImport->removeArquivo();

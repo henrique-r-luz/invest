@@ -46,7 +46,7 @@ class OperacoesImport extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['investidor_id', 'tipo_arquivo', 'arquivo'], 'required'],
+            [['investidor_id', 'tipo_arquivo', 'arquivo','data'], 'required'],
             [['investidor_id'], 'default', 'value' => null],
             [['investidor_id'], 'integer'],
             [['hash_nome', 'investidor_id'], 'unique', 'targetAttribute' => ['investidor_id','hash_nome'],'message'=>'O arquivo já existe na base de dados. '],

@@ -14,13 +14,14 @@ from selenium.webdriver.common.by import By
 # filePath = '~/NetBeansProjects/dados/';
 logPath = "/var/www/dados/atualiza_acao.txt"
 dir = "/var/www/dados"
+webServer = 'nginx'
 
 
 def getDados():
 
         if (os.path.exists(logPath)):
             os.remove(logPath);
-        url = "http://localhost/index.php/financas/atualiza-acao/url";
+        url = "http://"+webServer+"/index.php/financas/atualiza-acao/url";
         response = json.loads(requests.get(url).text);
         executa(response);
         print(1);

@@ -9,12 +9,8 @@
 namespace app\models\financas\service\operacoesImport;
 
 use Yii;
-use app\lib\CajuiHelper;
-use yii\base\UserException;
 use Smalot\PdfParser\Parser;
-use app\models\financas\Ativo;
-use app\models\financas\Operacao;
-use app\models\financas\ItensAtivo;
+use app\lib\TipoArquivoUpload;
 use app\models\financas\OperacoesImport;
 use app\models\financas\service\operacoesImport\OperacoesImportHelp;
 use app\models\financas\service\operacoesImport\OperacoesImportAbstract;
@@ -24,19 +20,23 @@ use app\models\financas\service\operacoesImport\OperacoesImportAbstract;
  *
  * @author henrique
  */
-class OperacaoInter extends OperacoesImportAbstract
+class OperacaoInterSicroniza extends OperacoesImportAbstract
 {
 
     private $valorCdbBruto;
     private $valorCdbLiquido;
     private $cdbBancoInterId = 40;
-    private $erros;
 
     //put your code here
     protected function getDados()
     {
+        $objImportado =   OperacoesImport::find()
+                          ->where(['tipo_arquivo'=>TipoArquivoUpload::INTER])
+                          ->orderBy(['data'=>SORT_DESC])
+                          ->one();
+        $this->operacoesImport = $objImportado;
         $parser = new Parser();
-        $filePath = Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $this->operacoesImport->hash_nome . '.' . $this->operacoesImport->extensao;
+        $filePath = Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $objImportado->hash_nome . '.' . $objImportado->extensao;
         if (!file_exists($filePath)) {
             throw new \Exception("O arquivo envado não foi salvo no servidor. ");
         }

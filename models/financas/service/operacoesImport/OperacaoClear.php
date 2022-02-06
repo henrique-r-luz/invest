@@ -4,11 +4,8 @@ namespace app\models\financas\service\operacoesImport;
 
 use Yii;
 use app\lib\CajuiHelper;
-use yii\base\UserException;
 use app\models\financas\Operacao;
-use app\models\financas\ItensAtivo;
 use app\models\financas\OperacoesImport;
-use app\models\financas\service\OperacaoService;
 use app\models\financas\service\sincroniza\ComponenteOperacoes;
 
 
@@ -37,10 +34,10 @@ class OperacaoClear extends OperacoesImportAbstract
             foreach ($this->arquivo as $id => $linha) {
                 $this->linha = $linha;
                 $codigo = substr($linha[1], 0, 5); //str_replace("F", "", $linha[1]);
-                $this->itensAtivo = $this->getIntemAtivo($codigo); 
+                $this->itensAtivo = OperacoesImportHelp::getIntemAtivo(['codigo' => $codigo, 'investidor' => $this->operacoesImport->investidor_id]); 
                 if (empty($this->itensAtivo)) {
                     $codigo = $linha[1]; //str_replace("F", "", $linha[1]);
-                    $this->itensAtivo = $this->getIntemAtivo($codigo);
+                    $this->itensAtivo = OperacoesImportHelp::getIntemAtivo(['codigo' => $codigo, 'investidor' => $this->operacoesImport->investidor_id]);
                     if (empty($this->itensAtivo)) {
                         continue;
                     }
@@ -55,7 +52,13 @@ class OperacaoClear extends OperacoesImportAbstract
 
                 if ($this->itensAtivo != null && ($linha[15] == '' || $linha[15] == null)) {
 
-                    $operacaoService = $this->insereOperacao();
+                    $operacaoService =  OperacoesImportHelp::insereOperacao([
+                        'itensAtivo_id' => $this->itensAtivo->id,
+                        'quantidade' => $this->linha[8],
+                        'data' => $this->dataAcao,
+                        'valor' => $this->linha[10] * $this->linha[8],
+                        'operacao' => $this->linha[3]
+                    ]);;
                     if (!$operacaoService->acaoSalvaOperacao()) {
                         $erros = CajuiHelper::processaErros($operacaoService->getOpereacao()->getErrors()) . '</br>';
                         throw new \Exception($erros);
@@ -67,31 +70,6 @@ class OperacaoClear extends OperacoesImportAbstract
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
-    }
-
-
-    private function getIntemAtivo($codigo){
-        return ItensAtivo::find()
-        ->joinWith(['ativos'])
-        ->where(['ativo.codigo' => $codigo])
-        ->andWhere(['investidor_id' => $this->operacoesImport->investidor_id])
-        ->one();
-    }
-
-
-    private function insereOperacao(){
-        $operacao = new Operacao();
-        $operacao->itens_ativos_id = $this->itensAtivo->id;
-        $operacao->quantidade = $this->linha[8];
-        $operacao->data = $this->dataAcao;
-        $operacao->valor = $this->linha[10] * $this->linha[8];
-        if (trim(strtolower($this->linha[3])) == 'venda') {
-            $operacao->tipo = 0;
-        } else {
-            $operacao->tipo = 1;
-        }
-        $operacaoService = new OperacaoService($operacao);
-        return $operacaoService;
     }
 
     public function delete()

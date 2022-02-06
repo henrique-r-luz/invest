@@ -8,15 +8,26 @@
 
 namespace app\models\financas\service\sincroniza;
 
+use app\models\financas\service\sincroniza\CotacaoEasy;
+use app\models\financas\service\sincroniza\CotacoesAcao;
+use app\models\financas\service\sincroniza\CotacaoCambio;
+use app\models\financas\service\sincroniza\OperacaoClear;
+use app\models\financas\service\sincroniza\CotacoesAcaoApi;
+use app\models\financas\service\sincroniza\CotacaoCambioApi;
+use app\models\financas\service\sincroniza\InseriEmpresasBolsa;
+use app\models\financas\service\operacoesImport\OperacaoInterSicroniza;
+
 /**
  * Description of Sincronizafactory
  *
  * @author henrique
  */
-class SincronizaFactory {
+class SincronizaFactory
+{
 
     //put your code here
-    public static function sincroniza($tipo) {
+    public static function sincroniza($tipo)
+    {
 
         switch ($tipo) {
             case 'cambio':
@@ -25,7 +36,7 @@ class SincronizaFactory {
                 return self::getCambioApi();
             case 'acao':
                 return self::getAcao();
-             case 'acaoApi':
+            case 'acaoApi':
                 return self::getAcaoApi();
             case 'easy':
                 return self::getEasy();
@@ -38,37 +49,44 @@ class SincronizaFactory {
         }
     }
 
-    private static function getAcao() {
+    private static function getAcao()
+    {
         return new CotacoesAcao();
     }
-    
-    private static function getAcaoApi() {
+
+    private static function getAcaoApi()
+    {
         return new CotacoesAcaoApi();
     }
 
-    private static function getCambio() {
+    private static function getCambio()
+    {
         return new CotacaoCambio();
     }
-    
-    private static function getCambioApi() {
+
+    private static function getCambioApi()
+    {
         return new CotacaoCambioApi();
     }
 
 
-    private static function getEasy() {
+    private static function getEasy()
+    {
         return new CotacaoEasy();
     }
 
-    private static function getEmpresa() {
+    private static function getEmpresa()
+    {
         return new InseriEmpresasBolsa();
     }
 
-    private static function getOperacaoClear() {
+    private static function getOperacaoClear()
+    {
         return new OperacaoClear();
     }
 
-    private static function getBancoInter() {
-        return new BancoInter();
+    private static function getBancoInter()
+    {
+        return new OperacaoInterSicroniza();
     }
-
 }

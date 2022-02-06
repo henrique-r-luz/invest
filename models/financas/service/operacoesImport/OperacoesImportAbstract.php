@@ -18,7 +18,7 @@ abstract class OperacoesImportAbstract {
     protected $operacoesImport;
     protected $dadosJson;
 
-    function __construct($operacoesImport) {
+    function __construct($operacoesImport=null) {
        $this->operacoesImport =  $operacoesImport;
         $this->getDados();
     }

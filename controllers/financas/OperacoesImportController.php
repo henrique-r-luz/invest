@@ -3,10 +3,8 @@
 namespace app\controllers\financas;
 
 use Yii;
-use yii\base\Response;
 use yii\web\Controller;
 use app\lib\CajuiHelper;
-use yii\web\UploadedFile;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use app\models\financas\OperacoesImport;
@@ -68,7 +66,6 @@ class OperacoesImportController extends Controller
      */
     public function actionCreate()
     {
-        //$model = new OperacoesImport();
         try {
             $operacoesImportService = new OperacoesImportService();
 
@@ -87,8 +84,7 @@ class OperacoesImportController extends Controller
                 'model' => $operacoesImportService->getModel(),
             ]);
         } catch (\Exception $e) {
-           
-            Yii::$app->session->setFlash('danger', 'Erro ao salvar operação import! ');
+            Yii::$app->session->setFlash('danger', 'Erro ao salvar operação import! '.$e->getMessage());
             $operacoesImportService->getModel()->arquivo = null;
             return $this->render('create', [
                 'model' => $operacoesImportService->getModel(),

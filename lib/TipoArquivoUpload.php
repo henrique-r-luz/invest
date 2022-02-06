@@ -23,6 +23,7 @@ class TipoArquivoUpload {
     const CLEAR = 'Operações Clear';
     const AVENUE = 'Operações Avenue';
     const INTER = 'Operações Inter';
+    const NU = 'NU';
     
     /**
      * Retorna todos os enuns em um array
@@ -33,6 +34,7 @@ class TipoArquivoUpload {
             self::CLEAR => self::CLEAR,
             self::AVENUE => self::AVENUE,
             self::INTER => self::INTER,
+            self::NU => self::NU,
         ];
     }
 

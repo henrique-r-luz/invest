@@ -26,6 +26,7 @@ class m211229_141830_upload_operacao extends Migration
             extensao text not null,
             tipo_arquivo text not null,
             hash_nome text not null,
+            data timestamp without time zone NOT NULL,
             lista_operacoes_criadas_json text -- operações que serão criadas pelo arquivo
         );");
 
