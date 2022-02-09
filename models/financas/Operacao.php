@@ -118,12 +118,12 @@ class Operacao extends ActiveRecord {
 
     public static function valorDeCompra($itens_ativos_id) {
 
-        return max(0, round(self::queryDadosAtivos($itens_ativos_id)[0]['valor_compra'], 2));
+        return self::queryDadosAtivos($itens_ativos_id)[0]['valor_compra'];
     }
     
     public static function valorDeCompraBancoInter($itens_ativos_id) {
 
-        return max(0, round(self::queryDadosAtivosBancoInter($itens_ativos_id)[0]['valor_compra'], 2));
+        return self::queryDadosAtivosBancoInter($itens_ativos_id)[0]['valor_compra'];
     }
 
     public static function  queryDadosAtivos($itens_ativos_id) {

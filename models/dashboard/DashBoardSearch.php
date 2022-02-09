@@ -84,8 +84,8 @@ class DashBoardSearch
                 $dados = (new \yii\db\Query())
                         ->from(['ativo' => $ativos, 'valorTotal' => $valorTotal])
                         ->all();
-                /*echo $dados->createCommand()->getRawSql();                
-                exit();*/        
+                //echo $dados->createCommand()->getRawSql();                
+                //exit();       
                 return $dados;
         }
 }

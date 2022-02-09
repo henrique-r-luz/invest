@@ -56,7 +56,6 @@ class SincronizarController extends Controller
     {
         SincronizaFactory::sincroniza('acao')->atualiza();
         SincronizaFactory::sincroniza('easy')->atualiza();
-        //SincronizaFactory::sincroniza('operacaoClear')->atualiza();
         SincronizaFactory::sincroniza('banco_inter')->atualiza();
         Yii::$app->session->setFlash('success', 'Dados atualizados com sucesso!');
         return $this->redirect('/index.php');
