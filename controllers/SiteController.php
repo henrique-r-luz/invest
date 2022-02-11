@@ -80,9 +80,9 @@ class SiteController extends Controller {
         $valorCompra = 0;
         $proventos = $formatter->asCurrency(Proventos::find()->sum('valor'));
         if (!empty($dados)) {
-            $patrimonioBruto = $formatter->asCurrency($dados[0]['valor_total']);
-            $valorCompra = $formatter->asCurrency($dados[0]['valor_compra']);
-            $lucro = $formatter->asCurrency($dados[0]['valor_total'] - $dados[0]['valor_compra']);
+            $patrimonioBruto = $formatter->asCurrency(round($dados[0]['valor_total'],5));
+            $valorCompra = $formatter->asCurrency(round($dados[0]['valor_compra'],5));
+            $lucro = $formatter->asCurrency(round(($dados[0]['valor_total'] - $dados[0]['valor_compra']),5));
         }
 
         return $this->render('index', [

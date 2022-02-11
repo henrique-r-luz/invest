@@ -12,6 +12,7 @@ use Yii;
 use yii\web\Controller;
 use app\lib\componentes\ExecutaBack;
 use app\models\financas\AtualizaAcao;
+use app\models\financas\service\sincroniza\Sincroniza;
 use app\models\financas\service\sincroniza\SincronizaFactory;
 
 /**
@@ -54,9 +55,7 @@ class SincronizarController extends Controller
 
     private function atualiza()
     {
-        SincronizaFactory::sincroniza('acao')->atualiza();
-        SincronizaFactory::sincroniza('easy')->atualiza();
-        SincronizaFactory::sincroniza('banco_inter')->atualiza();
+        Sincroniza::atualizaAtivos();
         Yii::$app->session->setFlash('success', 'Dados atualizados com sucesso!');
         return $this->redirect('/index.php');
         //return $this->redirect('/index.php');

@@ -14,10 +14,12 @@
 
 namespace app\models\financas\service\operacoesAtivos;
 
-use app\lib\CajuiHelper;
 use Yii;
 use \Exception;
+use app\lib\CajuiHelper;
+use app\models\financas\service\sincroniza\Sincroniza;
 use app\models\financas\service\sincroniza\SincronizaFactory;
+use app\models\financas\service\operacoesAtivos\AlteraAtivoOperacao;
 
 //use app\models\financas\Operacao;
 
@@ -114,11 +116,7 @@ class OperacaoService {
 
 
     private function sicronizaDadosAtivo() {
-       
-        SincronizaFactory::sincroniza('easy')->atualiza();
-        SincronizaFactory::sincroniza('acao')->atualiza();
-        SincronizaFactory::sincroniza('banco_inter')->atualiza();
-       
+        Sincroniza::atualizaAtivos();
     }
 
     public function getOpereacao() {

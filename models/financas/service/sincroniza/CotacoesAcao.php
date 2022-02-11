@@ -43,15 +43,13 @@ class CotacoesAcao extends OperacoesAbstract
                 $valor = str_replace('.', '', $acoes['valor']);
                 $valor = str_replace(',', '.', $valor);
                 $valor = Ativo::valorCambio($itensAtivo->ativos, $valor);
+                $valor = $valor;
 
                 $lucro = ($valor * $itensAtivo->quantidade);
                 $itensAtivo->valor_bruto = $lucro;
                 $itensAtivo->valor_liquido = $lucro;
                 $valorCompra = Ativo::valorCambio($itensAtivo->ativos, Operacao::valorDeCompra($itensAtivo->id));
                 $itensAtivo->valor_compra = $valorCompra;
-                /*if($acoes['id']==29){
-                    echo $acoes['valor'].' '.$valor.' '.$lucro.' '.$itensAtivo->quantidade; 
-                }*/
 
                 if (!$itensAtivo->save()) {
                     $this->erros .= CajuiHelper::processaErros($itensAtivo->getErrors()) . '</br>';
@@ -61,11 +59,7 @@ class CotacoesAcao extends OperacoesAbstract
         }
         if ($contErro != 0) {
             $msg = 'A Cotação açoes não foram atualizados !</br>' . $this->erros;
-            /*FabricaNotificacao::create('rank', ['ok' => false,
-                    'titulo' => 'Cotação ação falhou!',
-                    'mensagem' => $msg,
-                    'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();*/
-            throw new UserException($msg);
+            throw new Exception($msg);
         }
     }
 
