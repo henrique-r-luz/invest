@@ -12,7 +12,7 @@
  * @author henrique
  */
 
-namespace app\models\financas\service;
+namespace app\models\financas\service\operacoesAtivos;
 
 use app\lib\CajuiHelper;
 use Yii;

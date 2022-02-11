@@ -2,16 +2,15 @@
 
 namespace app\controllers\financas;
 
-use app\lib\CajuiHelper;
-use app\models\financas\Operacao;
-use app\models\financas\OperacaoSearch;
 use Yii;
-use yii\filters\VerbFilter;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-
-use \app\models\financas\service\OperacaoService;
 use Exception;
+use yii\web\Controller;
+use app\lib\CajuiHelper;
+use yii\filters\VerbFilter;
+use app\models\financas\Operacao;
+use yii\web\NotFoundHttpException;
+use app\models\financas\OperacaoSearch;
+use app\models\financas\service\operacoesAtivos\OperacaoService;
 
 /**
  * OperacaoController implements the CRUD actions for Operacao model.

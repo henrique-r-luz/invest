@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace app\models\financas\service;
+namespace app\models\financas\service\operacoesAtivos;
 
 
 use yii\db\Query;
@@ -35,8 +35,10 @@ class AlteraAtivoOperacao {
         $this->itens_ativos_id = $itens_ativos_id;
         $itensAtivo = ItensAtivo::findOne($itens_ativos_id);
         
-        $valoresAtivo = Operacao::queryDadosAtivos($itens_ativos_id);
-        $itensAtivo->quantidade = max(0, $valoresAtivo[0]['quantidade']);
+        $dadosOperacoesAtivos = new DadosOperacoesAtivos();
+        $dadosOperacoesAtivos->setItens_ativos_id($itens_ativos_id);
+        $dados = $dadosOperacoesAtivos->geraQuery();
+        $itensAtivo->quantidade = max(0, $dados[0]['quantidade']);
         if ($itensAtivo->save()) {
             return true;
         } else {
