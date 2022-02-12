@@ -39,7 +39,7 @@ $impostoRenda = 1;
             [
                 'attribute' => 'valor_compra',
                 'value' => function ($model) {
-                    return $model->valor_compra; //app\models\financas\Ativo::valorCambio($model, $model->valor_compra);
+                    return round($model->valor_compra,4); //app\models\financas\Ativo::valorCambio($model, $model->valor_compra);
                 },
                 'format' => 'currency',
                 'pageSummary' => true,
@@ -66,8 +66,6 @@ $impostoRenda = 1;
                     // print_r($dataProvider->models);
                     $objetos = $dataProvider->models;
                     $lucro = 0;
-                    $valorLiquidoAcao = 0;
-                    $valorCompraAcao = 0;
                     $lucroAcao = 0;
                     foreach ($objetos as $ativo) {
                         //renda fixa

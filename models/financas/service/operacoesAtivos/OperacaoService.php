@@ -21,8 +21,12 @@ use app\models\financas\service\sincroniza\Sincroniza;
 use app\models\financas\service\sincroniza\SincronizaFactory;
 use app\models\financas\service\operacoesAtivos\AlteraAtivoOperacao;
 
-//use app\models\financas\Operacao;
 
+/**
+ * classe que gerencia os seviços de oprações
+ *
+ * @author henrique.luz <henrique_r_luz@yahoo.com.br>
+ */
 class OperacaoService {
 
     //put your code here

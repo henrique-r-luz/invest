@@ -26,17 +26,21 @@ class OperacaoInterSicroniza extends OperacoesImportAbstract
     private $valorCdbBruto;
     private $valorCdbLiquido;
     private $cdbBancoInterId = 40;
+    private $objImportado;
 
     //put your code here
     protected function getDados()
     {
-        $objImportado =   OperacoesImport::find()
-                          ->where(['tipo_arquivo'=>TipoArquivoUpload::INTER])
-                          ->orderBy(['data'=>SORT_DESC])
-                          ->one();
-        $this->operacoesImport = $objImportado;
+        $this->objImportado =   OperacoesImport::find()
+            ->where(['tipo_arquivo' => TipoArquivoUpload::INTER])
+            ->orderBy(['data' => SORT_DESC])
+            ->one();
+        if (empty($this->objImportado)) {
+            return;
+        }
+        $this->operacoesImport = $this->objImportado;
         $parser = new Parser();
-        $filePath = Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $objImportado->hash_nome . '.' . $objImportado->extensao;
+        $filePath = Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $this->objImportado->hash_nome . '.' . $this->objImportado->extensao;
         if (!file_exists($filePath)) {
             throw new \Exception("O arquivo envado não foi salvo no servidor. ");
         }
@@ -53,10 +57,15 @@ class OperacaoInterSicroniza extends OperacoesImportAbstract
 
     public function atualiza()
     {
+        if (empty($this->objImportado)) {
+            return;
+        }
         OperacoesImportHelp::AtualizaInter(
-            [ 'cdbBancoInterId' => $this->cdbBancoInterId,
-                  'valorCdbBruto' => $this->valorCdbBruto,
-                  'valorCdbLiquido' => $this->valorCdbLiquido]
+            [
+                'cdbBancoInterId' => $this->cdbBancoInterId,
+                'valorCdbBruto' => $this->valorCdbBruto,
+                'valorCdbLiquido' => $this->valorCdbLiquido
+            ]
         );
     }
 

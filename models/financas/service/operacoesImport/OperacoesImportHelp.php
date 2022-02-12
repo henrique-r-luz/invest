@@ -8,7 +8,8 @@ use yii\base\UserException;
 use app\models\financas\Ativo;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
-use app\models\financas\service\OperacaoService;
+use app\models\financas\service\operacoesAtivos\OperacaoService;
+
 
 class OperacoesImportHelp
 {

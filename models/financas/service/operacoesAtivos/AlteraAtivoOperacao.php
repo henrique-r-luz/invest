@@ -22,7 +22,6 @@ use app\models\financas\ItensAtivo;
  */
 class AlteraAtivoOperacao {
     
-    private $itens_ativos_id;
     private $erro;
     
      /**
