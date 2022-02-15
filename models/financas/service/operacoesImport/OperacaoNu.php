@@ -6,43 +6,64 @@
  * and open the template in the editor.
  */
 
-namespace app\models\financas\service\sincroniza;
+namespace app\models\financas\service\operacoesImport;
 
 use Yii;
 use app\lib\Categoria;
 use app\lib\CajuiHelper;
 use yii\base\UserException;
-use app\models\financas\itensAtivo;
+use app\lib\TipoArquivoUpload;
 use app\models\financas\Operacao;
-use app\models\financas\service\sincroniza\OperacoesAbstract;
+use app\models\financas\ItensAtivo;
+use app\models\financas\OperacoesImport;
 use app\models\financas\service\sincroniza\ComponenteOperacoes;
+use app\models\financas\service\operacoesImport\OperacoesImportHelp;
+use app\models\financas\service\operacoesImport\OperacoesImportAbstract;
 
 /**
  * Description of CotacaoEasy
  *
  * @author henrique
  */
-class CotacaoEasy extends OperacoesAbstract
+class OperacaoNu extends OperacoesImportAbstract
 {
 
     private $csv;
 
     //put your code here
     protected function getDados()
+
     {
-        $file = Yii::$app->params['bot'] . '/Exportar_custodia.csv';
-        if (!file_exists($file)) {
-            //return [true, 'sucesso'];
+        if ($this->operacoesImport == null) {
+            $objImportado =   OperacoesImport::find()
+                ->where(['tipo_arquivo' => TipoArquivoUpload::NU])
+                ->orderBy(['data' => SORT_DESC])
+                ->one();
+            if (empty($objImportado)) {
+                return;
+            }
+            $this->operacoesImport = $objImportado;
         }
-        $this->csv = array_map(function ($v) use ($file) {
-            return str_getcsv($v, ComponenteOperacoes::getFileDelimiter($file));
-        }, file($file));
+
+        $filePath = Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $this->operacoesImport->hash_nome . '.' . $this->operacoesImport->extensao;
+
+        if (!file_exists($filePath)) {
+            throw new \Exception("O arquivo envado não foi salvo no servidor. ");
+        }
+
+        $this->csv = array_map(function ($v) use ($filePath) {
+            return str_getcsv($v, ComponenteOperacoes::getFileDelimiter($filePath));
+        }, file($filePath));
         unset($this->csv[0]);
         unset($this->csv[1]);
     }
 
     public function atualiza()
     {
+
+        if (empty($this->operacoesImport)) {
+            return;
+        }
         $contErro = 0;
         $erros = '';
         foreach ($this->csv as $titulo) {
@@ -55,8 +76,9 @@ class CotacaoEasy extends OperacoesAbstract
                     $contErro++;
                     $erros .= ' o codigo do itensAtivo:' . $codigo . ' não existe</br>';
                 } else {
-                    $itensAtivo->valor_bruto = intval(str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[6]))));
-                    $itensAtivo->valor_liquido = intval(str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[7]))));
+                    
+                    $itensAtivo->valor_bruto = floatval(str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[6]))));
+                    $itensAtivo->valor_liquido = floatval(str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[7]))));
                     if ($itensAtivo->valor_compra <= 0 && $itensAtivo->quantidade > 0) {
                         $itensAtivo->valor_compra = $itensAtivo->valor_bruto;
                     }
@@ -71,10 +93,6 @@ class CotacaoEasy extends OperacoesAbstract
         $contErro += $cont;
         $erros .= $msg;
         if ($contErro != 0) {
-            /* FabricaNotificacao::create('rank', ['ok' => false,
-                'titulo' => 'Renda fixa Easynveste falhou!',
-                'mensagem' => 'Renda fixa Easynveste não foi atualizados !</br>' . $erros,
-                'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();*/
             throw new UserException($erros);
         }
     }
@@ -99,5 +117,10 @@ class CotacaoEasy extends OperacoesAbstract
             }
         }
         return [0, $erros];
+    }
+
+    public  function delete()
+    {
+        OperacoesImportHelp::delete($this->operacoesImport);
     }
 }

@@ -22,6 +22,7 @@ use app\models\financas\service\operacoesImport\OperacoesImportAbstract;
  */
 class OperacaoInterSicroniza extends OperacoesImportAbstract
 {
+    use OperacaoInterTrait;
 
     private $valorCdbBruto;
     private $valorCdbLiquido;
@@ -39,20 +40,12 @@ class OperacaoInterSicroniza extends OperacoesImportAbstract
             return;
         }
         $this->operacoesImport = $this->objImportado;
-        $parser = new Parser();
         $filePath = Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $this->objImportado->hash_nome . '.' . $this->objImportado->extensao;
         if (!file_exists($filePath)) {
             throw new \Exception("O arquivo envado não foi salvo no servidor. ");
         }
-        $pdf = $parser->parseFile($filePath);
-        $text = $pdf->getText();
-        $valores = $this->between('TOTAL', 'POUPANÇA', $text);
-        $valores = preg_replace('/[ ]{2,}|[\t]/', '@', trim($valores));
-        $valores = explode('@', trim($valores));
-        $this->valorCdbBruto = str_replace('.', '', $valores[count($valores) - 3]);
-        $this->valorCdbBruto = str_replace(',', '.', $this->valorCdbBruto);
-        $this->valorCdbLiquido = str_replace('.', '', $valores[count($valores) - 1]);
-        $this->valorCdbLiquido = str_replace(',', '.', $this->valorCdbLiquido);
+        $this->atualizaValores($filePath);
+        
     }
 
     public function atualiza()
@@ -69,24 +62,4 @@ class OperacaoInterSicroniza extends OperacoesImportAbstract
         );
     }
 
-    function after($antes, $inthat)
-    {
-        if (!is_bool(strpos($inthat, $antes)))
-            return substr($inthat, strpos($inthat, $antes) + strlen($antes));
-    }
-
-    function before($antes, $inthat)
-    {
-        return substr($inthat, 0, strpos($inthat, $antes));
-    }
-
-    function between($antes, $that, $inthat)
-    {
-        return $this->before($that, $this->after($antes, $inthat));
-    }
-
-    public function delete()
-    {
-        OperacoesImportHelp::delete($this->operacoesImport);
-    }
 }
