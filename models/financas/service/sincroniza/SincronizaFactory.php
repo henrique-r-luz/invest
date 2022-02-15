@@ -8,10 +8,9 @@
 
 namespace app\models\financas\service\sincroniza;
 
-use app\models\financas\service\sincroniza\CotacaoEasy;
+use app\models\financas\service\operacoesImport\OperacaoNu;
 use app\models\financas\service\sincroniza\CotacoesAcao;
 use app\models\financas\service\sincroniza\CotacaoCambio;
-use app\models\financas\service\sincroniza\OperacaoClear;
 use app\models\financas\service\sincroniza\CotacoesAcaoApi;
 use app\models\financas\service\sincroniza\CotacaoCambioApi;
 use app\models\financas\service\sincroniza\InseriEmpresasBolsa;
@@ -42,8 +41,6 @@ class SincronizaFactory
                 return self::getEasy();
             case 'empresa':
                 return self::getEmpresa();
-            case 'operacaoClear':
-                return self::getOperacaoClear();
             case 'banco_inter':
                 return self::getBancoInter();
         }
@@ -72,17 +69,12 @@ class SincronizaFactory
 
     private static function getEasy()
     {
-        return new CotacaoEasy();
+        return new OperacaoNu(null);
     }
 
     private static function getEmpresa()
     {
         return new InseriEmpresasBolsa();
-    }
-
-    private static function getOperacaoClear()
-    {
-        return new OperacaoClear();
     }
 
     private static function getBancoInter()
