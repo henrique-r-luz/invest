@@ -67,7 +67,12 @@ class Ativo extends ActiveRecord {
             'pais' => 'País',
         ];
     }
-
+    /**
+     * Undocumented function
+     *
+     * @return void
+     * @author Henrique Luz
+     */
     public static function lucroPrejuizo() {
         $valorCompra = Ativo::find()
                 ->sum(['valor_compra']);

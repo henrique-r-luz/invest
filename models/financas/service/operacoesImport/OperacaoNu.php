@@ -79,6 +79,7 @@ class OperacaoNu extends OperacoesImportAbstract
                     
                     $itensAtivo->valor_bruto = floatval(str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[6]))));
                     $itensAtivo->valor_liquido = floatval(str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[7]))));
+                    $itensAtivo->valor_compra = floatval(str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[5]))));
                     if ($itensAtivo->valor_compra <= 0 && $itensAtivo->quantidade > 0) {
                         $itensAtivo->valor_compra = $itensAtivo->valor_bruto;
                     }

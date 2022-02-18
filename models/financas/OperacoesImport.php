@@ -30,7 +30,7 @@ class OperacoesImport extends \yii\db\ActiveRecord
         'png' => 'image',
         'jpg' => 'image',
         'jpeg' => 'image',
-         ''=>'text'
+        '' => 'text'
     ];
     /**
      * {@inheritdoc}
@@ -46,10 +46,10 @@ class OperacoesImport extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['investidor_id', 'tipo_arquivo', 'arquivo','data'], 'required'],
+            [['investidor_id', 'tipo_arquivo', 'arquivo', 'data'], 'required'],
             [['investidor_id'], 'default', 'value' => null],
             [['investidor_id'], 'integer'],
-            [['hash_nome', 'investidor_id'], 'unique', 'targetAttribute' => ['investidor_id','hash_nome'],'message'=>'O arquivo já existe na base de dados. '],
+            [['hash_nome', 'investidor_id'], 'unique', 'targetAttribute' => ['investidor_id', 'hash_nome'], 'message' => 'O arquivo já existe na base de dados. '],
             [['arquivo'], 'file', 'skipOnEmpty' => false],
             [['tipo_arquivo', 'lista_operacoes_criadas_json', 'hash_nome', 'extensao'], 'string'],
             [['investidor_id'], 'exist', 'skipOnError' => true, 'targetClass' => Investidor::className(), 'targetAttribute' => ['investidor_id' => 'id']],
@@ -128,6 +128,9 @@ class OperacoesImport extends \yii\db\ActiveRecord
                 return false;
             }
             $this->extensao = $this->arquivo->extension;
+            if(!file_exists(Yii::getAlias('@' . self::DIR))){
+                mkdir(Yii::getAlias('@' . self::DIR));
+            }
             if (!$this->arquivo->saveAs(Yii::getAlias('@' . self::DIR) . '/' . $this->hash_nome . '.' . $this->arquivo->extension)) {
                 $this->addError('arquivo', 'Arquivo de upload não foi gerado. ');
                 return false;
@@ -148,7 +151,7 @@ class OperacoesImport extends \yii\db\ActiveRecord
      */
     private function geraHashUpload()
     {
-        
+
         if (file_exists($this->arquivo->tempName)) {
             $this->hash_nome =  hash_file('sha3-512', $this->arquivo->tempName);
             return true;
@@ -177,7 +180,9 @@ class OperacoesImport extends \yii\db\ActiveRecord
     public function removeArquivo()
     {
         $arquivo = Yii::getAlias('@' . self::DIR) . '/' . $this->hash_nome . '.' . $this->extensao;
-        unlink($arquivo);
+        if (file_exists($arquivo)) {
+            unlink($arquivo);
+        }
         return (!file_exists($arquivo));
     }
 }

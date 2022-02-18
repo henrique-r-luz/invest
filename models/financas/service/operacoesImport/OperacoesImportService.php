@@ -42,8 +42,8 @@ class OperacoesImportService
     public function save()
     {
         try {
+
             $transaction = Yii::$app->db->beginTransaction();
-            
             $this->operacoesImport->arquivo = UploadedFile::getInstance($this->operacoesImport, 'arquivo');
             $this->operacoesImport->data = date("Y-m-d H:i:s");
             if (!$this->operacoesImport->saveUpload()) {

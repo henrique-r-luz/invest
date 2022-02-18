@@ -61,7 +61,7 @@ class DadosOperacoesAtivos
     private function quantidadeDesdobramentoMenos()
     {
         return Operacao::find()
-            ->select(['sum(quantidade) as quantidade_desdobramento_menos'])
+            ->select(['sum(quantidade) as quantidade_desdobramento_menos','sum(valor) as valor_desdobramento_menos'])
             ->andWhere(['itens_ativos_id' => $this->itens_ativos_id])
             ->andWhere(['tipo' =>  Operacao::getTipoOperacaoId(Operacao::DESDOBRAMENTO_MENOS)]);
     }
@@ -75,7 +75,7 @@ class DadosOperacoesAtivos
     private function quantidadeDesdobramentoMais()
     {
         return Operacao::find()
-            ->select(['sum(quantidade) as quantidade_desdobramento_mais'])
+            ->select(['sum(quantidade) as quantidade_desdobramento_mais','sum(valor) as valor_desdobramento_mais'])
             ->andWhere(['itens_ativos_id' => $this->itens_ativos_id])
             ->andWhere(['tipo' => Operacao::getTipoOperacaoId(Operacao::DESDOBRAMENTO_MAIS)]);
     }
@@ -91,10 +91,12 @@ class DadosOperacoesAtivos
 
     private function valorMedioAcoes()
     {
-        return 'coalesce((valor_compra/(quantidade_compra '
-            . '- coalesce(quantidade_desdobramento_menos,0)'
-            . '+ coalesce(quantidade_desdobramento_mais,0)'
-            . ')),0)';
+        return '(coalesce(valor_compra,0)-coalesce(valor_venda,0))/'
+        .'(coalesce(quantidade_compra,0)  '
+        . '- coalesce(quantidade_venda,0) '
+        . '- coalesce(quantidade_desdobramento_menos,0)'
+        . '+ coalesce(quantidade_desdobramento_mais,0)'
+        . ')';
     }
 
     /**

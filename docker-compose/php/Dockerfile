@@ -4,7 +4,6 @@ FROM php:8.0.5-fpm
 ARG user
 ARG uid
 
-RUN add-apt-repository ppa:deadsnakes/ppa -y
 # Instalando as dependências
 RUN apt-get update && apt-get install -y \
     git \
@@ -26,6 +25,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     software-properties-common \
     python3-pip
+    
+ 
 
 #Pacotes libreoffice para converter pdf
 RUN apt-get install -y libreoffice-writer --no-install-recommends --no-install-suggests
@@ -43,8 +44,6 @@ RUN curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/5.
     && mv phpredis-5.3.2 /usr/src/php/ext/redis \
     && docker-php-ext-install redis
 
-RUN pecl install xdebug-3.0.3 && \
-    docker-php-ext-enable xdebug
 
 ARG IMAGICK_LAST_COMMIT='448c1cd0d58ba2838b9b6dff71c9b7e70a401b90'
 
