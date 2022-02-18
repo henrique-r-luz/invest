@@ -23,6 +23,7 @@ trait OperacaoInterTrait
         $this->valorCdbBruto = str_replace(',', '.', $this->valorCdbBruto);
         $this->valorCdbLiquido = str_replace('.', '', $valores[count($valores) - 1]);
         $this->valorCdbLiquido = str_replace(',', '.', $this->valorCdbLiquido);
+        $this->valorCompra = floatval(str_replace(',', '.',str_replace('.', '',$valores[0]))) - floatval(str_replace(',', '.',str_replace('.', '',$valores[3])));
     }
 
 

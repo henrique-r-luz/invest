@@ -104,8 +104,8 @@ class OperacoesImportHelp
         $cdbBancoInter = ItensAtivo::findOne($param['cdbBancoInterId']);
         $cdbBancoInter->valor_bruto = $param['valorCdbBruto'];
         $cdbBancoInter->valor_liquido = $param['valorCdbLiquido'];
-        $valorCompra = Ativo::valorCambio($cdbBancoInter->ativos, Operacao::valorDeCompraBancoInter($param['cdbBancoInterId']));
-        $cdbBancoInter->valor_compra = $valorCompra;
+       // $valorCompra = Ativo::valorCambio($cdbBancoInter->ativos, Operacao::valorDeCompraBancoInter($param['cdbBancoInterId']));
+        $cdbBancoInter->valor_compra = $param['valorCompra'];
         if (!$cdbBancoInter->save()) {
             $erros = CajuiHelper::processaErros($cdbBancoInter->getErrors()) . '</br>';
             $msg = 'A Atualização CDB banco Inter falhou!</br>' . $erros;

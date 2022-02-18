@@ -31,6 +31,7 @@ class OperacaoClear extends OperacoesImportAbstract
     public  function atualiza()
     {
         try {
+            
             foreach ($this->arquivo as $id => $linha) {
                 $this->linha = $linha;
                 $codigo = substr($linha[1], 0, 5); //str_replace("F", "", $linha[1]);
@@ -50,7 +51,7 @@ class OperacaoClear extends OperacoesImportAbstract
                     continue;
                 }
 
-                if ($this->itensAtivo != null && ($linha[15] == '' || $linha[15] == null)) {
+                if ($this->itensAtivo != null) {
 
                     $operacaoService =  OperacoesImportHelp::insereOperacao([
                         'itensAtivo_id' => $this->itensAtivo->id,

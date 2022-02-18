@@ -8,11 +8,12 @@
 
 namespace app\models\financas\service\sincroniza;
 
-use app\models\financas\service\operacoesImport\OperacaoNu;
 use app\models\financas\service\sincroniza\CotacoesAcao;
 use app\models\financas\service\sincroniza\CotacaoCambio;
+use app\models\financas\service\operacoesImport\OperacaoNu;
 use app\models\financas\service\sincroniza\CotacoesAcaoApi;
 use app\models\financas\service\sincroniza\CotacaoCambioApi;
+use app\models\financas\service\operacoesImport\OperacaoInter;
 use app\models\financas\service\sincroniza\InseriEmpresasBolsa;
 use app\models\financas\service\operacoesImport\OperacaoInterSicroniza;
 
@@ -79,6 +80,6 @@ class SincronizaFactory
 
     private static function getBancoInter()
     {
-        return new OperacaoInterSicroniza();
+        return new OperacaoInter(null);
     }
 }

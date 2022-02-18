@@ -28,6 +28,7 @@ class OperacaoInterSicroniza extends OperacoesImportAbstract
     private $valorCdbLiquido;
     private $cdbBancoInterId = 40;
     private $objImportado;
+    private $valorCompra;
 
     //put your code here
     protected function getDados()
@@ -57,7 +58,8 @@ class OperacaoInterSicroniza extends OperacoesImportAbstract
             [
                 'cdbBancoInterId' => $this->cdbBancoInterId,
                 'valorCdbBruto' => $this->valorCdbBruto,
-                'valorCdbLiquido' => $this->valorCdbLiquido
+                'valorCdbLiquido' => $this->valorCdbLiquido,
+                'valorCompra'=>$this->valorCompra
             ]
         );
     }
