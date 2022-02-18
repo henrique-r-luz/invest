@@ -92,7 +92,7 @@ class OperacaoSearch extends Operacao {
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            'operacao.id' => $this->id,
             'operacao.quantidade' => $this->quantidade,
             'valor' => $this->valor,
             //'data' => $this->data,
