@@ -9,7 +9,6 @@
 namespace app\models\financas\service\sincroniza;
 
 use app\lib\CajuiHelper;
-use app\lib\componentes\FabricaNotificacao;
 use app\models\financas\Ativo;
 use app\models\financas\Operacao;
 use Yii;
