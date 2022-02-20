@@ -14,8 +14,7 @@ from selenium.webdriver.common.by import By
 # filePath = '~/NetBeansProjects/dados/';
 logPath = "/var/www/dados/atualiza_acao.txt"
 dir = "/var/www/dados"
-webServer = 'nginx'
-
+webServer = 'apache'
 
 def getDados():
 
@@ -32,14 +31,8 @@ def executa(discionarioAcoes):
     moeda = [];
     id = 0;
     for row in discionarioAcoes:
-        # if(id==2):
-            # break;
-        # print(row['url']);
-        
         browser.get(row['url']);
         preco = getPreco(browser);
-        # print(preco);
-        # print(str(row['ativo_id']));
         with open(logPath, 'a') as log:
              log.write('ativo@#:'+str(preco.text)+';');
         listaPreco.append([row['ativo_id'], preco.text])
@@ -47,7 +40,6 @@ def executa(discionarioAcoes):
        
     browser.get('https://br.investing.com/currencies/usd-brl');
     preco = getPreco(browser);
-    # preco = "5.5";
     with open(logPath, 'a') as log:
             log.write('ativo@#:'+str(preco.text)+';')
    
@@ -58,9 +50,7 @@ def executa(discionarioAcoes):
     df.to_csv(dir + '/preco_acao.csv', index=False)
     dfDollar.to_csv(dir + '/cambio.csv', index=False)
     browser.quit()
-    # print(df);
     
- 
 def getPreco(browser):
     preco = getPrecoId(browser);
     if(preco!=False):
@@ -80,7 +70,6 @@ def getPrecoId(browser):
     except NoSuchElementException:
         return False;
     
-
 
 def getPrecoClass(browser):
     try:
