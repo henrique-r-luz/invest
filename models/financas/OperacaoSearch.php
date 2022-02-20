@@ -3,10 +3,10 @@
 namespace app\models\financas;
 
 use yii\base\Model;
-use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
+use yii\data\ActiveDataProvider;
 use app\models\financas\Operacao;
-use kartik\daterange\DateRangeBehavior;
+use app\lib\behavior\DateRangeBehaviorAlterado;
 
 /**
  * OperacaoSearch represents the model behind the search form of `app\models\Operacao`.
@@ -42,7 +42,7 @@ class OperacaoSearch extends Operacao {
     public function behaviors() {
         return [
             [
-                'class' => \app\lib\DateRangeBehaviorAlterado::className(),
+                'class' => DateRangeBehaviorAlterado::className(),
                 'attribute' => 'createTimeRange',
                 'dateStartAttribute' => 'createTimeStart',
                 'dateEndAttribute' => 'createTimeEnd',

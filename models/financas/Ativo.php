@@ -2,7 +2,7 @@
 
 namespace app\models\financas;
 
-use app\lib\Pais;
+use app\lib\dicionario\Pais;
 use app\models\financas\service\sincroniza\CotacaoCambio;
 use app\models\Tipo;
 use yii\db\ActiveQuery;
@@ -23,19 +23,22 @@ use yii\helpers\ArrayHelper;
  * @property int $tipo_id
  * @property int $categoria_id
  */
-class Ativo extends ActiveRecord {
+class Ativo extends ActiveRecord
+{
 
     /**
      * {@inheritdoc}
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'public.ativo';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function transactions() {
+    public function transactions()
+    {
         return [
             self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
@@ -44,7 +47,8 @@ class Ativo extends ActiveRecord {
     /**
      * {@inheritdoc}
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['nome', 'codigo', 'tipo', 'categoria', 'pais'], 'required'],
             [['nome', 'codigo', 'categoria', 'tipo'], 'string'],
@@ -56,7 +60,8 @@ class Ativo extends ActiveRecord {
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id' => 'ID',
             'nome' => 'Nome',
@@ -73,45 +78,53 @@ class Ativo extends ActiveRecord {
      * @return void
      * @author Henrique Luz
      */
-    public static function lucroPrejuizo() {
+    public static function lucroPrejuizo()
+    {
         $valorCompra = Ativo::find()
-                ->sum(['valor_compra']);
+            ->sum(['valor_compra']);
         $valorLiquido = Ativo::find()
-                ->sum(['valor_liquido']);
+            ->sum(['valor_liquido']);
         return $valorLiquido - $valorCompra;
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getTipo() {
+    public function getTipo()
+    {
         return $this->hasOne(Tipo::class, ['id' => 'tipo_id']);
     }
 
     /**
      * @return ActiveQuery
      */
-    public function getOperacao() {
+    public function getOperacao()
+    {
         return $this->hasMany(Operacao::class, ['ativo_id' => 'id']);
     }
 
-    public function getItensAtivo() {
+    public function getItensAtivo()
+    {
         return $this->hasMany(ItensAtivo::class, ['ativo_id' => 'id']);
     }
 
-    public function getProvento() {
+    public function getProvento()
+    {
         return $this->hasMany(Proventos::class, ['ativo_id' => 'id']);
     }
 
-    public function getAcaoBolsa() {
+    public function getAcaoBolsa()
+    {
         return $this->hasOne(AcaoBolsa::class, ['id' => 'acao_bolsa_id']);
     }
 
-    public function getInvestidor() {
+    public function getInvestidor()
+    {
         return $this->hasOne(Investidor::class, ['id' => 'investidor_id']);
     }
 
-    public static function valorCambio($ativo, $valor) {
+    public static function valorCambio($ativo, $valor)
+    {
         $cotacao = new CotacaoCambio();
         $cambio = $cotacao->atualiza();
         if ($ativo->pais == Pais::US) {
@@ -121,20 +134,25 @@ class Ativo extends ActiveRecord {
         return $valor;
     }
 
-    public static function lista() {
-        return ArrayHelper::map(Ativo::find()->where(['ativo' => true])->all(), 'id', 
-                function($model){
-                    return $model->codigo.' | '.$model->investidor->nome;
-                });
-        
+    public static function lista()
+    {
+        return ArrayHelper::map(
+            Ativo::find()->where(['ativo' => true])->all(),
+            'id',
+            function ($model) {
+                return $model->codigo . ' | ' . $model->investidor->nome;
+            }
+        );
     }
 
-    public static function listaAtivo() {
-        return ArrayHelper::map(Ativo::find()->all(), 'id', 
-                function($model){
-                    return $model->id.' | '.$model->codigo;
-                });
-        
+    public static function listaAtivo()
+    {
+        return ArrayHelper::map(
+            Ativo::find()->all(),
+            'id',
+            function ($model) {
+                return $model->id . ' | ' . $model->codigo;
+            }
+        );
     }
-
 }

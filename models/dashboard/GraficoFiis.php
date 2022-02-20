@@ -8,6 +8,10 @@
 
 namespace app\models\dashboard;
 
+use app\lib\dicionario\Tipo;
+use app\models\dashboard\GraficoUtil;
+use app\models\dashboard\GraficoAbstract;
+
 /**
  * Description of GraficoFiis
  *
@@ -23,7 +27,7 @@ class GraficoFiis extends GraficoAbstract {
         
          $valorTotalFii = 0;
         foreach ($this->dados as $item) {
-            if($item['tipo']==\app\lib\Tipo::FIIS){
+            if($item['tipo']==Tipo::FIIS){
                 $this->fii[$item['codigo']] = $item['valor_bruto'];
             }
         }

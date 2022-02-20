@@ -1,7 +1,12 @@
 <?php
 
+use Yii;
 use yii\helpers\Html;
 use app\lib\grid\GridView;
+use app\lib\dicionario\Pais;
+use app\lib\dicionario\Tipo;
+use app\models\financas\Ativo;
+use app\lib\dicionario\Categoria;
 
 //use Yii;
 
@@ -18,7 +23,7 @@ $impostoRenda = 1;
     GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'toolbar'=>'padraoCajui',
+        'toolbar' => 'padraoCajui',
         'boxTitle' => $this->title,
         'columns' => [
             [
@@ -39,7 +44,7 @@ $impostoRenda = 1;
             [
                 'attribute' => 'valor_compra',
                 'value' => function ($model) {
-                    return round($model->valor_compra,4); //app\models\financas\Ativo::valorCambio($model, $model->valor_compra);
+                    return round($model->valor_compra, 4); //app\models\financas\Ativo::valorCambio($model, $model->valor_compra);
                 },
                 'format' => 'currency',
                 'pageSummary' => true,
@@ -50,11 +55,11 @@ $impostoRenda = 1;
                 'pageSummary' => true,
             ],
             [
-                'filter' => app\lib\Tipo::all(),
+                'filter' => Tipo::all(),
                 'attribute' => 'tipo',
                 'label' => 'Tipo',
                 'value' => function ($model) {
-                   // return 'tipo';
+                    // return 'tipo';
                     if (isset($model->ativos->acaoBolsa->setor)) {
                         return $model->ativos->tipo . ' (' . $model->ativos->acaoBolsa->setor . ')';
                     } else {
@@ -69,7 +74,7 @@ $impostoRenda = 1;
                     $lucroAcao = 0;
                     foreach ($objetos as $ativo) {
                         //renda fixa
-                        if ($ativo->ativos->categoria == app\lib\Categoria::RENDA_FIXA) {
+                        if ($ativo->ativos->categoria == Categoria::RENDA_FIXA) {
                             $lucro = $lucro + ($ativo->valor_bruto - $ativo->valor_compra);
                         } else {
                             $lucroAcao = $lucroAcao + ($ativo->valor_bruto - $ativo->valor_compra);
@@ -91,19 +96,18 @@ $impostoRenda = 1;
                 'pageSummaryOptions' => ['colspan' => 3],
             ],
             [
-                'filter' => app\lib\Categoria::all(),
+                'filter' => Categoria::all(),
                 'attribute' => 'categoria',
                 'label' => 'Categoria',
                 'value' => 'ativos.categoria',
             ],
             [
-                // 'filter' => app\lib\Categoria::all(),
                 'attribute' => 'investidor_id',
                 'label' => 'Investidor',
                 'value' => 'investidor.nome',
             ],
             [
-                'filter' => \app\lib\Pais::all(),
+                'filter' => Pais::all(),
                 'attribute' => 'pais',
                 'label' => 'País',
                 'value' => 'ativos.pais',

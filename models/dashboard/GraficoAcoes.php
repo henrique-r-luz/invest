@@ -8,6 +8,10 @@
 
 namespace app\models\dashboard;
 
+use app\lib\dicionario\Tipo;
+use app\models\dashboard\GraficoUtil;
+use app\models\dashboard\GraficoAbstract;
+
 /**
  * Description of GraficoAcoes
  *
@@ -21,7 +25,7 @@ class GraficoAcoes extends GraficoAbstract {
     protected function configuraDados() {
         $valorTotalAcoes = 0;
         foreach ($this->dados as $item) {
-            if($item['tipo']==\app\lib\Tipo::ACOES){
+            if($item['tipo']==Tipo::ACOES){
                 $this->acoes[$item['codigo']] = $item['valor_bruto'];
             }
         }

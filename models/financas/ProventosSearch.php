@@ -5,6 +5,7 @@ namespace app\models\financas;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\financas\Proventos;
+use app\lib\behavior\DateRangeBehaviorAlterado;
 
 /**
  * ProventosSearch represents the model behind the search form of `app\models\financas\Proventos`.
@@ -41,7 +42,7 @@ class ProventosSearch extends Proventos {
     public function behaviors() {
         return [
             [
-                'class' => \app\lib\DateRangeBehaviorAlterado::className(),
+                'class' => DateRangeBehaviorAlterado::className(),
                 'attribute' => 'createTimeRange',
                 'dateStartAttribute' => 'createTimeStart',
                 'dateEndAttribute' => 'createTimeEnd',

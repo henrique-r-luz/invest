@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace app\lib;
+namespace app\lib\dicionario;
 
 /**
  * Description of TipoFiltro

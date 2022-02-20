@@ -15,7 +15,7 @@
  * @link      http://cajui.ifnmg.edu.br/
  */
 
-namespace app\lib;
+namespace app\lib\widget;
 
 use yii\bootstrap\ButtonGroup;
 use yii\helpers\Html;

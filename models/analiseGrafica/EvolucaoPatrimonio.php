@@ -12,7 +12,7 @@ use \yii\base\Model;
 use \app\models\financas\Operacao;
 use \yii\db\Query;
 use \yii\db\Expression;
-use \app\lib\Pais;
+use \app\lib\dicionario\Pais;
 
 /**
  * Description of EvolucaoPatrimonio

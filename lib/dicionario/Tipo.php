@@ -16,25 +16,38 @@
  * @link      http://cajui.ifnmg.edu.br/
  */
 
-namespace app\lib;
+namespace app\lib\dicionario;
 
-class TipoArquivoUpload {
+class Tipo {
 
-    const CLEAR = 'Operações Clear';
-    const AVENUE = 'Operações Avenue';
-    const INTER = 'Operações Inter';
-    const NU = 'NU';
+    const TESOURO_DIRETO = 'Tesouro Direto';
+    const FUNDOS_INVESTIMENTO = 'Fundos de Investimentos';
+    const CDB = 'CDB';
+    const DEBENTURES = 'Debêntures';
+    const ACOES = 'Ações';
+    const Criptomoeda = 'Criptomoeda';
+    const OURO = 'Ouro';
+    const PRATA = 'Prata';
+    const ETFS = 'ETFs';
+    const FIIS = 'FIIs';
     
+
     /**
      * Retorna todos os enuns em um array
      * @return array 
      */
     public static function all() {
         return [
-            self::CLEAR => self::CLEAR,
-            self::AVENUE => self::AVENUE,
-            self::INTER => self::INTER,
-            self::NU => self::NU,
+            self::TESOURO_DIRETO => 'Tesouro Direto',
+            self::FUNDOS_INVESTIMENTO => 'Fundos de Investimentos',
+            self::CDB => 'CDB',
+            self::DEBENTURES => 'Debêntures',
+            self::ACOES => 'Ações',
+            self::Criptomoeda => 'Criptomoeda',
+            self::OURO => 'Ouro',
+            self::PRATA => 'Prata',
+            self::ETFS => 'ETFs',
+            self::FIIS => 'FIIs',
         ];
     }
 

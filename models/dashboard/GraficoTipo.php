@@ -9,6 +9,10 @@
 namespace app\models\dashboard;
 
 use yii\web\JsExpression;
+use app\lib\dicionario\Pais;
+use app\lib\dicionario\Tipo;
+use app\models\dashboard\GraficoUtil;
+use app\models\dashboard\GraficoAbstract;
 
 /**
  * Description of GraficoTipo
@@ -29,10 +33,10 @@ class GraficoTipo extends GraficoAbstract {
                     'valor_total' => 'valor_total']);
 
         unset($this->tipos['Ações']);
-        $paises = [\app\lib\Pais::BR, \app\lib\Pais::US];
+        $paises = [Pais::BR, Pais::US];
         foreach ($paises as $pais) {
             foreach ($this->dados as $dados) {
-                if ($dados['pais'] == $pais && $dados['tipo'] == \app\lib\Tipo::ACOES) {
+                if ($dados['pais'] == $pais && $dados['tipo'] == Tipo::ACOES) {
                     if ($dados['valor_total'] > 0) {
                         $this->tipos['Ações-' . $pais] = round($dados['valor_acao_pais'] / $dados['valor_total'] * 100);
                     }

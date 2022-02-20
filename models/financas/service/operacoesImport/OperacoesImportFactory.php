@@ -2,7 +2,7 @@
 
 namespace app\models\financas\service\operacoesImport;
 
-use app\lib\TipoArquivoUpload;
+use app\lib\dicionario\TipoArquivoUpload;
 
 
 class OperacoesImportFactory

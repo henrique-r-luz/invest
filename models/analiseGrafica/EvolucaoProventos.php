@@ -8,8 +8,9 @@
 
 namespace app\models\analiseGrafica;
 
-use \app\models\financas\Proventos;
 use \app\lib\Categoria;
+use app\lib\dicionario\Pais;
+use \app\models\financas\Proventos;
 
 /**
  * Description of EvolucaoProventos
@@ -34,7 +35,7 @@ class EvolucaoProventos {
                 ->select(["to_char(data, 'YYYY-MM') as data", 'ROUND(sum(valor)::numeric,2) as valores'])
                 ->innerJoin('itens_ativo','itens_ativo.id = proventos.itens_ativos_id')
                 ->innerjoin('ativo','ativo.id = itens_ativo.ativo_id')
-                ->where(['ativo.pais'=> \app\lib\Pais::BR])
+                ->where(['ativo.pais'=> Pais::BR])
                 ->groupBy(["to_char(data, 'YYYY-MM')"])
                 ->orderBy(["to_char(data, 'YYYY-MM')"=>SORT_ASC])
                 ->asArray()

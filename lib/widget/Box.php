@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Este arquivo é parte do
  *    ___       _       _
@@ -15,7 +16,7 @@
  * @link      http://cajui.ifnmg.edu.br/
  */
 
-namespace app\lib;
+namespace app\lib\widget;
 
 use yii\bootstrap\ButtonGroup;
 use yii\bootstrap\Widget;
@@ -160,11 +161,13 @@ HTML;
         if ($this->isSolid || $this->isTile) {
             Html::addCssClass($this->options, 'box-solid');
         }
-        echo strtr($this->topTemplate, [
-            '{options}'       => Html::renderTagAttributes($this->options),
-            '{headerOptions}' => Html::renderTagAttributes($this->prepareHeaderOptions()),
-            '{title}'         => $this->title,
-            '{box-tools}'     => $this->prepareBoxTools(),
+        echo strtr(
+            $this->topTemplate,
+            [
+                '{options}'       => Html::renderTagAttributes($this->options),
+                '{headerOptions}' => Html::renderTagAttributes($this->prepareHeaderOptions()),
+                '{title}'         => $this->title,
+                '{box-tools}'     => $this->prepareBoxTools(),
             ]
         ) . $this->body;
     }
@@ -176,9 +179,10 @@ HTML;
     {
         if ($this->footer) {
             return strtr(
-                $this->bottomTemplate, [
-                '{footer}'        => $this->footer . ($this->loading ? $this->loadingTemplate : ''),
-                '{footerOptions}' => $this->isTile ? 'bg-' . $this->type : $this->footerOptions,
+                $this->bottomTemplate,
+                [
+                    '{footer}'        => $this->footer . ($this->loading ? $this->loadingTemplate : ''),
+                    '{footerOptions}' => $this->isTile ? 'bg-' . $this->type : $this->footerOptions,
                 ]
             );
         } else {
@@ -197,10 +201,11 @@ HTML;
         }
         if ($this->tooltip) {
             $headerOptions = array_merge(
-                $headerOptions, [
-                'data-toggle'         => 'tooltip',
-                'data-original-title' => $this->tooltip,
-                'data-placement'      => $this->tooltipPlacement ?: 'bottom',
+                $headerOptions,
+                [
+                    'data-toggle'         => 'tooltip',
+                    'data-original-title' => $this->tooltip,
+                    'data-placement'      => $this->tooltipPlacement ?: 'bottom',
                 ]
             );
         }
@@ -216,8 +221,8 @@ HTML;
         if (!empty($this->boxTools)) {
             if (is_array($this->boxTools)) {
                 $boxTools = ButtonGroup::widget([
-                        'buttons'      => $this->boxTools,
-                        'encodeLabels' => false,
+                    'buttons'      => $this->boxTools,
+                    'encodeLabels' => false,
                 ]);
             } else {
                 $boxTools = $this->boxTools;
@@ -225,5 +230,4 @@ HTML;
         }
         return $boxTools ? Html::tag('div', $boxTools, ['class' => 'box-tools pull-right']) : '';
     }
-
 }

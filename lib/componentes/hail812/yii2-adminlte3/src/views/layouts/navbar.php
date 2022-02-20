@@ -1,10 +1,10 @@
 <?php
 
 use yii\helpers\Html;
-
+$skin  = (YII_ENV_DEV)?'navbar-lightblue':'navbar-success';
 ?>
 <!-- Navbar -->
-<nav class="main-header navbar navbar-dark bg-success navbar-expand" style="z-index: 1031;" >
+<nav class="main-header navbar navbar-dark <?= $skin ?> navbar-expand" style="z-index: 1031;" >
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">

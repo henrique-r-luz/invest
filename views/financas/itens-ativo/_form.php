@@ -1,16 +1,15 @@
 <?php
 
-use app\lib\Pais;
-use app\models\Tipo;
+use app\lib\dicionario\Pais;
 use yii\helpers\Html;
-use app\models\Categoria;
+
 use kartik\widgets\Select2;
 use kartik\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\financas\Ativo;
 use kartik\widgets\SwitchInput;
 use kartik\number\NumberControl;
-use app\models\financas\Investidor;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\financas\Ativo */

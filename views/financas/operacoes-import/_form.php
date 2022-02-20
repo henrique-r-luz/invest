@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use kartik\file\FileInput;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
-use app\lib\TipoArquivoUpload;
+use app\lib\dicionario\TipoArquivoUpload;
 use kartik\widgets\ActiveForm;
 use app\models\financas\Investidor;
 use app\models\financas\OperacoesImport;

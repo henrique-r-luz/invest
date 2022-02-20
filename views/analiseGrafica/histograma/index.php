@@ -1,7 +1,7 @@
 <?php
 
 use app\lib\Atributos;
-use app\lib\Tempo;
+use app\lib\dicionario\Tempo;
 use app\models\financas\AcaoBolsa;
 use kartik\widgets\Select2;
 use yii\data\ActiveDataProvider;

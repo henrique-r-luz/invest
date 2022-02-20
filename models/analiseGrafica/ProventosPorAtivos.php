@@ -8,7 +8,7 @@
 
 namespace app\models\analiseGrafica;
 
-use app\lib\Categoria;
+use app\lib\dicionario\Categoria;
 use app\models\financas\Ativo;
 use app\models\financas\Proventos;
 use yii\base\Model;

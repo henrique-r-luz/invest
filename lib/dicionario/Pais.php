@@ -1,7 +1,7 @@
 <?php
 
 
-namespace app\lib;
+namespace app\lib\dicionario;
 
 
 class Pais {

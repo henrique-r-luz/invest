@@ -9,10 +9,10 @@
 namespace app\models\financas\service\operacoesImport;
 
 use Yii;
-use app\lib\Categoria;
+use app\lib\dicionario\Categoria;
 use app\lib\CajuiHelper;
 use yii\base\UserException;
-use app\lib\TipoArquivoUpload;
+use app\lib\dicionario\TipoArquivoUpload;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
 use app\models\financas\OperacoesImport;

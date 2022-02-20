@@ -9,8 +9,8 @@
 namespace app\models\analiseGrafica;
 use yii\base\Model;
 use \app\models\financas\Ativo;
-use \app\lib\Tipo;
-use \app\lib\Categoria;
+use \app\lib\dicionario\Tipo;
+use \app\lib\dicionario\Categoria;
 use app\models\financas\ItensAtivo;
 
 /**

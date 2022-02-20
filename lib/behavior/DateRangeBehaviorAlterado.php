@@ -6,7 +6,7 @@
  * @version 1.7.2
  */
 
-namespace app\lib;
+namespace app\lib\behavior;
 
 use yii\base\Model;
 use yii\base\Behavior;

@@ -1,14 +1,15 @@
 <?php
 
 use yii\helpers\Html;
+use kartik\widgets\Select2;
+use app\lib\dicionario\Pais;
+use app\lib\dicionario\Tipo;
+use yii\helpers\ArrayHelper;
 use kartik\widgets\ActiveForm;
 use kartik\widgets\SwitchInput;
-use kartik\widgets\Select2;
-use app\models\Categoria;
-use yii\helpers\ArrayHelper;
-use app\models\Tipo;
-use app\lib\Pais;
 use kartik\number\NumberControl;
+use app\lib\dicionario\Categoria;
+use app\models\financas\AcaoBolsa;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\financas\Ativo */
@@ -30,7 +31,7 @@ use kartik\number\NumberControl;
                 <div class="col-xs-2 col-sm-2 col-lg-2">
                     <?= $form->field($model, 'pais')->widget(Select2::classname(), [
                         //'data' => ArrayHelper::map(Tipo::find()->asArray()->all(), 'id', 'nome'),
-                        'data' => \app\lib\Pais::all(),
+                        'data' => Pais::all(),
                         'options' => ['placeholder' => 'País'],
                         'pluginOptions' => [
                             'allowClear' => true
@@ -54,7 +55,7 @@ use kartik\number\NumberControl;
                     <?=
                     $form->field($model, 'tipo')->widget(Select2::classname(), [
                         //'data' => ArrayHelper::map(Tipo::find()->asArray()->all(), 'id', 'nome'),
-                        'data' => \app\lib\Tipo::all(),
+                        'data' => Tipo::all(),
                         'options' => ['placeholder' => 'Selecione um Tipo'],
                         'pluginOptions' => [
                             'allowClear' => true
@@ -66,7 +67,7 @@ use kartik\number\NumberControl;
                     <?=
                     $form->field($model, 'categoria')->widget(Select2::classname(), [
                         //'data' => ArrayHelper::map(Categoria::find()->asArray()->all(), 'id', 'nome'),
-                        'data' => app\lib\Categoria::all(),
+                        'data' => Categoria::all(),
                         'options' => ['placeholder' => 'Selecione a Categoria'],
                         'pluginOptions' => [
                             'allowClear' => true

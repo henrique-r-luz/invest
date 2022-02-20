@@ -24,7 +24,7 @@ $config = [
         'view' => [
             'theme' => [
                 'pathMap' => [
-                    '@app/views' => '@app/views/hail812/yii2-adminlte3/src/views'
+                    '@app/views' => '@app/lib/componentes/hail812/yii2-adminlte3/src/views'
                 ],
             ],
         ],
@@ -123,19 +123,21 @@ $config = [
 ];
 
 if (YII_ENV_DEV) {
+   
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        'allowedIPs' => ['127.0.0.1', '192.168.*.*', '172.19.0.*'],
+        //'allowedIPs' => ['127.0.0.1', '192.168.*.*', '172.19.0.*'],
+        'allowedIPs' => ['*']
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        'allowedIPs' => ['127.0.0.1', '192.168.*.*', '172.19.0.*'],
+        'allowedIPs' => ['*'],
         'generators' => [ //here
             'crud' => [ // generator name
                 'class' => 'yii\gii\generators\crud\Generator', // generator class

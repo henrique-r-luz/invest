@@ -1,8 +1,12 @@
 <?php
 
-use yii\helpers\Html;
+
+
+
 use app\lib\grid\GridView;
-use Mpdf\Tag\Summary;
+use app\lib\dicionario\Pais;
+use app\lib\dicionario\Tipo;
+use app\lib\dicionario\Categoria;
 
 //use Yii;
 
@@ -39,7 +43,7 @@ $impostoRenda = 1;
 
 
                     [
-                        'filter' => app\lib\Tipo::all(),
+                        'filter' => Tipo::all(),
                         'attribute' => 'tipo',
                         'label' => 'Tipo',
                         'value' => function ($model) {
@@ -52,13 +56,13 @@ $impostoRenda = 1;
                         }
                     ],
                     [
-                        'filter' => app\lib\Categoria::all(),
+                        'filter' => Categoria::all(),
                         'attribute' => 'categoria',
                         'label' => 'Categoria',
                         'value' => 'categoria',
                     ],
                     [
-                        'filter' => \app\lib\Pais::all(),
+                        'filter' => Pais::all(),
                         'attribute' => 'pais',
                         'label' => 'País',
                         'value' => 'pais',

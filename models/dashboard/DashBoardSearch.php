@@ -9,7 +9,7 @@
 namespace app\models\dashboard;
 
 use \app\models\financas\Ativo;
-use app\lib\Tipo;
+use app\lib\dicionario\Tipo;
 use \app\models\financas\Proventos;
 
 /**
@@ -83,9 +83,7 @@ class DashBoardSearch
 
                 $dados = (new \yii\db\Query())
                         ->from(['ativo' => $ativos, 'valorTotal' => $valorTotal])
-                        ->all();
-                //echo $dados->createCommand()->getRawSql();                
-                //exit();       
+                        ->all();    
                 return $dados;
         }
 }
