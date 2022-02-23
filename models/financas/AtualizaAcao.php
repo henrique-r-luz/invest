@@ -30,7 +30,7 @@ class AtualizaAcao extends \yii\db\ActiveRecord
         return [
             [['ativo_id', 'url'], 'required'],
             [['ativo_id'], 'default', 'value' => null],
-            [['ativo_id','id'], 'integer'],
+            [['ativo_id'], 'integer'],
             [['url'], 'string'],
             [['ativo_id'], 'unique'],
             [['ativo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ativo::className(), 'targetAttribute' => ['ativo_id' => 'id']],
