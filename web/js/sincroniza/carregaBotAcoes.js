@@ -1,7 +1,6 @@
 $("document").ready(function () {
 
     $("#acoes_id").click(function () {
-        //alert('olaa');
         progressoProcesso();
     });
 
@@ -11,10 +10,6 @@ function progressoProcesso() {
     showProgressBar();
     execBot();
     loadDados(5);
-    //loadDados();
-
-
-    //disposeProgressBar();
 }
 
 function execBot() {
@@ -36,9 +31,8 @@ function loadDados(porcentagem) {
         url: '/index.php/financas/sincronizar/get-status-acoes',
         type: 'get',
         success: function (data) {
-            console.log(data)
             if (data['total'] == 'erro') {
-                $.growl.error({ message: "Erro ao atualizar ativos" });
+                $.growl.error({message:"olaaa"});
                 disposeProgressBar();
 
             }

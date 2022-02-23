@@ -21,24 +21,11 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
-        // 'css/all.css',
         "js/grow-js/jquery.growl.css",
     ];
     public $js = [
-        //"/usr/local/bin/node-server/node_modules/socket.io-client/dist/socket.io.js",
-        "js/notificacao.js",
         "js/grow-js/jquery.growl.js",
-        "js/investimento.js",
-        // "js/demo.js"
-        // 'js/all.js',
-
+      
     ];
-    public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-        //'rmrevin\yii\fontawesome\cdn'
-        // '@vendro\rmrevin\yii\fontawesome\AssetBundle',
-        //'yii\fontawesome\CdnProAssetBundle',
-    ];
+  
 }
