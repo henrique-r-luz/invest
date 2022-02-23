@@ -80,6 +80,11 @@ class DadosOperacoesAtivos
             ->andWhere(['tipo' => Operacao::getTipoOperacaoId(Operacao::DESDOBRAMENTO_MAIS)]);
     }
 
+    private function caseQuantidade(){
+        return 'case when ('.$this->quantidadeAcoes().' = 0) then 1'
+              .'else('.$this->quantidadeAcoes().') end ';
+    }
+
     private function quantidadeAcoes()
     {
         return '(coalesce(quantidade_compra,0)  '
@@ -91,12 +96,8 @@ class DadosOperacoesAtivos
 
     private function valorMedioAcoes()
     {
-        return '(coalesce(valor_compra,0)-coalesce(valor_venda,0))/'
-        .'(coalesce(quantidade_compra,0)  '
-        . '- coalesce(quantidade_venda,0) '
-        . '- coalesce(quantidade_desdobramento_menos,0)'
-        . '+ coalesce(quantidade_desdobramento_mais,0)'
-        . ')';
+        return '(coalesce(valor_compra,0)-coalesce(valor_venda,0))/'.$this->caseQuantidade();
+       
     }
 
     /**
