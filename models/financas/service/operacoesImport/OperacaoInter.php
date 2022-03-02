@@ -9,7 +9,6 @@
 namespace app\models\financas\service\operacoesImport;
 
 use Yii;
-use Smalot\PdfParser\Parser;
 use app\lib\dicionario\TipoArquivoUpload;
 use app\models\financas\OperacoesImport;
 use app\models\financas\service\operacoesImport\OperacoesImportHelp;

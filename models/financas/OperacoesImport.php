@@ -53,7 +53,7 @@ class OperacoesImport extends \yii\db\ActiveRecord
             [['arquivo'], 'file', 'skipOnEmpty' => false],
             [['tipo_arquivo', 'lista_operacoes_criadas_json', 'hash_nome', 'extensao'], 'string'],
             [['investidor_id'], 'exist', 'skipOnError' => true, 'targetClass' => Investidor::className(), 'targetAttribute' => ['investidor_id' => 'id']],
-            //[['arquivo'], 'validaTypeUpload'],
+            [['arquivo'], 'validaTypeUpload'],
         ];
     }
 
@@ -111,7 +111,10 @@ class OperacoesImport extends \yii\db\ActiveRecord
      */
     public function validaTypeUpload()
     {
-        if ($this->arquivo->type != 'text/csv') {
+        if (
+            $this->arquivo->type != 'text/csv' &&
+            $this->arquivo->type != 'application/pdf'
+        ) {
             $this->addError('arquivo', 'Tipo de arquivo errado');
         }
     }
@@ -128,7 +131,7 @@ class OperacoesImport extends \yii\db\ActiveRecord
                 return false;
             }
             $this->extensao = $this->arquivo->extension;
-            if(!file_exists(Yii::getAlias('@' . self::DIR))){
+            if (!file_exists(Yii::getAlias('@' . self::DIR))) {
                 mkdir(Yii::getAlias('@' . self::DIR));
             }
             if (!$this->arquivo->saveAs(Yii::getAlias('@' . self::DIR) . '/' . $this->hash_nome . '.' . $this->arquivo->extension)) {

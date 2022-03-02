@@ -16,13 +16,7 @@ class m220301_200630_adiciona_tipo_atualizacao extends Migration
      */
     public function safeUp()
     {
-       
-        $this->execute("CREATE table sicroniza_ativo(
-            id SERIAL PRIMARY KEY,
-            tipo text not null  
-        );");
-
-        $this->addColumn('itens_ativo','sicroniza_ativo_id',Schema::TYPE_INTEGER);
+        $this->addColumn('itens_ativo','sicroniza_ativo_upload',Schema::TYPE_TEXT);
     }
 
     /**
@@ -30,7 +24,6 @@ class m220301_200630_adiciona_tipo_atualizacao extends Migration
      */
     public function safeDown()
     {
-        $this->dropColumn('itens_ativo','sicroniza_ativo_id');
-        $this->dropTable('sicorniza_ativo');
+        $this->dropColumn('itens_ativo','sicroniza_ativo_upload');
     }
 }

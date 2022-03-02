@@ -45,11 +45,12 @@ use app\models\financas\OperacoesImport;
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-lg-12">
+                    <?php echo $model->arquivo ?>
                     <?=  $form->field($model, 'arquivo')->widget(FileInput::classname(), [
                         'options' => [
                             'multiple' => false,
                         ],
-                        'pluginOptions' => isset($model->arquivo) ? [
+                        'pluginOptions' =>($model->arquivo!=null) ? [
                             'initialPreview' => [
                                 Url::to(['get-arquivo','id'=>$model->id]),
                             ],
@@ -62,8 +63,7 @@ use app\models\financas\OperacoesImport;
                             ],
                              'overwriteInitial' => false,
                             // 'maxFileSize' => 2800
-                        ]
-                            : [],
+                        ]:[]
                     ]);
                     ?>
                 </div>

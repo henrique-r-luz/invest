@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use app\models\financas\OperacoesImport;
 use app\models\financas\OperacoesImportSearch;
 use app\models\financas\service\operacoesImport\OperacoesImportService;
+use Exception;
 
 /**
  * OperacoesImportController implements the CRUD actions for OperacoesImport model.
@@ -73,6 +74,7 @@ class OperacoesImportController extends Controller
                 if (!$operacoesImportService->save()) {
                     $erro = CajuiHelper::processaErros($operacoesImportService->getErrors());
                     Yii::$app->session->setFlash('danger', 'Erro ao salvar Ativo!</br>' . $erro);
+                    $operacoesImportService->getModel()->arquivo = null;
                     return $this->render('create', [
                         'model' => $operacoesImportService->getModel(),
                     ]);
@@ -84,7 +86,7 @@ class OperacoesImportController extends Controller
                 'model' => $operacoesImportService->getModel(),
             ]);
         } catch (\Exception $e) {
-            Yii::$app->session->setFlash('danger', 'Erro ao salvar operação import! '.$e->getMessage());
+            Yii::$app->session->setFlash('danger', 'Erro ao salvar operação import! ' . $e->getMessage());
             $operacoesImportService->getModel()->arquivo = null;
             return $this->render('create', [
                 'model' => $operacoesImportService->getModel(),
@@ -114,11 +116,16 @@ class OperacoesImportController extends Controller
 
     public function actionGetArquivo($id)
     {
-        $model = $this->findModel($id);
-        \Yii::$app->response->format = yii\web\Response::FORMAT_RAW;
-        \Yii::$app->response->headers->add('content-type', OperacoesImport::get($model->extensao));
-        \Yii::$app->response->data = file_get_contents(Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $model->hash_nome . '.' . $model->extensao);
-        return \Yii::$app->response;
+        try {
+            $model = $this->findModel($id);
+            \Yii::$app->response->format = yii\web\Response::FORMAT_RAW;
+            \Yii::$app->response->headers->add('content-type', OperacoesImport::get($model->extensao));
+            \Yii::$app->response->data = file_get_contents(Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $model->hash_nome . '.' . $model->extensao);
+            return \Yii::$app->response;
+        } catch (Exception $e) {
+            \Yii::$app->response->format = yii\web\Response::FORMAT_RAW;
+            return \Yii::$app->response;
+        }
         // return Yii::$app->response->sendFile(Yii::getAlias('@' . $model->diretorio) . '/' . $model->hash_nome . '.' . $model->extensao)->send();
         //return 
     }
