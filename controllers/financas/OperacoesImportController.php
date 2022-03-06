@@ -140,12 +140,15 @@ class OperacoesImportController extends Controller
     public function actionDelete($id)
     {
         try {
+            $transaction = Yii::$app->db->beginTransaction();
             $model = $this->findModel($id);
             $operacoesImportService = new OperacoesImportService($model);
             $operacoesImportService->delete();
+            $transaction->commit();
             Yii::$app->session->setFlash('success', 'Registro deletado com sucesso! ');
         } catch (\Exception $e) {
-            Yii::$app->session->setFlash('danger', 'Erro ao deletera registro.');
+            $transaction->rollBack();
+            Yii::$app->session->setFlash('danger', 'Erro ao deletera registro.'.$e->getTraceAsString());
         } finally {
             return $this->redirect(['index']);
         }

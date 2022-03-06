@@ -21,6 +21,7 @@ use Exception;
 class OperacoesImport extends \yii\db\ActiveRecord
 {
 
+    public $itens_ativos;
     const DIR = 'arquivos';
     const type_pdf = 'application/pdf';
     const type_csv = 'text/plain';
@@ -49,6 +50,7 @@ class OperacoesImport extends \yii\db\ActiveRecord
             [['investidor_id', 'tipo_arquivo', 'arquivo', 'data'], 'required'],
             [['investidor_id'], 'default', 'value' => null],
             [['investidor_id'], 'integer'],
+            [['itens_ativos'],'safe'],
             [['hash_nome', 'investidor_id'], 'unique', 'targetAttribute' => ['investidor_id', 'hash_nome'], 'message' => 'O arquivo já existe na base de dados. '],
             [['arquivo'], 'file', 'skipOnEmpty' => false],
             [['tipo_arquivo', 'lista_operacoes_criadas_json', 'hash_nome', 'extensao'], 'string'],
@@ -100,8 +102,14 @@ class OperacoesImport extends \yii\db\ActiveRecord
      */
     public function getInvestidor()
     {
-        return $this->hasOne(Investidor::className(), ['id' => 'investidor_id']);
+        return $this->hasOne(Investidor::class, ['id' => 'investidor_id']);
     }
+
+    public function getItensAtivosImports()
+    {
+        return $this->hasMany(ItensAtivoImport::class, ['operacoes_import_id' => 'id']);
+    }
+
 
 
     /**

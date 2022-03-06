@@ -1,11 +1,8 @@
 <?php
 
-use yii\web\View;
 use yii\helpers\Html;
 use kartik\widgets\Select2;
 use kartik\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
-use app\models\financas\Ativo;
 use kartik\number\NumberControl;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;

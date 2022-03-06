@@ -3,10 +3,12 @@
 namespace app\models\financas\service\operacoesImport;
 
 use Yii;
+use Throwable;
 use app\lib\CajuiHelper;
 use yii\web\UploadedFile;
 use app\models\financas\OperacoesImport;
-use Throwable;
+use app\models\financas\ItensAtivoImport;
+use Exception;
 
 /**
  * Define o serviço para os trabalhos de operações de importação de dados 
@@ -50,6 +52,8 @@ class OperacoesImportService
                 $transaction->rollBack();
                 return false;
             }
+            //insere ativos que serão atualizadas
+            $this->saveItensAtivoImport();
             $acaoImport = OperacoesImportFactory::getObjeto($this->operacoesImport);
             $acaoImport->atualiza();
             $this->operacoesImport->refresh();
@@ -69,6 +73,19 @@ class OperacoesImportService
         }
     }
 
+    private function saveItensAtivoImport()
+    {
+        foreach ($this->operacoesImport->itens_ativos as $item_ativo) {
+            $itensAtivoImport  =  new ItensAtivoImport();
+            $itensAtivoImport->operacoes_import_id = $this->operacoesImport->id;
+            $itensAtivoImport->itens_ativo_id = $item_ativo;
+            if (!$itensAtivoImport->save()) {
+                $erro = CajuiHelper::processaErros($itensAtivoImport->getErrors());
+                throw new \Exception($erro);
+            }
+        }
+    }
+
 
     public function reload()
     {
@@ -78,8 +95,19 @@ class OperacoesImportService
 
     public function delete()
     {
-        $acaoImport = OperacoesImportFactory::getObjeto($this->operacoesImport);
-        $acaoImport->delete();
+            $acaoImport = OperacoesImportFactory::getObjeto($this->operacoesImport);
+            $this->deleteItensAtivoImport($this->operacoesImport);
+            $acaoImport->delete();
+    }
+
+
+    private function deleteItensAtivoImport($operacoesImport){
+    
+        foreach ($operacoesImport->itensAtivosImports as $item_ativo) {
+            if (!$item_ativo->delete()) {
+                //throw new \Exception('Erro ao remover ItensAtivoImport. ');
+            }
+        }
     }
 
 
