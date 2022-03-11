@@ -2,9 +2,11 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: http://127.0.0.1:8080/
-            browser: firefox
+            url: http://localhost/
+            browser: chrome
+            host : invest_bot
+            wait: 1
         - Yii2:
             part: orm
             entryScript: index-test.php
-            cleanup: false
+            cleanup: true
