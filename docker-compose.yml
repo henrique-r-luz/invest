@@ -65,6 +65,7 @@ services:
     ports:
       - "4444:4444"
     shm_size: 2gb
+    #network_mode: "host"
     networks:
       - invest-network
 

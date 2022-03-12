@@ -2,9 +2,9 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: http://localhost/
-            browser: chrome
+            url: http://apache/index-test.php
             host : invest_bot
+            browser: chrome
             wait: 1
         - Yii2:
             part: orm

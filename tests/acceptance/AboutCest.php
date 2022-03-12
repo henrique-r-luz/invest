@@ -6,9 +6,9 @@ class AboutCest
 {
     public function ensureThatAboutWorks(AcceptanceTester $I)
     {
-        $I->amOnPage('/');
-        $I->wait(30);
-        $I->see('Patrimônio');
+        $I->amOnPage('/financas/ativo');
+        //$I->wait(30);
+        $I->see('Ativos');
        
     }
 }
