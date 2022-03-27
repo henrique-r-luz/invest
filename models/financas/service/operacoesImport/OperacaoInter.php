@@ -25,7 +25,7 @@ class OperacaoInter extends OperacoesImportAbstract
 
     private $valorCdbBruto;
     private $valorCdbLiquido;
-    private $cdbBancoInterId = 40;
+    private $cdbBancoInterId; //id do cdb inter
     private $valorCompra;
     private $erros;
 
@@ -43,6 +43,16 @@ class OperacaoInter extends OperacoesImportAbstract
             }
             $this->operacoesImport = $this->objImportado;
         }
+        if($this->operacoesImport->isNewRecord && empty($this->operacoesImport->itens_ativos)){
+            throw new \Exception("Essa operação necessita de um item ativo! ");
+        }
+        if(!$this->operacoesImport->isNewRecord){
+            $this->operacoesImport->itens_ativos = [];
+            foreach($this->operacoesImport->itensAtivosImports as $itensAtivo){
+                $this->operacoesImport->itens_ativos[] = $itensAtivo->itens_ativo_id;
+            }
+        }
+        $this->cdbBancoInterId = $this->operacoesImport->itens_ativos;
         $filePath = Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $this->operacoesImport->hash_nome . '.' . $this->operacoesImport->extensao;
         if (!file_exists($filePath)) {
             throw new \Exception("O arquivo envado não foi salvo no servidor. ");
@@ -63,4 +73,27 @@ class OperacaoInter extends OperacoesImportAbstract
     }
 
 
+    
+
+
+
+    /**
+     * Get the value of cdbBancoInterId
+     */ 
+    public function getCdbBancoInterId()
+    {
+        return $this->cdbBancoInterId;
+    }
+
+    /**
+     * Set the value of cdbBancoInterId
+     *
+     * @return  self
+     */ 
+    public function setCdbBancoInterId($cdbBancoInterId)
+    {
+        $this->cdbBancoInterId = $cdbBancoInterId;
+
+        return $this;
+    }
 }

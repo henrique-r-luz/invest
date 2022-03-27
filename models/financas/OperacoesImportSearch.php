@@ -19,7 +19,7 @@ class OperacoesImportSearch extends OperacoesImport
     {
         return [
             [['id', 'investidor_id'], 'integer'],
-            [['arquivo', 'tipo_arquivo', 'lista_operacoes_criadas_json'], 'safe'],
+            [['arquivo', 'tipo_arquivo', 'lista_operacoes_criadas_json','itens_ativos'], 'safe'],
         ];
     }
 
@@ -41,7 +41,9 @@ class OperacoesImportSearch extends OperacoesImport
      */
     public function search($params)
     {
-        $query = OperacoesImport::find()->orderBy(['data'=>SORT_DESC]);
+        $query = OperacoesImport::find()
+            ->joinWith(['itensAtivosImports.itensAtivo.ativos'])
+                ->orderBy(['data'=>SORT_DESC]);
 
         // add conditions that should always apply here
 
@@ -51,6 +53,10 @@ class OperacoesImportSearch extends OperacoesImport
                 'pageSize' => 10,
             ],
         ]);
+        $dataProvider->sort->attributes['itens_ativos'] = [
+            'asc'  => ['ativo.codigo' => SORT_ASC],
+            'desc' => ['ativo.codigo' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -68,7 +74,8 @@ class OperacoesImportSearch extends OperacoesImport
 
         $query->andFilterWhere(['ilike', 'arquivo', $this->arquivo])
             ->andFilterWhere(['ilike', 'tipo_arquivo', $this->tipo_arquivo])
-            ->andFilterWhere(['ilike', 'lista_operacoes_criadas_json', $this->lista_operacoes_criadas_json]);
+            ->andFilterWhere(['ilike', 'lista_operacoes_criadas_json', $this->lista_operacoes_criadas_json])
+            ->andFilterWhere(['ilike', 'ativo.codigo', $this->itens_ativos]);
 
         return $dataProvider;
     }

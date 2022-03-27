@@ -101,7 +101,7 @@ class OperacoesImportHelp
      * @return [type]
      */
     public static function AtualizaInter($param){
-        $cdbBancoInter = ItensAtivo::findOne($param['cdbBancoInterId']);
+        $cdbBancoInter = ItensAtivo::findOne($param['cdbBancoInterId'][0]);
         $cdbBancoInter->valor_bruto = $param['valorCdbBruto'];
         $cdbBancoInter->valor_liquido = $param['valorCdbLiquido'];
        // $valorCompra = Ativo::valorCambio($cdbBancoInter->ativos, Operacao::valorDeCompraBancoInter($param['cdbBancoInterId']));

@@ -164,6 +164,11 @@ class OperacoesImportController extends Controller
     protected function findModel($id)
     {
         if (($model = OperacoesImport::findOne($id)) !== null) {
+            $model->itens_ativos = [];
+            foreach($model->itensAtivosImports as $itensAtivo){
+                $model->itens_ativos[] = $itensAtivo->itens_ativo_id;
+            }
+            //$model->itens_ativos
             return $model;
         }
 

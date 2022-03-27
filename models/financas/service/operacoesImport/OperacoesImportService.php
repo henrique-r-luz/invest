@@ -75,6 +75,9 @@ class OperacoesImportService
 
     private function saveItensAtivoImport()
     {
+        if(empty($this->operacoesImport->itens_ativos)){
+            return ;
+        }
         foreach ($this->operacoesImport->itens_ativos as $item_ativo) {
             $itensAtivoImport  =  new ItensAtivoImport();
             $itensAtivoImport->operacoes_import_id = $this->operacoesImport->id;
@@ -102,7 +105,6 @@ class OperacoesImportService
 
 
     private function deleteItensAtivoImport($operacoesImport){
-    
         foreach ($operacoesImport->itensAtivosImports as $item_ativo) {
             if (!$item_ativo->delete()) {
                 //throw new \Exception('Erro ao remover ItensAtivoImport. ');
