@@ -101,8 +101,6 @@ class OperacaoSearch extends Operacao {
         ]);
 
         if ($this->createTimeRange != null && $this->createTimeRange != '') {
-            // $query->andFilterWhere(['>=', 'data', date("d/m/y H:i", $this->createTimeStart)])
-            //         ->andFilterWhere(['<=', 'data', date("d/m/y H:i", $this->createTimeEnd)]);
             $query->andFilterWhere(['>=', 'data', $this->createTimeStart])
                     ->andFilterWhere(['<=', 'data', $this->createTimeEnd]);
         }
@@ -133,8 +131,7 @@ class OperacaoSearch extends Operacao {
             'pagination' => false,
         ]);
         return $dataProvider;
-        #echo $query->createCommand()->getSql();
-        #exit();
+
     }
 
 }

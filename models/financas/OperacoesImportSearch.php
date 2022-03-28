@@ -5,6 +5,7 @@ namespace app\models\financas;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\financas\OperacoesImport;
+use app\lib\behavior\DateRangeBehaviorAlterado;
 
 
 /**
@@ -12,6 +13,10 @@ use app\models\financas\OperacoesImport;
  */
 class OperacoesImportSearch extends OperacoesImport
 {
+
+    public $createTimeRange;
+    public $createTimeStart;
+    public $createTimeEnd;
     /**
      * {@inheritdoc}
      */
@@ -19,9 +24,23 @@ class OperacoesImportSearch extends OperacoesImport
     {
         return [
             [['id', 'investidor_id'], 'integer'],
-            [['arquivo', 'tipo_arquivo', 'lista_operacoes_criadas_json','itens_ativos'], 'safe'],
+            [['createTimeRange'], 'match', 'pattern' => '/^.+\s\-\s.+$/'],
+            [['arquivo', 'tipo_arquivo', 'data', 'lista_operacoes_criadas_json', 'itens_ativos'], 'safe'],
         ];
     }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => DateRangeBehaviorAlterado::className(),
+                'attribute' => 'createTimeRange',
+                'dateStartAttribute' => 'createTimeStart',
+                'dateEndAttribute' => 'createTimeEnd',
+            ]
+        ];
+    }
+
 
     /**
      * {@inheritdoc}
@@ -43,13 +62,13 @@ class OperacoesImportSearch extends OperacoesImport
     {
         $query = OperacoesImport::find()
             ->joinWith(['itensAtivosImports.itensAtivo.ativos'])
-                ->orderBy(['data'=>SORT_DESC]);
+            ->orderBy(['data' => SORT_DESC]);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-             'pagination' => [
+            'pagination' => [
                 'pageSize' => 10,
             ],
         ]);
@@ -76,6 +95,11 @@ class OperacoesImportSearch extends OperacoesImport
             ->andFilterWhere(['ilike', 'tipo_arquivo', $this->tipo_arquivo])
             ->andFilterWhere(['ilike', 'lista_operacoes_criadas_json', $this->lista_operacoes_criadas_json])
             ->andFilterWhere(['ilike', 'ativo.codigo', $this->itens_ativos]);
+
+        if ($this->createTimeRange != null && $this->createTimeRange != '') {
+            $query->andFilterWhere(['>=', 'data', $this->createTimeStart])
+                ->andFilterWhere(['<=', 'data', $this->createTimeEnd]);
+        }
 
         return $dataProvider;
     }

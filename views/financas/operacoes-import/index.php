@@ -2,11 +2,26 @@
 
 use yii\helpers\Html;
 use app\lib\grid\GridView;
+use kartik\daterange\DateRangePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\OperacoesImportSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+
+$daterange = [
+        'model' => $searchModel,
+        'attribute' => 'createTimeRange',
+        'convertFormat' => true,
+        'pluginOptions' => [
+            'timePicker' => true,
+            'timePicker24Hour' => true,
+            'timePickerIncrement' => 10,
+            //'locale' => ['format' => 'Y-m-d H:i']
+            'locale' => ['format' => 'd/m/Y H:i:s']
+            //'locale' => ['dd/MM/yyyy HH:mm']
+        ],
+    ];
 $this->title = 'Operacões Imports';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -57,6 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         [
                                 'attribute' => 'data',
+                                'filter' => DateRangePicker::widget($daterange),
                                 'value' => function ($model) {
                                         $date = date_create($model->data);
                                         return date_format($date, 'd/m/Y H:i:s');
