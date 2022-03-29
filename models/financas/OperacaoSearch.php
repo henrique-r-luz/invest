@@ -3,6 +3,7 @@
 namespace app\models\financas;
 
 use yii\base\Model;
+use app\lib\dicionario\Tipo;
 use yii\data\ArrayDataProvider;
 use yii\data\ActiveDataProvider;
 use app\models\financas\Operacao;
@@ -121,7 +122,7 @@ class OperacaoSearch extends Operacao {
                         ->innerJoin('ativo', 'ativo.id = itens_ativo.ativo_id')
                         ->where(['between', 'data', $model->dataInicio, $model->dataFim])
                         ->andWhere(['operacao.tipo' => 1])//operação de compra
-                        ->andWhere(['ativo.tipo' => \app\lib\Tipo::ACOES])
+                        ->andWhere(['ativo.tipo' => Tipo::ACOES])
                         ->groupBy(['ativo.codigo', 'ativo.nome'])
                         ->orderBy(['sum(operacao.valor)' => SORT_DESC])->asArray()->all();
 
