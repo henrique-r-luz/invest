@@ -25,6 +25,7 @@ $config = [
             'theme' => [
                 'pathMap' => [
                     '@app/views' => '@app/lib/componentes/hail812/yii2-adminlte3/src/views'
+                   // '@app/layou' => '@app/lib/componentes/hail812/yii2-adminlte3/src/views/'
                 ],
             ],
         ],
@@ -56,9 +57,13 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\Usuario',
-            'enableSession'=>true
+            'identityClass' => 'app\models\User',
+            'enableSession'=>true,
+            'authTimeout' => (60*15),
+            //'loginUrl' => ['site/login'],
+            //'authTimeout' => 60 * 30,
         ],
+        
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

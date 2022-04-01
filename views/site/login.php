@@ -1,25 +1,37 @@
 <?php
 
+use yii\helpers\Html;
+use kartik\form\ActiveForm;
+
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-\hail812\adminlte3\assets\AdminLteAsset::register($this);
-$this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700');
-$this->registerCssFile('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
-\hail812\adminlte3\assets\PluginAsset::register($this)->add(['fontawesome', 'icheck-bootstrap']);
-?>
-<?php $this->beginPage() ?>
-<body class="hold-transition login-page">
-<?php  $this->beginBody() ?>
-<div class="login-box">
-    <div class="login-logo">
-        <a href="<?=Yii::$app->homeUrl?>"><b>Admin</b>LTE</a>
-    </div>
-    <!-- /.login-logo -->
-</div>
-<!-- /.login-box -->
 
-<?php $this->endBody() ?>
-</body>
-</html>
-<?php $this->endPage() ?>
+?>
+<div class="login-box">
+    <?php $form = ActiveForm::begin([]); ?>
+    <div class="card">
+        <div class="card-body login-card-body">
+            <p class="login-box-msg">Faça o seu login</p>
+            <div class="row">
+                <div class="col-12">
+                    <?= $form->field($model, 'username')->textInput(['placeholder' => 'Usuário', 'autofocus' => true])->label(false) ?>
+                </div>
+                <div class="col-12">
+                    <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Senha'])->label(false) ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <?= Html::a('Limpar', ['login'], ['class' => 'btn btn-default btn-block']) ?>
+                </div>
+                <div class="col-6">
+                    <?= Html::submitButton('Acessar', ['class' => 'btn btn-primary btn-block', 'name' => 'login-button']) ?>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <?php ActiveForm::end(); ?>
+</div>

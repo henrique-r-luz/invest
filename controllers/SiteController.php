@@ -2,21 +2,21 @@
 
 namespace app\controllers;
 
-use app\models\dashboard\DashBoardSearch;
-use app\models\dashboard\GraficoAcaoPais;
-use app\models\dashboard\GraficoAcoes;
-use app\models\dashboard\GraficoAtivo;
-use app\models\dashboard\GraficoCategoria;
+use Yii;
+use const YII_ENV_TEST;
+use yii\web\Controller;
+use app\models\LoginForm;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use app\models\financas\Proventos;
 use app\models\dashboard\GraficoFiis;
 use app\models\dashboard\GraficoPais;
 use app\models\dashboard\GraficoTipo;
-use app\models\financas\Proventos;
-use app\models\LoginFrom;
-use Yii;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
-use yii\web\Controller;
-use const YII_ENV_TEST;
+use app\models\dashboard\GraficoAcoes;
+use app\models\dashboard\GraficoAtivo;
+use app\models\dashboard\DashBoardSearch;
+use app\models\dashboard\GraficoAcaoPais;
+use app\models\dashboard\GraficoCategoria;
 
 class SiteController extends Controller
 {
@@ -41,7 +41,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'logout' => ['GET'],
                 ],
             ],
         ];
@@ -107,8 +107,8 @@ class SiteController extends Controller
 
     public function actionLogin()
     {
-        $this->layout = '@app/lib/componentes/hail812/yii2-adminlte3/src/views/layouts/main-login.php';
-        $model = new LoginFrom();
+        $this->layout = 'main-login';
+        $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->redirect(['index']);
         }
@@ -116,5 +116,10 @@ class SiteController extends Controller
             'login',
             ['model' => $model]
         );
+    }
+
+    public function actionLogout(){
+        Yii::$app->user->logout();
+        return $this->redirect('index');
     }
 }

@@ -15,13 +15,14 @@ class m220328_203730_user extends Migration
      */
     public function safeUp()
     {
-        $this->execute("CREATE table usuario (
+        $this->execute("CREATE table public.user (
             id SERIAL PRIMARY KEY,
-            nome varchar(50)  NOT NULL,
-            senha varchar(50)  NOT NULL
+            username varchar(50)  NOT NULL,
+            password text  NOT NULL,
+            authkey text
         );");
 
-        $this->execute("CREATE UNIQUE INDEX unique_user ON  usuario(nome);");
+        $this->execute("CREATE UNIQUE INDEX unique_user ON  public.user(username);");
     }
 
     /**
@@ -29,6 +30,6 @@ class m220328_203730_user extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('usuario');
+        $this->dropTable('public.user');
     }
 }
