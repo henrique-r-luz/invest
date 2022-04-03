@@ -17,6 +17,7 @@ use app\models\dashboard\GraficoAtivo;
 use app\models\dashboard\DashBoardSearch;
 use app\models\dashboard\GraficoAcaoPais;
 use app\models\dashboard\GraficoCategoria;
+use yii\web\ForbiddenHttpException;
 
 class SiteController extends Controller
 {
@@ -27,17 +28,6 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -71,6 +61,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+       
+       
         $dashBoardSearch = new DashBoardSearch();
         $dados = $dashBoardSearch->search();
         $graficoCategoria = new GraficoCategoria($dados);
@@ -118,8 +110,20 @@ class SiteController extends Controller
         );
     }
 
-    public function actionLogout(){
-        Yii::$app->user->logout();
+    public function actionLogout()
+    {
+        if (!Yii::$app->user->isGuest) {
+            Yii::$app->user->logout();
+        }
+       
         return $this->redirect('index');
+    }
+
+
+    public function actionError(){
+        return $this->render(
+            'error',
+            []
+        );
     }
 }

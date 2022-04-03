@@ -22,7 +22,7 @@ $config = [
             ],
             'migrationPath' => null, // allows to disable not namespaced migration completely
         ],
-        
+
     ],
 
     'components' => [
@@ -38,8 +38,11 @@ $config = [
             ],
         ],
         'db' => $db,
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
     ],
-    
+
     'params' => $params,
     /*
     'controllerMap' => [

@@ -34,6 +34,7 @@ class AtivoController extends Controller {
      * @return mixed
      */
     public function actionIndex() {
+       
         $searchModel = new AtivoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

@@ -6,6 +6,7 @@ Yii::setAlias('arquivos', dirname(__DIR__) . '/arquivos');
 
 use \kartik\datecontrol\Module;
 use yii\i18n\Formatter;
+use yii\web\ForbiddenHttpException;
 
 $config = [
     'id' => 'Invest',
@@ -25,7 +26,7 @@ $config = [
             'theme' => [
                 'pathMap' => [
                     '@app/views' => '@app/lib/componentes/hail812/yii2-adminlte3/src/views'
-                   // '@app/layou' => '@app/lib/componentes/hail812/yii2-adminlte3/src/views/'
+                    // '@app/layou' => '@app/lib/componentes/hail812/yii2-adminlte3/src/views/'
                 ],
             ],
         ],
@@ -58,12 +59,12 @@ $config = [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-            'enableSession'=>true,
-            'authTimeout' => (60*15),
+            'enableSession' => true,
+            'authTimeout' => (60 * 15),
             //'loginUrl' => ['site/login'],
             //'authTimeout' => 60 * 30,
         ],
-        
+
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -84,19 +85,20 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
-      'urlManager' => [
-      'enablePrettyUrl' => true,
-      'showScriptName' => false,
-      'rules' => [
-      ],
-      ],
-     */
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
+
+    ],
+    'as beforeRequest' => [
+        'class' => 'app\lib\rbac\AccessControlInvest',
+        
+
     ],
     'modules' => [
         'gridview' => ['class' => '\kartik\grid\Module'],
         'datecontrol' => [
-            
+
             'class' => 'kartik\datecontrol\Module',
             'displaySettings' => [
                 Module::FORMAT_DATE => 'dd/MM/yyyy',
@@ -128,7 +130,7 @@ $config = [
 ];
 
 if (YII_ENV_DEV) {
-   
+
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
