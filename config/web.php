@@ -61,8 +61,6 @@ $config = [
             'identityClass' => 'app\models\User',
             'enableSession' => true,
             'authTimeout' => (60 * 15),
-            //'loginUrl' => ['site/login'],
-            //'authTimeout' => 60 * 30,
         ],
 
         'errorHandler' => [
@@ -70,9 +68,6 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
             'useFileTransport' => true,
         ],
         'log' => [

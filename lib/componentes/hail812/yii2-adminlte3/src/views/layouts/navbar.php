@@ -23,7 +23,7 @@ if(!empty(Yii::$app->user->id)){
         <!-- Messages Dropdown Menu -->
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item">
-            <?= Html::a('<i class="fas fa-user-lock"></i> '.$user, Url::to(['logout']), ['class' => "nav-link"]) ?>
+            <?= Html::a('<i class="fas fa-user-lock"></i> '.$user, Url::toRoute(['site/logout']), ['class' => "nav-link"]) ?>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">

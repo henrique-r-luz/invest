@@ -24,6 +24,10 @@ class AccessControlInvest extends AccessControl
             return true;
         }
 
+        if(Yii::$app->user->can('admin')){
+            return true;
+        }
+
         if(Yii::$app->authManager->checkAccess($user->id,(Yii::$app->controller->id.'/'.Yii::$app->controller->action->id))){
             return true;
         }
