@@ -26,18 +26,6 @@ class ActionException extends ErrorAction{
      */
     public function run()
     {
-       // echo 'olaa:'.$this->layout;
-        //exit();
-       /* if ($this->layout !== null) {
-            $this->controller->layout = $this->layout;
-        }
-
-        Yii::$app->getResponse()->setStatusCodeByException($this->exception);
-
-        if (Yii::$app->getRequest()->getIsAjax()) {
-            return $this->renderAjaxResponse();
-        }
-        //return $this->renderAjaxResponse();
-       return $this->renderHtmlResponse();*/
+       
     }
 }

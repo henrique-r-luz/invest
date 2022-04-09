@@ -5,8 +5,7 @@ use miloschuman\highcharts\Highcharts;
 use yii\web\JsExpression;
 
 $this->title = 'Patrimônio';
-//print_r($dadosCategoria);
-//exit();
+
 ?>
 
 <div class="row">

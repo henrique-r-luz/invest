@@ -3,8 +3,7 @@
 use miloschuman\highcharts\Highcharts;
 use yii\helpers\Html;
 use yii\web\View;
-//print_r($graficoAno[0]);
-//exit();
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,8 +12,7 @@ use yii\web\View;
 $data = $graficoAno[0];
 unset($graficoAno[0]);
 $graficoAno = array_values($graficoAno);
-//print_r($graficoAno);
-//exit();
+
 ?>
 
  <?= Html::button('<i class="fa fa-eye-slash"></i> Ocutar Todos', ['class' => 'btn btn-success', 'id'=>'ocultar']) ?>

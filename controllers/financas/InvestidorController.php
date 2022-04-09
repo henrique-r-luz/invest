@@ -73,7 +73,6 @@ class InvestidorController extends Controller
 
                 $erro = CajuiHelper::processaErros($model->getErrors());
                 Yii::$app->session->setFlash('danger', 'Erro ao salvar Ativo!</br>' . $erro);
-               // exit();
             }else{
                 Yii::$app->session->setFlash('success', 'Dados cadastrados com sucesso! ');
                 return $this->redirect(['view', 'id' => $model->id]);

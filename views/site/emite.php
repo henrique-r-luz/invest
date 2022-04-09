@@ -4,8 +4,7 @@
 
 
 $this->title = 'Emite';
-//print_r($dadosCategoria);
-//exit();
+
 ?>
 
 

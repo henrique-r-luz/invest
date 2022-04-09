@@ -134,29 +134,25 @@ class OperacoesImport extends \yii\db\ActiveRecord
      */
     public function saveUpload()
     {
-        try {
-            if ($this->validate()) {
-                if (!$this->geraHashUpload()) {
-                    return false;
-                }
-                $this->extensao = $this->arquivo->extension;
-                if (!file_exists(Yii::getAlias('@' . self::DIR))) {
-                    mkdir(Yii::getAlias('@' . self::DIR));
-                }
-                if (!$this->arquivo->saveAs(Yii::getAlias('@' . self::DIR) . '/' . $this->hash_nome . '.' . $this->arquivo->extension)) {
-                    $this->addError('arquivo', 'Arquivo de upload não foi gerado. ');
-                    return false;
-                }
-                if (!$this->save()) {
-                    $this->addError('arquivo', CajuiHelper::processaErros($this->getErrors()));
-                }
-                return true;
-            } else {
+
+        if ($this->validate()) {
+            if (!$this->geraHashUpload()) {
                 return false;
             }
-        } catch (\throwable $e) {
-            echo $e->getMessage();
-            exit();
+            $this->extensao = $this->arquivo->extension;
+            if (!file_exists(Yii::getAlias('@' . self::DIR))) {
+                mkdir(Yii::getAlias('@' . self::DIR));
+            }
+            if (!$this->arquivo->saveAs(Yii::getAlias('@' . self::DIR) . '/' . $this->hash_nome . '.' . $this->arquivo->extension)) {
+                $this->addError('arquivo', 'Arquivo de upload não foi gerado. ');
+                return false;
+            }
+            if (!$this->save()) {
+                $this->addError('arquivo', CajuiHelper::processaErros($this->getErrors()));
+            }
+            return true;
+        } else {
+            return false;
         }
     }
 

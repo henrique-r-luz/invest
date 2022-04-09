@@ -57,24 +57,7 @@ class ActionColumn extends \kartik\grid\ActionColumn
     protected function filterActionColumn($buttons = [])
     {
         return $buttons;
-        /*print_r($buttons);
-        exit();
-        if (is_array($buttons)) {
-            $result = [];
-            foreach ($buttons as $button) {
-               // $params =  array_merge(['botao' => $button]);
-               // if (Yii::$app->user->checkRoute($button, $params)) {
-                    $result[] = "{{$button}}";
-                //}
-            }
-            print_r($result);
-            exit();
-            return implode(' ', $result);
-        }
-        return preg_replace_callback('/\\{([\w\-\/]+)\\}/', static function ($matches) {
-           // $params = empty(Yii::$app->request->get()) ? [] : array_merge(['botao' => $matches[1]], Yii::$app->request->get());
-            "{{$matches[1]}}";// return Yii::$app->user->checkRoute($matches[1], $params) ? "{{$matches[1]}}" : '';
-        }, $buttons);*/
+       
     }
 
     /**

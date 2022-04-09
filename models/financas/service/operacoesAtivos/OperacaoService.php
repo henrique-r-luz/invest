@@ -60,8 +60,6 @@ class OperacaoService {
             $this->transaction->commit();
             return true;
         } catch (Exception $ex) {
-            echo $ex->getTraceAsString();
-            exit();
             $this->transaction->rollBack();
             throw new Exception($ex->getMessage());
             return false;
