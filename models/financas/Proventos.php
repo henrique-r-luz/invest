@@ -4,6 +4,7 @@ namespace app\models\financas;
 
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use ruturajmaniyar\mod\audit\behaviors\AuditEntryBehaviors;
 
 /**
  * This is the model class for table "proventos".
@@ -23,6 +24,15 @@ class Proventos extends ActiveRecord
     public static function tableName()
     {
         return 'proventos';
+    }
+
+    public function behaviors()
+    {
+        return [
+            'auditEntryBehaviors' => [
+                'class' => AuditEntryBehaviors::class
+            ],
+        ];
     }
 
     /**

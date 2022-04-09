@@ -24,7 +24,8 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     software-properties-common \
-    python3-pip
+    python3-pip \
+    vim
     
  
 

@@ -52,6 +52,7 @@
         "kartik-v/bootstrap-fileinput": "dev-master",
         "hail812/yii2-adminlte3": "~1.1",
         "kartik-v/yii2-bootstrap4-dropdown": "@dev"
+        
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

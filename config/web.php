@@ -22,6 +22,7 @@ $config = [
         '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
+        
         'view' => [
             'theme' => [
                 'pathMap' => [
@@ -87,7 +88,7 @@ $config = [
     ],
     'as beforeRequest' => [
         'class' => 'app\lib\rbac\AccessControlInvest',
-        
+
 
     ],
     'modules' => [
