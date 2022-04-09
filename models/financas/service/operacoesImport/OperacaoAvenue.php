@@ -20,10 +20,11 @@ class OperacaoAvenue extends OperacoesImportAbstract
 
     protected function getDados()
     {
-
+        echo 'olaaa'.$this->operacoesImport->hash_nome;
+        exit();
         $filePath = Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $this->operacoesImport->hash_nome . '.' . $this->operacoesImport->extensao;
         if (!file_exists($filePath)) {
-            throw new \Exception("O arquivo envado não foi salvo no servidor. ");
+            throw new \Exception("O arquivo enviado não foi salvo no servidor. ");
         }
         $this->arquivo = array_map(function ($v) use ($filePath) {
             return str_getcsv($v, ComponenteOperacoes::getFileDelimiter($filePath));

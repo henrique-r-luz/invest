@@ -17,11 +17,12 @@ class OperacaoClear extends OperacoesImportAbstract
 
     protected function getDados()
     {
-
+        
         $filePath = Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $this->operacoesImport->hash_nome . '.' . $this->operacoesImport->extensao;
         if (!file_exists($filePath)) {
-            throw new \Exception("O arquivo envado não foi salvo no servidor. ");
+            throw new \Exception("O arquivo enviado não foi salvo no servidor. ");
         }
+      
         $this->arquivo = array_map(function ($v) use ($filePath) {
             return str_getcsv($v, ComponenteOperacoes::getFileDelimiter($filePath));
         }, file($filePath));
@@ -31,8 +32,9 @@ class OperacaoClear extends OperacoesImportAbstract
     public  function atualiza()
     {
         try {
-            
+           
             foreach ($this->arquivo as $id => $linha) {
+               
                 $this->linha = $linha;
                 $codigo = substr($linha[1], 0, 5); //str_replace("F", "", $linha[1]);
                 $this->itensAtivo = OperacoesImportHelp::getIntemAtivo(['codigo' => $codigo, 'investidor' => $this->operacoesImport->investidor_id]); 
@@ -43,6 +45,7 @@ class OperacaoClear extends OperacoesImportAbstract
                         continue;
                     }
                 }
+               
                 list($data, $hora) = explode(" ", $linha[11]);
                 list($d, $m, $y) = explode('/', $data);
                 $this->dataAcao = $y . '-' . $m . '-' . $d . ' ' . $hora;
@@ -50,7 +53,7 @@ class OperacaoClear extends OperacoesImportAbstract
                 if (Operacao::find()->where(['itens_ativos_id' => $this->itensAtivo->id])->andWhere(['data' => $this->dataAcao])->exists()) {
                     continue;
                 }
-
+               
                 if ($this->itensAtivo != null) {
 
                     $operacaoService =  OperacoesImportHelp::insereOperacao([
@@ -59,7 +62,7 @@ class OperacaoClear extends OperacoesImportAbstract
                         'data' => $this->dataAcao,
                         'valor' => $this->linha[10] * $this->linha[8],
                         'operacao' => $this->linha[3]
-                    ]);;
+                    ]);
                     if (!$operacaoService->acaoSalvaOperacao()) {
                         $erros = CajuiHelper::processaErros($operacaoService->getOpereacao()->getErrors()) . '</br>';
                         throw new \Exception($erros);
@@ -67,8 +70,11 @@ class OperacaoClear extends OperacoesImportAbstract
                         $this->dadosJson['operacoes_id'][] = $operacaoService->getOpereacao()->id;
                     }
                 }
+               
+               
             }
         } catch (\Exception $e) {
+           
             throw new \Exception($e->getMessage());
         }
     }

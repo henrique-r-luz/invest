@@ -46,9 +46,8 @@ class OperacaoNu extends OperacoesImportAbstract
         }
 
         $filePath = Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $this->operacoesImport->hash_nome . '.' . $this->operacoesImport->extensao;
-
         if (!file_exists($filePath)) {
-            throw new \Exception("O arquivo envado não foi salvo no servidor. ");
+            throw new \Exception("O arquivo NU enviado não foi salvo no servidor. ");
         }
 
         $this->csv = array_map(function ($v) use ($filePath) {

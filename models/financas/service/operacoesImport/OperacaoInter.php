@@ -55,7 +55,7 @@ class OperacaoInter extends OperacoesImportAbstract
         $this->cdbBancoInterId = $this->operacoesImport->itens_ativos;
         $filePath = Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $this->operacoesImport->hash_nome . '.' . $this->operacoesImport->extensao;
         if (!file_exists($filePath)) {
-            throw new \Exception("O arquivo envado não foi salvo no servidor. ");
+            throw new \Exception("O arquivo banco Inter enviado não foi salvo no servidor. ");
         }
         $this->atualizaValores($filePath);
     }

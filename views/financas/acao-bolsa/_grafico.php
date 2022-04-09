@@ -47,9 +47,7 @@ Highcharts::widget([
         ],
         'plotOptions'=>[
            'series'=>[
-               'events'=>[
-                   'legendItemClick'=>"function(){alert('ola')}"
-               ]
+              
            ] 
         ],
         'series' => $graficoAno,

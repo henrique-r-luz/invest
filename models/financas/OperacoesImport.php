@@ -50,7 +50,7 @@ class OperacoesImport extends \yii\db\ActiveRecord
             [['investidor_id', 'tipo_arquivo', 'arquivo', 'data'], 'required'],
             [['investidor_id'], 'default', 'value' => null],
             [['investidor_id'], 'integer'],
-            [['itens_ativos'],'safe'],
+            [['itens_ativos'], 'safe'],
             [['hash_nome', 'investidor_id'], 'unique', 'targetAttribute' => ['investidor_id', 'hash_nome'], 'message' => 'O arquivo já existe na base de dados. '],
             [['arquivo'], 'file', 'skipOnEmpty' => false],
             [['tipo_arquivo', 'lista_operacoes_criadas_json', 'hash_nome', 'extensao'], 'string'],
@@ -134,24 +134,29 @@ class OperacoesImport extends \yii\db\ActiveRecord
      */
     public function saveUpload()
     {
-        if ($this->validate()) {
-            if (!$this->geraHashUpload()) {
+        try {
+            if ($this->validate()) {
+                if (!$this->geraHashUpload()) {
+                    return false;
+                }
+                $this->extensao = $this->arquivo->extension;
+                if (!file_exists(Yii::getAlias('@' . self::DIR))) {
+                    mkdir(Yii::getAlias('@' . self::DIR));
+                }
+                if (!$this->arquivo->saveAs(Yii::getAlias('@' . self::DIR) . '/' . $this->hash_nome . '.' . $this->arquivo->extension)) {
+                    $this->addError('arquivo', 'Arquivo de upload não foi gerado. ');
+                    return false;
+                }
+                if (!$this->save()) {
+                    $this->addError('arquivo', CajuiHelper::processaErros($this->getErrors()));
+                }
+                return true;
+            } else {
                 return false;
             }
-            $this->extensao = $this->arquivo->extension;
-            if (!file_exists(Yii::getAlias('@' . self::DIR))) {
-                mkdir(Yii::getAlias('@' . self::DIR));
-            }
-            if (!$this->arquivo->saveAs(Yii::getAlias('@' . self::DIR) . '/' . $this->hash_nome . '.' . $this->arquivo->extension)) {
-                $this->addError('arquivo', 'Arquivo de upload não foi gerado. ');
-                return false;
-            }
-            if (!$this->save()) {
-                $this->addError('arquivo', CajuiHelper::processaErros($this->getErrors()));
-            }
-            return true;
-        } else {
-            return false;
+        } catch (\throwable $e) {
+            echo $e->getMessage();
+            exit();
         }
     }
 

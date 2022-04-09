@@ -32,7 +32,7 @@ function loadDados(porcentagem) {
         type: 'get',
         success: function (data) {
             if (data['total'] == 'erro') {
-                $.growl.error({message:"olaaa"});
+                $.growl.error({message:"Erro ao atualizar preço das ações"});
                 disposeProgressBar();
 
             }

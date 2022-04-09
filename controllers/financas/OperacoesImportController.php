@@ -86,6 +86,7 @@ class OperacoesImportController extends Controller
                 'model' => $operacoesImportService->getModel(),
             ]);
         } catch (\Exception $e) {
+            
             Yii::$app->session->setFlash('danger', 'Erro ao salvar operação import! ' . $e->getMessage());
             $operacoesImportService->getModel()->arquivo = null;
             return $this->render('create', [
