@@ -2,6 +2,7 @@
 
 namespace app\migrations;
 
+use Yii;
 use app\models\User;
 use yii\db\Migration;
 
@@ -18,7 +19,7 @@ class m220403_192930_popula_user extends Migration
      */
     public function safeUp()
     {
-        $this->insert('public.user', ['username' => 'admin', 'password' => 'admin']);
+        $this->insert('public.user', ['username' => 'admin', 'password' => Yii::$app->getSecurity()->generatePasswordHash('admin')]);
         $this->insert('public.auth_item', ['name' => 'admin', 'type' => '1', 'description' => 'papel do administrador']);
         $user = User::find()->where(['username'=>'admin'])->one();
         $this->insert('public.auth_assignment', ['user_id' => $user->id, 'item_name' => 'admin']);

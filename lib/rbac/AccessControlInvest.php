@@ -15,7 +15,7 @@ class AccessControlInvest extends AccessControl
         
         $user = $this->user;
         /**
-         * páginas publicas
+         * páginas públicas
          */
         if(Yii::$app->controller->id=='site' && Yii::$app->controller->action->id=='login' ||
            Yii::$app->controller->id=='site' && Yii::$app->controller->action->id=='error' ||
@@ -24,11 +24,15 @@ class AccessControlInvest extends AccessControl
            ){
             return true;
         }
-
+        /**
+         * grupo administrador tem acesso inrestrito
+         */
         if(Yii::$app->user->can('admin')){
             return true;
         }
-
+        /**
+         * verifica se o usuário tem acesso a rota
+         */
         if(Yii::$app->authManager->checkAccess($user->id,(Yii::$app->controller->id.'/'.Yii::$app->controller->action->id))){
             return true;
         }
