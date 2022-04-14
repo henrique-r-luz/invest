@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use app\lib\behavior\AuditoriaBehavior;
 
 /**
  * This is the model class for table "user".
@@ -22,6 +23,13 @@ class User extends ActiveRecord implements IdentityInterface
     public static function tableName()
     {
         return 'public.user';
+    }
+
+    public function behaviors()
+    {
+        return [
+            AuditoriaBehavior::class,
+        ];
     }
 
     /**

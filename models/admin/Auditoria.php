@@ -4,6 +4,7 @@
 namespace app\models\admin;
 
 use Yii;
+use app\models\User;
 use yii\db\ActiveRecord;
 
 /**
@@ -18,8 +19,7 @@ use yii\db\ActiveRecord;
  *
  * @property User $createdBy
  *
- * @author Christopher Mota
- * @since  1.1.0
+
  */
 class Auditoria extends ActiveRecord
 {
@@ -38,10 +38,10 @@ class Auditoria extends ActiveRecord
     public function rules()
     {
         return [
-            [['model', 'operacao', 'user_id', 'created_at'], 'required'],
+            [['model', 'operacao','changes', 'user_id', 'created_at'], 'required'],
             [['model', 'operacao'], 'string'],
-            ['changes', 'safe'],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']]
+            //['changes', 'safe'],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']]
         ];
     }
 

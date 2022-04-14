@@ -2,12 +2,10 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\web\JsExpression;
 use kartik\file\FileInput;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use kartik\widgets\ActiveForm;
-use app\models\financas\Investidor;
 use app\models\financas\ItensAtivo;
 use app\models\financas\OperacoesImport;
 use app\lib\dicionario\TipoArquivoUpload;

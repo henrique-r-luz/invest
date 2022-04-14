@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models\financas;
+use app\lib\behavior\AuditoriaBehavior;
 
 use Yii;
 
@@ -21,6 +22,13 @@ class Investidor extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'investidor';
+    }
+
+    public function behaviors()
+    {
+        return [
+            AuditoriaBehavior::class,
+        ];
     }
 
     /**

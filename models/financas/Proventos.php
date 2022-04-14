@@ -4,7 +4,7 @@ namespace app\models\financas;
 
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-use ruturajmaniyar\mod\audit\behaviors\AuditEntryBehaviors;
+use app\lib\behavior\AuditoriaBehavior;
 
 /**
  * This is the model class for table "proventos".
@@ -29,9 +29,7 @@ class Proventos extends ActiveRecord
     public function behaviors()
     {
         return [
-            'auditEntryBehaviors' => [
-                'class' => AuditEntryBehaviors::class
-            ],
+            AuditoriaBehavior::class,
         ];
     }
 

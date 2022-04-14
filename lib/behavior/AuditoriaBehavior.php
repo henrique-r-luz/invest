@@ -1,12 +1,15 @@
 <?php
 
-namespace cajui\lib\behaviors;
+namespace app\lib\behavior;
 
+use app\lib\CajuiHelper;
 use Yii;
+use yii\helpers\Json;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
-use yii\helpers\Json;
-use cajui\models\admin\Auditoria;
+use app\models\admin\Auditoria;
+use Throwable;
+use yii\db\Transaction;
 
 /**
  * Class AuditoriaBehavior
@@ -16,21 +19,11 @@ use cajui\models\admin\Auditoria;
  */
 class AuditoriaBehavior extends Behavior
 {
-    /**
-     * Is the behavior is ativo or not
-     * @var boolean
-     */
-    public $ativo = true;
 
-    /**
-     * @var array
-     */
-    private $_oldAttributes = [];
-
-    /**
-     * @var array
-     */
-    private $_attributes = [];
+    private $action;
+    private $changes = [];
+    private $erros = [];
+    private $transaction;
 
     /**
      * {@inheritdoc}
@@ -38,10 +31,28 @@ class AuditoriaBehavior extends Behavior
     public function events()
     {
         return [
+            ActiveRecord::EVENT_AFTER_INSERT => 'afterInsert',
             ActiveRecord::EVENT_BEFORE_INSERT => 'beforeInsert',
             ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeUpdate',
             ActiveRecord::EVENT_BEFORE_DELETE => 'beforeDelete',
         ];
+    }
+
+
+
+
+    public function beforeInsert()
+    {
+        $this->transaction =  Yii::$app->db->beginTransaction();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function afterInsert()
+    {
+        $this->action = 'insert';
+        $this->insereAfterAuditoria();
     }
 
     /**
@@ -49,16 +60,8 @@ class AuditoriaBehavior extends Behavior
      */
     public function beforeUpdate()
     {
-        //$this->setOldAttributes($this->owner->getOldAttributes());
-    }
-
-     /**
-     * {@inheritdoc}
-     */
-    public function beforeInsert()
-    {
-       /* $this->auditar('INSERT');
-        $this->setOldAttributes($this->owner->getOldAttributes());*/
+        $this->action = 'update';
+        $this->insereBeforeAuditoria();
     }
 
     /**
@@ -66,93 +69,49 @@ class AuditoriaBehavior extends Behavior
      */
     public function beforeDelete()
     {
-       /* $this->setAttributes($this->owner->getAttributes());
-        $this->auditar('DELETE');*/
+        $this->action = 'delete';
+        $this->insereBeforeAuditoria();
     }
 
-    /**
-     * @param $action
-     * @throws \yii\db\Exception
-     */
-    public function auditar($action)
-    {
-        // Não está ativo? sair.
-        if (!$this->ativo) {
-            return;
-        }
 
-        // Obter os atributos novos e antigos
+    public function  insereBeforeAuditoria()
+    {
+        if (!$this->saveAuditoria()) {
+            throw new \Exception("Error ao inserir auditoria:</br>" . $this->erros);
+        }
+    }
+
+    public function  insereAfterAuditoria()
+    {
+        try {
+            if (!$this->saveAuditoria()) {
+                $this->transaction->rollBack();
+                throw new \Exception("Error ao inserir auditoria:</br>" . $this->erros);
+            }
+            $this->transaction->commit();
+        } catch (Throwable $e) {
+            $this->transaction->rollBack();
+            throw new \Exception("Error ao inserir auditoria");
+        }
+    }
+
+
+    private function saveAuditoria()
+    {
+        $this->changes       = [];
+        foreach ($this->owner->getAttributes() as $name => $value) {
+            $this->changes[$name] = $value;
+        }
         $auditoria = new Auditoria();
-
-        if ($action == 'UPDATE') {
-            $oldAttributes = $this->getOldAttributes();
-            $changes       = [];
-            foreach ($this->getAttributes() as $name => $value) {
-                if (!array_key_exists($name, $this->getOldAttributes()) || $value != $oldAttributes[$name]) {
-                    $changes[$name] = $value;
-                }
-            }
-
-            // Se não houver diferença não registra
-            if (count($changes) <= 0) {
-                return;
-            }
-            $auditoria->created_by = $this->owner->updated_by;
-            $auditoria->created_at = $this->owner->updated_at;
-        } else {
-            $changes               = $this->getAttributes();
-            $auditoria->created_by = Yii::$app->session->get('user.idUserInicial') ?? Yii::$app->user->id;
-            $auditoria->created_at = time();
-        }
-
-        // Dados auditados
         $auditoria->model    = get_class($this->owner);
-        $auditoria->model_id = $this->getNormalizedPk();
-        $auditoria->operacao = $action;
-        $auditoria->changes  = $changes;
-
-        $auditoria->save();
-    }
-
-    /**
-     * @return array
-     */
-    public function getOldAttributes()
-    {
-        return $this->_oldAttributes;
-    }
-
-    /**
-     * @return array
-     */
-    public function getAttributes()
-    {
-        return $this->_attributes;
-    }
-
-    /**
-     * @param $value
-     */
-    public function setOldAttributes($value)
-    {
-        $this->_oldAttributes = $value;
-    }
-
-    /**
-     * @param $value
-     */
-    public function setAttributes($value)
-    {
-        $this->_attributes = $value;
-    }
-
-    /**
-     * Quando a chave primaria for composta retorna em formato json.
-     * @return string
-     */
-    protected function getNormalizedPk()
-    {
-        $pk = $this->owner->getPrimaryKey();
-        return is_array($pk) ? json_encode($pk) : (string) $pk;
+        $auditoria->operacao = $this->action;
+        $auditoria->changes  = $this->changes;
+        $auditoria->user_id =  Yii::$app->user->id;
+        $auditoria->created_at = time();
+        if (!$auditoria->save()) {
+            $this->erros = CajuiHelper::processaErros($this->owner->getErrors());
+            return false;
+        }
+        return true;
     }
 }

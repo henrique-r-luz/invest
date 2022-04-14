@@ -89,8 +89,6 @@ class ProventosSearch extends Proventos {
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
@@ -103,8 +101,6 @@ class ProventosSearch extends Proventos {
         ]);
 
         if ($this->createTimeRange != null && $this->createTimeRange != '') {
-            // $query->andFilterWhere(['>=', 'data', date("d/m/y H:i", $this->createTimeStart)])
-            //         ->andFilterWhere(['<=', 'data', date("d/m/y H:i", $this->createTimeEnd)]);
             $query->andFilterWhere(['>=', 'data', $this->createTimeStart])
                     ->andFilterWhere(['<=', 'data', $this->createTimeEnd]);
         }

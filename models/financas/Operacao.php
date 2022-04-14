@@ -8,6 +8,7 @@ use yii\db\ActiveRecord;
 use app\models\financas\Ativo;
 use app\models\financas\service\operacoesAtivos\DadosOperacoesAtivos;
 use app\models\financas\service\operacoesAtivos\DadosAtivosBancoInter;
+use app\lib\behavior\AuditoriaBehavior;
 
 /**
  * This is the model class for table "public.operacao".
@@ -38,6 +39,13 @@ class Operacao extends ActiveRecord
             1 => self::COMPRA,
             2 => self::DESDOBRAMENTO_MAIS,
             3 => self::DESDOBRAMENTO_MENOS
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            AuditoriaBehavior::class,
         ];
     }
 

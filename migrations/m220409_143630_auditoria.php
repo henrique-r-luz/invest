@@ -2,8 +2,7 @@
 
 namespace app\migrations;
 
-use Yii;
-use app\models\User;
+
 use yii\db\Migration;
 
 /**
@@ -11,7 +10,7 @@ use yii\db\Migration;
  * type 2 são as regras
  * 
  */
-class m220403_192930_popula_user extends Migration
+class m220409_143630_auditoria extends Migration
 {
 
     /**
@@ -21,21 +20,13 @@ class m220403_192930_popula_user extends Migration
     {
         // Criação da tabela de auditoria
         $this->createTable('auditoria', [
-            'id'         => $this->primaryKey(),
+            'id'         => 'SERIAL PRIMARY KEY',
             'model'      => $this->text()->notNull(),
             'operacao'   => $this->text()->notNull(),
             'changes'    => 'JSONB NOT NULL',
-            'user_id'       => $this->integer()->notNull(),
+            'user_id'    => 'INTEGER REFERENCES public.user(id) NOT NULL',
             'created_at' => $this->integer()->notNull(),
-            'FOREIGN KEY (user) REFERENCES public.user (id)',
         ]);
-        $this->addCommentOnTable('basico.auditoria', 'Auditoria de tabelas. registra alterações numa tabela.');
-        $this->addCommentOnColumn('basico.auditoria', 'id', 'Identificador do registro de alteração numa tabela.');
-        $this->addCommentOnColumn('basico.auditoria', 'model', 'Classe modelo que representa a tabela alterada.');
-        $this->addCommentOnColumn('basico.auditoria', 'operacao', 'Operação que alterou a tabela: INSERT, DELETE, TRUNCATE.');
-        $this->addCommentOnColumn('basico.auditoria', 'changes', 'Registra diferença após alteração da tabela.');
-        $this->addCommentOnColumn('basico.auditoria', 'user', 'Identificador do usuário que executou a operação');
-        $this->addCommentOnColumn('basico.auditoria', 'created_at', 'Identificador do registro de alteração numa tabela');
     }
 
     /**
@@ -43,6 +34,6 @@ class m220403_192930_popula_user extends Migration
      */
     public function safeDown()
     {
-       $this->dropTable('auditoria')
+       $this->dropTable('auditoria');
     }
 }

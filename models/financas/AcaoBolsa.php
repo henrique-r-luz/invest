@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models\financas;
+use app\lib\behavior\AuditoriaBehavior;
 
 use Yii;
 
@@ -20,6 +21,13 @@ class AcaoBolsa extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'acao_bolsa';
+    }
+
+    public function behaviors()
+    {
+        return [
+            AuditoriaBehavior::class,
+        ];
     }
 
     /**

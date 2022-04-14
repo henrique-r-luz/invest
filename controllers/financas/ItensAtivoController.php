@@ -4,7 +4,6 @@ namespace app\controllers\financas;
 
 use Yii;
 use app\models\financas\Ativo;
-use app\models\financas\AtivoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,7 +64,7 @@ class ItensAtivoController extends Controller {
     public function actionCreate() {
         $model = new ItensAtivo();
         $model->ativo = true;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {

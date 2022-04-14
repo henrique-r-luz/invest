@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models\financas;
+use app\lib\behavior\AuditoriaBehavior;
 
 use Yii;
 
@@ -22,6 +23,13 @@ class ItensAtivoImport extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'itens_ativo_import';
+    }
+
+    public function behaviors()
+    {
+        return [
+            AuditoriaBehavior::class,
+        ];
     }
 
     /**

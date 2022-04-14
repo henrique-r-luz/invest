@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models\financas;
+use app\lib\behavior\AuditoriaBehavior;
 
 use Yii;
 
@@ -47,6 +48,14 @@ class BalancoEmpresaBolsa extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'balanco_empresa_bolsa';
+    }
+
+
+    public function behaviors()
+    {
+        return [
+            AuditoriaBehavior::class,
+        ];
     }
 
     /**

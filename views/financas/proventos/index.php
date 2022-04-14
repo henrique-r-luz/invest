@@ -43,6 +43,12 @@ $daterange = [
         'boxTitle' => $this->title,
         'columns' => [
             [
+                'attribute' => 'id',
+                'options' => [
+                    'style' => 'width:6%;'
+                ]
+            ],
+            [
                 'label' => 'Id Ativo',
                 'attribute' => 'itens_ativos_id',
                 'value' => 'itensAtivo.id',

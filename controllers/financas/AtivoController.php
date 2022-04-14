@@ -63,7 +63,7 @@ class AtivoController extends Controller {
      */
     public function actionCreate() {
         $model = new Ativo();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {

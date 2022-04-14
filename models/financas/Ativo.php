@@ -8,6 +8,7 @@ use app\models\Tipo;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
+use app\lib\behavior\AuditoriaBehavior;
 
 /**
  * This is the model class for table "public.ativo".
@@ -34,13 +35,10 @@ class Ativo extends ActiveRecord
         return 'public.ativo';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function transactions()
+    public function behaviors()
     {
         return [
-            self::SCENARIO_DEFAULT => self::OP_ALL,
+            AuditoriaBehavior::class,
         ];
     }
 

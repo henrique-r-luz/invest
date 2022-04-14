@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "54a46e547400dac21497448f40c47668",
+    "content-hash": "11e2e9a075c0dd43b4e7387a6f158136",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -511,16 +511,16 @@
         },
         {
             "name": "hail812/yii2-adminlte3",
-            "version": "v1.1.6",
+            "version": "v1.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hail812/yii2-adminlte3.git",
-                "reference": "c399655fef5b810d4250e01f088682b6c5d679e3"
+                "reference": "e97006d03a5cb10628086b95c31f7c094ed56405"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hail812/yii2-adminlte3/zipball/c399655fef5b810d4250e01f088682b6c5d679e3",
-                "reference": "c399655fef5b810d4250e01f088682b6c5d679e3",
+                "url": "https://api.github.com/repos/hail812/yii2-adminlte3/zipball/e97006d03a5cb10628086b95c31f7c094ed56405",
+                "reference": "e97006d03a5cb10628086b95c31f7c094ed56405",
                 "shasum": ""
             },
             "require": {
@@ -554,9 +554,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hail812/yii2-adminlte3/issues",
-                "source": "https://github.com/hail812/yii2-adminlte3/tree/v1.1.6"
+                "source": "https://github.com/hail812/yii2-adminlte3/tree/v1.1.7"
             },
-            "time": "2022-04-07T23:42:36+00:00"
+            "time": "2022-04-11T23:52:06+00:00"
         },
         {
             "name": "kartik-v/bootstrap-checkbox-x",
@@ -2650,23 +2650,22 @@
         },
         {
             "name": "kartik-v/yii2-widget-select2",
-            "version": "dev-master",
+            "version": "v2.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-select2.git",
-                "reference": "2346248bb09377bd4f0a585d7cad10be103d72ca"
+                "reference": "25fbe4b93b8acbac325fa4f594a983be1e84a780"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/2346248bb09377bd4f0a585d7cad10be103d72ca",
-                "reference": "2346248bb09377bd4f0a585d7cad10be103d72ca",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/25fbe4b93b8acbac325fa4f594a983be1e84a780",
+                "reference": "25fbe4b93b8acbac325fa4f594a983be1e84a780",
                 "shasum": ""
             },
             "require": {
                 "kartik-v/yii2-krajee-base": ">=3.0.4",
                 "select2/select2": ">=4.0"
             },
-            "default-branch": true,
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {
@@ -2703,7 +2702,7 @@
             ],
             "support": {
                 "issues": "https://github.com/kartik-v/yii2-widget-select2/issues",
-                "source": "https://github.com/kartik-v/yii2-widget-select2/tree/master"
+                "source": "https://github.com/kartik-v/yii2-widget-select2/tree/v2.2.3"
             },
             "funding": [
                 {
@@ -2711,7 +2710,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2022-03-29T13:25:36+00:00"
+            "time": "2022-03-04T10:11:54+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-sidenav",
@@ -3664,16 +3663,16 @@
         },
         {
             "name": "smalot/pdfparser",
-            "version": "v2.1.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smalot/pdfparser.git",
-                "reference": "4551cd0f07447d0865db7d89e07e6a7143536058"
+                "reference": "193515a64fb979aff1786b09d5960797db2f3b0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/4551cd0f07447d0865db7d89e07e6a7143536058",
-                "reference": "4551cd0f07447d0865db7d89e07e6a7143536058",
+                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/193515a64fb979aff1786b09d5960797db2f3b0a",
+                "reference": "193515a64fb979aff1786b09d5960797db2f3b0a",
                 "shasum": ""
             },
             "require": {
@@ -3709,9 +3708,9 @@
             ],
             "support": {
                 "issues": "https://github.com/smalot/pdfparser/issues",
-                "source": "https://github.com/smalot/pdfparser/tree/v2.1.0"
+                "source": "https://github.com/smalot/pdfparser/tree/v2.2.0"
             },
-            "time": "2022-02-03T13:28:46+00:00"
+            "time": "2022-04-04T10:25:03+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4520,12 +4519,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "a17ec7376309f707b3a636e607fdbfd69ef521d8"
+                "reference": "88ccc04a8966c8920f1fdce77ff8a18d98e098b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/a17ec7376309f707b3a636e607fdbfd69ef521d8",
-                "reference": "a17ec7376309f707b3a636e607fdbfd69ef521d8",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/88ccc04a8966c8920f1fdce77ff8a18d98e098b5",
+                "reference": "88ccc04a8966c8920f1fdce77ff8a18d98e098b5",
                 "shasum": ""
             },
             "require": {
@@ -4635,7 +4634,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-08T13:36:08+00:00"
+            "time": "2022-04-13T15:58:28+00:00"
         },
         {
             "name": "yiisoft/yii2-bootstrap4",
@@ -9969,7 +9968,6 @@
         "kartik-v/yii2-widget-affix": 20,
         "kartik-v/yii2-grid": 20,
         "kartik-v/yii2-date-range": 20,
-        "kartik-v/yii2-widget-select2": 20,
         "kartik-v/yii2-number": 20,
         "kartik-v/yii2-icons": 20,
         "kartik-v/bootstrap-fileinput": 20,

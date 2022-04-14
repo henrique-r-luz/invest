@@ -61,6 +61,21 @@ class ItensAtivoSearch extends ItensAtivo
             ],
         ]);
 
+        $dataProvider->sort->attributes['codigo'] = [
+            'asc' => ['ativo.codigo' => SORT_ASC],
+            'desc' => ['ativo.codigo' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['tipo'] = [
+            'asc' => ['ativo.tipo' => SORT_ASC],
+            'desc' => ['ativo.tipo' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['categoria'] = [
+            'asc' => ['ativo.categoria' => SORT_ASC],
+            'desc' => ['ativo.categoria' => SORT_DESC],
+        ];
+
         $this->load($params);
 
         if (!$this->validate()) {

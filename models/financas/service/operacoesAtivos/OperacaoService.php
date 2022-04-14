@@ -34,6 +34,7 @@ class OperacaoService {
     private $operacao;
     private $transaction;
     private $alteraAtivo;
+    private $ativo_id_antigo;
 
     function __construct($operacao) {
         $this->operacao = $operacao;
@@ -91,6 +92,7 @@ class OperacaoService {
     }
 
     private function salvaOperacao() {
+        $this->ativo_id_antigo = $this->operacao->getOldAttribute('itens_ativos_id');
         if (!$this->operacao->save()) {
             $erro = CajuiHelper::processaErros($this->operacao->getErrors());
             $msg = 'O sistema não pode alterar a operação:' . $erro . '. ';
@@ -106,14 +108,13 @@ class OperacaoService {
     }
 
     private function corrigeAlteracaoAtivo() {
-        $ativo_id_antigo = $this->operacao->getOldAttribute('itens_ativos_id');
-        if ($ativo_id_antigo == null) {
+        
+        if ($this->ativo_id_antigo == null) {
             return true;
         }
-
-        //essa ação acontece se ocorrer uma alteração do tipo de ativo
-        if (!$this->alteraAtivo->updateAtivo($ativo_id_antigo)) {
-            throw new Exception('O sistema não conseguiu atualizar o ativo:' . $ativo_id_antigo . '. ');
+        //essa ação acontece se ocorrer uma alteração do tipo de ativo, no form do cadastro
+        if (!$this->alteraAtivo->updateAtivo($this->ativo_id_antigo)) {
+            throw new Exception('O sistema não conseguiu atualizar o ativo:' . $this->ativo_id_antigo . '. ');
             // throw new Exception('O sistema não pode alterar o ativo:' . $this->ativo->codigo . '. ');
         }
     }

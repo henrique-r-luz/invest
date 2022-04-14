@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 ]) ?>
                 <?= Html::a('Voltar',['index'], ['class' => 'btn btn-default']) ?>
-                <?= Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar']) ?>
+                <?= Html::a('<i class="fas fa-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar']) ?>
             </p>
 
             <?= DetailView::widget([

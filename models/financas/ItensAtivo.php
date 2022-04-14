@@ -6,6 +6,7 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use app\models\financas\Ativo;
 use app\models\financas\Investidor;
+use app\lib\behavior\AuditoriaBehavior;
 
 /**
  * This is the model class for table "itens_ativo".
@@ -29,6 +30,13 @@ class ItensAtivo extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'itens_ativo';
+    }
+
+    public function behaviors()
+    {
+        return [
+            AuditoriaBehavior::class,
+        ];
     }
 
     /**

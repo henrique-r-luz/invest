@@ -6,6 +6,7 @@ use app\lib\CajuiHelper;
 use Yii;
 use app\models\financas\Investidor;
 use Exception;
+use app\lib\behavior\AuditoriaBehavior;
 
 /**
  * This is the model class for table "operacoes_import".
@@ -70,6 +71,14 @@ class OperacoesImport extends \yii\db\ActiveRecord
             'arquivo' => 'Arquivo',
             'tipo_arquivo' => 'Tipo Arquivo',
             'lista_operacoes_criadas_json' => 'Lista Operacoes Criadas Json',
+        ];
+    }
+
+
+    public function behaviors()
+    {
+        return [
+            AuditoriaBehavior::class,
         ];
     }
 
