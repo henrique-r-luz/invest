@@ -53,26 +53,25 @@
                             ['label' => 'Sincronizar', 'icon' => 'sync-alt', 'url' => ['financas/sincronizar']],
                         ],
                     ],
-                   /* [
-                        'label' => 'Relatórios',
-                        'icon' => 'file',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => 'Filtro Empresas', 'icon' => 'filter', 'url' => ['relatorios/analise-empresa']],
-                            ['label' => 'Aporte', 'icon' => 'balance-scale', 'url' => ['relatorios/aporte']],
-                        ],
-                    ],*/
                     [
                         'label' => 'Análise Gráfica',
                         'icon' => 'chart-line',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Histograma', 'icon' => 'chart-bar', 'url' => ['analiseGrafica/histograma']],
-                            ['label' => 'Correlação', 'icon' => 'project-diagram', 'url' => ['/']],
                             ['label' => 'Evol. Patrimônio', 'icon' => 'level-up-alt', 'url' => ['analiseGrafica/evolucao-patrimonio']],
                             ['label' => 'Lucro/Prejuízo', 'icon' => 'plus-circle', 'url' => ['analiseGrafica/lucro-prejuizo']],
                             ['label' => 'Proventos/mês', 'icon' => 'file-invoice-dollar', 'url' => ['analiseGrafica/evolucao-proventos']],
                             ['label' => 'Proventos/Ativo', 'icon' => 'rocket', 'url' => ['analiseGrafica/proventos-por-ativo']],
+                        ],
+                    ],
+
+                    [
+                        'label' => 'Admin',
+                        'icon' => 'hammer',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => 'Auditoria', 'icon' => 'audio-description', 'url' => ['admin/auditoria']],
+                            ['label' => 'Usuário', 'icon' => 'user', 'url' => ['/']],     
                         ],
                     ]
                 ]
