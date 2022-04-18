@@ -13,7 +13,6 @@ services:
       - "9000:9000"
     volumes:
       - ./:/var/www
-      - ./docker-compose/php/php:/usr/local/etc/php
     networks:
       - invest-network
     depends_on:
