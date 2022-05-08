@@ -5,7 +5,7 @@ namespace app\controllers;
 use Yii;
 use const YII_ENV_TEST;
 use yii\web\Controller;
-use app\models\LoginForm;
+use app\models\admin\LoginForm;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\financas\Proventos;

@@ -13,7 +13,7 @@ echo "<?php\n";
 ?>
 
 use yii\helpers\Html;
-use \kartik\grid\GridView;
+use app\lib\grid\GridView;
 
 /* @var $this yii\web\View */
 <?= !empty($generator->searchModelClass) ? "/* @var \$searchModel " . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>
@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php if ($generator->indexWidgetType === 'grid'): ?>
         <?= "<?= " ?>GridView::widget([
+        'toolbar' => 'padraoCajui',
         'dataProvider' => $dataProvider,
         <?= !empty($generator->searchModelClass) ? "'filterModel' => \$searchModel,\n        'columns' => [\n" : "'columns' => [\n"; ?>
 
@@ -56,17 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
         }
         ?>
 
-        ['class' => 'yii\grid\ActionColumn'],
-        ],
-        'panel' => [
-        'type' => GridView::TYPE_DEFAULT,
-        //'heading' => true,
-        ],
-        'toolbar' => [
-        [
-        'content' =>Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar'])
-        ],
-        '{toggleData}',
+        ['class' => 'app\lib\grid\ActionColumn'],
         ],
         ]); ?>
     <?php else: ?>

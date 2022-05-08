@@ -3,7 +3,7 @@
 namespace app\migrations;
 
 use Yii;
-use app\models\User;
+use app\models\admin\User;
 use yii\db\Migration;
 
 /**

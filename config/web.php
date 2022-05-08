@@ -59,7 +59,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\admin\User',
             'enableSession' => true,
             'authTimeout' => (60 * 15),
         ],

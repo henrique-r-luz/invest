@@ -4,13 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\AcaoBolsa */
+/* @var $model app\models\admin\User */
 
-$this->title = 'Visualiza '. 'AcaoBolsa';
-$this->params['breadcrumbs'][] = ['label' => 'Acao Bolsas', 'url' => ['index']];
+$this->title = 'Visualiza '. 'User';
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
+
 <div class="card-info card card-outline">
         <div class="card-body">
 <div class="user-view">
@@ -31,9 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'model' => $model,
             'attributes' => [
                         'id',
-            'nome:ntext',
-            'codigo',
-            'setor:ntext',
+            'username',
             ],
             ]) ?>
 

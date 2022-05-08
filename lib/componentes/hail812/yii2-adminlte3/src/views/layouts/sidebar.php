@@ -71,7 +71,7 @@
                         'url' => '#',
                         'items' => [
                             ['label' => 'Auditoria', 'icon' => 'audio-description', 'url' => ['admin/auditoria']],
-                            ['label' => 'Usuário', 'icon' => 'user', 'url' => ['/']],     
+                            ['label' => 'Usuário', 'icon' => 'user', 'url' => ['admin/user']],     
                         ],
                     ]
                 ]

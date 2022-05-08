@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\admin;
 
 use Yii;
 use yii\db\ActiveRecord;
@@ -39,7 +39,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['username', 'password'], 'required'],
-            [['password', 'authkey'], 'string'],
+            [['password', 'authkey',], 'string'],
             [['username'], 'string', 'max' => 50],
             [['username'], 'unique'],
         ];
@@ -58,7 +58,17 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
-     /**
+    public function attributeComments()
+    {
+        return [
+            'id' => 'ID',
+            'username' => 'Username',
+            'password' => 'Password',
+            'authkey' => 'Authkey',
+        ];
+    }
+
+    /**
      * {@inheritdoc}
      */
     public static function findIdentity($id)
@@ -83,7 +93,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByUsername($username)
     {
-       return self::findOne(['username'=>$username]);
+        return self::findOne(['username' => $username]);
     }
 
     /**
@@ -118,6 +128,20 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
+
         return Yii::$app->getSecurity()->validatePassword($password, $this->password);
     }
+
+
+    public function beforeSave($insert)
+    {
+        $this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
+        return  parent::beforeSave($insert);
+    }
+
+
+    public function getAuthAssignment(){
+        return  $this->hasMany(AuthAssignment::className(), ['user_id'=>'id']);
+     }
+ 
 }

@@ -4,7 +4,7 @@
 namespace app\models\admin;
 
 use Yii;
-use app\models\User;
+use app\models\admin\User;
 use yii\db\ActiveRecord;
 
 /**
