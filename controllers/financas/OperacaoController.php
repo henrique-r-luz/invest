@@ -9,8 +9,10 @@ use app\lib\CajuiHelper;
 use yii\filters\VerbFilter;
 use app\models\financas\Operacao;
 use yii\web\NotFoundHttpException;
+use app\lib\helpers\InvestException;
 use app\models\financas\OperacaoSearch;
 use app\models\financas\service\operacoesAtivos\OperacaoService;
+use Throwable;
 
 /**
  * OperacaoController implements the CRUD actions for Operacao model.
@@ -77,8 +79,10 @@ class OperacaoController extends Controller
                     return $this->redirect(['view', 'id' => $operacaoService->getOpereacao()->id]);
                 }
             }
-        } catch (Exception $ex) {
+        } catch (InvestException $ex) {
             Yii::$app->session->setFlash('danger', 'Erro ao salvar Operação!</br>' . $ex->getMessage());
+        } catch (Throwable) {
+            Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado');
         } finally {
             return $this->render('create', [
                 'model' => $model,
@@ -104,8 +108,10 @@ class OperacaoController extends Controller
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             }
-        } catch (Exception $ex) {
+        } catch (InvestException $ex) {
             Yii::$app->session->setFlash('danger', 'Erro ao salvar Operação!</br>' . $ex->getMessage());
+        } catch (Throwable) {
+            Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado');
         } finally {
             return $this->render('create', [
                 'model' => $model,
@@ -128,8 +134,10 @@ class OperacaoController extends Controller
             if ($operacaoService->acaoDeletaOperacao()) {
                 Yii::$app->session->setFlash('success', 'Dados excluídos com sucesso!');
             }
-        } catch (Exception $ex) {
+        } catch (InvestException $ex) {
             Yii::$app->session->setFlash('danger', 'Erro ao delete Operação!</br>' . $ex->getMessage());
+        } catch (Throwable) {
+            Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado');
         } finally {
             return $this->redirect(['index']);
         }

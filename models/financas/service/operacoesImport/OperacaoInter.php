@@ -9,8 +9,9 @@
 namespace app\models\financas\service\operacoesImport;
 
 use Yii;
-use app\lib\dicionario\TipoArquivoUpload;
+use app\lib\helpers\InvestException;
 use app\models\financas\OperacoesImport;
+use app\lib\dicionario\TipoArquivoUpload;
 use app\models\financas\service\operacoesImport\OperacoesImportHelp;
 use app\models\financas\service\operacoesImport\OperacoesImportAbstract;
 
@@ -44,7 +45,7 @@ class OperacaoInter extends OperacoesImportAbstract
             $this->operacoesImport = $this->objImportado;
         }
         if($this->operacoesImport->isNewRecord && empty($this->operacoesImport->itens_ativos)){
-            throw new \Exception("Essa operação necessita de um item ativo! ");
+            throw new InvestException("Essa operação necessita de um item ativo! ");
         }
         if(!$this->operacoesImport->isNewRecord){
             $this->operacoesImport->itens_ativos = [];
@@ -55,7 +56,7 @@ class OperacaoInter extends OperacoesImportAbstract
         $this->cdbBancoInterId = $this->operacoesImport->itens_ativos;
         $filePath = Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $this->operacoesImport->hash_nome . '.' . $this->operacoesImport->extensao;
         if (!file_exists($filePath)) {
-            throw new \Exception("O arquivo banco Inter enviado não foi salvo no servidor. ");
+            throw new InvestException("O arquivo banco Inter enviado não foi salvo no servidor. ");
         }
         $this->atualizaValores($filePath);
     }

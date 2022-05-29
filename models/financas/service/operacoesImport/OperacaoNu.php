@@ -9,13 +9,14 @@
 namespace app\models\financas\service\operacoesImport;
 
 use Yii;
-use app\lib\dicionario\Categoria;
 use app\lib\CajuiHelper;
 use yii\base\UserException;
-use app\lib\dicionario\TipoArquivoUpload;
+use app\lib\dicionario\Categoria;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
+use app\lib\helpers\InvestException;
 use app\models\financas\OperacoesImport;
+use app\lib\dicionario\TipoArquivoUpload;
 use app\models\financas\service\sincroniza\ComponenteOperacoes;
 use app\models\financas\service\operacoesImport\OperacoesImportHelp;
 use app\models\financas\service\operacoesImport\OperacoesImportAbstract;
@@ -47,7 +48,7 @@ class OperacaoNu extends OperacoesImportAbstract
 
         $filePath = Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $this->operacoesImport->hash_nome . '.' . $this->operacoesImport->extensao;
         if (!file_exists($filePath)) {
-            throw new \Exception("O arquivo NU enviado não foi salvo no servidor. ");
+            throw new InvestException("O arquivo NU enviado não foi salvo no servidor. ");
         }
 
         $this->csv = array_map(function ($v) use ($filePath) {
@@ -93,7 +94,7 @@ class OperacaoNu extends OperacoesImportAbstract
         $contErro += $cont;
         $erros .= $msg;
         if ($contErro != 0) {
-            throw new UserException($erros);
+            throw new InvestException($erros);
         }
     }
 

@@ -11,9 +11,11 @@ namespace app\controllers\financas;
 use Yii;
 use yii\web\Controller;
 use app\lib\componentes\ExecutaBack;
+use app\lib\helpers\InvestException;
 use app\models\financas\AtualizaAcao;
 use app\models\financas\service\sincroniza\Sincroniza;
 use app\models\financas\service\sincroniza\SincronizaFactory;
+use Throwable;
 
 /**
  * Description of SincronizarController
@@ -110,7 +112,7 @@ class SincronizarController extends Controller
                 }
             }
             return $this->asJson(['ativosAtualizados' => (count($ativoAtualizados) - 1), 'total' => ($total + 1)]);
-        } catch (\Exception $e) {
+        } catch (Throwable) {
             return $this->asJson(['ativosAtualizados' => 0, 'total' => 0]);
         }
     }

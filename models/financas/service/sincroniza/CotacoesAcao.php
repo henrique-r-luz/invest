@@ -15,6 +15,7 @@ use yii\base\UserException;
 use app\models\financas\Ativo;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
+use app\lib\helpers\InvestException;
 use app\models\financas\service\sincroniza\OperacoesAbstract;
 use app\models\financas\service\sincroniza\SincronizaFactory;
 
@@ -59,7 +60,7 @@ class CotacoesAcao extends OperacoesAbstract
         }
         if ($contErro != 0) {
             $msg = 'A Cotação açoes não foram atualizados !</br>' . $this->erros;
-            throw new Exception($msg);
+            throw new InvestException($msg);
         }
     }
 

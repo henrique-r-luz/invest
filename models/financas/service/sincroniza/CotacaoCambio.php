@@ -10,6 +10,7 @@ namespace app\models\financas\service\sincroniza;
 
 use Yii;
 use yii\db\Exception;
+use app\lib\helpers\InvestException;
 
 /**
  * Description of CotacaoCambio
@@ -33,7 +34,7 @@ class CotacaoCambio extends OperacoesAbstract {
     public function getDados() {
         $file = Yii::$app->params['bot'] . '/cambio.csv';
         if (!file_exists($file)) {
-            throw new Exception("Não foi possível encontrar o arquivo de câmbio");
+            throw new InvestException("Não foi possível encontrar o arquivo de câmbio");
         }
         $this->csv = array_map('str_getcsv', file($file));
         unset($this->csv[0]);

@@ -3,12 +3,13 @@
 namespace app\models\financas\service\operacoesImport;
 
 use Yii;
+use Exception;
 use Throwable;
 use app\lib\CajuiHelper;
 use yii\web\UploadedFile;
+use app\lib\helpers\InvestException;
 use app\models\financas\OperacoesImport;
 use app\models\financas\ItensAtivoImport;
-use Exception;
 
 /**
  * Define o serviço para os trabalhos de operações de importação de dados 
@@ -69,7 +70,7 @@ class OperacoesImportService
             if (!OperacoesImport::find()->where(['hash_nome' => $this->operacoesImport->hash_nome])->exists()) {
                 $this->operacoesImport->removeArquivo();
             }
-            throw new \Exception($e->getMessage());
+            throw new InvestException($e->getMessage());
         }
     }
 
@@ -84,7 +85,7 @@ class OperacoesImportService
             $itensAtivoImport->itens_ativo_id = $item_ativo;
             if (!$itensAtivoImport->save()) {
                 $erro = CajuiHelper::processaErros($itensAtivoImport->getErrors());
-                throw new \Exception($erro);
+                throw new InvestException($erro);
             }
         }
     }

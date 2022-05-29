@@ -8,6 +8,7 @@ use yii\base\UserException;
 use app\models\financas\Ativo;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
+use app\lib\helpers\InvestException;
 use app\models\financas\service\operacoesAtivos\OperacaoService;
 
 
@@ -35,7 +36,7 @@ class OperacoesImportHelp
             $transaction->commit();
         } catch (\Exception $e) {
             $transaction->rollBack();
-            throw new \Exception("Error ao remover operação Import. ");
+            throw new InvestException("Error ao remover operação Import. ");
         }
     }
 

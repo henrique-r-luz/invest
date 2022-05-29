@@ -15,10 +15,9 @@
 namespace app\models\financas\service\operacoesAtivos;
 
 use Yii;
-use \Exception;
 use app\lib\CajuiHelper;
 use app\models\financas\service\sincroniza\Sincroniza;
-use app\models\financas\service\sincroniza\SincronizaFactory;
+use app\lib\helpers\InvestException;
 use app\models\financas\service\operacoesAtivos\AlteraAtivoOperacao;
 
 
@@ -54,15 +53,16 @@ class OperacaoService {
         $this->transaction = $connection->beginTransaction();
         $this->alteraAtivo = new AlteraAtivoOperacao();
         try {
+          
             $this->salvaOperacao();
             $this->salvaAtivo();
             $this->corrigeAlteracaoAtivo();
             $this->sicronizaDadosAtivo();
             $this->transaction->commit();
             return true;
-        } catch (Exception $ex) {
+        } catch (InvestException $ex) {
             $this->transaction->rollBack();
-            throw new Exception($ex->getMessage());
+            throw new InvestException($ex->getMessage());
             return false;
         }
     }
@@ -77,8 +77,8 @@ class OperacaoService {
             $this->sicronizaDadosAtivo();
             $this->transaction->commit();
             return true;
-        } catch (Exception $ex) {
-            throw new Exception('Ocorreu um erro ao deletar operação');
+        } catch (InvestException $ex) {
+            throw new InvestException('Ocorreu um erro ao deletar operação');
             $this->transaction->rollBack();
             return false;
         }
@@ -87,7 +87,7 @@ class OperacaoService {
     private function deleteOperacao() {
         if (!$this->operacao->delete()) {
             $erro = CajuiHelper::processaErros($this->operacao->getErrors());
-            throw new Exception('O sistema não pode remover a operação:' . $erro . '. ' );
+            throw new InvestException('O sistema não pode remover a operação:' . $erro . '. ' );
         }
     }
 
@@ -97,13 +97,13 @@ class OperacaoService {
             $erro = CajuiHelper::processaErros($this->operacao->getErrors());
             $msg = 'O sistema não pode alterar a operação:' . $erro . '. ';
             $this->operacao->addError('itens_ativos_id', $msg);
-            throw new Exception($msg);
+            throw new InvestException($msg);
         }
     }
 
     private function salvaAtivo() {
         if (!$this->alteraAtivo->updateAtivo($this->operacao->itens_ativos_id)) {
-            throw new Exception('O sistema não pode atualizar o ativo. ');
+            throw new InvestException('O sistema não pode atualizar o ativo. ');
         }
     }
 
@@ -114,7 +114,7 @@ class OperacaoService {
         }
         //essa ação acontece se ocorrer uma alteração do tipo de ativo, no form do cadastro
         if (!$this->alteraAtivo->updateAtivo($this->ativo_id_antigo)) {
-            throw new Exception('O sistema não conseguiu atualizar o ativo:' . $this->ativo_id_antigo . '. ');
+            throw new InvestException('O sistema não conseguiu atualizar o ativo:' . $this->ativo_id_antigo . '. ');
             // throw new Exception('O sistema não pode alterar o ativo:' . $this->ativo->codigo . '. ');
         }
     }

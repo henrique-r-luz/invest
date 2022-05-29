@@ -5,6 +5,7 @@ namespace app\models\financas\service\operacoesImport;
 use Yii;
 use app\lib\CajuiHelper;
 use app\models\financas\Operacao;
+use app\lib\helpers\InvestException;
 use app\models\financas\OperacoesImport;
 use app\models\financas\service\sincroniza\ComponenteOperacoes;
 
@@ -20,7 +21,7 @@ class OperacaoClear extends OperacoesImportAbstract
         
         $filePath = Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $this->operacoesImport->hash_nome . '.' . $this->operacoesImport->extensao;
         if (!file_exists($filePath)) {
-            throw new \Exception("O arquivo enviado não foi salvo no servidor. ");
+            throw new InvestException("O arquivo enviado não foi salvo no servidor. ");
         }
       
         $this->arquivo = array_map(function ($v) use ($filePath) {
@@ -65,7 +66,7 @@ class OperacaoClear extends OperacoesImportAbstract
                     ]);
                     if (!$operacaoService->acaoSalvaOperacao()) {
                         $erros = CajuiHelper::processaErros($operacaoService->getOpereacao()->getErrors()) . '</br>';
-                        throw new \Exception($erros);
+                        throw new InvestException($erros);
                     } else {
                         $this->dadosJson['operacoes_id'][] = $operacaoService->getOpereacao()->id;
                     }

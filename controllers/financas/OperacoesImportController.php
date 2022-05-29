@@ -3,14 +3,16 @@
 namespace app\controllers\financas;
 
 use Yii;
+use Exception;
 use yii\web\Controller;
 use app\lib\CajuiHelper;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
+use app\lib\helpers\InvestException;
 use app\models\financas\OperacoesImport;
 use app\models\financas\OperacoesImportSearch;
 use app\models\financas\service\operacoesImport\OperacoesImportService;
-use Exception;
+use Throwable;
 
 /**
  * OperacoesImportController implements the CRUD actions for OperacoesImport model.
@@ -81,13 +83,11 @@ class OperacoesImportController extends Controller
                 }
                 return $this->redirect(['view', 'id' => $operacoesImportService->getModel()->id]);
             }
-            $operacoesImportService->getModel()->arquivo = null;
-            return $this->render('create', [
-                'model' => $operacoesImportService->getModel(),
-            ]);
-        } catch (\Exception $e) {
-            
+        } catch (InvestException $e) {
             Yii::$app->session->setFlash('danger', 'Erro ao salvar operação import! ' . $e->getMessage());
+        } catch (Throwable) {
+            Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado! ');
+        } finally {
             $operacoesImportService->getModel()->arquivo = null;
             return $this->render('create', [
                 'model' => $operacoesImportService->getModel(),
@@ -123,9 +123,11 @@ class OperacoesImportController extends Controller
             \Yii::$app->response->headers->add('content-type', OperacoesImport::get($model->extensao));
             \Yii::$app->response->data = file_get_contents(Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $model->hash_nome . '.' . $model->extensao);
             return \Yii::$app->response;
-        } catch (Exception $e) {
+        } catch (InvestException $e) {
             \Yii::$app->response->format = yii\web\Response::FORMAT_RAW;
             return \Yii::$app->response;
+        } catch (Throwable) {
+            Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado! ');
         }
         // return Yii::$app->response->sendFile(Yii::getAlias('@' . $model->diretorio) . '/' . $model->hash_nome . '.' . $model->extensao)->send();
         //return 
@@ -147,9 +149,11 @@ class OperacoesImportController extends Controller
             $operacoesImportService->delete();
             $transaction->commit();
             Yii::$app->session->setFlash('success', 'Registro deletado com sucesso! ');
-        } catch (\Exception $e) {
+        } catch (InvestException $e) {
             $transaction->rollBack();
-            Yii::$app->session->setFlash('danger', 'Erro ao deletera registro.'.$e->getTraceAsString());
+            Yii::$app->session->setFlash('danger', 'Erro ao deletera registro.' . $e->getTraceAsString());
+        } catch (Throwable) {
+            Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado! ');
         } finally {
             return $this->redirect(['index']);
         }
@@ -166,7 +170,7 @@ class OperacoesImportController extends Controller
     {
         if (($model = OperacoesImport::findOne($id)) !== null) {
             $model->itens_ativos = [];
-            foreach($model->itensAtivosImports as $itensAtivo){
+            foreach ($model->itensAtivosImports as $itensAtivo) {
                 $model->itens_ativos[] = $itensAtivo->itens_ativo_id;
             }
             //$model->itens_ativos
