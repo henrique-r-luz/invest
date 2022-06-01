@@ -39,7 +39,7 @@ class Proventos extends ActiveRecord
     public function rules()
     {
         return [
-            [['itens_ativos_id', 'data', 'valor'], 'required'],
+            [['itens_ativos_id', 'data', 'valor','movimentacao'], 'required'],
             [['itens_ativos_id'], 'default', 'value' => null],
             [['itens_ativos_id'], 'integer'],
             [['data'], 'safe'],
@@ -59,6 +59,7 @@ class Proventos extends ActiveRecord
             'itens_ativos_id' => 'Ativos',
             'data' => 'Data',
             'valor' => 'Valor',
+            'movimentacao'=>'Movimentação'
         ];
     }
 

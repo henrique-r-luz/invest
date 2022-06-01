@@ -4,6 +4,7 @@ use yii\web\View;
 use yii\helpers\Html;
 use app\lib\grid\GridView;
 use app\lib\dicionario\Pais;
+use app\lib\dicionario\ProventosMovimentacao;
 use app\models\financas\Ativo;
 use yii\data\ActiveDataProvider;
 use kartik\daterange\DateRangePicker;
@@ -58,6 +59,13 @@ $daterange = [
                 'label' => 'Ativo',
                 'attribute' => 'ativo_codigo',
                 'value' => 'itensAtivo.ativos.codigo',
+            ],
+            [
+                'attribute' => 'movimentacao',
+                'filter' => ProventosMovimentacao::all(),
+                'value' => function($model){
+                    return ProventosMovimentacao::getNome($model->movimentacao);
+                },
             ],
             [
                 'attribute' => 'valor',

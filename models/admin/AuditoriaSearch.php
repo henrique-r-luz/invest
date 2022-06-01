@@ -63,7 +63,7 @@ class AuditoriaSearch extends Auditoria
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            'auditoria.id' => $this->id,
             'created_at' => $this->created_at,
         ]);
 

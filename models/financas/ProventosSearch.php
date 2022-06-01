@@ -24,7 +24,7 @@ class ProventosSearch extends Proventos {
      */
     public function rules() {
         return [
-            [['id'], 'integer'],
+            [['id','movimentacao'], 'integer'],
             [['data', 'itens_ativos_id', 'ativo_codigo', 'pais','investidor'], 'safe'],
             [['createTimeRange'], 'match', 'pattern' => '/^.+\s\-\s.+$/'],
             [['valor'], 'number'],
@@ -94,10 +94,11 @@ class ProventosSearch extends Proventos {
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            'proventos.id' => $this->id,
             'valor' => $this->valor,
             'itens_ativos_id' => $this->itens_ativos_id,
             'pais' => $this->pais,
+            'movimentacao'=>$this->movimentacao,
         ]);
 
         if ($this->createTimeRange != null && $this->createTimeRange != '') {

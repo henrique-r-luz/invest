@@ -85,7 +85,7 @@ class OperacoesImportSearch extends OperacoesImport
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            'operacoes_import.id' => $this->id,
             'investidor_id' => $this->investidor_id,
         ]);
 
