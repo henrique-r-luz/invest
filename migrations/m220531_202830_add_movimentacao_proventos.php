@@ -19,8 +19,14 @@ class m220531_202830_add_movimentacao_proventos extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('proventos', 'movimentacao', 'integer');
-        $this->execute('CREATE UNIQUE INDEX unique_mv_data_ativo
+
+        $this->execute('ALTER TABLE proventos
+                        ADD CONSTRAINT itens_ativos_proventos_fk 
+                        FOREIGN KEY (itens_ativos_id) 
+                        REFERENCES  itens_ativo (id);');
+
+     $this->addColumn('proventos', 'movimentacao', 'integer');
+       $this->execute('CREATE UNIQUE INDEX unique_mv_data_ativo
                         ON proventos(data,itens_ativos_id,movimentacao);');
 
         $proventos = Proventos::find()->all();
@@ -38,6 +44,9 @@ class m220531_202830_add_movimentacao_proventos extends Migration
      */
     public function safeDown()
     {
-       return true;
+
+        $this->execute('DROP INDEX IF EXISTS public.unique_mv_data_ativo');
+        $this->dropColumn('proventos', 'movimentacao');
+        //return true;
     }
 }
