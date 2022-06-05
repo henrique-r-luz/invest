@@ -8,6 +8,7 @@ use yii\base\UserException;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
+use app\models\financas\Proventos;
 use app\models\financas\service\operacoesAtivos\OperacaoService;
 
 
@@ -111,10 +112,5 @@ class OperacoesImportHelp
             $msg = 'A Atualização CDB banco Inter falhou!</br>' . $erros;
             throw new UserException($msg);
         }
-    }
-
-
-    public static function deleteProventos($operacoesImport){
-
     }
 }

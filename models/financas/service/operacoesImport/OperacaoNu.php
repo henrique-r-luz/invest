@@ -17,6 +17,7 @@ use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
 use app\models\financas\OperacoesImport;
 use app\lib\dicionario\TipoArquivoUpload;
+use app\models\financas\service\sincroniza\SincronizaFactory;
 use app\models\financas\service\sincroniza\ComponenteOperacoes;
 use app\models\financas\service\operacoesImport\OperacoesImportHelp;
 use app\models\financas\service\operacoesImport\OperacoesImportAbstract;
@@ -123,5 +124,6 @@ class OperacaoNu extends OperacoesImportAbstract
     public  function delete()
     {
         OperacoesImportHelp::delete($this->operacoesImport);
+        SincronizaFactory::sincroniza('easy')->atualiza();
     }
 }

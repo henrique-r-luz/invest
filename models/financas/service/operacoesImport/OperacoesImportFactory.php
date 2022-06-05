@@ -19,6 +19,8 @@ class OperacoesImportFactory
                 return new OperacaoInter($operacoesImport);
             case TipoArquivoUpload::NU:
                 return new OperacaoNu($operacoesImport);
+            case TipoArquivoUpload::PROVENTOS:
+                return new OperacaoProventos($operacoesImport);
         }
     }
 }

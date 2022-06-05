@@ -44,7 +44,7 @@ class Proventos extends ActiveRecord
             [['itens_ativos_id'], 'integer'],
             [['data'], 'safe'],
             [['valor'], 'number'],
-            [['itens_ativos_id', 'data'], 'unique', 'targetAttribute' => ['itens_ativos_id', 'data']],
+            [['itens_ativos_id', 'data','movimentacao'], 'unique', 'targetAttribute' => ['itens_ativos_id', 'data','movimentacao']],
             [['itens_ativos_id'], 'exist', 'skipOnError' => true, 'targetClass' => ItensAtivo::className(), 'targetAttribute' => ['itens_ativos_id' => 'id']],
         ];
     }

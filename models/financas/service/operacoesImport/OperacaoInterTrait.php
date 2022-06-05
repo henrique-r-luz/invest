@@ -1,8 +1,9 @@
 <?php
 
 namespace app\models\financas\service\operacoesImport;
-use app\models\financas\service\operacoesImport\OperacoesImportHelp;
 use Smalot\PdfParser\Parser;
+use app\models\financas\service\sincroniza\SincronizaFactory;
+use app\models\financas\service\operacoesImport\OperacoesImportHelp;
 /**
  * Undocumented trait
  *
@@ -46,5 +47,6 @@ trait OperacaoInterTrait
     public function delete()
     {
         OperacoesImportHelp::delete($this->operacoesImport);
+        SincronizaFactory::sincroniza('banco_inter')->atualiza();
     }
 }

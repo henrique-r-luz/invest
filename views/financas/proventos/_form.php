@@ -1,5 +1,6 @@
 <?php
 
+use app\lib\dicionario\ProventosMovimentacao;
 use app\models\financas\Ativo;
 use app\models\financas\ItensAtivo;
 use app\models\financas\Proventos;
@@ -19,7 +20,7 @@ use kartik\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
     <div class="card-body">
         <div class="row">
-            <div class="col-xs-4 col-sm-4 col-lg-4">
+            <div class="col-xs-6 col-sm-6 col-lg-6">
                 <?=
                 $form->field($model, 'itens_ativos_id')->widget(Select2::classname(), [
                     'data' => ItensAtivo::lista(), //ArrayHelper::map(Ativo::find()->andWhere(['categoria'=> app\lib\Categoria::RENDA_VARIAVEL])->asArray()->all(), 'id', 'codigo'),
@@ -30,7 +31,7 @@ use kartik\widgets\ActiveForm;
                 ]);
                 ?>
             </div>
-            <div class="col-xs-4 col-sm-4 col-lg-4">
+            <div class="col-xs-6 col-sm-6 col-lg-6">
                 <?=
                 $form->field($model, 'data')->widget(DateControl::class, [
                     'widgetOptions' => [
@@ -42,7 +43,9 @@ use kartik\widgets\ActiveForm;
                 ])
                 ?>
             </div>
-            <div class="col-xs-4 col-sm-4 col-lg-4">
+        </div>
+        <div class='row'>
+            <div class="col-xs-6 col-sm-6 col-lg-6">
                 <?=
                 $form->field($model, 'valor')->widget(NumberControl::classname(), [
                     'maskedInputOptions' => [
@@ -51,11 +54,22 @@ use kartik\widgets\ActiveForm;
                 ])
                 ?>
             </div>
+            <div class="col-xs-6 col-sm-6 col-lg-6">
+                <?=
+                $form->field($model, 'movimentacao')->widget(Select2::classname(), [
+                    'data' => ProventosMovimentacao::all(), //ArrayHelper::map(Ativo::find()->andWhere(['categoria'=> app\lib\Categoria::RENDA_VARIAVEL])->asArray()->all(), 'id', 'codigo'),
+                    'options' => ['placeholder' => 'Selecione um Tipo'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
+                ?>
+            </div>
         </div>
     </div>
-        <div class="card-footer">
-            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-            <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
-        </div>
+    <div class="card-footer">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
+    </div>
     <?php ActiveForm::end(); ?>
 </div>

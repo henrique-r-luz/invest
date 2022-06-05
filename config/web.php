@@ -99,7 +99,7 @@ $config = [
             'displaySettings' => [
                 Module::FORMAT_DATE => 'dd/MM/yyyy',
                 Module::FORMAT_TIME => 'HH:mm',
-                Module::FORMAT_DATETIME => 'php:Y-m-d H:i:s',
+                Module::FORMAT_DATETIME => 'dd/MM/yyyy H:i:s',
             ],
             'saveSettings' => [
                 Module::FORMAT_DATE => 'php:Y-m-d',

@@ -53,7 +53,7 @@ class OperacoesImportService
                 $transaction->rollBack();
                 return false;
             }
-            //insere ativos que serão atualizadas
+            //insere ativos que serão atualizadas(ex:CDb inter)
             $this->saveItensAtivoImport();
             $acaoImport = OperacoesImportFactory::getObjeto($this->operacoesImport);
             $acaoImport->atualiza();
@@ -73,7 +73,12 @@ class OperacoesImportService
             throw new InvestException($e->getMessage());
         }
     }
-
+    /**
+     * salva quando houver itens import no formulário
+     * Exemplo: ao inserir uma atualização no cdb inter 
+     * @return void
+     * @author Henrique Luz
+     */
     private function saveItensAtivoImport()
     {
         if(empty($this->operacoesImport->itens_ativos)){
