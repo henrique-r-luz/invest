@@ -33,9 +33,8 @@ class CotacoesAcao extends OperacoesAbstract
     //put your code here
     public function atualiza()
     {
-
+        $contErro = 0;
         foreach ($this->csv as $acoes) {
-            $contErro = 0;
             $itensAtivos = ItensAtivo::find()->where(['ativo_id' => $acoes['id']])->all();
             foreach ($itensAtivos as $itensAtivo) {
                 if ($acoes['valor'][2] == '.') {

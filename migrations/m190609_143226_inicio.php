@@ -48,7 +48,7 @@ class m190609_143226_inicio extends Migration {
           $this->execute(
                 "CREATE TABLE operacao (
                     id SERIAL PRIMARY KEY,
-                    tipo TEXT integer NULL,--compra ou venda
+                    tipo integer NULL,--compra ou venda
                     quantidade integer not null,
                     valor real not null,
                     data date not null,

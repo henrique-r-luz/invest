@@ -75,6 +75,7 @@ class SiteController extends Controller
         $formatter = Yii::$app->formatter;
         $patrimonioBruto = 0;
         $valorCompra = 0;
+        $lucro = 0;
         $proventos = $formatter->asCurrency(Proventos::find()->sum('valor'));
         if (!empty($dados)) {
             $patrimonioBruto = $formatter->asCurrency(round($dados[0]['valor_total'], 5));

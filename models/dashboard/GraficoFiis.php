@@ -17,17 +17,22 @@ use app\models\dashboard\GraficoAbstract;
  *
  * @author henrique
  */
-class GraficoFiis extends GraficoAbstract {
+class GraficoFiis extends GraficoAbstract
+{
     //put your code here
-    
-    private $fii;
-    
-    
-    protected function configuraDados() {
-        
-         $valorTotalFii = 0;
+
+    private $fii = [];
+
+
+    protected function configuraDados()
+    {
+
+        $valorTotalFii = 0;
+        if (empty($this->dados)) {
+            return;
+        }
         foreach ($this->dados as $item) {
-            if($item['tipo']==Tipo::FIIS){
+            if ($item['tipo'] == Tipo::FIIS) {
                 $this->fii[$item['codigo']] = $item['valor_bruto'];
             }
         }
@@ -40,11 +45,10 @@ class GraficoFiis extends GraficoAbstract {
             $this->fii = $aux;
             arsort($this->fii);
         }
-        
     }
 
-    public function montaGrafico() {
-         return GraficoUtil::graficoPizza($this->fii);
+    public function montaGrafico()
+    {
+        return GraficoUtil::graficoPizza($this->fii);
     }
-
 }

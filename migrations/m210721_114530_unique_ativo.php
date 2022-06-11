@@ -14,7 +14,7 @@ class m210721_114530_unique_ativo extends Migration {
      * {@inheritdoc}
      */
     public function safeUp() {
-           $this->execute("drop index ativo_codigo;");
+           $this->execute("drop index IF EXISTS ativo_codigo;");
            $this->execute("CREATE UNIQUE INDEX ativo_codigo_investidor ON  ativo (codigo,investidor_id);");
        
     }

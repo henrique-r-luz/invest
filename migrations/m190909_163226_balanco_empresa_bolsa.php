@@ -46,7 +46,7 @@ class m190909_163226_balanco_empresa_bolsa extends Migration {
                     fcl real,
                     capex_fco real,
                     proventos real,
-                    payout real,
+                    payout real
                 );");
           $this->execute("CREATE UNIQUE INDEX unique_balanco_cnpj ON  balanco_empresa_bolsa (cnpj);");
             

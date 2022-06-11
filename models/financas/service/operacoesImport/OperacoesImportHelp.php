@@ -102,6 +102,9 @@ class OperacoesImportHelp
      * @return [type]
      */
     public static function AtualizaInter($param){
+        if(empty($param['cdbBancoInterId'])){
+            return;
+        }
         $cdbBancoInter = ItensAtivo::findOne($param['cdbBancoInterId'][0]);
         $cdbBancoInter->valor_bruto = $param['valorCdbBruto'];
         $cdbBancoInter->valor_liquido = $param['valorCdbLiquido'];

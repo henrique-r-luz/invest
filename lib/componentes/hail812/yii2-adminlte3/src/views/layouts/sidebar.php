@@ -1,9 +1,11 @@
-<?php use yii\helpers\Html; ?>
+<?php
+
+use yii\helpers\Html; ?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    
-    <a href="<?php echo  \Yii::$app->homeUrl?>" class="brand-link">
-        <img src="/img/logo2.png" alt="Invest Logo" class="brand-image" >
+
+    <a href="<?php echo  \Yii::$app->homeUrl ?>" class="brand-link">
+        <img src="/img/logo2.png" alt="Invest Logo" class="brand-image">
         <span class="brand-text font-weight-light">INVEST</span>
     </a>
 
@@ -43,9 +45,9 @@
                         'url' => '#',
                         'items' => [
                             ['label' => 'Ativo', 'icon' => 'gem', 'url' => ['financas/ativo']],
+                            ['label' => 'Investidor', 'icon' => 'user', 'url' => ['financas/investidor']],
                             ['label' => 'Ativo Investidos', 'icon' => 'glass-cheers', 'url' => ['financas/itens-ativo']],
                             ['label' => 'Atualiza Ação', 'icon' => 'undo', 'url' => ['financas/atualiza-acao']],
-                            ['label' => 'Investidor', 'icon' => 'user', 'url' => ['financas/investidor']],
                             ['label' => 'Operação', 'icon' => 'cash-register', 'url' => ['financas/operacao']],
                             ['label' => 'Operações Import', 'icon' => 'file-import', 'url' => ['financas/operacoes-import']],
                             ['label' => 'Proventos', 'icon' => 'arrow-down', 'url' => ['financas/proventos']],
@@ -71,7 +73,7 @@
                         'url' => '#',
                         'items' => [
                             ['label' => 'Auditoria', 'icon' => 'audio-description', 'url' => ['admin/auditoria']],
-                            ['label' => 'Usuário', 'icon' => 'user', 'url' => ['admin/user']],     
+                            ['label' => 'Usuário', 'icon' => 'user', 'url' => ['admin/user']],
                         ],
                     ]
                 ]

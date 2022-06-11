@@ -19,7 +19,6 @@ class m200202_173226_ajuste_tabela_fundamentos extends Migration {
         $this->execute("ALTER TABLE acao_bolsa ALTER COLUMN codigo TYPE varchar(4) using left(codigo, 4);");
         $this->execute("CREATE UNIQUE INDEX bolsa_acao_codigo ON  acao_bolsa(codigo);");
         //ajusta atributos da tabela balanco_empresa_bolsa
-        $this->execute("ALTER TABLE balanco_empresa_bolsa DROP COLUMN anual;");
         $this->execute("ALTER TABLE balanco_empresa_bolsa RENAME COLUMN capex_fco  TO fcl_capex;");
         $this->execute("ALTER TABLE balanco_empresa_bolsa ADD COLUMN PDD real;");
         $this->execute("ALTER TABLE balanco_empresa_bolsa ADD COLUMN PDD_lucro_liquido real;");

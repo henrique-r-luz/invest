@@ -19,11 +19,14 @@ use app\models\dashboard\GraficoAbstract;
  */
 class GraficoAcoes extends GraficoAbstract {
     
-    private $acoes;
+    private $acoes = [];
     
     //put your code here
     protected function configuraDados() {
         $valorTotalAcoes = 0;
+        if(empty($this->dados)){
+            return ;
+        }
         foreach ($this->dados as $item) {
             if($item['tipo']==Tipo::ACOES){
                 $this->acoes[$item['codigo']] = $item['valor_bruto'];
