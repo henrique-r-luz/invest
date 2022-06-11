@@ -30,7 +30,7 @@ class EvolucaoPatrimonio extends Model {
             $this->getPatrimonioValorMoeda(Pais::US, 'Dolar')];
     }
 
-    public function getPatrimonioValorMoeda($pais, $moeda) {
+    private function getPatrimonioValorMoeda($pais, $moeda) {
         $dados = $this->evolucaoPratrimonio($pais);
 
         $patromonio = ['name' => $moeda, 'data' => []];
@@ -48,7 +48,7 @@ class EvolucaoPatrimonio extends Model {
         return $patromonio;
     }
 
-    public function evolucaoPratrimonio($pais) {
+    private function evolucaoPratrimonio($pais) {
 
         $comprasMes = Operacao::find()
                 ->select(["to_char(data, 'YYYY-MM') as data_id", 'sum(valor) as valor_compra', 'ativo.pais'])
