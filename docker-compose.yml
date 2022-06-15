@@ -53,6 +53,7 @@ services:
     build:
       context: ./docker-compose/apache
       dockerfile: Dockerfile
+      image: web-invest-apache
     depends_on:
       - app
     networks:
