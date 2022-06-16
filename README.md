@@ -74,7 +74,7 @@ O Invest é um sistema de controle de investimentos pessoal que possibilita a ce
  
  ![telaInicial](https://user-images.githubusercontent.com/12544898/174131132-31e9e679-23db-4a6b-a565-c83c432e4d56.png)
  
- O manual do usuário se encontra no wiki do projeto.
+ O manual do usuário se encontra na wiki do projeto.
  
  ## Autor
 
