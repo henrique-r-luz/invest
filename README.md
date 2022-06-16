@@ -19,6 +19,7 @@ O Invest é um sistema de controle de investimentos pessoal que possibilita a ce
  - Atualização de CDB do banco inter.
  - Importação de proventos e rendimentos da B3. 
  - Gráficos Descritivos informativos. 
+ - Auditoria 
     
  ## Pré-requisito
    - Git
