@@ -64,6 +64,9 @@ O Invest é um sistema de controle de investimentos familiar, em que pode centra
  
  ![telaInicial](https://user-images.githubusercontent.com/12544898/174131132-31e9e679-23db-4a6b-a565-c83c432e4d56.png)
  
- 
+ ## Autores
+
+ [<img src="https://user-images.githubusercontent.com/12544898/174133076-fc3467c3-3908-436f-af3d-2635e4312180.png" width=115><br><sub>Henrique Rodrigues Luz</sub>](https://github.com/henrique-r-luz) 
+
  
  
