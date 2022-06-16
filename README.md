@@ -46,4 +46,16 @@ O Invest é um sistema de controle de investimentos familiar, em que pode centra
  ~~~
  php yii migrate
  ~~~
+ Com os migrates executados os sistema está pronto para uso, acesse:
+ ~~~
+ http://localhost
+ ~~~
+ Aparecerá a tela de login
+ ~~~
+ login:admin
+ senha:admin
+ ~~~
+ 
+ 
+ 
  
