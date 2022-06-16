@@ -1,4 +1,5 @@
 
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/12544898/174111505-79690883-5889-48f8-aba3-22e193daba76.png">
 </p>
@@ -8,15 +9,16 @@
 </p>
 O Invest é um sistema de controle de investimentos familiar, em que pode centralizar todos os ativos da família em um só lugar. Ele possibilita o controle de ativos de renda variável e fixa. A seguir é listado alguns dos recursos do sistema:
 
-    • Cadastro de ativos.
-    • Cadastro de Operações dos ativos(Venda e compra).
-    • Sincronização de preços do ativos.
-    • Cadastro proventos para renda Variável
-    • Importação de operações de renda variável das corretoras Clear e Avenue.
-    • Atualização de ativos de renda fixa da Corretora NuInvest.
-    • Atualização de CDB do banco inter.
-    • Importação de proventos e rendimentos da B3. 
-    • Gráficos Descritivos informativos. 
+ - Cadastro de ativos.
+ - Cadastro de Operações dos ativos(Venda e compra).
+ - Cadastro de Investidores
+ - Sincronização de preços do ativos.
+ - Cadastro proventos para renda Variável
+ - Importação de operações de renda variável das corretoras Clear e Avenue.
+ - Atualização de ativos de renda fixa da Corretora NuInvest.
+ - Atualização de CDB do banco inter.
+ - Importação de proventos e rendimentos da B3. 
+ - Gráficos Descritivos informativos. 
     
  ## Pré-requisito
    - Git
