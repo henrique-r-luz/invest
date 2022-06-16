@@ -37,23 +37,11 @@ services:
     networks:
       - invest-network
 
-  #nginx:
-  #  image: nginx:alpine
-  #  ports:
-  #    - "80:80"
-  #  volumes:
-  #    - ./:/var/www
-  #    - ./docker-compose/nginx:/etc/nginx/conf.d
-  #  networks:
-  #    - invest-network
-  #  depends_on:
-  #    - "app"
-
   apache:
     build:
       context: ./docker-compose/apache
       dockerfile: Dockerfile
-      image: web-invest-apache
+    image: web-invest-apache
     depends_on:
       - app
     networks:
@@ -68,7 +56,6 @@ services:
     ports:
       - "4444:4444"
     shm_size: 2gb
-    #network_mode: "host"
     networks:
       - invest-network
 

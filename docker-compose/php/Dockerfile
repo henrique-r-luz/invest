@@ -50,15 +50,6 @@ RUN mkdir -p /home/$user/.composer && \
 
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 
-RUN echo "xdebug.mode=develop,coverage,debug,profile" | tee -a /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini > /dev/null && \
-    echo "xdebug.start_with_request=yes" | tee -a /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini > /dev/null && \
-    echo "xdebug.client_host=172.17.0.1" | tee -a /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini > /dev/null && \
-    echo "xdebug.idekey=VSCODE" | tee -a /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini > /dev/null && \
-    echo "xdebug.remote_port=9003" | tee -a /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini > /dev/null && \
-    echo "xdebug.default_enable=on" | tee -a /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini > /dev/null && \
-    echo "xdebug.remote_log=/var/www/web/xdebug.log" | tee -a /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini > /dev/null && \
-    echo "xdebug.discover_client_host=true" | tee -a /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini > /dev/null
-
 RUN pip3 install pandas
 
 RUN pip3 install selenium
