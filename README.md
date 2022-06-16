@@ -17,3 +17,33 @@ O Invest é um sistema de controle de investimentos familiar, em que pode centra
     • Atualização de CDB do banco inter.
     • Importação de proventos e rendimentos da B3. 
     • Gráficos Descritivos informativos. 
+    
+ ## Pré-requisito
+   - Git
+   - Docker
+   - Docker-compose
+    
+ ## Instalação
+ Baixar o projeto no github.
+ ~~~
+ git clone https://github.com/henrique-r-luz/invest.git
+ ~~~ 
+ Após a conclusão do download entre na pasta invest e execute o comando abaixo.
+ Esse processo pode levar alguns minutos porque o docker irá criar e configurar
+ cada container. 
+ ~~~
+ sudo docker-compose up
+ ~~~ 
+ Com os contêineres ligados, acesse o app com o seguinte comando:
+ ~~~
+ docker exec -it invest_app_1 bash
+ ~~~
+ Execute o compose para instalar as dependências
+ ~~~
+ composer install
+ ~~~
+ Depois execute os migrates 
+ ~~~
+ php yii migrate
+ ~~~
+ 
