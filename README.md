@@ -24,6 +24,15 @@ O Invest é um sistema de controle de investimentos familiar, em que pode centra
    - Git
    - Docker
    - Docker-compose
+
+## Tecnologias utilizadas
+
+- ``PHP 8``
+- ``Yii2``
+- ``Python3``
+- ``PostgresSql``
+- ``JavaScript``
+
     
  ## Instalação
  Baixar o projeto no github.
