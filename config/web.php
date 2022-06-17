@@ -3,6 +3,7 @@
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 Yii::setAlias('arquivos', dirname(__DIR__) . '/arquivos');
+Yii::setAlias('dados', dirname(__DIR__) . '/dados');
 
 use \kartik\datecontrol\Module;
 use yii\i18n\Formatter;

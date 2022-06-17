@@ -51,6 +51,7 @@ use yii\helpers\Html; ?>
                             ['label' => 'Operação', 'icon' => 'cash-register', 'url' => ['financas/operacao']],
                             ['label' => 'Operações Import', 'icon' => 'file-import', 'url' => ['financas/operacoes-import']],
                             ['label' => 'Proventos', 'icon' => 'arrow-down', 'url' => ['financas/proventos']],
+                            ['label' => 'Preço', 'icon' => 'dollar-sign', 'url' => ['financas/preco']],
                             ['label' => 'Empresas Bolsa', 'icon' => 'building', 'url' => ['financas/acao-bolsa']],
                             ['label' => 'Sincronizar', 'icon' => 'sync-alt', 'url' => ['financas/sincronizar']],
                         ],
@@ -60,7 +61,7 @@ use yii\helpers\Html; ?>
                         'icon' => 'chart-line',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Evol. Patrimônio', 'icon' => 'level-up-alt', 'url' => ['analiseGrafica/evolucao-patrimonio']],
+                            ['label' => 'Evol. Aportes', 'icon' => 'level-up-alt', 'url' => ['analiseGrafica/evolucao-patrimonio']],
                             ['label' => 'Lucro/Prejuízo', 'icon' => 'plus-circle', 'url' => ['analiseGrafica/lucro-prejuizo']],
                             ['label' => 'Proventos/mês', 'icon' => 'file-invoice-dollar', 'url' => ['analiseGrafica/evolucao-proventos']],
                             ['label' => 'Proventos/Ativo', 'icon' => 'rocket', 'url' => ['analiseGrafica/proventos-por-ativo']],

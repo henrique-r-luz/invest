@@ -169,6 +169,17 @@ class GridView extends \kartik\grid\GridView
                 '{export}',
             ];
         }
+        if ($this->toolbar === 'precoCajui') {
+            $this->toolbar = $this->toolbarPreco();
+        }
+    }
+
+    protected function toolbarPreco(){
+        return [
+            'content' => '<div class="btn-group">' . $this->getBtnRedo()  . '</div>',
+            '{toggleData}',
+            '{export}',
+        ];
     }
 
     /**
