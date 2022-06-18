@@ -18,6 +18,7 @@ use app\models\dashboard\DashBoardSearch;
 use app\models\dashboard\GraficoAcaoPais;
 use app\models\dashboard\GraficoCategoria;
 use yii\web\ForbiddenHttpException;
+use app\lib\helpers\SiteHelper;
 
 class SiteController extends Controller
 {
@@ -61,8 +62,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-       
-       
+
+
         $dashBoardSearch = new DashBoardSearch();
         $dados = $dashBoardSearch->search();
         $graficoCategoria = new GraficoCategoria($dados);
@@ -103,7 +104,7 @@ class SiteController extends Controller
         $this->layout = 'main-login';
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect(['index']);
+            return SiteHelper::urlDepoisLogin($this);
         }
         return $this->render(
             'login',
@@ -115,14 +116,16 @@ class SiteController extends Controller
     {
         if (!Yii::$app->user->isGuest) {
             Yii::$app->user->logout();
+
             return $this->redirect('login');
         }
-       
+
         return $this->redirect('index');
     }
 
 
-    public function actionError(){
+    public function actionError()
+    {
         return $this->render(
             'error',
             []
