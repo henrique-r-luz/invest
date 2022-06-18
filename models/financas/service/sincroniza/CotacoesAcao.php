@@ -63,7 +63,7 @@ class CotacoesAcao extends OperacoesAbstract
         }
     }
 
-    public function getDados()
+    protected function getDados()
     {
         $file = Yii::$app->params['bot'] . '/preco_acao.csv';
         if (!file_exists($file)) {
