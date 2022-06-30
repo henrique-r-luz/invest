@@ -35,16 +35,17 @@ class CotacoesAcao extends OperacoesAbstract
     {
         $contErro = 0;
         foreach ($this->csv as $acoes) {
+           
             $itensAtivos = ItensAtivo::find()->where(['ativo_id' => $acoes['id']])->all();
+           
             foreach ($itensAtivos as $itensAtivo) {
                 if ($acoes['valor'][2] == '.') {
                     $acoes['valor'][2] = ',';
                 }
+               
                 $valor = str_replace('.', '', $acoes['valor']);
                 $valor = str_replace(',', '.', $valor);
                 $valor = Ativo::valorCambio($itensAtivo->ativos, $valor);
-                $valor = $valor;
-
                 $lucro = ($valor * $itensAtivo->quantidade);
                 $itensAtivo->valor_bruto = $lucro;
                 $itensAtivo->valor_liquido = $lucro;

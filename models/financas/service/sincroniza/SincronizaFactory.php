@@ -28,36 +28,13 @@ class SincronizaFactory
 
         switch ($tipo) {
             case 'cambio':
-                return self::getCambio();
+                return new CotacaoCambio();
             case 'acao':
-                return self::getAcao();
+                return new CotacoesAcao();
             case 'easy':
-                return self::getEasy();
+                return new OperacaoNu(null);;
             case 'banco_inter':
-                return self::getBancoInter();
+                return new OperacaoInter(null);
         }
-    }
-
-    private static function getAcao()
-    {
-        return new CotacoesAcao();
-    }
-
-   
-    private static function getCambio()
-    {
-        return new CotacaoCambio();
-    }
-
-
-    private static function getEasy()
-    {
-        return new OperacaoNu(null);
-    }
-
-
-    private static function getBancoInter()
-    {
-        return new OperacaoInter(null);
     }
 }
