@@ -7,7 +7,7 @@
 <p align="center">
 <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/>
 </p>
-O Invest é um sistema de controle de investimentos pessoal que possibilita a centralização de todos os seus ativos em um só lugar. Ele possibilita o controle de aplicações de renda variável e fixa. A seguir é listado alguns dos recursos do sistema:
+O Invest é um sistema de controle de investimentos pessoal que possibilita a centralização de todos os seus ativos em um só lugar. Ele permite o controle de aplicações de renda variável e fixa. A seguir é listado alguns dos recursos do sistema:
 
  - Cadastro de ativos.
  - Cadastro de Operações dos ativos(Venda e compra).
