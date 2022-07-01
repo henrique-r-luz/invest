@@ -34,19 +34,20 @@ class OperacaoProventos extends OperacoesImportAbstract
         try {
             $transaction = Yii::$app->db->beginTransaction();
             foreach ($this->arquivo as $id => $linha) {
-                $ativoProvento = $linha[3];
+                $ativoProvento = $linha[0];
                 $ativoProvento = str_replace(' ', '', $ativoProvento);
                 $ativoProvento = \explode('-', $ativoProvento)[0];
 
-                $valorProvento = $linha[7];
+                $valorProvento = $linha[6];
                 $valorProvento = str_replace('R$', '', $valorProvento);
                 $valorProvento = str_replace('.', '', $valorProvento);
                 $valorProvento = str_replace(',', '.', $valorProvento);
                
 
                 $data  = $linha[1];
+                
                 list($d, $m, $y) = explode('/', $data);
-                $data = $y . '-' . $m . '-' . ($d+1) ;
+                $data = $y . '-' . $m . '-' . ($d) ;
 
                 $movimentacao = $linha[2];
 
