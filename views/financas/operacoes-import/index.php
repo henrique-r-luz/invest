@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use app\lib\grid\GridView;
 use kartik\daterange\DateRangePicker;
@@ -14,14 +15,12 @@ $daterange = [
         'attribute' => 'createTimeRange',
         'convertFormat' => true,
         'pluginOptions' => [
-            'timePicker' => true,
-            'timePicker24Hour' => true,
-            'timePickerIncrement' => 10,
-            //'locale' => ['format' => 'Y-m-d H:i']
-            'locale' => ['format' => 'd/m/Y H:i:s']
-            //'locale' => ['dd/MM/yyyy HH:mm']
+                'timePicker' => true,
+                'timePicker24Hour' => true,
+                'timePickerIncrement' => 10,
+                'locale' => ['format' => 'd/m/Y H:i:s']
         ],
-    ];
+];
 $this->title = 'Operacões Imports';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -33,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
-                'toolbar' => 'padraoCajui',
+                // 'toolbar' => 'padraoCajui',
                 'boxTitle' => $this->title,
                 'columns' => [
 
@@ -78,7 +77,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                         return date_format($date, 'd/m/Y H:i:s');
                                 },
                         ],
-                        ['class' => 'app\lib\grid\ActionColumn'],
+                        [
+                                'class' => 'app\lib\grid\ActionColumn',
+                                'template' => '{view} {delete} {download}',
+                                'buttons' => [
+                                        'download' => static function ($url, $model) {
+                                                $icon    = '<button type="button" class="btn btn-success btn-xs"><i class="fas fa-download"> </i> </button>';
+                                                return Html::a($icon, Url::toRoute(['download', 'id' => $model->id]), []);
+                                        },
+                                ],
+                        ],
                 ],
         ]); ?>
 

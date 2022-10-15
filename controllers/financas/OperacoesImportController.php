@@ -12,6 +12,7 @@ use app\lib\helpers\InvestException;
 use app\models\financas\OperacoesImport;
 use app\models\financas\OperacoesImportSearch;
 use app\models\financas\service\operacoesImport\OperacoesImportService;
+use Mpdf\Container\NotFoundException;
 use Throwable;
 
 /**
@@ -95,23 +96,22 @@ class OperacoesImportController extends Controller
         }
     }
 
-    /**
-     * Updates an existing OperacoesImport model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+    /**
+     * Download nota de negociação
+     *
+     * @param [type] $id
+     * @return void
+     * @author Henrique Luz
+     */
+    public function actionDownload($id)
+    {
+        $notaNegociacao = OperacoesImport::findOne($id);
+        if (empty($notaNegociacao)) {
+            throw new NotFoundException('Nota de negociação não encontrada.');
+        }
+        $url = Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $notaNegociacao->hash_nome . '.' . $notaNegociacao->extensao;
+        return Yii::$app->response->sendFile($url, 'nota_negociação_' . $notaNegociacao->id . '.' . $notaNegociacao->extensao);
     }
 
 

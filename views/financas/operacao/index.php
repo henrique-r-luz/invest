@@ -36,9 +36,9 @@ $daterange = [
         'filterModel' => $searchModel,
         'toolbar' => 'padraoCajui',
         'boxTitle' => $this->title,
-        
+
         'columns' => [
-                  'id',
+            'id',
             //'tipo:ntext',
             [
                 'label' => 'Id Ativo',
@@ -104,7 +104,7 @@ $daterange = [
             //'data',
             [
                 'attribute' => 'data',
-                'value'=>function($model){
+                'value' => function ($model) {
                     $date = date_create($model->data);
                     return date_format($date, 'd/m/Y H:i:s');
                 },
@@ -118,7 +118,9 @@ $daterange = [
                 'label' => 'Investidor',
                 'value' => 'itensAtivo.investidor.nome',
             ],
-            ['class' => 'app\lib\grid\ActionColumn'],
+            [
+                'class' => 'app\lib\grid\ActionColumn',
+            ],
         ],
         'showPageSummary' => true,
     ]);

@@ -1,20 +1,13 @@
 version: "3.7"
 services:
+
   app:
-    build:
-      args:
-        user: invest
-        uid: 1000
-      context: ./docker-compose/php
-      dockerfile: Dockerfile
-    image: invest_app
+    image: henriquerluz/php-fpm:1.0.0
     working_dir: /var/www/
-    ports:
-      - "9000:9000"
     volumes:
       - ./:/var/www
-      - ./docker-compose/php/php.ini:/usr/local/etc/php/php.ini 
       - ./docker-compose/php/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ./docker-compose/php/php.ini:/usr/local/etc/php/php.ini
     networks:
       - invest-network
     depends_on:
