@@ -1,21 +1,21 @@
 version: "3.7"
 services:
 
-  app_prod:
+  app:
     build:
       args:
         user: invest
         uid: 1000
-      context: ./config/php
+      context: ./docker-compose/php
       dockerfile: Dockerfile
     image: invest_app
     working_dir: /var/www/
     ports:
       - "9010:9000"
     volumes:
-      - ./invest/:/var/www
-      - ./config/index.php:/var/www/web/index.php
-      - ./config/arquivos:/var/www/arquivos
+      - ./:/var/www
+      - ./docker-compose/php/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ./docker-compose/php/php.ini:/usr/local/etc/php/php.ini
     networks:
       - invest-network
     depends_on:
