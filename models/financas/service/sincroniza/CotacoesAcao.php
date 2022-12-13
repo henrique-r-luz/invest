@@ -16,8 +16,8 @@ use app\models\financas\Ativo;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
+use app\lib\helpers\ConvertValorMonetario;
 use app\models\financas\service\sincroniza\OperacoesAbstract;
-use app\models\financas\service\sincroniza\SincronizaFactory;
 
 /**
  * Description of CotacoesAcao
@@ -35,17 +35,14 @@ class CotacoesAcao extends OperacoesAbstract
     {
         $contErro = 0;
         foreach ($this->csv as $acoes) {
-           
+
             $itensAtivos = ItensAtivo::find()->where(['ativo_id' => $acoes['id']])->all();
-           
+
             foreach ($itensAtivos as $itensAtivo) {
-                if ($acoes['valor'][2] == '.') {
-                    $acoes['valor'][2] = ',';
-                }
-               
-                $valor = str_replace('.', '', $acoes['valor']);
-                $valor = str_replace(',', '.', $valor);
+                $valor = trim($acoes['valor']);
+                $valor = ConvertValorMonetario::brParaUs($valor);
                 $valor = Ativo::valorCambio($itensAtivo->ativos, $valor);
+
                 $lucro = ($valor * $itensAtivo->quantidade);
                 $itensAtivo->valor_bruto = $lucro;
                 $itensAtivo->valor_liquido = $lucro;

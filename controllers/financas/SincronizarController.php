@@ -11,10 +11,8 @@ namespace app\controllers\financas;
 use Yii;
 use yii\web\Controller;
 use app\lib\componentes\ExecutaBack;
-use app\lib\helpers\InvestException;
 use app\models\financas\AtualizaAcao;
 use app\models\financas\service\sincroniza\Sincroniza;
-use app\models\financas\service\sincroniza\SincronizaFactory;
 use Throwable;
 
 /**
