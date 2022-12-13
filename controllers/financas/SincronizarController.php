@@ -41,9 +41,6 @@ class SincronizarController extends Controller
         }
         if (Yii::$app->request->post('but') == 'dados_empresa') {
             //a classe Runner deve ser extendida
-            $runner = new ExecutaBack();
-            $return = $runner->run('backgroud/atualiza-fundamento');
-            Yii::$app->session->setFlash('success', 'Uma notificação será enviada quando o processo for finalizado!');
             return $this->redirect('index');
         }
 
