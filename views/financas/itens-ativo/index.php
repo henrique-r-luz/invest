@@ -59,12 +59,7 @@ $impostoRenda = 1;
                 'attribute' => 'tipo',
                 'label' => 'Tipo',
                 'value' => function ($model) {
-                    // return 'tipo';
-                    if (isset($model->ativos->acaoBolsa->setor)) {
-                        return $model->ativos->tipo . ' (' . $model->ativos->acaoBolsa->setor . ')';
-                    } else {
-                        return $model->ativos->tipo;
-                    }
+                    return $model->ativos->tipo;
                 },
                 'pageSummary' => function ($summary, $data, $widget) use ($dataProvider, $impostoRenda) {
                     //var_dump($dataProvider);

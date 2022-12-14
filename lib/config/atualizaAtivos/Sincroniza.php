@@ -1,7 +1,7 @@
 <?php
 
 
-namespace app\models\financas\service\sincroniza;
+namespace  app\lib\config\atualizaAtivos;
 
 
 class Sincroniza

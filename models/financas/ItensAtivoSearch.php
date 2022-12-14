@@ -23,7 +23,7 @@ class ItensAtivoSearch extends ItensAtivo
     {
         return [
             [['id', 'quantidade'], 'integer'],
-            [['nome', 'codigo','tipo','categoria','pais','investidor_id'], 'safe'],
+            [['nome', 'codigo', 'tipo', 'categoria', 'pais', 'investidor_id'], 'safe'],
             [['valor_compra', 'valor_bruto', 'valor_liquido'], 'number'],
         ];
     }
@@ -47,16 +47,12 @@ class ItensAtivoSearch extends ItensAtivo
     public function search($params)
     {
         $query = ItensAtivo::find()
-                 ->joinWith(['ativos','investidor'])
-                 ->andWhere(['ativo'=>true]);
-                 
-                 //->andWhere(['>','quantidade',0]);
-
-        // add conditions that should always apply here
+            ->joinWith(['ativos', 'investidor'])
+            ->andWhere(['ativo' => true]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-             'pagination' => [
+            'pagination' => [
                 'pageSize' => 10,
             ],
         ]);
@@ -93,13 +89,13 @@ class ItensAtivoSearch extends ItensAtivo
             'valor_liquido' => $this->valor_liquido,
             'ativo.tipo' => $this->tipo,
             'ativo.categoria' => $this->categoria,
-            'ativo.pais'=>$this->pais,
+            'ativo.pais' => $this->pais,
         ]);
 
         $query->andFilterWhere(['ilike', 'ativo.nome', $this->nome])
             ->andFilterWhere(['ilike', 'ativo.codigo', $this->codigo])
             ->andFilterWhere(['ilike', 'investidor.nome', $this->investidor_id]);
-            //->andFilterWhere(['ilike', 'categoria', $this->categoria]);
+        //->andFilterWhere(['ilike', 'categoria', $this->categoria]);
 
         return $dataProvider;
     }

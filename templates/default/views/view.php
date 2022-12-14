@@ -18,16 +18,16 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
 
-$this->title = <?= $generator->generateString('Visualiza ').". '". StringHelper::basename($generator->modelClass)."'" ?>;
+$this->title = <?= $generator->generateString('Visualiza ') . ". '" . StringHelper::basename($generator->modelClass) . "'" ?>;
 $this->params['breadcrumbs'][] = ['label' => <?= $generator->generateString(Inflector::pluralize(Inflector::camel2words(StringHelper::basename($generator->modelClass)))) ?>, 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 
-<div class="box box-default">
-        <div class="box-header with-border">
-<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view">
-    
+<div class="card-info card card-outline">
+    <div class="card-body">
+        <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-view">
+
             <p>
                 <?= "<?= " ?>Html::a(<?= $generator->generateString('Update') ?>, ['update', <?= $urlParams ?>], ['class' => 'btn btn-primary']) ?>
                 <?= "<?= " ?>Html::a(<?= $generator->generateString('Delete') ?>, ['delete', <?= $urlParams ?>], [

@@ -6,10 +6,9 @@ use app\lib\dicionario\Pais;
 use app\lib\dicionario\Tipo;
 use yii\helpers\ArrayHelper;
 use kartik\widgets\ActiveForm;
-use kartik\widgets\SwitchInput;
-use kartik\number\NumberControl;
 use app\lib\dicionario\Categoria;
-use app\models\financas\AcaoBolsa;
+use app\models\config\ClassesOperacoes;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\financas\Ativo */
@@ -17,10 +16,10 @@ use app\models\financas\AcaoBolsa;
 ?>
 
 <div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">
-<?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(); ?>
     <div class="ativo-form">
         <div class="card-body">
-           
+
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-lg-6">
                     <?= $form->field($model, 'nome')->textInput() ?>
@@ -76,12 +75,24 @@ use app\models\financas\AcaoBolsa;
                     ?>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-12">
+                    <?= $form->field($model, 'classe_atualiza_id')->widget(Select2::classname(), [
+                        'data' => ArrayHelper::map(ClassesOperacoes::find()->asArray()->all(), 'id', 'nome'),
+                        'options' => ['placeholder' => 'Selecione um Classe'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]); ?>
+                </div>
+            </div>
         </div>
+
         <div class="card-footer">
 
             <?= Html::submitButton('Salvar', ['class' => 'btn btn-success']) ?>
             <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
-            
+
         </div>
 
     </div>

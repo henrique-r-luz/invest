@@ -50,7 +50,7 @@ class Ativo extends ActiveRecord
         return [
             [['nome', 'codigo', 'tipo', 'categoria', 'pais'], 'required'],
             [['nome', 'codigo', 'categoria', 'tipo'], 'string'],
-            [['acao_bolsa_id'], 'integer'],
+            [['acao_bolsa_id', 'classe_atualiza_id'], 'integer'],
             [['categoria'], 'string'],
         ];
     }
@@ -68,6 +68,7 @@ class Ativo extends ActiveRecord
             'categoria' => 'Categoria',
             'acao_bolsa_id' => 'Empresas',
             'pais' => 'País',
+            'classe_atualiza_id' => 'Classe Atualização'
         ];
     }
     /**

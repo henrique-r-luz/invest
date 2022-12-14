@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace app\models\financas\service\sincroniza;
+namespace  app\lib\config\atualizaAtivos;
 
 use app\lib\config\atualizaAtivos\CotacoesAcao;
 use app\lib\config\atualizaAtivos\CotacaoCambio;
@@ -33,7 +33,7 @@ class SincronizaFactory
             case 'acao':
                 return new CotacoesAcao();
             case 'easy':
-                return new OperacaoNu(null);;
+                return new OperacaoNu(null);
         }
     }
 }

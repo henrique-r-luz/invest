@@ -17,7 +17,7 @@ use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
 use app\models\financas\OperacoesImport;
 use app\lib\dicionario\TipoArquivoUpload;
-use app\models\financas\service\sincroniza\SincronizaFactory;
+use app\lib\config\atualizaAtivos\SincronizaFactory;
 use app\models\financas\service\sincroniza\ComponenteOperacoes;
 use app\models\financas\service\operacoesImport\OperacoesImportHelp;
 use app\models\financas\service\operacoesImport\OperacoesImportAbstract;
@@ -77,7 +77,7 @@ class OperacaoNu extends OperacoesImportAbstract
                     $contErro++;
                     $erros .= ' o codigo do itensAtivo:' . $codigo . ' não existe</br>';
                 } else {
-                    
+
                     $itensAtivo->valor_bruto = floatval(str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[6]))));
                     $itensAtivo->valor_liquido = floatval(str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[7]))));
                     $itensAtivo->valor_compra = floatval(str_replace(',', '.', str_replace('R$', '', str_replace('.', '', $titulo[5]))));

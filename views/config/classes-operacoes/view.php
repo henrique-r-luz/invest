@@ -4,16 +4,17 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\financas\Investidor */
+/* @var $model app\models\financas\ClassesOperacoes */
 
-$this->title = 'Visualiza ' . 'Investidor';
-$this->params['breadcrumbs'][] = ['label' => 'Investidors', 'url' => ['index']];
+$this->title = 'Visualiza ' . 'ClassesOperacoes';
+$this->params['breadcrumbs'][] = ['label' => 'Classes Operacoes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
+
 <div class="card-info card card-outline">
     <div class="card-body">
-        <div class="investidor-view">
+        <div class="classes-operacoes-view">
 
             <p>
                 <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -31,8 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $model,
                 'attributes' => [
                     'id',
-                    'cpf',
-                    'nome:ntext',
+                    'nome',
                 ],
             ]) ?>
 

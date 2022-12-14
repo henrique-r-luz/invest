@@ -17,7 +17,6 @@ use app\models\dashboard\GraficoAtivo;
 use app\models\dashboard\DashBoardSearch;
 use app\models\dashboard\GraficoAcaoPais;
 use app\models\dashboard\GraficoCategoria;
-use yii\web\ForbiddenHttpException;
 use app\lib\helpers\SiteHelper;
 
 class SiteController extends Controller
@@ -62,7 +61,6 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
 
         $dashBoardSearch = new DashBoardSearch();
         $dados = $dashBoardSearch->search();

@@ -11,34 +11,19 @@ use yii\helpers\Html; ?>
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <!-- Sidebar user panel (optional) 
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="<?= $assetDir ?>/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
-            </div>
-        </div>
-        -->
-        <!-- SidebarSearch Form -->
-        <!-- href be escaped -->
-        <!-- <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                    </button>
-                </div>
-            </div>
-        </div> -->
-
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <?php
             echo \app\lib\Menu::widget([
                 'items' => [
+                    [
+                        'label' => 'Config',
+                        'icon' => 'crop',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => 'Classes Operações', 'icon' => 'sticky-note', 'url' => ['config/classes-operacoes']],
+                        ],
+                    ],
                     [
                         'label' => 'Finanças',
                         'icon' => 'dollar-sign',
@@ -47,15 +32,25 @@ use yii\helpers\Html; ?>
                             ['label' => 'Ativo', 'icon' => 'gem', 'url' => ['financas/ativo']],
                             ['label' => 'Investidor', 'icon' => 'user', 'url' => ['financas/investidor']],
                             ['label' => 'Ativo Investidos', 'icon' => 'glass-cheers', 'url' => ['financas/itens-ativo']],
-                            ['label' => 'Atualiza Ação', 'icon' => 'undo', 'url' => ['financas/atualiza-acao']],
                             ['label' => 'Operação', 'icon' => 'cash-register', 'url' => ['financas/operacao']],
                             ['label' => 'Operações Import', 'icon' => 'file-import', 'url' => ['financas/operacoes-import']],
                             ['label' => 'Proventos', 'icon' => 'arrow-down', 'url' => ['financas/proventos']],
-                            ['label' => 'Preço', 'icon' => 'dollar-sign', 'url' => ['financas/preco']],
                             ['label' => 'Empresas Bolsa', 'icon' => 'building', 'url' => ['financas/acao-bolsa']],
-                            ['label' => 'Sincronizar', 'icon' => 'sync-alt', 'url' => ['financas/sincronizar']],
+
                         ],
                     ],
+
+                    [
+                        'label' => 'Sincronizar',
+                        'icon' => 'sync-alt',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => 'Atualiza', 'icon' => 'sync-alt', 'url' => ['financas/sincronizar']],
+                            ['label' => 'Preço', 'icon' => 'dollar-sign', 'url' => ['financas/preco']],
+                            ['label' => 'Atualiza Ação', 'icon' => 'undo', 'url' => ['financas/atualiza-acao']],
+                        ],
+                    ],
+
                     [
                         'label' => 'Análise Gráfica',
                         'icon' => 'chart-line',
@@ -67,6 +62,7 @@ use yii\helpers\Html; ?>
                             ['label' => 'Proventos/Ativo', 'icon' => 'rocket', 'url' => ['analiseGrafica/proventos-por-ativo']],
                         ],
                     ],
+
 
                     [
                         'label' => 'Admin',
