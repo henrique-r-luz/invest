@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\sincronizar\Preco */
 
-$this->title = 'Cria Preco';
+$this->title = 'Cria Preço';
 $this->params['breadcrumbs'][] = ['label' => 'Precos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -7,7 +7,7 @@ use app\lib\grid\GridView;
 /* @var $searchModel app\models\sincronizar\PrecoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Precos';
+$this->title = 'Preços';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="preco-index">
