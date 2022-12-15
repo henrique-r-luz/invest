@@ -1,13 +1,14 @@
 <?php
 
-namespace app\controllers\financas;
+namespace app\controllers\sincronizar;
 
 use Yii;
-use app\models\financas\AtualizaAcao;
-use app\models\financas\AtualizaAcaoSearch;
+
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
+use app\models\sincronizar\AtualizaAcao;
+use app\models\sincronizar\AtualizaAcaoSearch;
 
 /**
  * AtualizaAcaoController implements the CRUD actions for AtualizaAcao model.
@@ -108,12 +109,13 @@ class AtualizaAcaoController extends Controller
 
         return $this->redirect(['index']);
     }
-    
-     public function actionUrl(){
+
+    public function actionUrl()
+    {
         // echo 'olaaa';
-      // \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-       
-         $this->asJson(AtualizaAcao::getUrl());
+        // \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $this->asJson(AtualizaAcao::getUrl());
     }
 
     /**
@@ -131,8 +133,4 @@ class AtualizaAcaoController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-    
-    
-    
-   
 }

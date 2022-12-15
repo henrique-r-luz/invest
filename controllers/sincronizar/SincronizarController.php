@@ -6,14 +6,13 @@
  * and open the template in the editor.
  */
 
-namespace app\controllers\financas;
+namespace app\controllers\sincronizar;
 
 use Yii;
-use yii\web\Controller;
-use app\lib\componentes\ExecutaBack;
-use app\models\financas\AtualizaAcao;
-use app\models\financas\service\sincroniza\Sincroniza;
 use Throwable;
+use yii\web\Controller;
+use app\models\sincronizar\AtualizaAcao;
+use app\models\financas\service\sincroniza\Sincroniza;
 
 /**
  * Description of SincronizarController

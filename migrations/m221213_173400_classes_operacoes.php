@@ -34,6 +34,24 @@ class m221213_173400_classes_operacoes extends Migration
             'classes_operacoes',
             'id'
         );
+
+        $this->createTable(
+            'preco',
+            [
+                'id' => Schema::TYPE_PK,
+                'valor' => ' NUMERIC NOT NULL ',
+                'ativo_id' => Schema::TYPE_INTEGER,
+                'data' => 'timestamp without time zone NOT NULL',
+
+            ]
+        );
+        $this->addForeignKey(
+            'ativo_preco_id_fk',
+            'preco',
+            'ativo_id',
+            'ativo',
+            'id'
+        );
     }
 
     /**
@@ -43,5 +61,6 @@ class m221213_173400_classes_operacoes extends Migration
     {
         $this->dropColumn('ativo', 'classe_atualiza_id');
         $this->dropTable('classes_operacoes');
+        $this->dropTable('preco');
     }
 }

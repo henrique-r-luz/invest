@@ -1,10 +1,9 @@
 <?php
 
-namespace app\models\financas;
+namespace app\models\sincronizar;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\financas\AtualizaAcao;
 
 /**
  * AtualizaAcaoSearch represents the model behind the search form of `app\models\financas\AtualizaAcao`.
@@ -41,13 +40,13 @@ class AtualizaAcaoSearch extends AtualizaAcao
     public function search($params)
     {
         $query = AtualizaAcao::find()
-                    ->joinWith(['ativo']);
+            ->joinWith(['ativo']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-             'pagination' => [
+            'pagination' => [
                 'pageSize' => 10,
             ],
         ]);

@@ -1,9 +1,12 @@
 <?php
 
-namespace app\models\financas;
-use app\lib\behavior\AuditoriaBehavior;
+namespace app\models\sincronizar;
 
 use Yii;
+
+use app\models\financas\Ativo;
+use app\lib\behavior\AuditoriaBehavior;
+
 
 /**
  * This is the model class for table "atualiza_acao".
@@ -55,13 +58,14 @@ class AtualizaAcao extends \yii\db\ActiveRecord
             'url' => 'Url',
         ];
     }
-    
-    
-    public static function getUrl(){
-       return AtualizaAcao::find()
-                            ->select(['ativo_id','url'])
-                            ->asArray()
-                            ->all();
+
+
+    public static function getUrl()
+    {
+        return AtualizaAcao::find()
+            ->select(['ativo_id', 'url'])
+            ->asArray()
+            ->all();
     }
 
     /**
