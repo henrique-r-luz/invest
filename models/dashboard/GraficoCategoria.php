@@ -16,22 +16,28 @@ use yii\web\JsExpression;
  *
  * @author henrique
  */
-class GraficoCategoria extends GraficoAbstract {
+class GraficoCategoria extends GraficoAbstract
+{
 
-  
+
     private $renda;
 
 
-    protected function configuraDados() {
-       
-        $this->renda = GraficoUtil::dadosPizza(['dados' => $this->dados,
-                    'item' => 'categoria',
-                    'valor_item' => 'valor_categoria',
-                    'valor_total' => 'valor_total']);
+    protected function configuraDados()
+    {
+
+        $this->renda = GraficoUtil::dadosPizza([
+            'dados' => $this->dados,
+            'item' => 'categoria',
+            'valor_item' => 'valor_categoria',
+            'valor_total' => 'valor_total',
+            'valorAporte' => $this->valorAporte,
+            'valorInvestido' => $this->valorInvestido,
+        ]);
     }
 
-    public function montaGrafico() {
-         return GraficoUtil::graficoPizza($this->renda);
+    public function montaGrafico()
+    {
+        return GraficoUtil::graficoPizza($this->renda);
     }
-
 }

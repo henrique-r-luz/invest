@@ -19,26 +19,32 @@ use app\models\dashboard\GraficoAbstract;
  *
  * @author henrique
  */
-class GraficoTipo extends GraficoAbstract {
+class GraficoTipo extends GraficoAbstract
+{
 
     //put your code here
 
     private $tipos = [];
 
-    protected function configuraDados() {
+    protected function configuraDados()
+    {
         $tipo = array_unique(array_column($this->dados, 'tipo'));
-        $this->tipos = GraficoUtil::dadosPizza(['dados' => $this->dados,
-                    'item' => 'tipo',
-                    'valor_item' => 'valor_tipo',
-                    'valor_total' => 'valor_total']);
+        $this->tipos = GraficoUtil::dadosPizza([
+            'dados' => $this->dados,
+            'item' => 'tipo',
+            'valor_item' => 'valor_tipo',
+            'valor_total' => 'valor_total',
+            'valorAporte' => $this->valorAporte,
+            'valorInvestido' => $this->valorInvestido,
+        ]);
 
         unset($this->tipos['Ações']);
         $paises = [Pais::BR, Pais::US];
         foreach ($paises as $pais) {
             foreach ($this->dados as $dados) {
                 if ($dados['pais'] == $pais && $dados['tipo'] == Tipo::ACOES) {
-                    if ($dados['valor_total'] > 0) {
-                        $this->tipos['Ações-' . $pais] = round($dados['valor_acao_pais'] / $dados['valor_total'] * 100);
+                    if ($this->valorInvestido > 0) {
+                        $this->tipos['Ações-' . $pais] = round($dados['valor_acao_pais'] / $this->valorInvestido * 100);
                     }
                     break;
                 }
@@ -47,8 +53,8 @@ class GraficoTipo extends GraficoAbstract {
         asort($this->tipos);
     }
 
-    public function montaGrafico() {
+    public function montaGrafico()
+    {
         return GraficoUtil::graficoPizza($this->tipos);
     }
-
 }

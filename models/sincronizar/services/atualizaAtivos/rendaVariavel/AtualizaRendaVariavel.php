@@ -25,9 +25,9 @@ class AtualizaRendaVariavel
             $itemAtivo = ItensAtivo::findOne($itemAtualiza['itens_ativo_id']);
             //tem que converter para dollar
             $valor = $itemAtualiza['valor'];
-            if ($itemAtualiza['pais'] == Pais::US) {
+            /* if ($itemAtualiza['pais'] == Pais::US) {
                 $valor = $valor * ValorDollar::getCotacaoDollar();
-            }
+            }*/
             $itemAtivo->valor_bruto = $valor;
             $itemAtivo->valor_liquido = $valor;
             $itemAtivo->valor_compra = $itemAtualiza['valor_compra'];

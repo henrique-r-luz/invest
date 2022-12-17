@@ -54,6 +54,12 @@ $impostoRenda = 1;
             [
                 'attribute' => 'valor_bruto',
                 'format' => 'currency',
+                'value' => function ($model) {
+                    if ($model->ativos->pais == Pais::US) {
+                        return round($model->valor_bruto * ValorDollar::getCotacaoDollar(), 4);
+                    }
+                    return round($model->valor_bruto, 4);
+                },
                 'pageSummary' => true,
             ],
             [
@@ -77,9 +83,9 @@ $impostoRenda = 1;
                         }
                         //renda fixa
                         if ($ativo->ativos->categoria == Categoria::RENDA_FIXA) {
-                            $lucro = $lucro + ($ativo->valor_bruto - $ativo->valor_compra * $cambio);
+                            $lucro = $lucro + (($ativo->valor_bruto * $cambio) - ($ativo->valor_compra * $cambio));
                         } else {
-                            $lucroAcao = $lucroAcao + ($ativo->valor_bruto - $ativo->valor_compra * $cambio);
+                            $lucroAcao = $lucroAcao + (($ativo->valor_bruto * $cambio) - ($ativo->valor_compra * $cambio));
                         }
                     }
 

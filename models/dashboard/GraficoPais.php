@@ -15,22 +15,28 @@ use yii\web\JsExpression;
  *
  * @author henrique
  */
-class GraficoPais extends GraficoAbstract {
+class GraficoPais extends GraficoAbstract
+{
 
     //put your code here
 
     private $pais = [];
 
-    protected function configuraDados() {
+    protected function configuraDados()
+    {
 
-        $this->pais = GraficoUtil::dadosPizza(['dados' => $this->dados,
-                    'item' => 'pais',
-                    'valor_item' => 'valor_pais',
-                    'valor_total' => 'valor_total']);
+        $this->pais = GraficoUtil::dadosPizza([
+            'dados' => $this->dados,
+            'item' => 'pais',
+            'valor_item' => 'valor_pais',
+            'valor_total' => 'valor_total',
+            'valorAporte' => $this->valorAporte,
+            'valorInvestido' => $this->valorInvestido,
+        ]);
     }
 
-    public function montaGrafico() {
+    public function montaGrafico()
+    {
         return GraficoUtil::graficoPizza($this->pais);
     }
-
 }

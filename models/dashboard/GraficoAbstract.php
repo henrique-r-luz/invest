@@ -13,18 +13,23 @@ namespace app\models\dashboard;
  *
  * @author henrique
  */
-abstract class GraficoAbstract {
+abstract class GraficoAbstract
+{
 
     protected $dados;
+    protected $valorAporte;
+    protected $valorInvestido;
 
-    function __construct($dados) {
+    function __construct($dados, $valoresTotais)
+    {
         $this->dados = $dados;
+        $this->valorAporte = ValoresConsolidados::valorCompra($valoresTotais);
+        $this->valorInvestido = ValoresConsolidados::valorInvestido($valoresTotais);
         $this->configuraDados();
     }
-    
-    
-    abstract protected  function configuraDados();
-    
-    abstract public function montaGrafico();
 
+
+    abstract protected  function configuraDados();
+
+    abstract public function montaGrafico();
 }

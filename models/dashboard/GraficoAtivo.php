@@ -13,22 +13,28 @@ namespace app\models\dashboard;
  *
  * @author henrique
  */
-class GraficoAtivo extends GraficoAbstract {
+class GraficoAtivo extends GraficoAbstract
+{
 
     private $ativo;
 
     //put your code here
 
 
-    protected function configuraDados() {
-        $this->ativo = GraficoUtil::dadosPizza(['dados' => $this->dados,
-                    'item' => 'codigo',
-                    'valor_item' => 'valor_bruto',
-                    'valor_total' => 'valor_total']);
+    protected function configuraDados()
+    {
+        $this->ativo = GraficoUtil::dadosPizza([
+            'dados' => $this->dados,
+            'item' => 'codigo',
+            'valor_item' => 'valor_bruto',
+            'valor_total' => 'valor_total',
+            'valorAporte' => $this->valorAporte,
+            'valorInvestido' => $this->valorInvestido,
+        ]);
     }
 
-    public function montaGrafico() {
+    public function montaGrafico()
+    {
         return GraficoUtil::graficoPizza($this->ativo);
     }
-
 }

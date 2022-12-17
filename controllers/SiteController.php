@@ -17,6 +17,7 @@ use app\models\dashboard\GraficoAtivo;
 use app\models\dashboard\DashBoardSearch;
 use app\models\dashboard\GraficoAcaoPais;
 use app\models\dashboard\GraficoCategoria;
+use app\models\dashboard\ValoresConsolidados;
 
 class SiteController extends Controller
 {
@@ -46,26 +47,29 @@ class SiteController extends Controller
 
         $dashBoardSearch = new DashBoardSearch();
         $dados = $dashBoardSearch->search();
-        $graficoCategoria = new GraficoCategoria($dados);
-        $graficoTipo = new GraficoTipo($dados);
-        $graficoPais = new GraficoPais($dados);
-        $graficoAtivo = new GraficoAtivo($dados);
-        $graficoAcaoPais = new GraficoAcaoPais($dados);
-        $graficoAcoes = new GraficoAcoes($dados);
-        $graficoFii = new GraficoFiis($dados);
+        $valoresTotais = $dashBoardSearch->valorTotal();
+        $graficoCategoria = new GraficoCategoria($dados, $valoresTotais);
+        $graficoTipo = new GraficoTipo($dados, $valoresTotais);
+        $graficoPais = new GraficoPais($dados, $valoresTotais);
+        $graficoAtivo = new GraficoAtivo($dados, $valoresTotais);
+        $graficoAcaoPais = new GraficoAcaoPais($dados, $valoresTotais);
+        $graficoAcoes = new GraficoAcoes($dados, $valoresTotais);
+        $graficoFii = new GraficoFiis($dados, $valoresTotais);
         $formatter = Yii::$app->formatter;
         $patrimonioBruto = 0;
         $valorCompra = 0;
         $lucro = 0;
         $proventos = $formatter->asCurrency(Proventos::find()->sum('valor'));
-        if (!empty($dados)) {
-            $patrimonioBruto = $formatter->asCurrency(round($dados[0]['valor_total'], 5));
-            $valorCompra = $formatter->asCurrency(round($dados[0]['valor_compra'], 5));
-            $lucro = $formatter->asCurrency(round(($dados[0]['valor_total'] - $dados[0]['valor_compra']), 5));
+        // print_r($valoresTotais);
+        // exit();
+        if (!empty($valoresTotais)) {
+            $patrimonioBruto = $formatter->asCurrency(round(ValoresConsolidados::valorInvestido($valoresTotais), 5));
+            $valorCompra = $formatter->asCurrency(round(ValoresConsolidados::valorCompra($valoresTotais), 5));
+            $lucro = $formatter->asCurrency(round((ValoresConsolidados::valorInvestido($valoresTotais) - ValoresConsolidados::valorCompra($valoresTotais)), 5));
         }
 
         return $this->render('index', [
-            'dadosCategoria' => $graficoCategoria->montaGrafico(), //$indexService->getDadosCategoria(),
+            'dadosCategoria' => $graficoCategoria->montaGrafico(),
             'dadosPais' => $graficoPais->montaGrafico(),
             'dadosAtivo' => $graficoAtivo->montaGrafico(),
             'dadosTipo' => $graficoTipo->montaGrafico(),
