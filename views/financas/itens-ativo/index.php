@@ -1,11 +1,10 @@
 <?php
 
+use app\lib\config\ValorDollar;
 use Yii;
-use yii\helpers\Html;
 use app\lib\grid\GridView;
 use app\lib\dicionario\Pais;
 use app\lib\dicionario\Tipo;
-use app\models\financas\Ativo;
 use app\lib\dicionario\Categoria;
 
 //use Yii;
@@ -44,6 +43,9 @@ $impostoRenda = 1;
             [
                 'attribute' => 'valor_compra',
                 'value' => function ($model) {
+                    if ($model->ativos->pais == Pais::US) {
+                        return round($model->valor_compra * ValorDollar::getCotacaoDollar(), 4);
+                    }
                     return round($model->valor_compra, 4); //app\models\financas\Ativo::valorCambio($model, $model->valor_compra);
                 },
                 'format' => 'currency',
@@ -64,15 +66,20 @@ $impostoRenda = 1;
                 'pageSummary' => function ($summary, $data, $widget) use ($dataProvider, $impostoRenda) {
                     //var_dump($dataProvider);
                     // print_r($dataProvider->models);
+
                     $objetos = $dataProvider->models;
                     $lucro = 0;
                     $lucroAcao = 0;
                     foreach ($objetos as $ativo) {
+                        $cambio = 1;
+                        if ($ativo->ativos->pais == Pais::US) {
+                            $cambio = ValorDollar::getCotacaoDollar();
+                        }
                         //renda fixa
                         if ($ativo->ativos->categoria == Categoria::RENDA_FIXA) {
-                            $lucro = $lucro + ($ativo->valor_bruto - $ativo->valor_compra);
+                            $lucro = $lucro + ($ativo->valor_bruto - $ativo->valor_compra * $cambio);
                         } else {
-                            $lucroAcao = $lucroAcao + ($ativo->valor_bruto - $ativo->valor_compra);
+                            $lucroAcao = $lucroAcao + ($ativo->valor_bruto - $ativo->valor_compra * $cambio);
                         }
                     }
 

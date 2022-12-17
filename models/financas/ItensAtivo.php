@@ -41,14 +41,15 @@ class ItensAtivo extends \yii\db\ActiveRecord
 
     /**
      * {@inheritdoc}
+     * Os valores são registrados na moeda de origem do ativo
      */
     public function rules()
     {
         return [
-            [['ativo_id', 'investidor_id','ativo'], 'required'],
+            [['ativo_id', 'investidor_id', 'ativo'], 'required'],
             [['ativo_id', 'investidor_id'], 'default', 'value' => null],
             [['ativo_id', 'investidor_id'], 'integer'],
-            [['ativo'],'boolean'],
+            [['ativo'], 'boolean'],
             [['quantidade', 'valor_compra', 'valor_liquido', 'valor_bruto'], 'number'],
             [['ativo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ativo::className(), 'targetAttribute' => ['ativo_id' => 'id']],
             [['investidor_id'], 'exist', 'skipOnError' => true, 'targetClass' => Investidor::className(), 'targetAttribute' => ['investidor_id' => 'id']],
@@ -68,7 +69,7 @@ class ItensAtivo extends \yii\db\ActiveRecord
             'valor_compra' => 'Valor Compra',
             'valor_liquido' => 'Valor Liquido',
             'valor_bruto' => 'Valor Bruto',
-            'ativo'=>'Ativo'
+            'ativo' => 'Ativo'
         ];
     }
 
@@ -92,12 +93,16 @@ class ItensAtivo extends \yii\db\ActiveRecord
         return $this->hasOne(Investidor::className(), ['id' => 'investidor_id']);
     }
 
-    public static function lista(){
-        return  ArrayHelper::map(itensAtivo::find()
-                ->joinWith(['ativos','investidor'])
-                ->where(['ativo' => true])->all(), 'id', 
-        function($model){
-            return $model->ativos->codigo.' | '.$model->investidor->nome;
-        });
+    public static function lista()
+    {
+        return  ArrayHelper::map(
+            itensAtivo::find()
+                ->joinWith(['ativos', 'investidor'])
+                ->where(['ativo' => true])->all(),
+            'id',
+            function ($model) {
+                return $model->ativos->codigo . ' | ' . $model->investidor->nome;
+            }
+        );
     }
 }

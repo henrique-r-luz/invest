@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\lib\helpers\SiteHelper;
@@ -42,8 +43,6 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        // echo ValorDollar::getCotacaoDollar();
-
 
         $dashBoardSearch = new DashBoardSearch();
         $dados = $dashBoardSearch->search();
@@ -98,10 +97,8 @@ class SiteController extends Controller
     {
         if (!Yii::$app->user->isGuest) {
             Yii::$app->user->logout();
-
             return $this->redirect('login');
         }
-
         return $this->redirect('index');
     }
 

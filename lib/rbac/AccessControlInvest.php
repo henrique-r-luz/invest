@@ -39,14 +39,18 @@ class AccessControlInvest extends AccessControl
         if (Yii::$app->authManager->checkAccess($user->id, $pagina)) {
             return true;
         }
-        if ($this->denyCallback !== null) {
+        /* if ($this->denyCallback !== null) {
             call_user_func($this->denyCallback, null, $action);
         } else {
             if ($pagina != 'default/toolbar') {
                 Url::remember([$pagina], 'pagina_after_login');
             }
             $this->denyAccess($user);
+        }*/
+        if ($pagina != 'default/toolbar') {
+            Url::remember([$pagina], 'pagina_after_login');
         }
+        $this->denyAccess($user);
 
         return false;
     }

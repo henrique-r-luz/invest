@@ -30,6 +30,7 @@ class AtualizaRendaVariavel
             }
             $itemAtivo->valor_bruto = $valor;
             $itemAtivo->valor_liquido = $valor;
+            $itemAtivo->valor_compra = $itemAtualiza['valor_compra'];
             if (!$itemAtivo->save()) {
                 $erro = CajuiHelper::processaErros($itemAtivo->getErrors());
                 throw new InvestException($erro);

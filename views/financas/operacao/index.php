@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use app\lib\grid\GridView;
+use app\lib\config\ValorDollar;
 use app\models\financas\Operacao;
 use kartik\daterange\DateRangePicker;
 
@@ -76,7 +77,8 @@ $daterange = [
                 'attribute' => 'valor',
                 'format' => 'currency',
                 'value' => function ($model) {
-                    return $model->getValorCambio();
+                    /** @var Operacao */
+                    return $model->valor * ValorDollar::getCotacaoDollar();
                 },
                 'pageSummary' => function ($summary, $data, $widget) use ($dataProvider) {
                     //var_dump($dataProvider);
@@ -86,10 +88,10 @@ $daterange = [
                     foreach ($objetos as $operacao) {
                         if ($operacao->tipo == 0) {
                             //dinheiro entrando no meu bolso
-                            $total += $operacao->getValorCambio();
+                            $total += $operacao->valor; //$operacao->getValorCambio();
                         } else {
                             //dinheiro saindo do meu bolso
-                            $total -= $operacao->getValorCambio();
+                            $total -= $operacao->valor;
                         }
                     }
                     if ($total < 0) {
@@ -97,7 +99,7 @@ $daterange = [
                     } else {
                         $color = 'green';
                     }
-                    return '<font color="' . $color . '">Valor Total: ' . Yii::$app->formatter->asCurrency($total) . '</font>';
+                    return '<font color="' . $color . '">Valor Total: ' . Yii::$app->formatter->asCurrency($total * ValorDollar::getCotacaoDollar()) . '</font>';
                 },
                 'pageSummaryOptions' => ['colspan' => 2],
             ],

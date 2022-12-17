@@ -23,7 +23,7 @@ $config = [
         '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
-        
+
         'view' => [
             'theme' => [
                 'pathMap' => [

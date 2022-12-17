@@ -161,8 +161,8 @@ class Operacao extends ActiveRecord
     }
 
 
-    public function getValorCambio()
+    /*public function getValorCambio()
     {
         return Ativo::valorCambio($this->itensAtivo->ativos, $this->valor);
-    }
+    }*/
 }
