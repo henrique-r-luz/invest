@@ -3,11 +3,10 @@
 namespace app\controllers;
 
 use Yii;
-use const YII_ENV_TEST;
 use yii\web\Controller;
-use app\models\admin\LoginForm;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
+use app\lib\helpers\SiteHelper;
+use app\models\admin\LoginForm;
 use app\models\financas\Proventos;
 use app\models\dashboard\GraficoFiis;
 use app\models\dashboard\GraficoPais;
@@ -17,7 +16,6 @@ use app\models\dashboard\GraficoAtivo;
 use app\models\dashboard\DashBoardSearch;
 use app\models\dashboard\GraficoAcaoPais;
 use app\models\dashboard\GraficoCategoria;
-use app\lib\helpers\SiteHelper;
 
 class SiteController extends Controller
 {
@@ -38,29 +36,14 @@ class SiteController extends Controller
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                // 'class' => ActionException::class,
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
-    }
-
-    /**
      * Displays homepage.
      *
      * @return string
      */
     public function actionIndex()
     {
+        // echo ValorDollar::getCotacaoDollar();
+
 
         $dashBoardSearch = new DashBoardSearch();
         $dados = $dashBoardSearch->search();
@@ -102,6 +85,7 @@ class SiteController extends Controller
         $this->layout = 'main-login';
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
             return SiteHelper::urlDepoisLogin($this);
         }
         return $this->render(

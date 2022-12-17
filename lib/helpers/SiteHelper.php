@@ -2,7 +2,6 @@
 
 namespace app\lib\helpers;
 
-use Yii;
 use yii\helpers\Url;
 
 class SiteHelper
@@ -10,12 +9,15 @@ class SiteHelper
 
     public static function urlDepoisLogin($controller)
     {
-        $relember = Url::previous();
+        /*$relember = Url::previous();
         if (isset($relember)) {
+            echo $relember . ' ';
+            //  exit();
             $url = Url::previous('pagina_after_login');
-            return $controller->redirect($url);
-        }
-
+            echo $url;
+            exit();
+            return $controller->redirect($relember);
+        }*/
         return $controller->redirect('index');
     }
 }

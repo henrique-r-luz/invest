@@ -12,7 +12,8 @@ use app\lib\behavior\DateRangeBehaviorAlterado;
 /**
  * OperacaoSearch represents the model behind the search form of `app\models\Operacao`.
  */
-class OperacaoSearch extends Operacao {
+class OperacaoSearch extends Operacao
+{
 
     public $ativo_codigo;
     public $createTimeRange;
@@ -23,7 +24,8 @@ class OperacaoSearch extends Operacao {
     /**
      * {@inheritdoc}
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['id', 'itens_ativos_id'], 'integer'],
             [['createTimeRange'], 'match', 'pattern' => '/^.+\s\-\s.+$/'],
@@ -35,12 +37,14 @@ class OperacaoSearch extends Operacao {
     /**
      * {@inheritdoc}
      */
-    public function scenarios() {
+    public function scenarios()
+    {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
 
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             [
                 'class' => DateRangeBehaviorAlterado::className(),
@@ -58,9 +62,10 @@ class OperacaoSearch extends Operacao {
      *
      * @return ActiveDataProvider
      */
-    public function search($params) {
+    public function search($params)
+    {
         $query = Operacao::find()
-                ->joinWith(['itensAtivo.investidor','itensAtivo.ativos']);
+            ->joinWith(['itensAtivo.investidor', 'itensAtivo.ativos']);
 
         // add conditions that should always apply here
 
@@ -103,7 +108,7 @@ class OperacaoSearch extends Operacao {
 
         if ($this->createTimeRange != null && $this->createTimeRange != '') {
             $query->andFilterWhere(['>=', 'data', $this->createTimeStart])
-                    ->andFilterWhere(['<=', 'data', $this->createTimeEnd]);
+                ->andFilterWhere(['<=', 'data', $this->createTimeEnd]);
         }
 
 
@@ -114,17 +119,18 @@ class OperacaoSearch extends Operacao {
         return $dataProvider;
     }
 
-    public function searchContAporte($model) {
+    public function searchContAporte($model)
+    {
 
         $query = Operacao::find()
-                        ->select(['ativo.codigo as codigo', 'ativo.nome as nome', 'sum(operacao.valor) as total', 'sum(operacao.quantidade) as quantidade'])
-                        ->innerjoin('itens_ativo','itens_ativo.id = operacao.itens_ativo')
-                        ->innerJoin('ativo', 'ativo.id = itens_ativo.ativo_id')
-                        ->where(['between', 'data', $model->dataInicio, $model->dataFim])
-                        ->andWhere(['operacao.tipo' => 1])//operação de compra
-                        ->andWhere(['ativo.tipo' => Tipo::ACOES])
-                        ->groupBy(['ativo.codigo', 'ativo.nome'])
-                        ->orderBy(['sum(operacao.valor)' => SORT_DESC])->asArray()->all();
+            ->select(['ativo.codigo as codigo', 'ativo.nome as nome', 'sum(operacao.valor) as total', 'sum(operacao.quantidade) as quantidade'])
+            ->innerjoin('itens_ativo', 'itens_ativo.id = operacao.itens_ativo')
+            ->innerJoin('ativo', 'ativo.id = itens_ativo.ativo_id')
+            ->where(['between', 'data', $model->dataInicio, $model->dataFim])
+            ->andWhere(['operacao.tipo' => 1]) //operação de compra
+            ->andWhere(['ativo.tipo' => Tipo::ACOES])
+            ->groupBy(['ativo.codigo', 'ativo.nome'])
+            ->orderBy(['sum(operacao.valor)' => SORT_DESC])->asArray()->all();
 
 
         $dataProvider = new ArrayDataProvider([
@@ -132,7 +138,5 @@ class OperacaoSearch extends Operacao {
             'pagination' => false,
         ]);
         return $dataProvider;
-
     }
-
 }

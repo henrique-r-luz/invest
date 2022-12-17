@@ -20,7 +20,7 @@ class AtivoSearch extends Ativo
     {
         return [
             [['id'], 'integer'],
-            [['nome', 'codigo','tipo','categoria','pais'], 'safe'],
+            [['nome', 'codigo', 'tipo', 'categoria', 'pais'], 'safe'],
         ];
     }
 
@@ -43,14 +43,14 @@ class AtivoSearch extends Ativo
     public function search($params)
     {
         $query = Ativo::find()
-                ->joinWith(['itensAtivo.investidor'])
-                 ->orderBy(['codigo'=>SORT_ASC]);
-               
+            ->joinWith(['itensAtivo.investidor'])
+            ->orderBy(['codigo' => SORT_ASC]);
+
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-             'pagination' => [
-                'pageSize' => 10,
+            'pagination' => [
+                'pageSize' => 11,
             ],
         ]);
 
@@ -67,7 +67,7 @@ class AtivoSearch extends Ativo
             'ativo.id' => $this->id,
             'tipo' => $this->tipo,
             'categoria' => $this->categoria,
-            'pais'=>$this->pais,
+            'pais' => $this->pais,
         ]);
 
         $query->andFilterWhere(['ilike', 'nome', $this->nome])

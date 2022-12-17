@@ -22,7 +22,7 @@ class AccessControlInvest extends AccessControl
             Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'login' ||
             Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'error' ||
             Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'logout' ||
-            Yii::$app->controller->id == 'financas/atualiza-acao' && Yii::$app->controller->action->id == 'url'
+            Yii::$app->controller->id == 'sincronizar/atualiza-acao' && Yii::$app->controller->action->id == 'url'
         ) {
             return true;
         }

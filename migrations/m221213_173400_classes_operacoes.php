@@ -52,6 +52,8 @@ class m221213_173400_classes_operacoes extends Migration
             'ativo',
             'id'
         );
+
+        $this->execute("ALTER TYPE public.tipo_enum  ADD VALUE 'Dollar' AFTER 'Criptomoeda';");
     }
 
     /**

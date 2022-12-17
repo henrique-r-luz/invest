@@ -1,15 +1,14 @@
-import pandas as pd
-from selenium import webdriver
 import json
-import requests
-import json
-from selenium.common.exceptions import NoSuchElementException
-import sys
 import os
 import os.path
+import sys
+
+import pandas as pd
+import requests
+from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-
 
 # filePath = '~/NetBeansProjects/dados/';
 logPath = "/var/www/dados/atualiza_acao.txt"
@@ -20,7 +19,8 @@ def getDados():
 
         if (os.path.exists(logPath)):
             os.remove(logPath);
-        url = "http://"+webServer+"/index.php/financas/atualiza-acao/url";
+        url = "http://"+webServer+"/index.php/sincronizar/atualiza-acao/url";
+       
         response = json.loads(requests.get(url).text);
         executa(response);
         print(1);
@@ -34,14 +34,14 @@ def executa(discionarioAcoes):
         browser.get(row['url']);
         preco = getPreco(browser);
         with open(logPath, 'a') as log:
-             log.write('ativo@#:'+str(preco.text)+';');
+             log.write('ativo@#'+str(preco.text)+'-'+str(row['ativo_id'])+';');
         listaPreco.append([row['ativo_id'], preco.text])
         id+=1
        
     browser.get('https://br.investing.com/currencies/usd-brl');
     preco = getPreco(browser);
     with open(logPath, 'a') as log:
-            log.write('ativo@#:'+str(preco.text)+';')
+            log.write('ativo@#'+str(preco.text)+'-dollar'+';')
    
     moeda.append(['dollar', preco.text]);
   

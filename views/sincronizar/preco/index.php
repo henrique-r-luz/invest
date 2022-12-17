@@ -35,7 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                         return $model->valor;
                                 },
                         ],
-
+                        [
+                                'attribute' => 'data',
+                                'value' => function ($model) {
+                                        $date = date_create($model->data);
+                                        return date_format($date, 'd/m/Y H:i:s');
+                                },
+                        ],
 
                         ['class' => 'app\lib\grid\ActionColumn'],
                 ],

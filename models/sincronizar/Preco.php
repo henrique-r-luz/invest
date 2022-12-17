@@ -4,6 +4,7 @@ namespace app\models\sincronizar;
 
 use Yii;
 use app\models\financas\Ativo;
+use app\lib\behavior\AuditoriaBehavior;
 
 /**
  * This is the model class for table "preco".
@@ -22,6 +23,13 @@ class Preco extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'preco';
+    }
+
+    public function behaviors()
+    {
+        return [
+            AuditoriaBehavior::class,
+        ];
     }
 
     /**

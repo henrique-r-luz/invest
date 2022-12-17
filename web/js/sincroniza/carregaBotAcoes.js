@@ -1,3 +1,4 @@
+var urlBase = '/index.php/sincronizar/sincronizar';
 $("document").ready(function () {
 
     $("#acoes_id").click(function () {
@@ -14,7 +15,7 @@ function progressoProcesso() {
 
 function execBot() {
     $.ajax({
-        url: '/index.php/financas/sincronizar/atualiza-acoes',
+        url: urlBase + '/atualiza-acoes',
         type: 'get',
         success: function (data) {
 
@@ -28,11 +29,11 @@ function execBot() {
 
 function loadDados(porcentagem) {
     $.ajax({
-        url: '/index.php/financas/sincronizar/get-status-acoes',
+        url: urlBase + '/get-status-acoes',
         type: 'get',
         success: function (data) {
             if (data['total'] == 'erro') {
-                $.growl.error({message:"Erro ao atualizar preço das ações"});
+                $.growl.error({ message: data['msg'] });
                 disposeProgressBar();
 
             }
@@ -53,7 +54,7 @@ function loadDados(porcentagem) {
             }
             if (data['total'] > 0 && taxa >= 100) {
                 disposeProgressBar();
-                window.location.href = '/index.php/financas/sincronizar/atualiza-dados';
+                window.location.href = urlBase + '/atualiza-dados';
                 return;
             }
         },

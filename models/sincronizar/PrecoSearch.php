@@ -17,8 +17,9 @@ class PrecoSearch extends Preco
     public function rules()
     {
         return [
-            [['id', 'ativo_id'], 'integer'],
+            [['id'], 'integer'],
             [['valor'], 'number'],
+            [['ativo_id'], 'string']
         ];
     }
 
@@ -62,10 +63,11 @@ class PrecoSearch extends Preco
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            'preco.id' => $this->id,
             'valor' => $this->valor,
-            'ativo_id' => $this->ativo_id,
+            //  'ativo_id' => $this->ativo_id,
         ]);
+        $query->andFilterWhere(['ilike', 'ativo.nome', $this->ativo_id]);
 
         return $dataProvider;
     }

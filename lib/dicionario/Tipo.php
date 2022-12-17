@@ -18,7 +18,8 @@
 
 namespace app\lib\dicionario;
 
-class Tipo {
+class Tipo
+{
 
     const TESOURO_DIRETO = 'Tesouro Direto';
     const FUNDOS_INVESTIMENTO = 'Fundos de Investimentos';
@@ -30,13 +31,15 @@ class Tipo {
     const PRATA = 'Prata';
     const ETFS = 'ETFs';
     const FIIS = 'FIIs';
-    
+    const DOLLAR = 'Dollar';
+
 
     /**
      * Retorna todos os enuns em um array
      * @return array 
      */
-    public static function all() {
+    public static function all()
+    {
         return [
             self::TESOURO_DIRETO => 'Tesouro Direto',
             self::FUNDOS_INVESTIMENTO => 'Fundos de Investimentos',
@@ -48,6 +51,7 @@ class Tipo {
             self::PRATA => 'Prata',
             self::ETFS => 'ETFs',
             self::FIIS => 'FIIs',
+            self::DOLLAR => 'Dollar',
         ];
     }
 
@@ -56,7 +60,8 @@ class Tipo {
      * @param int $modalidade valor do tipo. 
      * @return string
      */
-    public static function get($tipo) {
+    public static function get($tipo)
+    {
         $all = self::all();
 
         if (isset($all[$tipo])) {
@@ -65,5 +70,4 @@ class Tipo {
 
         return 'Não existe';
     }
-
 }

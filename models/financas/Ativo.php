@@ -2,13 +2,16 @@
 
 namespace app\models\financas;
 
-use app\lib\dicionario\Pais;
-use app\models\financas\service\sincroniza\CotacaoCambio;
-use app\models\Tipo;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use app\lib\dicionario\Pais;
+use app\lib\dicionario\Tipo;
 use yii\helpers\ArrayHelper;
+use app\models\financas\Operacao;
+use app\models\financas\Proventos;
+use app\models\financas\ItensAtivo;
 use app\lib\behavior\AuditoriaBehavior;
+use app\models\financas\service\sincroniza\CotacaoCambio;
 
 /**
  * This is the model class for table "public.ativo".
@@ -52,6 +55,7 @@ class Ativo extends ActiveRecord
             [['nome', 'codigo', 'categoria', 'tipo'], 'string'],
             [['acao_bolsa_id', 'classe_atualiza_id'], 'integer'],
             [['categoria'], 'string'],
+            [['tipo'], 'validaDollar']
         ];
     }
 
@@ -153,5 +157,20 @@ class Ativo extends ActiveRecord
                 return $model->id . ' | ' . $model->codigo;
             }
         );
+    }
+
+
+    public function validaDollar()
+    {
+        if (
+            isset($this->tipo) &&
+            Tipo::DOLLAR == $this->tipo &&
+            (Ativo::find()
+                ->where(['tipo' => Tipo::DOLLAR])
+                ->andFilterWhere(['<>', 'id', $this->id])
+                ->exists())
+        ) {
+            $this->addError('tipo', 'Só pode ter um ativo com tipo Dollar.');
+        }
     }
 }

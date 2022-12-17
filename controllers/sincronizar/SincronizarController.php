@@ -11,8 +11,11 @@ namespace app\controllers\sincronizar;
 use Yii;
 use Throwable;
 use yii\web\Controller;
+use app\lib\helpers\InvestException;
 use app\models\sincronizar\AtualizaAcao;
-use app\models\financas\service\sincroniza\Sincroniza;
+use app\models\sincronizar\services\AddPreco;
+use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\DadosAtivosValores;
+use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\AtualizaRendaVariavel;
 
 /**
  * Description of SincronizarController
@@ -51,9 +54,20 @@ class SincronizarController extends Controller
 
     private function atualiza()
     {
-        Sincroniza::atualizaAtivos();
-        Yii::$app->session->setFlash('success', 'Dados atualizados com sucesso!');
-        return $this->redirect('/index.php');
+        try {
+            $atualizaRendaVariavel = new AtualizaRendaVariavel();
+            $atualizaRendaVariavel->alteraIntesAtivo();
+            Yii::$app->session->setFlash('success', 'Dados atualizados com sucesso!');
+            return $this->redirect('/index.php');
+        } catch (InvestException $e) {
+            Yii::$app->session->setFlash('danger', $e->getMessage());
+        } catch (Throwable $e) {
+            echo $e->getMessage();
+            exit();
+            Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado.');
+        } finally {
+            return $this->redirect('/index.php');
+        }
         //return $this->redirect('/index.php');
     }
 
@@ -81,7 +95,17 @@ class SincronizarController extends Controller
 
     public function actionAtualizaDados()
     {
-        $this->atualiza();
+        try {
+            $addPreco = new AddPreco();
+            $addPreco->salva();
+            $this->atualiza();
+        } catch (InvestException $e) {
+            Yii::$app->session->setFlash('danger', $e->getMessage());
+            return $this->render('index');
+        } catch (Throwable $e) {
+            Yii::$app->session->setFlash('danger', 'Um erro inesperado ocorreu.');
+            return $this->render('index');
+        }
     }
 
     public function actionAtualizaAcoes()
