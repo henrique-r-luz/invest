@@ -8,6 +8,7 @@
 
 namespace app\models\dashboard;
 
+use app\lib\config\ValorDollar;
 use yii\web\JsExpression;
 use app\lib\dicionario\Pais;
 use app\lib\dicionario\Tipo;
@@ -44,7 +45,11 @@ class GraficoTipo extends GraficoAbstract
             foreach ($this->dados as $dados) {
                 if ($dados['pais'] == $pais && $dados['tipo'] == Tipo::ACOES) {
                     if ($this->valorInvestido > 0) {
-                        $this->tipos['Ações-' . $pais] = round($dados['valor_acao_pais'] / $this->valorInvestido * 100);
+                        if ($pais == Pais::US) {
+                            $this->tipos['Ações-' . $pais] = round(($dados['valor_acao_pais'] * ValorDollar::getCotacaoDollar()) / $this->valorInvestido * 100);
+                        } else {
+                            $this->tipos['Ações-' . $pais] = round(($dados['valor_acao_pais']) / $this->valorInvestido * 100);
+                        }
                     }
                     break;
                 }
@@ -55,6 +60,7 @@ class GraficoTipo extends GraficoAbstract
 
     public function montaGrafico()
     {
+
         return GraficoUtil::graficoPizza($this->tipos);
     }
 }
