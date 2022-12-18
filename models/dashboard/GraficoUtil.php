@@ -35,9 +35,19 @@ class GraficoUtil
     public static function dadosPizza($param)
     {
 
-        $infos = [];
-
         //divide Dados por pais
+        $infos = self::constroiDadosPorPais($param);
+        //soma os dados com o cambio
+        $vetDados  = self::addvalorCambio($infos);
+        $vetDados = self::geraPorcentagem($vetDados, $param);
+        arsort($vetDados);
+        return $vetDados;
+    }
+
+
+    private static function constroiDadosPorPais($param)
+    {
+        $infos = [];
         foreach ($param['dados'] as $item) {
             //print_r($param['dados']);
             //exit();
@@ -46,7 +56,11 @@ class GraficoUtil
                 // $vetDados[$item[$param['item']]] = round($item[$param['valor_item']] / $param['valorInvestido'] * 100);
             }
         }
-        //soma os dados com o cambio
+        return $infos;
+    }
+
+    private static  function addvalorCambio($infos)
+    {
         $vetDados = [];
         foreach ($infos as $key => $info) {
             $vetDados[$key] = 0;
@@ -58,6 +72,11 @@ class GraficoUtil
                 }
             }
         }
+        return $vetDados;
+    }
+
+    private static function geraPorcentagem($vetDados, $param)
+    {
         $aux = [];
         foreach ($vetDados as $key => $valor) {
             if ($param['valorInvestido'] == 0) {
@@ -65,22 +84,7 @@ class GraficoUtil
             }
             $aux[$key] = round(($valor / ($param['valorInvestido']) * 100));
         }
-        $vetDados = $aux;
-        arsort($vetDados);
-        return $vetDados;
-    }
-
-
-    private function constroiDadosPorPais()
-    {
-    }
-
-    private function addvalorCambio()
-    {
-    }
-
-    private function geraPorcentagem()
-    {
+        return $aux;
     }
 
     /**

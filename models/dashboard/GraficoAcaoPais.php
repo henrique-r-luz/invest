@@ -8,20 +8,29 @@
 
 namespace app\models\dashboard;
 
+use app\lib\config\ValorDollar;
+use app\lib\dicionario\Pais;
+
 /**
  * Description of GraficoAcaoPais
  *
  * @author henrique
  */
-class GraficoAcaoPais extends GraficoAbstract {
+class GraficoAcaoPais extends GraficoAbstract
+{
 
     private $acaoPais = [];
 
     //put your code here
-    protected function configuraDados() {
+    protected function configuraDados()
+    {
         $valorTotalAcoes = 0;
         foreach ($this->dados as $item) {
-            $this->acaoPais[$item['pais']] = $item['valor_acao_pais'];
+            if ($item['pais'] == Pais::US) {
+                $this->acaoPais[$item['pais']] = $item['valor_acao_pais'] * ValorDollar::getCotacaoDollar();
+            } else {
+                $this->acaoPais[$item['pais']] = $item['valor_acao_pais'];
+            }
         }
 
         $valorTotalAcoes = array_sum($this->acaoPais);
@@ -34,11 +43,10 @@ class GraficoAcaoPais extends GraficoAbstract {
             $this->acaoPais = $aux;
             arsort($this->acaoPais);
         }
-        
     }
 
-    public function montaGrafico() {
+    public function montaGrafico()
+    {
         return GraficoUtil::graficoPizza($this->acaoPais);
     }
-
 }
