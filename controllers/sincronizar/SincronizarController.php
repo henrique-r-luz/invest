@@ -62,8 +62,6 @@ class SincronizarController extends Controller
         } catch (InvestException $e) {
             Yii::$app->session->setFlash('danger', $e->getMessage());
         } catch (Throwable $e) {
-            echo $e->getMessage();
-            exit();
             Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado.');
         } finally {
             return $this->redirect('/index.php');
@@ -92,7 +90,12 @@ class SincronizarController extends Controller
             return $this->render('index');
         }
     }
-
+    /**
+     * Atualiza a tabela de preços
+     *
+     * @return void
+     * @author Henrique Luz
+     */
     public function actionAtualizaDados()
     {
         try {
@@ -103,11 +106,19 @@ class SincronizarController extends Controller
             Yii::$app->session->setFlash('danger', $e->getMessage());
             return $this->render('index');
         } catch (Throwable $e) {
+            echo $e->getTraceAsString();
+            exit();
             Yii::$app->session->setFlash('danger', 'Um erro inesperado ocorreu.');
             return $this->render('index');
         }
     }
-
+    /**
+     * inicia o porcesso de atualização de ações 
+     * utilizado o servidor selenium
+     *
+     * @return void
+     * @author Henrique Luz
+     */
     public function actionAtualizaAcoes()
     {
         if (file_exists($this->local_file)) {
@@ -116,7 +127,13 @@ class SincronizarController extends Controller
         $cmd = exec('python3 /var/www/bot/acao.py > /dev/null 2>&1 &');
         echo true;
     }
-
+    /**
+     * Faz a contabilidade de quais ações foram 
+     * atualizadas pelo selenium
+     *
+     * @return void
+     * @author Henrique Luz
+     */
     public function actionGetStatusAcoes()
     {
         try {

@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace app\models\financas\service\sincroniza;
+namespace app\lib\config\atualizaAtivos;
 
 use SplFileObject;
 
@@ -15,10 +15,12 @@ use SplFileObject;
  *
  * @author henrique
  */
-class ComponenteOperacoes {
+class ComponenteOperacoes
+{
 
     //put your code here
-    public static function getFileDelimiter($file, $checkLines = 2) {
+    public static function getFileDelimiter($file, $checkLines = 2)
+    {
         $file = new SplFileObject($file);
         $delimiters = array(',', '\t', ';', '|', ':');
         $results = array();
@@ -35,9 +37,10 @@ class ComponenteOperacoes {
                         $results[$delimiter] = 1;
                     }
                 }
-            } $i++;
-        } $results = array_keys($results, max($results));
+            }
+            $i++;
+        }
+        $results = array_keys($results, max($results));
         return $results[0];
     }
-
 }

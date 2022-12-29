@@ -14,10 +14,8 @@ class AddPreco
     private $local_file = '/var/www/dados/preco_acao.csv';
     private $arquivo;
 
-    // private array $ativosValor = [];
     public function __construct()
     {
-        //get csv
         $this->getDados();
     }
 
