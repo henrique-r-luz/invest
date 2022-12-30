@@ -3,9 +3,7 @@
 namespace app\controllers\financas;
 
 use Yii;
-use Exception;
 use yii\web\Controller;
-use app\lib\CajuiHelper;
 use app\lib\config\atualizaAtivos\TiposOperacoes;
 use yii\filters\VerbFilter;
 use app\models\financas\Operacao;
@@ -90,6 +88,9 @@ class OperacaoController extends Controller
                 'model' => $model,
             ]);
         }
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -143,6 +144,7 @@ class OperacaoController extends Controller
         } finally {
             return $this->redirect(['index']);
         }
+        return $this->redirect(['index']);
     }
 
     /**

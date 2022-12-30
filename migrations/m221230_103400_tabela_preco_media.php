@@ -22,6 +22,7 @@ class m221230_103400_tabela_preco_media extends Migration
 
             ]
         );
+        $this->addPrimaryKey('preco_medio_venda_pk', 'preco_medio_venda', ['operacoes_id']);
         $this->addForeignKey(
             'operacao_preco_media_id_fk',
             'preco_medio_venda',
@@ -29,11 +30,6 @@ class m221230_103400_tabela_preco_media extends Migration
             'operacao',
             'id'
         );
-
-        $this->execute("CREATE UNIQUE INDEX IF NOT EXISTS preco_medio_venda_unique_operacao
-        ON public.preco_medio_venda USING btree
-        (operacoes_id ASC NULLS LAST)
-        TABLESPACE pg_default;");
     }
 
     /**

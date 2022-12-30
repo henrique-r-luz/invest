@@ -19,6 +19,11 @@ use app\lib\CajuiHelper;
 use app\lib\helpers\InvestException;
 use app\models\financas\service\sincroniza\Sincroniza;
 use app\lib\config\atualizaAtivos\AtualizaAtivoOperacaoFactory;
+use app\lib\config\atualizaAtivos\TiposOperacoes;
+use app\lib\dicionario\Categoria;
+use app\models\financas\ItensAtivo;
+use app\models\financas\Operacao;
+use app\models\financas\PrecoMedioVenda;
 use app\models\financas\service\operacoesAtivos\AlteraAtivoOperacao;
 
 
@@ -57,7 +62,6 @@ class OperacaoService
         $connection = Yii::$app->db;
         $this->transaction = $connection->beginTransaction();
         try {
-
             $this->salvaOperacao();
             $this->salvaAtivo();
             $this->transaction->commit();
@@ -74,28 +78,21 @@ class OperacaoService
         $connection = Yii::$app->db;
         $this->transaction = $connection->beginTransaction();
         try {
-            $this->deleteOperacao();
             $this->salvaAtivo();
             $this->transaction->commit();
             return true;
         } catch (InvestException $ex) {
-            throw new InvestException('Ocorreu um erro ao deletar operação');
+            throw new InvestException('Ocorreu um erro ao deletar operação: ' . $ex->getMessage());
             $this->transaction->rollBack();
             return false;
         }
     }
 
-    private function deleteOperacao()
-    {
-        if (!$this->operacao->delete()) {
-            $erro = CajuiHelper::processaErros($this->operacao->getErrors());
-            throw new InvestException('O sistema não pode remover a operação:' . $erro . '. ');
-        }
-    }
+
 
     private function salvaOperacao()
     {
-        $this->ativo_id_antigo = $this->operacao->getOldAttribute('itens_ativos_id');
+
         if (!$this->operacao->save()) {
             $erro = CajuiHelper::processaErros($this->operacao->getErrors());
             $msg = 'O sistema não pode alterar a operação:' . $erro . '. ';
@@ -103,6 +100,7 @@ class OperacaoService
             throw new InvestException($msg);
         }
     }
+
 
     private function salvaAtivo()
     {

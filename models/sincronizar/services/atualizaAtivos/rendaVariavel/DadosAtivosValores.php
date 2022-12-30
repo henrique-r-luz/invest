@@ -5,8 +5,7 @@ namespace app\models\sincronizar\services\atualizaAtivos\rendaVariavel;
 use yii\db\Expression;
 use app\models\sincronizar\Preco;
 use app\models\financas\ItensAtivo;
-use app\models\financas\Operacao;
-use yii\db\Query;
+
 
 class DadosAtivosValores
 {
