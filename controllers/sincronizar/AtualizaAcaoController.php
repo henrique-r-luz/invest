@@ -112,8 +112,6 @@ class AtualizaAcaoController extends Controller
 
     public function actionUrl()
     {
-        // echo 'olaaa';
-        // \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
         $this->asJson(AtualizaAcao::getUrl());
     }

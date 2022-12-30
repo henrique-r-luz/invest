@@ -106,8 +106,6 @@ class SincronizarController extends Controller
             Yii::$app->session->setFlash('danger', $e->getMessage());
             return $this->render('index');
         } catch (Throwable $e) {
-            echo $e->getTraceAsString();
-            exit();
             Yii::$app->session->setFlash('danger', 'Um erro inesperado ocorreu.');
             return $this->render('index');
         }

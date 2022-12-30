@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use app\lib\grid\GridView;
+use app\lib\dicionario\Pais;
 use app\lib\config\ValorDollar;
 use app\models\financas\Operacao;
 use kartik\daterange\DateRangePicker;
@@ -78,7 +79,11 @@ $daterange = [
                 'format' => 'currency',
                 'value' => function ($model) {
                     /** @var Operacao */
-                    return $model->valor * ValorDollar::getCotacaoDollar();
+                    if ($model->itensAtivo->ativos->pais == Pais::US) {
+                        return $model->valor * ValorDollar::getCotacaoDollar();
+                    } else {
+                        return $model->valor;
+                    }
                 },
                 'pageSummary' => function ($summary, $data, $widget) use ($dataProvider) {
                     //var_dump($dataProvider);
@@ -86,12 +91,16 @@ $daterange = [
                     $objetos = $dataProvider->models;
                     $total = 0;
                     foreach ($objetos as $operacao) {
+                        $cambio = 1;
+                        if ($operacao->itensAtivo->ativos->pais == Pais::US) {
+                            $cambio = ValorDollar::getCotacaoDollar();
+                        }
                         if ($operacao->tipo == 0) {
                             //dinheiro entrando no meu bolso
-                            $total += $operacao->valor; //$operacao->getValorCambio();
+                            $total += ($operacao->valor * $cambio); //$operacao->getValorCambio();
                         } else {
                             //dinheiro saindo do meu bolso
-                            $total -= $operacao->valor;
+                            $total -= ($operacao->valor * $cambio);
                         }
                     }
                     if ($total < 0) {
@@ -99,7 +108,7 @@ $daterange = [
                     } else {
                         $color = 'green';
                     }
-                    return '<font color="' . $color . '">Valor Total: ' . Yii::$app->formatter->asCurrency($total * ValorDollar::getCotacaoDollar()) . '</font>';
+                    return '<font color="' . $color . '">Valor Total: ' . Yii::$app->formatter->asCurrency($total) . '</font>';
                 },
                 'pageSummaryOptions' => ['colspan' => 2],
             ],

@@ -22,16 +22,18 @@ use yii\db\Exception as Exception2;
  *
  * @author henrique
  */
-class BackgroudController extends Controller {
+class BackgroudController extends Controller
+{
 
     /**
      * Atualiza os fundamentos das empresas de acordo  com o site fundamente
      * @return void
      */
-    public function actionAtualizaFundamento() {
+    public function actionAtualizaFundamento()
+    {
         try {
             //BalancoEmpresaBolsa::deleteAll(['ilike','data','%TTM%']);
-           
+
             $erros = 'Erro na criação dos balanços : ';
             if (!file_exists('/vagrant/bot/fundamentos.csv')) {
                 $this->criaMessagen([true, 'sucesso']);
@@ -70,13 +72,13 @@ class BackgroudController extends Controller {
                 try {
                     $anoVar = str_replace(' ', '', $linha['Ano']);
 
-                    List($mes, $ano) = explode("/", $anoVar);
+                    list($mes, $ano) = explode("/", $anoVar);
                     $anoVar = $ano . '-' . $mes;
                     $linha['Ano'] = $anoVar;
                     $linha['trimestre'] = ($linha['trimestre'] == 'True') ? 1 : 0;
                     $linha['empresa'] = substr(trim($linha['empresa']), 0, 4);
                     $balanco = BalancoEmpresaBolsa::find()->where(['codigo' => $linha['empresa']])
-                                    ->andWhere(['data' => $linha['Ano'], 'trimestre' => $linha['trimestre']])->one();
+                        ->andWhere(['data' => $linha['Ano'], 'trimestre' => $linha['trimestre']])->one();
 
                     if ($balanco != null) {
                         $balanco = $this->constroiData($balanco, $linha);
@@ -100,7 +102,7 @@ class BackgroudController extends Controller {
                     throw $e;
                 }
             }
-            
+
             $this->criaMessagen([true, 'sucesso']);
             return;
         } catch (Exception2 $e) {
@@ -110,9 +112,10 @@ class BackgroudController extends Controller {
         }
     }
 
-    private function criaMessagen($resp) {
-         Yii::$app->db->createCommand("delete from balanco_empresa_bolsa  where data ilike '%TTM%'")->execute();
-        List($tipo, $msg) = $resp;
+    private function criaMessagen($resp)
+    {
+        Yii::$app->db->createCommand("delete from balanco_empresa_bolsa  where data ilike '%TTM%'")->execute();
+        list($tipo, $msg) = $resp;
         if ($tipo == true) {
             $titulo = 'Fundamentos Atualizado!';
             $mensagem = 'Fundamentos Atualizado!';
@@ -120,13 +123,16 @@ class BackgroudController extends Controller {
             $titulo = 'Fundamentos falhou!';
             $mensagem = $msg;
         }
-        FabricaNotificacao::create('rank', ['ok' => $tipo,
+        FabricaNotificacao::create('rank', [
+            'ok' => $tipo,
             'titulo' => $titulo,
             'mensagem' => $mensagem,
-            'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id])->envia();
+            'action' => Yii::$app->controller->id . '/' . Yii::$app->controller->action->id
+        ])->envia();
     }
 
-    public function constroiData($balanco, $linha) {
+    public function constroiData($balanco, $linha)
+    {
 
         $balanco->data = $linha['Ano'];
         $balanco->patrimonio_liquido = $linha['Pat. Líq.'] == 's/n' ? null : $linha['Pat. Líq.'];
@@ -158,7 +164,6 @@ class BackgroudController extends Controller {
         $balanco->indice_basileia = $linha['Índice de Basiléia'] == 's/n' ? null : $linha['Índice de Basiléia'];
         $balanco->codigo = substr(trim($linha['empresa']), 0, 4);
         $balanco->trimestre = $linha['trimestre'];
-        // echo 
         return $balanco;
     }
 

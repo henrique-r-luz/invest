@@ -9,9 +9,7 @@ class ValoresConsolidados
 {
     public static function valorCompra($dados)
     {
-        /* echo '<pre>';
-        print_r($dados);
-        exit();*/
+       
         $usCompra = 0;
         foreach ($dados as $dado) {
             if ($dado['pais'] == Pais::US) {
@@ -26,9 +24,7 @@ class ValoresConsolidados
     public static function valorInvestido($dados)
     {
 
-            /*echo '<pre>';
-        print_r($dados);
-        exit()*/;
+           
         $usLucro =  0;
         foreach ($dados as $dado) {
             if ($dado['pais'] == Pais::US) {

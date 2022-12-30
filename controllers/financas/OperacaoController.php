@@ -6,6 +6,7 @@ use Yii;
 use Exception;
 use yii\web\Controller;
 use app\lib\CajuiHelper;
+use app\lib\config\atualizaAtivos\TiposOperacoes;
 use yii\filters\VerbFilter;
 use app\models\financas\Operacao;
 use yii\web\NotFoundHttpException;
@@ -71,7 +72,7 @@ class OperacaoController extends Controller
     public function actionCreate()
     {
         $model = new Operacao();
-        $operacaoService = new OperacaoService($model);
+        $operacaoService = new OperacaoService($model, TiposOperacoes::INSERIR);
         try {
             if ($operacaoService->load(Yii::$app->request->post())) {
                 if ($operacaoService->acaoSalvaOperacao()) {
@@ -81,7 +82,8 @@ class OperacaoController extends Controller
             }
         } catch (InvestException $ex) {
             Yii::$app->session->setFlash('danger', 'Erro ao salvar Operação!</br>' . $ex->getMessage());
-        } catch (Throwable) {
+        } catch (Throwable $e) {
+            echo $e->getMessage();
             Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado');
         } finally {
             return $this->render('create', [
@@ -100,7 +102,7 @@ class OperacaoController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $operacaoService = new OperacaoService($model);
+        $operacaoService = new OperacaoService($model, TiposOperacoes::UPDATE);
         try {
             if ($operacaoService->load(Yii::$app->request->post())) {
                 if ($operacaoService->acaoSalvaOperacao()) {
@@ -129,7 +131,7 @@ class OperacaoController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        $operacaoService = new OperacaoService($model);
+        $operacaoService = new OperacaoService($model, TiposOperacoes::DELETE);
         try {
             if ($operacaoService->acaoDeletaOperacao()) {
                 Yii::$app->session->setFlash('success', 'Dados excluídos com sucesso!');

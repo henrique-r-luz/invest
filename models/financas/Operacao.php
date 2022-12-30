@@ -159,10 +159,4 @@ class Operacao extends ActiveRecord
         }
         throw new Exception('Valor de compra não encontrato');
     }
-
-
-    /*public function getValorCambio()
-    {
-        return Ativo::valorCambio($this->itensAtivo->ativos, $this->valor);
-    }*/
 }

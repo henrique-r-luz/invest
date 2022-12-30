@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Este arquivo é parte do
  *    ___       _       _
@@ -28,7 +29,7 @@ use Yii;
  */
 class CajuiHelper
 {
-    
+
     /**
      * Trasforma a string proveniente de um campo array do postgres em um array do php
      * {data,data} to [data, data]
@@ -39,10 +40,10 @@ class CajuiHelper
     {
         $data = str_replace('{', '', $value);
         $data = str_replace('}', '', $data);
-        $data = explode(',', $data);        
+        $data = explode(',', $data);
         return $data;
     }
-    
+
     /**
      * Passa erros de um array para uma string
      * @param array $erros
@@ -56,15 +57,15 @@ class CajuiHelper
         }
         return $msg;
     }
-    
+
     /**
      * Retorna array com lista de modulos do sistema.
      * @return array
      */
     public static function getModulos()
     {
-        $modulos = [];        
-        foreach (scandir(Yii::getAlias('@modules')) as $moduleId){
+        $modulos = [];
+        foreach (scandir(Yii::getAlias('@modules')) as $moduleId) {
             if ($moduleId != '.' && $moduleId != '..') {
                 $modulos[$moduleId] = $moduleId;
             }
@@ -78,9 +79,7 @@ class CajuiHelper
      * Example:
      *
      * ~~~
-     * $dias = CajuiHelper::dias();
-     * echo $dias[0]; // returns: Domingo
-     * echo $dias[1]; // returns: Segunda-feira
+     * $dias = CajuiHelper::dias()
      * ~~~
      *
      * @return array
@@ -103,14 +102,14 @@ class CajuiHelper
 
         if (!is_executable($binary)) {
             throw new \RuntimeException(
-            'O comando do libreoffice  ("' . $binary . '") ' .
-            'não foi encontrado! '
+                'O comando do libreoffice  ("' . $binary . '") ' .
+                    'não foi encontrado! '
             );
         }
         // Check to see if the profile dir exists and is writeable
         if (is_dir($arquivo) && !is_writable($arquivo)) {
             throw new \RuntimeException(
-            'Falta permissão no arquivo ("' . $arquivo . '")!'
+                'Falta permissão no arquivo ("' . $arquivo . '")!'
             );
         }
         // Build the cmd to run
@@ -118,20 +117,18 @@ class CajuiHelper
             '--headless ' .
             '--convert-to pdf:writer_pdf_Export ' .
             '--outdir "' . $saida . '" ' .
-            '"' . $arquivo . '"'
-        ;
-        
+            '"' . $arquivo . '"';
+
         // Run the command
         $process = new Process($cmd);
         $process->run();
-        if (!$process->isSuccessful())
-        {
-            throw new RuntimeException ($process->getErrorOutput());
+        if (!$process->isSuccessful()) {
+            throw new RuntimeException($process->getErrorOutput());
         }
 
         return true;
     }
-    
+
     /**
      * Retira acentos de uma string
      * @param string $string
@@ -139,18 +136,23 @@ class CajuiHelper
      */
     public static function retirarAcentos($string)
     {
-        return preg_replace(array("/(á|à|ã|â|ä)/", 
-                                  "/(Á|À|Ã|Â|Ä)/", 
-                                  "/(é|è|ê|ë)/", 
-                                  "/(É|È|Ê|Ë)/", 
-                                  "/(í|ì|î|ï)/", 
-                                  "/(Í|Ì|Î|Ï)/", 
-                                  "/(ó|ò|õ|ô|ö)/", 
-                                  "/(Ó|Ò|Õ|Ô|Ö)/", 
-                                  "/(ú|ù|û|ü)/", 
-                                  "/(Ú|Ù|Û|Ü)/", 
-                                  "/(ñ)/", "/(Ñ)/"), 
-                                  explode(" ", "a A e E i I o O u U n N"), $string);
+        return preg_replace(
+            array(
+                "/(á|à|ã|â|ä)/",
+                "/(Á|À|Ã|Â|Ä)/",
+                "/(é|è|ê|ë)/",
+                "/(É|È|Ê|Ë)/",
+                "/(í|ì|î|ï)/",
+                "/(Í|Ì|Î|Ï)/",
+                "/(ó|ò|õ|ô|ö)/",
+                "/(Ó|Ò|Õ|Ô|Ö)/",
+                "/(ú|ù|û|ü)/",
+                "/(Ú|Ù|Û|Ü)/",
+                "/(ñ)/", "/(Ñ)/"
+            ),
+            explode(" ", "a A e E i I o O u U n N"),
+            $string
+        );
     }
 
     /**
@@ -234,12 +236,12 @@ class CajuiHelper
         // Finalmente, basta juntar novamente todas as partes do nome, colocando um espaço entre elas.
         return implode($espaco, $partesNome);
     }
-    
+
     /**
      * Retorna a url de um icone para o mime type informado.
      * @param string $mimeType
      */
-    public static function getMimeTypeUrlIcon ($mimeType) 
+    public static function getMimeTypeUrlIcon($mimeType)
     {
         $extencoes = \yii\helpers\FileHelper::getExtensionsByMimeType($mimeType);
         foreach ($extencoes as $extencao) {

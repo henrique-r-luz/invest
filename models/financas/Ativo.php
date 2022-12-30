@@ -11,6 +11,7 @@ use app\models\financas\Operacao;
 use app\models\financas\Proventos;
 use app\models\financas\ItensAtivo;
 use app\lib\behavior\AuditoriaBehavior;
+use app\models\config\ClassesOperacoes;
 use app\models\financas\service\sincroniza\CotacaoCambio;
 
 /**
@@ -126,15 +127,9 @@ class Ativo extends ActiveRecord
         return $this->hasOne(Investidor::class, ['id' => 'investidor_id']);
     }
 
-    public static function valorCambio($ativo, $valor)
+    public function getClassesOperacoes()
     {
-        $cotacao = new CotacaoCambio();
-        $cambio = $cotacao->atualiza();
-        if ($ativo->pais == Pais::US) {
-            $moeda = str_replace(',', '.', $cambio['dollar']);
-            return floatval($valor) * floatval($moeda);
-        }
-        return $valor;
+        return $this->hasOne(ClassesOperacoes::class, ['id' => 'classe_atualiza_id']);
     }
 
     public static function lista()

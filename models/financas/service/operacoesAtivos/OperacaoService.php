@@ -16,8 +16,9 @@ namespace app\models\financas\service\operacoesAtivos;
 
 use Yii;
 use app\lib\CajuiHelper;
-use app\models\financas\service\sincroniza\Sincroniza;
 use app\lib\helpers\InvestException;
+use app\models\financas\service\sincroniza\Sincroniza;
+use app\lib\config\atualizaAtivos\AtualizaAtivoOperacaoFactory;
 use app\models\financas\service\operacoesAtivos\AlteraAtivoOperacao;
 
 
@@ -26,20 +27,23 @@ use app\models\financas\service\operacoesAtivos\AlteraAtivoOperacao;
  *
  * @author henrique.luz <henrique_r_luz@yahoo.com.br>
  */
-class OperacaoService {
+class OperacaoService
+{
 
     //put your code here
 
     private $operacao;
     private $transaction;
-    private $alteraAtivo;
-    private $ativo_id_antigo;
+    private string $tipoOperaco;
 
-    function __construct($operacao) {
+    function __construct($operacao, $tipoOperacao)
+    {
         $this->operacao = $operacao;
+        $this->tipoOperaco = $tipoOperacao;
     }
 
-    public function load($post) {
+    public function load($post)
+    {
         return $this->operacao->load($post);
     }
 
@@ -48,16 +52,14 @@ class OperacaoService {
      * Essa função realiza uma transação com a tabela ativo.
      * garantido a atualização da quantidade e valor de compra
      */
-    public function acaoSalvaOperacao() {
+    public function acaoSalvaOperacao()
+    {
         $connection = Yii::$app->db;
         $this->transaction = $connection->beginTransaction();
-        $this->alteraAtivo = new AlteraAtivoOperacao();
         try {
-          
+
             $this->salvaOperacao();
             $this->salvaAtivo();
-            $this->corrigeAlteracaoAtivo();
-            $this->sicronizaDadosAtivo();
             $this->transaction->commit();
             return true;
         } catch (InvestException $ex) {
@@ -67,14 +69,13 @@ class OperacaoService {
         }
     }
 
-    public function acaoDeletaOperacao() {
+    public function acaoDeletaOperacao()
+    {
         $connection = Yii::$app->db;
         $this->transaction = $connection->beginTransaction();
-        $this->alteraAtivo = new AlteraAtivoOperacao();
         try {
             $this->deleteOperacao();
             $this->salvaAtivo();
-            $this->sicronizaDadosAtivo();
             $this->transaction->commit();
             return true;
         } catch (InvestException $ex) {
@@ -84,14 +85,16 @@ class OperacaoService {
         }
     }
 
-    private function deleteOperacao() {
+    private function deleteOperacao()
+    {
         if (!$this->operacao->delete()) {
             $erro = CajuiHelper::processaErros($this->operacao->getErrors());
-            throw new InvestException('O sistema não pode remover a operação:' . $erro . '. ' );
+            throw new InvestException('O sistema não pode remover a operação:' . $erro . '. ');
         }
     }
 
-    private function salvaOperacao() {
+    private function salvaOperacao()
+    {
         $this->ativo_id_antigo = $this->operacao->getOldAttribute('itens_ativos_id');
         if (!$this->operacao->save()) {
             $erro = CajuiHelper::processaErros($this->operacao->getErrors());
@@ -101,31 +104,16 @@ class OperacaoService {
         }
     }
 
-    private function salvaAtivo() {
-        if (!$this->alteraAtivo->updateAtivo($this->operacao->itens_ativos_id)) {
-            throw new InvestException('O sistema não pode atualizar o ativo. ');
-        }
+    private function salvaAtivo()
+    {
+        /** @var AtualizaAtivoInterface */
+        $atualizaOperacao =  AtualizaAtivoOperacaoFactory::getObjeto($this->operacao);
+        $atualizaOperacao->setTipoOperacao($this->tipoOperaco);
+        $atualizaOperacao->atualiza();
     }
 
-    private function corrigeAlteracaoAtivo() {
-        
-        if ($this->ativo_id_antigo == null) {
-            return true;
-        }
-        //essa ação acontece se ocorrer uma alteração do tipo de ativo, no form do cadastro
-        if (!$this->alteraAtivo->updateAtivo($this->ativo_id_antigo)) {
-            throw new InvestException('O sistema não conseguiu atualizar o ativo:' . $this->ativo_id_antigo . '. ');
-            // throw new Exception('O sistema não pode alterar o ativo:' . $this->ativo->codigo . '. ');
-        }
-    }
-
-
-    private function sicronizaDadosAtivo() {
-        Sincroniza::atualizaAtivos();
-    }
-
-    public function getOpereacao() {
+    public function getOpereacao()
+    {
         return $this->operacao;
     }
-
 }
