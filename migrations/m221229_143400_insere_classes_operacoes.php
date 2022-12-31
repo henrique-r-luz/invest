@@ -11,7 +11,7 @@ use app\models\financas\Ativo;
 class m221229_143400_insere_classes_operacoes extends Migration
 {
 
-    private $classeRendaVariavel  = 'app\lib\config\atualizaAtivos\RendaVariavel';
+    private $classeRendaVariavel  = 'app\lib\config\atualizaAtivos\rendaVariavel\RendaVariavel';
     /**
      * {@inheritdoc}
      */

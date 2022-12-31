@@ -81,16 +81,15 @@ class OperacaoController extends Controller
         } catch (InvestException $ex) {
             Yii::$app->session->setFlash('danger', 'Erro ao salvar Operação!</br>' . $ex->getMessage());
         } catch (Throwable $e) {
-            echo $e->getMessage();
             Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado');
         } finally {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
-        return $this->render('create', [
+        /* return $this->render('create', [
             'model' => $model,
-        ]);
+        ]);*/
     }
 
     /**
@@ -144,7 +143,7 @@ class OperacaoController extends Controller
         } finally {
             return $this->redirect(['index']);
         }
-        return $this->redirect(['index']);
+        //return $this->redirect(['index']);
     }
 
     /**

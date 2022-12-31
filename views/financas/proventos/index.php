@@ -1,14 +1,10 @@
 <?php
 
-use yii\web\View;
-use yii\helpers\Html;
 use app\lib\grid\GridView;
 use app\lib\dicionario\Pais;
-use app\lib\dicionario\ProventosMovimentacao;
-use app\models\financas\Ativo;
-use yii\data\ActiveDataProvider;
+use app\lib\config\ValorDollar;
 use kartik\daterange\DateRangePicker;
-use app\models\financas\ProventosSearch;
+use app\lib\dicionario\ProventosMovimentacao;
 
 /* @var $this View */
 /* @var $searchModel ProventosSearch */
@@ -63,7 +59,7 @@ $daterange = [
             [
                 'attribute' => 'movimentacao',
                 'filter' => ProventosMovimentacao::all(),
-                'value' => function($model){
+                'value' => function ($model) {
                     return ProventosMovimentacao::getNome($model->movimentacao);
                 },
             ],
@@ -71,7 +67,11 @@ $daterange = [
                 'attribute' => 'valor',
                 'format' => 'currency',
                 'value' => function ($model) {
-                    return Ativo::valorCambio($model->itensAtivo->ativos, $model->valor);
+                    if ($model->itensAtivo->ativos->pais == Pais::US) {
+                        return $model->valor * ValorDollar::getCotacaoDollar();
+                    } else {
+                        return $model->valor;
+                    }
                 },
                 'pageSummary' => function ($summary, $data, $widget) use ($dataProvider) {
                     //var_dump($dataProvider);
@@ -79,7 +79,11 @@ $daterange = [
                     $objetos = $dataProvider->models;
                     $total = 0;
                     foreach ($objetos as $provento) {
-                        $valorCambio = Ativo::valorCambio($provento->itensAtivo->ativos, $provento->valor);
+                        $cambio = 1;
+                        if ($provento->itensAtivo->ativos->pais == Pais::US) {
+                            $cambio = ValorDollar::getCotacaoDollar();
+                        }
+                        $valorCambio = $provento->valor * $cambio;
                         $total += $valorCambio;
                     }
                     if ($total < 0) {

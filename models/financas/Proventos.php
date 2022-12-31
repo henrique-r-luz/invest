@@ -39,12 +39,12 @@ class Proventos extends ActiveRecord
     public function rules()
     {
         return [
-            [['itens_ativos_id', 'data', 'valor','movimentacao'], 'required'],
+            [['itens_ativos_id', 'data', 'valor', 'movimentacao'], 'required'],
             [['itens_ativos_id'], 'default', 'value' => null],
             [['itens_ativos_id'], 'integer'],
             [['data'], 'safe'],
-            [['valor'], 'number'],
-            [['itens_ativos_id', 'data','movimentacao'], 'unique', 'targetAttribute' => ['itens_ativos_id', 'data','movimentacao']],
+            [['valor'], 'number', 'min' => 0],
+            [['itens_ativos_id', 'data', 'movimentacao'], 'unique', 'targetAttribute' => ['itens_ativos_id', 'data', 'movimentacao']],
             [['itens_ativos_id'], 'exist', 'skipOnError' => true, 'targetClass' => ItensAtivo::className(), 'targetAttribute' => ['itens_ativos_id' => 'id']],
         ];
     }
@@ -59,7 +59,7 @@ class Proventos extends ActiveRecord
             'itens_ativos_id' => 'Ativos',
             'data' => 'Data',
             'valor' => 'Valor',
-            'movimentacao'=>'Movimentação'
+            'movimentacao' => 'Movimentação'
         ];
     }
 

@@ -59,7 +59,7 @@ class OperacoesImportHelp
             ->one();
     }
 
-    
+
     /**
      * @param mixed 
      * $param = [
@@ -73,12 +73,13 @@ class OperacoesImportHelp
      * 
      * @return [type]
      */
-    public static function insereOperacao($param){
+    public static function insereOperacao($param)
+    {
         $operacao = new Operacao();
         $operacao->itens_ativos_id = $param['itensAtivo_id'];
         $operacao->quantidade = $param['quantidade'];
         $operacao->data = $param['data'];
-        $operacao->valor = $param['valor'] ;
+        $operacao->valor = $param['valor'];
         if (trim(strtolower($param['operacao'])) == 'venda') {
             $operacao->tipo = 0;
         } else {
@@ -101,14 +102,14 @@ class OperacoesImportHelp
      * 
      * @return [type]
      */
-    public static function AtualizaInter($param){
-        if(empty($param['cdbBancoInterId'])){
+    public static function AtualizaInter($param)
+    {
+        if (empty($param['cdbBancoInterId'])) {
             return;
         }
         $cdbBancoInter = ItensAtivo::findOne($param['cdbBancoInterId'][0]);
         $cdbBancoInter->valor_bruto = $param['valorCdbBruto'];
         $cdbBancoInter->valor_liquido = $param['valorCdbLiquido'];
-       // $valorCompra = Ativo::valorCambio($cdbBancoInter->ativos, Operacao::valorDeCompraBancoInter($param['cdbBancoInterId']));
         $cdbBancoInter->valor_compra = $param['valorCompra'];
         if (!$cdbBancoInter->save()) {
             $erros = CajuiHelper::processaErros($cdbBancoInter->getErrors()) . '</br>';

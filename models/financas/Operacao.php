@@ -87,7 +87,7 @@ class Operacao extends ActiveRecord
             [['tipo', 'quantidade', 'valor', 'data', 'itens_ativos_id'], 'required'],
             [['quantidade', 'itens_ativos_id'], 'default', 'value' => null],
             [['itens_ativos_id', 'tipo'], 'integer'],
-            [['valor', 'quantidade'], 'number'],
+            [['valor', 'quantidade'], 'number', 'min' => 0],
             [
                 ['data'], 'unique',
                 'targetAttribute' => ['itens_ativos_id', 'data'],
@@ -136,27 +136,5 @@ class Operacao extends ActiveRecord
     public function getItensAtivo()
     {
         return $this->hasOne(ItensAtivo::class, ['id' => 'itens_ativos_id']);
-    }
-
-    public static function valorDeCompra($itens_ativos_id)
-    {
-        $dadosOperacoesAtivos = new DadosOperacoesAtivos();
-        $dadosOperacoesAtivos->setItens_ativos_id($itens_ativos_id);
-        $dados = $dadosOperacoesAtivos->geraQuery();
-        if (isset($dados[0]['valor_compra'])) {
-            return  $dados[0]['valor_compra'];
-        }
-        throw new Exception('Valor de compra não encontrato');
-    }
-
-    public static function valorDeCompraBancoInter($itens_ativos_id)
-    {
-        $dadosAtivosBancoInter = new DadosAtivosBancoInter();
-        $dadosAtivosBancoInter->setItens_ativos_id($itens_ativos_id);
-        $dados = $dadosAtivosBancoInter->geraQuery();
-        if (isset($dados[0]['valor_compra'])) {
-            return  $dados[0]['valor_compra'];
-        }
-        throw new Exception('Valor de compra não encontrato');
     }
 }
