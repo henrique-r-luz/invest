@@ -16,15 +16,10 @@ namespace app\models\financas\service\operacoesAtivos;
 
 use Yii;
 use app\lib\CajuiHelper;
+use app\models\financas\Operacao;
 use app\lib\helpers\InvestException;
 use app\models\financas\service\sincroniza\Sincroniza;
 use app\lib\config\atualizaAtivos\AtualizaAtivoOperacaoFactory;
-use app\lib\config\atualizaAtivos\TiposOperacoes;
-use app\lib\dicionario\Categoria;
-use app\models\financas\ItensAtivo;
-use app\models\financas\Operacao;
-use app\models\financas\PrecoMedioVenda;
-use app\models\financas\service\operacoesAtivos\AlteraAtivoOperacao;
 
 
 /**
@@ -37,9 +32,10 @@ class OperacaoService
 
     //put your code here
 
-    private $operacao;
+    private Operacao $operacao;
     private $transaction;
     private string $tipoOperaco;
+    private array $oldOperacao = [];
 
     function __construct($operacao, $tipoOperacao)
     {
@@ -67,6 +63,7 @@ class OperacaoService
             $this->transaction->commit();
             return true;
         } catch (InvestException $ex) {
+
             $this->transaction->rollBack();
             throw new InvestException($ex->getMessage());
             return false;
@@ -92,7 +89,7 @@ class OperacaoService
 
     private function salvaOperacao()
     {
-
+        $this->oldOperacao = $this->operacao->getOldAttributes();
         if (!$this->operacao->save()) {
             $erro = CajuiHelper::processaErros($this->operacao->getErrors());
             $msg = 'O sistema não pode alterar a operação:' . $erro . '. ';
@@ -107,6 +104,7 @@ class OperacaoService
         /** @var AtualizaAtivoInterface */
         $atualizaOperacao =  AtualizaAtivoOperacaoFactory::getObjeto($this->operacao);
         $atualizaOperacao->setTipoOperacao($this->tipoOperaco);
+        $atualizaOperacao->setOldOperacao($this->oldOperacao);
         $atualizaOperacao->atualiza();
     }
 

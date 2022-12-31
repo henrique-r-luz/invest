@@ -17,6 +17,9 @@ class RendaVariavel implements AtualizaAtivoInterface
     private ItensAtivo $itensAtivo;
     private Compra $compra;
     private Venda $venda;
+    private DesdobraMais $desdobraMais;
+    private DesdobraMenos $desdobraMenos;
+    private array  $oldOperacao;
 
     public function __construct(Operacao $operacao)
     {
@@ -25,11 +28,18 @@ class RendaVariavel implements AtualizaAtivoInterface
         $this->itensAtivo =  ItensAtivo::findOne($this->operacao->itens_ativos_id);
         $this->compra = new Compra($this->itensAtivo, $operacao);
         $this->venda  = new Venda($this->itensAtivo, $operacao);
+        $this->desdobraMais = new DesdobraMais($this->itensAtivo, $operacao);
+        $this->desdobraMenos = new DesdobraMenos($this->itensAtivo, $operacao);
     }
 
     public function setTipoOperacao(string $tipoOperaco)
     {
         $this->tipoOperaco = $tipoOperaco;
+    }
+
+    public function setOldOperacao(array $oldOperacao)
+    {
+        $this->oldOperacao = $oldOperacao;
     }
 
     public function atualiza()
@@ -44,9 +54,11 @@ class RendaVariavel implements AtualizaAtivoInterface
             return;
         }
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MAIS] && $this->tipoOperaco === TiposOperacoes::INSERIR) {
+            $this->desdobraMais->insere();
             return;
         }
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MENOS] && $this->tipoOperaco === TiposOperacoes::INSERIR) {
+            $this->desdobraMenos->insere();
             return;
         }
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::COMPRA] && $this->tipoOperaco === TiposOperacoes::DELETE) {
@@ -55,6 +67,31 @@ class RendaVariavel implements AtualizaAtivoInterface
         }
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::VENDA] && $this->tipoOperaco === TiposOperacoes::DELETE) {
             $this->venda->delete();
+            return;
+        }
+        if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MAIS] && $this->tipoOperaco === TiposOperacoes::DELETE) {
+            $this->desdobraMais->delete();
+            return;
+        }
+        if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MENOS] && $this->tipoOperaco === TiposOperacoes::DELETE) {
+            $this->desdobraMenos->delete();
+            return;
+        }
+
+        if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::COMPRA] && $this->tipoOperaco === TiposOperacoes::UPDATE) {
+            $this->compra->update($this->oldOperacao);
+            return;
+        }
+        if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::VENDA] && $this->tipoOperaco === TiposOperacoes::UPDATE) {
+            $this->venda->update($this->oldOperacao);
+            return;
+        }
+        if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MAIS] && $this->tipoOperaco === TiposOperacoes::UPDATE) {
+            $this->desdobraMais->update($this->oldOperacao);
+            return;
+        }
+        if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MENOS] && $this->tipoOperaco === TiposOperacoes::UPDATE) {
+            $this->desdobraMenos->update($this->oldOperacao);
             return;
         }
 

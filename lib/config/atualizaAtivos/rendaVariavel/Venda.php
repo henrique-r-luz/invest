@@ -23,7 +23,7 @@ class Venda
     {
         $precoMedio = $this->getPrecoMedio();
         $precoMedio = $this->salvaPrecoMedio($precoMedio);
-        $this->itensAtivo->valor_compra -=  $precoMedio;
+        $this->itensAtivo->valor_compra -=  $precoMedio * $this->operacao->quantidade;
         $this->itensAtivo->quantidade -= $this->operacao->quantidade;
         $this->itensAtivo->valor_liquido -= $this->operacao->valor;
         $this->itensAtivo->valor_bruto -= $this->operacao->valor;
@@ -47,7 +47,7 @@ class Venda
     {
 
         $precoMedio = new PrecoMedioVenda();
-        $valorVenda = $precoMedioValor * $this->operacao->quantidade;
+        $valorVenda = $precoMedioValor;
         $precoMedio->valor = $valorVenda;
         $precoMedio->operacoes_id = $this->operacao->id;
         if (!$precoMedio->save()) {
@@ -60,7 +60,7 @@ class Venda
     public function delete()
     {
         $precoMedio = $this->removePrecoMedioVenda();
-        $this->itensAtivo->valor_compra += $precoMedio;
+        $this->itensAtivo->valor_compra += $precoMedio * $this->operacao->quantidade;
         $this->itensAtivo->quantidade += $this->operacao->quantidade;
         $this->itensAtivo->valor_liquido += $this->operacao->valor;
         $this->itensAtivo->valor_bruto += $this->operacao->valor;
@@ -84,5 +84,23 @@ class Venda
             throw new InvestException('O preço médio não pode ser removido.');
         }
         return $valorPrecoMedio;
+    }
+
+    public function update($oldOperacao)
+    {
+        if (empty($oldOperacao) || $oldOperacao == null) {
+            throw new InvestException('O oldOperacao não foi definido pelo sistema. ');
+        }
+        $precoMedioVenda = PrecoMedioVenda::find()->where(['operacoes_id' => $this->operacao->id])->one();
+        $precoMedio  = $precoMedioVenda->valor;
+        $this->itensAtivo->valor_compra -=  ($precoMedio * $this->operacao->quantidade) - ($oldOperacao['quantidade'] * $precoMedio);
+        $this->itensAtivo->quantidade -= $this->operacao->quantidade - $oldOperacao['quantidade'];
+        $this->itensAtivo->valor_liquido -= $this->operacao->valor - $oldOperacao['valor'];
+        $this->itensAtivo->valor_bruto -= $this->operacao->valor - $oldOperacao['valor'];
+
+        if (!$this->itensAtivo->save()) {
+            $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
+            throw new InvestException($erro);
+        }
     }
 }

@@ -3,11 +3,11 @@
 namespace app\lib\config\atualizaAtivos\rendaVariavel;
 
 use app\lib\CajuiHelper;
+use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
-use app\models\financas\Operacao;
 
-class Compra
+class DesdobraMenos
 {
     private ItensAtivo $itensAtivo;
     private Operacao $operacao;
@@ -21,39 +21,25 @@ class Compra
 
     public function insere()
     {
-        $this->itensAtivo->valor_compra += $this->operacao->valor;
-        $this->itensAtivo->quantidade += $this->operacao->quantidade;
-        $this->itensAtivo->valor_liquido += $this->operacao->valor;
-        $this->itensAtivo->valor_bruto += $this->operacao->valor;
-
+        $this->itensAtivo->quantidade -= $this->operacao->quantidade;
         if (!$this->itensAtivo->save()) {
             $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
             throw new InvestException($erro);
         }
     }
 
-
     public function delete()
     {
-        $this->itensAtivo->valor_compra -= $this->operacao->valor;
-        $this->itensAtivo->quantidade -= $this->operacao->quantidade;
-        $this->itensAtivo->valor_liquido -= $this->operacao->valor;
-        $this->itensAtivo->valor_bruto -= $this->operacao->valor;
-
+        $this->itensAtivo->quantidade += $this->operacao->quantidade;
         if (!$this->itensAtivo->save()) {
             $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
             throw new InvestException($erro);
         }
         DeleteOperacao::delete($this->operacao);
     }
-
     public function update($oldOperacao)
     {
-        $this->itensAtivo->valor_compra += $this->operacao->valor  - $oldOperacao['valor'];
-        $this->itensAtivo->quantidade += $this->operacao->quantidade - $oldOperacao['quantidade'];
-        $this->itensAtivo->valor_liquido += $this->operacao->valor - $oldOperacao['valor'];
-        $this->itensAtivo->valor_bruto += $this->operacao->valor - $oldOperacao['valor'];
-
+        $this->itensAtivo->quantidade -= $this->operacao->quantidade - $oldOperacao['quantidade'];
         if (!$this->itensAtivo->save()) {
             $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
             throw new InvestException($erro);

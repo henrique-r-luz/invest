@@ -7,4 +7,5 @@ interface AtualizaAtivoInterface
 
     public function atualiza();
     public function setTipoOperacao(string $tipoOperaco);
+    public function setOldOperacao(array $oldOperacao);
 }

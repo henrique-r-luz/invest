@@ -70,7 +70,7 @@ class AtivoSearch extends Ativo
             'pais' => $this->pais,
         ]);
 
-        $query->andFilterWhere(['ilike', 'nome', $this->nome])
+        $query->andFilterWhere(['ilike', 'ativo.nome', $this->nome])
             ->andFilterWhere(['ilike', 'codigo', $this->codigo]);
 
         return $dataProvider;

@@ -5,9 +5,6 @@ namespace app\models\financas;
 use Exception;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-use app\models\financas\Ativo;
-use app\models\financas\service\operacoesAtivos\DadosOperacoesAtivos;
-use app\models\financas\service\operacoesAtivos\DadosAtivosBancoInter;
 use app\lib\behavior\AuditoriaBehavior;
 
 /**
@@ -88,11 +85,11 @@ class Operacao extends ActiveRecord
             [['quantidade', 'itens_ativos_id'], 'default', 'value' => null],
             [['itens_ativos_id', 'tipo'], 'integer'],
             [['valor', 'quantidade'], 'number', 'min' => 0],
-            [
+            /*[
                 ['data'], 'unique',
                 'targetAttribute' => ['itens_ativos_id', 'data'],
                 'comboNotUnique' => 'Já existe um registro de operação desse ativo nessa data e hora',
-            ],
+            ],*/
         ];
     }
 

@@ -107,7 +107,7 @@ class OperacaoController extends Controller
             if ($operacaoService->load(Yii::$app->request->post())) {
                 if ($operacaoService->acaoSalvaOperacao()) {
                     Yii::$app->session->setFlash('success', 'Dados salvos com sucesso!');
-                    return $this->redirect(['view', 'id' => $model->id]);
+                    return $this->redirect(['view', 'id' => $operacaoService->getOpereacao()->id]);
                 }
             }
         } catch (InvestException $ex) {
@@ -119,6 +119,9 @@ class OperacaoController extends Controller
                 'model' => $model,
             ]);
         }
+        /*return $this->render('create', [
+            'model' => $model,
+        ]);*/
     }
 
     /**
@@ -143,7 +146,7 @@ class OperacaoController extends Controller
         } finally {
             return $this->redirect(['index']);
         }
-        //return $this->redirect(['index']);
+        return $this->redirect(['index']);
     }
 
     /**
