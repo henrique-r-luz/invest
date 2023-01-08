@@ -6,8 +6,9 @@ use app\lib\CajuiHelper;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
+use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
 
-class DesdobraMenos
+class DesdobraMenos implements AtivosOperacoesInterface
 {
     private ItensAtivo $itensAtivo;
     private Operacao $operacao;

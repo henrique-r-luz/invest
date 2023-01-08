@@ -6,8 +6,9 @@ namespace app\lib\config\atualizaAtivos\rendaFixa;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
 use app\lib\config\atualizaAtivos\ItenaAtivoAlteraCompra;
+use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
 
-class Compra
+class Compra implements AtivosOperacoesInterface
 {
 
     private Operacao $operacao;

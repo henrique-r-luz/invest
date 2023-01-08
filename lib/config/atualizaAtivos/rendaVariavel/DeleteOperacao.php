@@ -6,7 +6,7 @@ use app\lib\CajuiHelper;
 use app\models\financas\Operacao;
 use app\lib\helpers\InvestException;
 
-class DeleteOperacao
+class DeleteOperacao 
 {
 
     public static function delete(Operacao $operacao)
