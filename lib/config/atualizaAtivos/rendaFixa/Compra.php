@@ -1,6 +1,7 @@
 <?php
 
-namespace app\lib\config\atualizaAtivos\rendaVariavel;
+namespace app\lib\config\atualizaAtivos\rendaFixa;
+
 
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
@@ -8,15 +9,15 @@ use app\lib\config\atualizaAtivos\ItenaAtivoAlteraCompra;
 
 class Compra
 {
-    private ItensAtivo $itensAtivo;
+
     private Operacao $operacao;
+    private ItensAtivo $itensAtivo;
 
-    public function __construct($itensAtivo, $operacao)
+    public function __construct(ItensAtivo $itensAtivo, Operacao $operacao)
     {
-        $this->itensAtivo = $itensAtivo;
         $this->operacao = $operacao;
+        $this->itensAtivo = $itensAtivo;
     }
-
 
     public function insere()
     {

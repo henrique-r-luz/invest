@@ -14,7 +14,6 @@ use yii\web\Controller;
 use app\lib\helpers\InvestException;
 use app\models\sincronizar\AtualizaAcao;
 use app\models\sincronizar\services\AddPreco;
-use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\DadosAtivosValores;
 use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\AtualizaRendaVariavel;
 use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\RecalculaAtivos;
 
@@ -84,8 +83,6 @@ class SincronizarController extends Controller
         } catch (InvestException $e) {
             Yii::$app->session->setFlash('danger', $e->getMessage());
         } catch (Throwable $e) {
-            echo $e->getMessage();
-            exit();
             Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado.');
         } finally {
             return $this->redirect('/index.php');

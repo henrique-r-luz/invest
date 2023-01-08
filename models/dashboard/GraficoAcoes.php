@@ -10,6 +10,7 @@ namespace app\models\dashboard;
 
 use app\lib\dicionario\Tipo;
 use app\lib\config\ValorDollar;
+use app\lib\dicionario\Pais;
 use app\models\dashboard\GraficoUtil;
 use app\models\dashboard\GraficoAbstract;
 
@@ -32,10 +33,10 @@ class GraficoAcoes extends GraficoAbstract
         }
         foreach ($this->dados as $item) {
             if ($item['tipo'] == Tipo::ACOES) {
-                if ($item['pais'] == 'BR') {
+                if ($item['pais'] == Pais::BR) {
                     $this->acoes[$item['codigo']] = $item['valor_bruto'];
                 }
-                if ($item['pais'] == 'US') {
+                if ($item['pais'] == Pais::US) {
                     $this->acoes[$item['codigo']] = $item['valor_bruto'] * ValorDollar::getCotacaoDollar();
                 }
             }
