@@ -16,42 +16,45 @@ use yii\bootstrap4\Progress;
 $this->title = 'Sincroniza Dados';
 $this->registerJsFile(
     '@web/js/sincroniza/carregaBotAcoes.js',
-    ['depends' => [yii\web\YiiAsset::class]
-    ]);
+    [
+        'depends' => [yii\web\YiiAsset::class]
+    ]
+);
 
 ?>
 <div class="box-body">
     <div class="sinc-form">
- 
-<?php $form = ActiveForm::begin(['action' => [Url::to('sincroniza')]]); ?> 
+
+        <?php $form = ActiveForm::begin(['action' => [Url::to('sincroniza')]]); ?>
 
 
 
         <div class="form-group">
             <?= Html::submitButton('Backup Dados', ['class' => 'btn btn-warning', 'name' => 'but', 'value' => 'backup']) ?>
             <?= Html::submitButton('Atualiza Dados', ['class' => 'btn btn-info', 'name' => 'but', 'value' => 'atualiza_dados']) ?>
+            <?= Html::submitButton('Recalcula Ativos', ['class' => 'btn btn-info', 'name' => 'but', 'value' => 'recalcula_ativos']) ?>
             <?= Html::Button('Atualiza ações', ['id' => 'acoes_id', 'class' => 'btn btn-success']) ?>
         </div>
 
-<?php ActiveForm::end(); ?> 
+        <?php ActiveForm::end(); ?>
 
     </div>
 </div>
 
 <?php
-    Modal::begin([
-        'title'        => '<h5 class = "card-title" id="progress"></h5>',
-        'id'            => 'progress-modal',
-        'closeButton'   => false,
-        'clientOptions' => ['backdrop' => 'static', 'keyboard' => false]]);
-    ?>
+Modal::begin([
+    'title'        => '<h5 class = "card-title" id="progress"></h5>',
+    'id'            => 'progress-modal',
+    'closeButton'   => false,
+    'clientOptions' => ['backdrop' => 'static', 'keyboard' => false]
+]);
+?>
 
-    <?=
-    Progress::widget([
-        'percent' => 0,
-        'options' => ['class' => 'progress-success active progress-striped']
-    ]);
-    ?>
+<?=
+Progress::widget([
+    'percent' => 0,
+    'options' => ['class' => 'progress-success active progress-striped']
+]);
+?>
 
-    <?php Modal::end(); ?>
-
+<?php Modal::end(); ?>

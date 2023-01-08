@@ -9,6 +9,7 @@
 namespace app\models\dashboard;
 
 use app\lib\dicionario\Tipo;
+use app\lib\config\ValorDollar;
 use app\models\dashboard\GraficoUtil;
 use app\models\dashboard\GraficoAbstract;
 
@@ -17,19 +18,26 @@ use app\models\dashboard\GraficoAbstract;
  *
  * @author henrique
  */
-class GraficoAcoes extends GraficoAbstract {
-    
+class GraficoAcoes extends GraficoAbstract
+{
+
     private $acoes = [];
-    
+
     //put your code here
-    protected function configuraDados() {
+    protected function configuraDados()
+    {
         $valorTotalAcoes = 0;
-        if(empty($this->dados)){
-            return ;
+        if (empty($this->dados)) {
+            return;
         }
         foreach ($this->dados as $item) {
-            if($item['tipo']==Tipo::ACOES){
-                $this->acoes[$item['codigo']] = $item['valor_bruto'];
+            if ($item['tipo'] == Tipo::ACOES) {
+                if ($item['pais'] == 'BR') {
+                    $this->acoes[$item['codigo']] = $item['valor_bruto'];
+                }
+                if ($item['pais'] == 'US') {
+                    $this->acoes[$item['codigo']] = $item['valor_bruto'] * ValorDollar::getCotacaoDollar();
+                }
             }
         }
         $valorTotalAcoes = array_sum($this->acoes);
@@ -41,11 +49,10 @@ class GraficoAcoes extends GraficoAbstract {
             $this->acoes = $aux;
             arsort($this->acoes);
         }
-        
     }
 
-    public function montaGrafico() {
+    public function montaGrafico()
+    {
         return GraficoUtil::graficoPizza($this->acoes);
     }
-
 }

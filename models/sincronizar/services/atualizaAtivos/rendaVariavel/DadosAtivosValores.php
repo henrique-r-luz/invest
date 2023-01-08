@@ -26,7 +26,7 @@ class DadosAtivosValores
     }
 
 
-    private function preco()
+    public function preco()
     {
         return  Preco::find()
             ->select([
@@ -43,6 +43,12 @@ class DadosAtivosValores
 
     public function getDados()
     {
-        return $this->query()->asArray()->all();
+        return $this->query();
+    }
+
+
+    public function getQuery()
+    {
+        return $this->query();
     }
 }

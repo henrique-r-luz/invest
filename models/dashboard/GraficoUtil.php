@@ -49,11 +49,8 @@ class GraficoUtil
     {
         $infos = [];
         foreach ($param['dados'] as $item) {
-            //print_r($param['dados']);
-            //exit();
             if ($param['valorInvestido'] > 0) {
                 $infos[$item[$param['item']]][$item['pais']] = $item[$param['valor_item']];
-                // $vetDados[$item[$param['item']]] = round($item[$param['valor_item']] / $param['valorInvestido'] * 100);
             }
         }
         return $infos;

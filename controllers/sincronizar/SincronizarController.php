@@ -16,6 +16,7 @@ use app\models\sincronizar\AtualizaAcao;
 use app\models\sincronizar\services\AddPreco;
 use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\DadosAtivosValores;
 use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\AtualizaRendaVariavel;
+use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\RecalculaAtivos;
 
 /**
  * Description of SincronizarController
@@ -49,6 +50,10 @@ class SincronizarController extends Controller
         if (Yii::$app->request->post('but') == 'atualiza_dados') {
             $this->atualiza();
         }
+
+        if (Yii::$app->request->post('but') == 'recalcula_ativos') {
+            $this->recalculaAtivos();
+        }
     }
 
 
@@ -67,6 +72,24 @@ class SincronizarController extends Controller
             return $this->redirect('/index.php');
         }
         //return $this->redirect('/index.php');
+    }
+
+
+    private function recalculaAtivos()
+    {
+        try {
+            $atualizaRendaVariavel = new RecalculaAtivos();
+            $atualizaRendaVariavel->alteraIntesAtivo();
+            Yii::$app->session->setFlash('success', 'Dados atualizados com sucesso!');
+        } catch (InvestException $e) {
+            Yii::$app->session->setFlash('danger', $e->getMessage());
+        } catch (Throwable $e) {
+            echo $e->getMessage();
+            exit();
+            Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado.');
+        } finally {
+            return $this->redirect('/index.php');
+        }
     }
 
     /**
