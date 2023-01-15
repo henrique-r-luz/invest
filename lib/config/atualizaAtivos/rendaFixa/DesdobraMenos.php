@@ -6,8 +6,9 @@ use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
 use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
 use app\lib\config\atualizaAtivos\InsereDesdobramentoMais;
+use app\lib\config\atualizaAtivos\InsereDesdobramentoMenos;
 
-class DesdobraMais implements AtivosOperacoesInterface
+class DesdobraMenos implements AtivosOperacoesInterface
 {
     private ItensAtivo $itensAtivo;
     private Operacao $operacao;
@@ -20,17 +21,17 @@ class DesdobraMais implements AtivosOperacoesInterface
 
     public function insere()
     {
-        InsereDesdobramentoMais::insere($this->itensAtivo, $this->operacao);
+        InsereDesdobramentoMenos::insere($this->itensAtivo, $this->operacao);
     }
 
 
     public function delete()
     {
-        InsereDesdobramentoMais::delete($this->itensAtivo, $this->operacao);
+        InsereDesdobramentoMenos::delete($this->itensAtivo, $this->operacao);
     }
 
     public function update($oldOperacao)
     {
-        InsereDesdobramentoMais::update($oldOperacao, $this->itensAtivo, $this->operacao);
+        InsereDesdobramentoMenos::update($oldOperacao, $this->itensAtivo, $this->operacao);
     }
 }

@@ -16,6 +16,8 @@ class RendaFixa implements AtualizaAtivoInterface
     private Compra $compra;
     private Venda $venda;
     private ItensAtivo $itensAtivo;
+    private DesdobraMais $desdobraMais;
+    private DesdobraMenos $desdobraMenos;
 
     public function __construct(Operacao $operacao)
     {
@@ -24,6 +26,8 @@ class RendaFixa implements AtualizaAtivoInterface
         $this->itensAtivo =  ItensAtivo::findOne($this->operacao->itens_ativos_id);
         $this->compra = new Compra($this->itensAtivo, $operacao);
         $this->venda = new Venda($this->itensAtivo, $operacao);
+        $this->desdobraMais = new DesdobraMais($this->itensAtivo, $operacao);
+        $this->desdobraMenos = new DesdobraMenos($this->itensAtivo, $operacao);
     }
 
     public function setTipoOperacao(string $tipoOperaco)
@@ -47,11 +51,11 @@ class RendaFixa implements AtualizaAtivoInterface
             return;
         }
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MAIS] && $this->tipoOperaco === TiposOperacoes::INSERIR) {
-            // $this->desdobraMais->insere();
+            $this->desdobraMais->insere();
             return;
         }
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MENOS] && $this->tipoOperaco === TiposOperacoes::INSERIR) {
-            // $this->desdobraMenos->insere();
+            $this->desdobraMenos->insere();
             return;
         }
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::COMPRA] && $this->tipoOperaco === TiposOperacoes::DELETE) {
@@ -63,11 +67,11 @@ class RendaFixa implements AtualizaAtivoInterface
             return;
         }
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MAIS] && $this->tipoOperaco === TiposOperacoes::DELETE) {
-            // $this->desdobraMais->delete();
+            $this->desdobraMais->delete();
             return;
         }
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MENOS] && $this->tipoOperaco === TiposOperacoes::DELETE) {
-            //$this->desdobraMenos->delete();
+            $this->desdobraMenos->delete();
             return;
         }
 
@@ -80,11 +84,11 @@ class RendaFixa implements AtualizaAtivoInterface
             return;
         }
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MAIS] && $this->tipoOperaco === TiposOperacoes::UPDATE) {
-            // $this->desdobraMais->update($this->oldOperacao);
+            $this->desdobraMais->update($this->oldOperacao);
             return;
         }
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MENOS] && $this->tipoOperaco === TiposOperacoes::UPDATE) {
-            //$this->desdobraMenos->update($this->oldOperacao);
+            $this->desdobraMenos->update($this->oldOperacao);
             return;
         }
 
