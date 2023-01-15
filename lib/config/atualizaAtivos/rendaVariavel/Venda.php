@@ -94,10 +94,10 @@ class Venda implements AtivosOperacoesInterface
         }
         $precoMedioVenda = PrecoMedioVenda::find()->where(['operacoes_id' => $this->operacao->id])->one();
         $precoMedio  = $precoMedioVenda->valor;
-        $this->itensAtivo->valor_compra -=  ($precoMedio * $this->operacao->quantidade) - ($oldOperacao['quantidade'] * $precoMedio);
-        $this->itensAtivo->quantidade -= $this->operacao->quantidade - $oldOperacao['quantidade'];
-        $this->itensAtivo->valor_liquido -= $this->operacao->valor - $oldOperacao['valor'];
-        $this->itensAtivo->valor_bruto -= $this->operacao->valor - $oldOperacao['valor'];
+        $this->itensAtivo->valor_compra =  ($this->itensAtivo->valor_compra + ($oldOperacao['quantidade'] * $precoMedio)) - ($precoMedio * $this->operacao->quantidade);
+        $this->itensAtivo->quantidade = ($this->itensAtivo->quantidade + $oldOperacao['quantidade']) - $this->operacao->quantidade;
+        $this->itensAtivo->valor_liquido = ($this->itensAtivo->valor_liquido + $oldOperacao['valor']) - $this->operacao->valor;
+        $this->itensAtivo->valor_bruto = ($this->itensAtivo->valor_bruto + $oldOperacao['valor']) - $oldOperacao['valor'];  //$this->operacao->valor - $oldOperacao['valor'];
 
         if (!$this->itensAtivo->save()) {
             $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());

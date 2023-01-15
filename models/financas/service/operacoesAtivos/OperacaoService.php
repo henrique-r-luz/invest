@@ -33,7 +33,6 @@ class OperacaoService
     //put your code here
 
     private Operacao $operacao;
-    private $transaction;
     private string $tipoOperaco;
     private array $oldOperacao = [];
 
@@ -55,34 +54,14 @@ class OperacaoService
      */
     public function acaoSalvaOperacao()
     {
-        $connection = Yii::$app->db;
-        $this->transaction = $connection->beginTransaction();
-        try {
-            $this->salvaOperacao();
-            $this->salvaAtivo();
-            $this->transaction->commit();
-            return true;
-        } catch (InvestException $ex) {
 
-            $this->transaction->rollBack();
-            throw new InvestException($ex->getMessage());
-            return false;
-        }
+        $this->salvaOperacao();
+        $this->salvaAtivo();
     }
 
     public function acaoDeletaOperacao()
     {
-        $connection = Yii::$app->db;
-        $this->transaction = $connection->beginTransaction();
-        try {
-            $this->salvaAtivo();
-            $this->transaction->commit();
-            return true;
-        } catch (InvestException $ex) {
-            throw new InvestException('Ocorreu um erro ao deletar operação: ' . $ex->getMessage());
-            $this->transaction->rollBack();
-            return false;
-        }
+        $this->salvaAtivo();
     }
 
 

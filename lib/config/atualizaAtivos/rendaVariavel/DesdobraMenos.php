@@ -40,7 +40,7 @@ class DesdobraMenos implements AtivosOperacoesInterface
     }
     public function update($oldOperacao)
     {
-        $this->itensAtivo->quantidade -= $this->operacao->quantidade - $oldOperacao['quantidade'];
+        $this->itensAtivo->quantidade = ($this->itensAtivo->quantidade + $oldOperacao['quantidade']) + $this->operacao->quantidade;
         if (!$this->itensAtivo->save()) {
             $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
             throw new InvestException($erro);

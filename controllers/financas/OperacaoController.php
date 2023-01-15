@@ -69,18 +69,24 @@ class OperacaoController extends Controller
      */
     public function actionCreate()
     {
+        $connection = Yii::$app->db;
+        $transaction = $connection->beginTransaction();
         $model = new Operacao();
         $operacaoService = new OperacaoService($model, TiposOperacoes::INSERIR);
         try {
             if ($operacaoService->load(Yii::$app->request->post())) {
-                if ($operacaoService->acaoSalvaOperacao()) {
-                    Yii::$app->session->setFlash('success', 'Dados salvos com sucesso!');
-                    return $this->redirect(['view', 'id' => $operacaoService->getOpereacao()->id]);
-                }
+                $operacaoService->acaoSalvaOperacao();
+                $transaction->commit();
+                Yii::$app->session->setFlash('success', 'Dados salvos com sucesso!');
+                return $this->redirect(['view', 'id' => $operacaoService->getOpereacao()->id]);
             }
         } catch (InvestException $ex) {
+            $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Erro ao salvar Operação!</br>' . $ex->getMessage());
         } catch (Throwable $e) {
+            echo $e->getMessage();
+            exit();
+            $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado');
         } finally {
             return $this->render('create', [
@@ -101,27 +107,29 @@ class OperacaoController extends Controller
      */
     public function actionUpdate($id)
     {
+        $connection = Yii::$app->db;
+        $transaction = $connection->beginTransaction();
         $model = $this->findModel($id);
         $operacaoService = new OperacaoService($model, TiposOperacoes::UPDATE);
         try {
+
             if ($operacaoService->load(Yii::$app->request->post())) {
-                if ($operacaoService->acaoSalvaOperacao()) {
-                    Yii::$app->session->setFlash('success', 'Dados salvos com sucesso!');
-                    return $this->redirect(['view', 'id' => $operacaoService->getOpereacao()->id]);
-                }
+                $operacaoService->acaoSalvaOperacao();
+                $transaction->commit();
+                Yii::$app->session->setFlash('success', 'Dados salvos com sucesso!');
+                return $this->redirect(['view', 'id' => $operacaoService->getOpereacao()->id]);
             }
         } catch (InvestException $ex) {
+            $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Erro ao salvar Operação!</br>' . $ex->getMessage());
         } catch (Throwable) {
+            $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado');
         } finally {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
-        /*return $this->render('create', [
-            'model' => $model,
-        ]);*/
     }
 
     /**
@@ -133,15 +141,19 @@ class OperacaoController extends Controller
      */
     public function actionDelete($id)
     {
+        $connection = Yii::$app->db;
+        $transaction = $connection->beginTransaction();
         $model = $this->findModel($id);
         $operacaoService = new OperacaoService($model, TiposOperacoes::DELETE);
         try {
-            if ($operacaoService->acaoDeletaOperacao()) {
-                Yii::$app->session->setFlash('success', 'Dados excluídos com sucesso!');
-            }
+            $operacaoService->acaoDeletaOperacao();
+            $transaction->commit();
+            Yii::$app->session->setFlash('success', 'Dados excluídos com sucesso!');
         } catch (InvestException $ex) {
+            $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Erro ao delete Operação!</br>' . $ex->getMessage());
         } catch (Throwable) {
+            $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado');
         } finally {
             return $this->redirect(['index']);

@@ -40,10 +40,10 @@ class ItenaAtivoAlteraCompra
 
     public static function update($oldOperacao, ItensAtivo $itensAtivo, Operacao $operacao)
     {
-        $itensAtivo->valor_compra += $operacao->valor  - $oldOperacao['valor'];
-        $itensAtivo->quantidade += $operacao->quantidade - $oldOperacao['quantidade'];
-        $itensAtivo->valor_liquido += $operacao->valor - $oldOperacao['valor'];
-        $itensAtivo->valor_bruto += $operacao->valor - $oldOperacao['valor'];
+        $itensAtivo->valor_compra = ($itensAtivo->valor_compra - $oldOperacao['valor']) + $operacao->valor; //$operacao->valor  - $oldOperacao['valor'];
+        $itensAtivo->quantidade = ($itensAtivo->quantidade - $oldOperacao['quantidade']) + $operacao->quantidade;
+        $itensAtivo->valor_liquido = ($itensAtivo->valor_liquido - $oldOperacao['valor']) + $operacao->valor;
+        $itensAtivo->valor_bruto = ($itensAtivo->valor_bruto - $oldOperacao['valor']) + $operacao->valor;
 
         if (!$itensAtivo->save()) {
             $erro  = CajuiHelper::processaErros($itensAtivo->getErrors());

@@ -14,6 +14,7 @@ class RendaFixa implements AtualizaAtivoInterface
     private array $oldOperacao;
     private $tipoOperaco;
     private Compra $compra;
+    private Venda $venda;
     private ItensAtivo $itensAtivo;
 
     public function __construct(Operacao $operacao)
@@ -22,6 +23,7 @@ class RendaFixa implements AtualizaAtivoInterface
         $this->operacao = $operacao;
         $this->itensAtivo =  ItensAtivo::findOne($this->operacao->itens_ativos_id);
         $this->compra = new Compra($this->itensAtivo, $operacao);
+        $this->venda = new Venda($this->itensAtivo, $operacao);
     }
 
     public function setTipoOperacao(string $tipoOperaco)
@@ -41,7 +43,7 @@ class RendaFixa implements AtualizaAtivoInterface
             return;
         }
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::VENDA] && $this->tipoOperaco === TiposOperacoes::INSERIR) {
-            // $this->venda->insere();
+            $this->venda->insere();
             return;
         }
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MAIS] && $this->tipoOperaco === TiposOperacoes::INSERIR) {
@@ -57,7 +59,7 @@ class RendaFixa implements AtualizaAtivoInterface
             return;
         }
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::VENDA] && $this->tipoOperaco === TiposOperacoes::DELETE) {
-            //$this->venda->delete();
+            $this->venda->delete();
             return;
         }
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MAIS] && $this->tipoOperaco === TiposOperacoes::DELETE) {
@@ -74,7 +76,7 @@ class RendaFixa implements AtualizaAtivoInterface
             return;
         }
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::VENDA] && $this->tipoOperaco === TiposOperacoes::UPDATE) {
-            //$this->venda->update($this->oldOperacao);
+            $this->venda->update($this->oldOperacao);
             return;
         }
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MAIS] && $this->tipoOperaco === TiposOperacoes::UPDATE) {
