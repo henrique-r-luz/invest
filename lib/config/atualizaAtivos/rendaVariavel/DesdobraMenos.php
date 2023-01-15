@@ -5,8 +5,8 @@ namespace app\lib\config\atualizaAtivos\rendaVariavel;
 use app\lib\CajuiHelper;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
-use app\lib\helpers\InvestException;
 use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
+use app\lib\config\atualizaAtivos\InsereDesdobramentoMenos;
 
 class DesdobraMenos implements AtivosOperacoesInterface
 {
@@ -22,28 +22,15 @@ class DesdobraMenos implements AtivosOperacoesInterface
 
     public function insere()
     {
-        $this->itensAtivo->quantidade -= $this->operacao->quantidade;
-        if (!$this->itensAtivo->save()) {
-            $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
-            throw new InvestException($erro);
-        }
+        InsereDesdobramentoMenos::insere($this->itensAtivo, $this->operacao);
     }
 
     public function delete()
     {
-        $this->itensAtivo->quantidade += $this->operacao->quantidade;
-        if (!$this->itensAtivo->save()) {
-            $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
-            throw new InvestException($erro);
-        }
-        DeleteOperacao::delete($this->operacao);
+        InsereDesdobramentoMenos::delete($this->itensAtivo, $this->operacao);
     }
     public function update($oldOperacao)
     {
-        $this->itensAtivo->quantidade = ($this->itensAtivo->quantidade + $oldOperacao['quantidade']) + $this->operacao->quantidade;
-        if (!$this->itensAtivo->save()) {
-            $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
-            throw new InvestException($erro);
-        }
+        InsereDesdobramentoMenos::update($this->itensAtivo, $oldOperacao, $this->operacao);
     }
 }
