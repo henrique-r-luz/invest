@@ -45,6 +45,7 @@ class RendaVariavel implements AtualizaAtivoInterface
     public function atualiza()
     {
 
+
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::COMPRA] && $this->tipoOperaco === TiposOperacoes::INSERIR) {
             $this->compra->insere();
             return;

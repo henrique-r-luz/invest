@@ -31,7 +31,7 @@ class InsereDesdobramentoMais
 
     public static function update($itensAtivo, $operacao, $oldOperacao)
     {
-        $itensAtivo->quantidade = $itensAtivo->quantidade - $oldOperacao['quantidade'] + $operacao->quantidade;
+        $itensAtivo->quantidade = ($itensAtivo->quantidade - $oldOperacao['quantidade']) + $operacao->quantidade;
         if (!$itensAtivo->save()) {
             $erro  = CajuiHelper::processaErros($itensAtivo->getErrors());
             throw new InvestException($erro);

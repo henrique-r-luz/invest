@@ -44,7 +44,7 @@ class DadosRecalculaAtivos
 
     public function getDados()
     {
-        //$this->query();
+
         return $this->query()->asArray()->all();
     }
 

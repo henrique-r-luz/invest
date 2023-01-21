@@ -14,11 +14,19 @@ class ValorDollar
     public static function getCotacaoDollar()
     {
         $session = Yii::$app->session;
+        if ($session->has('dollar') && $session->get('dollar')) {
+            $preco = self::precoDollar();
+            if (!empty($preco)) {
+                $session->set('dollar', $preco->valor);
+                return $session->get('dollar');
+            }
+        }
         if ($session->has('dollar')) {
             return $session->get('dollar');
         }
         $preco = self::precoDollar();
         if (empty($preco)) {
+            $session->set('dollar', 1);
             throw new InvestException('O preço do dollar não foi inserido.');
         }
         $session->set('dollar', $preco->valor);

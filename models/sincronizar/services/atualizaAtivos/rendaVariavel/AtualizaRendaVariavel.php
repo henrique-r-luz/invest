@@ -18,7 +18,7 @@ class AtualizaRendaVariavel
 
     public function alteraIntesAtivo()
     {
-        $dados = $this->dados->getDados();
+        $dados = $this->dados->getDados()->asArray()->all();
         foreach ($dados as $itemAtualiza) {
             $itemAtivo = ItensAtivo::findOne($itemAtualiza['itens_ativo_id']);
             $valor = $itemAtualiza['valor'];
