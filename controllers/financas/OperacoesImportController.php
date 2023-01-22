@@ -71,23 +71,23 @@ class OperacoesImportController extends Controller
     public function actionCreate()
     {
         try {
+            $transaction = Yii::$app->db->beginTransaction();
             $operacoesImportService = new OperacoesImportService();
 
             if ($operacoesImportService->load(Yii::$app->request->post())) {
-                if (!$operacoesImportService->save()) {
-                    $erro = CajuiHelper::processaErros($operacoesImportService->getErrors());
-                    Yii::$app->session->setFlash('danger', 'Erro ao salvar Ativo!</br>' . $erro);
-                    $operacoesImportService->getModel()->arquivo = null;
-                    return $this->render('create', [
-                        'model' => $operacoesImportService->getModel(),
-                    ]);
-                }
+                $operacoesImportService->save();
+                $transaction->commit();
                 return $this->redirect(['view', 'id' => $operacoesImportService->getModel()->id]);
             }
         } catch (InvestException $e) {
+
+            $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Erro ao salvar operação import! ' . $e->getMessage());
+            $operacoesImportService->removeArquivo();
         } catch (Throwable) {
+            $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado! ');
+            $operacoesImportService->removeArquivo();
         } finally {
             $operacoesImportService->getModel()->arquivo = null;
             return $this->render('create', [
@@ -169,11 +169,6 @@ class OperacoesImportController extends Controller
     protected function findModel($id)
     {
         if (($model = OperacoesImport::findOne($id)) !== null) {
-            $model->itens_ativos = [];
-            foreach ($model->itensAtivosImports as $itensAtivo) {
-                $model->itens_ativos[] = $itensAtivo->itens_ativo_id;
-            }
-            //$model->itens_ativos
             return $model;
         }
 

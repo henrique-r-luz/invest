@@ -52,7 +52,7 @@ class Ativo extends ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'codigo', 'tipo', 'categoria', 'pais'], 'required'],
+            [['nome', 'codigo', 'tipo', 'categoria', 'pais', 'classe_atualiza_id'], 'required'],
             [['nome', 'codigo', 'categoria', 'tipo'], 'string'],
             [['acao_bolsa_id', 'classe_atualiza_id'], 'integer'],
             [['categoria'], 'string'],

@@ -2,14 +2,11 @@
 
 namespace app\models\financas\service\operacoesImport;
 
-use Yii;
-use Exception;
-use Throwable;
+
 use app\lib\CajuiHelper;
 use yii\web\UploadedFile;
 use app\lib\helpers\InvestException;
 use app\models\financas\OperacoesImport;
-use app\models\financas\ItensAtivoImport;
 
 /**
  * Define o serviço para os trabalhos de operações de importação de dados 
@@ -44,57 +41,36 @@ class OperacoesImportService
 
     public function save()
     {
-        try {
-
-            $transaction = Yii::$app->db->beginTransaction();
-            $this->operacoesImport->arquivo = UploadedFile::getInstance($this->operacoesImport, 'arquivo');
-            $this->operacoesImport->data = date("Y-m-d H:i:s");
-            if (!$this->operacoesImport->saveUpload()) {
-                $transaction->rollBack();
-                return false;
-            }
-            //insere ativos que serão atualizadas(ex:CDb inter)
-            $this->saveItensAtivoImport();
-            $acaoImport = OperacoesImportFactory::getObjeto($this->operacoesImport);
-            $acaoImport->atualiza();
-            $this->operacoesImport->refresh();
-            $this->operacoesImport->lista_operacoes_criadas_json = $acaoImport->getJson();
-            if (!$this->operacoesImport->save(false)) {
-                $transaction->rollBack();
-                return false;
-            }
-            $transaction->commit();
-            return true;
-        } catch (Throwable $e) {
-            $transaction->rollBack();
-            if (!OperacoesImport::find()->where(['hash_nome' => $this->operacoesImport->hash_nome])->exists()) {
-                $this->operacoesImport->removeArquivo();
-            }
-            throw new InvestException($e->getMessage());
+        $this->operacoesImport->arquivo = UploadedFile::getInstance($this->operacoesImport, 'arquivo');
+        $this->operacoesImport->data = date("Y-m-d H:i:s");
+        if (!$this->operacoesImport->saveUpload()) {
+            throw new InvestException('Ocorreu um erro ao salvar upload. ');
         }
+        $this->salvaOperacaoImport();
+        $acaoImport = OperacoesImportFactory::getObjeto($this->operacoesImport);
+        $acaoImport->atualiza();
+        $this->operacoesImport->lista_operacoes_criadas_json = $acaoImport->getJson();
+        $this->salvaOperacaoImport();
+        //atualiza json em operações import
+
     }
-    /**
-     * salva quando houver itens import no formulário
-     * Exemplo: ao inserir uma atualização no cdb inter 
-     * @return void
-     * @author Henrique Luz
-     */
-    private function saveItensAtivoImport()
+
+
+    private function salvaOperacaoImport()
     {
-        if(empty($this->operacoesImport->itens_ativos)){
-            return ;
-        }
-        foreach ($this->operacoesImport->itens_ativos as $item_ativo) {
-            $itensAtivoImport  =  new ItensAtivoImport();
-            $itensAtivoImport->operacoes_import_id = $this->operacoesImport->id;
-            $itensAtivoImport->itens_ativo_id = $item_ativo;
-            if (!$itensAtivoImport->save()) {
-                $erro = CajuiHelper::processaErros($itensAtivoImport->getErrors());
-                throw new InvestException($erro);
-            }
+        if (!$this->operacoesImport->save(false)) {
+            $erro =  CajuiHelper::processaErros($this->operacoesImport->getErrors());
+            throw new InvestException($erro);
         }
     }
 
+
+    public function removeArquivo()
+    {
+        if (!OperacoesImport::find()->where(['hash_nome' => $this->operacoesImport->hash_nome])->exists()) {
+            $this->operacoesImport->removeArquivo();
+        }
+    }
 
     public function reload()
     {
@@ -104,20 +80,10 @@ class OperacoesImportService
 
     public function delete()
     {
-            $acaoImport = OperacoesImportFactory::getObjeto($this->operacoesImport);
-            $this->deleteItensAtivoImport($this->operacoesImport);
-            $acaoImport->delete();
+        $acaoImport = OperacoesImportFactory::getObjeto($this->operacoesImport);
+
+        $acaoImport->delete();
     }
-
-
-    private function deleteItensAtivoImport($operacoesImport){
-        foreach ($operacoesImport->itensAtivosImports as $item_ativo) {
-            if (!$item_ativo->delete()) {
-                //throw new \Exception('Erro ao remover ItensAtivoImport. ');
-            }
-        }
-    }
-
 
     public function getErrors()
     {

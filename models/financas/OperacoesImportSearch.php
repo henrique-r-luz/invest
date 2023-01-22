@@ -61,7 +61,6 @@ class OperacoesImportSearch extends OperacoesImport
     public function search($params)
     {
         $query = OperacoesImport::find()
-            ->joinWith(['itensAtivosImports.itensAtivo.ativos'])
             ->orderBy(['data' => SORT_DESC]);
 
         // add conditions that should always apply here
@@ -72,10 +71,7 @@ class OperacoesImportSearch extends OperacoesImport
                 'pageSize' => 10,
             ],
         ]);
-        $dataProvider->sort->attributes['itens_ativos'] = [
-            'asc'  => ['ativo.codigo' => SORT_ASC],
-            'desc' => ['ativo.codigo' => SORT_DESC],
-        ];
+
 
         $this->load($params);
 

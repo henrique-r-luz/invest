@@ -56,18 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                                 'label' => 'Ativos Atualizados',
                                 'attribute' => 'itens_ativos',
-                                'value' => function ($model) {
-                                        $id = 0;
-                                        $itensAtivo = '';
-                                        foreach ($model->itensAtivosImports as $itensAtivos) {
-                                                if ($id != 0) {
-                                                        $itensAtivo .= ', ';
-                                                }
-                                                $itensAtivo .= $itensAtivos->itensAtivo->ativos->codigo;
-                                                $id++;
-                                        }
-                                        return $itensAtivo;
-                                }
                         ],
                         [
                                 'attribute' => 'data',

@@ -4,6 +4,7 @@ namespace app\models\financas;
 
 use Yii;
 use app\models\financas\Operacao;
+use app\lib\behavior\AuditoriaBehavior;
 
 /**
  * This is the model class for table "preco_medio_venda".
@@ -21,6 +22,13 @@ class PrecoMedioVenda extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'preco_medio_venda';
+    }
+
+    public function behaviors()
+    {
+        return [
+            AuditoriaBehavior::class,
+        ];
     }
 
     /**

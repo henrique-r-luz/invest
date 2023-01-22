@@ -4,13 +4,13 @@ namespace app\models\financas\service\operacoesImport;
 
 use Yii;
 use app\lib\CajuiHelper;
-use app\lib\dicionario\ProventosMovimentacao;
 use app\models\financas\Operacao;
 use app\models\financas\Proventos;
 use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
 use app\models\financas\OperacoesImport;
-use app\models\financas\service\sincroniza\ComponenteOperacoes;
+use app\lib\dicionario\ProventosMovimentacao;
+use app\lib\config\atualizaAtivos\ComponenteOperacoes;
 
 
 class OperacaoProventos extends OperacoesImportAbstract

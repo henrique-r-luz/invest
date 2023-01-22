@@ -42,6 +42,8 @@ class OperacoesImport extends \yii\db\ActiveRecord
         return 'operacoes_import';
     }
 
+
+
     /**
      * {@inheritdoc}
      */
@@ -114,10 +116,6 @@ class OperacoesImport extends \yii\db\ActiveRecord
         return $this->hasOne(Investidor::class, ['id' => 'investidor_id']);
     }
 
-    public function getItensAtivosImports()
-    {
-        return $this->hasMany(ItensAtivoImport::class, ['operacoes_import_id' => 'id']);
-    }
 
 
 

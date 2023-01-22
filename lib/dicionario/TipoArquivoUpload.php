@@ -18,25 +18,25 @@
 
 namespace app\lib\dicionario;
 
-class TipoArquivoUpload {
+class TipoArquivoUpload
+{
 
     const CLEAR = 'Operações Clear';
     const AVENUE = 'Operações Avenue';
-    const INTER = 'Operações Inter';
     const NU = 'NU';
     const PROVENTOS = 'Proventos';
-    
+
     /**
      * Retorna todos os enuns em um array
      * @return array 
      */
-    public static function all() {
+    public static function all()
+    {
         return [
             self::CLEAR => self::CLEAR,
             self::AVENUE => self::AVENUE,
-            self::INTER => self::INTER,
             self::NU => self::NU,
-            self::PROVENTOS=>self::PROVENTOS,
+            self::PROVENTOS => self::PROVENTOS,
         ];
     }
 
@@ -45,7 +45,8 @@ class TipoArquivoUpload {
      * @param int $modalidade valor do tipo. 
      * @return string
      */
-    public static function get($tipo) {
+    public static function get($tipo)
+    {
         $all = self::all();
 
         if (isset($all[$tipo])) {
@@ -54,5 +55,4 @@ class TipoArquivoUpload {
 
         return 'Não existe';
     }
-
 }

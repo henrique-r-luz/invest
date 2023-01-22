@@ -72,7 +72,6 @@ class OperacaoService
         if (!$this->operacao->save()) {
             $erro = CajuiHelper::processaErros($this->operacao->getErrors());
             $msg = 'O sistema não pode alterar a operação:' . $erro . '. ';
-            $this->operacao->addError('itens_ativos_id', $msg);
             throw new InvestException($msg);
         }
     }

@@ -6,7 +6,6 @@ use kartik\file\FileInput;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use kartik\widgets\ActiveForm;
-use app\models\financas\ItensAtivo;
 use app\models\financas\OperacoesImport;
 use app\lib\dicionario\TipoArquivoUpload;
 
@@ -21,7 +20,7 @@ use app\lib\dicionario\TipoArquivoUpload;
     <div class="card-body">
 
         <div class="row">
-            <div class="col-xs-12 col-sm-3 col-lg-3">
+            <div class="col-xs-12 col-sm-6 col-lg-6">
                 <?=
                 $form->field($model, 'investidor_id')->widget(Select2::class, [
                     'data' => ArrayHelper::map(app\models\financas\Investidor::find()->asArray()->all(), 'id', 'nome'),
@@ -32,7 +31,7 @@ use app\lib\dicionario\TipoArquivoUpload;
                 ]);
                 ?>
             </div>
-            <div class="col-xs-12 col-sm-3 col-lg-3">
+            <div class="col-xs-12 col-sm-6 col-lg-6">
                 <?=
                 $form->field($model, 'tipo_arquivo')->widget(Select2::class, [
                     'data' => TipoArquivoUpload::all(),
@@ -40,21 +39,6 @@ use app\lib\dicionario\TipoArquivoUpload;
                     'pluginOptions' => [
                         'allowClear' => true
                     ],
-                ]);
-                ?>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-lg-6">
-                <?=
-                $form->field($model, 'itens_ativos')->widget(Select2::class, [
-                    'data' => ItensAtivo::lista(),
-                    'theme' => Select2::THEME_DEFAULT,
-                    'options' => [
-                        'placeholder' => 'Selecione Ativo',
-                        'multiple' => true
-                    ],
-                    'pluginOptions' => [
-                        'allowClear' => true
-                    ]
                 ]);
                 ?>
             </div>

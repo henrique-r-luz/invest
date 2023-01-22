@@ -6,9 +6,10 @@ use Yii;
 use app\lib\CajuiHelper;
 use yii\base\UserException;
 use app\models\financas\Operacao;
+use app\models\financas\Proventos;
 use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
-use app\models\financas\Proventos;
+use app\lib\config\atualizaAtivos\TiposOperacoes;
 use app\models\financas\service\operacoesAtivos\OperacaoService;
 
 
@@ -28,7 +29,7 @@ class OperacoesImportHelp
             foreach ($operacoes['operacoes_id'] as $operacao) {
                 $objOperacao = Operacao::findOne($operacao);
                 if (!empty($objOperacao)) {
-                    $operacaoService = new OperacaoService($objOperacao);
+                    $operacaoService = new OperacaoService($objOperacao, TiposOperacoes::DELETE);
                     $operacaoService->acaoDeletaOperacao();
                 }
             }
@@ -85,7 +86,7 @@ class OperacoesImportHelp
         } else {
             $operacao->tipo = 1;
         }
-        $operacaoService = new OperacaoService($operacao);
+        $operacaoService = new OperacaoService($operacao, $param['tipo_operacao']);
         return $operacaoService;
     }
 

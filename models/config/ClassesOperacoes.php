@@ -26,7 +26,8 @@ class ClassesOperacoes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome'], 'string', 'max' => 255],
+            [['nome'], 'required'],
+            [['nome'], 'string',  'max' => 255],
         ];
     }
 

@@ -96,7 +96,7 @@ class ItensAtivo extends \yii\db\ActiveRecord
     public static function lista()
     {
         return  ArrayHelper::map(
-            itensAtivo::find()
+            self::find()
                 ->joinWith(['ativos', 'investidor'])
                 ->where(['ativo' => true])->all(),
             'id',
