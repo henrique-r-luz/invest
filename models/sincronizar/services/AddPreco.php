@@ -43,6 +43,9 @@ class AddPreco
 
     private function inserePreco($ativo_id, $valor)
     {
+        if ($valor == '-1') {
+            return;
+        }
         $preco  = new Preco();
         $preco->ativo_id  = $ativo_id;
         $preco->valor = ConvertValorMonetario::brParaUs($valor);

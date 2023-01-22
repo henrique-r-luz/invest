@@ -164,7 +164,7 @@ class SincronizarController extends Controller
                     return $this->asJson(['ativosAtualizados' => 'erro', 'total' => 'erro']);
                 }
             }
-            return $this->asJson(['ativosAtualizados' => (count($ativoAtualizados) - 1), 'total' => ($total + 1)]);
+            return $this->asJson(['ativosAtualizados' => (count($ativoAtualizados) - 1), 'total' => ($total)]);
         } catch (Throwable) {
             return $this->asJson(['ativosAtualizados' => 0, 'total' => 0]);
         }

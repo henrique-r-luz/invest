@@ -27,29 +27,24 @@ def getDados():
         # return 'Deu certo';
 
 def executa(discionarioAcoes):
-    listaPreco = [];
-    moeda = [];
-    id = 0;
-    for row in discionarioAcoes:
-        browser.get(row['url']);
-        preco = getPreco(browser);
-        with open(logPath, 'a') as log:
-             log.write('ativo@#'+str(preco.text)+'-'+str(row['ativo_id'])+';');
-        listaPreco.append([row['ativo_id'], preco.text])
-        id+=1
-       
-    browser.get('https://br.investing.com/currencies/usd-brl');
-    preco = getPreco(browser);
-    with open(logPath, 'a') as log:
-            log.write('ativo@#'+str(preco.text)+'-dollar'+';')
-   
-    moeda.append(['dollar', preco.text]);
-  
-    df = pd.DataFrame(listaPreco, columns=['id', 'valor'])
-    dfDollar = pd.DataFrame(moeda, columns=['moeda', 'valor'])
-    df.to_csv(dir + '/preco_acao.csv', index=False)
-    dfDollar.to_csv(dir + '/cambio.csv', index=False)
-    browser.quit()
+    try:
+        listaPreco = [];
+        id = 0;
+        for row in discionarioAcoes:
+            browser.get(row['url']);
+            preco = getPreco(browser);
+            valor = addPreco(preco, row)
+            listaPreco.append([row['ativo_id'], valor])
+            id+=1
+    
+    
+        df = pd.DataFrame(listaPreco, columns=['id', 'valor'])
+        df.to_csv(dir + '/preco_acao.csv', index=False)
+        browser.quit()
+    except Exception as err:
+        print("Erro "+str(err))
+        browser.quit()
+        
     
 def getPreco(browser):
     preco = getPrecoId(browser);
@@ -61,19 +56,27 @@ def getPreco(browser):
     preco = getPrecoAttribute(browser);
     if(preco!=False):
         return preco;
+    return 'null'
     
+def addPreco(preco,row):
+    valor = '-1' 
+    if preco!='null':
+        valor  = str(preco.text)
+    with open(logPath, 'a') as log:
+        log.write('ativo@#'+valor+'-'+str(row['ativo_id'])+';')
+    return valor;
     
     
 def getPrecoId(browser):
     try:
-        return browser.find_element_by_id('last_last');
+        return browser.find_element("id",'last_last');
     except NoSuchElementException:
         return False;
     
 
 def getPrecoClass(browser):
     try:
-        return browser.find_element_by_class_name('instrument-price_last__KQzyA')
+        return browser.find_element(By.CLASS_NAME,"instrument-price_last__KQzyA")
     except NoSuchElementException:
         return False;
         
