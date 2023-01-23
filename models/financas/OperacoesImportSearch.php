@@ -60,8 +60,8 @@ class OperacoesImportSearch extends OperacoesImport
      */
     public function search($params)
     {
-        $query = OperacoesImport::find()
-            ->orderBy(['data' => SORT_DESC]);
+        $query = OperacoesImport::find();
+        //->orderBy(['data' => SORT_DESC]);
 
         // add conditions that should always apply here
 

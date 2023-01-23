@@ -70,21 +70,20 @@ class OperacoesImportController extends Controller
      */
     public function actionCreate()
     {
-        try {
-            $transaction = Yii::$app->db->beginTransaction();
-            $operacoesImportService = new OperacoesImportService();
+        //try {
+        $transaction = Yii::$app->db->beginTransaction();
+        $operacoesImportService = new OperacoesImportService();
 
-            if ($operacoesImportService->load(Yii::$app->request->post())) {
-                $operacoesImportService->save();
-                $transaction->commit();
-                return $this->redirect(['view', 'id' => $operacoesImportService->getModel()->id]);
-            }
-        } catch (InvestException $e) {
-
+        if ($operacoesImportService->load(Yii::$app->request->post())) {
+            $operacoesImportService->save();
+            $transaction->commit();
+            return $this->redirect(['view', 'id' => $operacoesImportService->getModel()->id]);
+        }
+        /*} catch (InvestException $e) {
             $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Erro ao salvar operação import! ' . $e->getMessage());
             $operacoesImportService->removeArquivo();
-        } catch (Throwable) {
+        } catch (Throwable $e) {
             $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado! ');
             $operacoesImportService->removeArquivo();
@@ -93,7 +92,10 @@ class OperacoesImportController extends Controller
             return $this->render('create', [
                 'model' => $operacoesImportService->getModel(),
             ]);
-        }
+        }*/
+        return $this->render('create', [
+            'model' => $operacoesImportService->getModel(),
+        ]);
     }
 
 
@@ -152,7 +154,7 @@ class OperacoesImportController extends Controller
         } catch (InvestException $e) {
             $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Erro ao deletera registro.' . $e->getTraceAsString());
-        } catch (Throwable) {
+        } catch (Throwable $e) {
             Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado! ');
         } finally {
             return $this->redirect(['index']);

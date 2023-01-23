@@ -47,12 +47,12 @@ class OperacoesImportService
             throw new InvestException('Ocorreu um erro ao salvar upload. ');
         }
         $this->salvaOperacaoImport();
+        $this->operacoesImport->refresh();
         $acaoImport = OperacoesImportFactory::getObjeto($this->operacoesImport);
         $acaoImport->atualiza();
         $this->operacoesImport->lista_operacoes_criadas_json = $acaoImport->getJson();
-        $this->salvaOperacaoImport();
         //atualiza json em operações import
-
+        $this->salvaOperacaoImport();
     }
 
 

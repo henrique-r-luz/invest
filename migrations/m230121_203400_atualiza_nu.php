@@ -2,6 +2,7 @@
 
 namespace app\migrations;
 
+use yii\db\Schema;
 use yii\db\Migration;
 
 
@@ -19,9 +20,10 @@ class m230121_203400_atualiza_nu extends Migration
         $this->createTable(
             'atualiza_nu',
             [
+                'id' => Schema::TYPE_PK,
                 'valor_bruto_antigo' => ' NUMERIC NOT NULL ',
                 'valor_liquido_antigo' => ' NUMERIC NOT NULL ',
-                'operacoes_import_id' => ' INTEGER PRIMARY KEY ',
+                'operacoes_import_id' => ' INTEGER NOT NULL ',
 
             ]
         );
@@ -32,6 +34,9 @@ class m230121_203400_atualiza_nu extends Migration
             'operacoes_import',
             'id'
         );
+
+        $this->execute("CREATE UNIQUE INDEX IF NOT EXISTS unique_operacoes_import_id
+                        ON public.atualiza_nu(operacoes_import_id);");
     }
 
     /**

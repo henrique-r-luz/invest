@@ -72,10 +72,11 @@ class OperacaoNu extends OperacoesImportAbstract
 
     private function salvaValoresAtigos($itensAtivo)
     {
+        //falta itens aptivo
         $atualizaNu =  new  AtualizaNu();
         $atualizaNu->valor_bruto_antigo = $itensAtivo->valor_bruto;
         $atualizaNu->valor_liquido_antigo = $itensAtivo->valor_liquido;
-        $atualizaNu->itens_ativo_import_id = $this->operacoesImport->id;
+        $atualizaNu->operacoes_import_id = $this->operacoesImport->id;
         if (!$atualizaNu->save()) {
             $erros = CajuiHelper::processaErros($atualizaNu->getErrors());
             throw new InvestException($erros);

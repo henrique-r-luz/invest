@@ -40,7 +40,7 @@ class AtualizaNu extends \yii\db\ActiveRecord
             [['valor_bruto_antigo', 'valor_liquido_antigo'], 'number'],
             [['operacoes_import_id'], 'default', 'value' => null],
             [['operacoes_import_id'], 'integer'],
-            [['operacoes_import_id'], 'unique'],
+            // [['operacoes_import_id'], 'unique'],
             [['operacoes_import_id'], 'exist', 'skipOnError' => true, 'targetClass' => OperacoesImport::className(), 'targetAttribute' => ['operacoes_import_id' => 'id']],
         ];
     }
@@ -53,7 +53,7 @@ class AtualizaNu extends \yii\db\ActiveRecord
         return [
             'valor_bruto_antigo' => 'Valor bruto Antigo',
             'valor_liquido_antigo' => 'Valor liquido Antigo',
-            'operacoes_import_id' => 'Itens Ativo Import ID',
+            'operacoes_import_id' => 'Operacao Import ID',
         ];
     }
 
@@ -62,7 +62,7 @@ class AtualizaNu extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getItensAtivoImport()
+    public function getOperacoesImport()
     {
         return $this->hasOne(OperacoesImport::className(), ['id' => 'operacoes_import_id']);
     }
