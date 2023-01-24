@@ -3,6 +3,7 @@
 namespace app\models\financas;
 
 use Yii;
+use app\models\financas\ItensAtivo;
 use app\lib\behavior\AuditoriaBehavior;
 use app\models\financas\OperacoesImport;
 
@@ -36,11 +37,10 @@ class AtualizaNu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['valor_bruto_antigo', 'valor_liquido_antigo', 'operacoes_import_id'], 'required'],
+            [['valor_bruto_antigo', 'valor_liquido_antigo', 'operacoes_import_id', 'itens_ativo_id'], 'required'],
             [['valor_bruto_antigo', 'valor_liquido_antigo'], 'number'],
-            [['operacoes_import_id'], 'default', 'value' => null],
-            [['operacoes_import_id'], 'integer'],
-            // [['operacoes_import_id'], 'unique'],
+            [['operacoes_import_id', 'itens_ativo_id'], 'default', 'value' => null],
+            [['operacoes_import_id', 'itens_ativo_id'], 'integer'],
             [['operacoes_import_id'], 'exist', 'skipOnError' => true, 'targetClass' => OperacoesImport::className(), 'targetAttribute' => ['operacoes_import_id' => 'id']],
         ];
     }
@@ -54,6 +54,7 @@ class AtualizaNu extends \yii\db\ActiveRecord
             'valor_bruto_antigo' => 'Valor bruto Antigo',
             'valor_liquido_antigo' => 'Valor liquido Antigo',
             'operacoes_import_id' => 'Operacao Import ID',
+            'itens_ativo_id' => 'Itens Ativo Id'
         ];
     }
 
@@ -65,5 +66,10 @@ class AtualizaNu extends \yii\db\ActiveRecord
     public function getOperacoesImport()
     {
         return $this->hasOne(OperacoesImport::className(), ['id' => 'operacoes_import_id']);
+    }
+
+    public function getItensAtivo()
+    {
+        return $this->hasOne(ItensAtivo::className(), ['id' => 'itens_ativo_id']);
     }
 }

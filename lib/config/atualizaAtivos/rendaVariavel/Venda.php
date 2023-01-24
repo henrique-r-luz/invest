@@ -65,7 +65,11 @@ class Venda implements AtivosOperacoesInterface
     public function delete()
     {
         $precoMedio = $this->removePrecoMedioVenda();
-        $this->itensAtivo->valor_compra += $precoMedio * $this->operacao->quantidade;
+        if ($precoMedio !== 0) {
+            $this->itensAtivo->valor_compra += $precoMedio * $this->operacao->quantidade;
+        } else {
+            $this->itensAtivo->valor_compra += $this->operacao->valor;
+        }
         $this->itensAtivo->quantidade += $this->operacao->quantidade;
         $this->itensAtivo->valor_liquido += $this->operacao->valor;
         $this->itensAtivo->valor_bruto += $this->operacao->valor;
@@ -82,7 +86,7 @@ class Venda implements AtivosOperacoesInterface
         $valorPrecoMedio = 0;
         $precoMedioVenda = PrecoMedioVenda::find()->where(['operacoes_id' => $this->operacao->id])->one();
         if (empty($precoMedioVenda)) {
-            return null;
+            return $valorPrecoMedio;
         }
         $valorPrecoMedio = $precoMedioVenda->valor;
         if (!$precoMedioVenda->delete()) {

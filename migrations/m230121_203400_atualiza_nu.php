@@ -24,6 +24,7 @@ class m230121_203400_atualiza_nu extends Migration
                 'valor_bruto_antigo' => ' NUMERIC NOT NULL ',
                 'valor_liquido_antigo' => ' NUMERIC NOT NULL ',
                 'operacoes_import_id' => ' INTEGER NOT NULL ',
+                'itens_ativo_id' => ' INTEGER NOT NULL '
 
             ]
         );
@@ -35,8 +36,16 @@ class m230121_203400_atualiza_nu extends Migration
             'id'
         );
 
-        $this->execute("CREATE UNIQUE INDEX IF NOT EXISTS unique_operacoes_import_id
-                        ON public.atualiza_nu(operacoes_import_id);");
+        $this->addForeignKey(
+            'atualiza_nu_itens_ativo_pk',
+            'atualiza_nu',
+            'itens_ativo_id',
+            'itens_ativo',
+            'id'
+        );
+
+        $this->execute("CREATE UNIQUE INDEX IF NOT EXISTS unique_operacoes_import_ativo
+                        ON public.atualiza_nu(operacoes_import_id, itens_ativo_id);");
     }
 
     /**

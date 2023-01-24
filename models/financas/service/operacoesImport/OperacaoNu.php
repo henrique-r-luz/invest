@@ -77,6 +77,7 @@ class OperacaoNu extends OperacoesImportAbstract
         $atualizaNu->valor_bruto_antigo = $itensAtivo->valor_bruto;
         $atualizaNu->valor_liquido_antigo = $itensAtivo->valor_liquido;
         $atualizaNu->operacoes_import_id = $this->operacoesImport->id;
+        $atualizaNu->itens_ativo_id = $itensAtivo->id;
         if (!$atualizaNu->save()) {
             $erros = CajuiHelper::processaErros($atualizaNu->getErrors());
             throw new InvestException($erros);
@@ -85,6 +86,24 @@ class OperacaoNu extends OperacoesImportAbstract
 
     public  function delete()
     {
+        $atualizaNus = AtualizaNu::find()->where(['operacoes_import_id' => $this->operacoesImport->id])->all();
+        foreach ($atualizaNus as $atualizaNu) {
+            $this->retornaValorAntigo($atualizaNu->itensAtivo, $atualizaNu->valor_bruto_antigo, $atualizaNu->valor_liquido_antigo);
+            if (!$atualizaNu->delete()) {
+                throw new InvestException('Não pode remover os Itens atualiza Nu');
+            }
+        }
         OperacoesImportHelp::delete($this->operacoesImport);
+    }
+
+
+    private function retornaValorAntigo($itensAtivo, $valorBruto, $valorLiquido)
+    {
+        $itensAtivo->valor_bruto = $valorBruto;
+        $itensAtivo->valor_liquido = $valorLiquido;
+        if (!$itensAtivo->save()) {
+            $erros = CajuiHelper::processaErros($itensAtivo->getErrors());
+            throw new InvestException($erros);
+        }
     }
 }
