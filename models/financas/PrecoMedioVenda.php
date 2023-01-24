@@ -7,7 +7,7 @@ use app\models\financas\Operacao;
 use app\lib\behavior\AuditoriaBehavior;
 
 /**
- * This is the model class for table "preco_medio_venda".
+ * Grava o preço médio da ação antes da venda
  *
  * @property float $valor
  * @property int $operacoes_id

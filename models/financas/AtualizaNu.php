@@ -8,7 +8,8 @@ use app\lib\behavior\AuditoriaBehavior;
 use app\models\financas\OperacoesImport;
 
 /**
- * This is the model class for table "atualiza_nu".
+ * grava os valores antigos (bruto e liquido) dos
+ * ativos de renda fixa da nu.
  *
  * @property float $valor_antigo
  * @property int $operacoes_import_id

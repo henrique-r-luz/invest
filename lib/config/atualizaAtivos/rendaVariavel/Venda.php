@@ -41,7 +41,7 @@ class Venda implements AtivosOperacoesInterface
         if ($this->itensAtivo->quantidade != 0) {
             $quantidade =  $this->itensAtivo->quantidade;
         }
-        return ($this->itensAtivo->valor_liquido / $quantidade);
+        return ($this->itensAtivo->valor_compra / $quantidade);
     }
 
     private function salvaPrecoMedio($precoMedioValor)
