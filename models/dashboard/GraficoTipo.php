@@ -9,8 +9,6 @@
 namespace app\models\dashboard;
 
 use app\lib\config\ValorDollar;
-use yii\web\JsExpression;
-use app\lib\dicionario\Pais;
 use app\lib\dicionario\Tipo;
 use app\models\dashboard\GraficoUtil;
 use app\models\dashboard\GraficoAbstract;
