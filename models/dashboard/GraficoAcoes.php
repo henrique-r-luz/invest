@@ -33,12 +33,7 @@ class GraficoAcoes extends GraficoAbstract
         }
         foreach ($this->dados as $item) {
             if ($item['tipo'] == Tipo::ACOES) {
-                if ($item['pais'] == Pais::BR) {
-                    $this->acoes[$item['codigo']] = $item['valor_bruto'];
-                }
-                if ($item['pais'] == Pais::US) {
-                    $this->acoes[$item['codigo']] = $item['valor_bruto'] * ValorDollar::getCotacaoDollar();
-                }
+                $this->acoes[$item['codigo']] = ValorDollar::convertValorMonetario($item['valor_bruto'], $item['pais']);
             }
         }
         $valorTotalAcoes = array_sum($this->acoes);

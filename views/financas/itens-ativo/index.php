@@ -43,10 +43,7 @@ $impostoRenda = 1;
             [
                 'attribute' => 'valor_compra',
                 'value' => function ($model) {
-                    if ($model->ativos->pais == Pais::US) {
-                        return round($model->valor_compra * ValorDollar::getCotacaoDollar(), 4);
-                    }
-                    return round($model->valor_compra, 4); //app\models\financas\Ativo::valorCambio($model, $model->valor_compra);
+                    return round(ValorDollar::convertValorMonetario($model->valor_compra, $model->ativos->pais), 4);
                 },
                 'format' => 'currency',
                 'pageSummary' => true,
@@ -55,10 +52,7 @@ $impostoRenda = 1;
                 'attribute' => 'valor_bruto',
                 'format' => 'currency',
                 'value' => function ($model) {
-                    if ($model->ativos->pais == Pais::US) {
-                        return round($model->valor_bruto * ValorDollar::getCotacaoDollar(), 4);
-                    }
-                    return round($model->valor_bruto, 4);
+                    return round(ValorDollar::convertValorMonetario($model->valor_bruto, $model->ativos->pais), 4);
                 },
                 'pageSummary' => true,
             ],
@@ -70,30 +64,19 @@ $impostoRenda = 1;
                     return $model->ativos->tipo;
                 },
                 'pageSummary' => function ($summary, $data, $widget) use ($dataProvider, $impostoRenda) {
-                    //var_dump($dataProvider);
-                    // print_r($dataProvider->models);
 
                     $objetos = $dataProvider->models;
                     $lucro = 0;
                     $lucroAcao = 0;
                     foreach ($objetos as $ativo) {
-                        $cambio = 1;
-                        if ($ativo->ativos->pais == Pais::US) {
-                            $cambio = ValorDollar::getCotacaoDollar();
-                        }
-                        //renda fixa
                         if ($ativo->ativos->categoria == Categoria::RENDA_FIXA) {
-                            $lucro = $lucro + (($ativo->valor_bruto * $cambio) - ($ativo->valor_compra * $cambio));
+                            $lucro = $lucro + (($ativo->valor_bruto) - ($ativo->valor_compra));
                         } else {
-                            $lucroAcao = $lucroAcao + (($ativo->valor_bruto * $cambio) - ($ativo->valor_compra * $cambio));
+                            $lucroAcao = $lucroAcao + (($ativo->valor_bruto) - ($ativo->valor_compra));
                         }
                     }
 
-                    //remove 15 % do lucro
-
-
-
-                    $lucro = $lucro + $lucroAcao;
+                    $lucro = ValorDollar::convertValorMonetario($lucro, $ativo->ativos->pais) + ValorDollar::convertValorMonetario($lucroAcao, $ativo->ativos->pais);
                     if ($lucro > 0) {
                         $color = 'green';
                     } else {

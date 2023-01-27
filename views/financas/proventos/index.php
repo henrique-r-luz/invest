@@ -67,11 +67,8 @@ $daterange = [
                 'attribute' => 'valor',
                 'format' => 'currency',
                 'value' => function ($model) {
-                    if ($model->itensAtivo->ativos->pais == Pais::US) {
-                        return $model->valor * ValorDollar::getCotacaoDollar();
-                    } else {
-                        return $model->valor;
-                    }
+
+                    return ValorDollar::convertValorMonetario($model->valor, $model->itensAtivo->ativos->pais);
                 },
                 'pageSummary' => function ($summary, $data, $widget) use ($dataProvider) {
                     //var_dump($dataProvider);
@@ -79,12 +76,7 @@ $daterange = [
                     $objetos = $dataProvider->models;
                     $total = 0;
                     foreach ($objetos as $provento) {
-                        $cambio = 1;
-                        if ($provento->itensAtivo->ativos->pais == Pais::US) {
-                            $cambio = ValorDollar::getCotacaoDollar();
-                        }
-                        $valorCambio = $provento->valor * $cambio;
-                        $total += $valorCambio;
+                        $total += ValorDollar::convertValorMonetario($provento->valor, $provento->itensAtivo->ativos->pais);
                     }
                     if ($total < 0) {
                         $color = 'red';
@@ -97,9 +89,7 @@ $daterange = [
             [
                 'attribute' => 'data',
                 'format' => 'datetime',
-                //'format'=>'dd/mm/yyyy HH:MM',
                 'filter' => DateRangePicker::widget($daterange),
-                // 'format'     => 'dd/mm/yyyy',
             ],
             [
                 'filter' => Pais::all(),

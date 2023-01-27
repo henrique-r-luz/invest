@@ -79,11 +79,8 @@ $daterange = [
                 'format' => 'currency',
                 'value' => function ($model) {
                     /** @var Operacao */
-                    if ($model->itensAtivo->ativos->pais == Pais::US) {
-                        return $model->valor * ValorDollar::getCotacaoDollar();
-                    } else {
-                        return $model->valor;
-                    }
+
+                    return ValorDollar::convertValorMonetario($model->valor, $model->itensAtivo->ativos->pais);
                 },
                 'pageSummary' => function ($summary, $data, $widget) use ($dataProvider) {
                     //var_dump($dataProvider);
@@ -91,18 +88,16 @@ $daterange = [
                     $objetos = $dataProvider->models;
                     $total = 0;
                     foreach ($objetos as $operacao) {
-                        $cambio = 1;
-                        if ($operacao->itensAtivo->ativos->pais == Pais::US) {
-                            $cambio = ValorDollar::getCotacaoDollar();
-                        }
+
                         if ($operacao->tipo == 0) {
                             //dinheiro entrando no meu bolso
-                            $total += ($operacao->valor * $cambio); //$operacao->getValorCambio();
+                            $total += ($operacao->valor); //$operacao->getValorCambio();
                         } else {
                             //dinheiro saindo do meu bolso
-                            $total -= ($operacao->valor * $cambio);
+                            $total -= ($operacao->valor);
                         }
                     }
+                    $total = ValorDollar::convertValorMonetario($total, $operacao->itensAtivo->ativos->pais);
                     if ($total < 0) {
                         $color = 'red';
                     } else {

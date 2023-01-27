@@ -62,11 +62,7 @@ class GraficoUtil
         foreach ($infos as $key => $info) {
             $vetDados[$key] = 0;
             foreach ($info as $pais => $valores) {
-                if ($pais == Pais::US) {
-                    $vetDados[$key] += ($valores * ValorDollar::getCotacaoDollar());
-                } else {
-                    $vetDados[$key] += $valores;
-                }
+                $vetDados[$key] += ValorDollar::convertValorMonetario($valores, $pais);
             }
         }
         return $vetDados;

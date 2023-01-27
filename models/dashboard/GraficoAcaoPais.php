@@ -26,11 +26,7 @@ class GraficoAcaoPais extends GraficoAbstract
     {
         $valorTotalAcoes = 0;
         foreach ($this->dados as $item) {
-            if ($item['pais'] == Pais::US) {
-                $this->acaoPais[$item['pais']] = $item['valor_acao_pais'] * ValorDollar::getCotacaoDollar();
-            } else {
-                $this->acaoPais[$item['pais']] = $item['valor_acao_pais'];
-            }
+            $this->acaoPais[$item['pais']] = ValorDollar::convertValorMonetario($item['valor_acao_pais'], $item['pais']);
         }
 
         $valorTotalAcoes = array_sum($this->acaoPais);

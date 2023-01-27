@@ -40,18 +40,11 @@ class GraficoTipo extends GraficoAbstract
         ]);
 
         unset($this->tipos['Ações']);
-        $paises = [Pais::BR, Pais::US];
-        foreach ($paises as $pais) {
-            foreach ($this->dados as $dados) {
-                if ($dados['pais'] == $pais && $dados['tipo'] == Tipo::ACOES) {
-                    if ($this->valorInvestido > 0) {
-                        if ($pais == Pais::US) {
-                            $this->tipos['Ações-' . $pais] = round(($dados['valor_acao_pais'] * ValorDollar::getCotacaoDollar()) / $this->valorInvestido * 100);
-                        } else {
-                            $this->tipos['Ações-' . $pais] = round(($dados['valor_acao_pais']) / $this->valorInvestido * 100);
-                        }
-                    }
-                    break;
+
+        foreach ($this->dados as $dados) {
+            if ($dados['tipo'] == Tipo::ACOES) {
+                if ($this->valorInvestido > 0) {
+                    $this->tipos['Ações-' . $dados['pais']] = round((ValorDollar::convertValorMonetario($dados['valor_acao_pais'], $dados['pais']) / $this->valorInvestido) * 100);
                 }
             }
         }
@@ -60,7 +53,6 @@ class GraficoTipo extends GraficoAbstract
 
     public function montaGrafico()
     {
-
         return GraficoUtil::graficoPizza($this->tipos);
     }
 }

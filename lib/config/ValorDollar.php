@@ -2,6 +2,7 @@
 
 namespace app\lib\config;
 
+use app\lib\dicionario\Pais;
 use app\lib\dicionario\Tipo;
 use app\lib\helpers\InvestException;
 use app\models\sincronizar\Preco;
@@ -11,15 +12,20 @@ use yii\db\Expression;
 class ValorDollar
 {
 
-    public static function getCotacaoDollar()
+    public static function convertValorMonetario($valor, $pais)
+    {
+        if ($pais == Pais::US) {
+            return ($valor * self::getCotacaoDollar());
+        }
+        return $valor;
+    }
+
+    private static function getCotacaoDollar()
     {
         $session = Yii::$app->session;
-        if ($session->has('dollar') && $session->get('dollar')) {
+        if ($session->has('dollar') && $session->get('dollar') == 1) {
             $preco = self::precoDollar();
-            if (!empty($preco)) {
-                $session->set('dollar', $preco->valor);
-                return $session->get('dollar');
-            }
+            return self::setPrecoDollar($session, $preco);
         }
         if ($session->has('dollar')) {
             return $session->get('dollar');
@@ -31,6 +37,15 @@ class ValorDollar
         }
         $session->set('dollar', $preco->valor);
         return $session->get('dollar');
+    }
+
+
+    private static function setPrecoDollar($session, $preco)
+    {
+        if (!empty($preco)) {
+            $session->set('dollar', $preco->valor);
+            return $session->get('dollar');
+        }
     }
 
 

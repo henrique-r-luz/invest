@@ -9,14 +9,10 @@ class ValoresConsolidados
 {
     public static function valorCompra($dados)
     {
-       
+
         $usCompra = 0;
         foreach ($dados as $dado) {
-            if ($dado['pais'] == Pais::US) {
-                $usCompra +=  $dado['valor_compra'] * ValorDollar::getCotacaoDollar();
-            } else {
-                $usCompra += $dado['valor_compra'];
-            }
+            $usCompra += ValorDollar::convertValorMonetario($dado['valor_compra'], $dado['pais']);
         }
         return $usCompra;
     }
@@ -24,14 +20,10 @@ class ValoresConsolidados
     public static function valorInvestido($dados)
     {
 
-           
+
         $usLucro =  0;
         foreach ($dados as $dado) {
-            if ($dado['pais'] == Pais::US) {
-                $usLucro +=  $dado['valor_total'] * ValorDollar::getCotacaoDollar();
-            } else {
-                $usLucro +=  $dado['valor_total'];
-            }
+            $usLucro += ValorDollar::convertValorMonetario($dado['valor_total'], $dado['pais']);
         }
 
         return $usLucro;
