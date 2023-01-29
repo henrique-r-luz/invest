@@ -21,9 +21,7 @@ $daterange = [
         'timePicker' => true,
         'timePicker24Hour' => true,
         'timePickerIncrement' => 10,
-        //'locale' => ['format' => 'Y-m-d H:i']
         'locale' => ['format' => 'd/m/Y H:i:s']
-        //'locale' => ['dd/MM/yyyy HH:mm']
     ],
 ];
 ?>

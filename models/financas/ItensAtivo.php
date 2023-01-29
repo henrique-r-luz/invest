@@ -51,6 +51,7 @@ class ItensAtivo extends \yii\db\ActiveRecord
             [['ativo_id', 'investidor_id'], 'integer'],
             [['ativo'], 'boolean'],
             [['quantidade', 'valor_compra', 'valor_liquido', 'valor_bruto'], 'number'],
+            [['quantidade', 'valor_compra'], 'min' => 0],
             [['ativo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ativo::className(), 'targetAttribute' => ['ativo_id' => 'id']],
             [['investidor_id'], 'exist', 'skipOnError' => true, 'targetClass' => Investidor::className(), 'targetAttribute' => ['investidor_id' => 'id']],
         ];

@@ -38,7 +38,7 @@ class PrecoMedioVenda extends \yii\db\ActiveRecord
     {
         return [
             [['valor', 'operacoes_id'], 'required'],
-            [['valor'], 'number'],
+            [['valor'], 'number', 'min' => 0],
             [['operacoes_id'], 'default', 'value' => null],
             [['operacoes_id'], 'integer'],
             [['operacoes_id'], 'unique'],

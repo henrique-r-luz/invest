@@ -39,7 +39,7 @@ class Preco extends \yii\db\ActiveRecord
     {
         return [
             [['valor', 'data'], 'required'],
-            [['valor'], 'number'],
+            [['valor'], 'number', 'min' => 0],
             [['ativo_id'], 'default', 'value' => null],
             [['ativo_id'], 'integer'],
             [['ativo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ativo::className(), 'targetAttribute' => ['ativo_id' => 'id']],
