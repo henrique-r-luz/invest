@@ -58,19 +58,19 @@ class SincronizarController extends Controller
 
     private function atualiza()
     {
-        try {
-            $atualizaRendaVariavel = new AtualizaRendaVariavel();
-            $atualizaRendaVariavel->alteraIntesAtivo();
-            Yii::$app->session->setFlash('success', 'Dados atualizados com sucesso!');
-            return $this->redirect('/index.php');
-        } catch (InvestException $e) {
+        //try {
+        $atualizaRendaVariavel = new AtualizaRendaVariavel();
+        $atualizaRendaVariavel->alteraIntesAtivo();
+        Yii::$app->session->setFlash('success', 'Dados atualizados com sucesso!');
+        return $this->redirect('/index.php');
+        /* } catch (InvestException $e) {
             Yii::$app->session->setFlash('danger', $e->getMessage());
         } catch (Throwable $e) {
             Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado.');
         } finally {
             return $this->redirect('/index.php');
-        }
-        //return $this->redirect('/index.php');
+        }*/
+        return $this->redirect('/index.php');
     }
 
 
