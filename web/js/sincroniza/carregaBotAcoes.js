@@ -54,7 +54,7 @@ function loadDados(porcentagem) {
             }
             if (data['total'] > 0 && taxa >= 100) {
                 disposeProgressBar();
-                window.location.href = urlBase + '/atualiza-dados';
+                window.location.href = urlBase + '/atualiza-dados-js';
                 return;
             }
         },
