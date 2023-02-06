@@ -54,10 +54,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'attribute' => 'lista_operacoes_criadas_json',
                         ],
                         [
-                                'label' => 'Ativos Atualizados',
-                                'attribute' => 'itens_ativos',
-                        ],
-                        [
                                 'attribute' => 'data',
                                 'filter' => DateRangePicker::widget($daterange),
                                 'value' => function ($model) {

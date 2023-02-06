@@ -70,6 +70,7 @@ class OperacoesImportSearch extends OperacoesImport
             'pagination' => [
                 'pageSize' => 10,
             ],
+            'sort' => ['defaultOrder' => ['data' => \SORT_DESC]],
         ]);
 
 
