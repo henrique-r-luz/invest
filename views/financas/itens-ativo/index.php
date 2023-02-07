@@ -70,13 +70,13 @@ $impostoRenda = 1;
                     $lucroAcao = 0;
                     foreach ($objetos as $ativo) {
                         if ($ativo->ativos->categoria == Categoria::RENDA_FIXA) {
-                            $lucro = $lucro + (($ativo->valor_bruto) - ($ativo->valor_compra));
+                            $lucro = $lucro + (ValorDollar::convertValorMonetario($ativo->valor_bruto, $ativo->ativos->pais) - ValorDollar::convertValorMonetario($ativo->valor_compra, $ativo->ativos->pais));
                         } else {
-                            $lucroAcao = $lucroAcao + (($ativo->valor_bruto) - ($ativo->valor_compra));
+                            $lucroAcao = $lucroAcao + (ValorDollar::convertValorMonetario($ativo->valor_bruto, $ativo->ativos->pais) - ValorDollar::convertValorMonetario($ativo->valor_compra, $ativo->ativos->pais));
                         }
                     }
 
-                    $lucro = ValorDollar::convertValorMonetario($lucro, $ativo->ativos->pais) + ValorDollar::convertValorMonetario($lucroAcao, $ativo->ativos->pais);
+                    $lucro = $lucro + $lucroAcao;
                     if ($lucro > 0) {
                         $color = 'green';
                     } else {

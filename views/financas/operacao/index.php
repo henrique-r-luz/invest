@@ -89,13 +89,13 @@ $daterange = [
 
                         if ($operacao->tipo == 0) {
                             //dinheiro entrando no meu bolso
-                            $total += ($operacao->valor); //$operacao->getValorCambio();
+                            $total += ValorDollar::convertValorMonetario($operacao->valor, $operacao->itensAtivo->ativos->pais); //$operacao->getValorCambio();
                         } else {
                             //dinheiro saindo do meu bolso
-                            $total -= ($operacao->valor);
+                            $total -= ValorDollar::convertValorMonetario($operacao->valor, $operacao->itensAtivo->ativos->pais);
                         }
                     }
-                    $total = ValorDollar::convertValorMonetario($total, $operacao->itensAtivo->ativos->pais);
+                    // $total = ValorDollar::convertValorMonetario($total, $operacao->itensAtivo->ativos->pais);
                     if ($total < 0) {
                         $color = 'red';
                     } else {
