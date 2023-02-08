@@ -36,11 +36,7 @@ class SincronizarController extends Controller
 
     public function actionSincroniza()
     {
-        $erro = '';
 
-        if (Yii::$app->request->post('but') == 'backup') {
-            return $this->executaBackup();
-        }
         if (Yii::$app->request->post('but') == 'dados_empresa') {
             //a classe Runner deve ser extendida
             return $this->redirect('index');
@@ -89,27 +85,6 @@ class SincronizarController extends Controller
         }
     }
 
-    /**
-     * Faz backup do banco de dados do sistema
-     */
-    private function executaBackup()
-    {
-        $dump = Yii::$app->params['back_up'] . '/' . date("YmdHis") . '.sql';
-        $cmd = 'sudo sshpass -p ' . Yii::$app->params['acesso'] . '  ssh  henrique@' . Yii::$app->params['ip_docker'] . ' "docker exec ' . Yii::$app->params['container_web'] . ' pg_dump -U postgres  investimento" > ' . $dump;
-        $resp = shell_exec($cmd);
-        if (empty($resp)) {
-            if (file_exists($dump)) {
-                Yii::$app->session->setFlash('success', 'O Backup realizado com sucesso!');
-                return $this->render('index');
-            } else {
-                Yii::$app->session->setFlash('danger', 'O arquivo não foi criado.');
-                return $this->render('index');
-            }
-        } else {
-            Yii::$app->session->setFlash('danger', 'Erro ao realizar backup.');
-            return $this->render('index');
-        }
-    }
     /**
      * Atualiza a tabela de preços através do Javascript
      *

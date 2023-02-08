@@ -6,7 +6,11 @@ use yii\db\Expression;
 use app\models\sincronizar\Preco;
 use app\models\financas\ItensAtivo;
 
-
+/**
+ * Só Atualiza renda variável
+ *
+ * @author Henrique Luz
+ */
 class DadosAtivosValores
 {
 
