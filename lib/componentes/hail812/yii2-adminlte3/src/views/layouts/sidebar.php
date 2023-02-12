@@ -63,6 +63,7 @@ use yii\helpers\Html; ?>
                             ['label' => 'Lucro/Prejuízo', 'icon' => 'plus-circle', 'url' => ['analiseGrafica/lucro-prejuizo']],
                             ['label' => 'Proventos/mês', 'icon' => 'file-invoice-dollar', 'url' => ['analiseGrafica/evolucao-proventos']],
                             ['label' => 'Proventos/Ativo', 'icon' => 'rocket', 'url' => ['analiseGrafica/proventos-por-ativo']],
+                            ['label' => 'Proventos/ValorAtual', 'icon' => 'rocket', 'url' => ['analiseGrafica/proventos-valor-por-montante']],
                         ],
                     ],
 
