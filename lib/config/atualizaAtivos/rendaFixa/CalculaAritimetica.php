@@ -8,7 +8,7 @@ use app\lib\helpers\InvestException;
 use app\lib\config\atualizaAtivos\TiposOperacoes;
 use app\lib\config\atualizaAtivos\AtualizaAtivoInterface;
 
-class RendaFixa implements AtualizaAtivoInterface
+class CalculaAritimetica implements AtualizaAtivoInterface
 {
     private Operacao $operacao;
     private array $oldOperacao;

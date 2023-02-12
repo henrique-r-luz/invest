@@ -9,7 +9,7 @@ use app\lib\helpers\InvestException;
 use app\lib\config\atualizaAtivos\TiposOperacoes;
 use app\lib\config\atualizaAtivos\AtualizaAtivoInterface;
 
-class RendaVariavel implements AtualizaAtivoInterface
+class CalculaPorMediaPreco implements AtualizaAtivoInterface
 {
 
     private Operacao $operacao;
