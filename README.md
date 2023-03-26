@@ -20,7 +20,17 @@ O Invest é um sistema de controle de investimentos pessoal que possibilita a ce
  - Importação de proventos e rendimentos da B3. 
  - Gráficos Descritivos informativos. 
  - Auditoria 
-    
+ 
+ ## Arquitetura de Containers 
+ A imagens abaixo revela a arquitetura de containers do sistema Invest.
+ 
+ ![Diagrama invest](https://user-images.githubusercontent.com/12544898/227791274-b1da3f04-1333-4772-a921-a305fd5fb644.png)
+ 
+ Descrições dos containers:
+   - apache: 
+   - app: 
+   - db_invest:
+   - invest_bot:
  ## Pré-requisito
    - Git
    - Docker
