@@ -27,10 +27,11 @@ O Invest é um sistema de controle de investimentos pessoal que possibilita a ce
  ![Diagrama invest](https://user-images.githubusercontent.com/12544898/227791274-b1da3f04-1333-4772-a921-a305fd5fb644.png)
  
  Descrições dos containers:
-   - apache: 
-   - app: 
-   - db_invest:
-   - invest_bot:
+   - <b>apache</b>: Servidor web, utilizando o sistema apache.
+   - <b>app</b>: PHP 8 com os códigos do sistema
+   - <b>db_invest</b>: Banco de dados do sistema com o Postgres instalado
+   - <b>invest_bot</b>: Contém o selenium, para atualizar os preços dos ativos.
+   
  ## Pré-requisito
    - Git
    - Docker
