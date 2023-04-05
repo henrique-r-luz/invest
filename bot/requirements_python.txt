@@ -3,7 +3,7 @@ async-generator==1.10
 attrs==21.4.0
 certifi==2022.12.7
 charset-normalizer==2.0.12
-cryptography==35.0
+cryptography==39.0.1
 entrypoints==0.3
 h11==0.13.0
 idna==3.3
