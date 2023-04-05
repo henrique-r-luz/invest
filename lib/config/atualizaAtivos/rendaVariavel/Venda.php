@@ -8,7 +8,6 @@ use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
 use app\models\financas\PrecoMedioVenda;
 use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
-use PhpParser\Node\Expr\List_;
 
 class Venda implements AtivosOperacoesInterface
 {
