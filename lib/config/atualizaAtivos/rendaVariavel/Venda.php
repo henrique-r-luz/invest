@@ -8,6 +8,7 @@ use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
 use app\models\financas\PrecoMedioVenda;
 use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
+use PhpParser\Node\Expr\List_;
 
 class Venda implements AtivosOperacoesInterface
 {
@@ -37,11 +38,27 @@ class Venda implements AtivosOperacoesInterface
 
     private function getPrecoMedio()
     {
-        $quantidade = 1;
+
+
         if ($this->itensAtivo->quantidade != 0) {
-            $quantidade =  $this->itensAtivo->quantidade;
+            // $quantidade =  $this->itensAtivo->quantidade;
+            list($valor, $quantidade) =  $this->dadosCompra();
+            return $valor / $quantidade;
         }
-        return ($this->itensAtivo->valor_compra / $quantidade);
+        return 0;
+    }
+
+    private function dadosCompra()
+    {
+        return Operacao::find()
+            ->select([
+                'sum(valor) as valor',
+                'sum(quantidade) as quantidade'
+            ])
+            ->where(['itens_ativos_id' => $this->itensAtivo->id])
+            ->andWhere(['tipo' => Operacao::tipoOperacaoId()[Operacao::COMPRA]])
+            ->asArray()
+            ->one();
     }
 
     private function salvaPrecoMedio($precoMedioValor)

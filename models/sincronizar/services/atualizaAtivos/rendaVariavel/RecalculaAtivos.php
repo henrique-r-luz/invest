@@ -7,11 +7,11 @@ use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
 use app\models\config\ClassesOperacoes;
-use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\DadosRecalculaAtivos;
+
 
 class RecalculaAtivos
 {
-    private DadosRecalculaAtivos $dados;
+
 
     public function __construct()
     {
@@ -37,7 +37,11 @@ class RecalculaAtivos
 
     private function calculaOperacoes($itensAtivo)
     {
-        $operacoes = Operacao::find()->where(['itens_ativos_id' => $itensAtivo->id])->all();
+        $operacoes = Operacao::find()
+            ->where(['itens_ativos_id' => $itensAtivo->id])
+            ->orderBy(['data' => \SORT_ASC])
+            ->all();
+
         $quantidade = 0;
         $valor_compra = 0;
         foreach ($operacoes as $operacao) {
