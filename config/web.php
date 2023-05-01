@@ -62,7 +62,7 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\admin\User',
             'enableSession' => true,
-            'authTimeout' => (60 * 15),
+            'authTimeout' => (60 * 60),
         ],
 
         'errorHandler' => [

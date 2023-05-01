@@ -39,7 +39,6 @@ $daterange = [
 
         'columns' => [
             'id',
-            //'tipo:ntext',
             [
                 'label' => 'Id Ativo',
                 'attribute' => 'itens_ativos_id',
@@ -67,7 +66,14 @@ $daterange = [
                     $quantidade = 0;
                     $objetos = $dataProvider->models;
                     foreach ($objetos as $operacao) {
-                        $quantidade += $operacao->quantidade;
+                        if (
+                            $operacao->tipo == Operacao::tipoOperacaoId()[Operacao::VENDA]
+                            || $operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MENOS]
+                        ) {
+                            $quantidade -= $operacao->quantidade;
+                        } else {
+                            $quantidade += $operacao->quantidade;
+                        }
                     }
                     return '<font color="blue">Quatidade: ' . $quantidade . '</font>';
                 }
@@ -87,7 +93,7 @@ $daterange = [
                     $total = 0;
                     foreach ($objetos as $operacao) {
 
-                        if ($operacao->tipo == 0) {
+                        if ($operacao->tipo == Operacao::tipoOperacaoId()[Operacao::VENDA]) {
                             //dinheiro entrando no meu bolso
                             $total += ValorDollar::convertValorMonetario($operacao->valor, $operacao->itensAtivo->ativos->pais); //$operacao->getValorCambio();
                         } else {

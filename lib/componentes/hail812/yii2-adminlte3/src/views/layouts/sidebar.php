@@ -66,6 +66,15 @@ use yii\helpers\Html; ?>
                             ['label' => 'Proventos/ValorAtual', 'icon' => 'rocket', 'url' => ['analiseGrafica/proventos-valor-por-montante']],
                         ],
                     ],
+                    [
+                        'label' => 'IR',
+                        'icon' => 'exclamation-triangle',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => 'Bens Direitos', 'icon' => 'suitcase', 'url' => ['ir/bens-direitos']],
+                            ['label' => 'Operações Vendas', 'icon' => 'cart-arrow-down', 'url' => ['ir/operacoes-vendas']]
+                        ],
+                    ],
 
 
                     [
