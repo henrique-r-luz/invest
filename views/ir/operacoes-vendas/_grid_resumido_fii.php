@@ -36,7 +36,7 @@ use kartik\grid\GridView;
     //'export' => true,
     'panel' => [
         'type' => GridView::TYPE_WARNING,
-        'heading' => 'Vendas Detalhadas FIIS',
+        'heading' => 'Vendas Resumidas FIIS',
         'before' => false,
         'after' => false,
         'footer' => false
