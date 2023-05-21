@@ -53,7 +53,9 @@ class OperacaoNu extends OperacoesImportAbstract
             $codigo = $titulo[1] . '-' . $titulo[3] . '-' . $titulo[2];
             $itensAtivos = ItensAtivo::find()
                 ->joinWith(['ativos'])
-                ->where(['codigo' => $codigo])->all();
+                ->where(['codigo' => $codigo])
+                ->andWhere(['investidor_id' => $this->operacoesImport->investidor_id])
+                ->all();
             foreach ($itensAtivos as $itensAtivo) {
                 $this->salvaValoresAtigos($itensAtivo);
                 if ($itensAtivo == null) {
