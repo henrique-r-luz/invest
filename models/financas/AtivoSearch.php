@@ -13,6 +13,7 @@ class AtivoSearch extends Ativo
 {
     public $tipo;
     public $categoria;
+    public $calculo_ativo;
     /**
      * {@inheritdoc}
      */
@@ -20,7 +21,7 @@ class AtivoSearch extends Ativo
     {
         return [
             [['id'], 'integer'],
-            [['nome', 'codigo', 'tipo', 'categoria', 'pais'], 'safe'],
+            [['nome', 'codigo', 'tipo', 'categoria', 'pais', 'calculo_ativo'], 'safe'],
         ];
     }
 
@@ -43,16 +44,20 @@ class AtivoSearch extends Ativo
     public function search($params)
     {
         $query = Ativo::find()
-            ->joinWith(['itensAtivo.investidor'])
-            ->orderBy(['codigo' => SORT_ASC]);
+            ->joinWith(['itensAtivo.investidor', 'classesOperacoes']);
 
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 11,
+                'pageSize' => 10,
             ],
         ]);
+
+        $dataProvider->sort->attributes['calculo_ativo'] = [
+            'asc'  => ['classes_operacoes.nome' => SORT_ASC],
+            'desc' => ['classes_operacoes.nome' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -71,7 +76,8 @@ class AtivoSearch extends Ativo
         ]);
 
         $query->andFilterWhere(['ilike', 'ativo.nome', $this->nome])
-            ->andFilterWhere(['ilike', 'codigo', $this->codigo]);
+            ->andFilterWhere(['ilike', 'codigo', $this->codigo])
+            ->andFilterWhere(['ilike', 'classes_operacoes.nome', $this->calculo_ativo]);
 
         return $dataProvider;
     }

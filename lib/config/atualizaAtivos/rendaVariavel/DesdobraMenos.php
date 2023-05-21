@@ -31,6 +31,6 @@ class DesdobraMenos implements AtivosOperacoesInterface
     }
     public function update($oldOperacao)
     {
-        InsereDesdobramentoMenos::update($this->itensAtivo, $oldOperacao, $this->operacao);
+        InsereDesdobramentoMenos::update($this->itensAtivo, $this->operacao, $oldOperacao);
     }
 }

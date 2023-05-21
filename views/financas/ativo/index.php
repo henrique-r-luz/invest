@@ -60,6 +60,7 @@ $impostoRenda = 1;
                     }
                 }
             ],
+
             [
                 'filter' => Categoria::all(),
                 'attribute' => 'categoria',
@@ -71,6 +72,13 @@ $impostoRenda = 1;
                 'attribute' => 'pais',
                 'label' => 'País',
                 'value' => 'pais',
+            ],
+            [
+                'label' => 'Cálculo Ativo',
+                'attribute' => 'calculo_ativo',
+                'value' => function ($model) {
+                    return $model->classesOperacoes->nome;
+                }
             ],
             ['class' => 'app\lib\grid\ActionColumn'],
         ],

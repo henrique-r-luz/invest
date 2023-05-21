@@ -84,7 +84,6 @@ class OperacaoController extends Controller
             $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Erro ao salvar Operação!</br>' . $ex->getMessage());
         } catch (Throwable $e) {
-
             $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado');
         } finally {
@@ -118,8 +117,12 @@ class OperacaoController extends Controller
         } catch (InvestException $ex) {
             $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Erro ao salvar Operação!</br>' . $ex->getMessage());
-        } catch (Throwable) {
+        } catch (Throwable $e) {
+            /*echo '<pre>';
+            print_r($e->getTrace());
+            exit();*/
             $transaction->rollBack();
+
             Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado');
         } finally {
             return $this->render('create', [
