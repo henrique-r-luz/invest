@@ -2,7 +2,6 @@
 
 namespace app\lib\config\atualizaAtivos\rendaVariavel;
 
-use app\lib\CajuiHelper;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
 use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;

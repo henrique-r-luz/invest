@@ -2,19 +2,19 @@
 
 namespace app\models\sincronizar\services\atualizaAtivos\rendaVariavel;
 
-use app\lib\CajuiHelper;
+
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
-use app\lib\helpers\InvestException;
 use app\models\config\ClassesOperacoes;
 
 
 class RecalculaAtivos
 {
+    private $itensAtivo_id = null;
 
-
-    public function __construct()
+    public function __construct($itensAtivo_id = null)
     {
+        $this->itensAtivo_id = $itensAtivo_id;
     }
     public function alteraIntesAtivo()
     {
@@ -25,8 +25,8 @@ class RecalculaAtivos
     {
         $itensAtivos = ItensAtivo::find()
             ->where(['ativo' => true])
+            ->andFilterWhere(['id' => $this->itensAtivo_id])
             ->all();
-
         foreach ($itensAtivos as $itensAtivo) {
             list($valor_compra, $quantidade) =  $this->calculaOperacoes($itensAtivo);
             $itensAtivo->quantidade = $quantidade;

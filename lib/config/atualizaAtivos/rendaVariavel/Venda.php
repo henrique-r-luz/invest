@@ -2,30 +2,34 @@
 
 namespace app\lib\config\atualizaAtivos\rendaVariavel;
 
+use yii\db\Query;
 use app\lib\CajuiHelper;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
 use app\models\financas\PrecoMedioVenda;
 use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
-use yii\db\Query;
+
 
 class Venda implements AtivosOperacoesInterface
 {
     private ItensAtivo $itensAtivo;
     private Operacao $operacao;
+    private $precoMedio = 0;
 
     public function __construct($itensAtivo, $operacao)
     {
         $this->itensAtivo = $itensAtivo;
         $this->operacao = $operacao;
+        $this->precoMedio =  $this->getPrecoMedio();
     }
 
     public function insere()
     {
-        $precoMedio = $this->getPrecoMedio();
-        $precoMedio = $this->salvaPrecoMedio($precoMedio);
-        $this->itensAtivo->valor_compra -=  $precoMedio * $this->operacao->quantidade;
+        if (CalculaItensAtivoPorData::verificaDataOperacao($this->operacao)) {
+            return true;
+        }
+        $this->itensAtivo->valor_compra -=  $this->precoMedio * $this->operacao->quantidade;
         $this->itensAtivo->quantidade -= $this->operacao->quantidade;
         $this->itensAtivo->valor_liquido -= $this->operacao->valor;
         $this->itensAtivo->valor_bruto -= $this->operacao->valor;
@@ -39,9 +43,9 @@ class Venda implements AtivosOperacoesInterface
     private function getPrecoMedio()
     {
         if ($this->itensAtivo->quantidade != 0) {
-
-            $valor =  $this->dadosCompra()['valor'];
-            $quantidade =  $this->dadosCompra()['quantidade'];
+            $dadosCompra  = $this->dadosCompra();
+            $valor =  $dadosCompra['valor'];
+            $quantidade =  $dadosCompra['quantidade'];
             return $valor / $quantidade;
         }
         return 0;
@@ -49,8 +53,6 @@ class Venda implements AtivosOperacoesInterface
 
     private function dadosCompra()
     {
-
-
         return (new Query())
             ->select([
                 'valor',
@@ -72,6 +74,7 @@ class Venda implements AtivosOperacoesInterface
             ])
             ->where(['itens_ativos_id' => $this->itensAtivo->id])
             ->andWhere(['tipo' => Operacao::tipoOperacaoId()[Operacao::COMPRA]])
+            ->andWhere(['<=', 'data', $this->operacao->data])
             ->groupBy(['itens_ativos_id']);
     }
 
@@ -84,6 +87,7 @@ class Venda implements AtivosOperacoesInterface
             ])
             ->where(['itens_ativos_id' => $this->itensAtivo->id])
             ->andWhere(['tipo' => Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MAIS]])
+            ->andWhere(['<=', 'data', $this->operacao->data])
             ->groupBy(['itens_ativos_id']);
     }
     private function desdobramentoMenos()
@@ -95,30 +99,18 @@ class Venda implements AtivosOperacoesInterface
             ])
             ->where(['itens_ativos_id' => $this->itensAtivo->id])
             ->andWhere(['tipo' => Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MENOS]])
+            ->andWhere(['<=', 'data', $this->operacao->data])
             ->groupBy(['itens_ativos_id']);
-    }
-
-    private function salvaPrecoMedio($precoMedioValor)
-    {
-        $precoMedio = PrecoMedioVenda::find()->where(['operacoes_id' => $this->operacao->id])->one();
-        $valorVenda = $precoMedioValor;
-        if (empty($precoMedio)) {
-            $precoMedio = new PrecoMedioVenda();
-            $precoMedio->valor = $valorVenda;
-            $precoMedio->operacoes_id = $this->operacao->id;
-        } else {
-            $precoMedio->valor = $valorVenda;
-        }
-        if (!$precoMedio->save()) {
-            $erro  = CajuiHelper::processaErros($precoMedio->getErrors());
-            throw new InvestException($erro);
-        }
-        return $valorVenda;
     }
 
     public function delete()
     {
-        $precoMedio = $this->removePrecoMedioVenda();
+        $precoMedio = $this->precoMedio;
+        $operacaoAux = $this->operacao;
+        DeleteOperacao::delete($operacaoAux);
+        if (CalculaItensAtivoPorData::verificaDataOperacao($this->operacao)) {
+            return true;
+        }
         if ($precoMedio !== 0) {
             $this->itensAtivo->valor_compra += $precoMedio * $this->operacao->quantidade;
         } else {
@@ -132,27 +124,15 @@ class Venda implements AtivosOperacoesInterface
             $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
             throw new InvestException($erro);
         }
-        DeleteOperacao::delete($this->operacao);
-    }
-
-    private function removePrecoMedioVenda()
-    {
-        $valorPrecoMedio = 0;
-        $precoMedioVenda = PrecoMedioVenda::find()->where(['operacoes_id' => $this->operacao->id])->one();
-        if (empty($precoMedioVenda)) {
-            return $valorPrecoMedio;
-        }
-        $valorPrecoMedio = $precoMedioVenda->valor;
-        if (!$precoMedioVenda->delete()) {
-            throw new InvestException('O preço médio não pode ser removido.');
-        }
-        return $valorPrecoMedio;
     }
 
     public function update($oldOperacao)
     {
         if (empty($oldOperacao) || $oldOperacao == null) {
             throw new InvestException('O oldOperacao não foi definido pelo sistema. ');
+        }
+        if (CalculaItensAtivoPorData::verificaDataOperacao($this->operacao)) {
+            return true;
         }
         $precoMedioVenda = PrecoMedioVenda::find()->where(['operacoes_id' => $this->operacao->id])->one();
         $precoMedio  = $precoMedioVenda->valor;

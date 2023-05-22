@@ -66,7 +66,6 @@ class SincronizarController extends Controller
         } finally {
             return $this->redirect('/index.php');
         }
-        return $this->redirect('/index.php');
     }
 
 
@@ -83,7 +82,6 @@ class SincronizarController extends Controller
         } finally {
             return $this->redirect('/index.php');
         }
-        return $this->redirect('/index.php');
     }
 
     /**
