@@ -57,11 +57,11 @@
         "yiisoft/yii2-debug": "~2.1.0",
         "yiisoft/yii2-gii": "*",
         "yiisoft/yii2-faker": "~2.0.0",
-        "codeception/codeception": "*",
+        "codeception/codeception": "^4.2",
         "codeception/verify": "*",
         "codeception/specify": "*",
         "codeception/module-phpbrowser": "*",
-        "codeception/module-db": "*",
+        "codeception/module-db": "^2.1",
         "codeception/module-asserts": "*",
         "codeception/module-yii2": "*",
         "codeception/module-webdriver": "*",
@@ -119,7 +119,6 @@
             "app\\web\\": "web/",
             "app\\controllers\\": "controllers/",
             "app\\commands\\": "commands/"
-            
         }
     }
 }

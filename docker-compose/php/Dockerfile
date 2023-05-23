@@ -19,8 +19,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     python3-pip \
     vim
-    
- 
+
+
 
 #Pacotes libreoffice para converter pdf
 #RUN apt-get install -y libreoffice-writer --no-install-recommends --no-install-suggests
@@ -37,7 +37,7 @@ ARG IMAGICK_LAST_COMMIT='448c1cd0d58ba2838b9b6dff71c9b7e70a401b90'
 RUN mkdir -p /usr/src/php/ext/imagick && \
     curl -fsSL https://github.com/Imagick/imagick/archive/${IMAGICK_LAST_COMMIT}.tar.gz | tar xvz -C /usr/src/php/ext/imagick --strip 1 && \
     docker-php-ext-install imagick
-    
+
 
 # Copiando última versão do Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -46,9 +46,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
-    
 
-RUN pecl install xdebug && docker-php-ext-enable xdebug
+
+RUN pecl install xdebug
 
 RUN pip3 install pandas
 

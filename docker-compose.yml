@@ -38,6 +38,22 @@ services:
     networks:
       - invest-network
 
+  db_teste:
+    build:
+      context: ./docker-compose/db_teste
+      dockerfile: Dockerfile
+    image: invest_db_teste
+    #container_name: cajui-db
+    ports:
+      - "3432:5432"
+    #restart: unless-stopped
+    environment:
+      POSTGRES_DB: invest
+      POSTGRES_PASSWORD: invest
+      POSTGRES_USER: postgres
+    networks:
+      - invest-network
+
   apache:
     build:
       context: ./docker-compose/apache
