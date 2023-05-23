@@ -29,6 +29,8 @@ class ItenaAtivoAlteraCompra
 
     public static function delete(ItensAtivo $itensAtivo, Operacao $operacao)
     {
+        $aux = $operacao;
+        DeleteOperacao::delete($aux);
         if (CalculaItensAtivoPorData::verificaDataOperacao($operacao)) {
             return true;
         }
@@ -41,7 +43,6 @@ class ItenaAtivoAlteraCompra
             $erro  = CajuiHelper::processaErros($itensAtivo->getErrors());
             throw new InvestException($erro);
         }
-        DeleteOperacao::delete($operacao);
     }
 
 

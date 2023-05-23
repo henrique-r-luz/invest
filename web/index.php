@@ -2,8 +2,6 @@
 // comment out the following two lines when deployed to production
 //phpinfo();
 
-use app\models\sincronizar\Preco;
-
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');
 

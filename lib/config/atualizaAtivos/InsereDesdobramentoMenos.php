@@ -24,6 +24,8 @@ class InsereDesdobramentoMenos
 
     public static function delete($itensAtivo, $operacao)
     {
+        $aux = $operacao;
+        DeleteOperacao::delete($aux);
         if (CalculaItensAtivoPorData::verificaDataOperacao($operacao)) {
             return true;
         }
@@ -32,7 +34,6 @@ class InsereDesdobramentoMenos
             $erro  = CajuiHelper::processaErros($itensAtivo->getErrors());
             throw new InvestException($erro);
         }
-        DeleteOperacao::delete($operacao);
     }
 
     public static function update($itensAtivo, $operacao, $oldOperacao)

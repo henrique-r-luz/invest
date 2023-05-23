@@ -7,7 +7,7 @@ use app\lib\CajuiHelper;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
-use app\models\financas\PrecoMedioVenda;
+
 use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
 
 
@@ -75,6 +75,7 @@ class Venda implements AtivosOperacoesInterface
             ->where(['itens_ativos_id' => $this->itensAtivo->id])
             ->andWhere(['tipo' => Operacao::tipoOperacaoId()[Operacao::COMPRA]])
             ->andWhere(['<=', 'data', $this->operacao->data])
+            ->andFilterWhere(['<>', 'id', $this->operacao->id])
             ->groupBy(['itens_ativos_id']);
     }
 
@@ -88,6 +89,7 @@ class Venda implements AtivosOperacoesInterface
             ->where(['itens_ativos_id' => $this->itensAtivo->id])
             ->andWhere(['tipo' => Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MAIS]])
             ->andWhere(['<=', 'data', $this->operacao->data])
+            ->andFilterWhere(['<>', 'id', $this->operacao->id])
             ->groupBy(['itens_ativos_id']);
     }
     private function desdobramentoMenos()
@@ -100,6 +102,7 @@ class Venda implements AtivosOperacoesInterface
             ->where(['itens_ativos_id' => $this->itensAtivo->id])
             ->andWhere(['tipo' => Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MENOS]])
             ->andWhere(['<=', 'data', $this->operacao->data])
+            ->andFilterWhere(['<>', 'id', $this->operacao->id])
             ->groupBy(['itens_ativos_id']);
     }
 
@@ -134,8 +137,7 @@ class Venda implements AtivosOperacoesInterface
         if (CalculaItensAtivoPorData::verificaDataOperacao($this->operacao)) {
             return true;
         }
-        $precoMedioVenda = PrecoMedioVenda::find()->where(['operacoes_id' => $this->operacao->id])->one();
-        $precoMedio  = $precoMedioVenda->valor;
+        $precoMedio  = $this->precoMedio;
         $this->itensAtivo->valor_compra =  ($this->itensAtivo->valor_compra + ($oldOperacao['quantidade'] * $precoMedio)) - ($precoMedio * $this->operacao->quantidade);
         $this->itensAtivo->quantidade = ($this->itensAtivo->quantidade + $oldOperacao['quantidade']) - $this->operacao->quantidade;
         $this->itensAtivo->valor_liquido = ($this->itensAtivo->valor_liquido + $oldOperacao['valor']) - $this->operacao->valor;
