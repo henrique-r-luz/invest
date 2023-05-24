@@ -77,6 +77,7 @@ class AuditoriaBehavior extends Behavior
     public function  insereBeforeAuditoria()
     {
         if (!$this->saveAuditoria()) {
+
             throw new \Exception("Error ao inserir auditoria:</br>" . $this->erros);
         }
     }
@@ -109,7 +110,7 @@ class AuditoriaBehavior extends Behavior
         $auditoria->user_id =  Yii::$app->user->id;
         $auditoria->created_at = time();
         if (!$auditoria->save()) {
-            $this->erros = CajuiHelper::processaErros($this->owner->getErrors());
+            $this->erros = CajuiHelper::processaErros($auditoria->getErrors());
             return false;
         }
         return true;
