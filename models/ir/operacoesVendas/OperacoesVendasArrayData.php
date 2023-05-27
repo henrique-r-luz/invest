@@ -26,7 +26,7 @@ class OperacoesVendasArrayData
 
             $valor_compra = ($todasOperacoes[$operacao->itens_ativos_id]['valor_compra'] ?? 0);
             $quantidade_ativo = $todasOperacoes[$operacao->itens_ativos_id]['quantidade_ativo'] ?? 0;
-
+            $valorEstoque  = 0;
             $anoOperacao = date('Y', strtotime($operacao->data));
             $mesOperacao = date('m', strtotime($operacao->data));
             if ($operacao->tipo == Operacao::tipoOperacaoId()[Operacao::VENDA] && $anoOperacao == $this->ano) {
@@ -41,16 +41,10 @@ class OperacoesVendasArrayData
                 $operacoesvendas[$operacao['id']]['data'] = $mesOperacao . '/' . $anoOperacao;
                 $operacoesvendas[$operacao['id']]['tipo'] = $operacao->itensAtivo->ativos->tipo;
                 $operacoesvendas[$operacao['id']]['pais'] = $operacao->itensAtivo->ativos->pais;
-
-
-                $todasOperacoes[$operacao->itens_ativos_id]['codigo'] =  $operacao->itensAtivo->ativos->codigo;
-                $todasOperacoes[$operacao->itens_ativos_id]['valor_compra'] = $this->valorCompra($valor_compra, $operacao, $valorEstoque);
-                $todasOperacoes[$operacao->itens_ativos_id]['quantidade_ativo'] = $this->calculaQuantidade($operacao, $quantidade_ativo);
-                continue;
             }
 
             $todasOperacoes[$operacao->itens_ativos_id]['codigo'] =  $operacao->itensAtivo->ativos->codigo;
-            $todasOperacoes[$operacao->itens_ativos_id]['valor_compra'] = $this->valorCompra($valor_compra, $operacao);
+            $todasOperacoes[$operacao->itens_ativos_id]['valor_compra'] = $this->valorCompra($valor_compra, $operacao, $valorEstoque);
             $todasOperacoes[$operacao->itens_ativos_id]['quantidade_ativo'] = $this->calculaQuantidade($operacao, $quantidade_ativo);
         }
         return  ['operacoesvendas' => $operacoesvendas];

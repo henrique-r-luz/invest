@@ -11,14 +11,17 @@ use kartik\grid\GridView;
 
         [
             'attribute' => 'valor_compra',
+            'format' => 'currency',
             // 'contentOptions' => ['style' => 'width:70px']
         ],
         [
             'attribute' => 'valor_venda',
+            'format' => 'currency',
             // 'contentOptions' => ['style' => 'width:70px']
         ],
         [
             'attribute' => 'resultado',
+            'format' => 'currency',
             // 'contentOptions' => ['style' => 'width:70px']
         ],
         [

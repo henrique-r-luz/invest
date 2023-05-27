@@ -19,20 +19,24 @@ use kartik\grid\GridView;
         ],
         [
             'label' => 'Preco Medio',
+            'format' => 'currency',
             'attribute' => 'preco_medio',
             // 'contentOptions' => ['style' => 'width:70px']
         ],
         [
             'label' => 'Valor Compra',
+            'format' => 'currency',
             'attribute' => 'valor_compra',
             // 'contentOptions' => ['style' => 'width:70px']
         ],
         [
             'label' => 'Valor Venda',
+            'format' => 'currency',
             'attribute' => 'valor_venda',
             // 'contentOptions' => ['style' => 'width:70px']
         ],
         [
+            'format' => 'currency',
             'attribute' => 'resultado',
             // 'contentOptions' => ['style' => 'width:70px']
         ],
