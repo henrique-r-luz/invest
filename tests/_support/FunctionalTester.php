@@ -15,9 +15,18 @@
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
  * @SuppressWarnings(PHPMD)
-*/
+ */
+
+
 class FunctionalTester extends \Codeception\Actor
 {
     use _generated\FunctionalTesterActions;
 
+
+    /* public function login(FunctionalTester $I)
+    {
+        $I->amOnPage('/site/login');
+        $I->submitForm('form#login', ['username' => 'admin', 'password' => 'admin']);
+        $I->saveSessionSnapshot('login');
+    }*/
 }

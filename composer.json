@@ -20,7 +20,7 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=7",
-        "yiisoft/yii2": "dev-master",
+        "yiisoft/yii2": "*",
         "npm-asset/font-awesome": "~5.1",
         "yiisoft/yii2-bootstrap4": "*",
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
@@ -54,13 +54,13 @@
         "kartik-v/yii2-bootstrap4-dropdown": "@dev"
     },
     "require-dev": {
-        "yiisoft/yii2-debug": "~2.1.0",
+        "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
         "yiisoft/yii2-faker": "~2.0.0",
-        "codeception/codeception": "^4.2",
+        "codeception/codeception": "^4.1",
         "codeception/verify": "*",
         "codeception/specify": "*",
-        "codeception/module-phpbrowser": "*",
+        "codeception/module-phpbrowser": "^1.0",
         "codeception/module-db": "^2.1",
         "codeception/module-asserts": "*",
         "codeception/module-yii2": "*",

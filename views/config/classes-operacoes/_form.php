@@ -11,14 +11,14 @@ use kartik\form\ActiveForm;
 <div class="card-success card card-outline">
     <div class="classes-operacoes-form">
         <div class="card-body">
-            <?php $form = ActiveForm::begin(); ?>
+            <?php $form = ActiveForm::begin(['id' => 'classesOperacoes']); ?>
 
-                <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
         </div>
         <div class="card-footer">
             <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-            <?= Html::a('Voltar',['index'], ['class' => 'btn btn-default']) ?>
+            <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
         </div>
         <?php ActiveForm::end(); ?>
     </div>

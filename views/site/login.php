@@ -9,7 +9,7 @@ use kartik\form\ActiveForm;
 
 ?>
 <div class="login-box">
-    <?php $form = ActiveForm::begin([]); ?>
+    <?php $form = ActiveForm::begin(['id' => 'login']); ?>
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">Faça o seu login</p>

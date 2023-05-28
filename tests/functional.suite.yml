@@ -8,6 +8,8 @@
 #basic/web/index.php
 class_name: FunctionalTester
 modules:
-    enabled:
-      - Filesystem
-      - Yii2
+  enabled:
+    - Filesystem
+    - Asserts
+    - Yii2
+    #    part: [orm, email, fixtures]
