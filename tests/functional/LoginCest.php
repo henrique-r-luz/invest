@@ -2,16 +2,16 @@
 
 namespace app\tests\functional;
 
-use AcceptanceTester;
+use FunctionalTester;
 
-/*class LoginCest
+class LoginCest
 {
 
-    public function Login(AcceptanceTester $I)
+    public function Login(FunctionalTester $I)
     {
-        $I->amOnPage('/site/login');
-
-        $I->submitForm('form#login', ['username' => 'admin', 'password' => 'admin']);
-        $I->see('INVEST');
+        /*$I->amOnPage('/site/login');
+        $I->fillField(['name' => 'LoginForm[username]'], 'admin');
+        $I->fillField(['name' => 'LoginForm[password]'], 'admin');
+        $I->click('Acessar');*/
     }
-}*/
+}

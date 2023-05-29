@@ -1,7 +1,12 @@
 <?php
 
 $params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
+if (YII_ENV_TEST) {
+    $db = require __DIR__ . '/test_db.php';
+} else {
+    $db = require __DIR__ . '/db.php';
+}
+//$db = require __DIR__ . '/db.php';
 Yii::setAlias('arquivos', dirname(__DIR__) . '/arquivos');
 Yii::setAlias('dados', dirname(__DIR__) . '/dados');
 

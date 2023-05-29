@@ -15,12 +15,21 @@
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
  * @SuppressWarnings(PHPMD)
-*/
+ */
 class AcceptanceTester extends \Codeception\Actor
 {
     use _generated\AcceptanceTesterActions;
 
-   /**
-    * Define custom actions here
-    */
+
+    public function login()
+    {
+        $this->amOnPage('/site/login');
+        $this->fillField(['name' => 'LoginForm[username]'], 'admin');
+        $this->fillField(['name' => 'LoginForm[password]'], 'admin');
+        $this->click('Acessar');
+    }
+
+    /**
+     * Define custom actions here
+     */
 }
