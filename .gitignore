@@ -42,4 +42,4 @@ arquivos/
 dados/.~lock.preco_acao.csv#
 /.vscode/
 assets/
-!/docker-compose/db_teste/db_teste.sql
+!db_teste.sql
