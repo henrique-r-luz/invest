@@ -23,10 +23,11 @@ class FunctionalTester extends \Codeception\Actor
     use _generated\FunctionalTesterActions;
 
 
-    /* public function login(FunctionalTester $I)
+    public function login()
     {
-        $I->amOnPage('/site/login');
-        $I->submitForm('form#login', ['username' => 'admin', 'password' => 'admin']);
-        $I->saveSessionSnapshot('login');
-    }*/
+        $this->amOnPage('/site/login');
+        $this->fillField(['name' => 'LoginForm[username]'], 'admin');
+        $this->fillField(['name' => 'LoginForm[password]'], 'admin');
+        $this->click('Acessar');
+    }
 }

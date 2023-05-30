@@ -9,7 +9,7 @@ use kartik\form\ActiveForm;
 ?>
 
 <div class="card-success card card-outline">
-    <?php $form = ActiveForm::begin(['id' => 'classesOperacoes']); ?>
+    <?php $form = ActiveForm::begin(['id' => 'form-classesOperacoes']); ?>
     <div class="classes-operacoes-form">
         <div class="card-body">
 
