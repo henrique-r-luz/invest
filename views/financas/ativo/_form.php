@@ -16,7 +16,7 @@ use app\models\config\ClassesOperacoes;
 ?>
 
 <div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id' => 'form_ativo']); ?>
     <div class="ativo-form">
         <div class="card-body">
 

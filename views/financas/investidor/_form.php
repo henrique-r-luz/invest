@@ -10,10 +10,10 @@ use yii\widgets\MaskedInput;
 ?>
 
 <div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">
-<?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id' => 'form_investidor']); ?>
     <div class="card-body">
         <div class="investidor-form">
-           
+
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-lg-6">
                     <?=
@@ -27,7 +27,7 @@ use yii\widgets\MaskedInput;
                     <?= $form->field($model, 'nome')->textInput() ?>
 
 
-                   
+
                 </div>
 
             </div>

@@ -14,7 +14,7 @@ use kartik\datecontrol\DateControl;
 ?>
 
 <div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id' => 'form_operacoes']); ?>
     <div class="card-body">
         <div class="operacao-form">
             <div class="row">

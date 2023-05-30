@@ -17,7 +17,7 @@ use kartik\number\NumberControl;
 ?>
 
 <div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">
-<?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id' => 'form_ativos_investido']); ?>
     <div class="card-body">
         <div class="ativo-form">
             <div class="row">
@@ -103,13 +103,13 @@ use kartik\number\NumberControl;
 
             </div>
         </div>
-        </div>
-        <div class="card-footer">
+    </div>
+    <div class="card-footer">
 
-            <?= Html::submitButton('Salvar', ['class' => 'btn btn-success']) ?>
-            <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton('Salvar', ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
 
-        </div>
+    </div>
 
-        <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end(); ?>
 </div>
