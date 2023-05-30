@@ -2,6 +2,7 @@
 
 namespace app\controllers\config;
 
+use app\lib\helpers\InvestException;
 use Yii;
 
 use yii\web\Controller;

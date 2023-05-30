@@ -118,7 +118,8 @@
             "app\\views\\": "views/",
             "app\\web\\": "web/",
             "app\\controllers\\": "controllers/",
-            "app\\commands\\": "commands/"
+            "app\\commands\\": "commands/",
+            "app\\tests\\": "tests"
         }
     }
 }

@@ -51,6 +51,8 @@ services:
       POSTGRES_DB: invest
       POSTGRES_PASSWORD: invest
       POSTGRES_USER: postgres
+    volumes:
+      - ./docker-compose/db_teste:/docker-entrypoint-initdb.d
     networks:
       - invest-network
 

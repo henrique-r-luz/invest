@@ -12,4 +12,3 @@ modules:
     - Filesystem
     - Asserts
     - Yii2
-    #    part: [orm, email, fixtures]

@@ -2,8 +2,13 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - PhpBrowser:
-              url: http://apache/index-test.php
+              url: http://apache/index.php
               capabilities:
                   browserName: chrome
                   chromeOptions:
                       args: ["--headless"]
+
+        - Yii2:
+              part: [orm, email, fixtures]
+              entryScript: index-test.php
+              cleanup: true

@@ -12,11 +12,11 @@ modules:
     config:
         Yii2:
             configFile: "config/web.php"
-        #Db:
-        #    dsn: "pgsql:host=db_teste;dbname=invest"
-        #    user: "postgres"
-        #    password: "invest"
-        #    dump: tests/_data/db_invest.dump
+        Db:
+            dsn: "pgsql:host=db_teste;dbname=invest"
+            user: "postgres"
+            password: "invest"
+            cleanup: true # run populator before each test
 # To enable code coverage:
 #coverage:
 #    #c3_url: http://localhost:8080/index-test.php/
