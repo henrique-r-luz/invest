@@ -53,11 +53,7 @@ $impostoRenda = 1;
                 'label' => 'Tipo',
                 'value' => function ($model) {
                     // return 'tipo';
-                    if (isset($model->acaoBolsa->setor)) {
-                        return $model->tipo . ' (' . $model->acaoBolsa->setor . ')';
-                    } else {
-                        return $model->tipo;
-                    }
+                    return $model->tipo;
                 }
             ],
 

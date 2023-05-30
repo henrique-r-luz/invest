@@ -21,4 +21,9 @@ class ClassesOperacoesCest
         $I->submitForm('#form-classesOperacoes', ['ClassesOperacoes[nome]' => 'testeClasseOperacao1']);
         $I->seeRecord(ClassesOperacoes::class, ['nome' => 'testeClasseOperacao1']);
     }
+
+
+    public function testDelete(FunctionalTester $I)
+    {
+    }
 }
