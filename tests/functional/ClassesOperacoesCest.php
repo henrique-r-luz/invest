@@ -14,7 +14,7 @@ class ClassesOperacoesCest
     {
         $I->login();
     }
-    public function testClassesOperacoesCreateF(FunctionalTester $I)
+    public function testClassesOperacoesCreate(FunctionalTester $I)
     {
 
         $I->amOnPage('/config/classes-operacoes/create');
