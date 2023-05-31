@@ -17,7 +17,7 @@ use kartik\widgets\ActiveForm;
 /* @var $form ActiveForm */
 ?>
 <div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id' => 'form_proventos']); ?>
     <div class="card-body">
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-lg-6">

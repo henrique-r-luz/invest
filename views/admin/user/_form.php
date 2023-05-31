@@ -11,10 +11,9 @@ use app\lib\helpers\user\GruposUser;
 ?>
 
 <div class="card-success card card-outline">
+    <?php $form = ActiveForm::begin(['id' => "form_user"]); ?>
     <div class="user-form">
         <div class="card-body">
-            <?php $form = ActiveForm::begin(); ?>
-
             <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'grupo')->widget(Select2::classname(), [
                 'data' => GruposUser::listaGrupos(),
@@ -25,17 +24,12 @@ use app\lib\helpers\user\GruposUser;
             ]); ?>
             <?= $form->field($model, 'password')->passwordInput(['autocomplete' => "new-password"])  ?>
             <?= $form->field($model, 'confirma')->passwordInput()  ?>
-
-
-
-
-
         </div>
         <div class="card-footer">
-            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton('Salvar', ['class' => 'btn btn-success']) ?>
             <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
         </div>
-        <?php ActiveForm::end(); ?>
+
     </div>
-</div>
+    <?php ActiveForm::end(); ?>
 </div>
