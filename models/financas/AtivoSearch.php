@@ -44,7 +44,7 @@ class AtivoSearch extends Ativo
     public function search($params)
     {
         $query = Ativo::find()
-            ->joinWith(['itensAtivo.investidor', 'classesOperacoes']);
+            ->joinWith(['classesOperacoes']);
 
 
         $dataProvider = new ActiveDataProvider([

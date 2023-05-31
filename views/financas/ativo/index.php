@@ -20,7 +20,7 @@ $impostoRenda = 1;
 ?>
 <div class="ativo-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]);  
+    <?php
     ?>
 
     <?=
@@ -51,10 +51,10 @@ $impostoRenda = 1;
                 'filter' => Tipo::all(),
                 'attribute' => 'tipo',
                 'label' => 'Tipo',
-                'value' => function ($model) {
+                /*'value' => function ($model) {
                     // return 'tipo';
                     return $model->tipo;
-                }
+                }*/
             ],
 
             [
