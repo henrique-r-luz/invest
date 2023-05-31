@@ -41,3 +41,4 @@ arquivos/
 dados/.~lock.preco_acao.csv#
 /.vscode/
 assets/
+*.sql*
