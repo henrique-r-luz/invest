@@ -70,14 +70,6 @@ services:
     volumes:
       - ./:/var/www
 
-  invest_bot:
-    image: selenium/standalone-chrome:95.0
-    ports:
-      - "4444:4444"
-    shm_size: 2gb
-    networks:
-      - invest-network
-
 networks:
   invest-network:
     driver: bridge

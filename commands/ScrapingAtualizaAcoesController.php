@@ -2,13 +2,11 @@
 
 namespace app\commands;
 
-use Yii;
 use DOMNode;
 use DOMXPath;
 use Throwable;
 use DOMDocument;
 use app\lib\CajuiHelper;
-use app\models\admin\User;
 use yii\console\Controller;
 use app\models\sincronizar\Preco;
 use app\models\sincronizar\SiteAcoes;
@@ -22,7 +20,7 @@ class ScrapingAtualizaAcoesController extends Controller
 {
 
     private $xPath = './/*[contains(concat(" ",normalize-space(@class)," ")," text-5xl ")]';
-    //private $vetAtivos = [];
+
 
     public function actionPage()
     {

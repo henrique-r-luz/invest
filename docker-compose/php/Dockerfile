@@ -4,6 +4,8 @@ FROM php:8.0.5-fpm
 ARG user
 ARG uid
 
+ENV TZ=America/Sao_Paulo
+
 # Instalando as dependências
 RUN apt-get update && apt-get install -y \
     curl \
@@ -49,12 +51,6 @@ RUN mkdir -p /home/$user/.composer && \
 
 
 RUN pecl install xdebug
-
-RUN pip3 install pandas
-
-RUN pip3 install selenium
-
-RUN pip3 install requests
 
 
 # Setando diretório de trabalho

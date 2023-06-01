@@ -29,7 +29,6 @@ $this->registerJsFile(
         <div class="form-group">
             <?= Html::submitButton('Atualiza Dados', ['class' => 'btn btn-info', 'name' => 'but', 'value' => 'atualiza_dados']) ?>
             <?= Html::submitButton('Recalcula Compra Ativos', ['class' => 'btn btn-info', 'name' => 'but', 'value' => 'recalcula_ativos']) ?>
-            <?= Html::Button('Atualiza ações Selenium', ['id' => 'acoes_id', 'class' => 'btn btn-success']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
