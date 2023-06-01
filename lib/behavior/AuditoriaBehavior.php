@@ -103,11 +103,12 @@ class AuditoriaBehavior extends Behavior
         foreach ($this->owner->getAttributes() as $name => $value) {
             $this->changes[$name] = $value;
         }
+        $user = Yii::$app->user->id ??  Yii::$app->params['userAdminPadraoId'];
         $auditoria = new Auditoria();
         $auditoria->model    = get_class($this->owner);
         $auditoria->operacao = $this->action;
         $auditoria->changes  = $this->changes;
-        $auditoria->user_id =  Yii::$app->user->id;
+        $auditoria->user_id =  $user;
         $auditoria->created_at = time();
         if (!$auditoria->save()) {
             $this->erros = CajuiHelper::processaErros($auditoria->getErrors());
