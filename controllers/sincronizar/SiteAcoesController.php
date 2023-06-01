@@ -7,13 +7,13 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
-use app\models\sincronizar\AtualizaAcao;
-use app\models\sincronizar\AtualizaAcaoSearch;
+use app\models\sincronizar\SiteAcoes;
+use app\models\sincronizar\SiteAcoesSearch;
 
 /**
- * AtualizaAcaoController implements the CRUD actions for AtualizaAcao model.
+ * SiteAcoesController implements the CRUD actions for SiteAcoes model.
  */
-class AtualizaAcaoController extends Controller
+class SiteAcoesController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -31,12 +31,12 @@ class AtualizaAcaoController extends Controller
     }
 
     /**
-     * Lists all AtualizaAcao models.
+     * Lists all SiteAcoes models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AtualizaAcaoSearch();
+        $searchModel = new SiteAcoesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +46,7 @@ class AtualizaAcaoController extends Controller
     }
 
     /**
-     * Displays a single AtualizaAcao model.
+     * Displays a single SiteAcoes model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -59,13 +59,13 @@ class AtualizaAcaoController extends Controller
     }
 
     /**
-     * Creates a new AtualizaAcao model.
+     * Creates a new SiteAcoes model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new AtualizaAcao();
+        $model = new SiteAcoes();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->ativo_id]);
@@ -77,7 +77,7 @@ class AtualizaAcaoController extends Controller
     }
 
     /**
-     * Updates an existing AtualizaAcao model.
+     * Updates an existing SiteAcoes model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -97,7 +97,7 @@ class AtualizaAcaoController extends Controller
     }
 
     /**
-     * Deletes an existing AtualizaAcao model.
+     * Deletes an existing SiteAcoes model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -113,19 +113,19 @@ class AtualizaAcaoController extends Controller
     public function actionUrl()
     {
 
-        $this->asJson(AtualizaAcao::getUrl());
+        $this->asJson(SiteAcoes::getUrl());
     }
 
     /**
-     * Finds the AtualizaAcao model based on its primary key value.
+     * Finds the SiteAcoes model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return AtualizaAcao the loaded model
+     * @return SiteAcoes the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = AtualizaAcao::findOne($id)) !== null) {
+        if (($model = SiteAcoes::findOne($id)) !== null) {
             return $model;
         }
 

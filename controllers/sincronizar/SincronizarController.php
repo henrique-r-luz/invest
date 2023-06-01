@@ -12,10 +12,10 @@ use Yii;
 use Throwable;
 use yii\web\Controller;
 use app\lib\helpers\InvestException;
-use app\models\sincronizar\AtualizaAcao;
+use app\models\sincronizar\SiteAcoes;
 use app\models\sincronizar\services\AddPreco;
-use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\AtualizaRendaVariavel;
 use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\RecalculaAtivos;
+use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\AtualizaRendaVariavel;
 
 /**
  * Description of SincronizarController
@@ -37,10 +37,6 @@ class SincronizarController extends Controller
     public function actionSincroniza()
     {
 
-        if (Yii::$app->request->post('but') == 'dados_empresa') {
-            //a classe Runner deve ser extendida
-            return $this->redirect('index');
-        }
 
         if (Yii::$app->request->post('but') == 'atualiza_dados') {
             $this->atualiza();
@@ -129,7 +125,7 @@ class SincronizarController extends Controller
     public function actionGetStatusAcoes()
     {
         try {
-            $total = AtualizaAcao::find()->count();
+            $total = SiteAcoes::find()->count();
             $arquivo =  file_get_contents($this->local_file);
             $ativoAtualizados = explode(';', $arquivo);
             foreach ($ativoAtualizados as $item) {

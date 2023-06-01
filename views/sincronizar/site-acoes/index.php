@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use app\lib\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\financas\AtualizaAcaoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Atualiza Acões';

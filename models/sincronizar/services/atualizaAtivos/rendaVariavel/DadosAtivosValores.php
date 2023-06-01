@@ -24,7 +24,7 @@ class DadosAtivosValores
                 'ativo.pais',
             ])
             ->innerJoin('ativo', 'ativo.id = itens_ativo.ativo_id')
-            ->innerJoin('atualiza_acao', 'atualiza_acao.ativo_id = ativo.id')
+            ->innerJoin('site_acoes', 'site_acoes.ativo_id = ativo.id')
             ->innerJoin(['preco' => $this->preco()], 'preco.ativo_id = ativo.id')
             ->where(['ativo' => true]);
     }

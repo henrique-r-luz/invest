@@ -8,7 +8,7 @@ use app\lib\helpers\InvestException;
 use app\lib\config\atualizaAtivos\TiposOperacoes;
 use app\lib\config\atualizaAtivos\AtualizaAtivoInterface;
 
-class CalculaAritimetica implements AtualizaAtivoInterface
+class CalculaAritimeticaCDBInter implements AtualizaAtivoInterface
 {
     private Operacao $operacao;
     private array $oldOperacao;

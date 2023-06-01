@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 /**
  * AtualizaAcaoSearch represents the model behind the search form of `app\models\financas\AtualizaAcao`.
  */
-class AtualizaAcaoSearch extends AtualizaAcao
+class SiteAcoesSearch extends SiteAcoes
 {
     /**
      * {@inheritdoc}
@@ -39,7 +39,7 @@ class AtualizaAcaoSearch extends AtualizaAcao
      */
     public function search($params)
     {
-        $query = AtualizaAcao::find()
+        $query = SiteAcoes::find()
             ->joinWith(['ativo']);
 
         // add conditions that should always apply here

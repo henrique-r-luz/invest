@@ -31,8 +31,10 @@ class Venda implements AtivosOperacoesInterface
         }
         $this->itensAtivo->valor_compra -=  $this->precoMedio * $this->operacao->quantidade;
         $this->itensAtivo->quantidade -= $this->operacao->quantidade;
-        $this->itensAtivo->valor_liquido -= $this->operacao->valor;
-        $this->itensAtivo->valor_bruto -= $this->operacao->valor;
+        $getPrecoCadastrado = new GetPrecoCadastrado($this->itensAtivo);
+        $valorFinalAtivo = $getPrecoCadastrado->getValor();
+        $this->itensAtivo->valor_liquido = $valorFinalAtivo;
+        $this->itensAtivo->valor_bruto = $valorFinalAtivo;
 
         if (!$this->itensAtivo->save()) {
             $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
@@ -120,8 +122,10 @@ class Venda implements AtivosOperacoesInterface
             $this->itensAtivo->valor_compra += $this->operacao->valor;
         }
         $this->itensAtivo->quantidade += $this->operacao->quantidade;
-        $this->itensAtivo->valor_liquido += $this->operacao->valor;
-        $this->itensAtivo->valor_bruto += $this->operacao->valor;
+        $getPrecoCadastrado = new GetPrecoCadastrado($this->itensAtivo);
+        $valorFinalAtivo = $getPrecoCadastrado->getValor();
+        $this->itensAtivo->valor_liquido = $valorFinalAtivo;
+        $this->itensAtivo->valor_bruto = $valorFinalAtivo;
 
         if (!$this->itensAtivo->save()) {
             $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
@@ -140,8 +144,10 @@ class Venda implements AtivosOperacoesInterface
         $precoMedio  = $this->precoMedio;
         $this->itensAtivo->valor_compra =  ($this->itensAtivo->valor_compra + ($oldOperacao['quantidade'] * $precoMedio)) - ($precoMedio * $this->operacao->quantidade);
         $this->itensAtivo->quantidade = ($this->itensAtivo->quantidade + $oldOperacao['quantidade']) - $this->operacao->quantidade;
-        $this->itensAtivo->valor_liquido = ($this->itensAtivo->valor_liquido + $oldOperacao['valor']) - $this->operacao->valor;
-        $this->itensAtivo->valor_bruto = ($this->itensAtivo->valor_bruto + $oldOperacao['valor']) - $this->operacao->valor;  //$this->operacao->valor - $oldOperacao['valor'];
+        $getPrecoCadastrado = new GetPrecoCadastrado($this->itensAtivo);
+        $valorFinalAtivo = $getPrecoCadastrado->getValor();
+        $this->itensAtivo->valor_liquido = $valorFinalAtivo;
+        $this->itensAtivo->valor_bruto = $valorFinalAtivo;
 
         if (!$this->itensAtivo->save()) {
             $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());

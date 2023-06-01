@@ -7,7 +7,6 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-use app\assets\AppAsset;
 use yii\bootstrap4\Modal;
 use yii\widgets\ActiveForm;
 use yii\bootstrap4\Progress;
@@ -30,7 +29,7 @@ $this->registerJsFile(
         <div class="form-group">
             <?= Html::submitButton('Atualiza Dados', ['class' => 'btn btn-info', 'name' => 'but', 'value' => 'atualiza_dados']) ?>
             <?= Html::submitButton('Recalcula Compra Ativos', ['class' => 'btn btn-info', 'name' => 'but', 'value' => 'recalcula_ativos']) ?>
-            <?= Html::Button('Atualiza ações', ['id' => 'acoes_id', 'class' => 'btn btn-success']) ?>
+            <?= Html::Button('Atualiza ações Selenium', ['id' => 'acoes_id', 'class' => 'btn btn-success']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>

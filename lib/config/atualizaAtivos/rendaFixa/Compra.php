@@ -3,10 +3,13 @@
 namespace app\lib\config\atualizaAtivos\rendaFixa;
 
 
+use app\lib\CajuiHelper;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
-use app\lib\config\atualizaAtivos\ItenaAtivoAlteraCompra;
+use app\lib\helpers\InvestException;
 use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
+use app\lib\config\atualizaAtivos\rendaVariavel\DeleteOperacao;
+use app\lib\config\atualizaAtivos\rendaVariavel\CalculaItensAtivoPorData;
 
 class Compra implements AtivosOperacoesInterface
 {
@@ -22,17 +25,53 @@ class Compra implements AtivosOperacoesInterface
 
     public function insere()
     {
-        ItenaAtivoAlteraCompra::compra($this->itensAtivo, $this->operacao);
+        if (CalculaItensAtivoPorData::verificaDataOperacao($this->operacao)) {
+            return true;
+        }
+        $this->itensAtivo->valor_compra += $this->operacao->valor;
+        $this->itensAtivo->quantidade += $this->operacao->quantidade;
+
+        $this->itensAtivo->valor_liquido += $this->operacao->valor;
+        $this->itensAtivo->valor_bruto += $this->operacao->valor;
+        if (!$this->itensAtivo->save()) {
+            $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
+            throw new InvestException($erro);
+        }
     }
 
 
     public function delete()
     {
-        ItenaAtivoAlteraCompra::delete($this->itensAtivo, $this->operacao);
+        $aux = $this->operacao;
+        DeleteOperacao::delete($aux);
+        if (CalculaItensAtivoPorData::verificaDataOperacao($this->operacao)) {
+            return true;
+        }
+        $this->itensAtivo->valor_compra -= $this->operacao->valor;
+        $this->itensAtivo->quantidade -= $this->operacao->quantidade;
+
+        $this->itensAtivo->valor_liquido -= $this->operacao->valor;
+        $this->itensAtivo->valor_bruto -= $this->operacao->valor;
+
+        if (!$this->itensAtivo->save()) {
+            $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
+            throw new InvestException($erro);
+        }
     }
 
     public function update($oldOperacao)
     {
-        ItenaAtivoAlteraCompra::update($oldOperacao, $this->itensAtivo, $this->operacao);
+        if (CalculaItensAtivoPorData::verificaDataOperacao($this->operacao)) {
+            return true;
+        }
+        $this->itensAtivo->valor_compra = ($this->itensAtivo->valor_compra - $oldOperacao['valor']) + $this->operacao->valor; //$operacao->valor  - $oldOperacao['valor'];
+        $this->itensAtivo->quantidade = ($this->itensAtivo->quantidade - $oldOperacao['quantidade']) + $this->operacao->quantidade;
+        $this->itensAtivo->valor_liquido = ($this->itensAtivo->valor_liquido - $oldOperacao['valor']) + $this->operacao->valor;
+        $this->itensAtivo->valor_bruto = ($this->itensAtivo->valor_bruto - $oldOperacao['valor']) + $this->operacao->valor;
+
+        if (!$this->itensAtivo->save()) {
+            $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
+            throw new InvestException($erro);
+        }
     }
 }

@@ -4,26 +4,26 @@ namespace app\models\sincronizar;
 
 use Yii;
 
+use yii\db\ActiveRecord;
 use app\models\financas\Ativo;
 use app\lib\behavior\AuditoriaBehavior;
 
 
 /**
- * This is the model class for table "atualiza_acao".
  *
  * @property int $ativo_id
  * @property string $url
  *
  * @property Ativo $ativo
  */
-class AtualizaAcao extends \yii\db\ActiveRecord
+class SiteAcoes extends ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'atualiza_acao';
+        return 'site_acoes';
     }
 
     public function behaviors()
@@ -62,7 +62,7 @@ class AtualizaAcao extends \yii\db\ActiveRecord
 
     public static function getUrl()
     {
-        return AtualizaAcao::find()
+        return SiteAcoes::find()
             ->select(['ativo_id', 'url'])
             ->asArray()
             ->all();

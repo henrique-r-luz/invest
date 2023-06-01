@@ -4,9 +4,11 @@ namespace app\lib\config\atualizaAtivos;
 
 use app\lib\CajuiHelper;
 use app\models\financas\Operacao;
+use app\models\sincronizar\Preco;
 use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
 use app\lib\config\atualizaAtivos\rendaVariavel\DeleteOperacao;
+use app\lib\config\atualizaAtivos\rendaVariavel\GetPrecoCadastrado;
 use app\lib\config\atualizaAtivos\rendaVariavel\CalculaItensAtivoPorData;
 
 class ItenaAtivoAlteraCompra
@@ -18,8 +20,10 @@ class ItenaAtivoAlteraCompra
         }
         $itensAtivo->valor_compra += $operacao->valor;
         $itensAtivo->quantidade += $operacao->quantidade;
-        $itensAtivo->valor_liquido += $operacao->valor;
-        $itensAtivo->valor_bruto += $operacao->valor;
+        $getPrecoCadastrado = new GetPrecoCadastrado($itensAtivo);
+        $valorFinalAtivo = $getPrecoCadastrado->getValor();
+        $itensAtivo->valor_liquido = $valorFinalAtivo;
+        $itensAtivo->valor_bruto = $valorFinalAtivo;
         if (!$itensAtivo->save()) {
             $erro  = CajuiHelper::processaErros($itensAtivo->getErrors());
             throw new InvestException($erro);
@@ -36,8 +40,10 @@ class ItenaAtivoAlteraCompra
         }
         $itensAtivo->valor_compra -= $operacao->valor;
         $itensAtivo->quantidade -= $operacao->quantidade;
-        $itensAtivo->valor_liquido -= $operacao->valor;
-        $itensAtivo->valor_bruto -= $operacao->valor;
+        $getPrecoCadastrado = new GetPrecoCadastrado($itensAtivo);
+        $valorFinalAtivo = $getPrecoCadastrado->getValor();
+        $itensAtivo->valor_liquido = $valorFinalAtivo;
+        $itensAtivo->valor_bruto = $valorFinalAtivo;
 
         if (!$itensAtivo->save()) {
             $erro  = CajuiHelper::processaErros($itensAtivo->getErrors());
@@ -53,8 +59,10 @@ class ItenaAtivoAlteraCompra
         }
         $itensAtivo->valor_compra = ($itensAtivo->valor_compra - $oldOperacao['valor']) + $operacao->valor; //$operacao->valor  - $oldOperacao['valor'];
         $itensAtivo->quantidade = ($itensAtivo->quantidade - $oldOperacao['quantidade']) + $operacao->quantidade;
-        $itensAtivo->valor_liquido = ($itensAtivo->valor_liquido - $oldOperacao['valor']) + $operacao->valor;
-        $itensAtivo->valor_bruto = ($itensAtivo->valor_bruto - $oldOperacao['valor']) + $operacao->valor;
+        $getPrecoCadastrado = new GetPrecoCadastrado($itensAtivo);
+        $valorFinalAtivo = $getPrecoCadastrado->getValor();
+        $itensAtivo->valor_liquido = $valorFinalAtivo;
+        $itensAtivo->valor_bruto = $valorFinalAtivo;
         if (!$itensAtivo->save()) {
             $erro  = CajuiHelper::processaErros($itensAtivo->getErrors());
             throw new InvestException($erro);
