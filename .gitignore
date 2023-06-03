@@ -39,3 +39,4 @@ dados/.~lock.preco_acao.csv#
 /.vscode/
 assets/
 *.sql*
+log-console.log

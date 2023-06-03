@@ -42,7 +42,8 @@ class PrecoSearch extends Preco
     public function search($params)
     {
         $query = Preco::find()
-            ->joinWith(['ativo']);
+            ->joinWith(['ativo'])
+            ->orderBy(['data' => \SORT_DESC]);
 
         // add conditions that should always apply here
 

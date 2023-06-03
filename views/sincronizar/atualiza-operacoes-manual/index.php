@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'toolbar' => 'padraoCajui',
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
+                'boxTitle' => $this->title,
                 'columns' => [
 
                         [

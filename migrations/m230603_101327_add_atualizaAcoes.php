@@ -29,7 +29,7 @@ class m230603_101327_add_atualizaAcoes extends Migration
             'atualiza_acoes',
             [
                 'id' => Schema::TYPE_PK,
-                'data' => Schema::TYPE_DATE . ' NOT NULL ',
+                'data' => ' timestamp without time zone NOT NULL ',
                 'ativo_atulizado' => ' jsonb ',
                 'status' => Schema::TYPE_TEXT . ' NOT NULL ',
             ]

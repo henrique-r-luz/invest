@@ -17,17 +17,26 @@ $this->params['breadcrumbs'][] = $this->title;
     GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'toolbar'=>'padraoCajui',
+        'toolbar' => 'padraoCajui',
+        'boxTitle' => $this->title,
         'columns' => [
             [
-                'label' => 'Ativo',
+                'label' => 'Ativo_id',
                 'attribute' => 'ativo_id',
+                'value' => function ($model) {
+                    return $model->ativo->id;
+                },
+            ],
+            [
+                'label' => 'Ativo',
+                'attribute' => 'ativo_nome',
                 'value' => 'ativo.codigo'
             ],
+
             'url:ntext',
             ['class' => 'app\lib\grid\ActionColumn'],
         ],
-        
+
     ]);
     ?>
 

@@ -4,23 +4,21 @@ namespace app\models\sincronizar;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use app\models\sincronizar\AtualizaAcoes;
 
 /**
- * AtualizaAcaoSearch represents the model behind the search form of `app\models\financas\AtualizaAcao`.
+ * AtualizaAcoesSearch represents the model behind the search form of `app\models\sincronizar\AtualizaAcoes`.
  */
-class SiteAcoesSearch extends SiteAcoes
+class AtualizaAcoesSearch extends AtualizaAcoes
 {
     /**
      * {@inheritdoc}
      */
-
-    public $ativo_nome;
-
     public function rules()
     {
         return [
-            [['ativo_id'], 'safe'],
-            [['url', 'ativo_nome'], 'string'],
+            [['id'], 'integer'],
+            [['data', 'ativo_atulizado', 'status'], 'safe'],
         ];
     }
 
@@ -42,8 +40,8 @@ class SiteAcoesSearch extends SiteAcoes
      */
     public function search($params)
     {
-        $query = SiteAcoes::find()
-            ->joinWith(['ativo']);
+        $query = AtualizaAcoes::find()
+            ->orderBy(['data' => \SORT_DESC]);
 
         // add conditions that should always apply here
 
@@ -54,11 +52,6 @@ class SiteAcoesSearch extends SiteAcoes
             ],
         ]);
 
-        $dataProvider->sort->attributes['ativo_nome'] = [
-            'asc' => ['ativo.codigo' => SORT_ASC],
-            'desc' => ['ativo.codigo' => SORT_DESC],
-        ];
-
         $this->load($params);
 
         if (!$this->validate()) {
@@ -68,9 +61,13 @@ class SiteAcoesSearch extends SiteAcoes
         }
 
         // grid filtering conditions
-        $query->andFilterWhere(['ativo_id' => $this->ativo_id]);
-        $query->andFilterWhere(['ilike', 'url', $this->url]);
-        $query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_nome]);
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'data' => $this->data,
+        ]);
+
+        $query->andFilterWhere(['ilike', 'ativo_atulizado', $this->ativo_atulizado])
+            ->andFilterWhere(['ilike', 'status', $this->status]);
 
         return $dataProvider;
     }
