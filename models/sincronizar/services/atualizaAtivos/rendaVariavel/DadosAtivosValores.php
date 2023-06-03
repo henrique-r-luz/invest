@@ -36,7 +36,6 @@ class DadosAtivosValores
             ->select([
                 new Expression("distinct on(ativo_id)  ativo_id "),
                 'valor',
-                // 'max(data)'
             ])
             ->orderBy([
                 'ativo_id' => \SORT_ASC,
@@ -46,12 +45,6 @@ class DadosAtivosValores
 
 
     public function getDados()
-    {
-        return $this->query();
-    }
-
-
-    public function getQuery()
     {
         return $this->query();
     }
