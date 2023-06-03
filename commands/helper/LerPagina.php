@@ -12,7 +12,12 @@ use app\models\sincronizar\SiteAcoes;
 
 class LerPagina
 {
-
+    /**
+     * local em que está os preços dos ativos
+     *
+     * @var array
+     * @author Henrique Luz
+     */
     private $xPaths  = [
         './/*[contains(concat(" ",normalize-space(@class)," ")," text-5xl ")]',
         '/html/body/div[1]/div[2]/div/div/div[2]/main/div/div[1]/div[2]/div[1]/span'
@@ -59,7 +64,6 @@ class LerPagina
         libxml_use_internal_errors($internalErrors);
         $tagPreco = new DOMXPath($documento);
         foreach ($this->xPaths as $xPath) {
-
             $tagPrecoList = $tagPreco->query($xPath);
             if ($tagPrecoList->length == 0) {
                 continue;
@@ -85,6 +89,7 @@ class LerPagina
             $valor = str_replace(".", "", $precoSite->textContent);
             $valor = str_replace(",", ".", $valor);
             $preco->valor = $valor;
+            $preco->atualiza_acoes_id = $this->atualizaAcoes->id;
             $preco->data = date("Y-m-d H:i:s");
             if ($preco->save()) {
                 $this->vetAtivos[$ativo_id]['status'] = true;

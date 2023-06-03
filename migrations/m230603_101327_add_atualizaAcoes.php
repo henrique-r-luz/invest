@@ -34,6 +34,15 @@ class m230603_101327_add_atualizaAcoes extends Migration
                 'status' => Schema::TYPE_TEXT . ' NOT NULL ',
             ]
         );
+
+        $this->addColumn('preco', 'atualiza_acoes_id', Schema::TYPE_INTEGER);
+        $this->addForeignKey(
+            'atualiza_acoes_id_fk',
+            'preco',
+            'atualiza_acoes_id',
+            'atualiza_acoes',
+            'id'
+        );
     }
 
     /**
@@ -41,6 +50,7 @@ class m230603_101327_add_atualizaAcoes extends Migration
      */
     public function safeDown()
     {
+        //$this->dropColumn('preco', 'atualiza_acoes_id');
         $this->execute("CREATE TABLE IF NOT EXISTS public.balanco_empresa_bolsa
         (
             id serial,
