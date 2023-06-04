@@ -30,7 +30,7 @@ class m230603_101327_add_atualizaAcoes extends Migration
             [
                 'id' => Schema::TYPE_PK,
                 'data' => ' timestamp without time zone NOT NULL ',
-                'ativo_atulizado' => ' jsonb ',
+                'ativo_atualizado' => ' jsonb ',
                 'status' => Schema::TYPE_TEXT . ' NOT NULL ',
             ]
         );
@@ -50,7 +50,7 @@ class m230603_101327_add_atualizaAcoes extends Migration
      */
     public function safeDown()
     {
-        //$this->dropColumn('preco', 'atualiza_acoes_id');
+        $this->dropColumn('preco', 'atualiza_acoes_id');
         $this->execute("CREATE TABLE IF NOT EXISTS public.balanco_empresa_bolsa
         (
             id serial,

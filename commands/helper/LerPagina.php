@@ -101,7 +101,7 @@ class LerPagina
             }
             break;
         }
-        $this->atualizaAcoes->ativo_atulizado  = $this->vetAtivos;
+        $this->atualizaAcoes->ativo_atualizado  = $this->vetAtivos;
         if (!$this->atualizaAcoes->save()) {
             $erro = CajuiHelper::processaErros($this->atualizaAcoes->getErrors());
             echo $erro;

@@ -22,7 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'boxTitle' => $this->title,
                 'columns' => [
 
-                        'id',
+                        [
+                                'attribute' => 'id',
+                                'options' => ['style' => 'width:7%;'],
+                        ],
                         [
                                 'attribute' => 'ativo_id',
                                 'value' => function ($model) {
@@ -34,6 +37,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'format' => 'currency',
                                 'value' => function ($model) {
                                         return $model->valor;
+                                },
+                        ],
+                        [
+                                'attribute' => 'atualiza_acoes_id',
+                                'value' => function ($model) {
+                                        return $model->atualiza_acoes_id ?? '';
                                 },
                         ],
                         [

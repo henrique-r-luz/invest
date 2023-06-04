@@ -11,7 +11,7 @@ use yii\db\ActiveRecord;
  *
  * @property int $id
  * @property string $data
- * @property string|null $ativo_atulizado
+ * @property string|null $ativo_atualizado
  * @property string $status
  */
 class AtualizaAcoes extends ActiveRecord
@@ -31,7 +31,7 @@ class AtualizaAcoes extends ActiveRecord
     {
         return [
             [['data', 'status'], 'required'],
-            [['data', 'ativo_atulizado'], 'safe'],
+            [['data', 'ativo_atualizado'], 'safe'],
             [['status'], 'string'],
             [['status'], 'validaStatus'],
         ];
@@ -45,7 +45,7 @@ class AtualizaAcoes extends ActiveRecord
         return [
             'id' => 'ID',
             'data' => 'Data',
-            'ativo_atulizado' => 'Ativo Atulizado',
+            'ativo_atualizado' => 'Ativo Atulizado',
             'status' => 'Status',
         ];
     }
@@ -70,10 +70,10 @@ class AtualizaAcoes extends ActiveRecord
     public function formataAtivoAtualizados($status)
     {
         $ativoCodigo = '';
-        if (empty($this->ativo_atulizado)) {
+        if (empty($this->ativo_atualizado)) {
             return $ativoCodigo;
         }
-        foreach ($this->ativo_atulizado as $id => $ativos) {
+        foreach ($this->ativo_atualizado as $id => $ativos) {
             if ($ativos['status'] == $status) {
                 $ativoCodigo .= $ativos['codigo'] . ', ';
             }

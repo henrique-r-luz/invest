@@ -11,13 +11,14 @@ use app\models\sincronizar\Preco;
  */
 class PrecoSearch extends Preco
 {
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'atualiza_acoes_id'], 'integer'],
             [['valor'], 'number'],
             [['ativo_id'], 'string']
         ];
@@ -66,6 +67,7 @@ class PrecoSearch extends Preco
         $query->andFilterWhere([
             'preco.id' => $this->id,
             'valor' => $this->valor,
+            'atualiza_acoes_id' => $this->atualiza_acoes_id
             //  'ativo_id' => $this->ativo_id,
         ]);
         $query->andFilterWhere(['ilike', 'ativo.nome', $this->ativo_id]);

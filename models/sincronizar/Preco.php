@@ -5,6 +5,7 @@ namespace app\models\sincronizar;
 use Yii;
 use app\models\financas\Ativo;
 use app\lib\behavior\AuditoriaBehavior;
+use app\models\sincronizar\AtualizaAcoes;
 
 /**
  * This is the model class for table "preco".
@@ -55,6 +56,7 @@ class Preco extends \yii\db\ActiveRecord
             'id' => 'Id',
             'valor' => 'Valor',
             'ativo_id' => 'Ativo',
+            'atualiza_acoes_id' => 'Atualização Id'
         ];
     }
 

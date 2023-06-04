@@ -18,7 +18,7 @@ class AtualizaAcoesSearch extends AtualizaAcoes
     {
         return [
             [['id'], 'integer'],
-            [['data', 'ativo_atulizado', 'status'], 'safe'],
+            [['data', 'ativo_atualizado', 'status'], 'safe'],
         ];
     }
 
@@ -66,7 +66,7 @@ class AtualizaAcoesSearch extends AtualizaAcoes
             'data' => $this->data,
         ]);
 
-        $query->andFilterWhere(['ilike', 'ativo_atulizado', $this->ativo_atulizado])
+        $query->andFilterWhere(['ilike', 'ativo_atualizado', $this->ativo_atualizado])
             ->andFilterWhere(['ilike', 'status', $this->status]);
 
         return $dataProvider;
