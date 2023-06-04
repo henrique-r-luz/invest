@@ -84,6 +84,8 @@ class OperacaoController extends Controller
             $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Erro ao salvar Operação!</br>' . $ex->getMessage());
         } catch (Throwable $e) {
+            echo $e->getMessage();
+            exit();
             $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado');
         } finally {

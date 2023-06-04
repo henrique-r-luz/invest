@@ -1,6 +1,6 @@
 <?php
 
-namespace app\lib\config\atualizaAtivos\rendaFixa;
+namespace app\lib\config\atualizaAtivos\rendaFixa\cdbInter;
 
 
 use app\lib\CajuiHelper;

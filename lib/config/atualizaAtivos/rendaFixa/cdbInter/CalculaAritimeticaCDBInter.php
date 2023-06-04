@@ -1,33 +1,35 @@
 <?php
 
-namespace app\lib\config\atualizaAtivos\rendaFixa;
+namespace app\lib\config\atualizaAtivos\rendaFixa\cdbInter;
 
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
+use app\lib\config\atualizaAtivos\FormOperacoes;
 use app\lib\config\atualizaAtivos\TiposOperacoes;
 use app\lib\config\atualizaAtivos\AtualizaAtivoInterface;
+use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
+use app\lib\config\atualizaAtivos\ConfigAtualizacoesAtivos;
 
 class CalculaAritimeticaCDBInter implements AtualizaAtivoInterface
 {
     private Operacao $operacao;
     private array $oldOperacao;
     private $tipoOperaco;
-    private Compra $compra;
-    private Venda $venda;
     private ItensAtivo $itensAtivo;
-    private DesdobraMais $desdobraMais;
-    private DesdobraMenos $desdobraMenos;
+    private $configAtualizacoesAtivos;
 
     public function __construct(Operacao $operacao)
     {
 
         $this->operacao = $operacao;
         $this->itensAtivo =  ItensAtivo::findOne($this->operacao->itens_ativos_id);
-        $this->compra = new Compra($this->itensAtivo, $operacao);
-        $this->venda = new Venda($this->itensAtivo, $operacao);
-        $this->desdobraMais = new DesdobraMais($this->itensAtivo, $operacao);
-        $this->desdobraMenos = new DesdobraMenos($this->itensAtivo, $operacao);
+        $formOperacoes = new FormOperacoes();
+        $formOperacoes->compra = new Compra($this->itensAtivo, $operacao);
+        $formOperacoes->venda = new Venda($this->itensAtivo, $operacao);
+        $formOperacoes->desdobraMais = new DesdobraMais($this->itensAtivo, $operacao);
+        $formOperacoes->desdobraMenos = new DesdobraMenos($this->itensAtivo, $operacao);
+        $this->configAtualizacoesAtivos = new ConfigAtualizacoesAtivos($formOperacoes);
     }
 
     public function setTipoOperacao(string $tipoOperaco)
@@ -42,7 +44,20 @@ class CalculaAritimeticaCDBInter implements AtualizaAtivoInterface
 
     public function atualiza()
     {
-        if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::COMPRA] && $this->tipoOperaco === TiposOperacoes::INSERIR) {
+        /**
+         * @var AtivosOperacoesInterface $ativosOperacoesInterface
+         */
+        $ativosOperacoesInterface = $this->configAtualizacoesAtivos->getClasse($this->operacao->tipo);
+        if ($this->tipoOperaco === TiposOperacoes::INSERIR) {
+            $ativosOperacoesInterface->insere();
+        }
+        if ($this->tipoOperaco === TiposOperacoes::UPDATE) {
+            $ativosOperacoesInterface->update($this->oldOperacao);
+        }
+        if ($this->tipoOperaco === TiposOperacoes::DELETE) {
+            $ativosOperacoesInterface->delete();
+        }
+        /*if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::COMPRA] && $this->tipoOperaco === TiposOperacoes::INSERIR) {
             $this->compra->insere();
             return;
         }
@@ -90,9 +105,9 @@ class CalculaAritimeticaCDBInter implements AtualizaAtivoInterface
         if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MENOS] && $this->tipoOperaco === TiposOperacoes::UPDATE) {
             $this->desdobraMenos->update($this->oldOperacao);
             return;
-        }
+        }*/
 
 
-        throw new InvestException('Codiação não implementadas para a classe: app\lib\config\atualizaAtivos\rendaFixa\RendaFixa');
+        //throw new InvestException('Codiação não implementadas para a classe: app\lib\config\atualizaAtivos\rendaFixa\RendaFixa');
     }
 }
