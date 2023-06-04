@@ -4,6 +4,7 @@ namespace app\lib\config\atualizaAtivos;
 
 use app\models\financas\Operacao;
 use app\lib\config\atualizaAtivos\FormOperacoes;
+use app\lib\helpers\InvestException;
 
 class ConfigAtualizacoesAtivos
 {
@@ -23,6 +24,10 @@ class ConfigAtualizacoesAtivos
 
     public function getClasse(string $operacoa)
     {
-        return $this->config[$operacoa];
+        if (isset($this->config[$operacoa])) {
+            return $this->config[$operacoa];
+        }
+
+        throw new InvestException("Operação não foi implementada na Classe: CalculaAritimeticaCDBInter");
     }
 }

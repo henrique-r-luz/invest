@@ -57,56 +57,6 @@ class CalculaAritimeticaCDBInter implements AtualizaAtivoInterface
         if ($this->tipoOperaco === TiposOperacoes::DELETE) {
             $ativosOperacoesInterface->delete();
         }
-        /*if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::COMPRA] && $this->tipoOperaco === TiposOperacoes::INSERIR) {
-            $this->compra->insere();
-            return;
-        }
-        if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::VENDA] && $this->tipoOperaco === TiposOperacoes::INSERIR) {
-            $this->venda->insere();
-            return;
-        }
-        if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MAIS] && $this->tipoOperaco === TiposOperacoes::INSERIR) {
-            $this->desdobraMais->insere();
-            return;
-        }
-        if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MENOS] && $this->tipoOperaco === TiposOperacoes::INSERIR) {
-            $this->desdobraMenos->insere();
-            return;
-        }
-        if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::COMPRA] && $this->tipoOperaco === TiposOperacoes::DELETE) {
-            $this->compra->delete();
-            return;
-        }
-        if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::VENDA] && $this->tipoOperaco === TiposOperacoes::DELETE) {
-            $this->venda->delete();
-            return;
-        }
-        if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MAIS] && $this->tipoOperaco === TiposOperacoes::DELETE) {
-            $this->desdobraMais->delete();
-            return;
-        }
-        if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MENOS] && $this->tipoOperaco === TiposOperacoes::DELETE) {
-            $this->desdobraMenos->delete();
-            return;
-        }
-
-        if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::COMPRA] && $this->tipoOperaco === TiposOperacoes::UPDATE) {
-            $this->compra->update($this->oldOperacao);
-            return;
-        }
-        if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::VENDA] && $this->tipoOperaco === TiposOperacoes::UPDATE) {
-            $this->venda->update($this->oldOperacao);
-            return;
-        }
-        if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MAIS] && $this->tipoOperaco === TiposOperacoes::UPDATE) {
-            $this->desdobraMais->update($this->oldOperacao);
-            return;
-        }
-        if ($this->operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MENOS] && $this->tipoOperaco === TiposOperacoes::UPDATE) {
-            $this->desdobraMenos->update($this->oldOperacao);
-            return;
-        }*/
-
 
         //throw new InvestException('Codiação não implementadas para a classe: app\lib\config\atualizaAtivos\rendaFixa\RendaFixa');
     }
