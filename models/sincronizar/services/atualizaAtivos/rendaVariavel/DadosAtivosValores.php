@@ -5,6 +5,7 @@ namespace app\models\sincronizar\services\atualizaAtivos\rendaVariavel;
 use yii\db\Expression;
 use app\models\sincronizar\Preco;
 use app\models\financas\ItensAtivo;
+use app\models\financas\Operacao;
 
 /**
  * Só Atualiza renda variável
@@ -28,7 +29,9 @@ class DadosAtivosValores
                 'ativo.id as ativo_id',
                 'itens_ativo.id as itens_ativo_id',
                 new Expression("itens_ativo.quantidade * preco.valor as valor"),
+                'itens_ativo.quantidade',
                 'ativo.pais',
+                'preco.valor as preco'
             ])
             ->innerJoin('ativo', 'ativo.id = itens_ativo.ativo_id')
             ->innerJoin('site_acoes', 'site_acoes.ativo_id = ativo.id')
@@ -36,6 +39,8 @@ class DadosAtivosValores
             ->where(['ativo' => true])
             ->andFilterWhere(['itens_ativo.id' => $this->itensAtivo_id]);
     }
+
+
 
 
     public function preco()

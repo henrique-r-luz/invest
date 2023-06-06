@@ -3,7 +3,7 @@
 namespace app\lib\config\atualizaAtivos\rendaVariavel;
 
 use app\models\financas\Operacao;
-use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\RecalculaAtivos;
+use app\lib\config\atualizaAtivos\AtualizaValorAtual;
 
 class CalculaItensAtivoPorData
 {
@@ -15,8 +15,7 @@ class CalculaItensAtivoPorData
             ->andWhere(['>', 'data', $operacao->data])
             ->exists()
         ) {
-            $recalculaAtivos = new RecalculaAtivos($operacao->itens_ativos_id);
-            $recalculaAtivos->alteraIntesAtivo();
+            AtualizaValorAtual::atualizaValorBrutoLiquido($operacao->itens_ativos_id);
             return true;
         }
         return false;

@@ -23,6 +23,7 @@ class RecalculaAtivos
 
     private function calculaAtivo()
     {
+
         $itensAtivos = ItensAtivo::find()
             ->where(['ativo' => true])
             ->andFilterWhere(['id' => $this->itensAtivo_id])
@@ -31,12 +32,14 @@ class RecalculaAtivos
             list($valor_compra, $quantidade) =  $this->calculaOperacoes($itensAtivo);
             $itensAtivo->quantidade = $quantidade;
             $itensAtivo->valor_compra = $valor_compra;
+            $itensAtivo->valor_liquido = $valor_compra;
             $itensAtivo->save();
         }
     }
 
     private function calculaOperacoes($itensAtivo)
     {
+
         $operacoes = Operacao::find()
             ->where(['itens_ativos_id' => $itensAtivo->id])
             ->orderBy(['data' => \SORT_ASC])
@@ -46,6 +49,7 @@ class RecalculaAtivos
         $valor_compra = 0;
         foreach ($operacoes as $operacao) {
             if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::COMPRA) {
+
                 $quantidade += $operacao->quantidade;
                 $valor_compra += $operacao->valor;
             }

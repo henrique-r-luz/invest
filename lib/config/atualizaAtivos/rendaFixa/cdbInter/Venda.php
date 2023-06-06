@@ -6,6 +6,7 @@ use app\lib\CajuiHelper;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
+use app\lib\config\atualizaAtivos\AtualizaValorAtual;
 use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
 use app\lib\config\atualizaAtivos\rendaVariavel\DeleteOperacao;
 use app\lib\config\atualizaAtivos\rendaVariavel\CalculaItensAtivoPorData;
@@ -58,8 +59,7 @@ class Venda implements AtivosOperacoesInterface
 
     public function update($oldOperacao)
     {
-        $recalculaAtivos = new RecalculaAtivos($this->itensAtivo->id);
-        $recalculaAtivos->alteraIntesAtivo();
+        AtualizaValorAtual::atualizaValorBrutoLiquido($this->itensAtivo->id);
 
     }
 }
