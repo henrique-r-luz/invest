@@ -1,32 +1,30 @@
 <?php
 
-namespace app\lib\config\atualizaAtivos\rendaVariavel;
+namespace app\lib\config\atualizaAtivos\rendaFixa\normais;
 
-use yii\db\Query;
 use app\lib\CajuiHelper;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
-
 use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
+use app\lib\config\atualizaAtivos\rendaVariavel\PrecoMedio;
+use app\lib\config\atualizaAtivos\rendaVariavel\DeleteOperacao;
+use app\lib\config\atualizaAtivos\rendaVariavel\CalculaItensAtivoPorData;
 use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\RecalculaAtivos;
-use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\AtualizaRendaVariavel;
 
-
-class Venda implements AtivosOperacoesInterface
+class VendaRendaFixa implements AtivosOperacoesInterface
 {
-    private ItensAtivo $itensAtivo;
     private Operacao $operacao;
-    private $precoMedio = 0;
+    private ItensAtivo $itensAtivo;
+    private $precoMedio;
 
-    public function __construct($itensAtivo, $operacao)
+    public function __construct(ItensAtivo $itensAtivo, Operacao $operacao)
     {
-        $this->itensAtivo = $itensAtivo;
         $this->operacao = $operacao;
+        $this->itensAtivo = $itensAtivo;
         $precoMedio = new PrecoMedio($itensAtivo, $operacao);
         $this->precoMedio =  $precoMedio->getPrecoMedio();
     }
-
     public function insere()
     {
         if (CalculaItensAtivoPorData::verificaDataOperacao($this->operacao)) {
@@ -34,21 +32,17 @@ class Venda implements AtivosOperacoesInterface
         }
         $this->itensAtivo->valor_compra -=  $this->precoMedio * $this->operacao->quantidade;
         $this->itensAtivo->quantidade -= $this->operacao->quantidade;
-        $getPrecoCadastrado = new GetPrecoCadastrado($this->itensAtivo);
-        $valorFinalAtivo = $getPrecoCadastrado->getValor();
-        $this->itensAtivo->valor_liquido = $valorFinalAtivo;
-        $this->itensAtivo->valor_bruto = $valorFinalAtivo;
+        $this->itensAtivo->valor_liquido -= $this->operacao->valor;
+        $this->itensAtivo->valor_bruto -= $this->operacao->valor;
 
         if (!$this->itensAtivo->save()) {
             $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
             throw new InvestException($erro);
         }
     }
-
-
-
     public function delete()
     {
+
         $precoMedio = $this->precoMedio;
         $operacaoAux = $this->operacao;
         DeleteOperacao::delete($operacaoAux);
@@ -61,22 +55,18 @@ class Venda implements AtivosOperacoesInterface
             $this->itensAtivo->valor_compra += $this->operacao->valor;
         }
         $this->itensAtivo->quantidade += $this->operacao->quantidade;
-        $getPrecoCadastrado = new GetPrecoCadastrado($this->itensAtivo);
-        $valorFinalAtivo = $getPrecoCadastrado->getValor();
-        $this->itensAtivo->valor_liquido = $valorFinalAtivo;
-        $this->itensAtivo->valor_bruto = $valorFinalAtivo;
+
+        $this->itensAtivo->valor_liquido += $this->operacao->valor;
+        $this->itensAtivo->valor_bruto += $this->operacao->valor;
 
         if (!$this->itensAtivo->save()) {
             $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
             throw new InvestException($erro);
         }
     }
-
     public function update($oldOperacao)
     {
         $recalculaAtivos = new RecalculaAtivos($this->itensAtivo->id);
         $recalculaAtivos->alteraIntesAtivo();
-        $atualizaRendaVariavel = new AtualizaRendaVariavel($this->itensAtivo->id);
-        $atualizaRendaVariavel->alteraIntesAtivo();
     }
 }

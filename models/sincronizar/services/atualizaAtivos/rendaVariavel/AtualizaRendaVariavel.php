@@ -11,9 +11,9 @@ class AtualizaRendaVariavel
 {
     private DadosAtivosValores $dados;
 
-    public function __construct()
+    public function __construct(?int $itensAtivo_id = null)
     {
-        $this->dados = new DadosAtivosValores();
+        $this->dados = new DadosAtivosValores($itensAtivo_id);
     }
 
     public function alteraIntesAtivo()

@@ -8,6 +8,8 @@ use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
 use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
 use app\lib\config\atualizaAtivos\rendaVariavel\DeleteOperacao;
+use app\lib\config\atualizaAtivos\rendaVariavel\CalculaItensAtivoPorData;
+use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\RecalculaAtivos;
 
 class Venda implements AtivosOperacoesInterface
 {
@@ -23,7 +25,9 @@ class Venda implements AtivosOperacoesInterface
 
     public function insere()
     {
-
+        if (CalculaItensAtivoPorData::verificaDataOperacao($this->operacao)) {
+            return true;
+        }
         $this->itensAtivo->valor_compra -= $this->operacao->valor;
         $this->itensAtivo->quantidade -= $this->operacao->quantidade;
         $this->itensAtivo->valor_liquido -= $this->operacao->valor;
@@ -37,6 +41,11 @@ class Venda implements AtivosOperacoesInterface
 
     public function delete()
     {
+        $aux = $this->operacao;
+        DeleteOperacao::delete($aux);
+        if (CalculaItensAtivoPorData::verificaDataOperacao($this->operacao)) {
+            return true;
+        }
         $this->itensAtivo->valor_compra += $this->operacao->valor;
         $this->itensAtivo->quantidade += $this->operacao->quantidade;
         $this->itensAtivo->valor_liquido += $this->operacao->valor;
@@ -45,19 +54,12 @@ class Venda implements AtivosOperacoesInterface
             $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
             throw new InvestException($erro);
         }
-        DeleteOperacao::delete($this->operacao);
     }
 
     public function update($oldOperacao)
     {
-        $this->itensAtivo->valor_compra = ($this->itensAtivo->valor_compra + $oldOperacao['valor']) - $this->operacao->valor; //abs($this->operacao->valor  - $oldOperacao['valor']);
-        $this->itensAtivo->quantidade = ($this->itensAtivo->quantidade + $oldOperacao['quantidade']) - $this->operacao->quantidade;
-        $this->itensAtivo->valor_liquido = ($this->itensAtivo->valor_liquido + $oldOperacao['valor']) - $this->operacao->valor;
-        $this->itensAtivo->valor_bruto = ($this->itensAtivo->valor_bruto + $oldOperacao['valor']) - $this->operacao->valor;
+        $recalculaAtivos = new RecalculaAtivos($this->itensAtivo->id);
+        $recalculaAtivos->alteraIntesAtivo();
 
-        if (!$this->itensAtivo->save()) {
-            $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
-            throw new InvestException($erro);
-        }
     }
 }

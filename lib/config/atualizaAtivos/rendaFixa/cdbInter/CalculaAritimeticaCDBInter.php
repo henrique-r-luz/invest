@@ -4,12 +4,15 @@ namespace app\lib\config\atualizaAtivos\rendaFixa\cdbInter;
 
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
-use app\lib\helpers\InvestException;
 use app\lib\config\atualizaAtivos\FormOperacoes;
 use app\lib\config\atualizaAtivos\TiposOperacoes;
+use app\lib\config\atualizaAtivos\rendaVariavel\Venda;
+use app\lib\config\atualizaAtivos\rendaVariavel\Compra;
 use app\lib\config\atualizaAtivos\AtualizaAtivoInterface;
 use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
 use app\lib\config\atualizaAtivos\ConfigAtualizacoesAtivos;
+use app\lib\config\atualizaAtivos\rendaVariavel\DesdobraMais;
+use app\lib\config\atualizaAtivos\rendaVariavel\DesdobraMenos;
 
 class CalculaAritimeticaCDBInter implements AtualizaAtivoInterface
 {
@@ -57,7 +60,5 @@ class CalculaAritimeticaCDBInter implements AtualizaAtivoInterface
         if ($this->tipoOperaco === TiposOperacoes::DELETE) {
             $ativosOperacoesInterface->delete();
         }
-
-        //throw new InvestException('Codiação não implementadas para a classe: app\lib\config\atualizaAtivos\rendaFixa\RendaFixa');
     }
 }

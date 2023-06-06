@@ -8,7 +8,6 @@ use app\lib\helpers\InvestException;
 
 class ConfigAtualizacoesAtivos
 {
-    //private FormOperacoes $formOperacoes;
     private array $config;
 
     public function __construct(FormOperacoes $formOperacoes)

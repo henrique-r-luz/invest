@@ -14,6 +14,13 @@ use app\models\financas\ItensAtivo;
 class DadosAtivosValores
 {
 
+    private $itensAtivo_id;
+
+    public function __construct($itensAtivo_id)
+    {
+        $this->itensAtivo_id = $itensAtivo_id;
+    }
+
     private function query()
     {
         return ItensAtivo::find()
@@ -26,7 +33,8 @@ class DadosAtivosValores
             ->innerJoin('ativo', 'ativo.id = itens_ativo.ativo_id')
             ->innerJoin('site_acoes', 'site_acoes.ativo_id = ativo.id')
             ->innerJoin(['preco' => $this->preco()], 'preco.ativo_id = ativo.id')
-            ->where(['ativo' => true]);
+            ->where(['ativo' => true])
+            ->andFilterWhere(['itens_ativo.id' => $this->itensAtivo_id]);
     }
 
 

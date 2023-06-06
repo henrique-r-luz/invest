@@ -2,10 +2,15 @@
 
 namespace app\lib\config\atualizaAtivos\rendaVariavel;
 
+use app\lib\CajuiHelper;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
+use app\lib\helpers\InvestException;
 use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
-use app\lib\config\atualizaAtivos\InsereDesdobramentoMenos;
+use app\lib\config\atualizaAtivos\rendaVariavel\DeleteOperacao;
+use app\lib\config\atualizaAtivos\rendaVariavel\CalculaItensAtivoPorData;
+use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\RecalculaAtivos;
+use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\AtualizaRendaVariavel;
 
 class DesdobraMenos implements AtivosOperacoesInterface
 {
@@ -21,15 +26,34 @@ class DesdobraMenos implements AtivosOperacoesInterface
 
     public function insere()
     {
-        InsereDesdobramentoMenos::insere($this->itensAtivo, $this->operacao);
+        if (CalculaItensAtivoPorData::verificaDataOperacao($this->operacao)) {
+            return true;
+        }
+        $this->itensAtivo->quantidade -= $this->operacao->quantidade;
+        if (!$this->itensAtivo->save()) {
+            $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
+            throw new InvestException($erro);
+        }
     }
 
     public function delete()
     {
-        InsereDesdobramentoMenos::delete($this->itensAtivo, $this->operacao);
+        $aux = $this->operacao;
+        DeleteOperacao::delete($aux);
+        if (CalculaItensAtivoPorData::verificaDataOperacao($this->operacao)) {
+            return true;
+        }
+        $this->itensAtivo->quantidade += $this->operacao->quantidade;
+        if (!$this->itensAtivo->save()) {
+            $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
+            throw new InvestException($erro);
+        }
     }
     public function update($oldOperacao)
     {
-        InsereDesdobramentoMenos::update($this->itensAtivo, $this->operacao, $oldOperacao);
+        $recalculaAtivos = new RecalculaAtivos($this->itensAtivo->id);
+        $recalculaAtivos->alteraIntesAtivo();
+        $atualizaRendaVariavel = new AtualizaRendaVariavel($this->itensAtivo->id);
+        $atualizaRendaVariavel->alteraIntesAtivo();
     }
 }

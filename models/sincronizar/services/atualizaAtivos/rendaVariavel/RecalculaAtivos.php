@@ -56,7 +56,7 @@ class RecalculaAtivos
                 $quantidade -= $operacao->quantidade;
             }
             if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::VENDA) {
-                if ($itensAtivo->ativos->classesOperacoes->nome == ClassesOperacoes::CALCULA_ARITIMETICA) {
+                if ($itensAtivo->ativos->classesOperacoes->nome == ClassesOperacoes::CALCULA_ARITIMETICA_CDB_INTER) {
                     $quantidade -= $operacao->quantidade;
                     $valor_compra -= $operacao->valor;
                     continue;

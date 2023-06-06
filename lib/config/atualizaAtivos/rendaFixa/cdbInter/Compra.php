@@ -10,6 +10,7 @@ use app\lib\helpers\InvestException;
 use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
 use app\lib\config\atualizaAtivos\rendaVariavel\DeleteOperacao;
 use app\lib\config\atualizaAtivos\rendaVariavel\CalculaItensAtivoPorData;
+use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\RecalculaAtivos;
 
 class Compra implements AtivosOperacoesInterface
 {
@@ -61,17 +62,7 @@ class Compra implements AtivosOperacoesInterface
 
     public function update($oldOperacao)
     {
-        if (CalculaItensAtivoPorData::verificaDataOperacao($this->operacao)) {
-            return true;
-        }
-        $this->itensAtivo->valor_compra = ($this->itensAtivo->valor_compra - $oldOperacao['valor']) + $this->operacao->valor; //$operacao->valor  - $oldOperacao['valor'];
-        $this->itensAtivo->quantidade = ($this->itensAtivo->quantidade - $oldOperacao['quantidade']) + $this->operacao->quantidade;
-        $this->itensAtivo->valor_liquido = ($this->itensAtivo->valor_liquido - $oldOperacao['valor']) + $this->operacao->valor;
-        $this->itensAtivo->valor_bruto = ($this->itensAtivo->valor_bruto - $oldOperacao['valor']) + $this->operacao->valor;
-
-        if (!$this->itensAtivo->save()) {
-            $erro  = CajuiHelper::processaErros($this->itensAtivo->getErrors());
-            throw new InvestException($erro);
-        }
+        $recalculaAtivos = new RecalculaAtivos($this->itensAtivo->id);
+        $recalculaAtivos->alteraIntesAtivo();
     }
 }

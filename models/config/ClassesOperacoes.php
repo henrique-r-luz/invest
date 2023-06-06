@@ -17,7 +17,10 @@ class ClassesOperacoes extends \yii\db\ActiveRecord
      */
 
     const CALCULA_POR_MEDIA_PRECO = 'app\lib\config\atualizaAtivos\rendaVariavel\CalculaPorMediaPreco';
-    const CALCULA_ARITIMETICA = 'app\lib\config\atualizaAtivos\rendaFixa\CalculaAritimetica';
+    const CALCULA_ARITIMETICA = 'app\lib\config\atualizaAtivos\rendaFixa\normais\CalculaAritimetica';
+    const CALCULA_ARITIMETICA_CDB_INTER = 'app\lib\config\atualizaAtivos\rendaFixa\cdbInter\CalculaAritimeticaCDBInter';
+
+
 
     public static function tableName()
     {
