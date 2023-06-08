@@ -6,11 +6,11 @@ use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
 use app\lib\config\atualizaAtivos\FormOperacoes;
 use app\lib\config\atualizaAtivos\TiposOperacoes;
-use app\lib\config\atualizaAtivos\rendaVariavel\Venda;
-use app\lib\config\atualizaAtivos\rendaVariavel\Compra;
 use app\lib\config\atualizaAtivos\AtualizaAtivoInterface;
 use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
 use app\lib\config\atualizaAtivos\ConfigAtualizacoesAtivos;
+use app\lib\config\atualizaAtivos\rendaFixa\cdbInter\Venda;
+use app\lib\config\atualizaAtivos\rendaFixa\cdbInter\Compra;
 use app\lib\config\atualizaAtivos\rendaVariavel\DesdobraMais;
 use app\lib\config\atualizaAtivos\rendaVariavel\DesdobraMenos;
 
