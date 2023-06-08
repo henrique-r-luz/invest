@@ -15,7 +15,7 @@ class RecalculaAtivosTest extends Unit
         /**
          * usuário admin
          */
-        Yii::$app->user->login(User::findOne(2), 1000);
+        Yii::$app->user->login(User::findOne(Yii::$app->params['userAdminPadraoId']), 1000);
     }
 
     // tests

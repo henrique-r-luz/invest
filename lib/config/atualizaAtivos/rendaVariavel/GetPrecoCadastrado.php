@@ -20,7 +20,9 @@ class GetPrecoCadastrado
         /**
          * @var Preco $precoAtivo
          */
-        $precoAtivo = Preco::find()->where(['ativo_id' => $this->itensAtivo->ativo_id])->one();
+        $precoAtivo = Preco::find()->where(['ativo_id' => $this->itensAtivo->ativo_id])
+            ->orderBy(['data' => \SORT_DESC])
+            ->one();
         if (empty($precoAtivo)) {
             throw new InvestException('Nenhum cadastro de preço foi encontrato para o ativo');
         }
