@@ -1,4 +1,4 @@
-FROM php:8.0.5-fpm
+FROM php:8.2.1-fpm
 
 # Variáveis definidas no docker-compose.yml
 ARG user
@@ -34,11 +34,11 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 #RUN docker-php-ext-install curl gd intl mbstring opcache pdo_pgsql xml zip
 RUN docker-php-ext-install curl gd intl mbstring opcache pdo_pgsql zip
 
-ARG IMAGICK_LAST_COMMIT='448c1cd0d58ba2838b9b6dff71c9b7e70a401b90'
+#ARG IMAGICK_LAST_COMMIT='448c1cd0d58ba2838b9b6dff71c9b7e70a401b90'
 
-RUN mkdir -p /usr/src/php/ext/imagick && \
-    curl -fsSL https://github.com/Imagick/imagick/archive/${IMAGICK_LAST_COMMIT}.tar.gz | tar xvz -C /usr/src/php/ext/imagick --strip 1 && \
-    docker-php-ext-install imagick
+#RUN mkdir -p /usr/src/php/ext/imagick && \
+#    curl -fsSL https://github.com/Imagick/imagick/archive/${IMAGICK_LAST_COMMIT}.tar.gz | tar xvz -C /usr/src/php/ext/imagick --strip 1 && \
+#    docker-php-ext-install imagick
 
 
 # Copiando última versão do Composer
@@ -50,7 +50,9 @@ RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
 
-RUN pecl install xdebug
+# Instalação do Xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
 
 
 # Setando diretório de trabalho
