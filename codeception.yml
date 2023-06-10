@@ -17,6 +17,16 @@ modules:
             user: "postgres"
             password: "invest"
             cleanup: true # run populator before each test
+coverage:
+    enabled: true
+    whitelist:
+        include:
+            - models/*
+            - controllers/*
+            - commands/*
+            - lib/*
+            - views/*
+    #
 # To enable code coverage:
 #coverage:
 #    #c3_url: http://localhost:8080/index-test.php/
