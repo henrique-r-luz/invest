@@ -104,7 +104,7 @@ class Operacao extends ActiveRecord
             'quantidade' => 'Quantidade',
             'valor' => 'Valor',
             'data' => 'Data',
-            'itens_ativos_id' => 'Ativo ID',
+            'itens_ativos_id' => 'Ativo',
         ];
     }
 
