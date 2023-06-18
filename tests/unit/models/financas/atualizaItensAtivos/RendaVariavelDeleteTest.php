@@ -22,15 +22,31 @@ class RendaVariavelDeleteTest extends Unit
     {
         //deleta a última compra do itens_ativo_id = 31
         $idOperacao1 = 806;
-
         $respEsperado1 = [
             'quantidade' => 615,
             'valor_compra' => 4823.10,
             'valor_bruto' => 4993.80
         ];
 
+        $idOperacao2 = 783;
+        $respEsperado2 = [
+            'quantidade' => 97,
+            'valor_compra' =>  2067.69,
+            'valor_bruto' => 3968.27
+        ];
+
+
+        $idOperacao3 = 783;
+        $respEsperado3 = [
+            'quantidade' => 97,
+            'valor_compra' =>  2067.69,
+            'valor_bruto' => 3968.27
+        ];
+
         return [
-            'Remove a última operação de compra de um ativo' => [$idOperacao1, $respEsperado1]
+            'Remove a última operação de compra de um ativo' => [$idOperacao1, $respEsperado1],
+            'Remove a última operação de venda de um ativo' => [$idOperacao2, $respEsperado2],
+            //'Remove a última operação de desdobramento mais de um ativo' => [$idOperacao2, $respEsperado2]
         ];
     }
 
