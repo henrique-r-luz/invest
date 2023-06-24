@@ -3,10 +3,21 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 
-$skin  = (YII_ENV_DEV) ? 'navbar-lightblue' : 'navbar-success';
+//$skin  = (YII_ENV_DEV) ? 'navbar-lightblue' : 'navbar-success';
+if (YII_ENV_TEST) {
+    $skin  = 'navbar-warning';
+}
+if (YII_ENV_DEV) {
+    $skin  = 'navbar-lightblue';
+}
+if (YII_ENV_PROD) {
+    $skin  = 'navbar-success';
+}
+
+
 $user = '';
-if(!empty(Yii::$app->user->id)){
-    $user = Yii::$app->user->identity->username; 
+if (!empty(Yii::$app->user->id)) {
+    $user = Yii::$app->user->identity->username;
 }
 ?>
 <!-- Navbar -->
@@ -23,7 +34,7 @@ if(!empty(Yii::$app->user->id)){
         <!-- Messages Dropdown Menu -->
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item">
-            <?= Html::a('<i class="fas fa-user-lock"></i> '.$user, Url::toRoute(['site/logout']), ['class' => "nav-link"]) ?>
+            <?= Html::a('<i class="fas fa-user-lock"></i> ' . $user, Url::toRoute(['site/logout']), ['class' => "nav-link"]) ?>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">

@@ -1305,6 +1305,87 @@ COPY public.auditoria (id, model, operacao, changes, user_id, created_at) FROM s
 10231	app\\models\\financas\\ItensAtivo	update	{"id": 51, "ativo": true, "ativo_id": 54, "quantidade": "1.61444", "valor_bruto": "200.9170580", "valor_compra": "181.78", "investidor_id": 2, "valor_liquido": "200.9170580"}	2	1687100026
 10232	app\\models\\financas\\ItensAtivo	update	{"id": 50, "ativo": true, "ativo_id": 55, "quantidade": "6.13338", "valor_bruto": "384.5015922", "valor_compra": "380.8", "investidor_id": 2, "valor_liquido": "384.5015922"}	2	1687100026
 10233	app\\models\\financas\\ItensAtivo	update	{"id": 52, "ativo": true, "ativo_id": 55, "quantidade": "28.52771", "valor_bruto": "1788.4021399", "valor_compra": "1912.68", "investidor_id": 1, "valor_liquido": "1788.4021399"}	2	1687100026
+10234	app\\models\\financas\\ItensAtivo	update	{"id": 22, "ativo": true, "ativo_id": 36, "quantidade": 0.33, "valor_bruto": "1068.21", "valor_compra": 984.95, "investidor_id": 1, "valor_liquido": 984.95}	2	1687561447
+10235	app\\models\\financas\\ItensAtivo	update	{"id": 47, "ativo": true, "ativo_id": 52, "quantidade": 2.8000000000000003, "valor_bruto": "35593.75", "valor_compra": 32934.780000000006, "investidor_id": 1, "valor_liquido": 32934.780000000006}	2	1687561447
+10236	app\\models\\financas\\ItensAtivo	update	{"id": 55, "ativo": true, "ativo_id": 57, "quantidade": 0.08, "valor_bruto": "1033.09", "valor_compra": 1033.09, "investidor_id": 2, "valor_liquido": 1033.09}	2	1687561447
+10237	app\\models\\financas\\ItensAtivo	update	{"id": 53, "ativo": true, "ativo_id": 57, "quantidade": 0.71, "valor_bruto": "7992.3", "valor_compra": 9008.13, "investidor_id": 1, "valor_liquido": 9008.13}	2	1687561447
+10238	app\\models\\financas\\ItensAtivo	update	{"id": 54, "ativo": true, "ativo_id": 52, "quantidade": 0.08, "valor_bruto": "1012.86", "valor_compra": 1012.86, "investidor_id": 2, "valor_liquido": 1012.86}	2	1687561447
+10239	app\\models\\financas\\ItensAtivo	update	{"id": 23, "ativo": true, "ativo_id": 41, "quantidade": 0.7299999999999999, "valor_bruto": "8385.16", "valor_compra": 8385.16, "investidor_id": 2, "valor_liquido": 8385.16}	2	1687561447
+10240	app\\models\\financas\\ItensAtivo	update	{"id": 27, "ativo": true, "ativo_id": 21, "quantidade": 71, "valor_bruto": "2904.61", "valor_compra": 1509.9557966101697, "investidor_id": 1, "valor_liquido": 1509.9557966101697}	2	1687561447
+10241	app\\models\\financas\\ItensAtivo	update	{"id": 31, "ativo": true, "ativo_id": 23, "quantidade": 616, "valor_bruto": "5001.92", "valor_compra": 4831.209999999999, "investidor_id": 1, "valor_liquido": 4831.209999999999}	2	1687561447
+10242	app\\models\\financas\\ItensAtivo	update	{"id": 8, "ativo": true, "ativo_id": 24, "quantidade": 66, "valor_bruto": "1875.72", "valor_compra": 2137.349577464789, "investidor_id": 1, "valor_liquido": 2137.349577464789}	2	1687561447
+10243	app\\models\\financas\\ItensAtivo	update	{"id": 9, "ativo": true, "ativo_id": 25, "quantidade": 253, "valor_bruto": "2532.53", "valor_compra": 3667.1575510204075, "investidor_id": 1, "valor_liquido": 3667.1575510204075}	2	1687561447
+10244	app\\models\\financas\\ItensAtivo	update	{"id": 45, "ativo": true, "ativo_id": 29, "quantidade": 1.339, "valor_bruto": "141.35823", "valor_compra": 195.19, "investidor_id": 2, "valor_liquido": 195.19}	2	1687561447
+10245	app\\models\\financas\\ItensAtivo	update	{"id": 40, "ativo": true, "ativo_id": 33, "quantidade": 200.19100000000006, "valor_bruto": "18205.01", "valor_compra": 16686.979999999996, "investidor_id": 1, "valor_liquido": 16686.979999999996}	2	1687561447
+10246	app\\models\\financas\\ItensAtivo	update	{"id": 20, "ativo": true, "ativo_id": 11, "quantidade": 1, "valor_bruto": "1372.36", "valor_compra": 1000, "investidor_id": 1, "valor_liquido": 1000}	2	1687561447
+10247	app\\models\\financas\\ItensAtivo	update	{"id": 21, "ativo": true, "ativo_id": 3, "quantidade": 3.54, "valor_bruto": "12899.76", "valor_compra": 7963.17, "investidor_id": 1, "valor_liquido": 7963.17}	2	1687561447
+10248	app\\models\\financas\\ItensAtivo	update	{"id": 26, "ativo": true, "ativo_id": 16, "quantidade": 427, "valor_bruto": "3744.79", "valor_compra": 5110.2303999999995, "investidor_id": 1, "valor_liquido": 5110.2303999999995}	2	1687561447
+10249	app\\models\\financas\\ItensAtivo	update	{"id": 28, "ativo": true, "ativo_id": 17, "quantidade": 288, "valor_bruto": "4066.56", "valor_compra": 4473.49, "investidor_id": 1, "valor_liquido": 4473.49}	2	1687561447
+10250	app\\models\\financas\\ItensAtivo	update	{"id": 29, "ativo": true, "ativo_id": 18, "quantidade": 306, "valor_bruto": "3552.66", "valor_compra": 5180.159999999999, "investidor_id": 1, "valor_liquido": 5180.159999999999}	2	1687561447
+10251	app\\models\\financas\\ItensAtivo	update	{"id": 30, "ativo": true, "ativo_id": 19, "quantidade": 85, "valor_bruto": "3485.85", "valor_compra": 3712.14144144144, "investidor_id": 1, "valor_liquido": 3712.14144144144}	2	1687561447
+10252	app\\models\\financas\\ItensAtivo	update	{"id": 25, "ativo": true, "ativo_id": 20, "quantidade": 174, "valor_bruto": "2510.82", "valor_compra": 4350.53, "investidor_id": 1, "valor_liquido": 4350.53}	2	1687561447
+10253	app\\models\\financas\\ItensAtivo	update	{"id": 32, "ativo": true, "ativo_id": 29, "quantidade": 17.2086, "valor_bruto": "1816.711902", "valor_compra": 2783.3500000000004, "investidor_id": 1, "valor_liquido": 2783.3500000000004}	2	1687561447
+10254	app\\models\\financas\\ItensAtivo	update	{"id": 33, "ativo": true, "ativo_id": 30, "quantidade": 21.2842, "valor_bruto": "2275.068138", "valor_compra": 2111.97, "investidor_id": 1, "valor_liquido": 2111.97}	2	1687561447
+10255	app\\models\\financas\\ItensAtivo	update	{"id": 41, "ativo": true, "ativo_id": 30, "quantidade": 2.9489300000000003, "valor_bruto": "315.2111277", "valor_compra": 376.96000000000004, "investidor_id": 2, "valor_liquido": 376.96000000000004}	2	1687561447
+10256	app\\models\\financas\\ItensAtivo	update	{"id": 34, "ativo": true, "ativo_id": 32, "quantidade": 10.22714, "valor_bruto": "3121.1185852", "valor_compra": 2434.7699999999995, "investidor_id": 1, "valor_liquido": 2434.7699999999995}	2	1687561447
+10257	app\\models\\financas\\ItensAtivo	update	{"id": 39, "ativo": true, "ativo_id": 32, "quantidade": 1.3328600000000002, "valor_bruto": "406.7622148", "valor_compra": 365.53999999999996, "investidor_id": 2, "valor_liquido": 365.53999999999996}	2	1687561447
+10258	app\\models\\financas\\ItensAtivo	update	{"id": 35, "ativo": true, "ativo_id": 34, "quantidade": 8.75256, "valor_bruto": "2411.7679080", "valor_compra": 2342.8399999999997, "investidor_id": 1, "valor_liquido": 2342.8399999999997}	2	1687561447
+10259	app\\models\\financas\\ItensAtivo	update	{"id": 42, "ativo": true, "ativo_id": 35, "quantidade": 1.61888, "valor_bruto": "270.7900576", "valor_compra": 171.02, "investidor_id": 2, "valor_liquido": 171.02}	2	1687561447
+10260	app\\models\\financas\\ItensAtivo	update	{"id": 36, "ativo": true, "ativo_id": 35, "quantidade": 21.396400000000003, "valor_bruto": "3578.975828", "valor_compra": 1517.678203181342, "investidor_id": 1, "valor_liquido": 1517.678203181342}	2	1687561447
+10261	app\\models\\financas\\ItensAtivo	update	{"id": 37, "ativo": true, "ativo_id": 37, "quantidade": 70.21576000000002, "valor_bruto": "2649.2406248", "valor_compra": 2387.24, "investidor_id": 1, "valor_liquido": 2387.24}	2	1687561447
+10262	app\\models\\financas\\ItensAtivo	update	{"id": 38, "ativo": true, "ativo_id": 37, "quantidade": 10.82491, "valor_bruto": "408.4238543", "valor_compra": 373, "investidor_id": 2, "valor_liquido": 373}	2	1687561447
+10263	app\\models\\financas\\ItensAtivo	update	{"id": 10, "ativo": true, "ativo_id": 38, "quantidade": 48, "valor_bruto": "7799.52", "valor_compra": 8095.378039215686, "investidor_id": 1, "valor_liquido": 8095.378039215686}	2	1687561447
+10264	app\\models\\financas\\ItensAtivo	update	{"id": 11, "ativo": true, "ativo_id": 39, "quantidade": 80, "valor_bruto": "8176.80", "valor_compra": 8406.587307692309, "investidor_id": 1, "valor_liquido": 8406.587307692309}	2	1687561447
+10265	app\\models\\financas\\ItensAtivo	update	{"id": 14, "ativo": true, "ativo_id": 39, "quantidade": 11, "valor_bruto": "1124.31", "valor_compra": 1053.18, "investidor_id": 2, "valor_liquido": 1053.18}	2	1687561447
+10266	app\\models\\financas\\ItensAtivo	update	{"id": 12, "ativo": true, "ativo_id": 40, "quantidade": 69, "valor_bruto": "7112.52", "valor_compra": 7105.83443139785, "investidor_id": 1, "valor_liquido": 7105.83443139785}	2	1687561447
+10267	app\\models\\financas\\ItensAtivo	update	{"id": 17, "ativo": true, "ativo_id": 40, "quantidade": 10, "valor_bruto": "1030.80", "valor_compra": 1022, "investidor_id": 2, "valor_liquido": 1022}	2	1687561447
+10268	app\\models\\financas\\ItensAtivo	update	{"id": 13, "ativo": true, "ativo_id": 42, "quantidade": 174, "valor_bruto": "14414.16", "valor_compra": 18020.090099999998, "investidor_id": 1, "valor_liquido": 18020.090099999998}	2	1687561447
+10269	app\\models\\financas\\ItensAtivo	update	{"id": 43, "ativo": true, "ativo_id": 49, "quantidade": 129, "valor_bruto": "14490.57", "valor_compra": 15093.679979999995, "investidor_id": 1, "valor_liquido": 15093.679979999995}	2	1687561447
+10270	app\\models\\financas\\ItensAtivo	update	{"id": 44, "ativo": true, "ativo_id": 50, "quantidade": 1.35168, "valor_bruto": "320.0643072", "valor_compra": 277, "investidor_id": 1, "valor_liquido": 277}	2	1687561447
+10271	app\\models\\financas\\ItensAtivo	update	{"id": 46, "ativo": true, "ativo_id": 51, "quantidade": 0.01867941, "valor_bruto": "2753.04616344", "valor_compra": 2187, "investidor_id": 1, "valor_liquido": 2187}	2	1687561447
+10272	app\\models\\financas\\ItensAtivo	update	{"id": 48, "ativo": true, "ativo_id": 53, "quantidade": 317, "valor_bruto": "2472.60", "valor_compra": 2565.677596439169, "investidor_id": 1, "valor_liquido": 2565.677596439169}	2	1687561447
+10273	app\\models\\financas\\ItensAtivo	update	{"id": 49, "ativo": true, "ativo_id": 54, "quantidade": 16.726, "valor_bruto": "2081.55070", "valor_compra": 2006.81, "investidor_id": 1, "valor_liquido": 2006.81}	2	1687561447
+10274	app\\models\\financas\\ItensAtivo	update	{"id": 51, "ativo": true, "ativo_id": 54, "quantidade": 1.61444, "valor_bruto": "200.9170580", "valor_compra": 181.78, "investidor_id": 2, "valor_liquido": 181.78}	2	1687561447
+10275	app\\models\\financas\\ItensAtivo	update	{"id": 50, "ativo": true, "ativo_id": 55, "quantidade": 6.13338, "valor_bruto": "384.5015922", "valor_compra": 380.8, "investidor_id": 2, "valor_liquido": 380.8}	2	1687561447
+10276	app\\models\\financas\\ItensAtivo	update	{"id": 52, "ativo": true, "ativo_id": 55, "quantidade": 28.52771, "valor_bruto": "1788.4021399", "valor_compra": 1912.6799999999998, "investidor_id": 1, "valor_liquido": 1912.6799999999998}	2	1687561447
+10277	app\\models\\financas\\ItensAtivo	update	{"id": 26, "ativo": true, "ativo_id": 16, "quantidade": "427", "valor_bruto": "3744.79", "valor_compra": "5110.2304", "investidor_id": 1, "valor_liquido": "3744.79"}	2	1687561454
+10278	app\\models\\financas\\ItensAtivo	update	{"id": 28, "ativo": true, "ativo_id": 17, "quantidade": "288", "valor_bruto": "4066.56", "valor_compra": "4473.49", "investidor_id": 1, "valor_liquido": "4066.56"}	2	1687561454
+10279	app\\models\\financas\\ItensAtivo	update	{"id": 29, "ativo": true, "ativo_id": 18, "quantidade": "306", "valor_bruto": "3552.66", "valor_compra": "5180.16", "investidor_id": 1, "valor_liquido": "3552.66"}	2	1687561454
+10280	app\\models\\financas\\ItensAtivo	update	{"id": 30, "ativo": true, "ativo_id": 19, "quantidade": "85", "valor_bruto": "3485.85", "valor_compra": "3712.1414414414", "investidor_id": 1, "valor_liquido": "3485.85"}	2	1687561454
+10281	app\\models\\financas\\ItensAtivo	update	{"id": 25, "ativo": true, "ativo_id": 20, "quantidade": "174", "valor_bruto": "2510.82", "valor_compra": "4350.53", "investidor_id": 1, "valor_liquido": "2510.82"}	2	1687561454
+10282	app\\models\\financas\\ItensAtivo	update	{"id": 27, "ativo": true, "ativo_id": 21, "quantidade": "71", "valor_bruto": "2904.61", "valor_compra": "1509.9557966102", "investidor_id": 1, "valor_liquido": "2904.61"}	2	1687561454
+10283	app\\models\\financas\\ItensAtivo	update	{"id": 31, "ativo": true, "ativo_id": 23, "quantidade": "616", "valor_bruto": "5001.92", "valor_compra": "4831.21", "investidor_id": 1, "valor_liquido": "5001.92"}	2	1687561454
+10284	app\\models\\financas\\ItensAtivo	update	{"id": 8, "ativo": true, "ativo_id": 24, "quantidade": "66", "valor_bruto": "1875.72", "valor_compra": "2137.3495774648", "investidor_id": 1, "valor_liquido": "1875.72"}	2	1687561454
+10285	app\\models\\financas\\ItensAtivo	update	{"id": 9, "ativo": true, "ativo_id": 25, "quantidade": "253", "valor_bruto": "2532.53", "valor_compra": "3667.1575510204", "investidor_id": 1, "valor_liquido": "2532.53"}	2	1687561454
+10286	app\\models\\financas\\ItensAtivo	update	{"id": 45, "ativo": true, "ativo_id": 29, "quantidade": "1.339", "valor_bruto": "141.35823", "valor_compra": "195.19", "investidor_id": 2, "valor_liquido": "141.35823"}	2	1687561454
+10287	app\\models\\financas\\ItensAtivo	update	{"id": 32, "ativo": true, "ativo_id": 29, "quantidade": "17.2086", "valor_bruto": "1816.711902", "valor_compra": "2783.35", "investidor_id": 1, "valor_liquido": "1816.711902"}	2	1687561454
+10288	app\\models\\financas\\ItensAtivo	update	{"id": 33, "ativo": true, "ativo_id": 30, "quantidade": "21.2842", "valor_bruto": "2275.068138", "valor_compra": "2111.97", "investidor_id": 1, "valor_liquido": "2275.068138"}	2	1687561454
+10289	app\\models\\financas\\ItensAtivo	update	{"id": 41, "ativo": true, "ativo_id": 30, "quantidade": "2.94893", "valor_bruto": "315.2111277", "valor_compra": "376.96", "investidor_id": 2, "valor_liquido": "315.2111277"}	2	1687561454
+10290	app\\models\\financas\\ItensAtivo	update	{"id": 34, "ativo": true, "ativo_id": 32, "quantidade": "10.22714", "valor_bruto": "3121.1185852", "valor_compra": "2434.77", "investidor_id": 1, "valor_liquido": "3121.1185852"}	2	1687561454
+10291	app\\models\\financas\\ItensAtivo	update	{"id": 39, "ativo": true, "ativo_id": 32, "quantidade": "1.33286", "valor_bruto": "406.7622148", "valor_compra": "365.54", "investidor_id": 2, "valor_liquido": "406.7622148"}	2	1687561454
+10292	app\\models\\financas\\ItensAtivo	update	{"id": 35, "ativo": true, "ativo_id": 34, "quantidade": "8.75256", "valor_bruto": "2411.7679080", "valor_compra": "2342.84", "investidor_id": 1, "valor_liquido": "2411.7679080"}	2	1687561454
+10293	app\\models\\financas\\ItensAtivo	update	{"id": 42, "ativo": true, "ativo_id": 35, "quantidade": "1.61888", "valor_bruto": "270.7900576", "valor_compra": "171.02", "investidor_id": 2, "valor_liquido": "270.7900576"}	2	1687561454
+10294	app\\models\\financas\\ItensAtivo	update	{"id": 36, "ativo": true, "ativo_id": 35, "quantidade": "21.3964", "valor_bruto": "3578.975828", "valor_compra": "1517.6782031813", "investidor_id": 1, "valor_liquido": "3578.975828"}	2	1687561454
+10295	app\\models\\financas\\ItensAtivo	update	{"id": 37, "ativo": true, "ativo_id": 37, "quantidade": "70.21576", "valor_bruto": "2649.2406248", "valor_compra": "2387.24", "investidor_id": 1, "valor_liquido": "2649.2406248"}	2	1687561454
+10296	app\\models\\financas\\ItensAtivo	update	{"id": 38, "ativo": true, "ativo_id": 37, "quantidade": "10.82491", "valor_bruto": "408.4238543", "valor_compra": "373", "investidor_id": 2, "valor_liquido": "408.4238543"}	2	1687561454
+10297	app\\models\\financas\\ItensAtivo	update	{"id": 10, "ativo": true, "ativo_id": 38, "quantidade": "48", "valor_bruto": "7799.52", "valor_compra": "8095.3780392157", "investidor_id": 1, "valor_liquido": "7799.52"}	2	1687561454
+10298	app\\models\\financas\\ItensAtivo	update	{"id": 11, "ativo": true, "ativo_id": 39, "quantidade": "80", "valor_bruto": "8176.80", "valor_compra": "8406.5873076923", "investidor_id": 1, "valor_liquido": "8176.80"}	2	1687561454
+10299	app\\models\\financas\\ItensAtivo	update	{"id": 14, "ativo": true, "ativo_id": 39, "quantidade": "11", "valor_bruto": "1124.31", "valor_compra": "1053.18", "investidor_id": 2, "valor_liquido": "1124.31"}	2	1687561454
+10300	app\\models\\financas\\ItensAtivo	update	{"id": 12, "ativo": true, "ativo_id": 40, "quantidade": "69", "valor_bruto": "7112.52", "valor_compra": "7105.8344313978", "investidor_id": 1, "valor_liquido": "7112.52"}	2	1687561454
+10301	app\\models\\financas\\ItensAtivo	update	{"id": 17, "ativo": true, "ativo_id": 40, "quantidade": "10", "valor_bruto": "1030.80", "valor_compra": "1022", "investidor_id": 2, "valor_liquido": "1030.80"}	2	1687561454
+10302	app\\models\\financas\\ItensAtivo	update	{"id": 13, "ativo": true, "ativo_id": 42, "quantidade": "174", "valor_bruto": "14414.16", "valor_compra": "18020.0901", "investidor_id": 1, "valor_liquido": "14414.16"}	2	1687561454
+10303	app\\models\\financas\\ItensAtivo	update	{"id": 43, "ativo": true, "ativo_id": 49, "quantidade": "129", "valor_bruto": "14490.57", "valor_compra": "15093.67998", "investidor_id": 1, "valor_liquido": "14490.57"}	2	1687561454
+10304	app\\models\\financas\\ItensAtivo	update	{"id": 44, "ativo": true, "ativo_id": 50, "quantidade": "1.35168", "valor_bruto": "320.0643072", "valor_compra": "277", "investidor_id": 1, "valor_liquido": "320.0643072"}	2	1687561454
+10305	app\\models\\financas\\ItensAtivo	update	{"id": 46, "ativo": true, "ativo_id": 51, "quantidade": "0.01867941", "valor_bruto": "2753.04616344", "valor_compra": "2187", "investidor_id": 1, "valor_liquido": "2753.04616344"}	2	1687561454
+10306	app\\models\\financas\\ItensAtivo	update	{"id": 48, "ativo": true, "ativo_id": 53, "quantidade": "317", "valor_bruto": "2472.60", "valor_compra": "2565.6775964392", "investidor_id": 1, "valor_liquido": "2472.60"}	2	1687561454
+10307	app\\models\\financas\\ItensAtivo	update	{"id": 49, "ativo": true, "ativo_id": 54, "quantidade": "16.726", "valor_bruto": "2081.55070", "valor_compra": "2006.81", "investidor_id": 1, "valor_liquido": "2081.55070"}	2	1687561454
+10308	app\\models\\financas\\ItensAtivo	update	{"id": 51, "ativo": true, "ativo_id": 54, "quantidade": "1.61444", "valor_bruto": "200.9170580", "valor_compra": "181.78", "investidor_id": 2, "valor_liquido": "200.9170580"}	2	1687561454
+10309	app\\models\\financas\\ItensAtivo	update	{"id": 50, "ativo": true, "ativo_id": 55, "quantidade": "6.13338", "valor_bruto": "384.5015922", "valor_compra": "380.8", "investidor_id": 2, "valor_liquido": "384.5015922"}	2	1687561454
+10310	app\\models\\financas\\ItensAtivo	update	{"id": 52, "ativo": true, "ativo_id": 55, "quantidade": "28.52771", "valor_bruto": "1788.4021399", "valor_compra": "1912.68", "investidor_id": 1, "valor_liquido": "1788.4021399"}	2	1687561454
+10311	app\\models\\financas\\Operacao	insert	{"id": 817, "data": "2023-06-21 20:05:11", "tipo": "2", "valor": 0, "quantidade": "7", "itens_ativos_id": "48"}	2	1687561643
+10312	app\\models\\financas\\ItensAtivo	update	{"id": 48, "ativo": true, "ativo_id": 53, "quantidade": 324, "valor_bruto": "2472.60", "valor_compra": "2565.6775964392", "investidor_id": 1, "valor_liquido": "2472.60"}	2	1687561643
+10313	app\\models\\financas\\Operacao	insert	{"id": 818, "data": "2023-06-21 17:05:07", "tipo": "3", "valor": 0, "quantidade": "7", "itens_ativos_id": "8"}	2	1687561764
+10314	app\\models\\financas\\ItensAtivo	update	{"id": 8, "ativo": true, "ativo_id": 24, "quantidade": 59, "valor_bruto": "1875.72", "valor_compra": "2137.3495774648", "investidor_id": 1, "valor_liquido": "1875.72"}	2	1687561764
 \.
 
 
@@ -1386,19 +1467,18 @@ COPY public.itens_ativo (id, ativo_id, investidor_id, quantidade, valor_compra, 
 53	57	1	0.71	9008.13	9008.13	7992.3	t
 54	52	2	0.08	1012.86	1012.86	1012.86	t
 23	41	2	0.73	8385.16	8385.16	8385.16	t
-27	21	1	71	1509.9557966102	2904.61	2904.61	t
-31	23	1	616	4831.21	5001.92	5001.92	t
-8	24	1	66	2137.3495774648	1875.72	1875.72	t
-9	25	1	253	3667.1575510204	2532.53	2532.53	t
-45	29	2	1.339	195.19	141.35823	141.35823	t
-40	33	1	200.191	63814.13965764	63814.13965764	18205.01	t
+40	33	1	200.191	16686.98	16686.98	18205.01	t
 20	11	1	1	1000	1000	1372.36	t
 21	3	1	3.54	7963.17	7963.17	12899.76	t
+25	20	1	174	4350.53	2510.82	2510.82	t
+27	21	1	71	1509.9557966102	2904.61	2904.61	t
+31	23	1	616	4831.21	5001.92	5001.92	t
 26	16	1	427	5110.2304	3744.79	3744.79	t
 28	17	1	288	4473.49	4066.56	4066.56	t
 29	18	1	306	5180.16	3552.66	3552.66	t
 30	19	1	85	3712.1414414414	3485.85	3485.85	t
-25	20	1	174	4350.53	2510.82	2510.82	t
+9	25	1	253	3667.1575510204	2532.53	2532.53	t
+45	29	2	1.339	195.19	141.35823	141.35823	t
 32	29	1	17.2086	2783.35	1816.711902	1816.711902	t
 33	30	1	21.2842	2111.97	2275.068138	2275.068138	t
 41	30	2	2.94893	376.96	315.2111277	315.2111277	t
@@ -1418,11 +1498,12 @@ COPY public.itens_ativo (id, ativo_id, investidor_id, quantidade, valor_compra, 
 43	49	1	129	15093.67998	14490.57	14490.57	t
 44	50	1	1.35168	277	320.0643072	320.0643072	t
 46	51	1	0.01867941	2187	2753.04616344	2753.04616344	t
-48	53	1	317	2565.6775964392	2472.60	2472.60	t
 49	54	1	16.726	2006.81	2081.55070	2081.55070	t
 51	54	2	1.61444	181.78	200.9170580	200.9170580	t
 50	55	2	6.13338	380.8	384.5015922	384.5015922	t
 52	55	1	28.52771	1912.68	1788.4021399	1788.4021399	t
+48	53	1	324	2565.6775964392	2472.60	2472.60	t
+8	24	1	59	2137.3495774648	1875.72	1875.72	t
 \.
 
 
@@ -2010,6 +2091,8 @@ COPY public.operacao (id, quantidade, valor, data, tipo, itens_ativos_id) FROM s
 242	40	595.6	2020-03-03 13:45:40	1	28
 812	7	53.97	2023-04-26 16:22:59	1	48
 816	20	200	2023-05-23 09:55:35	0	48
+817	7	0	2023-06-21 20:05:11	2	48
+818	7	0	2023-06-21 17:05:07	3	8
 \.
 
 
@@ -3009,7 +3092,7 @@ SELECT pg_catalog.setval('public.atualiza_operacoes_manual_id_seq', 4, true);
 -- Name: auditoria_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.auditoria_id_seq', 10233, true);
+SELECT pg_catalog.setval('public.auditoria_id_seq', 10314, true);
 
 
 --
@@ -3037,7 +3120,7 @@ SELECT pg_catalog.setval('public.itens_ativo_id_seq', 55, true);
 -- Name: operacao_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.operacao_id_seq', 816, true);
+SELECT pg_catalog.setval('public.operacao_id_seq', 818, true);
 
 
 --
