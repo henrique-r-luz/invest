@@ -21,6 +21,9 @@ class PrecoMedio
     {
         if ($this->itensAtivo->quantidade != 0) {
             $dadosCompra  = $this->dadosCompra();
+            if (empty($dadosCompra)) {
+                return 0;
+            }
             $valor =  $dadosCompra['valor'];
             $quantidade =  $dadosCompra['quantidade'];
             return $valor / $quantidade;

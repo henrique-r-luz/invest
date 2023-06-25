@@ -9,6 +9,8 @@ use yii\data\ActiveDataProvider;
 use app\models\financas\Operacao;
 use app\lib\behavior\DateRangeBehaviorAlterado;
 
+use function PHPUnit\Framework\isEmpty;
+
 /**
  * OperacaoSearch represents the model behind the search form of `app\models\Operacao`.
  */
@@ -20,6 +22,9 @@ class OperacaoSearch extends Operacao
     public $createTimeStart;
     public $createTimeEnd;
     public $investidor;
+    public $pais;
+    public $tipo_ativo;
+    public $ativo_id;
 
     /**
      * {@inheritdoc}
@@ -27,9 +32,10 @@ class OperacaoSearch extends Operacao
     public function rules()
     {
         return [
-            [['id', 'itens_ativos_id'], 'integer'],
+            [['id', 'itens_ativos_id', 'ativo_id'], 'integer'],
             [['createTimeRange'], 'match', 'pattern' => '/^.+\s\-\s.+$/'],
             [['tipo', 'data', 'ativo_codigo', 'itens_ativos_id', 'investidor'], 'safe'],
+            [['pais', 'tipo_ativo'], 'string'],
             [['valor', 'quantidade'], 'number'],
         ];
     }
@@ -64,7 +70,19 @@ class OperacaoSearch extends Operacao
      */
     public function search($params)
     {
-        $query = Operacao::find()
+        $query = self::find()
+            ->select([
+                'operacao.id',
+                'ativo.codigo as ativo_codigo',
+                'ativo.id as ativo_id',
+                'operacao.tipo',
+                'operacao.quantidade',
+                'operacao.valor',
+                'operacao.data',
+                'investidor.nome as investidor',
+                'ativo.pais',
+                'ativo.tipo as tipo_ativo'
+            ])
             ->joinWith(['itensAtivo.investidor', 'itensAtivo.ativos']);
 
         // add conditions that should always apply here
@@ -87,6 +105,11 @@ class OperacaoSearch extends Operacao
             'desc' => ['investidor.nome' => SORT_DESC],
         ];
 
+        $dataProvider->sort->attributes['tipo_ativo'] = [
+            'asc' => ['ativo.tipo' => SORT_ASC],
+            'desc' => ['ativo.tipo' => SORT_DESC],
+        ];
+
 
         $this->load($params);
 
@@ -103,7 +126,7 @@ class OperacaoSearch extends Operacao
             'valor' => $this->valor,
             //'data' => $this->data,
             'operacao.tipo' => $this->tipo,
-            'itens_ativo.id' => $this->itens_ativos_id
+            'ativo.tipo' => $this->tipo_ativo,
         ]);
 
         if ($this->createTimeRange != null && $this->createTimeRange != '') {
@@ -113,10 +136,27 @@ class OperacaoSearch extends Operacao
 
 
         $query->andFilterWhere(['ilike', 'investidor.nome', $this->investidor]);
-        $query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_codigo]);
+        // $query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_codigo]);
+        $query = $this->pesquisaAtivo($query);
 
 
         return $dataProvider;
+    }
+
+
+    private function pesquisaAtivo($query)
+    {
+
+        if ($this->ativo_codigo === null) {
+            return $query;
+        }
+        if (preg_match('/^(?=.*\d)\d{1,}$/', $this->ativo_codigo) == 1) {
+            $query->andFilterWhere(['ativo.id' => $this->ativo_codigo]);
+        } else {
+            $query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_codigo]);
+        }
+
+        return $query;
     }
 
     public function searchContAporte($model)

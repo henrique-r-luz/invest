@@ -45,4 +45,21 @@ class SalvaOperacoes
         ];
         return $respGerado;
     }
+
+
+    public function update($id)
+    {
+        $model = Operacao::findOne($id);
+        $model->tipo = Operacao::tipoOperacaoId()[Operacao::COMPRA];
+        $operacaoService = new OperacaoService($model, TiposOperacoes::UPDATE);
+        $operacaoService->acaoSalvaOperacao();
+
+        $itensAtivos = ItensAtivo::findOne($model->itens_ativos_id);
+        $respGerado = [
+            'quantidade' => $itensAtivos->quantidade,
+            'valor_compra' => round($itensAtivos->valor_compra, 2),
+            'valor_bruto' => round($itensAtivos->valor_bruto, 2)
+        ];
+        return $respGerado;
+    }
 }

@@ -20,6 +20,16 @@ class RendaVariavelUpdateTest extends Unit
 
     public function providerRendaVariavelUpdate()
     {
+        $idOperacao1 = 837;
+        $respEsperado1 = [
+            'quantidade' => 119,
+            'valor_compra' => 12602.30,
+            'valor_bruto' => 12162.99
+        ];
+
+        return [
+            'Altera operações de venda no meio da lista' => [$idOperacao1, $respEsperado1],
+        ];
     }
 
 
@@ -32,7 +42,7 @@ class RendaVariavelUpdateTest extends Unit
     public function testAtualizaItensAtivoUpdateOperacao($idOperacao, $respEsperado)
     {
         $salvaOperacoes = new SalvaOperacoes();
-        $respGerado =  $salvaOperacoes->delete($idOperacao);
+        $respGerado =  $salvaOperacoes->update($idOperacao);
         $this->assertEquals($respGerado, $respEsperado);
     }
 }

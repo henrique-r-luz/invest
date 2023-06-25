@@ -52,6 +52,7 @@ class ItensAtivo extends \yii\db\ActiveRecord
             [['ativo'], 'boolean'],
             [['valor_liquido', 'valor_bruto', 'valor_compra'], 'number'],
             [['quantidade'], 'number', 'min' => 0],
+            [['quantidade'], 'validaQuantidade'],
             [['ativo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ativo::className(), 'targetAttribute' => ['ativo_id' => 'id']],
             [['investidor_id'], 'exist', 'skipOnError' => true, 'targetClass' => Investidor::className(), 'targetAttribute' => ['investidor_id' => 'id']],
         ];
@@ -92,6 +93,14 @@ class ItensAtivo extends \yii\db\ActiveRecord
     public function getInvestidor()
     {
         return $this->hasOne(Investidor::className(), ['id' => 'investidor_id']);
+    }
+
+
+    public function validaQuantidade()
+    {
+        if ($this->quantidade < 0) {
+            $this->addError('quantidade', 'A quantidade do item ativo deve ser positiva.');
+        }
     }
 
     public static function lista()

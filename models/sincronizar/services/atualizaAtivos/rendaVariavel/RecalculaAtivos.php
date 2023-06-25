@@ -2,7 +2,8 @@
 
 namespace app\models\sincronizar\services\atualizaAtivos\rendaVariavel;
 
-
+use app\lib\CajuiHelper;
+use app\lib\helpers\InvestException;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
 use app\models\config\ClassesOperacoes;
@@ -32,8 +33,9 @@ class RecalculaAtivos
             list($valor_compra, $quantidade) =  $this->calculaOperacoes($itensAtivo);
             $itensAtivo->quantidade = $quantidade;
             $itensAtivo->valor_compra = $valor_compra;
-            $itensAtivo->valor_liquido = $valor_compra;
-            $itensAtivo->save();
+            if (!$itensAtivo->save()) {
+                throw new InvestException(CajuiHelper::processaErros($itensAtivo->getErros()));
+            }
         }
     }
 

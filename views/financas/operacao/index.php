@@ -1,8 +1,10 @@
 <?php
 
+use Yii;
 use yii\helpers\Html;
 use app\lib\grid\GridView;
 use app\lib\dicionario\Pais;
+use app\lib\dicionario\Tipo;
 use app\lib\config\ValorDollar;
 use app\models\financas\Operacao;
 use kartik\daterange\DateRangePicker;
@@ -27,9 +29,6 @@ $daterange = [
 ?>
 <div class="operacao-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]);    
-    ?>
-
     <?=
     GridView::widget([
         'dataProvider' => $dataProvider,
@@ -40,18 +39,21 @@ $daterange = [
         'columns' => [
             'id',
             [
-                'label' => 'Id Ativo',
-                'attribute' => 'itens_ativos_id',
-                'value' => 'itens_ativos_id',
-                'options' => ['style' => 'width:10%;']
-            ],
-            [
                 'label' => 'Ativo',
                 'attribute' => 'ativo_codigo',
-                'value' => 'itensAtivo.ativos.codigo',
+                'value' => function ($model) {
+                    return $model->ativo_id . ' - ' . $model->ativo_codigo;
+                },
                 'pageSummary' => 'EXTRATO FINANCEIRO',
                 'pageSummaryOptions' => ['colspan' => 2],
             ],
+            [
+                'filter' => Tipo::all(),
+                'attribute' => 'tipo_ativo',
+                'label' => 'Tipo Ativo',
+
+            ],
+
             [
                 'filter' => Operacao::tipoOperacao(),
                 'attribute' => 'tipo',
@@ -82,9 +84,7 @@ $daterange = [
                 'attribute' => 'valor',
                 'format' => 'currency',
                 'value' => function ($model) {
-                    /** @var Operacao */
-
-                    return ValorDollar::convertValorMonetario($model->valor, $model->itensAtivo->ativos->pais);
+                    return ValorDollar::convertValorMonetario($model->valor, $model->pais);
                 },
                 'pageSummary' => function ($summary, $data, $widget) use ($dataProvider) {
                     //var_dump($dataProvider);
@@ -95,10 +95,10 @@ $daterange = [
 
                         if ($operacao->tipo == Operacao::tipoOperacaoId()[Operacao::VENDA]) {
                             //dinheiro entrando no meu bolso
-                            $total += ValorDollar::convertValorMonetario($operacao->valor, $operacao->itensAtivo->ativos->pais); //$operacao->getValorCambio();
+                            $total += ValorDollar::convertValorMonetario($operacao->valor, $operacao->pais); //$operacao->getValorCambio();
                         } else {
                             //dinheiro saindo do meu bolso
-                            $total -= ValorDollar::convertValorMonetario($operacao->valor, $operacao->itensAtivo->ativos->pais);
+                            $total -= ValorDollar::convertValorMonetario($operacao->valor, $operacao->pais);
                         }
                     }
                     // $total = ValorDollar::convertValorMonetario($total, $operacao->itensAtivo->ativos->pais);
@@ -111,7 +111,6 @@ $daterange = [
                 },
                 'pageSummaryOptions' => ['colspan' => 2],
             ],
-            //'data',
             [
                 'attribute' => 'data',
                 'value' => function ($model) {
@@ -126,7 +125,7 @@ $daterange = [
             [
                 'attribute' => 'investidor',
                 'label' => 'Investidor',
-                'value' => 'itensAtivo.investidor.nome',
+                //  'value' => 'itensAtivo.investidor.nome',
             ],
             [
                 'class' => 'app\lib\grid\ActionColumn',
