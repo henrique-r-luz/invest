@@ -62,6 +62,7 @@ $daterange = [
                 },
             ],
             [
+                'format' => ['decimal'],
                 'attribute' => 'quantidade',
                 //'format' => 'number',
                 'pageSummary' => function ($summary, $data, $widget) use ($dataProvider) {

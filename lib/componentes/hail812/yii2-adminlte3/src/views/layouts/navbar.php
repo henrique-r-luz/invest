@@ -2,6 +2,7 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
+use app\lib\config\ValorDollar;
 
 //$skin  = (YII_ENV_DEV) ? 'navbar-lightblue' : 'navbar-success';
 if (YII_ENV_TEST) {
@@ -34,7 +35,10 @@ if (!empty(Yii::$app->user->id)) {
         <!-- Messages Dropdown Menu -->
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item">
-            <?= Html::a('<i class="fas fa-user-lock"></i> ' . $user, Url::toRoute(['site/logout']), ['class' => "nav-link"]) ?>
+            <div class="nav-link"> <b>Dollar: R$ <?= ValorDollar::getDollar() ?></b> </div>
+        </li>
+        <li class="nav-item">
+            <?= Html::a('<i class="fas fa-user-lock"></i> <b>' . $user . '</b>', Url::toRoute(['site/logout']), ['class' => "nav-link"]) ?>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">

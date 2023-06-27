@@ -2,18 +2,15 @@
 
 namespace app\commands;
 
-use DOMNode;
-use DOMXPath;
 use Throwable;
-use DOMDocument;
 use app\lib\CajuiHelper;
 use yii\console\Controller;
-use app\models\sincronizar\Preco;
 use app\commands\helper\LerPagina;
-use app\models\sincronizar\SiteAcoes;
+use app\lib\config\ValorDollar;
 use app\models\sincronizar\AtualizaAcoes;
 use app\lib\dicionario\StatusAtualizacaoAcoes;
 use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\AtualizaRendaVariavel;
+use Yii;
 
 /**
  * Atualiza ativos dos tipo renda variável cadastrados no sistema

@@ -48,7 +48,6 @@ class ValorDollar
         }
     }
 
-
     private static function precoDollar()
     {
         return Preco::find()
@@ -62,5 +61,12 @@ class ValorDollar
                 'ativo.id' => \SORT_DESC,
                 'data' => \SORT_DESC
             ])->one();
+    }
+
+    public static function getDollar()
+    {
+        $session = Yii::$app->session;
+        $formatter = Yii::$app->formatter;
+        return $formatter->asCurrency(round($session->get('dollar'), 2));
     }
 }

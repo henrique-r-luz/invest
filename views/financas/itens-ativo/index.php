@@ -37,6 +37,7 @@ $impostoRenda = 1;
                 'options' => ['style' => 'width:5%;'],
             ],
             [
+                'format' => ['decimal'],
                 'attribute' => 'quantidade',
                 'pageSummary' => true,
             ],
