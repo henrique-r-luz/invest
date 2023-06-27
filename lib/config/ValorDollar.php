@@ -66,6 +66,9 @@ class ValorDollar
     public static function getDollar()
     {
         $session = Yii::$app->session;
+        if (!$session->has('dollar')) {
+            return 0;
+        }
         $formatter = Yii::$app->formatter;
         return $formatter->asCurrency(round($session->get('dollar'), 2));
     }
