@@ -84,6 +84,18 @@ O Invest é um sistema de controle de investimentos pessoal que possibilita a ce
  Realizando o login o sistema já pode ser utilizado, segui a tela inicial do invest
  
  ![telaInicial](https://user-images.githubusercontent.com/12544898/174131132-31e9e679-23db-4a6b-a565-c83c432e4d56.png)
+
+ O Sistema possui alguns testes automatizados, para executá-los acesse o container do app:
+
+ ~~~
+ docker exec -it invest_app_1 bash
+ ~~~
+
+ Dentro do terminal do app execute o seguinte comando:
+
+ ~~~
+./vendor/bin/codecept run
+ ~~~
  
  O manual do usuário se encontra na wiki do projeto.
  
