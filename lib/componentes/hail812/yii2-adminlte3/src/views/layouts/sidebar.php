@@ -45,7 +45,7 @@ use yii\helpers\Html; ?>
                         'icon' => 'sync-alt',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Atualiza', 'icon' => 'sync-alt', 'url' => ['sincronizar/sincronizar']],
+                            ['label' => 'Recalcula', 'icon' => 'sync-alt', 'url' => ['sincronizar/sincronizar']],
                             ['label' => 'Atualiza Ações', 'icon' => 'chevron-circle-down', 'url' => ['sincronizar/atualiza-acoes']],
                             ['label' => 'Preço', 'icon' => 'dollar-sign', 'url' => ['sincronizar/preco']],
                             ['label' => 'Site Ação', 'icon' => 'undo', 'url' => ['sincronizar/site-acoes']],

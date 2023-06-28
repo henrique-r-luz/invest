@@ -112,8 +112,10 @@ class ProventosSearch extends Proventos
                 ->andFilterWhere(['<=', 'data', $this->createTimeEnd]);
         }
 
-        $query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_codigo]);
+        //$query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_codigo]);
         $query->andFilterWhere(['ilike', 'investidor.nome', $this->investidor]);
+
+        $query = FiltrosGrid::pesquisaAtivo($query, $this->ativo_codigo);
 
         return $dataProvider;
     }

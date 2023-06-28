@@ -69,6 +69,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
 
                         ],
+
+                        [
+                                'class' => 'app\lib\grid\ActionColumn',
+                                'template' => '{delete}',
+                        ],
                 ],
         ]); ?>
 

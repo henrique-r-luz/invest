@@ -136,28 +136,13 @@ class OperacaoSearch extends Operacao
 
 
         $query->andFilterWhere(['ilike', 'investidor.nome', $this->investidor]);
-        // $query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_codigo]);
-        $query = $this->pesquisaAtivo($query);
+
+        $query = FiltrosGrid::pesquisaAtivo($query, $this->ativo_codigo);
 
 
         return $dataProvider;
     }
 
-
-    private function pesquisaAtivo($query)
-    {
-
-        if ($this->ativo_codigo === null) {
-            return $query;
-        }
-        if (preg_match('/^(?=.*\d)\d{1,}$/', $this->ativo_codigo) == 1) {
-            $query->andFilterWhere(['ativo.id' => $this->ativo_codigo]);
-        } else {
-            $query->andFilterWhere(['ilike', 'ativo.codigo', $this->ativo_codigo]);
-        }
-
-        return $query;
-    }
 
     public function searchContAporte($model)
     {

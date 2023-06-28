@@ -44,7 +44,7 @@ $daterange = [
                 ]
             ],
             [
-                'label' => 'Id Ativo',
+                'label' => 'Iten Ativo Id',
                 'attribute' => 'itens_ativos_id',
                 'value' => 'itensAtivo.id',
                 'options' => ['style' => 'width:10%;']
@@ -52,7 +52,10 @@ $daterange = [
             [
                 'label' => 'Ativo',
                 'attribute' => 'ativo_codigo',
-                'value' => 'itensAtivo.ativos.codigo',
+                'value' => function ($model) {
+                    return $model->itensAtivo->ativos->id . ' - ' . $model->itensAtivo->ativos->codigo;
+                }
+                //'value' => 'itensAtivo.ativos.codigo',
             ],
             [
                 'attribute' => 'movimentacao',

@@ -3,14 +3,18 @@
 namespace app\controllers\sincronizar;
 
 use Yii;
+use Throwable;
 use yii\web\Controller;
 use app\lib\CajuiHelper;
 use yii\helpers\Console;
 use yii\filters\VerbFilter;
+use app\models\sincronizar\Preco;
+use app\lib\helpers\InvestException;
 use app\models\sincronizar\AtualizaAcoes;
 use app\lib\dicionario\StatusAtualizacaoAcoes;
 use app\models\sincronizar\AtualizaAcoesSearch;
-use Throwable;
+use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\RecalculaAtivos;
+use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\AtualizaRendaVariavel;
 
 /**
  * AtualizaAcoesController implements the CRUD actions for AtualizaAcoes model.
@@ -77,5 +81,39 @@ class AtualizaAcoesController extends Controller
             Yii::$app->session->setFlash('danger', 'Erro!</br>' . $e->getMessage());
         }
         return $this->redirect('index');
+    }
+
+    public function actionDelete(int $id)
+    {
+        $connection = Yii::$app->db;
+        $transaction = $connection->beginTransaction();
+        try {
+
+            $precos = Preco::find()->where(['atualiza_acoes_id' => $id])->all();
+            foreach ($precos as $preco) {
+                if (!$preco->delete()) {
+                    throw new InvestException('erro ao remover o preço id: ' . $preco->id . '.');
+                }
+            }
+            $atualizaAcoes =  AtualizaAcoes::findOne($id);
+            if (!$atualizaAcoes->delete()) {
+                throw new InvestException('erro ao remover de Atualização ações. ');
+            }
+            $recalculaAtivos = new RecalculaAtivos();
+            $recalculaAtivos->alteraIntesAtivo();
+            $atualizaRendaVariavel = new AtualizaRendaVariavel();
+            $atualizaRendaVariavel->alteraIntesAtivo();
+            Yii::$app->session->setFlash('success', 'Remoção de Atualização ocorreu com sucesso');
+            $transaction->commit();
+            return $this->redirect('index');
+        } catch (InvestException $e) {
+            Yii::$app->session->setFlash('danger', $e->getMessage());
+            $transaction->rollBack();
+            return $this->redirect('index');
+        } catch (Throwable $e) {
+            Yii::$app->session->setFlash('danger', 'ocorreu um erro desconhecido. ');
+            $transaction->rollBack();
+            return $this->redirect('index');
+        }
     }
 }

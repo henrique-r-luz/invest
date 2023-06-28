@@ -27,7 +27,7 @@ $this->registerJsFile(
         <?php $form = ActiveForm::begin(['action' => [Url::to('sincroniza')]]); ?>
 
         <div class="form-group">
-            <?= Html::submitButton('Atualiza Dados', ['class' => 'btn btn-info', 'name' => 'but', 'value' => 'atualiza_dados']) ?>
+            <?= Html::submitButton('Recalcula Valor Ações', ['class' => 'btn btn-info', 'name' => 'but', 'value' => 'atualiza_dados']) ?>
             <?= Html::submitButton('Recalcula Compra Ativos', ['class' => 'btn btn-info', 'name' => 'but', 'value' => 'recalcula_ativos']) ?>
         </div>
 

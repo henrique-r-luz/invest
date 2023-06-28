@@ -1,7 +1,6 @@
 <?php
 
 use app\lib\config\ValorDollar;
-use Yii;
 use app\lib\grid\GridView;
 use app\lib\dicionario\Pais;
 use app\lib\dicionario\Tipo;
@@ -34,7 +33,10 @@ $impostoRenda = 1;
             [
                 'attribute' => 'codigo',
                 'value' => 'ativos.codigo',
-                'options' => ['style' => 'width:5%;'],
+                'value' => function ($model) {
+                    return $model->ativos->id . ' - ' . $model->ativos->codigo;
+                },
+                'options' => ['style' => 'width:12%;'],
             ],
             [
                 'format' => ['decimal'],

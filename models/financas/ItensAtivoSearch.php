@@ -93,9 +93,8 @@ class ItensAtivoSearch extends ItensAtivo
         ]);
 
         $query->andFilterWhere(['ilike', 'ativo.nome', $this->nome])
-            ->andFilterWhere(['ilike', 'ativo.codigo', $this->codigo])
             ->andFilterWhere(['ilike', 'investidor.nome', $this->investidor_id]);
-        //->andFilterWhere(['ilike', 'categoria', $this->categoria]);
+        $query = FiltrosGrid::pesquisaAtivo($query, $this->codigo);
 
         return $dataProvider;
     }
