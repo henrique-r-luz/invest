@@ -1587,6 +1587,12 @@ COPY public.auditoria (id, model, operacao, changes, user_id, created_at) FROM s
 10754	app\\models\\financas\\ItensAtivo	update	{"id": 11, "ativo": true, "ativo_id": 39, "quantidade": 80, "valor_bruto": "9505.53", "valor_compra": 8406.587307692309, "investidor_id": 1, "valor_liquido": "9505.53"}	2	1687715069
 10755	app\\models\\financas\\ItensAtivo	update	{"id": 48, "ativo": true, "ativo_id": 53, "quantidade": 324, "valor_bruto": "2472.60", "valor_compra": 2565.677596439169, "investidor_id": 1, "valor_liquido": "2472.60"}	2	1687715069
 10756	app\\models\\financas\\ItensAtivo	update	{"id": 52, "ativo": true, "ativo_id": 55, "quantidade": 28.52771, "valor_bruto": "1788.4021399", "valor_compra": 1912.6799999999998, "investidor_id": 1, "valor_liquido": "1788.4021399"}	2	1687715069
+10757	app\\models\\financas\\Operacao	insert	{"id": 842, "data": "2023-06-28 11:30:13", "tipo": "2", "valor": 0, "quantidade": "0.02", "itens_ativos_id": "55"}	2	1687962705
+10758	app\\models\\financas\\ItensAtivo	update	{"id": 55, "ativo": true, "ativo_id": 57, "quantidade": 0.1, "valor_bruto": "1033.09", "valor_compra": "1033.09", "investidor_id": 2, "valor_liquido": "1033.09"}	2	1687962705
+10759	app\\models\\financas\\Operacao	insert	{"id": 843, "data": "2023-06-28 11:30:41", "tipo": "0", "valor": "1500", "quantidade": "0.08", "itens_ativos_id": "47"}	2	1687962811
+10760	app\\models\\financas\\ItensAtivo	update	{"id": 47, "ativo": true, "ativo_id": 52, "quantidade": 2.7199999999999998, "valor_bruto": 34093.75, "valor_compra": 31993.786285714283, "investidor_id": 1, "valor_liquido": 31434.78}	2	1687962811
+10761	app\\models\\financas\\Operacao	insert	{"id": 844, "data": "2023-06-28 11:35:48", "tipo": "3", "valor": 0, "quantidade": "0.08", "itens_ativos_id": "23"}	2	1687963101
+10762	app\\models\\financas\\ItensAtivo	update	{"id": 23, "ativo": true, "ativo_id": 41, "quantidade": 0.65, "valor_bruto": "8385.16", "valor_compra": "8385.16", "investidor_id": 2, "valor_liquido": "8385.16"}	2	1687963101
 \.
 
 
@@ -1669,11 +1675,8 @@ COPY public.itens_ativo (id, ativo_id, investidor_id, quantidade, valor_compra, 
 52	55	1	28.52771	1912.68	1788.4021399	1788.4021399	t
 14	39	2	99	10580.845927121	10118.79	10118.79	t
 22	36	1	0.33	984.95	984.95	1068.21	t
-47	52	1	2.8	32934.78	32934.78	35593.75	t
-55	57	2	0.08	1033.09	1033.09	1033.09	t
 53	57	1	0.71	9008.13	9008.13	7992.3	t
 54	52	2	0.08	1012.86	1012.86	1012.86	t
-23	41	2	0.73	8385.16	8385.16	8385.16	t
 40	33	1	200.191	16686.98	16686.98	18205.01	t
 20	11	1	1	1000	1000	1372.36	t
 21	3	1	3.54	7963.17	7963.17	12899.76	t
@@ -1705,6 +1708,9 @@ COPY public.itens_ativo (id, ativo_id, investidor_id, quantidade, valor_compra, 
 46	51	1	0.01867941	2187	2753.04616344	2753.04616344	t
 49	54	1	16.726	2006.81	2081.55070	2081.55070	t
 51	54	2	1.61444	181.78	200.9170580	200.9170580	t
+55	57	2	0.1	1033.09	1033.09	1033.09	t
+47	52	1	2.72	31993.786285714	31434.78	34093.75	t
+23	41	2	0.65	8385.16	8385.16	8385.16	t
 \.
 
 
@@ -2300,6 +2306,9 @@ COPY public.operacao (id, quantidade, valor, data, tipo, itens_ativos_id) FROM s
 840	100	0	2023-06-25 12:30:56	3	14
 841	13	1274	2023-06-25 12:35:33	1	14
 837	10	1100	2023-06-25 12:15:43	0	14
+842	0.02	0	2023-06-28 11:30:13	2	55
+843	0.08	1500	2023-06-28 11:30:41	0	47
+844	0.08	0	2023-06-28 11:35:48	3	23
 \.
 
 
@@ -3299,7 +3308,7 @@ SELECT pg_catalog.setval('public.atualiza_operacoes_manual_id_seq', 4, true);
 -- Name: auditoria_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.auditoria_id_seq', 10756, true);
+SELECT pg_catalog.setval('public.auditoria_id_seq', 10762, true);
 
 
 --
@@ -3327,7 +3336,7 @@ SELECT pg_catalog.setval('public.itens_ativo_id_seq', 56, true);
 -- Name: operacao_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.operacao_id_seq', 841, true);
+SELECT pg_catalog.setval('public.operacao_id_seq', 844, true);
 
 
 --
