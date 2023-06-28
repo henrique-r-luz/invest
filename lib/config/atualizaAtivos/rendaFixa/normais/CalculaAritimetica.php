@@ -27,6 +27,9 @@ class CalculaAritimetica implements AtualizaAtivoInterface
 
         $this->operacao = $operacao;
         $this->itensAtivo =  ItensAtivo::findOne($this->operacao->itens_ativos_id);
+        /**
+         * define as classes das operações
+         */
         $formOperacoes = new FormOperacoes();
         $formOperacoes->compra = new Compra($this->itensAtivo, $operacao);
         $formOperacoes->venda = new VendaRendaFixa($this->itensAtivo, $operacao);

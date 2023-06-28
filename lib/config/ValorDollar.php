@@ -70,6 +70,6 @@ class ValorDollar
             return 0;
         }
         $formatter = Yii::$app->formatter;
-        return $formatter->asCurrency(round($session->get('dollar'), 2));
+        return $formatter->asDecimal(round($session->get('dollar'), 2));
     }
 }

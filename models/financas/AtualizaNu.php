@@ -9,7 +9,9 @@ use app\models\financas\OperacoesImport;
 
 /**
  * grava os valores antigos (bruto e liquido) dos
- * ativos de renda fixa da nu.
+ * ativos de renda fixa da NuInvest. Porque quando
+ * a importação for removida atribui os valores atingos
+ * dos itens ativos
  *
  * @property float $valor_antigo
  * @property int $operacoes_import_id

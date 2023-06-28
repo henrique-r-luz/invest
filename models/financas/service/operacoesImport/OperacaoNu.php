@@ -18,7 +18,8 @@ use app\models\financas\AtualizaNu;
 use app\models\financas\service\operacoesImport\OperacoesImportAbstract;
 
 /**
- * Description of CotacaoEasy
+ * Atualiza os valores bruto e liquido dos
+ * itens ativos da Nuinvest 
  *
  * @author henrique
  */
