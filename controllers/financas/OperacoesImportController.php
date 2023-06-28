@@ -153,7 +153,7 @@ class OperacoesImportController extends Controller
             Yii::$app->session->setFlash('success', 'Registro deletado com sucesso! ');
         } catch (InvestException $e) {
             $transaction->rollBack();
-            Yii::$app->session->setFlash('danger', 'Erro ao deletera registro.' . $e->getTraceAsString());
+            Yii::$app->session->setFlash('danger', 'Erro ao deletera registro. ' . $e->getMessage());
         } catch (Throwable $e) {
             Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado! ');
         } finally {

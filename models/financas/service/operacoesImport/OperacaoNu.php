@@ -89,6 +89,17 @@ class OperacaoNu extends OperacoesImportAbstract
 
     public  function delete()
     {
+        $atualizacaoNu = AtualizaNu::find()
+            ->joinWith(['operacoesImport'])
+            ->where(['>', 'data', $this->operacoesImport->data])
+            ->andWhere(['<>', 'operacoes_import_id', $this->operacoesImport->id])
+            ->one();
+        /**
+         * só pode remover o último registro
+         */
+        if ($atualizacaoNu != null) {
+            throw new InvestException('Só pode remover a última importações da NuInvest. ');
+        }
         $atualizaNus = AtualizaNu::find()->where(['operacoes_import_id' => $this->operacoesImport->id])->all();
         foreach ($atualizaNus as $atualizaNu) {
             $this->retornaValorAntigo($atualizaNu->itensAtivo, $atualizaNu->valor_bruto_antigo, $atualizaNu->valor_liquido_antigo);
@@ -102,6 +113,7 @@ class OperacaoNu extends OperacoesImportAbstract
 
     private function retornaValorAntigo($itensAtivo, $valorBruto, $valorLiquido)
     {
+
         $itensAtivo->valor_bruto = $valorBruto;
         $itensAtivo->valor_liquido = $valorLiquido;
         if (!$itensAtivo->save()) {
