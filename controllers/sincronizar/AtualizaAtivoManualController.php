@@ -3,11 +3,12 @@
 namespace app\controllers\sincronizar;
 
 use Yii;
+use yii\web\Response;
+use yii\web\Controller;
+use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 use app\models\sincronizar\AtualizaAtivoManual;
 use app\models\sincronizar\AtualizaAtivoManualSearch;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * AtivoManualController implements the CRUD actions for AtualizaAtivoManual model.
@@ -104,9 +105,20 @@ class AtualizaAtivoManualController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        if (!$this->findModel($id)->delete()) {
+            $response = [
+                'resp' => false,
+                'msg' => 'Ocorreu um erro ao remover o Registro. '
+            ];
+        }
 
-        return $this->redirect(['index']);
+        $response = [
+            'resp' => true,
+            'msg' => true
+        ];
+
+        return $response;
     }
 
     /**

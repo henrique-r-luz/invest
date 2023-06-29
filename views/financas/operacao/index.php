@@ -1,6 +1,6 @@
 <?php
 
-use Yii;
+use yii\helpers\Url;
 use yii\helpers\Html;
 use app\lib\grid\GridView;
 use app\lib\dicionario\Pais;
@@ -130,6 +130,14 @@ $daterange = [
             ],
             [
                 'class' => 'app\lib\grid\ActionColumn',
+                /*'urlCreator' => function ($action, $model, $key, $index) {
+                    $url = Url::to([$action, 'id' => $key]);
+                    if (str_contains($action, 'delete')) {
+                        $url =  Url::to([$action, 'id' => $key, Yii::$app->request->queryParams]);
+                        $url =  $url . '&' . Yii::$app->request->queryString;
+                    }
+                    return $url;
+                },*/
             ],
         ],
         'showPageSummary' => true,

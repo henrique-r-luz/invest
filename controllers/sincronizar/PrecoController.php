@@ -3,11 +3,12 @@
 namespace app\controllers\sincronizar;
 
 use Yii;
-use app\models\sincronizar\Preco;
-use app\models\sincronizar\PrecoSearch;
+use yii\web\Response;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\sincronizar\Preco;
+use yii\web\NotFoundHttpException;
+use app\models\sincronizar\PrecoSearch;
 
 /**
  * PrecoController implements the CRUD actions for Preco model.
@@ -104,9 +105,20 @@ class PrecoController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        if (!$this->findModel($id)->delete()) {
+            $response = [
+                'resp' => false,
+                'msg' => 'Ocorreu um erro ao remover o Registro. '
+            ];
+        }
 
-        return $this->redirect(['index']);
+        $response = [
+            'resp' => true,
+            'msg' => true
+        ];
+
+        return $response;
     }
 
     /**

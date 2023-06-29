@@ -25,7 +25,8 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         "js/grow-js/jquery.growl.js",
-      
+        "js/gridView/gridView.js",
+        "js/gridView/bootstrap-notify.js"
+
     ];
-  
 }

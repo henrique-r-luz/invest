@@ -16,13 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <p>
                 <?= Html::a('Update', ['update', 'id' => $model->ativo_id], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('Delete', ['delete', 'id' => $model->ativo_id], [
-                    'class' => 'btn btn-danger',
-                    'data' => [
-                        'confirm' => 'Are you sure you want to delete this item?',
-                        'method' => 'post',
-                    ],
-                ]) ?>
+
                 <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
                 <?= Html::a('<i class="fa fa-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar']) ?>
             </p>

@@ -4,6 +4,7 @@ namespace app\controllers\sincronizar;
 
 use Yii;
 use Throwable;
+use yii\web\Response;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
@@ -132,9 +133,20 @@ class AtualizaOperacoesManualController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        if (!$this->findModel($id)->delete()) {
+            $response = [
+                'resp' => false,
+                'msg' => 'Ocorreu um erro ao remover o Registro. '
+            ];
+        }
 
-        return $this->redirect(['index']);
+        $response = [
+            'resp' => true,
+            'msg' => true
+        ];
+
+        return $response;
     }
 
     /**

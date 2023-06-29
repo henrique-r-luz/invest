@@ -3,11 +3,12 @@
 namespace app\controllers\admin;
 
 use Yii;
-use app\models\admin\Auditoria;
-use app\models\admin\AuditoriaSearch;
+use yii\web\Response;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\admin\Auditoria;
+use yii\web\NotFoundHttpException;
+use app\models\admin\AuditoriaSearch;
 
 /**
  * AuditoriaController implements the CRUD actions for Auditoria model.
@@ -104,9 +105,20 @@ class AuditoriaController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        if (!$this->findModel($id)->delete()) {
+            $response = [
+                'resp' => false,
+                'msg' => 'Ocorreu um erro ao remover o Registro. '
+            ];
+        }
 
-        return $this->redirect(['index']);
+        $response = [
+            'resp' => true,
+            'msg' => true
+        ];
+
+        return $response;
     }
 
     /**

@@ -2,16 +2,17 @@
 
 namespace app\controllers\admin;
 
-use app\controllers\admin\services\UserServices;
 use Yii;
-use app\models\admin\User;
-use app\models\admin\UserForm;
-use app\models\admin\UserSearch;
 use Exception;
 use Throwable;
+use yii\web\Response;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use app\models\admin\User;
 use yii\filters\VerbFilter;
+use app\models\admin\UserForm;
+use app\models\admin\UserSearch;
+use yii\web\NotFoundHttpException;
+use app\controllers\admin\services\UserServices;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -131,21 +132,32 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
+        \Yii::$app->response->format = Response::FORMAT_JSON;
         try {
             $transaction = Yii::$app->db->beginTransaction();
             $user  = $this->findModel($id);
             $userServices = new UserServices($user);
             $userServices->delete();
             $transaction->commit();
+            return [
+                'resp' => true,
+                'msg' => true
+            ];
         } catch (Exception $e) {
-            Yii::$app->session->setFlash('danger','Erro ao remover Usuário! </br>'.$e->getMessage());
+            return [
+                'resp' => false,
+                'msg' => 'Erro ao remover Usuário! </br>' . $e->getMessage()
+            ];
+            //Yii::$app->session->setFlash('danger', 'Erro ao remover Usuário! </br>' . $e->getMessage());
             $transaction->rollBack();
         } catch (Throwable $e) {
-            Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado! ');
+            // Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado! ');
+            return [
+                'resp' => false,
+                'msg' => 'Ocorreu um erro inesperado! '
+            ];
             $transaction->rollBack();
         }
-
-        return $this->redirect(['index']);
     }
 
     /**

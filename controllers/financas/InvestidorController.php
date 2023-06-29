@@ -3,6 +3,7 @@
 namespace app\controllers\financas;
 
 use Yii;
+use yii\web\Response;
 use yii\web\Controller;
 use app\lib\CajuiHelper;
 use yii\filters\VerbFilter;
@@ -68,12 +69,12 @@ class InvestidorController extends Controller
         $model = new Investidor();
 
         if ($model->load(Yii::$app->request->post())) {
-           
+
             if (!$model->save()) {
 
                 $erro = CajuiHelper::processaErros($model->getErrors());
                 Yii::$app->session->setFlash('danger', 'Erro ao salvar Ativo!</br>' . $erro);
-            }else{
+            } else {
                 Yii::$app->session->setFlash('success', 'Dados cadastrados com sucesso! ');
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -113,9 +114,20 @@ class InvestidorController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        if (!$this->findModel($id)->delete()) {
+            $response = [
+                'resp' => false,
+                'msg' => 'Ocorreu um erro ao remover o Registro. '
+            ];
+        }
 
-        return $this->redirect(['index']);
+        $response = [
+            'resp' => true,
+            'msg' => true
+        ];
+
+        return $response;
     }
 
     /**

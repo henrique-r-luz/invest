@@ -4,16 +4,17 @@ namespace app\controllers\financas;
 
 use Yii;
 use Exception;
+use Throwable;
+use yii\web\Response;
 use yii\web\Controller;
 use app\lib\CajuiHelper;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use app\lib\helpers\InvestException;
+use Mpdf\Container\NotFoundException;
 use app\models\financas\OperacoesImport;
 use app\models\financas\OperacoesImportSearch;
 use app\models\financas\service\operacoesImport\OperacoesImportService;
-use Mpdf\Container\NotFoundException;
-use Throwable;
 
 /**
  * OperacoesImportController implements the CRUD actions for OperacoesImport model.
@@ -144,20 +145,33 @@ class OperacoesImportController extends Controller
      */
     public function actionDelete($id)
     {
+        \Yii::$app->response->format = Response::FORMAT_JSON;
         try {
             $transaction = Yii::$app->db->beginTransaction();
             $model = $this->findModel($id);
             $operacoesImportService = new OperacoesImportService($model);
             $operacoesImportService->delete();
             $transaction->commit();
-            Yii::$app->session->setFlash('success', 'Registro deletado com sucesso! ');
+            //Yii::$app->session->setFlash('success', 'Registro deletado com sucesso! ');
+            $response = [
+                'resp' => true,
+                'msg' => true
+            ];
         } catch (InvestException $e) {
             $transaction->rollBack();
-            Yii::$app->session->setFlash('danger', 'Erro ao deletera registro. ' . $e->getMessage());
+            $response = [
+                'resp' => false,
+                'msg' => $e->getMessage()
+            ];
+            //Yii::$app->session->setFlash('danger', 'Erro ao deletera registro. ' . $e->getMessage());
         } catch (Throwable $e) {
-            Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado! ');
+            // Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado! ');
+            $response = [
+                'resp' => false,
+                'msg' => 'Ocorreu um erro inesperado! '
+            ];
         } finally {
-            return $this->redirect(['index']);
+            return $response;
         }
     }
 

@@ -2,12 +2,13 @@
 
 namespace app\controllers\config;
 
-use app\lib\helpers\InvestException;
 use Yii;
+use yii\web\Response;
 
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
+use app\lib\helpers\InvestException;
 use app\models\config\ClassesOperacoes;
 use app\models\config\ClassesOperacoesSearch;
 
@@ -106,9 +107,23 @@ class ClassesOperacoesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        if (!$this->findModel($id)->delete()) {
+            $response = [
+                'resp' => false,
+                'msg' => 'Ocorreu um erro ao remover o Registro. '
+            ];
+        }
 
-        return $this->redirect(['index']);
+        $response = [
+            'resp' => true,
+            'msg' => true
+        ];
+
+        return $response;
+
+
+        //return $this->redirect(['index']);
     }
 
     /**

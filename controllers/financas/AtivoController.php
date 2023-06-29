@@ -3,22 +3,25 @@
 namespace app\controllers\financas;
 
 use Yii;
-use app\models\financas\Ativo;
-use app\models\financas\AtivoSearch;
+use yii\web\Response;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use app\lib\CajuiHelper;
+use yii\filters\VerbFilter;
+use app\models\financas\Ativo;
+use yii\web\NotFoundHttpException;
+use app\models\financas\AtivoSearch;
 
 /**
  * AtivoController implements the CRUD actions for Ativo model.
  */
-class AtivoController extends Controller {
+class AtivoController extends Controller
+{
 
     /**
      * {@inheritdoc}
      */
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -33,14 +36,15 @@ class AtivoController extends Controller {
      * Lists all Ativo models.
      * @return mixed
      */
-    public function actionIndex() {
-       
+    public function actionIndex()
+    {
+
         $searchModel = new AtivoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -50,9 +54,10 @@ class AtivoController extends Controller {
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id) {
+    public function actionView($id)
+    {
         return $this->render('view', [
-                    'model' => $this->findModel($id),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -61,7 +66,8 @@ class AtivoController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate() {
+    public function actionCreate()
+    {
         $model = new Ativo();
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
@@ -73,7 +79,7 @@ class AtivoController extends Controller {
         }
 
         return $this->render('create', [
-                    'model' => $model,
+            'model' => $model,
         ]);
     }
 
@@ -84,7 +90,8 @@ class AtivoController extends Controller {
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id) {
+    public function actionUpdate($id)
+    {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -92,7 +99,7 @@ class AtivoController extends Controller {
         }
 
         return $this->render('update', [
-                    'model' => $model,
+            'model' => $model,
         ]);
     }
 
@@ -103,10 +110,22 @@ class AtivoController extends Controller {
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id) {
-        $this->findModel($id)->delete();
+    public function actionDelete($id)
+    {
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        if (!$this->findModel($id)->delete()) {
+            $response = [
+                'resp' => false,
+                'msg' => 'Ocorreu um erro ao remover o Registro. '
+            ];
+        }
 
-        return $this->redirect(['index']);
+        $response = [
+            'resp' => true,
+            'msg' => true
+        ];
+
+        return $response;
     }
 
     /**
@@ -116,12 +135,12 @@ class AtivoController extends Controller {
      * @return Ativo the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id) {
+    protected function findModel($id)
+    {
         if (($model = Ativo::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
 }

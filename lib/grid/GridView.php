@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Este arquivo é parte do
  *    ___       _       _
@@ -26,13 +27,29 @@ use yii\helpers\Url;
 /**
  * Description of GridView
  *
- * @author Wesley Oliveira
+ * @author Henrique Luz
  *
  * @property-read string $btnRedo
  * @property-read string $btnCreate
  */
 class GridView extends \kartik\grid\GridView
 {
+
+    /**
+     * Ativa o pjax
+     *
+     * @var boolean
+     * @author Henrique Luz
+     */
+    public $pjax = true;
+    /**
+     * Define configurações padrão para o pjax
+     *
+     * @var array
+     * @author Henrique Luz
+     */
+    public $pjaxSettings = ['options' => ['id' => 'grid_pjax']];
+
     /**
      * @var string Estipo aparencia do card. Valor padrão 'card-secondary card-outline'
      */
@@ -101,6 +118,7 @@ class GridView extends \kartik\grid\GridView
      */
     public function init(): void
     {
+
         $this->layout = '
             <div class="card ' . $this->cardStyle . '">
               <div class="card-header" style="padding-left: 10px;">
@@ -174,7 +192,8 @@ class GridView extends \kartik\grid\GridView
         }
     }
 
-    protected function toolbarPreco(){
+    protected function toolbarPreco()
+    {
         return [
             'content' => '<div class="btn-group">' . $this->getBtnRedo()  . '</div>',
             '{toggleData}',
@@ -189,7 +208,7 @@ class GridView extends \kartik\grid\GridView
     {
         //if (!Yii::$app->user->checkRoute('create')) {
         //    return '';
-       // }
+        // }
         return $this->create ?? Html::a('<i class="fas fa-plus"></i>', ['create'], ['class' => 'btn btn-success but-add-registro', 'title' => 'Adicionar', 'data-pjax' => 0]);
     }
 

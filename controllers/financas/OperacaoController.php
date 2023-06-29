@@ -3,15 +3,16 @@
 namespace app\controllers\financas;
 
 use Yii;
+use Throwable;
+use yii\web\Response;
 use yii\web\Controller;
-use app\lib\config\atualizaAtivos\TiposOperacoes;
 use yii\filters\VerbFilter;
 use app\models\financas\Operacao;
 use yii\web\NotFoundHttpException;
 use app\lib\helpers\InvestException;
 use app\models\financas\OperacaoSearch;
+use app\lib\config\atualizaAtivos\TiposOperacoes;
 use app\models\financas\service\operacoesAtivos\OperacaoService;
-use Throwable;
 
 /**
  * OperacaoController implements the CRUD actions for Operacao model.
@@ -34,14 +35,19 @@ class OperacaoController extends Controller
         ];
     }
 
+
+
+
     /**
      * Lists all Operacao models.
      * @return mixed
      */
     public function actionIndex()
     {
+
         $searchModel = new OperacaoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -102,6 +108,7 @@ class OperacaoController extends Controller
      */
     public function actionUpdate($id)
     {
+
         $connection = Yii::$app->db;
         $transaction = $connection->beginTransaction();
         $model = $this->findModel($id);
@@ -137,6 +144,7 @@ class OperacaoController extends Controller
      */
     public function actionDelete($id)
     {
+        \Yii::$app->response->format = Response::FORMAT_JSON;
         $connection = Yii::$app->db;
         $transaction = $connection->beginTransaction();
         $model = $this->findModel($id);
@@ -144,17 +152,26 @@ class OperacaoController extends Controller
         try {
             $operacaoService->acaoDeletaOperacao();
             $transaction->commit();
-            Yii::$app->session->setFlash('success', 'Dados excluídos com sucesso!');
+            $response = [
+                'resp' => true,
+                'msg' => true
+            ];
         } catch (InvestException $ex) {
             $transaction->rollBack();
-            Yii::$app->session->setFlash('danger', 'Erro ao delete Operação!</br>' . $ex->getMessage());
+            $response = [
+                'resp' => false,
+                'msg' => $ex->getMessage()
+            ];
         } catch (Throwable) {
             $transaction->rollBack();
-            Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado');
+            $response = [
+                'resp' => false,
+                'msg' => 'Ocorreu um erro inesperado'
+            ];
         } finally {
-            return $this->redirect(['index']);
+            return  $response;
         }
-        return $this->redirect(['index']);
+        //return $this->redirect(['index']);
     }
 
     /**

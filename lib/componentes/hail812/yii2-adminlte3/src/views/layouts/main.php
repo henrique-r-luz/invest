@@ -6,17 +6,60 @@
 use yii\helpers\Html;
 use kartik\growl\Growl;
 use app\assets\AppAsset;
+use app\lib\widget\GrowlInvest;
 
-AppAsset::register($this); 
+AppAsset::register($this);
 \hail812\adminlte3\assets\FontAwesomeAsset::register($this);
 \hail812\adminlte3\assets\AdminLteAsset::register($this);
 $this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
 
 $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
 ?>
+<!--
+ notificação de erro quando é chamado diretamento pelo
+ javascript 
+ -->
+<?php GrowlInvest::widget([
+    'type' =>  'danger',
+    'title' => '<b>Erro</b>',
+    'icon' => 'fa fa-times-circle',
+    'nomeTemplate' => 'hash_Grow_invest',
+    // 'icon' => (!empty($message['icon'])) ? $message['icon'] : 'fa fa-info',
+    'body' => '', //(!empty($message['message'])) ? Html::encode($message['message']) : 'Message Not Set!',
+    'showSeparator' => true,
+    'delay' => 1, //This delay is how long before the message shows
+    'pluginOptions' => [
+        'delay' =>  3000000, //This delay is how long the message shows for
+        'placement' => [
+            'from' =>  'top',
+            'align' =>  'right',
+        ]
+    ]
+]); ?>
 
+<!--
+ notificação de sucesso quando é chamado diretamento pelo
+ javascript 
+ -->
+<?php GrowlInvest::widget([
+    'type' =>  'success',
+    'title' => '<b>Sucesso</b>',
+    'icon' => 'fa fa-check-circle',
+    'nomeTemplate' => 'hash_Grow_invest_sucesso',
+    // 'icon' => (!empty($message['icon'])) ? $message['icon'] : 'fa fa-info',
+    'body' => '', //(!empty($message['message'])) ? Html::encode($message['message']) : 'Message Not Set!',
+    'showSeparator' => true,
+    'delay' => 1, //This delay is how long before the message shows
+    'pluginOptions' => [
+        'delay' =>  3000, //This delay is how long the message shows for
+        'placement' => [
+            'from' =>  'top',
+            'align' =>  'right',
+        ]
+    ]
+]); ?>
 <?php foreach (Yii::$app->session->getAllFlashes() as $key => $message) :; ?>
-    
+
     <?php
     $titulo = '<b>Erro</b>';
     $icon = 'fa fa-times-circle';
@@ -26,7 +69,7 @@ $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/admi
         $icon = 'fa fa-check-circle';
         $duracao = 3000;
     }
-    if($key == 'warning'){
+    if ($key == 'warning') {
         $titulo = '<b>Aviso</b>';
         $icon = 'fa fa-check-circle';
         $duracao = 3000;
@@ -37,7 +80,7 @@ $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/admi
         'title' => $titulo,
         'icon' => $icon,
         // 'icon' => (!empty($message['icon'])) ? $message['icon'] : 'fa fa-info',
-        'body' => $message,//(!empty($message['message'])) ? Html::encode($message['message']) : 'Message Not Set!',
+        'body' => $message, //(!empty($message['message'])) ? Html::encode($message['message']) : 'Message Not Set!',
         'showSeparator' => true,
         'delay' => 1, //This delay is how long before the message shows
         'pluginOptions' => [

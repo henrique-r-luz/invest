@@ -4,6 +4,7 @@ namespace app\controllers\sincronizar;
 
 use Yii;
 use Throwable;
+use yii\web\Response;
 use yii\web\Controller;
 use app\lib\CajuiHelper;
 use yii\helpers\Console;
@@ -85,6 +86,7 @@ class AtualizaAcoesController extends Controller
 
     public function actionDelete(int $id)
     {
+        \Yii::$app->response->format = Response::FORMAT_JSON;
         $connection = Yii::$app->db;
         $transaction = $connection->beginTransaction();
         try {
@@ -103,17 +105,26 @@ class AtualizaAcoesController extends Controller
             $recalculaAtivos->alteraIntesAtivo();
             $atualizaRendaVariavel = new AtualizaRendaVariavel();
             $atualizaRendaVariavel->alteraIntesAtivo();
-            Yii::$app->session->setFlash('success', 'Remoção de Atualização ocorreu com sucesso');
+            // Yii::$app->session->setFlash('success', 'Remoção de Atualização ocorreu com sucesso');
             $transaction->commit();
-            return $this->redirect('index');
+            return [
+                'resp' => true,
+                'msg' => true
+            ];  //$this->redirect('index');
         } catch (InvestException $e) {
-            Yii::$app->session->setFlash('danger', $e->getMessage());
+            //Yii::$app->session->setFlash('danger', $e->getMessage());
             $transaction->rollBack();
-            return $this->redirect('index');
+            return [
+                'resp' => false,
+                'msg' => $e->getMessage()
+            ];
         } catch (Throwable $e) {
-            Yii::$app->session->setFlash('danger', 'ocorreu um erro desconhecido. ');
+            //Yii::$app->session->setFlash('danger', 'ocorreu um erro desconhecido. ');
             $transaction->rollBack();
-            return $this->redirect('index');
+            return [
+                'resp' => false,
+                'msg' => 'ocorreu um erro desconhecido. '
+            ]; //$this->redirect('index');
         }
     }
 }

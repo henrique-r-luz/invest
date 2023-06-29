@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Este arquivo é parte do
  *    ___       _       _
@@ -57,7 +58,6 @@ class ActionColumn extends \kartik\grid\ActionColumn
     protected function filterActionColumn($buttons = [])
     {
         return $buttons;
-       
     }
 
     /**
@@ -72,20 +72,13 @@ class ActionColumn extends \kartik\grid\ActionColumn
         /*if (isset($this->buttons[$name])) {
             return;
         }*/
-        $this->buttons[$name] = function ($url) use ($name, $title, $icon) {
+        $this->buttons[$name] = function ($url, $model, $key) use ($name, $title, $icon) {
             $opts = "{$name}Options";
             $options = ['title' => $title, 'aria-label' => $title, 'data-pjax' => 0];
-           /* if ($name === 'view') {
-                $options['class'] = 'loadModal';
-                $options['titulo-modal'] = '<i class="fas fa-check-square"></i> Visualizar' . (array_key_exists('tituloModal', $options) ? '<small> ' . $options['tituloModal'] . '</small>' : '');
-                $options['value'] = $url;
-                $options['data-toggle'] = 'modal';
-                $options['data-target'] = '#modal';
-                $url = false;*/
             if ($name === 'delete') {
-                $item = !empty($this->grid->itemLabelSingle) ? $this->grid->itemLabelSingle : Yii::t('kvgrid', 'item');
-                $options['data-method'] = 'post';
-                $options['data-confirm'] = Yii::t('kvgrid', 'Are you sure to delete this {item}?', ['item' => $item]);
+                $options = ['title' => $title, 'aria-label' => $title, 'data-pjax' => 1];
+                $options['onClick'] = "grid.delete('" . $url . "')";
+                $url = '#';
             }
             $options = array_replace_recursive($options, $this->buttonOptions, $this->$opts);
             $label = ArrayHelper::remove($options, 'label', $icon);

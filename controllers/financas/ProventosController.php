@@ -3,11 +3,12 @@
 namespace app\controllers\financas;
 
 use Yii;
-use app\models\financas\Proventos;
-use app\models\financas\ProventosSearch;
+use yii\web\Response;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\financas\Proventos;
+use yii\web\NotFoundHttpException;
+use app\models\financas\ProventosSearch;
 
 /**
  * ProventosController implements the CRUD actions for Proventos model.
@@ -104,9 +105,20 @@ class ProventosController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        if (!$this->findModel($id)->delete()) {
+            $response = [
+                'resp' => false,
+                'msg' => 'Ocorreu um erro ao remover o Registro. '
+            ];
+        }
 
-        return $this->redirect(['index']);
+        $response = [
+            'resp' => true,
+            'msg' => true
+        ];
+
+        return $response;
     }
 
     /**

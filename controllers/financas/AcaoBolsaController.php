@@ -2,25 +2,28 @@
 
 namespace app\controllers\financas;
 
-use app\models\financas\AcaoBolsa;
-use app\models\financas\AcaoBolsaOperacao;
-use app\models\financas\AcaoBolsaSearch;
-use app\models\financas\BalancoEmpresaBolsaSearch;
-use app\models\financas\BalancoEmpresaBolsa;
 use Yii;
-use yii\filters\VerbFilter;
+use yii\web\Response;
 use yii\web\Controller;
+use yii\filters\VerbFilter;
+use app\models\financas\AcaoBolsa;
 use yii\web\NotFoundHttpException;
+use app\models\financas\AcaoBolsaSearch;
+use app\models\financas\AcaoBolsaOperacao;
+use app\models\financas\BalancoEmpresaBolsa;
+use app\models\financas\BalancoEmpresaBolsaSearch;
 
 /**
  * AcaoBolsaController implements the CRUD actions for AcaoBolsa model.
  */
-class AcaoBolsaController extends Controller {
+class AcaoBolsaController extends Controller
+{
 
     /**
      * {@inheritdoc}
      */
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -35,13 +38,14 @@ class AcaoBolsaController extends Controller {
      * Lists all AcaoBolsa models.
      * @return mixed
      */
-    public function actionIndex() {
+    public function actionIndex()
+    {
         $searchModel = new AcaoBolsaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -51,9 +55,10 @@ class AcaoBolsaController extends Controller {
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id) {
+    public function actionView($id)
+    {
         return $this->render('view', [
-                    'model' => $this->findModel($id),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -62,7 +67,8 @@ class AcaoBolsaController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate() {
+    public function actionCreate()
+    {
         $model = new AcaoBolsa();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -70,7 +76,7 @@ class AcaoBolsaController extends Controller {
         }
 
         return $this->render('create', [
-                    'model' => $model,
+            'model' => $model,
         ]);
     }
 
@@ -81,7 +87,8 @@ class AcaoBolsaController extends Controller {
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id) {
+    public function actionUpdate($id)
+    {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -89,29 +96,30 @@ class AcaoBolsaController extends Controller {
         }
 
         return $this->render('update', [
-                    'model' => $model,
-        ]);
-    }
-    
-    
-    public function actionBalanco($codigo_empresa){
-        
-        $empresa = AcaoBolsa::find()->where(['codigo'=>$codigo_empresa])->one();
-        $balancoDadosAnos = new BalancoEmpresaBolsaSearch();
-         $balancoDadosTrimestre = new BalancoEmpresaBolsaSearch();
-        $provider =$balancoDadosAnos->search(['BalancoEmpresaBolsaSearch'=>['codigo'=>$codigo_empresa,'trimestre'=>false]]);
-        $providerTrimestre =$balancoDadosTrimestre->search(['BalancoEmpresaBolsaSearch'=>['codigo'=>$codigo_empresa,'trimestre'=>true]]);
-      
-        return $this->render('balanco', [
-                    'empresa'=>$empresa,
-                    'providerBalancoDadosAnos' => $provider,
-                    'providerBalancoDadosTrimestre' => $providerTrimestre,
-                    'graficoAno'=>$balancoDadosAnos->criaDadosGrafico(),
-                   
+            'model' => $model,
         ]);
     }
 
-    
+
+    public function actionBalanco($codigo_empresa)
+    {
+
+        $empresa = AcaoBolsa::find()->where(['codigo' => $codigo_empresa])->one();
+        $balancoDadosAnos = new BalancoEmpresaBolsaSearch();
+        $balancoDadosTrimestre = new BalancoEmpresaBolsaSearch();
+        $provider = $balancoDadosAnos->search(['BalancoEmpresaBolsaSearch' => ['codigo' => $codigo_empresa, 'trimestre' => false]]);
+        $providerTrimestre = $balancoDadosTrimestre->search(['BalancoEmpresaBolsaSearch' => ['codigo' => $codigo_empresa, 'trimestre' => true]]);
+
+        return $this->render('balanco', [
+            'empresa' => $empresa,
+            'providerBalancoDadosAnos' => $provider,
+            'providerBalancoDadosTrimestre' => $providerTrimestre,
+            'graficoAno' => $balancoDadosAnos->criaDadosGrafico(),
+
+        ]);
+    }
+
+
     /**
      * Deletes an existing AcaoBolsa model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -119,10 +127,22 @@ class AcaoBolsaController extends Controller {
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id) {
-        $this->findModel($id)->delete();
+    public function actionDelete($id)
+    {
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        if (!$this->findModel($id)->delete()) {
+            $response = [
+                'resp' => false,
+                'msg' => 'Ocorreu um erro ao remover o Registro. '
+            ];
+        }
 
-        return $this->redirect(['index']);
+        $response = [
+            'resp' => true,
+            'msg' => true
+        ];
+
+        return $response;
     }
 
     /**
@@ -132,12 +152,12 @@ class AcaoBolsaController extends Controller {
      * @return AcaoBolsa the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id) {
+    protected function findModel($id)
+    {
         if (($model = AcaoBolsa::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
 }
