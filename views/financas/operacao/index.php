@@ -118,26 +118,17 @@ $daterange = [
                     $date = date_create($model->data);
                     return date_format($date, 'd/m/Y H:i:s');
                 },
-                //'format' => 'datetime',
-                //'format'=>'dd/mm/yyyy HH:MM',
                 'filter' => DateRangePicker::widget($daterange),
-                // 'format'     => 'dd/mm/yyyy',
+               
             ],
             [
                 'attribute' => 'investidor',
                 'label' => 'Investidor',
-                //  'value' => 'itensAtivo.investidor.nome',
+               
             ],
             [
                 'class' => 'app\lib\grid\ActionColumn',
-                /*'urlCreator' => function ($action, $model, $key, $index) {
-                    $url = Url::to([$action, 'id' => $key]);
-                    if (str_contains($action, 'delete')) {
-                        $url =  Url::to([$action, 'id' => $key, Yii::$app->request->queryParams]);
-                        $url =  $url . '&' . Yii::$app->request->queryString;
-                    }
-                    return $url;
-                },*/
+               
             ],
         ],
         'showPageSummary' => true,

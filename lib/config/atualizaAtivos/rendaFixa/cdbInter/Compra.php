@@ -62,7 +62,6 @@ class Compra implements AtivosOperacoesInterface
 
     public function update($oldOperacao)
     {
-
         AtualizaValorAtual::atualizaValorBrutoLiquido($this->itensAtivo->id);
     }
 }
