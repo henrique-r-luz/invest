@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use kartik\detail\DetailView;
 
 /* @var $this yii\web\View */
 
@@ -24,8 +24,43 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
-                    'ativo_id',
-                    'url:ntext',
+                    [
+                        'columns' => [
+                            [
+                                'label' => 'Ativo Id',
+                                'value' => $model->ativo_id,
+                            ],
+                            [
+                                'label' => 'Código Ativo',
+                                'value' => $model->ativo->codigo,
+                                'labelColOptions' => ['style' => 'width:10%'],
+                            ],
+                            [
+                                'label' => 'Nome Ativo',
+                                'value' => $model->ativo->nome,
+                                'labelColOptions' => ['style' => 'width:10%'],
+                            ]
+
+                            //'ativo_id'
+                        ],
+                    ],
+                    [
+                        'columns' => [
+                            [
+                                'label' => 'Url',
+                                'value' => $model->url,
+                            ],
+                        ],
+                    ],
+
+
+                    /*
+                    [
+                            'label' => 'Url',
+                            'value' => $model->url,
+                        ]
+                   */
+
                 ],
             ]) ?>
 

@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'boxTitle' => $this->title,
         'columns' => [
             [
-                'label' => 'Ativo_id',
+                'label' => 'Ativo Id',
                 'attribute' => 'ativo_id',
                 'value' => function ($model) {
                     return $model->ativo->id;

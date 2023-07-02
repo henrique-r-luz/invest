@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use kartik\detail\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\admin\User */
@@ -24,9 +24,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= DetailView::widget([
                 'model' => $model,
+                'condensed' => true,
+                'notSetIfEmpty' => true,
                 'attributes' => [
-                    'id',
-                    'username',
+                    [
+                        'columns' => [
+                            'id',
+                            'username'
+                        ],
+                    ],
                 ],
             ]) ?>
 

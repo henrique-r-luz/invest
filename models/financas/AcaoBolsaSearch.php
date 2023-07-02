@@ -18,7 +18,7 @@ class AcaoBolsaSearch extends AcaoBolsa
     {
         return [
             [['id'], 'integer'],
-            [['nome', 'codigo', 'setor','cnpj'], 'safe'],
+            [['nome', 'codigo', 'setor', 'cnpj'], 'safe'],
         ];
     }
 
@@ -46,10 +46,9 @@ class AcaoBolsaSearch extends AcaoBolsa
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-             'pagination' => [
+            'pagination' => [
                 'pageSize' => 10,
             ],
-            'sort'=> ['defaultOrder' => ['rank_ano'=>SORT_DESC]]
         ]);
 
         $this->load($params);

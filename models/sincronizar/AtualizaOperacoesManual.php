@@ -3,6 +3,7 @@
 namespace app\models\sincronizar;
 
 use Yii;
+use yii\db\ActiveRecord;
 use app\lib\behavior\AuditoriaBehavior;
 
 
@@ -18,7 +19,7 @@ use app\lib\behavior\AuditoriaBehavior;
  * @property AtualizaOperacoesManual $atualizaAtivoManual
  * @property AtualizaOperacoesManual[] $atualizaOperacoesManuals
  */
-class AtualizaOperacoesManual extends \yii\db\ActiveRecord
+class AtualizaOperacoesManual extends ActiveRecord
 {
     /**
      * {@inheritdoc}

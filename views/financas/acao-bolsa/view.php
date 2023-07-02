@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use kartik\detail\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\AcaoBolsa */
@@ -17,17 +17,31 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <p>
                 <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-
                 <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
+                <?= Html::a('<i class="fa fa-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar']) ?>
             </p>
 
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
-                    'id',
+                    [
+                        'columns' => [
+                            'id',
+                            'nome',
+                            'codigo',
+                        ],
+                    ],
+                    [
+                        'columns' => [
+                            'setor',
+                            'cnpj'
+                        ],
+                    ],
+
+                    /* 'id',
                     'nome:ntext',
                     'codigo',
-                    'setor:ntext',
+                    'setor:ntext',*/
                 ],
             ]) ?>
 

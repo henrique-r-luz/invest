@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use kartik\detail\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\sincronizar\AtualizaOperacoesManual */
@@ -18,14 +18,52 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <p>
                 <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-
                 <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-default']) ?>
+                <?= Html::a('<i class="fa fa-plus"></i>', ['create'], ['class' => 'btn btn-success', 'title' => 'Adicionar']) ?>
             </p>
 
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
-                    'id',
+                    [
+                        'columns' => [
+                            'id',
+                            [
+                                'label' => 'Item Ativo Id',
+                                'value' => $model->atualizaAtivoManual->itensAtivo->id,
+                            ],
+                            [
+                                'format' => ['decimal', 2],
+                                'attribute' => 'valor_bruto',
+                            ],
+                            [
+                                'format' => ['decimal', 2],
+                                'attribute' => 'valor_liquido'
+                            ]
+                        ],
+                    ],
+                    [
+                        'columns' => [
+                            [
+                                'label' => 'Ativo Id',
+                                'value' => $model->atualizaAtivoManual->itensAtivo->ativo_id,
+                            ],
+                            [
+                                'label' => 'Código Ativo',
+                                'value' => $model->atualizaAtivoManual->itensAtivo->ativos->codigo,
+                                'labelColOptions' => ['style' => 'width:10%'],
+                            ],
+                            [
+                                'label' => 'Nome Ativo',
+                                'value' => $model->atualizaAtivoManual->itensAtivo->ativos->nome,
+                                'labelColOptions' => ['style' => 'width:10%'],
+                            ]
+
+                            //'ativo_id'
+                        ],
+
+                    ],
+                    /*'id',
                     'valor_bruto',
                     'valor_liquido',
                     //'atualiza_ativo_manual_id',
@@ -40,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'data',
                         'format' => 'dateTime',
-                    ],
+                    ],*/
                 ],
             ]) ?>
 
