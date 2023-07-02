@@ -111,7 +111,7 @@ class ItensAtivo extends \yii\db\ActiveRecord
                 ->where(['ativo' => true])->all(),
             'id',
             function ($model) {
-                return $model->ativos->codigo . ' | ' . $model->investidor->nome;
+                return $model->id . ' - ' . $model->ativos->codigo . ' | ' . $model->investidor->nome;
             }
         );
     }

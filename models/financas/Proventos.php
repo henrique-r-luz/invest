@@ -56,7 +56,7 @@ class Proventos extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'itens_ativos_id' => 'Ativos',
+            'itens_ativos_id' => 'Item Ativo',
             'data' => 'Data',
             'valor' => 'Valor',
             'movimentacao' => 'Movimentação'
