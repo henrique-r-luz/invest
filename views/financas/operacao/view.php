@@ -46,10 +46,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'value' => $model->quantidade
                             ],
                             [
+                                'format' => ['decimal', 2],
+                                'attribute' => 'valor',
+                                'value' => $model->valor
+                            ],
+                            [
                                 'Label' => 'Data',
                                 'format' => 'datetime',
                                 'attribute' => 'data',
-                                'value' => $model->data
+                                'value' => $model->data,
+                                'labelColOptions' => ['style' => 'width:10%'],
                             ]
                         ],
                     ],

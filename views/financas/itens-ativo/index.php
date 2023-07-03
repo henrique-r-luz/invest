@@ -28,7 +28,7 @@ $impostoRenda = 1;
                 'attribute' => 'id',
                 'pageSummary' => 'EXTRATO FINANCEIRO',
                 'pageSummaryOptions' => ['colspan' => 2],
-                'options' => ['style' => 'width:5%;'],
+                'options' => ['style' => 'width:3%;'],
             ],
             [
                 'attribute' => 'codigo',

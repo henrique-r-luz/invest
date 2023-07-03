@@ -20,6 +20,15 @@ class ValorDollar
         return $valor;
     }
 
+    public static function valorEmDolarView($valor, $pais)
+    {
+        if ($pais == Pais::US) {
+            return (string)(Yii::$app->formatter->asCurrency(round($valor * self::getCotacaoDollar(), 4)))
+                . '($' . Yii::$app->formatter->asCurrency(round($valor, 4)) . ')';
+        }
+        return $valor;
+    }
+
     private static function getCotacaoDollar()
     {
         $session = Yii::$app->session;

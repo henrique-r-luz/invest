@@ -9,8 +9,6 @@ use yii\data\ActiveDataProvider;
 use app\models\financas\Operacao;
 use app\lib\behavior\DateRangeBehaviorAlterado;
 
-use function PHPUnit\Framework\isEmpty;
-
 /**
  * OperacaoSearch represents the model behind the search form of `app\models\Operacao`.
  */
@@ -110,6 +108,12 @@ class OperacaoSearch extends Operacao
             'desc' => ['ativo.tipo' => SORT_DESC],
         ];
 
+        $dataProvider->sort->attributes['pais'] = [
+            'asc' => ['ativo.pais' => SORT_ASC],
+            'desc' => ['ativo.pais' => SORT_DESC],
+        ];
+
+
 
         $this->load($params);
 
@@ -124,9 +128,9 @@ class OperacaoSearch extends Operacao
             'operacao.id' => $this->id,
             'operacao.quantidade' => $this->quantidade,
             'valor' => $this->valor,
-            //'data' => $this->data,
             'operacao.tipo' => $this->tipo,
             'ativo.tipo' => $this->tipo_ativo,
+            'ativo.pais' => $this->pais
         ]);
 
         if ($this->createTimeRange != null && $this->createTimeRange != '') {

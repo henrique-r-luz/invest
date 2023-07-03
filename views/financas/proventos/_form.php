@@ -24,10 +24,19 @@ use kartik\widgets\ActiveForm;
                 <?=
                 $form->field($model, 'itens_ativos_id')->widget(Select2::classname(), [
                     'data' => ItensAtivo::lista(), //ArrayHelper::map(Ativo::find()->andWhere(['categoria'=> app\lib\Categoria::RENDA_VARIAVEL])->asArray()->all(), 'id', 'codigo'),
-                    'options' => ['placeholder' => 'Selecione um Tipo'],
+                    'options' => [
+                        'placeholder' => 'Selecione um Item Ativo',
+                        'id' => 'item_ativo',
+                    ],
+
                     'pluginOptions' => [
                         'allowClear' => true
                     ],
+                    'pluginEvents' => [
+                        "change" => 'function(data) { 
+                            tipoMoeda.setMoeda();
+                        }',
+                    ]
                 ]);
                 ?>
             </div>
@@ -51,7 +60,7 @@ use kartik\widgets\ActiveForm;
                     'maskedInputOptions' => [
                         'allowMinus' => false
                     ],
-                ])
+                ])->label(null, ['id' => 'valor'])
                 ?>
             </div>
             <div class="col-xs-6 col-sm-6 col-lg-6">

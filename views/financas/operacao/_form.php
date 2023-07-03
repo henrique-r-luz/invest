@@ -22,10 +22,18 @@ use kartik\datecontrol\DateControl;
                     <?=
                     $form->field($model, 'itens_ativos_id')->widget(Select2::classname(), [
                         'data' => ItensAtivo::lista(),
-                        'options' => ['placeholder' => 'Selecione um Tipo'],
+                        'options' => [
+                            'placeholder' => 'Selecione um Tipo',
+                            'id' => 'item_ativo',
+                        ],
                         'pluginOptions' => [
                             'allowClear' => true
                         ],
+                        'pluginEvents' => [
+                            "change" => 'function(data) { 
+                                tipoMoeda.setMoeda();
+                            }',
+                        ]
                     ]);
                     ?>
                 </div>
@@ -72,7 +80,7 @@ use kartik\datecontrol\DateControl;
                         'maskedInputOptions' => [
                             'allowMinus' => false
                         ],
-                    ])
+                    ])->label(null, ['id' => 'valor'])
                     ?>
 
                 </div>

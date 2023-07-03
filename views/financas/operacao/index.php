@@ -37,7 +37,11 @@ $daterange = [
         'boxTitle' => $this->title,
 
         'columns' => [
-            'id',
+            [
+                'attribute' => 'id',
+                'options' => ['style' => 'width:5
+                %;'],
+            ],
             [
                 'label' => 'Ativo',
                 'attribute' => 'ativo_codigo',
@@ -46,6 +50,7 @@ $daterange = [
                 },
                 'pageSummary' => 'EXTRATO FINANCEIRO',
                 'pageSummaryOptions' => ['colspan' => 2],
+                // 'options' => ['style' => 'width:3%;'],
             ],
             [
                 'filter' => Tipo::all(),
@@ -119,16 +124,26 @@ $daterange = [
                     return date_format($date, 'd/m/Y H:i:s');
                 },
                 'filter' => DateRangePicker::widget($daterange),
-               
+
             ],
             [
                 'attribute' => 'investidor',
                 'label' => 'Investidor',
-               
+
+            ],
+            [
+                'filter' => Pais::all(),
+                'attribute' => 'pais',
+                'label' => 'País',
+                /* 'value' => function ($model) {
+                    // itensAtivo->ativos
+                    return $model->pais;
+                }*/
+                // 'value' => 'itens_ativo.ativos.pais',
             ],
             [
                 'class' => 'app\lib\grid\ActionColumn',
-               
+
             ],
         ],
         'showPageSummary' => true,
