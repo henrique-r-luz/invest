@@ -1,20 +1,21 @@
 <?php
 
-use app\lib\dicionario\ProventosMovimentacao;
-use app\models\financas\Ativo;
-use app\models\financas\ItensAtivo;
-use app\models\financas\Proventos;
-use kartik\datecontrol\DateControl;
-use kartik\number\NumberControl;
-use kartik\widgets\Select2;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
 use yii\web\View;
+use yii\helpers\Html;
+use kartik\widgets\Select2;
+use app\lib\helpers\TipoMoeda;
 use kartik\widgets\ActiveForm;
+use kartik\number\NumberControl;
+use app\models\financas\ItensAtivo;
+use kartik\datecontrol\DateControl;
+use app\lib\dicionario\ProventosMovimentacao;
 
 /* @var $this View */
 /* @var $model Proventos */
 /* @var $form ActiveForm */
+
+$valor = 'Valor';
+$valor = TipoMoeda::valor($model->itensAtivo->ativos->pais, $valor);
 ?>
 <div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">
     <?php $form = ActiveForm::begin(['id' => 'form_proventos']); ?>
@@ -60,7 +61,7 @@ use kartik\widgets\ActiveForm;
                     'maskedInputOptions' => [
                         'allowMinus' => false
                     ],
-                ])->label(null, ['id' => 'valor'])
+                ])->label($valor, ['id' => 'valor'])
                 ?>
             </div>
             <div class="col-xs-6 col-sm-6 col-lg-6">

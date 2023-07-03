@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use kartik\widgets\Select2;
+use app\lib\helpers\TipoMoeda;
 use kartik\widgets\ActiveForm;
 use kartik\number\NumberControl;
 use app\models\financas\Operacao;
@@ -11,6 +12,9 @@ use kartik\datecontrol\DateControl;
 /* @var $this View */
 /* @var $model app\models\Operacao */
 /* @var $form ActiveForm */
+
+$valor = 'Valor';
+$valor = TipoMoeda::valor($model->itensAtivo->ativos->pais, $valor);
 ?>
 
 <div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">
@@ -80,7 +84,7 @@ use kartik\datecontrol\DateControl;
                         'maskedInputOptions' => [
                             'allowMinus' => false
                         ],
-                    ])->label(null, ['id' => 'valor'])
+                    ])->label($valor, ['id' => 'valor'])
                     ?>
 
                 </div>

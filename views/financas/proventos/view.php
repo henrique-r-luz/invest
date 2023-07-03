@@ -1,6 +1,8 @@
 <?php
 
 use yii\helpers\Html;
+use yii\web\YiiAsset;
+use app\lib\dicionario\Pais;
 use kartik\detail\DetailView;
 use app\lib\dicionario\ProventosMovimentacao;
 
@@ -67,9 +69,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                             [
                                 'format' => ['decimal', 2],
-                                'label' => 'Valor',
+                                'label' => ($model->itensAtivo->ativos->pais == Pais::BR) ? 'Valor(R$ Real)' : 'Valor($ Dollar)',
                                 'value' => $model->valor,
-                                'labelColOptions' => ['style' => 'width:8%'],
+                                'labelColOptions' => ['style' => 'width:12%'],
                             ],
                             [
                                 'Label' => 'Data',

@@ -1,5 +1,6 @@
 <?php
 
+use app\lib\dicionario\Pais;
 use yii\helpers\Html;
 use kartik\detail\DetailView;
 use app\models\financas\Operacao;
@@ -47,6 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                             [
                                 'format' => ['decimal', 2],
+                                'label' => ($model->itensAtivo->ativos->pais == Pais::BR) ? 'Valor(R$ Real)' : 'Valor($ Dollar)',
                                 'attribute' => 'valor',
                                 'value' => $model->valor
                             ],
