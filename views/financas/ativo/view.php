@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use kartik\detail\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\financas\Ativo */
@@ -24,13 +24,35 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= DetailView::widget([
                 'model' => $model,
+                'condensed' => true,
+                'notSetIfEmpty' => true,
                 'attributes' => [
-                    'id',
-                    'nome:ntext',
-                    'codigo:ntext',
-                    'tipo',
-                    'categoria',
-                    'pais'
+                    [
+                        'columns' => [
+                            'id',
+                            'nome',
+                            'codigo'
+
+                        ],
+                    ],
+                    [
+                        'columns' => [
+                            'tipo',
+                            'categoria',
+                            'pais'
+
+                        ],
+                    ],
+                    [
+                        'columns' => [
+                            [
+                                'label' => 'Classe Cálculo Ativo',
+                                'value' => $model->classesOperacoes->nome
+                            ]
+
+
+                        ],
+                    ],
                 ],
             ]) ?>
 

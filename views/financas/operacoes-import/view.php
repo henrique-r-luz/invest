@@ -1,12 +1,13 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use kartik\detail\DetailView;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\OperacoesImport */
 
-$this->title = 'Visualiza ' . 'OperacoesImport';
+$this->title = 'Visualiza ' . 'Operacoes Imports';
 $this->params['breadcrumbs'][] = ['label' => 'Operacoes Imports', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -23,12 +24,51 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= DetailView::widget([
                 'model' => $model,
+                'condensed' => true,
+                'notSetIfEmpty' => true,
                 'attributes' => [
-                    'id',
-                    'investidor_id',
-                    'arquivo:ntext',
-                    'tipo_arquivo:ntext',
-                    'lista_operacoes_criadas_json:ntext',
+                    [
+                        'columns' => [
+                            [
+                                'label' => 'Id',
+                                'value' => $model->id,
+                                'labelColOptions' => ['style' => 'width:3%'],
+                            ],
+                            [
+                                'label' => 'Investidor',
+                                'value' => $model->investidor->nome,
+                                'labelColOptions' => ['style' => 'width:8%'],
+                            ],
+                            [
+                                'label' => 'Arquivo',
+                                'value' => $model->arquivo,
+                                'labelColOptions' => ['style' => 'width:8%'],
+                            ],
+                            [
+                                'Label' => 'Data',
+                                'format' => 'datetime',
+                                'attribute' => 'data',
+                                'value' => $model->data
+                            ]
+                        ],
+                    ],
+
+                    [
+                        'columns' => [
+                            [
+                                'label' => 'Tipo',
+                                'value' => $model->tipo_arquivo,
+                                'labelColOptions' => ['style' => 'width:5%'],
+                            ],
+
+                            [
+                                'Label' => 'Operações Criadas',
+                                'attribute' => 'lista_operacoes_criadas_json',
+                                'value' => $model->lista_operacoes_criadas_json
+                            ]
+                        ],
+                    ],
+
                 ],
             ]) ?>
 

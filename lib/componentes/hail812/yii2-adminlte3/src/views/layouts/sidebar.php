@@ -29,13 +29,14 @@ use yii\helpers\Html; ?>
                         'icon' => 'dollar-sign',
                         'url' => '#',
                         'items' => [
+                            ['label' => 'Empresas Bolsa', 'icon' => 'building', 'url' => ['financas/acao-bolsa']],
                             ['label' => 'Ativo', 'icon' => 'gem', 'url' => ['financas/ativo']],
                             ['label' => 'Investidor', 'icon' => 'user', 'url' => ['financas/investidor']],
                             ['label' => 'Ativo Investidos', 'icon' => 'glass-cheers', 'url' => ['financas/itens-ativo']],
                             ['label' => 'Operação', 'icon' => 'cash-register', 'url' => ['financas/operacao']],
                             ['label' => 'Operações Import', 'icon' => 'file-import', 'url' => ['financas/operacoes-import']],
                             ['label' => 'Proventos', 'icon' => 'arrow-down', 'url' => ['financas/proventos']],
-                            ['label' => 'Empresas Bolsa', 'icon' => 'building', 'url' => ['financas/acao-bolsa']],
+
 
                         ],
                     ],

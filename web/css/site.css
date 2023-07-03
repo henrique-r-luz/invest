@@ -11,7 +11,7 @@ body {
     padding: 0 0 60px;
 }
 
-.wrap > .container {
+.wrap>.container {
     padding: 70px 15px 20px;
 }
 
@@ -43,7 +43,8 @@ body {
 }
 
 /* add sorting icons to gridview sort links */
-a.asc:after, a.desc:after {
+a.asc:after,
+a.desc:after {
     position: relative;
     top: 1px;
     display: inline-block;
@@ -55,11 +56,15 @@ a.asc:after, a.desc:after {
 }
 
 a.asc:after {
-    content: /*"\e113"*/ "\e151";
+    content:
+        /*"\e113"*/
+        "\e151";
 }
 
 a.desc:after {
-    content: /*"\e114"*/ "\e152";
+    content:
+        /*"\e114"*/
+        "\e152";
 }
 
 .sort-numerical a.asc:after {
@@ -97,32 +102,32 @@ a.desc:after {
 }
 
 /* align the logout "link" (button in form) of the navbar */
-.nav li > form > button.logout {
+.nav li>form>button.logout {
     padding: 15px;
     border: none;
 }
 
 @media(max-width:767px) {
-    .nav li > form > button.logout {
-        display:block;
+    .nav li>form>button.logout {
+        display: block;
         text-align: left;
         width: 100%;
         padding: 10px 15px;
     }
 }
 
-.nav > li > form > button.logout:focus,
-.nav > li > form > button.logout:hover {
+.nav>li>form>button.logout:focus,
+.nav>li>form>button.logout:hover {
     text-decoration: none;
 }
 
-.nav > li > form > button.logout:focus {
+.nav>li>form>button.logout:focus {
     outline: none;
 }
 
 /** ajusta estilo do sistema 
 */
-.content-header > h1 {
+.content-header>h1 {
     margin: 0;
     font-size: 18px;
 }
@@ -131,7 +136,7 @@ a.desc:after {
     font-size: 12px;
 }
 
-.content-header > .breadcrumb {
+.content-header>.breadcrumb {
     font-size: 10px;
 }
 
@@ -139,23 +144,23 @@ a.desc:after {
     font-size: 12px;
 }
 
-.control-label{
+.control-label {
     font-size: 12px;
 }
 
-.form-control{
+.form-control {
     font-size: 12px;
 }
 
-.detail-view{
-    font-size: 12px; 
-}
-
-.sidebar-menu{
+.detail-view {
     font-size: 12px;
 }
 
-.treeview-menu > li > a {
+.sidebar-menu {
+    font-size: 12px;
+}
+
+.treeview-menu>li>a {
     font-size: 12px;
 }
 
@@ -185,7 +190,7 @@ body {
 
 }
 
-.table-hover tbody tr:hover{
+.table-hover tbody tr:hover {
     background-color: #ffe4e1;
 }
 
@@ -193,8 +198,3 @@ body {
     height: 50px;
     width: 150px;
 }
-
-.teste {
-    color: red;
-}
-

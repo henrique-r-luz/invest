@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'buttons' => [
                                         'download' => static function ($url, $model) {
                                                 $icon    = '<button type="button" class="btn btn-success btn-xs"><i class="fas fa-download"> </i> </button>';
-                                                return Html::a($icon, Url::toRoute(['download', 'id' => $model->id]), []);
+                                                return Html::a($icon, Url::toRoute(['download', 'id' => $model->id]), ['data-pjax' => 0]);
                                         },
                                 ],
                         ],

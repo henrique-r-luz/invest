@@ -24,6 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= DetailView::widget([
                 'model' => $model,
+                'condensed' => true,
+                'notSetIfEmpty' => true,
                 'attributes' => [
                     [
                         'columns' => [

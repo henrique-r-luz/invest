@@ -24,6 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= DetailView::widget([
                 'model' => $model,
+                'condensed' => true,
+                'notSetIfEmpty' => true,
                 'attributes' => [
                     [
                         'columns' => [
@@ -59,26 +61,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'labelColOptions' => ['style' => 'width:10%'],
                             ]
 
-                            //'ativo_id'
                         ],
 
                     ],
-                    /*'id',
-                    'valor_bruto',
-                    'valor_liquido',
-                    //'atualiza_ativo_manual_id',
-                    [
-                        'attribute' => 'atualiza_ativo_manual_id',
-                        'value' => $model->atualizaAtivoManual->itensAtivo->ativos->codigo,
-                    ],
-                    [
-                        'label' => 'Investidor',
-                        'value' => $model->atualizaAtivoManual->itensAtivo->investidor->nome,
-                    ],
-                    [
-                        'attribute' => 'data',
-                        'format' => 'dateTime',
-                    ],*/
+
                 ],
             ]) ?>
 
