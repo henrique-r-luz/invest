@@ -14,7 +14,8 @@ use kartik\datecontrol\DateControl;
 /* @var $form ActiveForm */
 
 $valor = 'Valor';
-$valor = TipoMoeda::valor($model->itensAtivo->ativos->pais, $valor);
+$pais = $model->itensAtivo->ativos->pais ?? false;
+$valor = TipoMoeda::valor($pais, $valor);
 ?>
 
 <div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">

@@ -8,6 +8,9 @@ class TipoMoeda
 {
     public static  function valor($pais, $valor)
     {
+        if ($pais == false) {
+            return $valor;
+        }
         if (isset($pais)) {
             $valor = 'Valor($ Dollar)';
             if ($pais == Pais::BR) {
