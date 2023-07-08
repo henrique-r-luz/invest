@@ -19,7 +19,6 @@ RUN apt-get update && apt-get install -y \
     libmagickwand-dev \
     zip \
     unzip \
-    python3-pip \
     vim
 
 
@@ -50,8 +49,9 @@ RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
 
-# Instalação do Xdebug
-RUN pecl install xdebug \
+# Instalação de extensões
+RUN pecl install  apcu \
+    xdebug \
     && docker-php-ext-enable xdebug
 
 

@@ -4,13 +4,14 @@ namespace app\lib\config;
 
 use app\lib\dicionario\Pais;
 use app\lib\dicionario\Tipo;
-use app\lib\helpers\InvestException;
 use app\models\sincronizar\Preco;
+use Throwable;
 use Yii;
 use yii\db\Expression;
 
 class ValorDollar
 {
+    public const  key  = 'dollar';
 
     public static function convertValorMonetario($valor, $pais)
     {
@@ -29,33 +30,22 @@ class ValorDollar
         return $valor;
     }
 
-    private static function getCotacaoDollar()
+    public static function getCotacaoDollar()
     {
-        $session = Yii::$app->session;
-        if ($session->has('dollar') && $session->get('dollar') == 1) {
+
+        $cache = Yii::$app->cache;
+        if ($cache->get(self::key) === false) {
+
             $preco = self::precoDollar();
-            return self::setPrecoDollar($session, $preco);
+            if ($preco != null) {
+                $cache->set(self::key, $preco->valor);
+            } else {
+                $cache->set(self::key, 0);
+            }
         }
-        if ($session->has('dollar')) {
-            return $session->get('dollar');
-        }
-        $preco = self::precoDollar();
-        if (empty($preco)) {
-            $session->set('dollar', 1);
-            throw new InvestException('O preço do dollar não foi inserido.');
-        }
-        $session->set('dollar', $preco->valor);
-        return $session->get('dollar');
+        return $cache->get(self::key);
     }
 
-
-    private static function setPrecoDollar($session, $preco)
-    {
-        if (!empty($preco)) {
-            $session->set('dollar', $preco->valor);
-            return $session->get('dollar');
-        }
-    }
 
     private static function precoDollar()
     {
@@ -74,11 +64,11 @@ class ValorDollar
 
     public static function getDollar()
     {
-        $session = Yii::$app->session;
-        if (!$session->has('dollar')) {
+        $cache = Yii::$app->cache;
+        if ($cache->get(self::key) === false) {
             return 0;
         }
         $formatter = Yii::$app->formatter;
-        return $formatter->asDecimal(round($session->get('dollar'), 2));
+        return $formatter->asDecimal(round($cache->get(self::key), 2));
     }
 }

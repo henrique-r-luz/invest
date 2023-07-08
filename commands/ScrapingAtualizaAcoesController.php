@@ -39,6 +39,9 @@ class ScrapingAtualizaAcoesController extends Controller
                 $erro = CajuiHelper::processaErros($this->atualizaAcoes->getErrors());
                 echo $erro;
             }
+            $cache = Yii::$app->cache;
+            $cache->delete(ValorDollar::key);
+            ValorDollar::getCotacaoDollar();
         }
     }
 
