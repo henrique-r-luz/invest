@@ -62,8 +62,7 @@ $config = [
             ]
         ],
         'cache' => [
-            'class' => 'yii\caching\ApcCache',
-            'useApcu' => true,
+            'class' => 'yii\caching\FileCache',
         ],
         'user' => [
             'identityClass' => 'app\models\admin\User',

@@ -17,6 +17,7 @@ $daterange = [
     'model' => $searchModel,
     'attribute' => 'createTimeRange',
     'convertFormat' => true,
+    'pjaxContainerId' => 'grid_pjax',
     'pluginOptions' => [
         'timePicker' => true,
         'timePicker24Hour' => true,

@@ -27,8 +27,7 @@ $config = [
 
     'components' => [
         'cache' => [
-            'class' => 'yii\caching\ApcCache',
-            'useApcu' => true,
+            'class' => 'yii\caching\FileCache',
         ],
         'log' => [
             'targets' => [

@@ -45,6 +45,7 @@ class ScrapingAtualizaAcoesController extends Controller
         }
     }
 
+
     private function botPreco()
     {
         $lerPagina = new  LerPagina($this->atualizaAcoes);

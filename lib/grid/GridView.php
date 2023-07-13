@@ -48,7 +48,12 @@ class GridView extends \kartik\grid\GridView
      * @var array
      * @author Henrique Luz
      */
-    public $pjaxSettings = ['options' => ['id' => 'grid_pjax']];
+    public $pjaxSettings = ['options' =>
+    [
+        'id' => 'grid_pjax',
+
+
+    ]];
 
     /**
      * @var string Estipo aparencia do card. Valor padrão 'card-secondary card-outline'

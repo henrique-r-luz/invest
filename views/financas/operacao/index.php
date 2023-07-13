@@ -19,6 +19,8 @@ $daterange = [
     'model' => $searchModel,
     'attribute' => 'createTimeRange',
     'convertFormat' => true,
+    'pjaxContainerId' => 'grid_pjax',
+    //'presetDropdown' => true,
     'pluginOptions' => [
         'timePicker' => true,
         'timePicker24Hour' => true,
@@ -35,6 +37,7 @@ $daterange = [
         'filterModel' => $searchModel,
         'toolbar' => 'padraoCajui',
         'boxTitle' => $this->title,
+        'id' => 'grid_index',
 
         'columns' => [
             [
@@ -123,6 +126,7 @@ $daterange = [
                     $date = date_create($model->data);
                     return date_format($date, 'd/m/Y H:i:s');
                 },
+                //'filter' => GridView::FILTER_DATE_RANGE,
                 'filter' => DateRangePicker::widget($daterange),
 
             ],
