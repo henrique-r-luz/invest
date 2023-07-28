@@ -63,6 +63,6 @@ class ProventosCest
     {
         $I->amOnPage('/financas/proventos/view?id=327');
         $I->see("valor");
-        $I->see("2.81");
+        $I->see("2,81");
     }
 }

@@ -66,6 +66,6 @@ class OperacoesCest
     {
         $I->amOnPage('/financas/operacao/view?id=810');
         $I->see("810");
-        $I->see("2023-04-24 16:10:13");
+        $I->see("23,37");
     }
 }
