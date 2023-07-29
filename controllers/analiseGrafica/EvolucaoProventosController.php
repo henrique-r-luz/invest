@@ -16,19 +16,21 @@ use \yii\base\Controller;
  *
  * @author henrique
  */
-class EvolucaoProventosController extends Controller {
+class EvolucaoProventosController extends Controller
+{
 
     //put your code here
 
 
-    public function actionIndex() {
+    public function actionIndex()
+    {
         $dadosGraficoProventos = new EvolucaoProventos();
-        return $this->render('index',
-                        [
-                            'dados' =>  $dadosGraficoProventos,
-                            
-                        ]
+        return $this->render(
+            'index',
+            [
+                'dados' =>  $dadosGraficoProventos,
+
+            ]
         );
     }
-
 }

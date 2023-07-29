@@ -8,6 +8,8 @@ use yii\web\View;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
 ?>
 
 <?=
@@ -17,10 +19,7 @@ Highcharts::widget([
         'modules/exporting',
     ],
     'options' => [
-        // 'chart' => [
-        //     'type' => 'container',
-        //'width' => 300
-        //],
+
         'title' => [
             'text' => 'Evolução',
         ],
@@ -35,12 +34,10 @@ Highcharts::widget([
         'yAxis' => [
             'title' => ['text' => 'Valores']
         ],
-        'plotOptions'=>[
-           'series'=>[
-               
-           ] 
+        'plotOptions' => [
+            'series' => []
         ],
-       // 'series' => [['name' => 'graf', 'data' =>[11217.93,1198.93,3604.3599,-1055.34 ]]],
+        // 'series' => [['name' => 'graf', 'data' =>[11217.93,1198.93,3604.3599,-1055.34 ]]],
         'series' => $dados->getDadosGrafico(),
     ]
 ])
