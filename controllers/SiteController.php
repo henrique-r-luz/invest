@@ -2,14 +2,15 @@
 
 namespace app\controllers;
 
-use app\lib\helpers\InvestException;
 use Yii;
+use Throwable;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\lib\helpers\SiteHelper;
 use app\models\admin\LoginForm;
 use app\models\financas\Proventos;
+use app\lib\helpers\InvestException;
 use app\models\dashboard\GraficoFiis;
 use app\models\dashboard\GraficoPais;
 use app\models\dashboard\GraficoTipo;
@@ -18,8 +19,8 @@ use app\models\dashboard\GraficoAtivo;
 use app\models\dashboard\DashBoardSearch;
 use app\models\dashboard\GraficoAcaoPais;
 use app\models\dashboard\GraficoCategoria;
+use app\models\dashboard\ProventosDashBoard;
 use app\models\dashboard\ValoresConsolidados;
-use Throwable;
 
 class SiteController extends Controller
 {
@@ -58,11 +59,13 @@ class SiteController extends Controller
             $graficoAcaoPais = new GraficoAcaoPais($dados, $valoresTotais);
             $graficoAcoes = new GraficoAcoes($dados, $valoresTotais);
             $graficoFii = new GraficoFiis($dados, $valoresTotais);
+            $proventosDashBoard = new ProventosDashBoard();
             $formatter = Yii::$app->formatter;
             $patrimonioBruto = 0;
             $valorCompra = 0;
             $lucro = 0;
-            $proventos = $formatter->asCurrency(Proventos::find()->sum('valor'));
+            $proventos = 0;
+            $proventos = $formatter->asCurrency($proventosDashBoard->getValor());
             if (!empty($valoresTotais)) {
                 $patrimonioBruto = $formatter->asCurrency(round(ValoresConsolidados::valorInvestido($valoresTotais), 5));
                 $valorCompra = $formatter->asCurrency(round(ValoresConsolidados::valorCompra($valoresTotais), 5));

@@ -8,7 +8,6 @@
 
 namespace app\models\analiseGrafica;
 
-use \app\lib\Categoria;
 use app\lib\dicionario\Pais;
 use \app\models\financas\Proventos;
 
