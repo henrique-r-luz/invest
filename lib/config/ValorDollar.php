@@ -5,7 +5,6 @@ namespace app\lib\config;
 use app\lib\dicionario\Pais;
 use app\lib\dicionario\Tipo;
 use app\models\sincronizar\Preco;
-use Throwable;
 use Yii;
 use yii\db\Expression;
 
@@ -15,6 +14,9 @@ class ValorDollar
 
     public static function convertValorMonetario($valor, $pais)
     {
+        if ($valor === null) {
+            return 0;
+        }
         if ($pais == Pais::US) {
             return ($valor * self::getCotacaoDollar());
         }
@@ -23,6 +25,9 @@ class ValorDollar
 
     public static function valorEmDolarView($valor, $pais)
     {
+        if ($valor === null) {
+            return 0;
+        }
         if ($pais == Pais::US) {
             return (string)(Yii::$app->formatter->asCurrency(round($valor * self::getCotacaoDollar(), 4)))
                 . '($' . Yii::$app->formatter->asCurrency(round($valor, 4)) . ')';
