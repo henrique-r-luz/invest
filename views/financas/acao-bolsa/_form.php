@@ -10,7 +10,7 @@ use kartik\widgets\SwitchInput;
 ?>
 
 <div class="<?= $model->isNewRecord ? 'card-success' : 'card-info' ?> card card-outline">
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id' => 'form_acao_bolsa']); ?>
     <div class="card-body">
         <div class="acao-bolsa-form">
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models\financas;
+
 use app\lib\behavior\AuditoriaBehavior;
 
 use Yii;
@@ -36,11 +37,9 @@ class AcaoBolsa extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'codigo', 'setor','cnpj'], 'required'],
-            [['nome', 'setor','cnpj'], 'string'],
-            [['rank_ano','rank_trimestre'],'number'],
+            [['nome', 'codigo', 'setor', 'cnpj'], 'required'],
+            [['nome', 'setor', 'cnpj'], 'string'],
             [['codigo'], 'unique'],
-            [['habilita_rank'],'boolean']
         ];
     }
 
@@ -50,13 +49,13 @@ class AcaoBolsa extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'cnpj'=>'Registro Empresa (CPNJ,IRS)',
+            'cnpj' => 'Registro Empresa (CPNJ,IRS)',
             'id' => 'ID',
             'nome' => 'Nome',
             'codigo' => 'Código',
             'setor' => 'Setor',
             'rank_ano' => 'Rank Ano',
-            'rank_trimestre'=>'Rank trimestre'
+            'rank_trimestre' => 'Rank trimestre'
         ];
     }
 }
