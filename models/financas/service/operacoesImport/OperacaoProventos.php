@@ -41,7 +41,7 @@ class OperacaoProventos extends OperacoesImportAbstract
     {
         $proventos = array_filter($this->proventosInseridos, function ($provento) use ($item) {
             return (($provento->itens_ativos_id == $item->itens_ativos_id)
-                && $provento->valor == $item->valor
+                && $provento->movimentacao == $item->movimentacao
                 && $provento->data == $item->data);
         });
         if (!empty($proventos)) {
@@ -110,7 +110,7 @@ class OperacaoProventos extends OperacoesImportAbstract
             }
             $transaction->commit();
         } catch (\Exception $e) {
-            throw new \Exception($e->getMessage());
+            throw $e;
         } catch (InvestException $e) {
             throw $e;
         }
