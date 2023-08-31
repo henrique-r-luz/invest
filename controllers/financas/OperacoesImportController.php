@@ -94,7 +94,6 @@ class OperacoesImportController extends Controller
                 'model' => $operacoesImportService->getModel(),
             ]);
         }
-       
     }
 
 

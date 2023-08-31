@@ -39,6 +39,9 @@ class OperacaoProventos extends OperacoesImportAbstract
     }
     private function uniaoDadosRepetidos($item)
     {
+        /**
+         * valor que está no banco
+         */
         $proventos = array_filter($this->proventosInseridos, function ($provento) use ($item) {
             return (($provento->itens_ativos_id == $item->itens_ativos_id)
                 && $provento->movimentacao == $item->movimentacao
@@ -47,7 +50,7 @@ class OperacaoProventos extends OperacoesImportAbstract
         if (!empty($proventos)) {
             $objProvento = array_values($proventos);
             $provento  = $objProvento[0];
-            $provento->valor += $provento->valor;
+            $provento->valor += $item->valor;
             if (!$provento->save()) {
                 $erro = CajuiHelper::processaErros($provento->getErrors());
                 throw new InvestException($erro);
@@ -82,8 +85,8 @@ class OperacaoProventos extends OperacoesImportAbstract
                 list($d, $m, $y) = explode('/', $data);
                 $data = $y . '-' . $m . '-' . ($d);
 
-                $movimentacao = $linha[2];
 
+                $movimentacao = $linha[2];
                 $provento = new Proventos();
                 $provento->itens_ativos_id =  ItensAtivo::find()
                     ->innerJoin('ativo', 'itens_ativo.ativo_id = ativo.id')
@@ -92,7 +95,7 @@ class OperacaoProventos extends OperacoesImportAbstract
                     ->one()
                     ->id;
                 $provento->valor = floatval($valorProvento);
-                $provento->data =  $data;
+                $provento->data =  $data . " 20:00:00";
                 $provento->movimentacao = ProventosMovimentacao::getId($movimentacao);
 
                 if ($this->uniaoDadosRepetidos($provento)) {
