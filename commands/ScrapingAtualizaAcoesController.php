@@ -20,6 +20,7 @@ use Yii;
 class ScrapingAtualizaAcoesController extends Controller
 {
     private AtualizaAcoes $atualizaAcoes;
+    public const categoriaLog = 'bot_preço';
 
 
     public function actionPage(int $id)
@@ -32,12 +33,12 @@ class ScrapingAtualizaAcoesController extends Controller
             echo "atualiza itens ativos" . \PHP_EOL;
         } catch (Throwable $ex) {
             $erro = $ex->getMessage();
-            echo $erro . \PHP_EOL;
+            Yii::error($erro, self::categoriaLog);
         } finally {
             $this->atualizaAcoes->status = StatusAtualizacaoAcoes::FINALIZADO;
             if (!$this->atualizaAcoes->save()) {
                 $erro = CajuiHelper::processaErros($this->atualizaAcoes->getErrors());
-                echo $erro;
+                Yii::error($erro, self::categoriaLog);
             }
             $cache = Yii::$app->cache;
             $cache->delete(ValorDollar::key);

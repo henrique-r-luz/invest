@@ -2,6 +2,7 @@
 
 namespace app\commands\helper;
 
+use Yii;
 use DOMAttr;
 use DOMXPath;
 use Throwable;
@@ -9,18 +10,21 @@ use DOMDocument;
 use app\lib\CajuiHelper;
 use app\models\sincronizar\Preco;
 use app\models\sincronizar\SiteAcoes;
+use app\commands\ScrapingAtualizaAcoesController;
 
 class LerPagina
 {
+
     /**
      * local em que está os preços dos ativos
-     *
+   
      * @var array
      * @author Henrique Luz
      */
     private $xPaths  = [
         './/*[contains(concat(" ",normalize-space(@class)," ")," text-5xl ")]',
-        '/html/body/div[1]/div[2]/div/div/div[2]/main/div/div[1]/div[2]/div[1]/span'
+        '/html/body/div[1]/div[2]/div/div/div[2]/main/div/div[1]/div[2]/div[1]/span',
+        '/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div/div[1]/div[1]/div[1]'
     ];
 
     private $vetAtivos;
@@ -48,6 +52,7 @@ class LerPagina
             } catch (Throwable $ex) {
                 $erro = 'Throwable :' . $ativo_id . ' ' . $ex->getMessage();
                 $vetAtivos[$ativo_id]['erro'] = $erro;
+                Yii::error($erro, ScrapingAtualizaAcoesController::categoriaLog);
                 echo  $erro;
             }
         }
@@ -66,6 +71,7 @@ class LerPagina
         foreach ($this->xPaths as $xPath) {
             $tagPrecoList = $tagPreco->query($xPath);
             if ($tagPrecoList->length == 0) {
+                Yii::error("Não achou o valor do ativo: " . $ativo['codigo'], ScrapingAtualizaAcoesController::categoriaLog);
                 continue;
             } else {
                 return $tagPrecoList;
@@ -86,6 +92,7 @@ class LerPagina
 
             $preco = new Preco();
             $preco->ativo_id = $ativo_id;
+            Yii::error($precoSite->textContent, ScrapingAtualizaAcoesController::categoriaLog);
             $valor = str_replace(".", "", $precoSite->textContent);
             $valor = str_replace(",", ".", $valor);
             $preco->valor = $valor;
@@ -98,13 +105,14 @@ class LerPagina
                 $erro = CajuiHelper::processaErros($preco->getErrors());
                 $this->vetAtivos[$ativo_id]['erro'] = $erro;
                 echo 'erro ' . $erro . \PHP_EOL;
+                Yii::error($erro, ScrapingAtualizaAcoesController::categoriaLog);
             }
             break;
         }
         $this->atualizaAcoes->ativo_atualizado  = $this->vetAtivos;
         if (!$this->atualizaAcoes->save()) {
             $erro = CajuiHelper::processaErros($this->atualizaAcoes->getErrors());
-            echo $erro;
+            Yii::error($erro, ScrapingAtualizaAcoesController::categoriaLog);
         }
     }
 
