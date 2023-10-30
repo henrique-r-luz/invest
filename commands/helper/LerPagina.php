@@ -24,7 +24,9 @@ class LerPagina
     private $xPaths  = [
         './/*[contains(concat(" ",normalize-space(@class)," ")," text-5xl ")]',
         '/html/body/div[1]/div[2]/div/div/div[2]/main/div/div[1]/div[2]/div[1]/span',
-        '/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div/div[1]/div[1]/div[1]'
+        '/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div/div[1]/div[1]/div[1]',
+        '/html/body/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[3]/div/div[1]/div[1]/div[1]',
+        '/html/body/div[1]/div[2]/div/div/div/main/div/div[1]/div[2]/div[1]/span'
     ];
 
     private $vetAtivos;
