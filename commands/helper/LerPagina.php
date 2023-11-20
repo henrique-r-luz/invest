@@ -11,23 +11,12 @@ use app\lib\CajuiHelper;
 use app\models\sincronizar\Preco;
 use app\models\sincronizar\SiteAcoes;
 use app\commands\ScrapingAtualizaAcoesController;
+use app\models\sincronizar\XpathBot;
+use yii\db\Expression;
 
 class LerPagina
 {
 
-    /**
-     * local em que está os preços dos ativos
-   
-     * @var array
-     * @author Henrique Luz
-     */
-    private $xPaths  = [
-        './/*[contains(concat(" ",normalize-space(@class)," ")," text-5xl ")]',
-        '/html/body/div[1]/div[2]/div/div/div[2]/main/div/div[1]/div[2]/div[1]/span',
-        '/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div/div[1]/div[1]/div[1]',
-        '/html/body/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[3]/div/div[1]/div[1]/div[1]',
-        '/html/body/div[1]/div[2]/div/div/div/main/div/div[1]/div[2]/div[1]/span'
-    ];
 
     private $vetAtivos;
     private $atualizaAcoes;
@@ -70,15 +59,18 @@ class LerPagina
         $documento->loadHTML($pagina);
         libxml_use_internal_errors($internalErrors);
         $tagPreco = new DOMXPath($documento);
-        foreach ($this->xPaths as $xPath) {
-            $tagPrecoList = $tagPreco->query($xPath);
-            if ($tagPrecoList->length == 0) {
-                Yii::error("Não achou o valor do ativo: " . $ativo['codigo'], ScrapingAtualizaAcoesController::categoriaLog);
-                continue;
-            } else {
-                return $tagPrecoList;
-            }
+        echo 'xpth ' . $ativo['codigo'] . \PHP_EOL;
+        //foreach ($this->xPaths as $xPath) {
+        if ($ativo['xpth'] == null || $ativo['xpth'] == '') {
+            Yii::error("Não achou o xpth para : " . $ativo['codigo'], ScrapingAtualizaAcoesController::categoriaLog);
         }
+        $tagPrecoList = $tagPreco->query($ativo['xpth']);
+        if ($tagPrecoList->length == 0) {
+            Yii::error("Não achou o valor do ativo: " . $ativo['codigo'], ScrapingAtualizaAcoesController::categoriaLog);
+        } else {
+            return $tagPrecoList;
+        }
+        //}
     }
 
 
@@ -121,16 +113,42 @@ class LerPagina
 
     private function getAtivos()
     {
+
+        $xpthBot = XpathBot::find()
+            ->select([
+                new Expression(" DISTINCT ON (site_acao_id) * ")
+            ])->orderBy([
+                'site_acao_id' => \SORT_DESC,
+                'data' => \SORT_DESC,
+                'xpath' => \SORT_DESC,
+                'id' => \SORT_DESC
+            ]);
+
         $siteAcoes = SiteAcoes::find()
+            ->select([
+                'site_acoes.url',
+                'ativo.codigo',
+                'xpath_bots.xpath',
+                'ativo.id as ativo_id'
+            ])
             ->joinWith(['ativo'])
-            ->all();
+            ->leftJoin(["xpath_bots" => $xpthBot], 'xpath_bots.site_acao_id = site_acoes.ativo_id')
+            ->asArray()->all();
+
         $vetAtivos = [];
         foreach ($siteAcoes as $siteAcoe) {
-            $vetAtivos[$siteAcoe->ativo_id]['status'] = false;
-            $vetAtivos[$siteAcoe->ativo_id]['site'] = $siteAcoe->url;
-            $vetAtivos[$siteAcoe->ativo_id]['codigo'] = $siteAcoe->ativo->codigo;
-            $vetAtivos[$siteAcoe->ativo_id]['erro'] = '';
+            try {
+
+                $vetAtivos[$siteAcoe['ativo_id']]['status'] = false;
+                $vetAtivos[$siteAcoe['ativo_id']]['site'] = $siteAcoe['url'];
+                $vetAtivos[$siteAcoe['ativo_id']]['codigo'] = $siteAcoe['codigo'];
+                $vetAtivos[$siteAcoe['ativo_id']]['xpth'] = $siteAcoe['xpath'];
+                $vetAtivos[$siteAcoe['ativo_id']]['erro'] = '';
+            } catch (Throwable $e) {
+                echo  $e->getMessage();
+            }
         }
+
         $this->vetAtivos = $vetAtivos;
     }
 }

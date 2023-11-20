@@ -50,6 +50,7 @@ use yii\helpers\Html; ?>
                             ['label' => 'Atualiza Ações', 'icon' => 'chevron-circle-down', 'url' => ['sincronizar/atualiza-acoes']],
                             ['label' => 'Preço', 'icon' => 'dollar-sign', 'url' => ['sincronizar/preco']],
                             ['label' => 'Site Ação', 'icon' => 'undo', 'url' => ['sincronizar/site-acoes']],
+                            ['label' => 'Site Xpath', 'icon' => 'road', 'url' => ['sincronizar/xpath-bot']],
                             ['label' => 'Ativo Manual', 'icon' => 'plus', 'url' => ['sincronizar/atualiza-ativo-manual']],
                             ['label' => 'Operação Manual', 'icon' => 'plus-square', 'url' => ['sincronizar/atualiza-operacoes-manual']],
 

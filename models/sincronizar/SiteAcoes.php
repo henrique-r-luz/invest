@@ -77,4 +77,10 @@ class SiteAcoes extends ActiveRecord
     {
         return $this->hasOne(Ativo::className(), ['id' => 'ativo_id']);
     }
+
+
+    public function getXpthBot()
+    {
+        return $this->hasMany(XpathBot::className(), ['site_acao_id' => 'ativo_id']);
+    }
 }
