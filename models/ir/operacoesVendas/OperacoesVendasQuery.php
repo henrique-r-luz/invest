@@ -29,7 +29,6 @@ class OperacoesVendasQuery
             ->andWhere(new Expression(" EXTRACT(YEAR FROM  operacao.data) <='" . $this->formBensDireito->ano . "'"))
             ->andWhere(['ativo.pais' => Pais::BR])
             ->andWhere(['categoria' => Categoria::RENDA_VARIAVEL])
-            ->andWhere(['itens_ativo.ativo' => true])
             ->orderBy([
                 'ativo.codigo' => \SORT_ASC,
                 'operacao.data' => \SORT_ASC
@@ -47,7 +46,6 @@ class OperacoesVendasQuery
             ->andWhere(new Expression(" EXTRACT(YEAR FROM  operacao.data) ='" . $this->formBensDireito->ano . "'"))
             ->andWhere(['ativo.pais' => Pais::BR])
             ->andWhere(['categoria' => Categoria::RENDA_VARIAVEL])
-            ->andWhere(['itens_ativo.ativo' => true])
             ->andWhere(['operacao.tipo' => Operacao::tipoOperacaoId()[Operacao::VENDA]]);
 
         return $operacoesVendidas;

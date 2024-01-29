@@ -77,6 +77,9 @@ class RecalculaAtivos
                 $valor_compra -= $operacao->quantidade * $precoMedio;
             }
         }
+        if ($valor_compra < 0) {
+            $valor_compra = 0;
+        }
         return [$valor_compra, $quantidade];
     }
 }

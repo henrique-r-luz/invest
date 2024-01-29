@@ -10,7 +10,6 @@ namespace app\models\dashboard;
 
 use \app\models\financas\Ativo;
 use app\lib\dicionario\Tipo;
-use \app\models\financas\Proventos;
 
 /**
  * Description of DashBoardSearch

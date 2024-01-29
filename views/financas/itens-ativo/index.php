@@ -106,6 +106,24 @@ $impostoRenda = 1;
                 'label' => 'País',
                 'value' => 'ativos.pais',
             ],
+            [
+                // 'filter' => Pais::all(),
+                'filter' => [
+                    1 => 'SIM',
+                    0 => 'Não'
+                ],
+                'attribute' => 'ativo',
+                'label' => 'On',
+                'value' => function ($model) {
+                    if ($model->ativo >= 1) {
+                        return 'SIM';
+                    }
+                    return 'NÃO';
+                },
+                'options' => ['style' => 'width:5%;'],
+
+                // 'value' => 'ativo',
+            ],
             ['class' => 'app\lib\grid\ActionColumn'],
         ],
         'showPageSummary' => true,

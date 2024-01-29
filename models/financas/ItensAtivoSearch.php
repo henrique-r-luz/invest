@@ -24,6 +24,7 @@ class ItensAtivoSearch extends ItensAtivo
         return [
             [['id', 'quantidade'], 'integer'],
             [['nome', 'codigo', 'tipo', 'categoria', 'pais', 'investidor_id'], 'safe'],
+            [['ativo'], 'boolean'],
             [['valor_compra', 'valor_bruto', 'valor_liquido'], 'number'],
         ];
     }
@@ -47,8 +48,7 @@ class ItensAtivoSearch extends ItensAtivo
     public function search($params)
     {
         $query = ItensAtivo::find()
-            ->joinWith(['ativos', 'investidor'])
-            ->andWhere(['ativo' => true]);
+            ->joinWith(['ativos', 'investidor']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -90,6 +90,7 @@ class ItensAtivoSearch extends ItensAtivo
             'ativo.tipo' => $this->tipo,
             'ativo.categoria' => $this->categoria,
             'ativo.pais' => $this->pais,
+            'itens_ativo.ativo' => $this->ativo
         ]);
 
         $query->andFilterWhere(['ilike', 'ativo.nome', $this->nome])
