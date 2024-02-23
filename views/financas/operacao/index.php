@@ -42,8 +42,7 @@ $daterange = [
         'columns' => [
             [
                 'attribute' => 'id',
-                'options' => ['style' => 'width:5
-                %;'],
+                'options' => ['style' => 'width:3%;'],
             ],
             [
                 'label' => 'Ativo',
@@ -60,6 +59,7 @@ $daterange = [
                 'attribute' => 'tipo_ativo',
                 'label' => 'Tipo Ativo',
 
+
             ],
 
             [
@@ -68,6 +68,7 @@ $daterange = [
                 'value' => function ($model) {
                     return Operacao::getTipoOperacao($model->tipo);
                 },
+                'options' => ['style' => 'width:8%;'],
             ],
             [
                 'format' => ['decimal'],
@@ -87,7 +88,8 @@ $daterange = [
                         }
                     }
                     return '<font color="blue">Quatidade: ' . $quantidade . '</font>';
-                }
+                },
+                'options' => ['style' => 'width:8%;'],
             ],
             [
                 'attribute' => 'valor',
@@ -121,6 +123,12 @@ $daterange = [
                 'pageSummaryOptions' => ['colspan' => 2],
             ],
             [
+                'attribute' => 'preco_medio',
+                'format' => 'currency',
+                'options' => ['style' => 'width:8%;'],
+
+            ],
+            [
                 'attribute' => 'data',
                 'value' => function ($model) {
                     $date = date_create($model->data);
@@ -133,6 +141,7 @@ $daterange = [
             [
                 'attribute' => 'investidor',
                 'label' => 'Investidor',
+                'options' => ['style' => 'width:8%;'],
 
             ],
             [

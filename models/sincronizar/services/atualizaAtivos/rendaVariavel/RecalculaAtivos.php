@@ -2,16 +2,18 @@
 
 namespace app\models\sincronizar\services\atualizaAtivos\rendaVariavel;
 
+use Yii;
 use app\lib\CajuiHelper;
-use app\lib\helpers\InvestException;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
+use app\lib\helpers\InvestException;
 use app\models\config\ClassesOperacoes;
 
 
 class RecalculaAtivos
 {
     private $itensAtivo_id = null;
+    private $transaction;
 
     public function __construct($itensAtivo_id = null)
     {
@@ -24,7 +26,7 @@ class RecalculaAtivos
 
     private function calculaAtivo()
     {
-
+        $this->transaction = Yii::$app->db->beginTransaction();
         $itensAtivos = ItensAtivo::find()
             ->where(['ativo' => true])
             ->andFilterWhere(['id' => $this->itensAtivo_id])
@@ -34,9 +36,11 @@ class RecalculaAtivos
             $itensAtivo->quantidade = $quantidade;
             $itensAtivo->valor_compra = $valor_compra;
             if (!$itensAtivo->save()) {
+                $this->transaction->rollBack();
                 throw new InvestException(CajuiHelper::processaErros($itensAtivo->getErros()));
             }
         }
+        $this->transaction->commit();
     }
 
     private function calculaOperacoes($itensAtivo)
@@ -61,6 +65,7 @@ class RecalculaAtivos
             if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::DESDOBRAMENTO_MENOS) {
                 $quantidade -= $operacao->quantidade;
             }
+
             if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::VENDA) {
                 if ($itensAtivo->ativos->classesOperacoes->nome == ClassesOperacoes::CALCULA_ARITIMETICA_CDB_INTER) {
                     $quantidade -= $operacao->quantidade;
@@ -76,7 +81,13 @@ class RecalculaAtivos
                 $quantidade -= $operacao->quantidade;
                 $valor_compra -= $operacao->quantidade * $precoMedio;
             }
+
+            $operacao->preco_medio = ($valor_compra / ($quantidade == 0 ? 1 : $quantidade));
+            if (!$operacao->save()) {
+                throw new InvestException(CajuiHelper::processaErros($itensAtivo->getErros()));
+            }
         }
+
         if ($valor_compra < 0) {
             $valor_compra = 0;
         }

@@ -34,7 +34,7 @@ class OperacaoSearch extends Operacao
             [['createTimeRange'], 'match', 'pattern' => '/^.+\s\-\s.+$/'],
             [['tipo', 'data', 'ativo_codigo', 'itens_ativos_id', 'investidor'], 'safe'],
             [['pais', 'tipo_ativo'], 'string'],
-            [['valor', 'quantidade'], 'number'],
+            [['valor', 'quantidade', 'preco_medio'], 'number'],
         ];
     }
 
@@ -77,6 +77,7 @@ class OperacaoSearch extends Operacao
                 'operacao.quantidade',
                 'operacao.valor',
                 'operacao.data',
+                'operacao.preco_medio',
                 'investidor.nome as investidor',
                 'ativo.pais',
                 'ativo.tipo as tipo_ativo'
@@ -128,6 +129,7 @@ class OperacaoSearch extends Operacao
             'operacao.id' => $this->id,
             'operacao.quantidade' => $this->quantidade,
             'valor' => $this->valor,
+            'valor' => $this->preco_medio,
             'operacao.tipo' => $this->tipo,
             'ativo.tipo' => $this->tipo_ativo,
             'ativo.pais' => $this->pais

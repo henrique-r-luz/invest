@@ -84,7 +84,7 @@ class Operacao extends ActiveRecord
             [['tipo', 'quantidade', 'valor', 'data', 'itens_ativos_id'], 'required'],
             [['quantidade', 'itens_ativos_id'], 'default', 'value' => null],
             [['itens_ativos_id', 'tipo'], 'integer'],
-            [['valor', 'quantidade'], 'number', 'min' => 0],
+            [['valor', 'quantidade', 'preco_medio'], 'number', 'min' => 0],
             /*[
                 ['data'], 'unique',
                 'targetAttribute' => ['itens_ativos_id', 'data'],
@@ -105,6 +105,7 @@ class Operacao extends ActiveRecord
             'valor' => 'Valor',
             'data' => 'Data',
             'itens_ativos_id' => 'Item Ativo',
+            'preco_medio' => 'Preço Médio'
         ];
     }
 

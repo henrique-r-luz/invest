@@ -20,6 +20,7 @@ use app\models\financas\Operacao;
 use app\lib\helpers\InvestException;
 use app\models\financas\service\sincroniza\Sincroniza;
 use app\lib\config\atualizaAtivos\AtualizaAtivoOperacaoFactory;
+use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\RecalculaAtivos;
 
 
 /**
@@ -69,6 +70,7 @@ class OperacaoService
     private function salvaOperacao()
     {
         $this->oldOperacao = $this->operacao->getOldAttributes();
+        $recalculaAtivos = new RecalculaAtivos();
         if (!$this->operacao->save()) {
             $erro = CajuiHelper::processaErros($this->operacao->getErrors());
             $msg = 'O sistema não pode alterar a operação:' . $erro . '. ';
