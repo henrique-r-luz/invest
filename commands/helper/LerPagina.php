@@ -40,9 +40,10 @@ class LerPagina
                 if ($ativo['codigo'] === 'BTC') {
                     $this->insereBtc($ativo, $ativo_id);
                 } else {
+                    $tagPrecoList = $this->getTagPreco($ativo, $ativo_id);
+                    $this->inserePreco($tagPrecoList, $ativo_id);
                 }
-                $tagPrecoList = $this->getTagPreco($ativo, $ativo_id);
-                $this->inserePreco($tagPrecoList, $ativo_id);
+
                 if (!$this->atualizaAcoes->save()) {
                     $erro = CajuiHelper::processaErros($this->atualizaAcoes->getErrors());
                     Yii::error($erro, ScrapingAtualizaAcoesController::categoriaLog);
