@@ -3,7 +3,6 @@
 namespace app\commands\helper;
 
 use Yii;
-use DOMAttr;
 use DOMXPath;
 use Throwable;
 use DOMDocument;
@@ -77,7 +76,6 @@ class LerPagina
         } else {
             return $tagPrecoList;
         }
-        //}
     }
 
 
@@ -96,10 +94,7 @@ class LerPagina
 
     private function inserePreco($tagPrecoList, $ativo_id)
     {
-        // echo 'ativo_id ' . $ativo_id . \PHP_EOL;
-        /*if ($ativo_id == 51) {
-            print_r($tagPrecoList);
-        }*/
+
         if ($tagPrecoList == null || $tagPrecoList->length == 0) {
             return;
         }
@@ -178,8 +173,6 @@ class LerPagina
         $jsnsrc = $url;
         $json = file_get_contents($jsnsrc);
         $json = json_decode($json);
-        $one_Btc_To_Brl = $json->BRL->last;
-
         return  $json->BRL->last;
     }
 }
