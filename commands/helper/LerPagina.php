@@ -38,8 +38,16 @@ class LerPagina
     {
         foreach ($this->vetAtivos as $ativo_id => $ativo) {
             try {
-                $tagPrecoList = $this->getTagPreco($ativo);
+                if ($ativo['codigo'] === 'BTC') {
+                    $this->insereBtc($ativo, $ativo_id);
+                } else {
+                }
+                $tagPrecoList = $this->getTagPreco($ativo, $ativo_id);
                 $this->inserePreco($tagPrecoList, $ativo_id);
+                if (!$this->atualizaAcoes->save()) {
+                    $erro = CajuiHelper::processaErros($this->atualizaAcoes->getErrors());
+                    Yii::error($erro, ScrapingAtualizaAcoesController::categoriaLog);
+                }
             } catch (Throwable $ex) {
                 $erro = 'Throwable :' . $ativo_id . ' ' . $ex->getMessage();
                 $vetAtivos[$ativo_id]['erro'] = $erro;
@@ -50,7 +58,7 @@ class LerPagina
     }
 
 
-    private function getTagPreco($ativo)
+    private function getTagPreco($ativo, $ativo_id)
     {
         $tagPrecoList = null;
         $pagina = \file_get_contents($ativo['site']);
@@ -60,7 +68,6 @@ class LerPagina
         libxml_use_internal_errors($internalErrors);
         $tagPreco = new DOMXPath($documento);
         echo 'xpth ' . $ativo['codigo'] . \PHP_EOL;
-        //foreach ($this->xPaths as $xPath) {
         if ($ativo['xpth'] == null || $ativo['xpth'] == '') {
             Yii::error("Não achou o xpth para : " . $ativo['codigo'], ScrapingAtualizaAcoesController::categoriaLog);
         }
@@ -74,8 +81,25 @@ class LerPagina
     }
 
 
+    private function insereBtc($ativo, $ativo_id)
+    {
+        $preco = new Preco();
+        $preco->ativo_id = $ativo_id;
+        $preco->valor = $this->getBtc($ativo['site']);
+        $preco->atualiza_acoes_id = $this->atualizaAcoes->id;
+        $preco->data = date("Y-m-d H:i:s");
+        if ($preco->save()) {
+            $this->vetAtivos[$ativo_id]['status'] = true;
+        }
+        $this->atualizaAcoes->ativo_atualizado  = $this->vetAtivos;
+    }
+
     private function inserePreco($tagPrecoList, $ativo_id)
     {
+        // echo 'ativo_id ' . $ativo_id . \PHP_EOL;
+        /*if ($ativo_id == 51) {
+            print_r($tagPrecoList);
+        }*/
         if ($tagPrecoList == null || $tagPrecoList->length == 0) {
             return;
         }
@@ -104,10 +128,6 @@ class LerPagina
             break;
         }
         $this->atualizaAcoes->ativo_atualizado  = $this->vetAtivos;
-        if (!$this->atualizaAcoes->save()) {
-            $erro = CajuiHelper::processaErros($this->atualizaAcoes->getErrors());
-            Yii::error($erro, ScrapingAtualizaAcoesController::categoriaLog);
-        }
     }
 
 
@@ -150,5 +170,16 @@ class LerPagina
         }
 
         $this->vetAtivos = $vetAtivos;
+    }
+
+    private function getBtc($url)
+    {
+
+        $jsnsrc = $url;
+        $json = file_get_contents($jsnsrc);
+        $json = json_decode($json);
+        $one_Btc_To_Brl = $json->BRL->last;
+
+        return  $json->BRL->last;
     }
 }
