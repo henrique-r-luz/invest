@@ -70,7 +70,6 @@ class OperacaoService
     private function salvaOperacao()
     {
         $this->oldOperacao = $this->operacao->getOldAttributes();
-        $recalculaAtivos = new RecalculaAtivos();
         if (!$this->operacao->save()) {
             $erro = CajuiHelper::processaErros($this->operacao->getErrors());
             $msg = 'O sistema não pode alterar a operação:' . $erro . '. ';
@@ -78,7 +77,9 @@ class OperacaoService
         }
     }
 
-
+    /**
+     * O cálculo do preço médio ocorre no momento de salvar o ativo 
+     */
     private function salvaAtivo()
     {
         /** @var AtualizaAtivoInterface */
@@ -91,5 +92,6 @@ class OperacaoService
     public function getOpereacao()
     {
         return $this->operacao;
+        $this->salvaAtivo();
     }
 }

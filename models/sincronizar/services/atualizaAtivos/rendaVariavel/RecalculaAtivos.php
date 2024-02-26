@@ -9,7 +9,10 @@ use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
 use app\models\config\ClassesOperacoes;
 
-
+/**
+ * recálcula estoque dos ativos e preço médio 
+ * das operações
+ */
 class RecalculaAtivos
 {
     private $itensAtivo_id = null;
@@ -53,7 +56,7 @@ class RecalculaAtivos
 
         $quantidade = 0;
         $valor_compra = 0;
-        foreach ($operacoes as $operacao) {
+        foreach ($operacoes as $id => $operacao) {
             if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::COMPRA) {
 
                 $quantidade += $operacao->quantidade;
@@ -65,7 +68,7 @@ class RecalculaAtivos
             if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::DESDOBRAMENTO_MENOS) {
                 $quantidade -= $operacao->quantidade;
             }
-
+            $precoMedio = round(($valor_compra / ($quantidade == 0 ? 1 : $quantidade)), 2);
             if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::VENDA) {
                 if ($itensAtivo->ativos->classesOperacoes->nome == ClassesOperacoes::CALCULA_ARITIMETICA_CDB_INTER) {
                     $quantidade -= $operacao->quantidade;
@@ -73,16 +76,16 @@ class RecalculaAtivos
                     continue;
                 }
 
-                $divisor = 1;
-                if ($quantidade != 0) {
-                    $divisor = $quantidade;
-                }
-                $precoMedio = ($valor_compra / $divisor);
-                $quantidade -= $operacao->quantidade;
-                $valor_compra -= $operacao->quantidade * $precoMedio;
-            }
 
-            $operacao->preco_medio = ($valor_compra / ($quantidade == 0 ? 1 : $quantidade));
+                //$precoMedio = ($valor_compra / $divisor);
+                $precoMedio = $operacoes[$id - 1]->preco_medio;
+                $quantidade -= $operacao->quantidade;
+                $valor_compra -=  $operacao->quantidade * $operacoes[$id - 1]->preco_medio;
+            }
+            $operacao->preco_medio = $precoMedio;
+            if ($itensAtivo->ativos->classesOperacoes->nome == ClassesOperacoes::CALCULA_ARITIMETICA_CDB_INTER) {
+                $operacao->preco_medio = null;
+            }
             if (!$operacao->save()) {
                 throw new InvestException(CajuiHelper::processaErros($itensAtivo->getErros()));
             }

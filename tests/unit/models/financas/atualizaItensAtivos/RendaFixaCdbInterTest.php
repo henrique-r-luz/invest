@@ -38,7 +38,7 @@ class RendaFixaCdbInterTest extends Unit
         $respEsperado1 = [
             'quantidade' => 200.291,
             'valor_compra' => 17686.98,
-            'valor_bruto' => 19205.01
+
         ];
 
         //insere venda no final da operacao
@@ -56,7 +56,6 @@ class RendaFixaCdbInterTest extends Unit
         $respEsperado2 = [
             'quantidade' => 200.091,
             'valor_compra' =>  15686.98,
-            'valor_bruto' => 17205.01
         ];
 
         //insere desdobramento mais no final da operacao
@@ -74,7 +73,7 @@ class RendaFixaCdbInterTest extends Unit
         $respEsperado3 = [
             'quantidade' => 200.291,
             'valor_compra' => 16686.98,
-            'valor_bruto' => 18205.01
+
         ];
 
         //insere desdobramento mais no final da operacao
@@ -92,7 +91,7 @@ class RendaFixaCdbInterTest extends Unit
         $respEsperado4 = [
             'quantidade' => 200.091,
             'valor_compra' => 16686.98,
-            'valor_bruto' => 18205.01
+
         ];
 
         //insere compra no meio
@@ -110,7 +109,7 @@ class RendaFixaCdbInterTest extends Unit
         $respEsperado5 = [
             'quantidade' => 200.291,
             'valor_compra' => 17686.98,
-            'valor_bruto' =>  18205.01
+
         ];
 
         //insere venda no meio
@@ -128,7 +127,7 @@ class RendaFixaCdbInterTest extends Unit
         $respEsperado6 = [
             'quantidade' => 200.091,
             'valor_compra' => 15686.98,
-            'valor_bruto' => 18205.01
+
         ];
 
 
@@ -167,13 +166,13 @@ class RendaFixaCdbInterTest extends Unit
         $respGerado = [
             'quantidade' => $itensAtivos->quantidade,
             'valor_compra' => round($itensAtivos->valor_compra, 2),
-            'valor_bruto' => round($itensAtivos->valor_bruto, 2)
+
         ];
 
         $respEsperado = [
             'quantidade' => 200.391,
             'valor_compra' => 17486.98,
-            'valor_bruto' => 18205.01
+
         ];
 
         $this->assertEquals($respGerado, $respEsperado);

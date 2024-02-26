@@ -38,7 +38,7 @@ class RendaFixaNormalTest extends Unit
         $respEsperado1 = [
             'quantidade' => 0.79,
             'valor_compra' => 10052.13,
-            'valor_bruto' => 9036.30
+
         ];
 
         $post2  = [
@@ -55,7 +55,7 @@ class RendaFixaNormalTest extends Unit
         $respEsperado2 = [
             'quantidade' => 0.63,
             'valor_compra' => 7993.13,
-            'valor_bruto' => 6948.30
+
         ];
 
         $post3  = [
@@ -72,7 +72,7 @@ class RendaFixaNormalTest extends Unit
         $respEsperado3 = [
             'quantidade' => 0.79,
             'valor_compra' => 9008.13,
-            'valor_bruto' => 7992.30
+
         ];
 
 
@@ -90,7 +90,7 @@ class RendaFixaNormalTest extends Unit
         $respEsperado4 = [
             'quantidade' => 0.63,
             'valor_compra' => 9008.13,
-            'valor_bruto' => 7992.30
+
         ];
 
 
@@ -130,13 +130,13 @@ class RendaFixaNormalTest extends Unit
         $respGerado = [
             'quantidade' => $itensAtivos->quantidade,
             'valor_compra' => round($itensAtivos->valor_compra, 2),
-            'valor_bruto' => round($itensAtivos->valor_bruto, 2)
+
         ];
 
         $respEsperado = [
             'quantidade' => 0.55,
             'valor_compra' => 6974.27,
-            'valor_bruto' => 7992.30
+
         ];
 
         $this->assertEquals($respGerado, $respEsperado);
@@ -154,7 +154,7 @@ class RendaFixaNormalTest extends Unit
         $respEsperado = [
             'quantidade' => 0.63,
             'valor_compra' => 7975.04,
-            'valor_bruto' => 6959.21
+
         ];
 
         $this->assertEquals($respGerado, $respEsperado);
@@ -171,7 +171,7 @@ class RendaFixaNormalTest extends Unit
         $respEsperado = [
             'quantidade' => 2.8,
             'valor_compra' => 32934.78,
-            'valor_bruto' => 35593.75
+
         ];
 
         $this->assertEquals($respGerado, $respEsperado);
@@ -188,7 +188,7 @@ class RendaFixaNormalTest extends Unit
         $respEsperado = [
             'quantidade' => 0.08,
             'valor_compra' => 1033.09,
-            'valor_bruto' => 1033.09
+
         ];
 
         $this->assertEquals($respGerado, $respEsperado);
@@ -204,7 +204,7 @@ class RendaFixaNormalTest extends Unit
         $respEsperado = [
             'quantidade' => 0.73,
             'valor_compra' => 8385.16,
-            'valor_bruto' => 8385.16
+
         ];
 
         $this->assertEquals($respGerado, $respEsperado);

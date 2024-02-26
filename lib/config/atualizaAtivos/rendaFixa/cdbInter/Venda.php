@@ -10,7 +10,6 @@ use app\lib\config\atualizaAtivos\AtualizaValorAtual;
 use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
 use app\lib\config\atualizaAtivos\rendaVariavel\DeleteOperacao;
 use app\lib\config\atualizaAtivos\rendaVariavel\CalculaItensAtivoPorData;
-use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\RecalculaAtivos;
 
 class Venda implements AtivosOperacoesInterface
 {
@@ -60,6 +59,5 @@ class Venda implements AtivosOperacoesInterface
     public function update($oldOperacao)
     {
         AtualizaValorAtual::atualizaValorBrutoLiquido($this->itensAtivo->id);
-
     }
 }

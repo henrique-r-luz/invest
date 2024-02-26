@@ -162,11 +162,12 @@ class OperacaoController extends Controller
                 'resp' => false,
                 'msg' => $ex->getMessage()
             ];
-        } catch (Throwable) {
+        } catch (Throwable $e) {
+
             $transaction->rollBack();
             $response = [
                 'resp' => false,
-                'msg' => 'Ocorreu um erro inesperado'
+                'msg' => 'Ocorreu um erro inesperado ' . $e->getMessage()
             ];
         } finally {
             return  $response;

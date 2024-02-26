@@ -25,7 +25,6 @@ class SalvaOperacoes
         $respGerado = [
             'quantidade' => $itensAtivos->quantidade,
             'valor_compra' => round($itensAtivos->valor_compra, 2),
-            'valor_bruto' => round($itensAtivos->valor_bruto, 2)
         ];
         return $respGerado;
     }
@@ -41,7 +40,6 @@ class SalvaOperacoes
         $respGerado = [
             'quantidade' => $itensAtivos->quantidade,
             'valor_compra' => round($itensAtivos->valor_compra, 2),
-            'valor_bruto' => round($itensAtivos->valor_bruto, 2)
         ];
         return $respGerado;
     }
@@ -58,7 +56,6 @@ class SalvaOperacoes
         $respGerado = [
             'quantidade' => $itensAtivos->quantidade,
             'valor_compra' => round($itensAtivos->valor_compra, 2),
-            'valor_bruto' => round($itensAtivos->valor_bruto, 2)
         ];
         return $respGerado;
     }

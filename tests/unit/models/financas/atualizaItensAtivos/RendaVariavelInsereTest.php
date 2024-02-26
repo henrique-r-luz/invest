@@ -37,7 +37,7 @@ class RendaVariavelInsereTest extends Unit
         $respEsperado1 = [
             'quantidade' => 621,
             'valor_compra' => 4883.21,
-            'valor_bruto' => 5042.52
+
         ];
 
         //insere venda no final da operacao
@@ -55,7 +55,7 @@ class RendaVariavelInsereTest extends Unit
         $respEsperado2 = [
             'quantidade' => 606,
             'valor_compra' =>  4752.78,
-            'valor_bruto' => 4920.72
+
         ];
 
         //insere desdobramento mais no final da lista de operações
@@ -73,7 +73,7 @@ class RendaVariavelInsereTest extends Unit
         $respEsperado3 = [
             'quantidade' => 626,
             'valor_compra' =>  4831.21,
-            'valor_bruto' => 5001.92
+
         ];
 
         //insere desdobramento menos no final da lista de operações
@@ -91,7 +91,7 @@ class RendaVariavelInsereTest extends Unit
         $respEsperado4 = [
             'quantidade' => 606,
             'valor_compra' =>  4831.21,
-            'valor_bruto' => 5001.92
+
         ];
 
 

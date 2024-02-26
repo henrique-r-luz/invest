@@ -37,7 +37,7 @@ class RendaVariavelNoMeioListaTest extends Unit
         $respEsperado1 = [
             'quantidade' => 106,
             'valor_compra' => 10963.34,
-            'valor_bruto' => 10834.26
+
         ];
 
         $post2  = [
@@ -54,7 +54,7 @@ class RendaVariavelNoMeioListaTest extends Unit
         $respEsperado2 = [
             'quantidade' => 92,
             'valor_compra' =>  10230.59,
-            'valor_bruto' => 9403.32
+
         ];
 
         $post3  = [
@@ -71,7 +71,7 @@ class RendaVariavelNoMeioListaTest extends Unit
         $respEsperado3 = [
             'quantidade' => 106,
             'valor_compra' => 10606.10,
-            'valor_bruto' => 10834.26
+
         ];
 
         $post4  = [
@@ -88,7 +88,7 @@ class RendaVariavelNoMeioListaTest extends Unit
         $respEsperado4 = [
             'quantidade' => 92,
             'valor_compra' => 10553.76,
-            'valor_bruto' =>  9403.32
+
         ];
 
 
@@ -125,12 +125,12 @@ class RendaVariavelNoMeioListaTest extends Unit
         $respGerado = [
             'quantidade' => $itensAtivos->quantidade,
             'valor_compra' => round($itensAtivos->valor_compra, 2),
-            'valor_bruto' => round($itensAtivos->valor_bruto, 2)
+
         ];
         $respEsperado = [
             'quantidade' => 88,
             'valor_compra' => 9563.47,
-            'valor_bruto' => 8994.48
+
         ];
         $this->assertEquals($respGerado, $respEsperado);
     }

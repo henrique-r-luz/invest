@@ -4,60 +4,42 @@ namespace app\lib\config\atualizaAtivos\rendaVariavel;
 
 
 use app\models\financas\Operacao;
-use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
-use app\lib\config\atualizaAtivos\FormOperacoes;
 use app\lib\config\atualizaAtivos\TiposOperacoes;
 use app\lib\config\atualizaAtivos\AtualizaAtivoInterface;
-use app\lib\config\atualizaAtivos\ConfigAtualizacoesAtivos;
+use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\RecalculaAtivos;
 
 class CalculaPorMediaPreco implements AtualizaAtivoInterface
 {
 
     private Operacao $operacao;
-    private string $tipoOperaco;
-    private ItensAtivo $itensAtivo;
-    private array  $oldOperacao;
-    private $configAtualizacoesAtivos;
+    private string $tipoOperaco = '';
 
     public function __construct(Operacao $operacao)
     {
-
         $this->operacao = $operacao;
-        $this->itensAtivo =  ItensAtivo::findOne($this->operacao->itens_ativos_id);
-        $formOperacoes = new FormOperacoes();
-        $formOperacoes->compra = new Compra($this->itensAtivo, $operacao);
-        $formOperacoes->venda  = new Venda($this->itensAtivo, $operacao);
-        $formOperacoes->desdobraMais = new DesdobraMais($this->itensAtivo, $operacao);
-        $formOperacoes->desdobraMenos = new DesdobraMenos($this->itensAtivo, $operacao);
-        $this->configAtualizacoesAtivos = new ConfigAtualizacoesAtivos($formOperacoes);
     }
 
     public function setTipoOperacao(string $tipoOperaco)
     {
         $this->tipoOperaco = $tipoOperaco;
+        // não  implementado;
     }
 
     public function setOldOperacao(array $oldOperacao)
     {
-        $this->oldOperacao = $oldOperacao;
+        // não  implementado;
     }
 
     public function atualiza()
     {
-
-        /**
-         * @var AtivosOperacoesInterface $ativosOperacoesInterface
-         */
-        $ativosOperacoesInterface = $this->configAtualizacoesAtivos->getClasse($this->operacao->tipo);
-        if ($this->tipoOperaco === TiposOperacoes::INSERIR) {
-            $ativosOperacoesInterface->insere();
-        }
-        if ($this->tipoOperaco === TiposOperacoes::UPDATE) {
-            $ativosOperacoesInterface->update($this->oldOperacao);
-        }
+        $itens_ativos_id = $this->operacao->itens_ativos_id;
         if ($this->tipoOperaco === TiposOperacoes::DELETE) {
-            $ativosOperacoesInterface->delete();
+            if (!$this->operacao->delete()) {
+                throw new InvestException('Erro ao deletar operação');
+            }
         }
+        $recalculaAtivos = new RecalculaAtivos($itens_ativos_id);
+        $recalculaAtivos->alteraIntesAtivo();
     }
 }

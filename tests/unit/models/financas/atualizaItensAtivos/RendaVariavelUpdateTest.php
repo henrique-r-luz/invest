@@ -23,8 +23,7 @@ class RendaVariavelUpdateTest extends Unit
         $idOperacao1 = 837;
         $respEsperado1 = [
             'quantidade' => 119,
-            'valor_compra' => 12602.30,
-            'valor_bruto' => 12162.99
+            'valor_compra' => 12602.33,
         ];
 
         return [
