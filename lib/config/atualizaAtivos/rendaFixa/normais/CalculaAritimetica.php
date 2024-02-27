@@ -4,6 +4,7 @@ namespace app\lib\config\atualizaAtivos\rendaFixa\normais;
 
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
+use app\lib\helpers\InvestException;
 use app\lib\config\atualizaAtivos\FormOperacoes;
 use app\lib\config\atualizaAtivos\TiposOperacoes;
 use app\lib\config\atualizaAtivos\AtualizaAtivoInterface;
@@ -12,6 +13,7 @@ use app\lib\config\atualizaAtivos\rendaFixa\cdbInter\Compra;
 use app\lib\config\atualizaAtivos\rendaVariavel\DesdobraMais;
 use app\lib\config\atualizaAtivos\rendaVariavel\DesdobraMenos;
 use app\lib\config\atualizaAtivos\rendaFixa\normais\VendaRendaFixa;
+use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\RecalculaAtivos;
 
 class CalculaAritimetica implements AtualizaAtivoInterface
 {
@@ -27,15 +29,6 @@ class CalculaAritimetica implements AtualizaAtivoInterface
 
         $this->operacao = $operacao;
         $this->itensAtivo =  ItensAtivo::findOne($this->operacao->itens_ativos_id);
-        /**
-         * define as classes das operações
-         */
-        $formOperacoes = new FormOperacoes();
-        $formOperacoes->compra = new Compra($this->itensAtivo, $operacao);
-        $formOperacoes->venda = new VendaRendaFixa($this->itensAtivo, $operacao);
-        $formOperacoes->desdobraMais = new DesdobraMais($this->itensAtivo, $operacao);
-        $formOperacoes->desdobraMenos = new DesdobraMenos($this->itensAtivo, $operacao);
-        $this->configAtualizacoesAtivos = new ConfigAtualizacoesAtivos($formOperacoes);
     }
 
 
@@ -51,10 +44,15 @@ class CalculaAritimetica implements AtualizaAtivoInterface
 
     public function atualiza()
     {
-        /**
-         * @var AtivosOperacoesInterface $ativosOperacoesInterface
-         */
-        $ativosOperacoesInterface = $this->configAtualizacoesAtivos->getClasse($this->operacao->tipo);
+        $itens_ativos_id = $this->operacao->itens_ativos_id;
+        if ($this->tipoOperaco === TiposOperacoes::DELETE) {
+            if (!$this->operacao->delete()) {
+                throw new InvestException('Erro ao deletar operação');
+            }
+        }
+        $recalculaAtivos = new RecalculaAtivos($itens_ativos_id);
+        $recalculaAtivos->alteraIntesAtivo();
+        /* $ativosOperacoesInterface = $this->configAtualizacoesAtivos->getClasse($this->operacao->tipo);
         if ($this->tipoOperaco === TiposOperacoes::INSERIR) {
             $ativosOperacoesInterface->insere();
         }
@@ -63,6 +61,6 @@ class CalculaAritimetica implements AtualizaAtivoInterface
         }
         if ($this->tipoOperaco === TiposOperacoes::DELETE) {
             $ativosOperacoesInterface->delete();
-        }
+        }*/
     }
 }

@@ -54,7 +54,7 @@ class RendaVariavelInsereTest extends Unit
 
         $respEsperado2 = [
             'quantidade' => 606,
-            'valor_compra' =>  4752.78,
+            'valor_compra' =>  4752.81,
 
         ];
 

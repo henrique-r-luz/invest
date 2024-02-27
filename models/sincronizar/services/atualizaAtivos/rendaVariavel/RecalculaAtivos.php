@@ -18,10 +18,14 @@ class RecalculaAtivos
     private $itensAtivo_id = null;
     private $transaction;
 
+
+
     public function __construct($itensAtivo_id = null)
     {
         $this->itensAtivo_id = $itensAtivo_id;
     }
+
+
     public function alteraIntesAtivo()
     {
         $this->calculaAtivo();

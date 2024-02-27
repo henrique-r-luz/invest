@@ -31,7 +31,7 @@ class RendaVariavelDeleteTest extends Unit
         $idOperacao2 = 783;
         $respEsperado2 = [
             'quantidade' => 97,
-            'valor_compra' =>  2.062, 70,
+            'valor_compra' =>  2062.70,
 
         ];
 
@@ -39,14 +39,14 @@ class RendaVariavelDeleteTest extends Unit
         $idOperacao3 = 817;
         $respEsperado3 = [
             'quantidade' => 317,
-            'valor_compra' =>  2565.68,
+            'valor_compra' =>  2565.75,
 
         ];
 
         $idOperacao4 = 818;
         $respEsperado4 = [
             'quantidade' => 66,
-            'valor_compra' =>  2137.35,
+            'valor_compra' =>  2137.66,
 
         ];
 

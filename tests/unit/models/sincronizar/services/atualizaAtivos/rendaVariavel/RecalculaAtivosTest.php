@@ -29,21 +29,21 @@ class RecalculaAtivosTest extends Unit
          */
         $itensAtivo = ItensAtivo::findOne(27);
         $valor_compra  = round($itensAtivo->valor_compra, 2);
-        $respWEGE3 =  ($valor_compra == 1509.96);
+        $respWEGE3 =  ($valor_compra == 1509.68);
 
         /**
          * Xpml11 
          */
         $itensAtivo = ItensAtivo::findOne(12);
         $valor_compra  = round($itensAtivo->valor_compra, 2);
-        $respXPML11 =  ($valor_compra == 7105.83);
+        $respXPML11 =  ($valor_compra == 7105.80);
 
         /**
          * Xplgl11 
          */
         $itensAtivo = ItensAtivo::findOne(11);
         $valor_compra  = round($itensAtivo->valor_compra, 2);
-        $respXPLG11 =  ($valor_compra == 8406.59);
+        $respXPLG11 =  ($valor_compra == 8406.57);
 
         $this->assertEquals(($respWEGE3 && $respXPML11 && $respXPLG11), true);
     }
