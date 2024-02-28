@@ -45,6 +45,11 @@ class CalculaAritimeticaCDBInter implements AtualizaAtivoInterface
         $this->oldOperacao = $oldOperacao;
     }
 
+    public function getOperacao()
+    {
+        return  $this->operacao;
+    }
+
     public function atualiza()
     {
         /**

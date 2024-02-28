@@ -6,6 +6,7 @@ namespace app\lib\config\atualizaAtivos\rendaVariavel;
 use app\models\financas\Operacao;
 use app\lib\helpers\InvestException;
 use app\lib\config\atualizaAtivos\TiposOperacoes;
+use app\lib\config\atualizaAtivos\RecalculaAtivosLib;
 use app\lib\config\atualizaAtivos\AtualizaAtivoInterface;
 use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\RecalculaAtivos;
 
@@ -31,6 +32,11 @@ class CalculaPorMediaPreco implements AtualizaAtivoInterface
         // não  implementado;
     }
 
+    public function getOperacao()
+    {
+        return $this->operacao;
+    }
+
     public function atualiza()
     {
         $itens_ativos_id = $this->operacao->itens_ativos_id;
@@ -39,7 +45,7 @@ class CalculaPorMediaPreco implements AtualizaAtivoInterface
                 throw new InvestException('Erro ao deletar operação');
             }
         }
-        $recalculaAtivos = new RecalculaAtivos($itens_ativos_id);
+        $recalculaAtivos = new RecalculaAtivosLib($itens_ativos_id, $this);
         $recalculaAtivos->alteraIntesAtivo();
     }
 }

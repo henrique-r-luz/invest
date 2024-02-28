@@ -24,6 +24,8 @@ use app\lib\behavior\AuditoriaBehavior;
  */
 class ItensAtivo extends \yii\db\ActiveRecord
 {
+
+    public $preco_valor;
     /**
      * {@inheritdoc}
      */
@@ -51,7 +53,7 @@ class ItensAtivo extends \yii\db\ActiveRecord
             [['ativo_id', 'investidor_id'], 'integer'],
             [['ativo'], 'boolean'],
             [['valor_liquido', 'valor_bruto', 'valor_compra'], 'number'],
-            [['quantidade'], 'number', 'min' => 0],
+            [['quantidade', 'preco_valor'], 'number', 'min' => 0],
             [['quantidade'], 'validaQuantidade'],
             [['ativo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ativo::className(), 'targetAttribute' => ['ativo_id' => 'id']],
             [['investidor_id'], 'exist', 'skipOnError' => true, 'targetClass' => Investidor::className(), 'targetAttribute' => ['investidor_id' => 'id']],

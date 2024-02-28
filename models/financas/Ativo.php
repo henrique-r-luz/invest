@@ -8,6 +8,7 @@ use app\lib\dicionario\Pais;
 use app\lib\dicionario\Tipo;
 use yii\helpers\ArrayHelper;
 use app\models\financas\Operacao;
+use app\models\sincronizar\Preco;
 use app\models\financas\Proventos;
 use app\models\financas\ItensAtivo;
 use app\lib\behavior\AuditoriaBehavior;
@@ -105,6 +106,11 @@ class Ativo extends ActiveRecord
     public function getOperacao()
     {
         return $this->hasMany(Operacao::class, ['ativo_id' => 'id']);
+    }
+
+    public function getPrecos()
+    {
+        return $this->hasMany(Preco::class, ['ativo_id' => 'id']);
     }
 
     public function getItensAtivo()
