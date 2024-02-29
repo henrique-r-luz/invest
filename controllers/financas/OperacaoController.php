@@ -172,6 +172,7 @@ class OperacaoController extends Controller
         } finally {
             return  $response;
         }
+
         //return $this->redirect(['index']);
     }
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace app\lib\config\atualizaAtivos\rendaFixa\normais;
+namespace app\lib\config\atualizaAtivos\rendaFixa\cdbInter;
 
 use app\models\financas\ItensAtivo;
 use app\lib\config\atualizaAtivos\ValorBrutoLiquidoInterface;
 use app\lib\config\atualizaAtivos\rendaFixa\CalculaValorRendaFixa;
 
-class CalculaValorBrutoLiquidoFixa implements ValorBrutoLiquidoInterface
+class CalculaValorBrutoLiquidoCDBItenter implements ValorBrutoLiquidoInterface
 {
     public function __construct(
-        private CalculaAritimetica $calculaAritimetica,
+        private CalculaAritimeticaCDBInter  $calculaAritimetica,
         private ItensAtivo $itemAtivo
     ) {
     }

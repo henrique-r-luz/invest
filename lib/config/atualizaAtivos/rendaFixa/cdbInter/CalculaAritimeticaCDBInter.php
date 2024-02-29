@@ -2,47 +2,33 @@
 
 namespace app\lib\config\atualizaAtivos\rendaFixa\cdbInter;
 
+use Yii;
+use app\lib\CajuiHelper;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
-use app\lib\config\atualizaAtivos\FormOperacoes;
+use app\lib\helpers\InvestException;
 use app\lib\config\atualizaAtivos\TiposOperacoes;
 use app\lib\config\atualizaAtivos\AtualizaAtivoInterface;
-use app\lib\config\atualizaAtivos\AtivosOperacoesInterface;
-use app\lib\config\atualizaAtivos\ConfigAtualizacoesAtivos;
-use app\lib\config\atualizaAtivos\rendaFixa\cdbInter\Venda;
-use app\lib\config\atualizaAtivos\rendaFixa\cdbInter\Compra;
-use app\lib\config\atualizaAtivos\rendaVariavel\DesdobraMais;
-use app\lib\config\atualizaAtivos\rendaVariavel\DesdobraMenos;
+use app\lib\config\atualizaAtivos\ValorBrutoLiquidoFactory;
+
 
 class CalculaAritimeticaCDBInter implements AtualizaAtivoInterface
 {
     private Operacao $operacao;
-    private array $oldOperacao;
-    private $tipoOperaco;
-    private ItensAtivo $itensAtivo;
-    private $configAtualizacoesAtivos;
+
+    private $transaction;
+
+    private int $itensAtivo_id;
+
+    public $oldOperacao = [];
+
+    public string $tipoOperacao;
+
 
     public function __construct(Operacao $operacao)
     {
-
         $this->operacao = $operacao;
-        $this->itensAtivo =  ItensAtivo::findOne($this->operacao->itens_ativos_id);
-        $formOperacoes = new FormOperacoes();
-        $formOperacoes->compra = new Compra($this->itensAtivo, $operacao);
-        $formOperacoes->venda = new Venda($this->itensAtivo, $operacao);
-        $formOperacoes->desdobraMais = new DesdobraMais($this->itensAtivo, $operacao);
-        $formOperacoes->desdobraMenos = new DesdobraMenos($this->itensAtivo, $operacao);
-        $this->configAtualizacoesAtivos = new ConfigAtualizacoesAtivos($formOperacoes);
-    }
-
-    public function setTipoOperacao(string $tipoOperaco)
-    {
-        $this->tipoOperaco = $tipoOperaco;
-    }
-
-    public function setOldOperacao(array $oldOperacao)
-    {
-        $this->oldOperacao = $oldOperacao;
+        $this->itensAtivo_id =  $this->operacao->itens_ativos_id;
     }
 
     public function getOperacao()
@@ -50,20 +36,87 @@ class CalculaAritimeticaCDBInter implements AtualizaAtivoInterface
         return  $this->operacao;
     }
 
+    public function setTipoOperacao($tipoOperacao)
+    {
+        $this->tipoOperacao = $tipoOperacao;
+        // não  implementado;
+    }
+
+
+    public function setOldOperacao($oldOperacao)
+    {
+        $this->oldOperacao = $oldOperacao;
+    }
+
+
+
     public function atualiza()
     {
-        /**
-         * @var AtivosOperacoesInterface $ativosOperacoesInterface
-         */
-        $ativosOperacoesInterface = $this->configAtualizacoesAtivos->getClasse($this->operacao->tipo);
-        if ($this->tipoOperaco === TiposOperacoes::INSERIR) {
-            $ativosOperacoesInterface->insere();
+        if ($this->tipoOperacao === TiposOperacoes::DELETE) {
+            if (!$this->operacao->delete()) {
+                throw new InvestException('Erro ao deletar operação');
+            }
         }
-        if ($this->tipoOperaco === TiposOperacoes::UPDATE) {
-            $ativosOperacoesInterface->update($this->oldOperacao);
+        $this->calculaAtivo();
+    }
+    private function calculaAtivo()
+    {
+        $this->transaction = Yii::$app->db->beginTransaction();
+        $itensAtivo = ItensAtivo::find()
+            ->where(['ativo' => true])
+            ->andWhere(['itens_ativo.id' => $this->itensAtivo_id])
+            ->one();
+        if (empty($itensAtivo)) {
+            throw new InvestException('O item Ativo da operação não foi encontrato.');
         }
-        if ($this->tipoOperaco === TiposOperacoes::DELETE) {
-            $ativosOperacoesInterface->delete();
+        list($valor_compra, $quantidade) =  $this->calculaOperacoes($itensAtivo);
+        $itensAtivo->quantidade = $quantidade;
+        $itensAtivo->valor_compra = $valor_compra;
+        $itensAtivo = ValorBrutoLiquidoFactory::getObjeto($this, $itensAtivo)->calcula();
+        if (!$itensAtivo->save()) {
+            $this->transaction->rollBack();
+            throw new InvestException(CajuiHelper::processaErros($itensAtivo->getErros()));
         }
+
+        $this->transaction->commit();
+    }
+
+    private function calculaOperacoes($itensAtivo)
+    {
+
+        $operacoes = Operacao::find()
+            ->where(['itens_ativos_id' => $itensAtivo->id])
+            ->orderBy(['data' => \SORT_ASC])
+            ->all();
+        return $this->calculaOperacaoesAtivos($operacoes);
+    }
+
+
+    private function  calculaOperacaoesAtivos($operacoes)
+    {
+        $quantidade = 0;
+        $valor_compra = 0;
+
+        foreach ($operacoes as $operacao) {
+            if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::COMPRA) {
+
+                $quantidade += $operacao->quantidade;
+                $valor_compra += $operacao->valor;
+            }
+            if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::DESDOBRAMENTO_MAIS) {
+                $quantidade += $operacao->quantidade;
+            }
+            if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::DESDOBRAMENTO_MENOS) {
+                $quantidade -= $operacao->quantidade;
+            }
+            if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::VENDA) {
+                $quantidade -= $operacao->quantidade;
+                $valor_compra -=  $operacao->valor;
+            }
+        }
+        if ($valor_compra < 0) {
+            $valor_compra = 0;
+        }
+        return [$valor_compra, $quantidade];
     }
 }

@@ -24,10 +24,9 @@ class CalculaPorMediaPreco implements AtualizaAtivoInterface
     public function setTipoOperacao(string $tipoOperaco)
     {
         $this->tipoOperaco = $tipoOperaco;
-        // não  implementado;
     }
 
-    public function setOldOperacao(array $oldOperacao)
+    public function setOldOperacao($oldOperacao)
     {
         // não  implementado;
     }

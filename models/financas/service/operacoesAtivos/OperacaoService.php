@@ -20,6 +20,7 @@ use app\models\financas\Operacao;
 use app\lib\helpers\InvestException;
 use app\models\financas\service\sincroniza\Sincroniza;
 use app\lib\config\atualizaAtivos\AtualizaAtivoOperacaoFactory;
+use app\lib\config\atualizaAtivos\rendaFixa\cdbInter\CalculaAritimeticaCDBInter;
 use app\models\sincronizar\services\atualizaAtivos\rendaVariavel\RecalculaAtivos;
 
 
@@ -34,13 +35,13 @@ class OperacaoService
     //put your code here
 
     private Operacao $operacao;
-    private string $tipoOperaco;
     private array $oldOperacao = [];
+    private string $tipoOperacao;
 
     function __construct($operacao, $tipoOperacao)
     {
         $this->operacao = $operacao;
-        $this->tipoOperaco = $tipoOperacao;
+        $this->tipoOperacao = $tipoOperacao;
     }
 
     public function load($post)
@@ -84,14 +85,14 @@ class OperacaoService
     {
         /** @var AtualizaAtivoInterface */
         $atualizaOperacao =  AtualizaAtivoOperacaoFactory::getObjeto($this->operacao);
-        $atualizaOperacao->setTipoOperacao($this->tipoOperaco);
+
         $atualizaOperacao->setOldOperacao($this->oldOperacao);
+        $atualizaOperacao->setTipoOperacao($this->tipoOperacao);
         $atualizaOperacao->atualiza();
     }
 
     public function getOpereacao()
     {
         return $this->operacao;
-        $this->salvaAtivo();
     }
 }
