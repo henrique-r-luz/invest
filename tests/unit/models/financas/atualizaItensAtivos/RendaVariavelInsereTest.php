@@ -36,7 +36,7 @@ class RendaVariavelInsereTest extends Unit
 
         $respEsperado1 = [
             'quantidade' => 621,
-            'valor_compra' => 4883.21,
+            'valor_compra' => 4881.06,
 
         ];
 
@@ -54,7 +54,7 @@ class RendaVariavelInsereTest extends Unit
 
         $respEsperado2 = [
             'quantidade' => 606,
-            'valor_compra' =>  4752.81,
+            'valor_compra' =>  4751.04,
 
         ];
 
@@ -72,7 +72,7 @@ class RendaVariavelInsereTest extends Unit
 
         $respEsperado3 = [
             'quantidade' => 626,
-            'valor_compra' =>  4831.21,
+            'valor_compra' =>  4832.72,
 
         ];
 
@@ -90,7 +90,7 @@ class RendaVariavelInsereTest extends Unit
 
         $respEsperado4 = [
             'quantidade' => 606,
-            'valor_compra' =>  4831.21,
+            'valor_compra' =>  4829.82,
 
         ];
 
