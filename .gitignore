@@ -7,8 +7,6 @@
 /sistema.zip
 /instalacao.sh
 /package.box
-/investimento-2020-01-26.sql
-!/docker-compose/db_teste/init_db_test.sql
 /db/
 /node_modules/
 /web/js/node_modules/
@@ -41,3 +39,4 @@ dados/.~lock.preco_acao.csv#
 assets/
 *.sql*
 log-console.log
+!db_teste.sql
