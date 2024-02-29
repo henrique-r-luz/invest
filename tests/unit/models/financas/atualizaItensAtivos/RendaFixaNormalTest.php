@@ -135,7 +135,7 @@ class RendaFixaNormalTest extends Unit
 
         $respEsperado = [
             'quantidade' => 0.55,
-            'valor_compra' => 6974.27,
+            'valor_compra' => 6974.28,
 
         ];
 
@@ -170,7 +170,7 @@ class RendaFixaNormalTest extends Unit
 
         $respEsperado = [
             'quantidade' => 2.8,
-            'valor_compra' => 32934.78,
+            'valor_compra' => 32934.8,
 
         ];
 

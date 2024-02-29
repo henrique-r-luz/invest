@@ -28,6 +28,7 @@ class CalculaPorMediaPreco implements AtualizaAtivoInterface
 
     public function setOldOperacao($oldOperacao)
     {
+        
         // não  implementado;
     }
 

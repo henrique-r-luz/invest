@@ -22,7 +22,8 @@ class CalculaValorRendaFixa
             return $itemAtivo;
         }
 
-        if (empty($oldOperacao)) {
+        if (!empty($oldOperacao)) {
+
             if ($oldOperacao['tipo'] == Operacao::tipoOperacaoId()[Operacao::VENDA]) {
                 $itemAtivo->valor_bruto += $oldOperacao['valor'];
                 $itemAtivo->valor_liquido += $oldOperacao['valor'];

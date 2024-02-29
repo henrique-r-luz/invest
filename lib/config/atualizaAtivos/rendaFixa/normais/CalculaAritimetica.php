@@ -15,7 +15,7 @@ class CalculaAritimetica implements AtualizaAtivoInterface
 
     public string $tipoOperacao;
 
-    public string $oldOperacao;
+    public  $oldOperacao = [];
 
     public function __construct(Operacao $operacao)
     {
@@ -45,7 +45,7 @@ class CalculaAritimetica implements AtualizaAtivoInterface
     public function atualiza()
     {
         $itens_ativos_id = $this->operacao->itens_ativos_id;
-        if ($this->operacao->tipo === TiposOperacoes::DELETE) {
+        if ($this->tipoOperacao === TiposOperacoes::DELETE) {
             if (!$this->operacao->delete()) {
                 throw new InvestException('Erro ao deletar operação');
             }

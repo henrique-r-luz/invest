@@ -79,14 +79,14 @@ class OperacaoController extends Controller
         $transaction = $connection->beginTransaction();
         $model = new Operacao();
         $operacaoService = new OperacaoService($model, TiposOperacoes::INSERIR);
-        try {
-            if ($operacaoService->load(Yii::$app->request->post())) {
-                $operacaoService->acaoSalvaOperacao();
-                $transaction->commit();
-                Yii::$app->session->setFlash('success', 'Dados salvos com sucesso!');
-                return $this->redirect(['view', 'id' => $operacaoService->getOpereacao()->id]);
-            }
-        } catch (InvestException $ex) {
+        //  try {
+        if ($operacaoService->load(Yii::$app->request->post())) {
+            $operacaoService->acaoSalvaOperacao();
+            $transaction->commit();
+            Yii::$app->session->setFlash('success', 'Dados salvos com sucesso!');
+            return $this->redirect(['view', 'id' => $operacaoService->getOpereacao()->id]);
+        }
+        /*} catch (InvestException $ex) {
             $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Erro ao salvar Operação!</br>' . $ex->getMessage());
         } catch (Throwable $e) {
@@ -96,7 +96,10 @@ class OperacaoController extends Controller
             return $this->render('create', [
                 'model' => $model,
             ]);
-        }
+        }*/
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
