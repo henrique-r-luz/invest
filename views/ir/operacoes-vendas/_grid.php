@@ -9,39 +9,47 @@ use kartik\grid\GridView;
     'columns' => [
         [
             'label' => 'Código',
-            'attribute' => 'codigo',
+            'attribute' => 'ativo_codigo',
             // 'contentOptions' => ['style' => 'width:70px']
         ],
         [
             'label' => 'Quantidade',
-            'attribute' => 'quantidade_vendida',
+            'attribute' => 'quantidade',
             // 'contentOptions' => ['style' => 'width:70px']
         ],
         [
             'label' => 'Preco Medio',
-            'format' => 'currency',
+            'format' => ['decimal', 2],
+            //  'format' => 'currency',
             'attribute' => 'preco_medio',
             // 'contentOptions' => ['style' => 'width:70px']
         ],
         [
             'label' => 'Valor Compra',
-            'format' => 'currency',
+            'format' => ['decimal', 2],
+            //  'format' => 'currency',
             'attribute' => 'valor_compra',
             // 'contentOptions' => ['style' => 'width:70px']
         ],
         [
             'label' => 'Valor Venda',
-            'format' => 'currency',
+            'format' => ['decimal', 2],
+            // 'format' => 'currency',
             'attribute' => 'valor_venda',
             // 'contentOptions' => ['style' => 'width:70px']
         ],
         [
-            'format' => 'currency',
+            //'format' => 'currency',
+            //'format' => ['decimal', 2],
             'attribute' => 'resultado',
+            'value' => function ($model) {
+                return round($model->resultado, 2);
+            }
             // 'contentOptions' => ['style' => 'width:70px']
         ],
         [
-            'attribute' => 'tipo',
+            'label' => 'Tipo',
+            'attribute' => 'tipo_ativo',
             // 'contentOptions' => ['style' => 'width:70px']
         ],
         [
@@ -50,6 +58,7 @@ use kartik\grid\GridView;
         ],
         [
             'attribute' => 'data',
+            'format' => ['date', 'php:m/Y']
             // 'contentOptions' => ['style' => 'width:70px']
         ],
 

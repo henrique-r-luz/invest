@@ -5,8 +5,7 @@ namespace app\controllers\ir;
 use Yii;
 use yii\web\Controller;
 use app\models\ir\bensDireitos\FormBensDireitos;
-use app\models\ir\operacoesVendas\OperacoesVendasQuery;
-use app\models\ir\operacoesVendas\OperacoesVendasArrayData;
+use app\models\ir\operacoesVendas\VendaOperacoesSearch;
 
 class OperacoesVendasController extends Controller
 {
@@ -15,13 +14,23 @@ class OperacoesVendasController extends Controller
     {
         $formBensDireitos = new FormBensDireitos();
         $formBensDireitos->load(Yii::$app->request->get());
-        $operacoesVendasQuery = new OperacoesVendasQuery($formBensDireitos);
-        $operacoesVendasArrayData = new OperacoesVendasArrayData($operacoesVendasQuery->query(), $formBensDireitos->ano);
+        if (empty($formBensDireitos->ano)) {
+            return $this->render('index', [
+                'formBensDireitos' => $formBensDireitos,
+                'provider' => null,
+                'providerFii' =>  null,
+                'providerAcoes' =>  null
+            ]);
+        }
+        $vendaOperacoesSearch = new VendaOperacoesSearch();
+        $providerOperacoes = $vendaOperacoesSearch->search($formBensDireitos);
+        list($resumoAcoes, $resumoFii) =  $vendaOperacoesSearch->resumoDados();
+
         return $this->render('index', [
             'formBensDireitos' => $formBensDireitos,
-            'provider' => $operacoesVendasArrayData->getProviderDetalhado(),
-            'providerFii' =>  $operacoesVendasArrayData->getProviderResumoFii(),
-            'providerAcoes' =>  $operacoesVendasArrayData->getProviderResumoAcoes()
+            'provider' => $providerOperacoes,
+            'providerFii' =>  $resumoFii,
+            'providerAcoes' =>  $resumoAcoes
         ]);
     }
 }

@@ -18,20 +18,21 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="bens_direitos">
     <?= $this->render('_search', ['formBensDireitos' => $formBensDireitos]) ?>
 
-    <?php if ($provider->count > 0) : ?>
+    <?php if ($provider != null &&   $provider->count > 0) : ?>
         <?= $this->render('_grid', [
             'formBensDireitos' => $formBensDireitos,
             'provider' => $provider
         ]) ?>
     <?php endif ?>
 
-    <?php if ($providerFii->count > 0) : ?>
+
+    <?php if ($providerFii != null && $providerFii->count > 0) : ?>
         <?= $this->render('_grid_resumido_fii', [
             'providerFii' => $providerFii
         ]) ?>
     <?php endif ?>
 
-    <?php if ($providerAcoes->count > 0) : ?>
+    <?php if ($providerAcoes != null && $providerAcoes->count > 0) : ?>
         <?= $this->render('_grid_resumido_acoes', [
             'providerAcoes' => $providerAcoes
         ]) ?>
