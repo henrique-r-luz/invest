@@ -43,7 +43,7 @@ use kartik\grid\GridView;
             //'format' => ['decimal', 2],
             'attribute' => 'resultado',
             'value' => function ($model) {
-                return round($model->resultado, 2);
+                return round($model->resultado ?? 0, 2);
             }
             // 'contentOptions' => ['style' => 'width:70px']
         ],

@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     libcurl4-openssl-dev \
     libldb-dev \
     libonig-dev \
+    libgmp-dev \
     libpq-dev \
     libzip-dev \
     libc-dev \

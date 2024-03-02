@@ -60,6 +60,7 @@ class RecalculaAtivos
 
         $quantidade = 0;
         $valor_compra = 0;
+        $ultimoPrecoMedio = 0;
         foreach ($operacoes as $id => $operacao) {
             if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::COMPRA) {
 
@@ -91,10 +92,11 @@ class RecalculaAtivos
                 $operacao->preco_medio = null;
             }
             if (!$operacao->save()) {
-                throw new InvestException(CajuiHelper::processaErros($itensAtivo->getErros()));
+                throw new InvestException(CajuiHelper::processaErros($operacao->getErros()));
             }
+            $ultimoPrecoMedio = $precoMedio;
         }
-
+        $valor_compra  = $quantidade * $ultimoPrecoMedio;
         if ($valor_compra < 0) {
             $valor_compra = 0;
         }

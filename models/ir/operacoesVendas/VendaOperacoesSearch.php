@@ -62,7 +62,7 @@ class VendaOperacoesSearch  extends Operacao
             ->andWhere(['ativo.pais' => Pais::BR])
             ->andWhere(['categoria' => Categoria::RENDA_VARIAVEL])
             ->andWhere(['operacao.tipo' => Operacao::tipoOperacaoId()[Operacao::VENDA]])
-            ->andWhere(['itens_ativo.ativo' => true])
+            // ->andWhere(['itens_ativo.ativo' => true])
             ->orderBy([
                 'operacao.data' => \SORT_ASC,
                 'ativo.codigo' => \SORT_ASC,
@@ -104,17 +104,17 @@ class VendaOperacoesSearch  extends Operacao
             $dataKey = date_format($date, 'm/Y');
             if (isset($dados[$dataKey . $acao->pais])) {
                 $dados[$dataKey . $acao->pais] =  [
-                    'valor_compra' => $dados[$dataKey . $acao->pais]['valor_compra'] + round($acao->valor_compra, 2),
-                    'valor_venda' => $dados[$dataKey . $acao->pais]['valor_venda'] + round($acao->valor_venda, 2),
-                    'resultado' => $dados[$dataKey . $acao->pais]['resultado'] + round($acao->resultado, 2),
+                    'valor_compra' => $dados[$dataKey . $acao->pais]['valor_compra'] + round($acao->valor_compra ?? 0, 2),
+                    'valor_venda' => $dados[$dataKey . $acao->pais]['valor_venda'] + round($acao->valor_venda ?? 0, 2),
+                    'resultado' => $dados[$dataKey . $acao->pais]['resultado'] + round($acao->resultado ?? 0, 2),
                     'pais' => $acao->pais,
                     'data' => $dataKey,
                 ];
             } else {
                 $dados[$dataKey . $acao->pais] =  [
-                    'valor_compra' => round($acao->valor_compra, 2),
-                    'valor_venda' =>  round($acao->valor_venda, 2),
-                    'resultado' =>  round($acao->resultado, 2),
+                    'valor_compra' => round($acao->valor_compra ?? 0, 2),
+                    'valor_venda' =>  round($acao->valor_venda ?? 0, 2),
+                    'resultado' =>  round($acao->resultado ?? 0, 2),
                     'pais' =>  $acao->pais,
                     'data' =>  $dataKey,
                 ];
