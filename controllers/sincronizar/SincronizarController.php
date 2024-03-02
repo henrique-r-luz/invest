@@ -64,17 +64,17 @@ class SincronizarController extends Controller
 
     private function recalculaAtivos()
     {
-        //  try {
-        $atualizaRendaVariavel = new RecalculaAtivos(23);
-        $atualizaRendaVariavel->alteraIntesAtivo();
-        Yii::$app->session->setFlash('success', 'Dados atualizados com sucesso!');
-        /* } catch (InvestException $e) {
+        try {
+            $atualizaRendaVariavel = new RecalculaAtivos(23);
+            $atualizaRendaVariavel->alteraIntesAtivo();
+            Yii::$app->session->setFlash('success', 'Dados atualizados com sucesso!');
+        } catch (InvestException $e) {
             Yii::$app->session->setFlash('danger', $e->getMessage());
         } catch (Throwable $e) {
             Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado.');
         } finally {
             return $this->redirect('/index.php');
-        }*/
+        }
         return $this->redirect('/index.php');
     }
 }

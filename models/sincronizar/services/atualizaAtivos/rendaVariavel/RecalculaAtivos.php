@@ -80,9 +80,6 @@ class RecalculaAtivos
                     $valor_compra -= $operacao->valor;
                     continue;
                 }
-
-
-                //$precoMedio = ($valor_compra / $divisor);
                 $precoMedio = $operacoes[$id - 1]->preco_medio;
                 $quantidade -= $operacao->quantidade;
                 $valor_compra -=  $operacao->quantidade * $operacoes[$id - 1]->preco_medio;
@@ -95,7 +92,9 @@ class RecalculaAtivos
                 throw new InvestException(CajuiHelper::processaErros($operacao->getErros()));
             }
             $ultimoPrecoMedio = $precoMedio;
+            echo  $quantidade . ' || ' . $operacao->quantidade;
         }
+        exit();
         $valor_compra  = $quantidade * $ultimoPrecoMedio;
         if ($valor_compra < 0) {
             $valor_compra = 0;
