@@ -7,6 +7,7 @@ use app\lib\dicionario\Pais;
 use app\lib\dicionario\Tipo;
 use app\lib\config\ValorDollar;
 use app\models\financas\Operacao;
+use Brick\Math\BigDecimal;
 use kartik\daterange\DateRangePicker;
 
 /* @var $this yii\web\View */
@@ -82,9 +83,9 @@ $daterange = [
                             $operacao->tipo == Operacao::tipoOperacaoId()[Operacao::VENDA]
                             || $operacao->tipo == Operacao::tipoOperacaoId()[Operacao::DESDOBRAMENTO_MENOS]
                         ) {
-                            $quantidade -= $operacao->quantidade;
+                            $quantidade = BigDecimal::of($quantidade)->plus(-$operacao->quantidade)->toFloat();
                         } else {
-                            $quantidade += $operacao->quantidade;
+                            $quantidade = BigDecimal::of($quantidade)->plus($operacao->quantidade)->toFloat();;
                         }
                     }
                     return '<font color="blue">Quatidade: ' . $quantidade . '</font>';
@@ -113,6 +114,7 @@ $daterange = [
                         }
                     }
                     // $total = ValorDollar::convertValorMonetario($total, $operacao->itensAtivo->ativos->pais);
+                    
                     if ($total < 0) {
                         $color = 'red';
                     } else {
@@ -148,11 +150,6 @@ $daterange = [
                 'filter' => Pais::all(),
                 'attribute' => 'pais',
                 'label' => 'País',
-                /* 'value' => function ($model) {
-                    // itensAtivo->ativos
-                    return $model->pais;
-                }*/
-                // 'value' => 'itens_ativo.ativos.pais',
             ],
             [
                 'class' => 'app\lib\grid\ActionColumn',
