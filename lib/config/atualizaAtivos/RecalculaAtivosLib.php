@@ -4,6 +4,7 @@ namespace app\lib\config\atualizaAtivos;
 
 use Yii;
 use app\lib\CajuiHelper;
+use Brick\Math\BigDecimal;
 use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
@@ -75,22 +76,23 @@ class RecalculaAtivosLib
         $ultimoPrecoMedio = 0;
 
         foreach ($operacoes as $id => $operacao) {
+            $operacaoQuantidade  = $operacao->quantidade;
             if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::COMPRA) {
 
-                $quantidade += $operacao->quantidade;
+                $quantidade = BigDecimal::of($quantidade)->plus($operacaoQuantidade)->toFloat();
                 $valor_compra += $operacao->valor;
             }
             if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::DESDOBRAMENTO_MAIS) {
-                $quantidade += $operacao->quantidade;
+                $quantidade = BigDecimal::of($quantidade)->plus($operacaoQuantidade)->toFloat();
             }
             if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::DESDOBRAMENTO_MENOS) {
-                $quantidade -= $operacao->quantidade;
+                $quantidade = BigDecimal::of($quantidade)->plus(-$operacaoQuantidade)->toFloat();
             }
             $precoMedio = round(($valor_compra / ($quantidade == 0 ? 1 : $quantidade)), 2);
             if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::VENDA) {
                 $precoMedio = $operacoes[$id - 1]->preco_medio;
-                $quantidade -= $operacao->quantidade;
-                $valor_compra -=  $operacao->quantidade * $operacoes[$id - 1]->preco_medio;
+                $quantidade = BigDecimal::of($quantidade)->plus(-$operacaoQuantidade)->toFloat();
+                $valor_compra =  BigDecimal::of($operacaoQuantidade)->toFloat() * $operacoes[$id - 1]->preco_medio;
             }
             $operacao->preco_medio = $precoMedio;
             if (!$operacao->save()) {

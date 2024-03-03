@@ -8,6 +8,7 @@ use app\models\financas\Operacao;
 use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
 use app\models\config\ClassesOperacoes;
+use Brick\Math\BigDecimal;
 
 /**
  * recálcula estoque dos ativos e preço médio 
@@ -35,7 +36,6 @@ class RecalculaAtivos
     {
         $this->transaction = Yii::$app->db->beginTransaction();
         $itensAtivos = ItensAtivo::find()
-            ->where(['ativo' => true])
             ->andFilterWhere(['id' => $this->itensAtivo_id])
             ->all();
         foreach ($itensAtivos as $itensAtivo) {
@@ -62,33 +62,35 @@ class RecalculaAtivos
         $valor_compra = 0;
         $ultimoPrecoMedio = 0;
         foreach ($operacoes as $id => $operacao) {
+            $operacaoQuantidade  = $operacao->quantidade;
             if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::COMPRA) {
 
-                $quantidade += $operacao->quantidade;
+                $quantidade = BigDecimal::of($quantidade)->plus($operacaoQuantidade)->toFloat();
                 $valor_compra += $operacao->valor;
             }
             if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::DESDOBRAMENTO_MAIS) {
-                $quantidade += $operacao->quantidade;
+                $quantidade = BigDecimal::of($quantidade)->plus($operacaoQuantidade)->toFloat();
             }
             if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::DESDOBRAMENTO_MENOS) {
-                $quantidade -= $operacao->quantidade;
+                $quantidade = BigDecimal::of($quantidade)->plus(-$operacaoQuantidade)->toFloat();
             }
             $precoMedio = round(($valor_compra / ($quantidade == 0 ? 1 : $quantidade)), 2);
             if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::VENDA) {
                 if ($itensAtivo->ativos->classesOperacoes->nome == ClassesOperacoes::CALCULA_ARITIMETICA_CDB_INTER) {
-                    $quantidade -= $operacao->quantidade;
+                    $quantidade =  BigDecimal::of($quantidade)->plus(-$operacaoQuantidade)->toFloat();
                     $valor_compra -= $operacao->valor;
                     continue;
                 }
                 $precoMedio = $operacoes[$id - 1]->preco_medio;
-                $quantidade -= $operacao->quantidade;
-                $valor_compra -=  $operacao->quantidade * $operacoes[$id - 1]->preco_medio;
+                $quantidade =  BigDecimal::of($quantidade)->plus(-$operacaoQuantidade)->toFloat();
+                $valor_compra -=  BigDecimal::of($operacaoQuantidade)->toFloat() * $operacoes[$id - 1]->preco_medio;
             }
             $operacao->preco_medio = $precoMedio;
             if ($itensAtivo->ativos->classesOperacoes->nome == ClassesOperacoes::CALCULA_ARITIMETICA_CDB_INTER) {
                 $operacao->preco_medio = null;
             }
             if (!$operacao->save()) {
+
                 throw new InvestException(CajuiHelper::processaErros($operacao->getErros()));
             }
             $ultimoPrecoMedio = $precoMedio;
