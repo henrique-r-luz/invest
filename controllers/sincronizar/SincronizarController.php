@@ -65,7 +65,7 @@ class SincronizarController extends Controller
     private function recalculaAtivos()
     {
         try {
-            $atualizaRendaVariavel = new RecalculaAtivos(23);
+            $atualizaRendaVariavel = new RecalculaAtivos();
             $atualizaRendaVariavel->alteraIntesAtivo();
             Yii::$app->session->setFlash('success', 'Dados atualizados com sucesso!');
         } catch (InvestException $e) {

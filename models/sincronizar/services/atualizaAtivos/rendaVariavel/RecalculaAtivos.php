@@ -92,9 +92,8 @@ class RecalculaAtivos
                 throw new InvestException(CajuiHelper::processaErros($operacao->getErros()));
             }
             $ultimoPrecoMedio = $precoMedio;
-            echo  $quantidade . ' || ' . $operacao->quantidade;
         }
-        exit();
+
         $valor_compra  = $quantidade * $ultimoPrecoMedio;
         if ($valor_compra < 0) {
             $valor_compra = 0;
