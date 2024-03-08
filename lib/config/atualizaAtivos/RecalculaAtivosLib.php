@@ -92,7 +92,7 @@ class RecalculaAtivosLib
             if (Operacao::tipoOperacao()[$operacao->tipo] == Operacao::VENDA) {
                 $precoMedio = $operacoes[$id - 1]->preco_medio;
                 $quantidade = BigDecimal::of($quantidade)->plus(-$operacaoQuantidade)->toFloat();
-                $valor_compra =  BigDecimal::of($operacaoQuantidade)->toFloat() * $operacoes[$id - 1]->preco_medio;
+                $valor_compra -=  BigDecimal::of($operacaoQuantidade)->toFloat() * $operacoes[$id - 1]->preco_medio;
             }
             $operacao->preco_medio = $precoMedio;
             if (!$operacao->save()) {
@@ -100,6 +100,7 @@ class RecalculaAtivosLib
             }
             $ultimoPrecoMedio =  $precoMedio;
         }
+
         $valor_compra  = $quantidade * $ultimoPrecoMedio;
 
         if ($valor_compra < 0) {
