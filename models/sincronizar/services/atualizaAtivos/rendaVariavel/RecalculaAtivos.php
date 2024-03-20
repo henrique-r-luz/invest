@@ -42,6 +42,10 @@ class RecalculaAtivos
             list($valor_compra, $quantidade) =  $this->calculaOperacoes($itensAtivo);
             $itensAtivo->quantidade = $quantidade;
             $itensAtivo->valor_compra = $valor_compra;
+            if ($quantidade == 0) {
+                $itensAtivo->valor_bruto = 0;
+                $itensAtivo->valor_liquido = 0;
+            }
             if (!$itensAtivo->save()) {
                 $this->transaction->rollBack();
                 throw new InvestException(CajuiHelper::processaErros($itensAtivo->getErros()));
@@ -96,10 +100,13 @@ class RecalculaAtivos
             $ultimoPrecoMedio = $precoMedio;
         }
 
+
         $valor_compra  = $quantidade * $ultimoPrecoMedio;
-        if ($valor_compra < 0) {
+
+        if ($valor_compra < 0 || BigDecimal::of($quantidade)->toFloat() == 0) {
             $valor_compra = 0;
         }
+
         return [$valor_compra, $quantidade];
     }
 }
