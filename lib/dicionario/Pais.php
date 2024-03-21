@@ -4,10 +4,15 @@
 namespace app\lib\dicionario;
 
 
-class Pais {
-    
+class Pais
+{
+
     const BR = 'BR';
     const  US = 'US';
+    /**
+     * Criptomoeadas
+     */
+    const CR = 'CR';
 
     /**
      * Retorna todos os enuns em um array
@@ -18,9 +23,10 @@ class Pais {
         return [
             self::BR => Pais::BR,
             self::US => Pais::US,
+            self::CR => Pais::CR
         ];
     }
-    
+
     /**
      * Retorna um enun baseado no seu valor  
      * @return string
