@@ -30,4 +30,8 @@ class AppAsset extends AssetBundle
         "js/operacao/tipoMoeda.js"
 
     ];
+
+    public $publishOptions = [
+        'forceCopy' => YII_ENV_DEV,
+    ];
 }

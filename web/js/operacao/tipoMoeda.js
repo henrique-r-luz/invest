@@ -4,9 +4,10 @@ window.tipoMoeda = (function ($) {
         setMoeda: function () {
             let textoSelecionando = $("#item_ativo :selected").text();
             let myarr = textoSelecionando.split("|");
-            let valorText = 'Valor($ Dollar)';
-            if (myarr[2].trim() == 'BR') {
-                valorText = 'Valor(R$ Real)';
+            console.log(myarr);
+            let valorText = 'Valor(R$ Real)';
+            if (myarr[2].trim() === 'US') {
+                valorText = 'Valor($ Dollar)';
             }
             $("#valor").text(valorText);
 

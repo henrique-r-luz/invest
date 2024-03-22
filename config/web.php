@@ -29,6 +29,14 @@ $config = [
     ],
     'components' => [
 
+
+        'formatter' => [
+            'numberFormatterOptions' => [
+                NumberFormatter::MIN_FRACTION_DIGITS => 0,
+                NumberFormatter::MAX_FRACTION_DIGITS => 12,
+            ]
+        ],
+
         'view' => [
             'theme' => [
                 'pathMap' => [

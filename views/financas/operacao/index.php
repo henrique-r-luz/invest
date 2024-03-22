@@ -3,12 +3,13 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use app\lib\grid\GridView;
+use Brick\Math\BigDecimal;
 use app\lib\dicionario\Pais;
 use app\lib\dicionario\Tipo;
 use app\lib\config\ValorDollar;
 use app\models\financas\Operacao;
-use Brick\Math\BigDecimal;
 use kartik\daterange\DateRangePicker;
+use app\lib\helpers\FormatQuantidadeGrid;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\OperacaoSearch */
@@ -72,9 +73,13 @@ $daterange = [
                 'options' => ['style' => 'width:8%;'],
             ],
             [
-                'format' => ['decimal'],
+                // 'format' => ['decimal'],
+                // 'format' => ['decimal'],
                 'attribute' => 'quantidade',
                 //'format' => 'number',
+                'value' => function ($model) {
+                    return  FormatQuantidadeGrid::format($model->quantidade);
+                },
                 'pageSummary' => function ($summary, $data, $widget) use ($dataProvider) {
                     $quantidade = 0;
                     $objetos = $dataProvider->models;
@@ -85,10 +90,10 @@ $daterange = [
                         ) {
                             $quantidade = BigDecimal::of($quantidade)->plus(-$operacao->quantidade)->toFloat();
                         } else {
-                            $quantidade = BigDecimal::of($quantidade)->plus($operacao->quantidade)->toFloat();;
+                            $quantidade = BigDecimal::of($quantidade)->plus($operacao->quantidade)->toFloat();
                         }
                     }
-                    return '<font color="blue">Quatidade: ' . $quantidade . '</font>';
+                    return '<font color="blue">Quatidade: ' . FormatQuantidadeGrid::format($quantidade) . '</font>';
                 },
                 'options' => ['style' => 'width:8%;'],
             ],
@@ -114,7 +119,7 @@ $daterange = [
                         }
                     }
                     // $total = ValorDollar::convertValorMonetario($total, $operacao->itensAtivo->ativos->pais);
-                    
+
                     if ($total < 0) {
                         $color = 'red';
                     } else {

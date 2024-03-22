@@ -1,10 +1,12 @@
 <?php
 
-use app\lib\config\ValorDollar;
+use Yii;
 use app\lib\grid\GridView;
 use app\lib\dicionario\Pais;
 use app\lib\dicionario\Tipo;
+use app\lib\config\ValorDollar;
 use app\lib\dicionario\Categoria;
+use app\lib\helpers\FormatQuantidadeGrid;
 
 //use Yii;
 
@@ -39,8 +41,10 @@ $impostoRenda = 1;
                 'options' => ['style' => 'width:12%;'],
             ],
             [
-                'format' => ['decimal'],
                 'attribute' => 'quantidade',
+                'value' => function ($model) {
+                    return  FormatQuantidadeGrid::format($model->quantidade);
+                },
                 'pageSummary' => true,
             ],
             [
