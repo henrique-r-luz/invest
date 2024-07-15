@@ -43,6 +43,7 @@ class AtualizaAcoesController extends Controller
      */
     public function actionIndex()
     {
+
         $searchModel = new AtualizaAcoesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

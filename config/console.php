@@ -45,16 +45,11 @@ $config = [
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],
+        'api_preco' => require(__DIR__ . '/api_preco.php')
     ],
 
     'params' => $params,
-    /*
-    'controllerMap' => [
-        'fixture' => [ // Fixture generation command line.
-            'class' => 'yii\faker\FixtureController',
-        ],
-    ],
-    */
+
 ];
 
 if (YII_ENV_DEV) {

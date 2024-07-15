@@ -2,6 +2,7 @@
 
 namespace app\commands;
 
+use app\commands\helper\LerApi;
 use Throwable;
 use app\lib\CajuiHelper;
 use yii\console\Controller;
@@ -25,6 +26,7 @@ class ScrapingAtualizaAcoesController extends Controller
 
     public function actionPage(int $id)
     {
+
         try {
             $this->atualizaAcoes = AtualizaAcoes::findOne($id);
             $this->botPreco();
@@ -49,7 +51,7 @@ class ScrapingAtualizaAcoesController extends Controller
 
     private function botPreco()
     {
-        $lerPagina = new  LerPagina($this->atualizaAcoes);
+        $lerPagina = new  LerApi($this->atualizaAcoes);
         $lerPagina->analisaSalvaPreco();
     }
 }
