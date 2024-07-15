@@ -70,7 +70,7 @@ O Invest é um sistema de controle de investimentos pessoal que possibilita a ce
  ~~~
  php yii migrate
  ~~~
-  É necessario cria contas em APIs para atualizar os preços dos ativos de renda variável, as apis utilizadas são: 
+  É necessário cria contas em APIs para atualizar os preços dos ativos de renda variável, as apis utilizadas são: 
  ~~~
 https://brapi.dev/ (renda variável no Brasil)
 https://blockchain.info/ticker (Bitcoin)
