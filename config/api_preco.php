@@ -6,7 +6,7 @@ return [
     'class' => ApiPreco::class,
     'apiBitcoin' => 'https://blockchain.info/ticker',
     'apiUsa' => 'https://financialmodelingprep.com/api/v3/quote-short/',
-    'apiUsaKey' => '',
+    'apiUsaKey' => ' ',
     'apiBr' => 'https://brapi.dev/api/quote/',
     'apiBrKey' => '',
 ];
