@@ -70,6 +70,27 @@ O Invest é um sistema de controle de investimentos pessoal que possibilita a ce
  ~~~
  php yii migrate
  ~~~
+  è necessario cria contas em APIs para atualizar os preços dos ativos de renda variável, as apis utilizadas são: 
+ ~~~
+https://brapi.dev/ (renda variável no Brasil)
+https://blockchain.info/ticker (Bitcoin)
+https://site.financialmodelingprep.com (renda variável nos Estados Unidos)
+ ~~~
+  A configuração das APIs  é feita editando o arquivo /config/api_preco.php
+ ~~~
+<?php
+
+use app\lib\componentes\ApiPreco;
+
+return [
+    'class' => ApiPreco::class,
+    'apiBitcoin' => 'https://blockchain.info/ticker',
+    'apiUsa' => 'https://financialmodelingprep.com/api/v3/quote-short/',
+    'apiUsaKey' => '?apikey=<sua api key>',
+    'apiBr' => 'https://brapi.dev/api/quote/',
+    'apiBrKey' => '?token=<seu token key>',
+];
+ ~~~
  Com os migrates executados os sistema está pronto para uso, acesse:
  ~~~
  http://localhost
