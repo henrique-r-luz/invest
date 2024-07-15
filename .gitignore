@@ -39,7 +39,4 @@ assets/
 *.sql*
 log-console.log
 !db_teste.sql
-api_preco.php
 /config/api_preco.php
-config/api_preco.php
-config/api_preco.php
