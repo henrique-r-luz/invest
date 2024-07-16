@@ -5,11 +5,13 @@ namespace app\commands\helper;
 use Yii;
 use Throwable;
 use app\lib\CajuiHelper;
-use app\models\sincronizar\Preco;
-use app\commands\ScrapingAtualizaAcoesController;
-use app\lib\dicionario\Categoria;
 use app\lib\dicionario\Pais;
+use app\lib\dicionario\Tipo;
+use app\models\financas\Ativo;
+use app\lib\dicionario\Categoria;
+use app\models\sincronizar\Preco;
 use app\models\financas\ItensAtivo;
+use app\commands\ScrapingAtualizaAcoesController;
 
 class LerApi
 {
@@ -34,7 +36,9 @@ class LerApi
     {
         foreach ($this->vetAtivos as $ativo_id => $ativo) {
             try {
-
+                if ($ativo['pais'] == Tipo::DOLLAR) {
+                    $this->inserePreco(null, $ativo['pais'], $ativo_id, Yii::$app->api_preco->apiMoeda, null);
+                }
                 if ($ativo['pais'] === Pais::CR) {
                     $this->inserePreco(null, $ativo['pais'], $ativo_id, Yii::$app->api_preco->apiBitcoin, null);
                 }
@@ -44,6 +48,7 @@ class LerApi
                 if ($ativo['pais'] == Pais::BR) {
                     $this->inserePreco($ativo['codigo'], $ativo['pais'], $ativo_id, Yii::$app->api_preco->apiBr, Yii::$app->api_preco->apiBrKey);
                 }
+
                 if (!$this->atualizaAcoes->save()) {
                     $erro = CajuiHelper::processaErros($this->atualizaAcoes->getErrors());
                     Yii::error($erro, ScrapingAtualizaAcoesController::categoriaLog);
@@ -75,6 +80,9 @@ class LerApi
             ->andWhere(['ativo.categoria' => Categoria::RENDA_VARIAVEL])
             ->distinct()->asArray()->all();
 
+        $dolar = Ativo::find()->where(['tipo' => Tipo::DOLLAR])
+            ->one();
+
         $vetAtivos = [];
         foreach ($itensAtivos as $siteAcoe) {
             try {
@@ -86,6 +94,13 @@ class LerApi
             } catch (Throwable $e) {
                 echo  $e->getMessage();
             }
+        }
+        if (!empty($dolar)) {
+            $vetAtivos[$dolar->id]['status'] = false;
+            $vetAtivos[$dolar->id]['codigo'] = $dolar->codigo;
+            $vetAtivos[$dolar->id]['tipo'] = $dolar->tipo;
+            $vetAtivos[$dolar->id]['pais'] = $dolar->tipo;
+            $vetAtivos[$dolar->id]['erro'] = '';
         }
 
         $this->vetAtivos = $vetAtivos;
@@ -125,6 +140,11 @@ class LerApi
 
     private function trataJson($json, $pais)
     {
+        if ($pais == Tipo::DOLLAR) {
+            $json = json_decode($json, true);
+            return $json['USDBRL']['bid'];
+            //return  $json->BRL->last;
+        }
         if ($pais === Pais::CR) {
             $json = json_decode($json);
             return  $json->BRL->last;
