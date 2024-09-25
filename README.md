@@ -89,6 +89,7 @@ return [
     'apiUsaKey' => '?apikey=<sua api key>',
     'apiBr' => 'https://brapi.dev/api/quote/',
     'apiBrKey' => '?token=<seu token key>',
+    'apiMoeda' => 'https://economia.awesomeapi.com.br/last/USD-BRL'
 ];
  ~~~
  Com os migrates executados os sistema está pronto para uso, acesse:
