@@ -132,6 +132,9 @@ $daterange = [
             [
                 'attribute' => 'preco_medio',
                 'format' => 'currency',
+                'value' => function ($model) {
+                    return ValorDollar::convertValorMonetario($model->preco_medio, $model->pais);
+                },
                 'options' => ['style' => 'width:8%;'],
 
             ],

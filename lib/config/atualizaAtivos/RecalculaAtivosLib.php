@@ -52,7 +52,7 @@ class RecalculaAtivosLib
         $itensAtivo = ValorBrutoLiquidoFactory::getObjeto($this->classe, $itensAtivo)->calcula();
         if (!$itensAtivo->save()) {
             $this->transaction->rollBack();
-            throw new InvestException(CajuiHelper::processaErros($itensAtivo->getErros()));
+            throw new InvestException(CajuiHelper::processaErros($itensAtivo->getErrors()));
         }
 
         $this->transaction->commit();
@@ -96,11 +96,10 @@ class RecalculaAtivosLib
             }
             $operacao->preco_medio = $precoMedio;
             if (!$operacao->save()) {
-                throw new InvestException(CajuiHelper::processaErros($operacao->getErros()));
+                throw new InvestException(CajuiHelper::processaErros($operacao->getErrors()));
             }
             $ultimoPrecoMedio =  $precoMedio;
         }
-
         $valor_compra  = $quantidade * $ultimoPrecoMedio;
 
         if ($valor_compra < 0) {
