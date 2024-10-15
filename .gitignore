@@ -40,3 +40,4 @@ assets/
 log-console.log
 !db_teste.sql
 /config/api_preco.php
+api_preco.php

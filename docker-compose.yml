@@ -67,7 +67,7 @@ services:
     networks:
       - invest-network
     ports:
-      - "80:80"
+      - "82:80"
     volumes:
       - ./:/var/www
 
