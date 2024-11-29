@@ -55,6 +55,9 @@ class GridView extends \kartik\grid\GridView
 
     ]];
 
+
+
+
     /**
      * @var string Estipo aparencia do card. Valor padrão 'card-secondary card-outline'
      */

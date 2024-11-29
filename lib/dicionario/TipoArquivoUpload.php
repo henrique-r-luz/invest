@@ -24,7 +24,8 @@ class TipoArquivoUpload
     const CLEAR = 'Operações Clear';
     const AVENUE = 'Operações Avenue';
     const NU = 'NU';
-    const PROVENTOS = 'Proventos';
+    const PROVENTOS_CLEAR = 'Proventos Clear';
+    const PROVENTOS_AVENUE = 'Proventos Avenue';
 
     /**
      * Retorna todos os enuns em um array
@@ -36,7 +37,8 @@ class TipoArquivoUpload
             self::CLEAR => self::CLEAR,
             self::AVENUE => self::AVENUE,
             self::NU => self::NU,
-            self::PROVENTOS => self::PROVENTOS,
+            self::PROVENTOS_CLEAR => self::PROVENTOS_CLEAR,
+            self::PROVENTOS_AVENUE => self::PROVENTOS_AVENUE,
         ];
     }
 

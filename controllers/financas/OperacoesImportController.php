@@ -162,10 +162,11 @@ class OperacoesImportController extends Controller
             ];
             //Yii::$app->session->setFlash('danger', 'Erro ao deletera registro. ' . $e->getMessage());
         } catch (Throwable $e) {
+
             // Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado! ');
             $response = [
                 'resp' => false,
-                'msg' => 'Ocorreu um erro inesperado! '
+                'msg' => 'Ocorreu um erro inesperado! ' . $e->getMessage()
             ];
         } finally {
             return $response;
