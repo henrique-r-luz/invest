@@ -12,4 +12,5 @@ class ApiPreco extends Component
     public $apiBr;
     public $apiBrKey;
     public $apiMoeda;
+    public $apiMoedaKey;
 }

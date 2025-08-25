@@ -37,7 +37,7 @@ class LerApi
         foreach ($this->vetAtivos as $ativo_id => $ativo) {
             try {
                 if ($ativo['pais'] == Tipo::DOLLAR) {
-                    $this->inserePreco(null, $ativo['pais'], $ativo_id, Yii::$app->api_preco->apiMoeda, null);
+                    $this->inserePreco(null, $ativo['pais'], $ativo_id, Yii::$app->api_preco->apiMoeda, Yii::$app->api_preco->apiMoedaKey);
                 }
                 if ($ativo['pais'] === Pais::CR) {
                     $this->inserePreco(null, $ativo['pais'], $ativo_id, Yii::$app->api_preco->apiBitcoin, null);
