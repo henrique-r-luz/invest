@@ -3,11 +3,9 @@
 namespace app\controllers\financas;
 
 use Yii;
-use Exception;
 use Throwable;
 use yii\web\Response;
 use yii\web\Controller;
-use app\lib\CajuiHelper;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use app\lib\helpers\InvestException;
@@ -85,6 +83,7 @@ class OperacoesImportController extends Controller
             Yii::$app->session->setFlash('danger', 'Erro ao salvar operação import! ' . $e->getMessage());
             $operacoesImportService->removeArquivo();
         } catch (Throwable $e) {
+
             $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado! ');
             $operacoesImportService->removeArquivo();

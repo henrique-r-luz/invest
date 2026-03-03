@@ -4,8 +4,9 @@
 namespace app\lib\dicionario;
 
 
-class ProventosMovimentacao {
-    
+class ProventosMovimentacao
+{
+
     const Dividendo = 'Dividendo';
     const  JurosSobreCapitalProprio = 'Juros Sobre Capital Próprio';
     const  Rendimento = 'Rendimento';
@@ -22,7 +23,7 @@ class ProventosMovimentacao {
             3 => self::Rendimento,
         ];
     }
-    
+
     /**
      * Retorna um enun baseado no seu valor  
      * @return string
@@ -35,14 +36,14 @@ class ProventosMovimentacao {
             return $all[$id];
         }
 
-        return 'Não existe';
+        return self::Dividendo;
     }
 
     public static function getId($nome)
     {
         $valor = array_search($nome, self::all());
-        if($valor===false){
-            return 'Não existe';
+        if ($valor === false) {
+            return 1;
         }
         return $valor;
     }

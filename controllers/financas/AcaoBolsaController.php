@@ -9,8 +9,6 @@ use yii\filters\VerbFilter;
 use app\models\financas\AcaoBolsa;
 use yii\web\NotFoundHttpException;
 use app\models\financas\AcaoBolsaSearch;
-use app\models\financas\AcaoBolsaOperacao;
-use app\models\financas\BalancoEmpresaBolsa;
 use app\models\financas\BalancoEmpresaBolsaSearch;
 
 /**
