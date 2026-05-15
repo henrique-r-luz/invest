@@ -10,121 +10,165 @@ use app\models\financas\ItensAtivo;
 use app\lib\helpers\InvestException;
 use app\models\financas\OperacoesImport;
 use app\lib\dicionario\ProventosMovimentacao;
-use app\lib\config\atualizaAtivos\ComponenteOperacoes;
 use app\models\financas\service\operacoesImport\OperacoesImportAbstract;
 
 class OperacaoProventosAvenue extends OperacoesImportAbstract
 {
-    const COMPRA = 'Compra';
-    const VENDA = 'Venda';
-    const DIVIDENDOS = 'Dividendos';
-    const RETENCAO_IMPOSTOS = 'Retenção Impostos sobre Dividendos';
+    const CREDITO_DIVIDENDOS = 'Crédito dividendos';
+    const RETENCAO_IMPOSTOS  = 'Retenção Impostos sobre Dividendos';
 
-
+    /**
+     * Lê o PDF da Avenue usando smalot/pdfparser e armazena o texto extraído.
+     */
     protected function getDados()
     {
         $filePath = Yii::getAlias('@' . OperacoesImport::DIR) . '/' . $this->operacoesImport->hash_nome . '.' . $this->operacoesImport->extensao;
         if (!file_exists($filePath)) {
-            throw new InvestException("O arquivo enviado não foi salvo no servidor. ");
+            throw new InvestException("O arquivo enviado não foi salvo no servidor.");
         }
-        $this->arquivo = array_map(function ($v) use ($filePath) {
-            return str_getcsv($v, ComponenteOperacoes::getFileDelimiter($filePath));
-        }, file($filePath));
-        unset($this->arquivo[0]);
+
+        $parser = new \Smalot\PdfParser\Parser();
+        $pdf    = $parser->parseFile($filePath);
+        $this->arquivo = $pdf->getText();
     }
 
-
-
-
-    public  function atualiza()
+    /**
+     * Processa os dividendos extraídos do PDF e insere na tabela proventos.
+     * Valor inserido = Crédito dividendos − Retenção Impostos (por ativo).
+     */
+    public function atualiza()
     {
         try {
             $transaction = Yii::$app->db->beginTransaction();
-            $dadosDividendos = $this->dadosComDividendo();
+            $dividendos  = $this->parseDividendos();
 
-            foreach ($dadosDividendos as $key => $itens) {
-                list($codigo, $dataRef) = \explode('_', $key);
+            if (empty($dividendos)) {
+                throw new InvestException("Nenhum dividendo encontrado no PDF.");
+            }
+
+            foreach ($dividendos as $ticker => $dados) {
+                $valorLiquido = $dados['credito'] - $dados['retencao'];
+
+                if ($valorLiquido <= 0) {
+                    continue;
+                }
+
+                $data = DateTime::createFromFormat('d/m/Y', $dados['data'])->format('Y-m-d') . ' 20:00:00';
+
+                // Verifica se o provento já existe para não duplicar
                 if (Proventos::find()
                     ->innerJoin('public.itens_ativo', 'itens_ativo.id = proventos.itens_ativos_id')
                     ->innerJoin('public.ativo', 'ativo.id = itens_ativo.ativo_id')
-                    ->where(['UPPER(ativo.codigo)' => strtoupper(trim($codigo))])
-                    ->andWhere(['proventos.data' => $itens['data']])->exists()
+                    ->where(['UPPER(ativo.codigo)' => strtoupper($ticker)])
+                    ->andWhere(['proventos.data' => $data])
+                    ->andWhere(['itens_ativo.investidor_id' => $this->operacoesImport->investidor_id])
+                    ->exists()
                 ) {
                     continue;
                 }
-                $provento = new Proventos();
-                $provento->itens_ativos_id =  ItensAtivo::find()
+
+                $itensAtivo = ItensAtivo::find()
                     ->innerJoin('ativo', 'itens_ativo.ativo_id = ativo.id')
-                    ->where(['ativo.codigo' => $codigo])
+                    ->where(['UPPER(ativo.codigo)' => strtoupper($ticker)])
                     ->andWhere(['investidor_id' => $this->operacoesImport->investidor_id])
-                    ->one()
-                    ->id;
-                $provento->valor = floatval($itens['dividendo_bruto'] - abs($itens['dividendo_desconto']));
-                $provento->data = $itens['data'];
-                $provento->movimentacao = ProventosMovimentacao::getId(ProventosMovimentacao::Dividendo);
+                    ->one();
+
+                if (empty($itensAtivo)) {
+                    throw new InvestException("Ativo não encontrado na carteira: {$ticker}");
+                }
+
+                $provento = new Proventos();
+                $provento->itens_ativos_id = $itensAtivo->id;
+                $provento->valor           = $valorLiquido;
+                $provento->data            = $data;
+                $provento->movimentacao    = ProventosMovimentacao::getId(ProventosMovimentacao::Dividendo);
+
                 if (!$provento->save()) {
                     $erro = CajuiHelper::processaErros($provento->getErrors());
                     $transaction->rollBack();
                     throw new InvestException($erro);
                 }
+
                 $this->dadosJson['operacoes_id'][] = $provento->id;
             }
+
             $transaction->commit();
-        } catch (\Exception $e) {
-            $transaction->rollBack();
-            throw $e;
         } catch (InvestException $e) {
-            $transaction->rollBack();
+            throw $e;
+        } catch (\Exception $e) {
             throw $e;
         }
     }
 
-
-
-    private function dadosComDividendo()
+    /**
+     * Faz o parse do texto do PDF e retorna os dividendos agrupados por ticker.
+     *
+     * Formato esperado no texto extraído (após normalização):
+     *   DIVIDEND DD/MM/YYYY C Crédito dividendos TICKER $VALOR
+     *   DIVIDEND DD/MM/YYYY C Retenção Impostos sobre Dividendos TICKER $VALOR
+     *
+     * @return array ['TICKER' => ['credito' => float, 'retencao' => float, 'data' => string]]
+     */
+    private function parseDividendos(): array
     {
-        $transacoesAvenue = $this->arquivo;
+        // O smalot/pdfparser extrai o PDF da Avenue com espaços inseridos dentro
+        // das palavras (ex: "D IV ID EN D", "Cré d ito"). Por isso removemos TODOS
+        // os espaços/quebras de linha antes de aplicar os regex.
+        // Resultado: "DIVIDEND17/02/2026CCréditodividendosO$34.05"
+        $text = preg_replace('/\s+/', '', $this->arquivo);
+
         $dividendos = [];
-        foreach ($transacoesAvenue as $linha) {
-            $indexTextoDividendo = strpos(trim($linha[3]), trim(self::DIVIDENDOS));
-            if ($indexTextoDividendo !== false && $indexTextoDividendo == 0) {
-                $codigo =  $this->getCodigoAtivo($linha[3]);
-                $dividendos[$codigo . '_' . $linha[0]]['dividendo_bruto'] = $linha[4];
-                $date = $linha[2];
-                $formattedDate = DateTime::createFromFormat('d/m/Y', $date)->format('Y-m-d') . ' ' . trim($linha[1]) . ':00';
-                $dividendos[$codigo . '_' . $linha[0]]['data'] = $formattedDate;
+
+        // "CCréditodividendos" = "C" (tipo de conta) + "Crédito dividendos" sem espaços
+        preg_match_all(
+            '/DIVIDEND(\d{2}\/\d{2}\/\d{4})CCr[eé]ditodividendos([A-Z]{1,5})\$?([\d,]+\.?\d*)/u',
+            $text,
+            $creditoMatches,
+            PREG_SET_ORDER
+        );
+
+        foreach ($creditoMatches as $match) {
+            $ticker = $match[2];
+            $valor  = floatval(str_replace(',', '', $match[3]));
+            if (!isset($dividendos[$ticker])) {
+                $dividendos[$ticker] = ['credito' => 0, 'retencao' => 0, 'data' => null];
             }
-            if (strpos(trim($linha[3]), trim(self::RETENCAO_IMPOSTOS)) !== false) {
-                $codigo =  $this->getCodigoAtivo($linha[3]);
-                $dividendos[$codigo . '_' . $linha[0]]['dividendo_desconto'] = $linha[4];
+            $dividendos[$ticker]['credito'] += $valor;
+            $dividendos[$ticker]['data']     = $match[1];
+        }
+
+        // "CReten.{1,4}oImpostossobreDividendos" = "C" (tipo de conta) +
+        // "Retenção Impostos sobre Dividendos" sem espaços.
+        // O .{1,4} cobre os caracteres "çã" de "Retenção" e possíveis variações de encoding.
+        preg_match_all(
+            '/DIVIDEND(\d{2}\/\d{2}\/\d{4})CReten.{1,4}oImpostossobreDividendos([A-Z]{1,5})\$?([\d,]+\.?\d*)/u',
+            $text,
+            $retencaoMatches,
+            PREG_SET_ORDER
+        );
+
+        foreach ($retencaoMatches as $match) {
+            $ticker = $match[2];
+            $valor  = floatval(str_replace(',', '', $match[3]));
+            if (!isset($dividendos[$ticker])) {
+                $dividendos[$ticker] = ['credito' => 0, 'retencao' => 0, 'data' => null];
+            }
+            $dividendos[$ticker]['retencao'] += $valor;
+            if ($dividendos[$ticker]['data'] === null) {
+                $dividendos[$ticker]['data'] = $match[1];
             }
         }
+
         return $dividendos;
     }
 
-    private function getCodigoAtivo($texto)
-    {
-        $startLimite = strpos($texto, self::DIVIDENDOS);
-        $endLimite = strpos($texto, '.');
-
-        if ($startLimite === false) {
-            throw new InvestException("Não pode encontrar o código do ativo");
-        }
-
-        if ($endLimite === false) {
-            throw new InvestException("Não pode encontrar o código do ativo");
-        }
-        $init = ($startLimite + strlen(self::DIVIDENDOS));
-        $substring = substr($texto, ($init), ($endLimite - $init));
-        return  trim($substring);
-    }
-
-
     public function delete()
     {
+        $transaction = null;
         try {
             $transaction = Yii::$app->db->beginTransaction();
-            $operacoes =  json_decode($this->operacoesImport->lista_operacoes_criadas_json, true);
+
+            $operacoes   = json_decode($this->operacoesImport->lista_operacoes_criadas_json, true);
             if (!isset($operacoes['operacoes_id'])) {
                 $this->operacoesImport->deleteUpload();
                 $transaction->commit();
@@ -132,13 +176,17 @@ class OperacaoProventosAvenue extends OperacoesImportAbstract
             }
             foreach ($operacoes['operacoes_id'] as $operacao) {
                 $objOperacao = Proventos::findOne($operacao);
-                $objOperacao->delete();
+                if (!empty($objOperacao)) {
+                    $objOperacao->delete();
+                }
             }
             $this->operacoesImport->deleteUpload();
             $transaction->commit();
         } catch (\Exception $e) {
-            $transaction->rollBack();
-            throw new InvestException("Error ao remover operação Import. ");
+            if ($transaction !== null) {
+                $transaction->rollBack();
+            }
+            throw new InvestException("Erro ao remover operação Import: " . $e->getMessage());
         }
     }
 }

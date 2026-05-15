@@ -69,9 +69,9 @@ class OperacoesImportController extends Controller
      */
     public function actionCreate()
     {
+        $transaction = Yii::$app->db->beginTransaction();
+        $operacoesImportService = new OperacoesImportService();
         try {
-            $transaction = Yii::$app->db->beginTransaction();
-            $operacoesImportService = new OperacoesImportService();
 
             if ($operacoesImportService->load(Yii::$app->request->post())) {
                 $operacoesImportService->save();
@@ -83,7 +83,8 @@ class OperacoesImportController extends Controller
             Yii::$app->session->setFlash('danger', 'Erro ao salvar operação import! ' . $e->getMessage());
             $operacoesImportService->removeArquivo();
         } catch (Throwable $e) {
-
+            echo $e->getMessage();
+            exit();
             $transaction->rollBack();
             Yii::$app->session->setFlash('danger', 'Ocorreu um erro inesperado! ');
             $operacoesImportService->removeArquivo();
@@ -147,8 +148,7 @@ class OperacoesImportController extends Controller
             $model = $this->findModel($id);
             $operacoesImportService = new OperacoesImportService($model);
             $operacoesImportService->delete();
-            $transaction->commit();
-            //Yii::$app->session->setFlash('success', 'Registro deletado com sucesso! ');
+            $transaction->commit();;
             $response = [
                 'resp' => true,
                 'msg' => true

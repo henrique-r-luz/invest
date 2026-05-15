@@ -52,13 +52,13 @@ class OperacoesImportService
         $acaoImport->atualiza();
         $this->operacoesImport->lista_operacoes_criadas_json = $acaoImport->getJson();
         //atualiza json em operações import
-        $this->salvaOperacaoImport();
+        $this->operacoesImport->update(false);
     }
 
 
     private function salvaOperacaoImport()
     {
-        if (!$this->operacoesImport->save(false)) {
+        if (!$this->operacoesImport->save()) {
             $erro =  CajuiHelper::processaErros($this->operacoesImport->getErrors());
             throw new InvestException($erro);
         }
@@ -80,7 +80,7 @@ class OperacoesImportService
 
     public function delete()
     {
-        $acaoImport = OperacoesImportFactory::getObjeto($this->operacoesImport);
+        $acaoImport = OperacoesImportFactory::getObjeto($this->operacoesImport, 'delete');
 
         $acaoImport->delete();
     }
