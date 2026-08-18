@@ -90,6 +90,9 @@ class GraficoUtil
         $grafico = [];
         $index = 0;
         foreach ($dados as $nome => $item) {
+            if ($item == 0) {
+                continue;
+            }
             $grafico[] = [
                 'name' => $nome,
                 'y' => $item,
