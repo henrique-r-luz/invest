@@ -5,7 +5,37 @@
  */
 var invest = {
     load: function(objJon){
-       
+
+    }
+}
+
+var investidorFiltro = {
+
+    reloadUrl: null,
+
+    init: function(reloadUrl){
+        this.reloadUrl = reloadUrl;
+        this.moverParaNavbar();
+        this.bindChange();
+    },
+
+    moverParaNavbar: function(){
+        var $item = $('#investidor-nav-item').detach();
+        var $navLeft = $('.main-header .navbar-nav').not('.ml-auto').first();
+        $navLeft.css('flex', '1 1 auto');
+        $item.show().appendTo($navLeft);
+    },
+
+    bindChange: function(){
+        var self = this;
+        $('#investidor-id-select').on('change', function() {
+            var investidorId = $(this).val();
+            var url = self.reloadUrl;
+            if (investidorId) {
+                url += '?investidor_id=' + encodeURIComponent(investidorId);
+            }
+            window.location.href = url;
+        });
     }
 }
 

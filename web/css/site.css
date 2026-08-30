@@ -198,3 +198,8 @@ body {
     height: 50px;
     width: 150px;
 }
+
+/* select2 do filtro de investidor no dashboard (site/index) */
+#investidor-id-select + .select2-container .select2-selection {
+    border-radius: 20px !important;
+}
