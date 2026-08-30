@@ -21,6 +21,8 @@ use app\models\dashboard\GraficoAcaoPais;
 use app\models\dashboard\GraficoCategoria;
 use app\models\dashboard\ProventosDashBoard;
 use app\models\dashboard\ValoresConsolidados;
+use app\models\financas\Investidor;
+use yii\helpers\ArrayHelper;
 
 class SiteController extends Controller
 {
@@ -47,11 +49,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $investidorId = Yii::$app->request->get('investidor_id');
+        $investidores = ArrayHelper::map(Investidor::find()->orderBy('nome')->asArray()->all(), 'id', 'nome');
         try {
-
             $dashBoardSearch = new DashBoardSearch();
-            $dados = $dashBoardSearch->search();
-            $valoresTotais = $dashBoardSearch->valorTotal();
+            $dados = $dashBoardSearch->search($investidorId);
+            $valoresTotais = $dashBoardSearch->valorTotal($investidorId);
             $graficoCategoria = new GraficoCategoria($dados, $valoresTotais);
             $graficoTipo = new GraficoTipo($dados, $valoresTotais);
             $graficoPais = new GraficoPais($dados, $valoresTotais);
@@ -59,7 +62,7 @@ class SiteController extends Controller
             $graficoAcaoPais = new GraficoAcaoPais($dados, $valoresTotais);
             $graficoAcoes = new GraficoAcoes($dados, $valoresTotais);
             $graficoFii = new GraficoFiis($dados, $valoresTotais);
-            $proventosDashBoard = new ProventosDashBoard();
+            $proventosDashBoard = new ProventosDashBoard($investidorId);
             $formatter = Yii::$app->formatter;
             $patrimonioBruto = 0;
             $valorCompra = 0;
@@ -88,6 +91,8 @@ class SiteController extends Controller
                 'proventos' => $proventos,
                 'dadosAcoesPais' => $graficoAcaoPais->montaGrafico(),
                 'dadosFiis' => $graficoFii->montaGrafico(),
+                'investidorId' => $investidorId,
+                'investidores' => $investidores,
             ]);
         }
     }

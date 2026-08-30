@@ -3,9 +3,55 @@
 
 use miloschuman\highcharts\Highcharts;
 use yii\web\JsExpression;
+use yii\helpers\Url;
+use kartik\select2\Select2;
 
 $this->title = 'Patrimônio';
 
+// Item da navbar com o seletor de investidor. Fica escondido no corpo da
+// página e é movido via JS para dentro da ul.navbar-nav.ml-auto do layout,
+// para não alterar o navbar.php compartilhado por todo o sistema.
+?>
+<li id="investidor-nav-item" class="nav-item d-flex align-items-center" style="display:none;flex:1 1 auto;padding-top:6px;">
+    <div style="flex:1 1 auto;">
+        <?= Select2::widget([
+            'name' => 'investidor_id',
+            'value' => $investidorId,
+            'data' => $investidores,
+            'options' => [
+                'id' => 'investidor-id-select',
+                'placeholder' => 'Investidor',
+            ],
+            'pluginOptions' => [
+                'allowClear' => true,
+                'width' => '100%',
+            ],
+        ]) ?>
+    </div>
+</li>
+<?php
+$reloadUrl = Url::to(['site/index']);
+$js = <<<JS
+var \$item = $('#investidor-nav-item').detach();
+var \$navLeft = $('.main-header .navbar-nav').not('.ml-auto').first();
+\$navLeft.css('flex', '1 1 auto');
+\$item.show().appendTo(\$navLeft);
+$('#investidor-id-select').on('change', function() {
+    var investidorId = $(this).val();
+    var url = '{$reloadUrl}';
+    if (investidorId) {
+        url += '?investidor_id=' + encodeURIComponent(investidorId);
+    }
+    window.location.href = url;
+});
+JS;
+$this->registerJs($js);
+$this->registerCss(<<<CSS
+#investidor-id-select + .select2-container .select2-selection {
+    border-radius: 20px !important;
+}
+CSS
+);
 ?>
 
 <div class="row">

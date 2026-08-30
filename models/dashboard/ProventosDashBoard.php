@@ -12,12 +12,13 @@ class ProventosDashBoard
 {
 
     private $queryBase;
-    public function __construct()
+    public function __construct($investidorId = null)
     {
         $this->queryBase =   Proventos::find()
 
             ->innerJoin('itens_ativo', 'itens_ativo.id = proventos.itens_ativos_id')
-            ->innerjoin('ativo', 'ativo.id = itens_ativo.ativo_id');
+            ->innerjoin('ativo', 'ativo.id = itens_ativo.ativo_id')
+            ->andFilterWhere(['itens_ativo.investidor_id' => $investidorId]);
     }
 
     private function valorBR()
@@ -27,7 +28,7 @@ class ProventosDashBoard
             ->select([
                 new Expression("sum(valor) as valor_br")
             ])
-            ->where(['ativo.pais' => Pais::BR]);
+            ->andWhere(['ativo.pais' => Pais::BR]);
     }
 
     private function valorUsa()
@@ -37,7 +38,7 @@ class ProventosDashBoard
             ->select([
                 new Expression("sum(valor) as valor_usa")
             ])
-            ->where(['ativo.pais' => Pais::US]);
+            ->andWhere(['ativo.pais' => Pais::US]);
     }
 
     public function getValor()

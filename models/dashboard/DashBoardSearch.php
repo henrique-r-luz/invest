@@ -19,7 +19,7 @@ use app\lib\dicionario\Tipo;
 class DashBoardSearch
 {
 
-        public function search()
+        public function search($investidorId = null)
         {
                 $categorio = Ativo::find()
                         ->select([
@@ -29,6 +29,7 @@ class DashBoardSearch
                         ])
                         ->joinWith(['itensAtivo'])
                         ->where(['ativo' => true])
+                        ->andFilterWhere(['itens_ativo.investidor_id' => $investidorId])
                         ->groupBy(['categoria', 'pais']);
 
                 $tipo = Ativo::find()
@@ -39,6 +40,7 @@ class DashBoardSearch
                         ])
                         ->joinWith(['itensAtivo'])
                         ->where(['ativo' => true])
+                        ->andFilterWhere(['itens_ativo.investidor_id' => $investidorId])
                         ->groupBy(['tipo', 'pais']);
 
                 $pais = Ativo::find()
@@ -48,6 +50,7 @@ class DashBoardSearch
                         ])
                         ->joinWith(['itensAtivo'])
                         ->where(['ativo' => true])
+                        ->andFilterWhere(['itens_ativo.investidor_id' => $investidorId])
                         ->groupBy(['pais']);
 
                 $acaoPais = Ativo::find()
@@ -59,6 +62,7 @@ class DashBoardSearch
                         ->joinWith(['itensAtivo'])
                         ->where(['tipo' => Tipo::ACOES])
                         ->andWhere(['ativo' => true])
+                        ->andFilterWhere(['itens_ativo.investidor_id' => $investidorId])
                         ->groupBy(['tipo', 'pais']);
 
                 $ativos = Ativo::find()
@@ -74,7 +78,7 @@ class DashBoardSearch
                         ->joinWith(['itensAtivo'])
                         ->leftJoin(
                                 ['ativo_categoria' => $categorio],
-                                'ativo.categoria = ativo_categoria.categoria and 
+                                'ativo.categoria = ativo_categoria.categoria and
                                 ativo_categoria.pais = ativo.pais'
                         )
                         ->leftJoin(['ativo_tipo' => $tipo], 'ativo.tipo = ativo_tipo.tipo
@@ -82,6 +86,7 @@ class DashBoardSearch
                         ->leftJoin(['ativo_pais' => $pais], 'ativo.pais = ativo_pais.pais')
                         ->leftJoin(['ativo_acao_pais' => $acaoPais], 'ativo_acao_pais.pais = ativo.pais')
                         ->where(['ativo' => true])
+                        ->andFilterWhere(['itens_ativo.investidor_id' => $investidorId])
                         ->groupBy([
                                 'ativo.codigo', 'ativo.categoria', 'valor_categoria',
                                 'ativo.pais', 'valor_pais', 'ativo.tipo', 'valor_tipo', 'valor_acao_pais'
@@ -94,7 +99,7 @@ class DashBoardSearch
                 return $dados;
         }
 
-        public function valorTotal()
+        public function valorTotal($investidorId = null)
         {
 
                 return  Ativo::find()
@@ -105,6 +110,7 @@ class DashBoardSearch
                         ])
                         ->joinWith(['itensAtivo'])
                         ->where(['ativo' => true])
+                        ->andFilterWhere(['itens_ativo.investidor_id' => $investidorId])
                         ->groupBy(['ativo.pais'])->asArray()->all();
         }
 }
