@@ -12,6 +12,8 @@ use app\models\sincronizar\AtualizaOperacoesManual;
  */
 class AtualizaOperacoesManualSearch extends AtualizaOperacoesManual
 {
+    public $ativo_nome;
+
     /**
      * {@inheritdoc}
      */
@@ -20,7 +22,7 @@ class AtualizaOperacoesManualSearch extends AtualizaOperacoesManual
         return [
             [['id', 'atualiza_ativo_manual_id'], 'integer'],
             [['valor_bruto', 'valor_liquido'], 'number'],
-            [['data'], 'safe'],
+            [['data', 'ativo_nome'], 'safe'],
         ];
     }
 
@@ -42,7 +44,9 @@ class AtualizaOperacoesManualSearch extends AtualizaOperacoesManual
      */
     public function search($params)
     {
-        $query = AtualizaOperacoesManual::find();
+        $query = AtualizaOperacoesManual::find()
+            ->select(['atualiza_operacoes_manual.*'])
+            ->joinWith(['atualizaAtivoManual.itensAtivo.ativos']);
 
         // add conditions that should always apply here
 
@@ -50,6 +54,20 @@ class AtualizaOperacoesManualSearch extends AtualizaOperacoesManual
             'query' => $query,
             'pagination' => [
                 'pageSize' => 10,
+            ],
+            'sort' => [
+                'defaultOrder' => ['data' => SORT_DESC],
+                'attributes' => [
+                    'id',
+                    'valor_bruto',
+                    'valor_liquido',
+                    'atualiza_ativo_manual_id',
+                    'data',
+                    'ativo_nome' => [
+                        'asc' => ['ativo.nome' => SORT_ASC],
+                        'desc' => ['ativo.nome' => SORT_DESC],
+                    ],
+                ],
             ],
         ]);
 
@@ -63,12 +81,14 @@ class AtualizaOperacoesManualSearch extends AtualizaOperacoesManual
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'valor_bruto' => $this->valor_bruto,
-            'valor_liquido' => $this->valor_liquido,
-            'atualiza_ativo_manual_id' => $this->atualiza_ativo_manual_id,
-            'data' => $this->data,
+            'atualiza_operacoes_manual.id' => $this->id,
+            'atualiza_operacoes_manual.valor_bruto' => $this->valor_bruto,
+            'atualiza_operacoes_manual.valor_liquido' => $this->valor_liquido,
+            'atualiza_operacoes_manual.atualiza_ativo_manual_id' => $this->atualiza_ativo_manual_id,
+            'atualiza_operacoes_manual.data' => $this->data,
         ]);
+
+        $query->andFilterWhere(['ilike', 'ativo.nome', $this->ativo_nome]);
 
         return $dataProvider;
     }

@@ -47,9 +47,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 },
                         ],
                         [
-                                'attribute' => 'atualiza_ativo_manual_id',
+                                'attribute' => 'ativo_nome',
                                 'value' => function ($model) {
-                                        return $model->atualizaAtivoManual->itensAtivo->ativos->codigo;
+                                        return $model->atualizaAtivoManual->itensAtivo->ativos->nome;
                                 }
                         ],
                         [

@@ -58,7 +58,9 @@ class AtualizacaoOperacoesManualServices
     {
 
         if (AtualizaOperacoesManual::find()
-            ->where(['>', 'data', $this->atualizaOperacoesManual->data])
+            ->where(['atualiza_ativo_manual_id' => $this->atualizaOperacoesManual->atualiza_ativo_manual_id])
+            ->andWhere(['>', 'data', $this->atualizaOperacoesManual->data])
+            ->andWhere(['!=', 'id', $this->atualizaOperacoesManual->id])
             ->exists()
         ) {
             return true;
